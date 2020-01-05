@@ -9,5 +9,4 @@ public class SopApplication {
 		SpringApplication.run(SopApplication.class, args);
 		System.out.println("Start aplikacji");
 	}
-
 }
