@@ -1,1 +1,13 @@
-<p>statistics works!</p>
+<clr-datagrid>
+  <-- ... -->
+  <clr-dg-row *clrDgItems="let user of users" [clrDgItem]="user">
+    <clr-dg-action-overflow>
+      <button class="action-item" (click)="onEdit(user)">Edit</button>
+      <button class="action-item" (click)="onDelete(user)">Delete</button>
+    </clr-dg-action-overflow>
+    <-- ... -->
+  </clr-dg-row>
+  <-- ... -->
+</clr-datagrid>
+
+Selected users: <span *ngFor="let user of selected">{{user.name}}</span>
