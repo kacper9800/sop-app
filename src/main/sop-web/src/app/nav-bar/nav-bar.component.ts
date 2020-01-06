@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MenuItem } from 'primeng';
+import {TabMenuModule} from 'primeng/tabmenu';
+
 
 @Component({
   selector: 'app-nav-bar',

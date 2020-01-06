@@ -11,7 +11,9 @@ import { StatisticsComponent } from './statistics/statistics.component';
 import { FormsComponent } from './forms/forms.component';
 import { LogoutComponent } from './logout/logout.component';
 import { FooterComponent } from './footer/footer.component';
-import { InternService } from './services/intern.service';
+import { MatToolbarModule } from '@angular/material';
+import { ClarityModule } from "@clr/angular";
+
 
 // @ts-ignore
 @NgModule({
@@ -24,15 +26,12 @@ import { InternService } from './services/intern.service';
     FormsComponent,
     LogoutComponent,
     FooterComponent,
-    InternService
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    TabMenuModule,
-    ToolbarModule,
-    SplitButtonModule
+    ClarityModule
   ],
   providers: [],
   bootstrap: [AppComponent]
