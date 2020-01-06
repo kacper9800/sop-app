@@ -13,8 +13,11 @@ export class NavBarComponent implements OnInit {
   items: MenuItem[];
 
   activeItem: MenuItem;
+  logged: boolean;
+  aboutDialog = false;
 
   ngOnInit() {
+    this.logged = true;
     this.items = [
       {label: 'Strona główna', routerLink: [''], icon: 'fa fa-fw fa-bar-chart'},
       {label: 'Rejestracja praktykanta', routerLink: ['app/new-intern'], icon: 'fa fa-fw fa-calendar'},

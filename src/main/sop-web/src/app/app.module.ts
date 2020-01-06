@@ -12,14 +12,17 @@ import { FormsComponent } from './forms/forms.component';
 import { LogoutComponent } from './logout/logout.component';
 import { FooterComponent } from './footer/footer.component';
 import {
-  ClrDatagridModule,
+  ClrCheckboxModule,
+  ClrDatagridModule, ClrDatepickerModule,
   ClrDropdownModule,
-  ClrIconModule,
-  ClrMainContainerModule,
-  ClrNavigationModule
+  ClrIconModule, ClrInputModule, ClrLoadingModule,
+  ClrMainContainerModule, ClrModalModule,
+  ClrNavigationModule, ClrPasswordModule, ClrSelectModule
 } from '@clr/angular';
 import { CompaniesComponent } from './companies/companies.component';
 import { LoginComponent } from './login/login.component';
+import { FormsModule } from '@angular/forms';
+import { InternsComponent } from './interns/interns.component';
 
 
 // @ts-ignore
@@ -35,6 +38,7 @@ import { LoginComponent } from './login/login.component';
     FooterComponent,
     CompaniesComponent,
     LoginComponent,
+    InternsComponent,
   ],
   imports: [
     BrowserModule,
@@ -45,6 +49,14 @@ import { LoginComponent } from './login/login.component';
     ClrNavigationModule,
     ClrDropdownModule,
     ClrDatagridModule,
+    ClrInputModule,
+    FormsModule,
+    ClrDatepickerModule,
+    ClrSelectModule,
+    ClrPasswordModule,
+    ClrCheckboxModule,
+    ClrModalModule,
+    ClrLoadingModule,
 
   ],
   providers: [],

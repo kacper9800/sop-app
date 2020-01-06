@@ -1,16 +1,32 @@
-<!--<p-toolbar>-->
-<!--  <div class="ui-toolbar-group-left">-->
-<!--    <button pButton type="button" label="New" icon="pi pi-plus"></button>-->
-<!--    <button pButton type="button" label="Upload" icon="pi pi-upload" class="ui-button-success"></button>-->
+<form clrForm>
+  Dodawanie nowego praktykanta
+  <clr-input-container>
+    <label>Imie</label>
+    <input clrInput type="text" [(ngModel)]="model" name="example" />
+  </clr-input-container>
+  <clr-input-container>
+    <label>Nazwisko</label>
+    <input clrInput type="text" [(ngModel)]="model" name="example" />
+  </clr-input-container>
+  <clr-date-container>
+    <label>Data urodzenia</label>
+    <input type="date" clrDate name="demo" [(ngModel)]="demo">
+  </clr-date-container>
+  <clr-input-container>
+    <label>Kierunek studiów</label>
+    <input clrInput type="text" [(ngModel)]="model" name="example" />
+  </clr-input-container>
+  <clr-input-container>
+    <label>Rok studiów</label>
+    <input clrInput type="text" [(ngModel)]="model" name="example" />
+  </clr-input-container>
+  <clr-input-container>
+    <label>Wydział</label>
+    <input clrInput type="text" [(ngModel)]="model" name="example" />
+  </clr-input-container>
 
-<!--    <i class="pi pi-bars"></i>-->
-
-<!--    <p-splitButton label="Save" icon="pi pi-check" [model]="" styleClass="ui-button-warning"></p-splitButton>-->
-<!--  </div>-->
-
-<!--  <div class="ui-toolbar-group-right">-->
-<!--    <button pButton type="button" icon="pi pi-search"></button>-->
-<!--    <button pButton type="button" icon="pi pi-calendar" class="ui-button-success"></button>-->
-<!--    <button pButton type="button" icon="pi pi-times" class="ui-button-danger"></button>-->
-<!--  </div>-->
-<!--</p-toolbar>-->
+  <br>
+  <div class="btn-group btn-primary">
+    <button class="btn btn-success">Dodaj</button>
+  </div>
+</form>
