@@ -1,0 +1,171 @@
+<div class="clr-row">
+  <div class="clr-col-lg-6 clr-col-md-6 clr-col-6">
+    <div class="card">
+      <div class="card-header">
+        Ankieta dla praktykanta
+      </div>
+      <div class="card-block">
+        <div class="card-title">
+          Ankieta przeznaczona dla praktykantów po I etapie praktyk
+        </div>
+        <div class="card-text">
+        </div>
+      </div>
+      <div class="card-footer">
+        <button (click)="formInternIOpen=true" class="btn btn-sm btn-link">Otwórz formularz</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="clr-col-lg-6 clr-col-md-6 clr-col-6">
+    <div class="card">
+      <div class="card-header">
+        Ankieta dla opiekuna praktyk
+      </div>
+      <div class="card-block">
+        <div class="card-title">
+          Ankieta przeznaczona dla opiekuna praktyk po I etapie praktyk
+        </div>
+        <div class="card-text">
+        </div>
+      </div>
+      <div class="card-footer">
+        <button (click)="formInternIIOpen=true"class="btn btn-sm btn-link">Otwórz formularz</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="clr-row">
+  <div class="clr-col-lg-6 clr-col-md-6 clr-col-6">
+    <div class="card">
+      <div class="card-header">
+        Ankieta dla praktykanta
+      </div>
+      <div class="card-block">
+        <div class="card-title">
+          Ankieta przeznaczona dla praktykantów po II etapie praktyk
+        </div>
+        <div class="card-text">
+        </div>
+      </div>
+      <div class="card-footer">
+        <button (click)="formSuperviseIOpen=true" class="btn btn-sm btn-link">Otwórz formularz</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="clr-col-lg-6 clr-col-md-6 clr-col-6">
+    <div class="card">
+      <div class="card-header">
+        Ankieta dla opiekuna praktyk
+      </div>
+      <div class="card-block">
+        <div class="card-title">
+          Ankieta przeznaczona dla opiekuna praktyk po II etapie praktyk
+        </div>
+        <div class="card-text">
+        </div>
+      </div>
+      <div class="card-footer">
+        <button (click)="formSuperviseIIOpen=true" class="btn btn-sm btn-link">Otwórz formularz</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<clr-wizard #internI [(clrWizardOpen)]="formInternIOpen" clrWizardSize="lg">
+  <clr-wizard-title>Ankieta dla praktykanta po I etapie praktyk</clr-wizard-title>
+
+  <clr-wizard-button [type]="'cancel'">Cancel</clr-wizard-button>
+  <clr-wizard-button [type]="'previous'">Back</clr-wizard-button>
+  <clr-wizard-button [type]="'next'">Next</clr-wizard-button>
+  <clr-wizard-button [type]="'finish'">Finish</clr-wizard-button>
+
+  <clr-wizard-page>
+    <ng-template clrPageTitle>Dane podstawowe</ng-template>
+    ...
+  </clr-wizard-page>
+
+  <clr-wizard-page>
+    <ng-template clrPageTitle>Dane kontaktowe</ng-template>
+    ...
+  </clr-wizard-page>
+
+  <clr-wizard-page>
+    <ng-template clrPageTitle>Ocena praktykanta</ng-template>
+    ...
+  </clr-wizard-page>
+</clr-wizard>
+
+<clr-wizard #internII [(clrWizardOpen)]="formInternIIOpen" clrWizardSize="lg">
+  <clr-wizard-title>Ankieta dla praktykanta po II etapie praktyk</clr-wizard-title>
+
+  <clr-wizard-button [type]="'cancel'">Cancel</clr-wizard-button>
+  <clr-wizard-button [type]="'previous'">Back</clr-wizard-button>
+  <clr-wizard-button [type]="'next'">Next</clr-wizard-button>
+  <clr-wizard-button [type]="'finish'">Finish</clr-wizard-button>
+
+  <clr-wizard-page>
+    <ng-template clrPageTitle>Dane podstawowe</ng-template>
+    ...
+  </clr-wizard-page>
+
+  <clr-wizard-page>
+    <ng-template clrPageTitle>Dane kontaktowe</ng-template>
+    ...
+  </clr-wizard-page>
+
+  <clr-wizard-page>
+    <ng-template clrPageTitle>Ocena praktykanta</ng-template>
+    ...
+  </clr-wizard-page>
+</clr-wizard>
+
+<clr-wizard #superviseI [(clrWizardOpen)]="formSuperviseIOpen" clrWizardSize="lg">
+  <clr-wizard-title>Ankieta przeznaczona dla opiekuna praktyk po I etapie</clr-wizard-title>
+
+  <clr-wizard-button [type]="'cancel'">Cancel</clr-wizard-button>
+  <clr-wizard-button [type]="'previous'">Back</clr-wizard-button>
+  <clr-wizard-button [type]="'next'">Next</clr-wizard-button>
+  <clr-wizard-button [type]="'finish'">Finish</clr-wizard-button>
+
+  <clr-wizard-page>
+    <ng-template clrPageTitle>Dane podstawowe</ng-template>
+    ...
+  </clr-wizard-page>
+
+  <clr-wizard-page>
+    <ng-template clrPageTitle>Dane kontaktowe</ng-template>
+    ...
+  </clr-wizard-page>
+
+  <clr-wizard-page>
+    <ng-template clrPageTitle>Ocena praktykanta</ng-template>
+    ...
+  </clr-wizard-page>
+</clr-wizard>
+
+<clr-wizard #superviseII [(clrWizardOpen)]="formSuperviseIIOpen" clrWizardSize="lg">
+  <clr-wizard-title>Ankieta przeznaczona dla opiekuna praktyk po II etapie</clr-wizard-title>
+
+  <clr-wizard-button [type]="'cancel'">Cancel</clr-wizard-button>
+  <clr-wizard-button [type]="'previous'">Back</clr-wizard-button>
+  <clr-wizard-button [type]="'next'">Next</clr-wizard-button>
+  <clr-wizard-button [type]="'finish'">Finish</clr-wizard-button>
+
+  <clr-wizard-page>
+    <ng-template clrPageTitle>Dane podstawowe</ng-template>
+    ...
+  </clr-wizard-page>
+
+  <clr-wizard-page>
+    <ng-template clrPageTitle>Page 2</ng-template>
+    ...
+  </clr-wizard-page>
+
+  <clr-wizard-page>
+    <ng-template clrPageTitle>Ocena praktykanta</ng-template>
+    ...
+  </clr-wizard-page>
+</clr-wizard>

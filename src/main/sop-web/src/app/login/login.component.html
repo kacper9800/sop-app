@@ -1,35 +1,35 @@
 <div class="login-wrapper">
-  <form class="login">
+  <form [formGroup]="loginForm" class="login">
     <section class="title">
-      <h3 class="welcome">Welcome to</h3>
-      Company Product Name
-      <h5 class="hint">Use your Company ID to sign in or create one now</h5>
+      <h2 class="welcome">System Obsługi Praktyk</h2>
+<!--      <h5 class="hint"</h5>-->
     </section>
     <div class="login-group">
       <clr-select-container>
         <label class="clr-sr-only">User Role</label>
-        <select clrSelect name="type" [(ngModel)]="form.type">
-          <option value="local">Local Users</option>
-          <option value="admin">Administrator</option>
+        <select clrSelect name="type" formControlName="userType">
+          <option value="local">Kierownik praktyk</option>
+          <option value="admin">Opiekun praktyk</option>
+          <option value="admin">Praktykant</option>
         </select>
       </clr-select-container>
       <clr-input-container>
         <label class="clr-sr-only">Username</label>
-        <input type="text" name="username" clrInput placeholder="Username" [(ngModel)]="form.username"/>
+        <input type="text" name="username" clrInput placeholder="Username" formControlName="userName"/>
       </clr-input-container>
       <clr-password-container>
         <label class="clr-sr-only">Password</label>
-        <input type="password" name="password" clrPassword placeholder="Password" [(ngModel)]="form.password"/>
+        <input type="password" name="password" clrPassword placeholder="Password" formControlName="password"/>
       </clr-password-container>
-      <clr-checkbox-wrapper>
-        <label>Remember me</label>
-        <input type="checkbox" name="rememberMe" clrCheckbox [(ngModel)]="form.rememberMe"/>
-      </clr-checkbox-wrapper>
+<!--      <clr-checkbox-wrapper>-->
+<!--        <label>Remember me</label>-->
+<!--        <input type="checkbox" name="rememberMe" clrCheckbox />-->
+<!--      </clr-checkbox-wrapper>-->
       <div class="error active">
         Invalid user name or password
       </div>
-      <button type="submit" class="btn btn-primary">NEXT</button>
-      <a href="javascript://" class="signup">Sign up for a Company ID</a>
+      <button type="submit" class="btn btn-primary">Zaloguj</button>
+      <a href="/app/registration"class="signup">Nie posiadasz konta?<br> Zarejestruj się tutaj!</a>
     </div>
   </form>
 </div>

@@ -23,7 +23,7 @@
     "@angular/router": "~8.2.12",
     "@clr/angular": "^2.3.4",
     "@clr/icons": "^2.3.4",
-    "@clr/ui": "^2.3.4",
+    "@clr/ui": "^3.0.0-next.5",
     "@fullcalendar/core": "^4.3.1",
     "@webcomponents/custom-elements": "^1.0.0",
     "chart.js": "^2.9.3",

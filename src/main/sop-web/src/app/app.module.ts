@@ -5,24 +5,25 @@ import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { SplitButtonModule, TabMenuModule, ToolbarModule } from 'primeng';
 import { HomeComponent } from './home/home.component';
-import { NavBarComponent } from './nav-bar/nav-bar.component';
-import { NewInternComponent } from './new-intern/new-intern.component';
-import { StatisticsComponent } from './statistics/statistics.component';
-import { FormsComponent } from './forms/forms.component';
-import { LogoutComponent } from './logout/logout.component';
-import { FooterComponent } from './footer/footer.component';
+import { NavBarComponent } from './layout/nav-bar/nav-bar.component';
+import { NewInternComponent } from './sop/new-intern/new-intern.component';
+import { StatisticsComponent } from './sop/statistics/statistics.component';
+import { FormsComponent } from './sop/forms/forms.component';
+import { LogoutComponent } from './sop/logout/logout.component';
+import { FooterComponent } from './layout/footer/footer.component';
 import {
   ClrCheckboxModule,
   ClrDatagridModule, ClrDatepickerModule,
   ClrDropdownModule,
   ClrIconModule, ClrInputModule, ClrLoadingModule,
   ClrMainContainerModule, ClrModalModule,
-  ClrNavigationModule, ClrPasswordModule, ClrSelectModule
+  ClrNavigationModule, ClrPasswordModule, ClrSelectModule, ClarityModule
 } from '@clr/angular';
-import { CompaniesComponent } from './companies/companies.component';
+import { CompaniesComponent } from './sop/companies/companies.component';
 import { LoginComponent } from './login/login.component';
-import { FormsModule } from '@angular/forms';
-import { InternsComponent } from './interns/interns.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { InternsComponent } from './sop/interns/interns.component';
+import { RegistrationComponent } from './registration/registration.component';
 
 
 // @ts-ignore
@@ -39,6 +40,7 @@ import { InternsComponent } from './interns/interns.component';
     CompaniesComponent,
     LoginComponent,
     InternsComponent,
+    RegistrationComponent,
   ],
   imports: [
     BrowserModule,
@@ -57,6 +59,8 @@ import { InternsComponent } from './interns/interns.component';
     ClrCheckboxModule,
     ClrModalModule,
     ClrLoadingModule,
+    ClarityModule,
+    ReactiveFormsModule,
 
   ],
   providers: [],

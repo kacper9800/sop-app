@@ -1,0 +1,70 @@
+<!--<form clrForm>-->
+<!--  Dodawanie nowego praktykanta-->
+<!--  <clr-input-container>-->
+<!--    <label>Imie</label>-->
+<!--    <input clrInput type="text" [(ngModel)]="model" name="example" />-->
+<!--  </clr-input-container>-->
+<!--  <clr-input-container>-->
+<!--    <label>Nazwisko</label>-->
+<!--    <input clrInput type="text" [(ngModel)]="model" name="example" />-->
+<!--  </clr-input-container>-->
+<!--  <clr-date-container>-->
+<!--    <label>Data urodzenia</label>-->
+<!--    <input type="date" clrDate name="demo" [(ngModel)]="demo">-->
+<!--  </clr-date-container>-->
+<!--  <clr-input-container>-->
+<!--    <label>Kierunek studiów</label>-->
+<!--    <input clrInput type="text" [(ngModel)]="model" name="example" />-->
+<!--  </clr-input-container>-->
+<!--  <clr-input-container>-->
+<!--    <label>Rok studiów</label>-->
+<!--    <input clrInput type="text" [(ngModel)]="model" name="example" />-->
+<!--  </clr-input-container>-->
+<!--  <clr-input-container>-->
+<!--    <label>Wydział</label>-->
+<!--    <input clrInput type="text" [(ngModel)]="model" name="example" />-->
+<!--  </clr-input-container>-->
+
+<!--  <br>-->
+<!--  <div class="btn-group btn-primary">-->
+<!--    <button class="btn btn-success">Dodaj</button>-->
+<!--  </div>-->
+<!--</form>-->
+<form clrStepper #contactForm="ngForm" (ngSubmit)="templateFormSubmit(contactForm.value)">
+    Dodawanie nowego praktykanta
+  <clr-stepper-panel ngModelGroup="name">
+    <clr-step-title>Legal Name</clr-step-title>
+    <clr-step-description>Description goes here.</clr-step-description>
+    <clr-step-content>
+      <clr-input-container>
+        <label>First Name</label>
+        <input clrInput [ngModel]="templateForm.name.firstName" name="firstName" required />
+      </clr-input-container>
+
+      <clr-input-container>
+        <label>Last Name</label>
+        <input clrInput [ngModel]="templateForm.name.lastName" name="lastName" required />
+      </clr-input-container>
+
+      <button clrStepButton="next">next</button>
+    </clr-step-content>
+  </clr-stepper-panel>
+
+  <clr-stepper-panel ngModelGroup="contact">
+    <clr-step-title>Contact Information</clr-step-title>
+    <clr-step-description>...</clr-step-description>
+    <clr-step-content>
+      ...
+      <button clrStepButton="next">next</button>
+    </clr-step-content>
+  </clr-stepper-panel>
+
+  <clr-stepper-panel ngModelGroup="password">
+    <clr-step-title>Password</clr-step-title>
+    <clr-step-description>...</clr-step-description>
+    <clr-step-content>
+      ...
+      <button clrStepButton="submit">submit</button>
+    </clr-step-content>
+  </clr-stepper-panel>
+</form>
