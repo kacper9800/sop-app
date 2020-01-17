@@ -13,13 +13,11 @@
     <version>0.0.1-SNAPSHOT</version>
     <name>sop</name>
     <description>System obsługi praktyk</description>
-
     <properties>
         <java.version>1.8</java.version>
     </properties>
-
     <dependencies>
-<!--        Spring Boot-->
+        <!--        Spring Boot-->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-actuator</artifactId>
@@ -58,16 +56,6 @@
             <optional>true</optional>
         </dependency>
         <dependency>
-            <groupId>io.springfox</groupId>
-            <artifactId>springfox-swagger2</artifactId>
-            <version>2.9.2</version>
-        </dependency>
-        <dependency>
-            <groupId>io.springfox</groupId>
-            <artifactId>springfox-swagger-ui</artifactId>
-            <version>2.9.2</version>
-        </dependency>
-        <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
@@ -78,52 +66,57 @@
                 </exclusion>
             </exclusions>
         </dependency>
-
-<!--        PostGres-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-undertow</artifactId>
+        </dependency>
+        <!--        PostGres-->
         <dependency>
             <groupId>org.postgresql</groupId>
             <artifactId>postgresql</artifactId>
             <scope>runtime</scope>
         </dependency>
-
-<!--        Hibernate-->
+        <!--        Hibernate-->
         <dependency>
             <groupId>org.hibernate</groupId>
             <artifactId>hibernate-core</artifactId>
             <version>5.4.10.Final</version>
         </dependency>
-
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
             <optional>true</optional>
         </dependency>
 
-        <!-- https://mvnrepository.com/artifact/org.springframework.session/spring-session -->
-        <!--		<dependency>-->
-        <!--			<groupId>org.springframework.session</groupId>-->
-        <!--			<artifactId>spring-session</artifactId>-->
-        <!--			<version>1.3.5.RELEASE</version>-->
-        <!--		</dependency>-->
-        <!--		<dependency>-->
-        <!--			    <groupId>org.springframework.boot</groupId>-->
-        <!--			    <artifactId>spring-boot-starter-data-redis</artifactId>-->
-        <!--		</dependency>-->
-        <!--		<dependency>-->
-        <!--			    <groupId>org.springframework.session</groupId>-->
-        <!--			    <artifactId>spring-session</artifactId>-->
-        <!--		</dependency>-->
-<!--        <dependency>-->
-<!--            <groupId>org.springframework.session</groupId>-->
-<!--            <artifactId>spring-session</artifactId>-->
-<!--            <version>1.3.5.RELEASE</version>-->
-<!--        </dependency>-->
-
-
-
-
+<!--        Swagger-->
+        <dependency>
+            <groupId>io.springfox</groupId>
+            <artifactId>springfox-swagger2</artifactId>
+            <version>2.9.2</version>
+        </dependency>
+        <dependency>
+            <groupId>io.springfox</groupId>
+            <artifactId>springfox-swagger-ui</artifactId>
+            <version>2.9.2</version>
+        </dependency>
+        <dependency>
+            <groupId>io.springfox</groupId>
+            <artifactId>springfox-swagger2</artifactId>
+            <version>3.0.0-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>io.springfox</groupId>
+            <artifactId>springfox-data-rest</artifactId>
+            <version>3.0.0-SNAPSHOT</version>
+        </dependency>
     </dependencies>
-
+    <repositories>
+        <repository>
+            <id>jcenter-snapshots</id>
+            <name>jcenter</name>
+            <url>http://oss.jfrog.org/artifactory/oss-snapshot-local/</url>
+        </repository>
+    </repositories>
     <build>
         <plugins>
             <plugin>
@@ -132,5 +125,4 @@
             </plugin>
         </plugins>
     </build>
-
 </project>
