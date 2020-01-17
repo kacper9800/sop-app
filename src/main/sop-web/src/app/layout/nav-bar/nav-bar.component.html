@@ -1,4 +1,4 @@
-<clr-main-container *ngIf="!logged">
+<clr-main-container *ngIf="logged">
   <clr-header class="header header-7">
     <div class="branding">
       <a href="..." class="nav-link">
@@ -65,7 +65,8 @@
   </div>
 </clr-main-container>
 
-<app-login *ngIf="logged"></app-login>
+<!--<app-login *ngIf="!logged"></app-login>-->
+<!--<app-registration *ngIf="!logged"></app-registration>-->
 
 <clr-modal [(clrModalOpen)]="aboutDialog" [clrModalClosable]="false">
   <h3 class="modal-title"></h3>
