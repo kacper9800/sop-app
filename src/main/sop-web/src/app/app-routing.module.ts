@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
+import { RouterModule, Routes } from '@angular/router';
 import { HomeComponent } from './home/home.component';
 import { NewInternComponent } from './sop/new-intern/new-intern.component';
 import { StatisticsComponent } from './sop/statistics/statistics.component';
@@ -9,6 +9,8 @@ import { CompaniesComponent } from './sop/companies/companies.component';
 import { LoginComponent } from './login/login.component';
 import { InternsComponent } from './sop/interns/interns.component';
 import { RegistrationComponent } from './registration/registration.component';
+import { ActivationKeysComponent } from './sop/activation-keys/activation-keys.component';
+import { LogbookComponent } from './sop/logbook/logbook.component';
 
 
 const routes: Routes = [
@@ -20,7 +22,9 @@ const routes: Routes = [
   {path: 'app/statistics', component: StatisticsComponent},
   {path: 'app/login', component: LoginComponent},
   {path: 'app/logout', component: LogoutComponent},
-  {path: 'app/registration', component: RegistrationComponent}
+  {path: 'app/registration', component: RegistrationComponent},
+  {path: 'app/activation-keys', component: ActivationKeysComponent},
+  {path: 'app/logbook', component: LogbookComponent}
 
 ];
 
@@ -28,4 +32,5 @@ const routes: Routes = [
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule]
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {
+}

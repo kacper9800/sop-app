@@ -24,6 +24,8 @@ import { LoginComponent } from './login/login.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { InternsComponent } from './sop/interns/interns.component';
 import { RegistrationComponent } from './registration/registration.component';
+import { ActivationKeysComponent } from './sop/activation-keys/activation-keys.component';
+import { LogbookComponent } from './sop/logbook/logbook.component';
 
 
 // @ts-ignore
@@ -41,6 +43,8 @@ import { RegistrationComponent } from './registration/registration.component';
     LoginComponent,
     InternsComponent,
     RegistrationComponent,
+    ActivationKeysComponent,
+    LogbookComponent,
   ],
   imports: [
     BrowserModule,
