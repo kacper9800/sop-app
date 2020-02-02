@@ -26,6 +26,9 @@ import { InternsComponent } from './sop/interns/interns.component';
 import { RegistrationComponent } from './registration/registration.component';
 import { ActivationKeysComponent } from './sop/activation-keys/activation-keys.component';
 import { LogbookComponent } from './sop/logbook/logbook.component';
+import { CollegeComponent } from './sop/college/college.component';
+import { ActivationKeysDialogComponent } from './sop/activation-keys/activation-keys-dialog/activation-keys-dialog.component';
+import { SettingsComponent } from './settings/settings.component';
 
 
 // @ts-ignore
@@ -45,6 +48,9 @@ import { LogbookComponent } from './sop/logbook/logbook.component';
     RegistrationComponent,
     ActivationKeysComponent,
     LogbookComponent,
+    CollegeComponent,
+    ActivationKeysDialogComponent,
+    SettingsComponent,
   ],
   imports: [
     BrowserModule,

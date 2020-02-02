@@ -7,19 +7,25 @@
       </a>
     </div>
     <div class="header-actions">
-        <a href="javascript://" class="nav-link nav-icon-text">
-          <clr-icon shape="user"></clr-icon>
-          <span class="nav-text">Nazwa użytkownika</span>
-        </a>
+      <a href="javascript://" class="nav-link nav-icon-text">
+        <clr-icon shape="user"></clr-icon>
+        <span class="nav-text">Nazwa użytkownika</span>
+      </a>
       <clr-dropdown>
         <button class="nav-icon" clrDropdownTrigger aria-label="toggle settings menu">
           <clr-icon shape="cog"></clr-icon>
           <clr-icon shape="caret down"></clr-icon>
         </button>
         <clr-dropdown-menu *clrIfOpen clrPosition="bottom-right">
-          <a (click)="aboutDialog = true" clrDropdownItem>Informacje</a>
-          <a href="..." clrDropdownItem>Preferences</a>
-          <a href="/app/logout" clrDropdownItem>Log out</a>
+          <a (click)="aboutDialog = true" clrDropdownItem>
+            <clr-icon shape="info-standard" class="is-solid"></clr-icon>
+            Informacje</a>
+          <a href="..." clrDropdownItem>
+            <clr-icon shape="cog" class="is-solid"></clr-icon>
+            Preferences</a>
+          <a href="/app/logout" clrDropdownItem>
+            <clr-icon shape="logout" class="is-solid"></clr-icon>
+            Wyloguj się</a>
         </clr-dropdown-menu>
       </clr-dropdown>
     </div>
@@ -36,6 +42,32 @@
           <clr-icon shape="form"></clr-icon>
           Ankiety
         </a>
+        <hr>
+        <a href="" class="nav-link">
+          SuperAdmin
+        </a>
+        <a href="/app/college" class="nav-link">
+          <clr-icon shape="building" class="is-solid"></clr-icon>
+          Uczelnie
+        </a>
+        <hr>
+
+        <a href="" class="nav-link">
+          Administrator uczelni
+        </a>
+
+        <a href="/app/activation-keys" class="nav-link">
+          <clr-icon shape="users" class="is-solid"></clr-icon>
+          Kierownicy praktyk
+        </a>
+
+        <a href="/app/activation-keys" class="nav-link">
+          <clr-icon shape="cursor-move"></clr-icon>
+          Kierunki studiów
+        </a>
+
+        <hr>
+
         <a href="" class="nav-link">
           Kierownik praktyk
         </a>
@@ -59,26 +91,31 @@
           <clr-icon shape="line-chart"></clr-icon>
           Statystyki
         </a>
+        <hr>
         <a href="" class="nav-link">
           Praktykant
-        </a>
-        <a href="/app/statistics" class="nav-link">
-          <clr-icon shape="line-chart"></clr-icon>
-          Statystyki
         </a>
         <a href="/app/logbook" class="nav-link">
           <clr-icon shape="calendar"></clr-icon>
           Dziennik praktyk
         </a>
+        <hr>
         <a href="" class="nav-link">
           Opiekun praktyk
         </a>
-        <a href="" class="nav-link">
-          Testowe
+        <a href="/app/logbook" class="nav-link">
+          <clr-icon shape="calendar"></clr-icon>
+          Dziennik praktyk
         </a>
+        <hr>
+        Testowe
         <a href="/app/login" class="nav-link">
           <clr-icon shape="line-chart"></clr-icon>
           Login
+        </a>
+        <a href="/app/registration" class="nav-link">
+          <clr-icon shape="line-chart"></clr-icon>
+          Rejestracja
         </a>
       </section>
     </nav>

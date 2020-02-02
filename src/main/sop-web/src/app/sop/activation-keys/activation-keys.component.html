@@ -1,1 +1,79 @@
-<h1 style="text-align: center">Klucze aktywacyjne dla praktykantów</h1>
+<h1 style="text-align: center">Klucze aktywacyjne dla użytkowników</h1>
+<h4 style="text-align: center">Aby dodać nowych użytkowników utwórz klucz aktywacyjny</h4>
+
+<clr-datagrid>
+  <clr-dg-column>User ID</clr-dg-column>
+  <clr-dg-column>Name</clr-dg-column>
+  <clr-dg-column>Creation date</clr-dg-column>
+  <clr-dg-column>Favorite color</clr-dg-column>
+
+  <clr-dg-row *ngFor="let user of users">
+    <clr-dg-cell>{{user.id}}</clr-dg-cell>
+    <clr-dg-cell>{{user.name}}</clr-dg-cell>
+    <clr-dg-cell>{{user.creation | date}}</clr-dg-cell>
+    <clr-dg-cell>{{user.color}}</clr-dg-cell>
+  </clr-dg-row>
+
+  <!--  <clr-dg-footer>{{user.length}} users</clr-dg-footer>-->
+</clr-datagrid>
+<div class="row">
+  <div class="clr-col-6"></div>
+  <div class="clr-col-4">
+  <div class="btn-group btn-primary">
+    <button class="btn btn-success" (click)="opened=true">Dodaj klucz</button>
+    <button class="btn btn-danger" (click)="opened=true">Usuń klucz</button>
+  </div>
+  </div>
+  <div class="clr-col-2"></div>
+
+</div>
+<clr-modal [(clrModalOpen)]="opened">
+  <form clrForm>
+    <clr-input-container>
+      <label>Rola użytkownika</label>
+      <input clrInput type="text" [(ngModel)]="model" name="example"/>
+    </clr-input-container>
+    <h5 style="text-align: center">Formularz dodawania nowych praktykantów</h5>
+
+
+    <clr-input-container>
+      <label>Wybierz uczelnię</label>
+      <input clrInput type="text" [(ngModel)]="model" name="example"/>
+    </clr-input-container>
+    <clr-input-container>
+      <label>Wybierz wydział</label>
+      <input clrInput type="text" [(ngModel)]="model" name="example"/>
+    </clr-input-container>
+    <clr-input-container>
+      <label>Wybierz kierunek</label>
+      <input clrInput type="text" [(ngModel)]="model" name="example"/>
+    </clr-input-container>
+    <clr-input-container>
+      <label>Wybierz rok</label>
+      <input clrInput type="text" [(ngModel)]="model" name="example"/>
+    </clr-input-container>
+    <clr-input-container>
+      <label>Wybierz uczelnię</label>
+      <input clrInput type="text" [(ngModel)]="model" name="example"/>
+    </clr-input-container>
+
+
+    <h4 style="text-align: center">Formularz dla opiekunów praktyk</h4>
+
+    <clr-input-container>
+      <label>Wybierz uczelnię</label>
+      <input clrInput type="text" [(ngModel)]="model" name="example"/>
+    </clr-input-container>
+
+  </form>
+</clr-modal>
+
+
+<!--  <h4>Opis komponenetu:</h4>-->
+<!--  <p>Zagadnienia do przemyślenia:<br>-->
+<!--    Czy ma być wybór uczelni?<br>-->
+<!--    - Czy jeden pracownik uczelni - kierownik praktyk - może pracować na dwóch uczelniach?-->
+<!--    - Może, ale czy to się zdarza?-->
+<!--    - Nie wiem-->
+<!--    </p>-->
+

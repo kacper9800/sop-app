@@ -16,6 +16,10 @@
     <properties>
         <java.version>1.8</java.version>
     </properties>
+    <properties>
+        <spring-security.version>5.0.6.RELEASE</spring-security.version>
+        <spring.version>5.0.6.RELEASE</spring.version>
+    </properties>
     <dependencies>
         <!--        Spring Boot-->
         <dependency>
@@ -70,7 +74,23 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-undertow</artifactId>
         </dependency>
-        <!--        PostGres-->
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-core</artifactId>
+            <version>${spring-security.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-web</artifactId>
+            <version>${spring-security.version}</version>
+        </dependency>
+        <!-- Liquibase -->
+        <dependency>
+            <groupId>org.liquibase</groupId>
+            <artifactId>liquibase-core</artifactId>
+        </dependency>
+
+        <!--        Postgresql-->
         <dependency>
             <groupId>org.postgresql</groupId>
             <artifactId>postgresql</artifactId>

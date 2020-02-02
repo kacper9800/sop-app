@@ -6,6 +6,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./activation-keys.component.css']
 })
 export class ActivationKeysComponent implements OnInit {
+  opened = false;
 
   constructor() { }
 
