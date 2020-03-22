@@ -4,42 +4,91 @@ import javax.persistence.*;
 import java.util.Date;
 
 @Entity
+@Table(name = "users")
 public class User {
     @Id
-    @Column(name = "ID", nullable = false)
+    @Column(name = "id", nullable = false)
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @Column(name="firstName",nullable = false)
+    @Column(name = "login", nullable = false)
+    private String login;
+
+    @Column(name = "password", nullable = false)
+    private String password;
+
+    @Column(name = "firstName", nullable = false)
     private String firstName;
 
-    @Column(name="lastName", nullable = false)
+    @Column(name = "lastName", nullable = false)
     private String lastName;
 
-    @Column(name="birthDate", nullable = false)
+    @Column(name = "email", nullable = false)
+    private String email;
+
+    @Column(name = "phone", nullable = false)
+    private String phone;
+
+    @Column(name = "active", nullable = false)
+    private String activationKey;
+
+    @Column(name = "academic_title", nullable = false)
+    private String academic_title;
+
+
+
+    @Column(name = "birthDate", nullable = false)
     private Date birthDate;
 
-    @Column(name="deleted")
+    @Column(name = "deleted")
     private Boolean deleted;
 
 
-    public Long getId() { return id; }
+    public Long getId() {
+        return id;
+    }
 
-    public void setId(Long id) { this.id = id; }
+    public void setId(Long id) {
+        this.id = id;
+    }
 
-    public String getFirstName() { return firstName; }
+    public String getLogin() {
+        return login;
+    }
 
-    public void setFirstName(String firstName) { this.firstName = firstName; }
+    public void setLogin(String login) {
+        this.login = login;
+    }
 
-    public String getLastName() { return lastName; }
+    public String getFirstName() {
+        return firstName;
+    }
 
-    public void setLastName(String lastName) { this.lastName = lastName; }
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
 
-    public Date getBirthDate() { return birthDate; }
+    public String getLastName() {
+        return lastName;
+    }
 
-    public void setBirthDate(Date birthDate) { this.birthDate = birthDate; }
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
 
-    public Boolean getDeleted() { return deleted; }
+    public Date getBirthDate() {
+        return birthDate;
+    }
 
-    public void setDeleted(Boolean deleted) { this.deleted = deleted; }
+    public void setBirthDate(Date birthDate) {
+        this.birthDate = birthDate;
+    }
+
+    public Boolean getDeleted() {
+        return deleted;
+    }
+
+    public void setDeleted(Boolean deleted) {
+        this.deleted = deleted;
+    }
 }

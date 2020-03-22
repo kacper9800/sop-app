@@ -14,10 +14,6 @@ public class CollegeController {
     @Autowired
     CollegeRepository collegeRepository;
 
-    public CollegeController(CollegeRepository collegeRepository) {
-        this.collegeRepository = collegeRepository;
-    }
-
     @GetMapping(value = "/api/college")
     public ResponseEntity<List<College>> getAllColleges() {
         final List<College> colleges = collegeRepository.findAllColleges();

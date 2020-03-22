@@ -11,9 +11,6 @@ public class FieldOfStudyController {
     @Autowired
     FieldOfStudyRepository fieldOfStudyRepository;
 
-    public FieldOfStudyController(FieldOfStudyRepository fieldOfStudyRepository) {
-        this.fieldOfStudyRepository = fieldOfStudyRepository;
-    }
 
 //    @GetMapping(value = "/api/college")
 //    public ResponseEntity<List<College>> getAllColleges() {
@@ -21,14 +18,14 @@ public class FieldOfStudyController {
 //        return new ResponseEntity<>(colleges, HttpStatus.OK);
 //    }
 
-    @PostMapping(value = "/api/college/")
+    @PostMapping(value = "/api/field/")
     public HttpStatus saveNewCollege(@RequestBody FieldOfStudy fieldOfStudy) {
         //ToDo
         fieldOfStudyRepository.save(fieldOfStudy);
         return HttpStatus.OK;
     }
 
-    @PutMapping(value = "/api/college/{id}")
+    @PutMapping(value = "/api/filed/{id}")
     public HttpStatus updateCollege(@PathVariable Long id, @RequestBody FieldOfStudy fieldOfStudy) {
         //ToDo
         fieldOfStudyRepository.save(fieldOfStudy);
