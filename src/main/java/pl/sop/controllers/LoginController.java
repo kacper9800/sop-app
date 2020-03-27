@@ -19,14 +19,17 @@ public class LoginController {
 
     @PostMapping("/login")
     public String login(@RequestBody User user) {
+      String token = createToken(user);
+      return token;
+    }
 
-        long currentTime = System.currentTimeMillis();
+    public String createToken(User user){
         return Jwts.builder()
                 .setSubject(user.getLogin())
                 .claim("roles", "user")
-                .setIssuedAt(new Date(currentTime))  // Data ważności od
-                .setExpiration(new Date(currentTime + 30000)) // Data ważności do
-                .signWith(SignatureAlgorithm.HS512, user.getLogin())
+                .setIssuedAt(new Date(System.currentTimeMillis()))  // Data ważności od
+                .setExpiration(new Date(System.currentTimeMillis() + 30000)) // Data ważności do
+                .signWith(SignatureAlgorithm.HS512, user.getPassword())
                 .compact();
     }
 

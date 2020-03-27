@@ -1,16 +1,19 @@
 <clr-main-container *ngIf="logged">
   <clr-header class="header header-7">
     <div class="branding">
-      <a href="..." class="nav-link">
+      <a routerLink="..." class="nav-link">
         <clr-icon shape="block"></clr-icon>
-        <span class="title">SOP</span>
+        <span class="title">{{'header.SOP' | translate}}</span>
       </a>
     </div>
+
     <div class="header-actions">
+
       <a href="javascript://" class="nav-link nav-icon-text">
         <clr-icon shape="user"></clr-icon>
         <span class="nav-text">Nazwa użytkownika</span>
       </a>
+
       <clr-dropdown>
         <button class="nav-icon" clrDropdownTrigger aria-label="toggle settings menu">
           <clr-icon shape="cog"></clr-icon>
@@ -32,15 +35,46 @@
   </clr-header>
 
   <div class="content-container">
-    <nav class="sidenav" *ngIf="logged" [clr-nav-level]="1">
+    <nav class="sidenav" *ngIf="!planner" [clr-nav-level]="1">
       <section class="sidenav-content">
         <a href="/" class="nav-link">
           <clr-icon shape="home"></clr-icon>
-          Strona główna
+          {{'navBar.home' | translate}}
         </a>
+        <section class="nav-group collapsible">
+          <input id="tabexample1" type="checkbox">
+          <label for="tabexample1">{{'navBar.planner.label' | translate}}</label>
+          <ul class="nav-list">
+            <li>
+              <a class="nav-link" href="/app/planner/myActivitiesList">
+                <clr-icon shape="view-list"></clr-icon>
+                {{'navBar.planner.myActivitiesList' | translate}}
+              </a>
+            </li>
+            <li>
+              <a class="nav-link" href="/app/planner/myActivitiesCalendar">
+                <clr-icon shape="calendar"></clr-icon>
+                {{'navBar.planner.myActivitiesCalendar' | translate}}
+              </a>
+            </li>
+            <li>
+              <a class="nav-link" href="/app/planner/locations">
+                <clr-icon shape="building"></clr-icon>
+                {{'navBar.planner.locations' | translate}}
+              </a>
+            </li>
+            <li>
+              <a class="nav-link" href="/app/planner/workSchedule">
+                <clr-icon shape="clock" ></clr-icon>
+                {{'navBar.planner.workHours' | translate}}
+              </a>
+            </li>
+          </ul>
+        </section>
+
         <a href="/app/forms" class="nav-link">
           <clr-icon shape="form"></clr-icon>
-          Ankiety
+          {{'navBar.surveys' | translate}}
         </a>
         <hr>
         <a href="" class="nav-link">
@@ -48,22 +82,25 @@
         </a>
         <a href="/app/college" class="nav-link">
           <clr-icon shape="building" class="is-solid"></clr-icon>
-          Uczelnie
+          {{'navBar.colleges' | translate}}
+        </a>
+        <a href="/app/users" class="nav-link">
+          <clr-icon shape="users" class="is-solid"></clr-icon>
+          {{'navBar.users' | translate}}
         </a>
         <hr>
-
         <a href="" class="nav-link">
           Administrator uczelni
         </a>
 
         <a href="/app/activation-keys" class="nav-link">
           <clr-icon shape="users" class="is-solid"></clr-icon>
-          Kierownicy praktyk
+          {{'navBar.practiceManagers'| translate}}
         </a>
 
         <a href="/app/activation-keys" class="nav-link">
           <clr-icon shape="cursor-move"></clr-icon>
-          Kierunki studiów
+          {{'navBar.practiceSupervisors' | translate}}
         </a>
 
         <hr>
@@ -119,6 +156,7 @@
         </a>
       </section>
     </nav>
+
     <div class="content-area">
       <router-outlet></router-outlet>
     </div>

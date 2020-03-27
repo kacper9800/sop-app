@@ -1,12 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { MenuItem } from 'primeng';
-import {TabMenuModule} from 'primeng/tabmenu';
-
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-nav-bar',
   templateUrl: './nav-bar.component.html',
-  styleUrls: ['./nav-bar.component.css']
+  styleUrls: ['./nav-bar.component.css'],
+  providers: [TranslateService]
 })
 export class NavBarComponent implements OnInit {
 
@@ -14,7 +14,15 @@ export class NavBarComponent implements OnInit {
 
   activeItem: MenuItem;
   logged: boolean;
+  planner: Boolean;
+
   aboutDialog = false;
+
+
+  constructor(private translateService: TranslateService) {
+    translateService.setDefaultLang('pl');
+
+  }
 
   ngOnInit() {
     this.logged = true;
@@ -35,5 +43,6 @@ export class NavBarComponent implements OnInit {
     this.items = this.items.filter((item, i) => i !== index);
     event.preventDefault();
   }
+
 
 }

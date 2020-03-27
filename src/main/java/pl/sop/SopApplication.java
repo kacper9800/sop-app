@@ -18,7 +18,7 @@ public class SopApplication {
     public FilterRegistrationBean filterRegistrationBean() {
         FilterRegistrationBean filterRegistrationBean = new FilterRegistrationBean();
         filterRegistrationBean.setFilter(new JWTFilter());
-        filterRegistrationBean.setUrlPatterns(Collections.singleton("/api/test"));
+        filterRegistrationBean.setUrlPatterns(Collections.singleton("/api/user"));
         return filterRegistrationBean;
     }
 }

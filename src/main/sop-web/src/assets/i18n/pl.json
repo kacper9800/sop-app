@@ -1,0 +1,23 @@
+{
+  "header": {
+    "SOP": "System obsługi praktyk",
+    "info": "Informacje",
+    "settings": "Ustawienia"
+  },
+  "navBar": {
+    "home": "Strona główna",
+    "planner": {
+      "label": "Planer zajęć",
+      "myActivitiesList": "Lista zajęć",
+      "myActivitiesCalendar": "Kalendarz",
+      "locations": "Lista sal",
+      "workHours": "Godziny pracy"
+    },
+    "surveys": "Ankiety",
+    "colleges": "Uczelnie",
+    "users": "Użytkownicy",
+    "fieldsOfStudy": "Kierunki studiów",
+    "practiceManagers": "Kierownicy praktyk",
+    "practiceSupervisors": "Opiekunowie praktyk"
+  }
+}

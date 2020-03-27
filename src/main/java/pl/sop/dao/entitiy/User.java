@@ -6,6 +6,7 @@ import java.util.Date;
 @Entity
 @Table(name = "users")
 public class User {
+
     @Id
     @Column(name = "id", nullable = false)
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -35,8 +36,6 @@ public class User {
     @Column(name = "academic_title", nullable = false)
     private String academic_title;
 
-
-
     @Column(name = "birthDate", nullable = false)
     private Date birthDate;
 
@@ -60,6 +59,14 @@ public class User {
         this.login = login;
     }
 
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
     public String getFirstName() {
         return firstName;
     }
@@ -74,6 +81,38 @@ public class User {
 
     public void setLastName(String lastName) {
         this.lastName = lastName;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
+    public String getActivationKey() {
+        return activationKey;
+    }
+
+    public void setActivationKey(String activationKey) {
+        this.activationKey = activationKey;
+    }
+
+    public String getAcademic_title() {
+        return academic_title;
+    }
+
+    public void setAcademic_title(String academic_title) {
+        this.academic_title = academic_title;
     }
 
     public Date getBirthDate() {

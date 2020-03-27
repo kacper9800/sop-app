@@ -12,6 +12,8 @@ import { RegistrationComponent } from './registration/registration.component';
 import { ActivationKeysComponent } from './sop/activation-keys/activation-keys.component';
 import { LogbookComponent } from './sop/logbook/logbook.component';
 import { CollegeComponent } from './sop/college/college.component';
+import { UsersComponent } from './sop/users/users.component';
+import { PlannerComponent } from './planner/planner.component';
 
 
 const routes: Routes = [
@@ -26,7 +28,9 @@ const routes: Routes = [
   {path: 'app/registration', component: RegistrationComponent},
   {path: 'app/activation-keys', component: ActivationKeysComponent},
   {path: 'app/logbook', component: LogbookComponent},
-  {path: 'app/college', component: CollegeComponent}
+  {path: 'app/college', component: CollegeComponent},
+  {path: 'app/users', component: UsersComponent},
+  {path: 'app/planner', component: PlannerComponent}
 
 ];
 

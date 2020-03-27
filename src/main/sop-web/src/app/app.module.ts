@@ -3,7 +3,7 @@ import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { SplitButtonModule, TabMenuModule, ToolbarModule } from 'primeng';
+import { SplitButtonModule, TableModule, TabMenuModule, ToolbarModule } from 'primeng';
 import { HomeComponent } from './home/home.component';
 import { NavBarComponent } from './layout/nav-bar/nav-bar.component';
 import { NewInternComponent } from './sop/new-intern/new-intern.component';
@@ -29,9 +29,17 @@ import { LogbookComponent } from './sop/logbook/logbook.component';
 import { CollegeComponent } from './sop/college/college.component';
 import { ActivationKeysDialogComponent } from './sop/activation-keys/activation-keys-dialog/activation-keys-dialog.component';
 import { SettingsComponent } from './settings/settings.component';
+import { UsersComponent } from './sop/users/users.component';
+import { PlannerComponent } from './planner/planner.component';
+import {TranslateLoader, TranslateModule} from '@ngx-translate/core';
+import {TranslateHttpLoader} from '@ngx-translate/http-loader';
+import {HttpClient, HttpClientModule} from '@angular/common/http';
+import { ActivitiesComponent } from './sop/planner/activities/activities.component';
+import { LocationsComponent } from './sop/planner/locations/locations.component';
+import { WorkHoursComponent } from './sop/planner/work-hours/work-hours.component';
 
 
-// @ts-ignore
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -51,6 +59,11 @@ import { SettingsComponent } from './settings/settings.component';
     CollegeComponent,
     ActivationKeysDialogComponent,
     SettingsComponent,
+    UsersComponent,
+    PlannerComponent,
+    ActivitiesComponent,
+    LocationsComponent,
+    WorkHoursComponent,
   ],
   imports: [
     BrowserModule,
@@ -71,10 +84,22 @@ import { SettingsComponent } from './settings/settings.component';
     ClrLoadingModule,
     ClarityModule,
     ReactiveFormsModule,
+    TableModule,
+    HttpClientModule,
+    TranslateModule.forRoot({
+      loader: {
+        provide: TranslateLoader,
+        useFactory: HttpLoaderFactory,
+        deps: [HttpClient]
+      }
+    })
 
   ],
   providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule {
+}
+export function HttpLoaderFactory(http: HttpClient) {
+  return new TranslateHttpLoader(http);
 }
