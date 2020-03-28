@@ -1,4 +1,4 @@
-<clr-main-container *ngIf="logged">
+<clr-main-container *ngIf="isLoggedIn">
   <clr-header class="header header-7">
     <div class="branding">
       <a routerLink="..." class="nav-link">
@@ -46,25 +46,25 @@
           <label for="tabexample1">{{'navBar.planner.label' | translate}}</label>
           <ul class="nav-list">
             <li>
-              <a class="nav-link" href="/app/planner/myActivitiesList">
+              <a class="nav-link" routerLink="/app/planner/activitiesList">
                 <clr-icon shape="view-list"></clr-icon>
                 {{'navBar.planner.myActivitiesList' | translate}}
               </a>
             </li>
             <li>
-              <a class="nav-link" href="/app/planner/myActivitiesCalendar">
+              <a class="nav-link" routerLink="/app/planner/activitiesCalendar">
                 <clr-icon shape="calendar"></clr-icon>
                 {{'navBar.planner.myActivitiesCalendar' | translate}}
               </a>
             </li>
             <li>
-              <a class="nav-link" href="/app/planner/locations">
+              <a class="nav-link" routerLink="/app/planner/locations">
                 <clr-icon shape="building"></clr-icon>
                 {{'navBar.planner.locations' | translate}}
               </a>
             </li>
             <li>
-              <a class="nav-link" href="/app/planner/workSchedule">
+              <a class="nav-link" routerLink="/app/planner/workHours">
                 <clr-icon shape="clock" ></clr-icon>
                 {{'navBar.planner.workHours' | translate}}
               </a>
@@ -72,7 +72,7 @@
           </ul>
         </section>
 
-        <a href="/app/forms" class="nav-link">
+        <a routerLink="/app/forms" class="nav-link">
           <clr-icon shape="form"></clr-icon>
           {{'navBar.surveys' | translate}}
         </a>
@@ -80,11 +80,11 @@
         <a href="" class="nav-link">
           SuperAdmin
         </a>
-        <a href="/app/college" class="nav-link">
+        <a routerLink="/app/college" class="nav-link">
           <clr-icon shape="building" class="is-solid"></clr-icon>
           {{'navBar.colleges' | translate}}
         </a>
-        <a href="/app/users" class="nav-link">
+        <a routerLink="/app/users" class="nav-link">
           <clr-icon shape="users" class="is-solid"></clr-icon>
           {{'navBar.users' | translate}}
         </a>

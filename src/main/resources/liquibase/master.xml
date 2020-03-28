@@ -26,5 +26,32 @@
             <column name="deleted" type="boolean"></column>
         </createTable>
     </changeSet>
-
+    <changeSet id="2" author="krzymkiewicz">
+        <createTable tableName="roles">
+            <column name="id" type="int" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="name" type="varchar(50)"></column>
+        </createTable>
+        <createTable tableName="user_roles">
+            <column name="user_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+            <column name="role_id" type="int">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+        <addPrimaryKey columnNames="role_id, user_id" tableName="user_roles"/>
+        <addForeignKeyConstraint baseColumnNames="role_id"
+                                 baseTableName="user_roles"
+                                 constraintName="fk_role_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="roles"/>
+        <addForeignKeyConstraint baseColumnNames="user_id"
+                                 baseTableName="user_roles"
+                                 constraintName="fk_user_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="users"/>
+        <sql>INSERT INTO roles (name) values ('ROLE_USER'),('ROLE_MODERATOR'),('ROLE_ADMIN');</sql>
+    </changeSet>
 </databaseChangeLog>

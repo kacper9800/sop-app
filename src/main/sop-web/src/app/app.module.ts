@@ -37,6 +37,7 @@ import {HttpClient, HttpClientModule} from '@angular/common/http';
 import { ActivitiesComponent } from './sop/planner/activities/activities.component';
 import { LocationsComponent } from './sop/planner/locations/locations.component';
 import { WorkHoursComponent } from './sop/planner/work-hours/work-hours.component';
+import { authInterceptorProviders } from './_helpers/auth.interceptor';
 
 
 
@@ -95,7 +96,7 @@ import { WorkHoursComponent } from './sop/planner/work-hours/work-hours.componen
     })
 
   ],
-  providers: [],
+  providers: [authInterceptorProviders],
   bootstrap: [AppComponent]
 })
 export class AppModule {

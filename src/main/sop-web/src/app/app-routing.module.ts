@@ -14,6 +14,9 @@ import { LogbookComponent } from './sop/logbook/logbook.component';
 import { CollegeComponent } from './sop/college/college.component';
 import { UsersComponent } from './sop/users/users.component';
 import { PlannerComponent } from './planner/planner.component';
+import { ActivitiesComponent } from './sop/planner/activities/activities.component';
+import { WorkHoursComponent } from './sop/planner/work-hours/work-hours.component';
+import { LocationsComponent } from './sop/planner/locations/locations.component';
 
 
 const routes: Routes = [
@@ -30,9 +33,13 @@ const routes: Routes = [
   {path: 'app/logbook', component: LogbookComponent},
   {path: 'app/college', component: CollegeComponent},
   {path: 'app/users', component: UsersComponent},
-  {path: 'app/planner', component: PlannerComponent}
-
-];
+  {path: 'app/planner', children: [
+      {path: '', pathMatch: 'full', component: PlannerComponent},
+      {path: 'activitiesList', component: ActivitiesComponent},
+      {path: 'activitiesCalendar', component: ActivitiesComponent},
+      {path: 'locations', component: LocationsComponent},
+      {path: 'workHours', component: WorkHoursComponent}
+    ]}];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],

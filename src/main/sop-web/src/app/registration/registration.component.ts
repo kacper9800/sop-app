@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { AuthService } from '../_services/auth.service';
 
 @Component({
   selector: 'app-registration',
@@ -8,14 +9,18 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 })
 export class RegistrationComponent implements OnInit {
 
-  constructor(private fb: FormBuilder) {
-  }
+  registrationForm: FormGroup;
+  isSuccessful = false;
+  isSignUpFailed = false;
+  errorMessage = '';
 
-  registrationForm: FormGroup
+  constructor(private formBuilder: FormBuilder,
+              private authService: AuthService) {
+  }
 
   ngOnInit() {
 
-    this.registrationForm = this.fb.group({
+    this.registrationForm = this.formBuilder.group({
 
       token: new FormControl({value: null, disabled: false}, Validators.required),
       firstName: new FormControl({value: null, disabled: false}, Validators.required),
@@ -36,6 +41,20 @@ export class RegistrationComponent implements OnInit {
       // birthDate: new FormControl({value: null, disabled: false}, Validators.required),
       // genderId: new FormControl({value: null, disabled: false}, Validators.required),
     });
+  }
+
+  onSubmit() {
+    this.authService.register(this.registrationForm).subscribe(
+      data => {
+        console.log(data);
+        this.isSuccessful = true;
+        this.isSignUpFailed = false;
+      },
+      err => {
+        this.errorMessage = err.error.message;
+        this.isSignUpFailed = true;
+      }
+    );
   }
 
 }

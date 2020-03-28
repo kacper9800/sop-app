@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { UsersService } from '../../_services/users.service';
+import { HttpResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-users',
@@ -7,9 +9,28 @@ import { Component, OnInit } from '@angular/core';
 })
 export class UsersComponent implements OnInit {
 
-  constructor() { }
+  @Input()
+  isLoggedIn: Boolean = false;
 
-  ngOnInit() {
+  constructor(private usersService: UsersService) {
   }
 
+  ngOnInit() {
+    this.loadTest();
+  }
+
+  private loadTest() {
+    this.usersService.getTest().subscribe(
+      (res: HttpResponse<any>) => this.onSuccessTest(res.body),
+      (res: HttpResponse<any>) => this.onError(res.body),
+    );
+  }
+
+  private onSuccessTest(body: any) {
+    console.log('git!');
+  }
+
+  private onError(body: any) {
+    console.log('lipa!')
+  }
 }

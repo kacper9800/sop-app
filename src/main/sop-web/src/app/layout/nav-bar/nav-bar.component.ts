@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { MenuItem } from 'primeng';
 import { TranslateService } from '@ngx-translate/core';
 
@@ -9,6 +9,10 @@ import { TranslateService } from '@ngx-translate/core';
   providers: [TranslateService]
 })
 export class NavBarComponent implements OnInit {
+
+  @Input()
+  isLoggedIn: boolean;
+
 
   items: MenuItem[];
 
