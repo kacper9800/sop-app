@@ -20,8 +20,13 @@ public class UserController {
     @RequestMapping(value = "/api/user", method = RequestMethod.GET)
     public ResponseEntity<List<User>> getAllUsers() {
         final List<User> users = userRepository.findAllUsers();
-        return new ResponseEntity<>(users, HttpStatus.OK)   ;
+        return new ResponseEntity<>(users, HttpStatus.OK);
 
+    }
+
+    @RequestMapping(value ="/api/tests", method = RequestMethod.GET)
+    public String getTest() {
+        return "ok";
     }
 }
 

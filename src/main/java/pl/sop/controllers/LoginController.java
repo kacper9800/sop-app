@@ -25,7 +25,7 @@ public class LoginController {
 
     public String createToken(User user){
         return Jwts.builder()
-                .setSubject(user.getLogin())
+                .setSubject(user.getUsername())
                 .claim("roles", "user")
                 .setIssuedAt(new Date(System.currentTimeMillis()))  // Data ważności od
                 .setExpiration(new Date(System.currentTimeMillis() + 30000)) // Data ważności do

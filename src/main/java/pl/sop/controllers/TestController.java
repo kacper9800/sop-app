@@ -5,35 +5,37 @@
 
 package pl.sop.controllers;
 
-import org.springframework.web.bind.annotation.*;
-import pl.sop.dao.entitiy.Test;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
-import java.util.ArrayList;
-import java.util.List;
-
+@CrossOrigin
 @RestController
+@RequestMapping("/api/test")
 public class TestController {
-    private List<Test> tests;
 
-    public TestController() {
-        this.tests = new ArrayList<>();
-        tests.add(new Test("Nowy","Test"));
-        tests.add(new Test("Nowy2","Test2"));
-        tests.add(new Test("Nowy3","Test3"));
+    @GetMapping("/all")
+    public String allAccess() {
+        return "Public Content.";
     }
 
-    @GetMapping(value = "/api/test")
-    public List<Test> testMethod() {
-        return tests;
+    @GetMapping("/user")
+    @PreAuthorize ("hasRole('USER') or hasRole('MODERATOR') or hasRole('Admin')")
+    public String userAccess(){
+        return "User Content";
     }
 
-    @PostMapping(value = "/api/test")
-    public boolean getTest(@RequestBody Test test) {
-        return tests.add(test);
-    }
-    @DeleteMapping(value = "/api/test")
-    public void deleteTest(@RequestParam int index) {
-        tests.remove(index);
+    @GetMapping("/mod")
+    @PreAuthorize("hasRole('MODERATOR')")
+    public String moderatorAccess() {
+        return "Moderator access";
     }
 
+    @GetMapping("/admin")
+    @PreAuthorize("hasRole('ADMIN')")
+    public String adminAccess(){
+        return "Admin access.";
+    }
 }
