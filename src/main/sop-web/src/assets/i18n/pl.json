@@ -2,7 +2,9 @@
   "header": {
     "SOP": "System obsługi praktyk",
     "info": "Informacje",
-    "settings": "Ustawienia"
+    "settings": "Ustawienia",
+    "login": "Logowanie",
+    "register": "Rejestracja"
   },
   "navBar": {
     "home": "Strona główna",
@@ -19,5 +21,13 @@
     "fieldsOfStudy": "Kierunki studiów",
     "practiceManagers": "Kierownicy praktyk",
     "practiceSupervisors": "Opiekunowie praktyk"
+  },
+  "login": {
+    "header": "Panel logowania",
+    "usernameLabel": "Nazwa użytkownika",
+    "passwordLabel": "Hasło",
+    "required": "To pole jest wymagane!",
+    "loginButton": "Zaloguj",
+    "cancelButton": "Anuluj"
   }
 }

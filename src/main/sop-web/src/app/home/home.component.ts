@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { FormGroup } from '@angular/forms';
+import { Component, OnInit, Output } from '@angular/core';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from '../_services/auth.service';
 import { TokenStorageService } from '../_services/token-storage.service';
 
@@ -15,8 +15,10 @@ export class HomeComponent implements OnInit {
   errorMessage = '';
   roles: string[] = [];
 
+
   constructor(private authService: AuthService,
-              private tokenStorage: TokenStorageService) {
+              private tokenStorage: TokenStorageService,
+              private formBuilder: FormBuilder) {
   }
 
   ngOnInit() {
@@ -24,6 +26,7 @@ export class HomeComponent implements OnInit {
       this.isLoggedIn = true;
       this.roles = this.tokenStorage.getUser().roles;
     }
+    this.prepareForm();
   }
 
   onSubmit() {
@@ -48,5 +51,15 @@ export class HomeComponent implements OnInit {
     window.location.reload();
   }
 
+
+  private prepareForm() {
+    this.loginForm = this.formBuilder.group({
+      username: new FormControl({
+        value: null,
+        disabled: false
+      }, Validators.compose([Validators.required, Validators.minLength(6)])),
+      password: new FormControl({value: null, disabled: false}, Validators.required)
+    });
+  }
 
 }

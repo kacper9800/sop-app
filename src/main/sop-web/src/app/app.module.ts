@@ -3,7 +3,15 @@ import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { SplitButtonModule, TableModule, TabMenuModule, ToolbarModule } from 'primeng';
+import {
+  BlockUIModule,
+  ButtonModule,
+  DialogModule,
+  InputTextModule,
+  PanelModule, ProgressSpinnerModule,
+  TableModule,
+  ToastModule
+} from 'primeng';
 import { HomeComponent } from './home/home.component';
 import { NavBarComponent } from './layout/nav-bar/nav-bar.component';
 import { NewInternComponent } from './sop/new-intern/new-intern.component';
@@ -12,12 +20,19 @@ import { FormsComponent } from './sop/forms/forms.component';
 import { LogoutComponent } from './sop/logout/logout.component';
 import { FooterComponent } from './layout/footer/footer.component';
 import {
+  ClarityModule,
   ClrCheckboxModule,
-  ClrDatagridModule, ClrDatepickerModule,
+  ClrDatagridModule,
+  ClrDatepickerModule,
   ClrDropdownModule,
-  ClrIconModule, ClrInputModule, ClrLoadingModule,
-  ClrMainContainerModule, ClrModalModule,
-  ClrNavigationModule, ClrPasswordModule, ClrSelectModule, ClarityModule
+  ClrIconModule,
+  ClrInputModule,
+  ClrLoadingModule,
+  ClrMainContainerModule,
+  ClrModalModule,
+  ClrNavigationModule,
+  ClrPasswordModule,
+  ClrSelectModule
 } from '@clr/angular';
 import { CompaniesComponent } from './sop/companies/companies.component';
 import { LoginComponent } from './login/login.component';
@@ -31,15 +46,14 @@ import { ActivationKeysDialogComponent } from './sop/activation-keys/activation-
 import { SettingsComponent } from './settings/settings.component';
 import { UsersComponent } from './sop/users/users.component';
 import { PlannerComponent } from './planner/planner.component';
-import {TranslateLoader, TranslateModule} from '@ngx-translate/core';
-import {TranslateHttpLoader} from '@ngx-translate/http-loader';
-import {HttpClient, HttpClientModule} from '@angular/common/http';
+import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
+import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { ActivitiesComponent } from './sop/planner/activities/activities.component';
 import { LocationsComponent } from './sop/planner/locations/locations.component';
 import { WorkHoursComponent } from './sop/planner/work-hours/work-hours.component';
 import { authInterceptorProviders } from './_helpers/auth.interceptor';
-
-
+import { HeaderComponent } from './layout/header/header.component';
 
 @NgModule({
   declarations: [
@@ -65,6 +79,7 @@ import { authInterceptorProviders } from './_helpers/auth.interceptor';
     ActivitiesComponent,
     LocationsComponent,
     WorkHoursComponent,
+    HeaderComponent,
   ],
   imports: [
     BrowserModule,
@@ -93,14 +108,25 @@ import { authInterceptorProviders } from './_helpers/auth.interceptor';
         useFactory: HttpLoaderFactory,
         deps: [HttpClient]
       }
-    })
+    }),
+    InputTextModule,
+    DialogModule,
+    ToastModule,
+    PanelModule,
+    ButtonModule,
+    BlockUIModule,
+    ProgressSpinnerModule,
 
   ],
   providers: [authInterceptorProviders],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  entryComponents: [
+    LoginComponent
+  ]
 })
 export class AppModule {
 }
+
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
 }

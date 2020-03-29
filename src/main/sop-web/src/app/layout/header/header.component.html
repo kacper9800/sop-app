@@ -1,0 +1,54 @@
+<clr-main-container [ngClass]="'mainContainer'">
+  <clr-header class="header header-4">
+    <div class="branding">
+      <a routerLink="/" class="nav-link">
+        <clr-icon shape="block"></clr-icon>
+        <span class="title">{{'header.SOP' | translate}}</span>
+      </a>
+    </div>
+    <div class="header-actions" *ngIf="!isLoggedIn">
+      <a class="nav-link nav-text" (click)="showLoginForm()">
+        {{'header.login' | translate}}
+      </a>
+
+      <a routerLink="/app/registration" class="nav-link nav-text">
+        {{'header.register' | translate}}
+      </a>
+      <clr-dropdown>
+        <button class="nav-icon" clrDropdownTrigger aria-label="toggle settings menu">
+          <span class="flag-icon flag-icon-pl"></span>
+          <clr-icon shape="caret down"></clr-icon>
+        </button>
+        <clr-dropdown-menu *clrIfOpen>
+          <span class="flag-icon flag-icon-gb"></span>
+        </clr-dropdown-menu>
+      </clr-dropdown>
+    </div>
+
+    <div class="header-actions" *ngIf="isLoggedIn">
+      <a href="javascript://" class="nav-link nav-icon-text">
+        <clr-icon shape="user"></clr-icon>
+        <span class="nav-text">Nazwa użytkownika</span>
+      </a>
+      <clr-dropdown>
+        <button class="nav-icon" clrDropdownTrigger aria-label="toggle settings menu">
+          <clr-icon shape="cog"></clr-icon>
+          <clr-icon shape="caret down"></clr-icon>
+        </button>
+        <clr-dropdown-menu *clrIfOpen clrPosition="bottom-right">
+          <a (click)="aboutDialog = true" clrDropdownItem>
+            <clr-icon shape="info-standard" class="is-solid"></clr-icon>
+            Informacje</a>
+          <a href="..." clrDropdownItem>
+            <clr-icon shape="cog" class="is-solid"></clr-icon>
+            Preferences</a>
+          <a (click)="logout()" clrDropdownItem>
+            <clr-icon shape="logout" class="is-solid"></clr-icon>
+            Wyloguj się</a>
+        </clr-dropdown-menu>
+      </clr-dropdown>
+    </div>
+  </clr-header>
+</clr-main-container>
+
+<ng-template #loginForm></ng-template>
