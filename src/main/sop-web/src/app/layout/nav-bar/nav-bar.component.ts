@@ -14,6 +14,7 @@ export class NavBarComponent implements OnInit {
   isLoggedIn: boolean;
 
 
+
   items: MenuItem[];
 
   activeItem: MenuItem;

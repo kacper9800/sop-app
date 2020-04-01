@@ -205,21 +205,21 @@
 <clr-modal [(clrModalOpen)]="displayLoginDialog" [clrModalClosable]="false">
   <h3 class="modal-title" style="text-align: center;">{{'login.header' | translate}}</h3>
   <div class="modal-body" style="margin-left: 20%">
-    <form clrForm [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+    <form clrForm [formGroup]="loginForm">
       <clr-input-container>
         <label>{{'login.usernameLabel' | translate}}</label>
-        <input clrInput placeholder="{{'login.usernameLabel' | translate}}"/>
+        <input clrInput formControlName="username" placeholder="{{'login.usernameLabel' | translate}}"/>
       </clr-input-container>
       <clr-input-container>
         <label>{{'login.passwordLabel' | translate}}</label>
-        <input clrInput type="password" placeholder="{{'login.passwordLabel' | translate}}"/>
+        <input clrInput type="password"  formControlName="password" placeholder="{{'login.passwordLabel' | translate}}"/>
       </clr-input-container>
     </form>
   </div>
   <div class="modal-footer">
     <button type="button" class="btn btn-outline"
             (click)="displayLoginDialog = false">{{'login.cancelButton' | translate}}</button>
-    <button type="submit" class="btn btn-primary">{{'login.loginButton' | translate}}</button>
+    <button type="submit" (click)="onSubmit()" class="btn btn-primary">{{'login.loginButton' | translate}}</button>
   </div>
 </clr-modal>
 

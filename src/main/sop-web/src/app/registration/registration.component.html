@@ -32,7 +32,8 @@
       </clr-password-container>
       <clr-password-container>
         <label class="clr-sr-only">Password</label>
-        <input type="password" name="repeatedPassword" clrPassword placeholder="Powtórz hasło" formControlName="repeatedPassword"/>
+        <input type="password" name="repeatedPassword" clrPassword placeholder="Powtórz hasło"
+               formControlName="repeatedPassword"/>
       </clr-password-container>
       <!--      <clr-checkbox-wrapper>-->
       <!--        <label>Remember me</label>-->
@@ -45,3 +46,19 @@
     </div>
   </form>
 </div>
+
+
+<clr-alert [clrAlertType]="'success'" [clrAlertClosed]="displayAlert" clrAlertClosable="true">
+  <clr-alert-item>
+        <span class="alert-text">
+            This alert indicates success.
+        </span>
+  </clr-alert-item>
+</clr-alert>
+<clr-alert>
+  <clr-alert-item>
+        <span class="alert-text">
+            This is a default info alert.
+        </span>
+  </clr-alert-item>
+</clr-alert>

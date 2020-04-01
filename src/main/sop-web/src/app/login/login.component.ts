@@ -71,10 +71,11 @@ export class LoginComponent implements OnInit {
   }
 
   onSubmit() {
-   let crudentials = [];
-   crudentials.push(this.loginForm.get('username').value);
-   crudentials.push(this.loginForm.get('password').value);
-    this.authService.login(crudentials).subscribe(
+   let credentials = [];
+   credentials.push(this.loginForm.get('username').value);
+   credentials.push(this.loginForm.get('password').value);
+   console.log(credentials);
+    this.authService.login(credentials).subscribe(
       data => {
         this.tokenStorage.saveToken(data.accessToken);
         this.tokenStorage.saveUser(data);

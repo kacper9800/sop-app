@@ -15,6 +15,7 @@ export class RegistrationComponent implements OnInit {
   isSignUpFailed = false;
   errorMessage = '';
   userToRegister: User;
+  private displayAlert: boolean;
 
   constructor(private formBuilder: FormBuilder,
               private authService: AuthService) {
@@ -55,6 +56,7 @@ export class RegistrationComponent implements OnInit {
       },
       err => {
         console.log(err);
+        this.displayAlert = true;
         this.errorMessage = err.error.message;
         this.isSignUpFailed = true;
       }
