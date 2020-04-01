@@ -7,7 +7,7 @@ export interface IUser {
   email?: string;
   phone?: string;
   birthDate?: Date;
-
+  role?: any[];
 }
 
 export class User {
@@ -19,6 +19,7 @@ export class User {
   email?: string;
   phone?: string;
   birthDate?: Date;
+  role?: any[];
 
   static fromJson(json: IUser): User {
     const user: User = new User();
@@ -29,6 +30,7 @@ export class User {
     user.email = json.email;
     user.phone = json.phone;
     user.birthDate = json.birthDate;
+    user.role = json.role;
     return user;
   }
 }

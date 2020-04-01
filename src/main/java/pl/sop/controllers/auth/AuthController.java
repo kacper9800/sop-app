@@ -68,7 +68,7 @@ public class AuthController {
                 roles));
     }
 
-    @PostMapping("/singUp")
+    @PostMapping("/signUp")
     public ResponseEntity<?> registerUser(@Valid @RequestBody SignUpRequest signUpRequest) {
         if (userRepository.existsByUsername(signUpRequest.getUsername())) {
             return ResponseEntity.badRequest().body(new MessageResponse("Error: Username already exist!"));

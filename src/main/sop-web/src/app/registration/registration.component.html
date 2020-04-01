@@ -1,5 +1,5 @@
 <div class="login-wrapper">
-  <form [formGroup]="registrationForm" class="login">
+  <form [formGroup]="registrationForm" class="login" (ngSubmit)="onSubmit()">
     <section class="title">
       <h2 class="welcome">Rejestracja</h2>
     </section>
@@ -18,7 +18,7 @@
       </clr-input-container>
       <clr-input-container>
         <label class="clr-sr-only">Email</label>
-        <input type="text" name="email" clrInput placeholder="E-mail" formControlName="email"/>
+        <input type="text" name="username" clrInput placeholder="E-mail" formControlName="username"/>
       </clr-input-container>
       <clr-input-container>
         <label class="clr-sr-only">Data urodzenia</label>

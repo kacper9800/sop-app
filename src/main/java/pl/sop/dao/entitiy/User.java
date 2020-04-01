@@ -46,7 +46,7 @@ public class User {
     @Column(name = "phone", nullable = false)
     private String phone;
 
-    @Column(name = "active", nullable = false)
+    @Column(name = "activation_key", nullable = false)
     private String activationKey;
 
     @Column(name = "academic_title", nullable = false)
@@ -58,6 +58,9 @@ public class User {
     @Column(name = "deleted")
     private Boolean deleted;
 
+    @Column(name = "active")
+    private Boolean active;
+
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "user_roles",
             joinColumns = @JoinColumn(name = "user_id"),
@@ -65,10 +68,11 @@ public class User {
     private Set<Role> roles = new HashSet<>();
 
 
-    public User(@NotBlank @Size(max = 20) String username, @NotBlank @Size(max = 120) String password, @NotBlank @Size(max = 50) @Email String email) {
+    public User(@NotBlank @Size(max = 20) String username,  @NotBlank @Size(max = 50) @Email String email, @NotBlank @Size(max = 120) String password) {
         this.username = username;
-        this.password = password;
         this.email = email;
+        this.password = password;
+
     }
 
     public Long getId() {

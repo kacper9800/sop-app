@@ -28,7 +28,7 @@ const routes: Routes = [
   {path: 'app/statistics', component: StatisticsComponent},
   {path: 'app/login', component: LoginComponent},
   {path: 'app/logout', component: LogoutComponent},
-  {path: 'app/registration', component: RegistrationComponent},
+  {path: 'register', component: RegistrationComponent},
   {path: 'app/activation-keys', component: ActivationKeysComponent},
   {path: 'app/logbook', component: LogbookComponent},
   {path: 'app/college', component: CollegeComponent},

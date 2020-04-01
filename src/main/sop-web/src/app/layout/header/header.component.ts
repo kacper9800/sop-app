@@ -13,6 +13,9 @@ import { LoginComponent } from '../../login/login.component';
 export class HeaderComponent implements OnInit {
   @Input()
   isLoggedIn: boolean;
+
+  @Input()
+  username: string
   displayLoginDialog: Boolean = false;
 
   @ViewChild('loginForm', {read: ViewContainerRef, static: false}) entry: ViewContainerRef;
