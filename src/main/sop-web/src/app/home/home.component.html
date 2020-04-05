@@ -1,72 +1,49 @@
+<div class="clr-row">
+  <div class="clr-col-4 clr-col-lg-3 "></div>
+  <div class="clr-col-4 clr-col-lg-6 ">
+    <h1>Strona główna <br> Systemu Obsługi Praktyk</h1>
+  </div>
+  <div class="clr-col-4 clr-col-lg-3 "></div>
+</div>
 <div class="content-container">
-  <h1>Strona główna <br> Systemu Obsługi Praktyk</h1>
   <div class="clr-row">
     <div class="clr-col-lg-6 clr-col-12">
-      <a href="" class="card clickable">
-        <div class="card-img">
-          <img src="../../assets/img/test1.jpg">
+      <a class="card clickable">
+        <div *ngIf="isLoggedIn">
+          <app-todo></app-todo>
         </div>
-        <!--      <div class="card-block">-->
-        <!--        <p class="card-text">-->
-        <!--          Innowacyjne rozwiązanie-->
-        <!--        </p>-->
-        <!--      </div>-->
+        <div *ngIf="!isLoggedIn">
+          <div class="card-img">
+            <img src="../../assets/img/test1.jpg">
+          </div>
+        </div>
       </a>
     </div>
     <div class="clr-col-lg-6 clr-col-12">
-      <a href="" class="card clickable">
-        <div class="card-img">
-          <img src="../../assets/img/test2.jpg">
+      <a class="card clickable">
+        <div *ngIf="isLoggedIn">
+          <app-calendar></app-calendar>
         </div>
-        <!--      <div class="card-block">-->
-        <!--        <p class="card-text">-->
-        <!--          ...-->
-        <!--        </p>-->
-        <!--      </div>-->
+        <div *ngIf="!isLoggedIn">
+          <div class="card-img">
+            <img src="../../assets/img/test2.jpg">
+          </div>
+        </div>
       </a>
     </div>
     <div class="clr-col-lg-6 clr-col-12">
-      <a href="" class="card clickable">
+      <a class="card clickable">
         <div class="card-img">
           <img src="../../assets/img/test3.jpg">
         </div>
-        <!--      <div class="card-block">-->
-        <!--        <p class="card-text">-->
-        <!--          ...-->
-        <!--        </p>-->
-        <!--      </div>-->
       </a>
     </div>
     <div class="clr-col-lg-6 clr-col-12">
-      <a href="" class="card clickable">
+      <a class="card clickable">
         <div class="card-img">
           <img src="../../assets/img/test4.jpg">
         </div>
-        <!--      <div class="card-block">-->
-        <!--        <p class="card-text">-->
-        <!--          ...-->
-        <!--        </p>-->
-        <!--      </div>-->
       </a>
     </div>
   </div>
 </div>
-
-<!--<div class="clr-row">-->
-<!--  <div class="clr-col-3"></div>-->
-<!--  <div class="clr-col-lg-6 clr-col-12">-->
-<!--    <form [formGroup]="loginForm" clrForm>-->
-<!--      <label>{{'login.loginLabel' | translate}}</label>-->
-<!--      <input placeholder="{{'login.usernameLabel'|translate}}" clrInput formControlName="username" required/>-->
-<!--      <clr-control-error>{{'login.required' | translate}}</clr-control-error>-->
-<!---->
-<!--      <label>{{'login.passwordLabel' | translate}}</label>-->
-<!--      <input placeholder="{{'login.passwordLabel'|translate}}" type="password" clrInput formControlName="password"-->
-<!--             required/>-->
-<!--      <clr-control-error>{{'login.required' | translate}}</clr-control-error>-->
-<!---->
-<!--      <button type="submit">{{'login.loginButton' | translate}}</button>-->
-<!--    </form>-->
-<!--  </div>-->
-<!--  <div class="clr-col-3"></div>-->
-<!--</div>-->

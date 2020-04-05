@@ -4,12 +4,13 @@ import dayGridPlugin from '@fullcalendar/daygrid';
 import timeGridPlugin from '@fullcalendar/timegrid';
 import plLocale from '@fullcalendar/core/locales/pl';
 // import enLocale from '@fullcalendar/core/locales/en';
+
 @Component({
-  selector: 'app-activities',
-  templateUrl: './activities.component.html',
-  styleUrls: ['./activities.component.css']
+  selector: 'app-calendar',
+  templateUrl: './calendar.component.html',
+  styleUrls: ['./calendar.component.css']
 })
-export class ActivitiesComponent implements OnInit {
+export class CalendarComponent implements OnInit {
   events: any;
   calOptions: any;
   @ViewChild('calendar', {static: true}) calendarComponent: FullCalendar;
@@ -20,13 +21,13 @@ export class ActivitiesComponent implements OnInit {
   ngOnInit() {
 
     this.calOptions = {
-      plugins: [dayGridPlugin, timeGridPlugin],
+      plugins: [ timeGridPlugin],
       defaultView: 'timeGridDay',
       defaultDate: new Date(),
       header: {
         //   left: 'prevYear prev next nextYear ',
         //   center: 'title',
-        right: 'today timeGridDay timeGridWeek dayGridMonth',
+        //   right: 'today timeGridDay timeGridWeek dayGridMonth',
       },
       buttonIcons: {
         // prev: 'left-single-arrow',

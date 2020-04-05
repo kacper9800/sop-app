@@ -10,7 +10,7 @@ import { TokenStorageService } from '../_services/token-storage.service';
 })
 export class HomeComponent implements OnInit {
   loginForm: FormGroup;
-  isLoggedIn: Boolean = false;
+  isLoggedIn = false;
   isLoginFailed = false;
   errorMessage = '';
   roles: string[] = [];

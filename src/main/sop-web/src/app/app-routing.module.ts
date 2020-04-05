@@ -17,6 +17,7 @@ import { PlannerComponent } from './planner/planner.component';
 import { ActivitiesComponent } from './sop/planner/activities/activities.component';
 import { WorkHoursComponent } from './sop/planner/work-hours/work-hours.component';
 import { LocationsComponent } from './sop/planner/locations/locations.component';
+import { PlannerSettingsComponent } from './sop/planner/planner-settings/planner-settings.component';
 
 
 const routes: Routes = [
@@ -38,7 +39,8 @@ const routes: Routes = [
       {path: 'activitiesList', component: ActivitiesComponent},
       {path: 'activitiesCalendar', component: ActivitiesComponent},
       {path: 'locations', component: LocationsComponent},
-      {path: 'workHours', component: WorkHoursComponent}
+      {path: 'workHours', component: WorkHoursComponent},
+      {path: 'settings', component: PlannerSettingsComponent}
     ]}];
 
 @NgModule({

@@ -6,7 +6,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {
   BlockUIModule,
   ButtonModule,
-  DialogModule,
+  DialogModule, FullCalendarModule,
   InputTextModule,
   PanelModule, ProgressSpinnerModule,
   TableModule,
@@ -54,6 +54,10 @@ import { LocationsComponent } from './sop/planner/locations/locations.component'
 import { WorkHoursComponent } from './sop/planner/work-hours/work-hours.component';
 import { authInterceptorProviders } from './_helpers/auth.interceptor';
 import { HeaderComponent } from './layout/header/header.component';
+import { WidgetsComponent } from './widgets/widgets.component';
+import { TodoComponent } from './widgets/todo/todo.component';
+import { CalendarComponent } from './widgets/calendar/calendar.component';
+import { PlannerSettingsComponent } from './sop/planner/planner-settings/planner-settings.component';
 
 @NgModule({
   declarations: [
@@ -80,6 +84,10 @@ import { HeaderComponent } from './layout/header/header.component';
     LocationsComponent,
     WorkHoursComponent,
     HeaderComponent,
+    WidgetsComponent,
+    TodoComponent,
+    CalendarComponent,
+    PlannerSettingsComponent,
   ],
   imports: [
     BrowserModule,
@@ -116,6 +124,7 @@ import { HeaderComponent } from './layout/header/header.component';
     ButtonModule,
     BlockUIModule,
     ProgressSpinnerModule,
+    FullCalendarModule,
 
   ],
   providers: [authInterceptorProviders],
