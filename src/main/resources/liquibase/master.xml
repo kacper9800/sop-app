@@ -54,4 +54,26 @@
                                  referencedTableName="users"/>
         <sql>INSERT INTO roles (name) values ('ROLE_USER'),('ROLE_MODERATOR'),('ROLE_ADMIN');</sql>
     </changeSet>
+    <changeSet id="3" author="krzymkiewicz">
+        <sql>INSERT INTO roles (name) values ('ROLE_STUDENT'),('ROLE_SUPERVISER'),('ROLE_SUPERADMIN');</sql>
+    </changeSet>
+<!--    <changeSet id="4" author="krzymkiewicz">-->
+<!--        <createTable tableName="calendar_events">-->
+<!--            <column name="event_id"></column>-->
+<!--            <column name="college_id"></column>-->
+<!--            <column name="department_id"></column>-->
+<!--            <column name="class_id"></column>-->
+<!--            <column name="user_id"></column>-->
+<!--            <column name="start_date"></column>-->
+<!--            <column name="end_date"></column>-->
+<!--            <column name="name"></column>-->
+<!--            <column name="description"></column>-->
+
+<!--        </createTable>-->
+<!--        <createTable tableName="todo_items">-->
+<!--            <column name="user_id"></column>-->
+<!--            <column name="title"></column>-->
+<!--            <column name="checked"></column>-->
+<!--        </createTable>-->
+<!--    </changeSet>-->
 </databaseChangeLog>

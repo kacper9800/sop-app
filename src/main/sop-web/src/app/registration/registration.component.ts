@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { AuthService } from '../_services/auth.service';
+import { AuthService } from '../_services/auth/auth.service';
 import { User } from '../security/user';
 
 @Component({
@@ -10,15 +10,25 @@ import { User } from '../security/user';
 })
 export class RegistrationComponent implements OnInit {
 
+  displayRegistrationDialog: any;
+
+  @Output()
+  closeDialogWithSaveEmitter: EventEmitter<any> = new EventEmitter<any>();
+
   registrationForm: FormGroup;
   isSuccessful = false;
   isSignUpFailed = false;
   errorMessage = '';
   userToRegister: User;
   private displayAlert: boolean;
+  blockUI: any;
 
   constructor(private formBuilder: FormBuilder,
               private authService: AuthService) {
+  }
+
+  show() {
+    this.displayRegistrationDialog = true;
   }
 
   ngOnInit() {
@@ -47,20 +57,26 @@ export class RegistrationComponent implements OnInit {
   }
 
   onSubmit() {
+    this.blockUI = true;
     this.collectUserData();
     this.authService.register(this.userToRegister).subscribe(
       data => {
-        console.log(data);
         this.isSuccessful = true;
         this.isSignUpFailed = false;
+        this.reloadPage();
+
       },
       err => {
-        console.log(err);
         this.displayAlert = true;
         this.errorMessage = err.error.message;
         this.isSignUpFailed = true;
       }
     );
+  }
+
+  reloadPage() {
+    window.location.reload();
+    this.blockUI = false;
   }
 
   private collectUserData() {
@@ -70,6 +86,6 @@ export class RegistrationComponent implements OnInit {
     this.userToRegister.password = this.registrationForm.get('password').value;
     this.userToRegister.email = this.registrationForm.get('username').value;
     this.userToRegister.username = this.registrationForm.get('username').value;
-    this.userToRegister.role = ['ROLE_USER','ROLE_ADMIN']
+    this.userToRegister.role = ['ROLE_USER', 'ROLE_ADMIN'];
   }
 }

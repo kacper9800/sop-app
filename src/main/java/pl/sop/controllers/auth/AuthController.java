@@ -13,8 +13,8 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
-import pl.sop.dao.entitiy.User;
 import pl.sop.dao.entitiy.Role;
+import pl.sop.dao.entitiy.User;
 import pl.sop.dao.repository.RoleRepository;
 import pl.sop.dao.repository.UserRepository;
 import pl.sop.enums.ERole;
@@ -80,6 +80,11 @@ public class AuthController {
         User user = new User(signUpRequest.getUsername(),
                 signUpRequest.getEmail(),
                 encoder.encode(signUpRequest.getPassword()));
+
+
+        //Todo
+        // Dodawanie w rejestracji pozostałych danych!
+//        User user = new User(signUpRequest.getUsername(), signUpRequest.get)
 
         Set<String> strRoles = signUpRequest.getRole();
         Set<Role> roles = new HashSet<>();

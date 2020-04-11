@@ -2,8 +2,10 @@ import { Component, ComponentFactoryResolver, Input, OnInit, ViewChild, ViewCont
 import { MenuItem } from 'primeng';
 import { TranslateService } from '@ngx-translate/core';
 import { Router } from '@angular/router';
-import { TokenStorageService } from '../../_services/token-storage.service';
+import { TokenStorageService } from '../../_services/auth/token-storage.service';
 import { LoginComponent } from '../../login/login.component';
+import { RegistrationComponent } from '../../registration/registration.component';
+import { User } from '../../security/user';
 
 @Component({
   selector: 'app-header',
@@ -15,18 +17,18 @@ export class HeaderComponent implements OnInit {
   isLoggedIn: boolean;
 
   @Input()
-  username: string
-  displayLoginDialog: Boolean = false;
+  user: User;
+
+  displayLoginDialog = false;
 
   @ViewChild('loginForm', {read: ViewContainerRef, static: false}) entry: ViewContainerRef;
   componentRef: any;
 
 
   items: MenuItem[];
-
   activeItem: MenuItem;
   logged: boolean;
-  planner: Boolean;
+  planner: boolean;
 
   aboutDialog = false;
 
@@ -58,6 +60,18 @@ export class HeaderComponent implements OnInit {
     if (!this.isLoggedIn) {
       this.entry.clear();
       const factory = this.resolver.resolveComponentFactory(LoginComponent);
+      this.componentRef = this.entry.createComponent(factory);
+      this.componentRef.instance.show();
+      this.componentRef.instance.closeDialogWithSaveEmitter.subscribe(data => {
+        this.refersh();
+      });
+    }
+  }
+
+  showRegistrationForm() {
+    if (!this.isLoggedIn) {
+      this.entry.clear();
+      const factory = this.resolver.resolveComponentFactory(RegistrationComponent);
       this.componentRef = this.entry.createComponent(factory);
       this.componentRef.instance.show();
       this.componentRef.instance.closeDialogWithSaveEmitter.subscribe(data => {

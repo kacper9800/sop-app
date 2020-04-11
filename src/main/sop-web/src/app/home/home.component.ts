@@ -1,7 +1,8 @@
-import { Component, OnInit, Output } from '@angular/core';
+import { Component, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { AuthService } from '../_services/auth.service';
-import { TokenStorageService } from '../_services/token-storage.service';
+import { AuthService } from '../_services/auth/auth.service';
+import { TokenStorageService } from '../_services/auth/token-storage.service';
+import { User } from '../security/user';
 
 @Component({
   selector: 'app-home',
@@ -9,6 +10,9 @@ import { TokenStorageService } from '../_services/token-storage.service';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
+  @Input()
+  userDetails: User;
+
   loginForm: FormGroup;
   isLoggedIn = false;
   isLoginFailed = false;

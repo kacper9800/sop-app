@@ -29,6 +29,18 @@
     "passwordLabel": "Hasło",
     "required": "To pole jest wymagane!",
     "loginButton": "Zaloguj",
-    "cancelButton": "Anuluj"
+    "cancelButtonLabel": "Anuluj"
+  },
+  "registration": {
+    "header": "Panel rejestracji",
+    "tokenLabel": "Klucz aktywacyjny",
+    "firstNameLabel": "Imię",
+    "lastNameLabel": "Nazwisko",
+    "birthDateLabel": "Data urodzenia",
+    "passwordLabel": "Hasło",
+    "passwordRepeatLabel": "Powtórz hasło",
+    "emailLabel": "Adres e-mail",
+    "register": "Zarejestruj się",
+    "cancelButtonLabel": "Przerwij rejestrację"
   }
 }

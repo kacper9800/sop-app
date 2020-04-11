@@ -3,13 +3,14 @@ import { FullCalendar } from 'primeng';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import timeGridPlugin from '@fullcalendar/timegrid';
 import plLocale from '@fullcalendar/core/locales/pl';
-// import enLocale from '@fullcalendar/core/locales/en';
+
 @Component({
-  selector: 'app-activities',
-  templateUrl: './activities.component.html',
-  styleUrls: ['./activities.component.css']
+  selector: 'app-planner-calendar',
+  templateUrl: './planner-calendar.component.html',
+  styleUrls: ['./planner-calendar.component.css']
 })
-export class ActivitiesComponent implements OnInit {
+export class PlannerCalendarComponent implements OnInit {
+
   events: any;
   calOptions: any;
   @ViewChild('calendar', {static: true}) calendarComponent: FullCalendar;

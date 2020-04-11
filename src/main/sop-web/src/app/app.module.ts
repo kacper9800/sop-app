@@ -49,15 +49,16 @@ import { PlannerComponent } from './planner/planner.component';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
-import { ActivitiesComponent } from './sop/planner/activities/activities.component';
-import { LocationsComponent } from './sop/planner/locations/locations.component';
-import { WorkHoursComponent } from './sop/planner/work-hours/work-hours.component';
 import { authInterceptorProviders } from './_helpers/auth.interceptor';
 import { HeaderComponent } from './layout/header/header.component';
 import { WidgetsComponent } from './widgets/widgets.component';
 import { TodoComponent } from './widgets/todo/todo.component';
 import { CalendarComponent } from './widgets/calendar/calendar.component';
 import { PlannerSettingsComponent } from './sop/planner/planner-settings/planner-settings.component';
+import { PlannerCalendarComponent } from './sop/planner/planner-calendar/planner-calendar.component';
+import { PlannerActivitiesComponent } from './sop/planner/planner-activities/planner-activities.component';
+import { PlannerWorkHoursComponent } from './sop/planner/planner-work-hours/planner-work-hours.component';
+import { PlannerLocationsComponent } from './sop/planner/planner-locations/planner-locations.component';
 
 @NgModule({
   declarations: [
@@ -80,14 +81,15 @@ import { PlannerSettingsComponent } from './sop/planner/planner-settings/planner
     SettingsComponent,
     UsersComponent,
     PlannerComponent,
-    ActivitiesComponent,
-    LocationsComponent,
-    WorkHoursComponent,
     HeaderComponent,
     WidgetsComponent,
     TodoComponent,
     CalendarComponent,
     PlannerSettingsComponent,
+    PlannerCalendarComponent,
+    PlannerActivitiesComponent,
+    PlannerWorkHoursComponent,
+    PlannerLocationsComponent,
   ],
   imports: [
     BrowserModule,
@@ -124,6 +126,7 @@ import { PlannerSettingsComponent } from './sop/planner/planner-settings/planner
     ButtonModule,
     BlockUIModule,
     ProgressSpinnerModule,
+    FullCalendarModule,
     FullCalendarModule,
 
   ],

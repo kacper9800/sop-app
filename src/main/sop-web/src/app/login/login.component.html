@@ -1,225 +1,42 @@
-<!--<div class="login-wrapper">-->
-<!--  <form [formGroup]="loginForm" class="login">-->
-<!--    <section class="title">-->
-<!--      <h2 class="welcome">System Obsługi Praktyk</h2>-->
-<!--&lt;!&ndash;      <h5 class="hint"</h5>&ndash;&gt;-->
-<!--    </section>-->
-<!--    <div class="login-group">-->
-<!--      <clr-select-container>-->
-<!--        <label class="clr-sr-only">User Role</label>-->
-<!--        <select clrSelect name="type" formControlName="userType">-->
-<!--          <option value="local">Kierownik praktyk</option>-->
-<!--          <option value="admin">Opiekun praktyk</option>-->
-<!--          <option value="admin">Praktykant</option>-->
-<!--        </select>-->
-<!--      </clr-select-container>-->
-<!--      <clr-input-container>-->
-<!--        <label class="clr-sr-only">Username</label>-->
-<!--        <input type="text" name="username" clrInput placeholder="Username" formControlName="userName"/>-->
-<!--      </clr-input-container>-->
-<!--      <clr-password-container>-->
-<!--        <label class="clr-sr-only">Password</label>-->
-<!--        <input type="password" name="password" clrPassword placeholder="Password" formControlName="password"/>-->
-<!--      </clr-password-container>-->
-<!--&lt;!&ndash;      <clr-checkbox-wrapper>&ndash;&gt;-->
-<!--&lt;!&ndash;        <label>Remember me</label>&ndash;&gt;-->
-<!--&lt;!&ndash;        <input type="checkbox" name="rememberMe" clrCheckbox />&ndash;&gt;-->
-<!--&lt;!&ndash;      </clr-checkbox-wrapper>&ndash;&gt;-->
-<!--      <div class="error active">-->
-<!--        Invalid user name or password-->
-<!--      </div>-->
-<!--      <button type="submit" class="btn btn-primary">Zaloguj</button>-->
-<!--      <a href="/app/registration"class="signup">Nie posiadasz konta?<br> Zarejestruj się tutaj!</a>-->
-<!--    </div>-->
-<!--  </form>-->
-<!--</div>-->
-
-<!--<div class="login-wrapper">-->
-<!--  <form *ngIf>-->
-
-<!--  </form>-->
-<!--</div>-->
-<!--<div class="card card-container">-->
-<!--  <form *ngIf="!isLoggedIn" name="form" (ngSubmit)="f.form.valid && onSubmit()"-->
-<!--    #f="ngForm"-->
-<!--    novalidate>-->
-<!--    <div class="form-group">-->
-<!--      <label for="username">Username</label>-->
-<!--      <input-->
-<!--        type="text"-->
-<!--        class="form-control"-->
-<!--        name="username"-->
-<!--        [(ngModel)]="form.username"-->
-<!--        required-->
-<!--        #username="ngModel"-->
-<!--      />-->
-<!--      <div-->
-<!--        class="alert alert-danger"-->
-<!--        role="alert"-->
-<!--        *ngIf="f.submitted && username.invalid"-->
-<!--      >-->
-<!--        Username is required!-->
-<!--      </div>-->
-<!--    </div>-->
-<!--    <div class="form-group">-->
-<!--      <label for="password">Password</label>-->
-<!--      <input-->
-<!--        type="password"-->
-<!--        class="form-control"-->
-<!--        name="password"-->
-<!--        [(ngModel)]="form.password"-->
-<!--        required-->
-<!--        minlength="6"-->
-<!--        #password="ngModel"-->
-<!--      />-->
-<!--      <div-->
-<!--        class="alert alert-danger"-->
-<!--        role="alert"-->
-<!--        *ngIf="f.submitted && password.invalid"-->
-<!--      >-->
-<!--        <div *ngIf="password.errors.required">Password is required</div>-->
-<!--        <div *ngIf="password.errors.minlength">-->
-<!--          Password must be at least 6 characters-->
-<!--        </div>-->
-<!--      </div>-->
-<!--    </div>-->
-<!--    <div class="form-group">-->
-<!--      <button class="btn btn-primary btn-block">-->
-<!--        Login-->
-<!--      </button>-->
-<!--    </div>-->
-<!--    <div class="form-group">-->
-<!--      <div-->
-<!--        class="alert alert-danger"-->
-<!--        role="alert"-->
-<!--        *ngIf="f.submitted && isLoginFailed"-->
-<!--      >-->
-<!--        Login failed: {{ errorMessage }}-->
-<!--      </div>-->
-<!--    </div>-->
-<!--  </form>-->
-
-<!--  <div class="alert alert-success" *ngIf="isLoggedIn">-->
-<!--    Logged in as {{ roles }}.-->
-<!--  </div>-->
-<!--</div>-->
-
-<!--  <h3 class="modal-title">I have a nice title</h3>-->
-<!--  <div class="modal-body">-->
-<!--    <form formGroup="loginForm" clrForm>-->
-<!--      <clr-input-container>-->
-<!--        <div class="clr-row">-->
-<!--          <div class="clr-col-4"><label>{{'login.usernameLabel' | translate}}</label></div>-->
-<!--          <div class="clr-col-8">-->
-<!--            <input clrInput formControl="username" name="username"/>-->
-<!--          </div>-->
-<!--        </div>-->
-<!--        <div class="clr-row">-->
-<!--          <div class="clr-col-4"><label>{{'login.passwordLabel' | translate}}</label></div>-->
-<!--          <div class="clr-col-8">-->
-<!--            <input clrInput formControl="password" name="password"/>-->
-<!--          </div>-->
-<!--        </div>-->
-<!--      </clr-input-container>-->
-<!--    </form>-->
-<!--  </div>-->
-<!--  <div class="modal-footer">-->
-<!--    <button type="button" class="btn btn-outline" (click)="displayLoginDialog = false">Cancel</button>-->
-<!--    <button type="button" class="btn btn-primary" (click)="displayLoginDialog = false">Ok</button>-->
-<!--  </div>-->
-
-<!--<div class="ui-grid">-->
-<!--  <div class="ui-grid-col-3"></div>-->
-<!--  <div class="ui-grid-col-6">-->
-<!--    <div class="login-container">-->
-<!--      <div class="ui-grid-row">-->
-<!--        <div class="ui-grid-col-5"></div>-->
-<!--        <div class="ui-grid-col-2">-->
-<!--          {{'login.header' | translate}}-->
-<!--        </div>-->
-<!--        <div class="ui-grid-col-5"></div>-->
-<!--      </div>-->
-
-<!--      <form clrForm [formGroup]="loginForm">-->
-<!--        <div class="ui-grid-row">-->
-<!--          <div class="ui-grid-col-2"></div>-->
-<!--          <div class="ui-grid-col-4">{{'login.usernameLabel'|translate}}</div>-->
-<!--          <div class="ui-grid-col-4">-->
-<!--            <input pInputText formControlName="username">-->
-<!--          </div>-->
-<!--          <div class="ui-grid-col-2"></div>-->
-<!--        </div>-->
-
-<!--      </form>-->
-<!--    </div>-->
-<!--  </div>-->
-<!--</div>-->
-<!--<p-toast [baseZIndex]="100000" [autoZIndex]="true"></p-toast>-->
-
-<!--<p-dialog header="{{headerText}}" [(visible)]="displayLoginDialog" [modal]="true" [responsive]="true" appendTo="body"-->
-<!--          [style]="{width: '700px'}" [minY]="70" (onHide)="onHide()" [maximizable]="false"-->
-<!--          [baseZIndex]="400" [contentStyle]="{'overflow': 'visible'}">-->
-<!--  <div class="login-container">-->
-
-<!--    <form [formGroup]="loginForm" (ngSubmit)="login()">-->
-<!--      <div class="p-grid">-->
-<!--        <div class="p-col-12 p-md-12 p-lg-12">-->
-<!--          <div class="ui-grid ui-grid-responsive ui-grid-pad ui-fluid" style="margin: 10px 0px">-->
-<!--            <div class="ui-grid-row">-->
-<!--              <div class="ui-grid-col-2"></div>-->
-<!--              <div class="ui-grid-col-3">-->
-<!--                {{'login.usernameLabel' | translate}}-->
-<!--              </div>-->
-<!--              <div class="ui-grid-col-5">-->
-<!--                <input pInputText formControlName="username" [style]="{'size':'auto','overflow-y':'auto !important'}">-->
-<!--              </div>-->
-<!--              <div class="ui-grid-col-2"></div>-->
-<!--            </div>-->
-<!--            <div class="ui-grid-row">-->
-<!--              <div class="ui-grid-col-2"></div>-->
-<!--              <div class="ui-grid-col-3">-->
-<!--                {{'login.passwordLabel' | translate}}-->
-<!--              </div>-->
-<!--              <div class="ui-grid-col-5">-->
-<!--                <input pInputText formControlName="password" [style]="{'size':'auto','overflow-y':'auto !important'}">-->
-<!--              </div>-->
-<!--              <div class="ui-grid-col-2"></div>-->
-<!--            </div>-->
-<!--          </div>-->
-<!--        </div>-->
-<!--      </div>-->
-<!--      <p-footer>-->
-<!--        <button pButton icon="pi pi-save" (click)="login()"-->
-<!--                type="submit"-->
-<!--                label="{{loginButton}}"></button>-->
-<!--        <button pButton type="button" icon="pi pi-times" (click)="displayLoginDialog=false"-->
-<!--                label="Zamknij"-->
-<!--                class="ui-button-secondary"></button>-->
-<!--      </p-footer>-->
-<!--    </form>-->
-<!--  </div>-->
-<!--</p-dialog>-->
-<p-blockUI [autoZIndex]="false" [baseZIndex]="9999" [blocked]="blockUI">
-  <p-progressSpinner></p-progressSpinner>
-</p-blockUI>
-<clr-modal [(clrModalOpen)]="displayLoginDialog" [clrModalClosable]="false">
-  <h3 class="modal-title" style="text-align: center;">{{'login.header' | translate}}</h3>
-  <div class="modal-body" style="margin-left: 20%">
+<clr-modal [(clrModalOpen)]="displayLoginDialog" [clrModalStaticBackdrop]="false" [clrModalClosable]="false">
+  <h3 class="modal-title">{{'login.header' | translate}}</h3>
+  <div class="modal-body">
+    <div *ngIf="blockUI" style="text-align: center">
+      <clr-spinner *ngIf="blockUI">Loading data</clr-spinner>
+    </div>
     <form clrForm [formGroup]="loginForm">
-      <clr-input-container>
-        <label>{{'login.usernameLabel' | translate}}</label>
-        <input clrInput formControlName="username" placeholder="{{'login.usernameLabel' | translate}}"/>
-      </clr-input-container>
-      <clr-input-container>
-        <label>{{'login.passwordLabel' | translate}}</label>
-        <input clrInput type="password"  formControlName="password" placeholder="{{'login.passwordLabel' | translate}}"/>
-      </clr-input-container>
+      <div class="clr-row">
+        <div class="clr-col-4"></div>
+        <div class="clr-col-4">
+          <clr-input-container>
+            <label>
+              <clr-icon shape="user"></clr-icon>
+            </label>
+            <input clrInput formControlName="username" placeholder="{{'login.usernameLabel' | translate}}"/>
+          </clr-input-container>
+        </div>
+        <div class="clr-col-4"></div>
+      </div>
+      <div class="clr-row">
+        <div class="clr-col-4"></div>
+        <div class="clr-col-4">
+          <clr-input-container>
+            <label>
+              <clr-icon shape="key"></clr-icon>
+            </label>
+            <input clrInput type="password" formControlName="password"
+                   placeholder="{{'login.passwordLabel' | translate}}"/>
+          </clr-input-container>
+        </div>
+        <div class="clr-col-4"></div>
+      </div>
     </form>
   </div>
   <div class="modal-footer">
-    <button type="button" class="btn btn-outline"
-            (click)="displayLoginDialog = false">{{'login.cancelButton' | translate}}</button>
-    <button type="submit" (click)="onSubmit()" class="btn btn-primary">{{'login.loginButton' | translate}}</button>
+    <button type="submit" class="btn btn-primary btn-block"
+            (click)="onSubmit()">{{'login.loginButton' | translate}} </button>
+    <button type="submit" class="btn btn-secondary-outline btn-block"
+            (click)="displayLoginDialog = false">{{'login.cancelButtonLabel' | translate}} </button>
   </div>
 </clr-modal>
 

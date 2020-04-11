@@ -14,10 +14,11 @@ import { LogbookComponent } from './sop/logbook/logbook.component';
 import { CollegeComponent } from './sop/college/college.component';
 import { UsersComponent } from './sop/users/users.component';
 import { PlannerComponent } from './planner/planner.component';
-import { ActivitiesComponent } from './sop/planner/activities/activities.component';
-import { WorkHoursComponent } from './sop/planner/work-hours/work-hours.component';
-import { LocationsComponent } from './sop/planner/locations/locations.component';
 import { PlannerSettingsComponent } from './sop/planner/planner-settings/planner-settings.component';
+import { PlannerCalendarComponent } from './sop/planner/planner-calendar/planner-calendar.component';
+import { PlannerActivitiesComponent } from './sop/planner/planner-activities/planner-activities.component';
+import { PlannerLocationsComponent } from './sop/planner/planner-locations/planner-locations.component';
+import { PlannerWorkHoursComponent } from './sop/planner/planner-work-hours/planner-work-hours.component';
 
 
 const routes: Routes = [
@@ -34,14 +35,16 @@ const routes: Routes = [
   {path: 'app/logbook', component: LogbookComponent},
   {path: 'app/college', component: CollegeComponent},
   {path: 'app/users', component: UsersComponent},
-  {path: 'app/planner', children: [
+  {
+    path: 'app/planner', children: [
       {path: '', pathMatch: 'full', component: PlannerComponent},
-      {path: 'activitiesList', component: ActivitiesComponent},
-      {path: 'activitiesCalendar', component: ActivitiesComponent},
-      {path: 'locations', component: LocationsComponent},
-      {path: 'workHours', component: WorkHoursComponent},
+      {path: 'activitiesList', component: PlannerActivitiesComponent},
+      {path: 'activitiesCalendar', component: PlannerCalendarComponent},
+      {path: 'locations', component: PlannerLocationsComponent},
+      {path: 'workHours', component: PlannerWorkHoursComponent},
       {path: 'settings', component: PlannerSettingsComponent}
-    ]}];
+    ]
+  }];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],

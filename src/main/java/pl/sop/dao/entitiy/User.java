@@ -72,7 +72,20 @@ public class User {
         this.username = username;
         this.email = email;
         this.password = password;
+    }
 
+    public User(@NotBlank @Size(max = 20) String username, @NotBlank @Size(max = 120) String password,
+                String firstName, String lastName, @NotBlank @Size(max = 50) @Email String email,
+                String phone, String activationKey, String academic_title, Date birthDate) {
+        this.username = username;
+        this.password = password;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
+        this.phone = phone;
+        this.activationKey = activationKey;
+        this.academic_title = academic_title;
+        this.birthDate = birthDate;
     }
 
     public User() {

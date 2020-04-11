@@ -1,6 +1,9 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { MenuItem } from 'primeng';
 import { TranslateService } from '@ngx-translate/core';
+import { TokenStorageService } from '../../_services/auth/token-storage.service';
+import { User } from '../../security/user';
+import { PrincipalService } from '../../_services/auth/principal.service';
 
 @Component({
   selector: 'app-nav-bar',
@@ -13,24 +16,29 @@ export class NavBarComponent implements OnInit {
   @Input()
   isLoggedIn: boolean;
 
-
+  user: User;
 
   items: MenuItem[];
 
   activeItem: MenuItem;
   logged: boolean;
-  planner: Boolean;
+  planner: boolean;
 
   aboutDialog = false;
 
+  isSuperAdmin: boolean;
+  isAdmin: boolean;
+  isModerator: boolean;
+  isSuperviser: boolean;
+  isStudent: boolean;
 
-  constructor(private translateService: TranslateService) {
+  constructor(private translateService: TranslateService,
+              private tokenStorageService: TokenStorageService,
+              private principalService: PrincipalService) {
     translateService.setDefaultLang('pl');
-
   }
 
   ngOnInit() {
-    this.logged = true;
     this.items = [
       {label: 'Strona główna', routerLink: [''], icon: 'fa fa-fw fa-bar-chart'},
       {label: 'Rejestracja praktykanta', routerLink: ['app/new-intern'], icon: 'fa fa-fw fa-calendar'},
@@ -40,6 +48,11 @@ export class NavBarComponent implements OnInit {
       {label: 'Statystki', routerLink: ['app/statistics'], icon: 'fa fa-fw fa-twitter'},
       {label: 'Wyloguj', routerLink: ['app/logout'], icon: 'fa fa-fw fa-twitter'}
     ];
+    this.isSuperAdmin = this.principalService.isSuperAdmin();
+    this.isAdmin = this.principalService.isAdmin();
+    this.isModerator = this.principalService.isModerator();
+    this.isSuperviser = this.principalService.isSuperviser();
+    this.isStudent = this.principalService.isStudent();
 
     this.activeItem = this.items[0];
   }

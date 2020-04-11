@@ -1,64 +1,127 @@
-<div class="login-wrapper">
-  <form [formGroup]="registrationForm" class="login" (ngSubmit)="onSubmit()">
-    <section class="title">
-      <h2 class="welcome">Rejestracja</h2>
-    </section>
-    <div class="login-group">
-      <clr-input-container>
-        <label class="clr-sr-only">Klucz dostępu</label>
-        <input type="text" name="token" clrInput placeholder="Klucz dostępu" formControlName="token"/>
-      </clr-input-container>
-      <clr-input-container>
-        <label class="clr-sr-only">Imię</label>
-        <input type="text" name="firstName" clrInput placeholder="Imię" formControlName="firstName"/>
-      </clr-input-container>
-      <clr-input-container>
-        <label class="clr-sr-only">Naziwsko</label>
-        <input type="text" name="lastName" clrInput placeholder="Nazwisko" formControlName="lastName"/>
-      </clr-input-container>
-      <clr-input-container>
-        <label class="clr-sr-only">Email</label>
-        <input type="text" name="username" clrInput placeholder="E-mail" formControlName="username"/>
-      </clr-input-container>
-      <clr-input-container>
-        <label class="clr-sr-only">Data urodzenia</label>
-        <clr-date-container>
-          <input type="date" name="birthDate" clrDate placeholder="Data urodzenia" formControlName="birthDate">
-        </clr-date-container>
-      </clr-input-container>
-      <clr-password-container>
-        <label class="clr-sr-only">Password</label>
-        <input type="password" name="password" clrPassword placeholder="Hasło" formControlName="password"/>
-      </clr-password-container>
-      <clr-password-container>
-        <label class="clr-sr-only">Password</label>
-        <input type="password" name="repeatedPassword" clrPassword placeholder="Powtórz hasło"
-               formControlName="repeatedPassword"/>
-      </clr-password-container>
-      <!--      <clr-checkbox-wrapper>-->
-      <!--        <label>Remember me</label>-->
-      <!--        <input type="checkbox" name="rememberMe" clrCheckbox />-->
-      <!--      </clr-checkbox-wrapper>-->
-      <div class="error active">
-        Invalid user name or password
-      </div>
-      <button type="submit" class="btn btn-primary">Zarejestruj się</button>
+<clr-modal [(clrModalOpen)]="displayRegistrationDialog" [clrModalStaticBackdrop]="false" [clrModalClosable]="false">
+  <h3 class="modal-title">{{'registration.header' | translate}}</h3>
+  <div class="modal-body">
+    <div *ngIf="blockUI" style="text-align: center">
+      <clr-spinner *ngIf="blockUI">Loading data</clr-spinner>
     </div>
-  </form>
-</div>
+    <form clrForm [formGroup]="registrationForm">
+      <div class="clr-row">
+        <div class="clr-col-4"></div>
+        <div class="clr-col-4">
+          <clr-input-container>
+            <label>
+              <clr-icon shape="key"></clr-icon>
+            </label>
+            <input clrInput type="password" formControlName="password"
+                   placeholder="{{'registration.tokenLabel' | translate}}"/>
+          </clr-input-container>
+        </div>
+        <div class="clr-col-4"></div>
+      </div>
 
+      <div class="clr-row">
+        <div class="clr-col-4"></div>
+        <div class="clr-col-4">
+          <clr-input-container>
+            <label>
+              <clr-icon shape="user"></clr-icon>
+            </label>
+            <input type="text" name="firstName" clrInput placeholder="{{'registration.firstNameLabel' | translate}}"
+                   formControlName="firstName"/>
+          </clr-input-container>
+        </div>
+        <div class="clr-col-4"></div>
+      </div>
 
-<clr-alert [clrAlertType]="'success'" [clrAlertClosed]="displayAlert" clrAlertClosable="true">
-  <clr-alert-item>
-        <span class="alert-text">
-            This alert indicates success.
-        </span>
-  </clr-alert-item>
-</clr-alert>
-<clr-alert>
-  <clr-alert-item>
-        <span class="alert-text">
-            This is a default info alert.
-        </span>
-  </clr-alert-item>
-</clr-alert>
+      <div class="clr-row">
+        <div class="clr-col-4"></div>
+        <div class="clr-col-4">
+          <clr-input-container>
+            <label>
+              <clr-icon shape="user"></clr-icon>
+            </label>
+            <input type="text" name="lastName" clrInput placeholder="{{'registration.lastNameLabel' | translate}}"
+                   formControlName="lastName"/>
+          </clr-input-container>
+        </div>
+        <div class="clr-col-4"></div>
+      </div>
+
+      <div class="clr-row">
+        <div class="clr-col-4"></div>
+        <div class="clr-col-4">
+          <clr-input-container>
+            <label>
+              <clr-icon shape="calendar"></clr-icon>
+            </label>
+            <input clrInput formControlName="birthDate" placeholder="{{'registration.birthDateLabel' | translate}}"/>
+          </clr-input-container>
+        </div>
+        <div class="clr-col-4"></div>
+      </div>
+
+      <div class="clr-row">
+        <div class="clr-col-4"></div>
+        <div class="clr-col-4">
+          <clr-input-container>
+            <label>
+              <clr-icon shape="envelope"></clr-icon>
+            </label>
+            <input clrInput formControlName="username" placeholder="{{'registration.emailLabel' | translate}}"/>
+          </clr-input-container>
+        </div>
+        <div class="clr-col-4"></div>
+      </div>
+
+      <div class="clr-row">
+        <div class="clr-col-4"></div>
+        <div class="clr-col-4">
+          <clr-input-container>
+            <label>
+              <clr-icon shape="key"></clr-icon>
+            </label>
+            <input clrInput type="password" formControlName="password"
+                   placeholder="{{'registration.passwordLabel' | translate}}"/>
+          </clr-input-container>
+        </div>
+        <div class="clr-col-4"></div>
+      </div>
+
+      <div class="clr-row">
+        <div class="clr-col-4"></div>
+        <div class="clr-col-4">
+          <clr-input-container>
+            <label>
+              <clr-icon shape="refresh"></clr-icon>
+            </label>
+            <input clrInput type="password" formControlName="password"
+                   placeholder="{{'registration.passwordRepeatLabel' | translate}}"/>
+          </clr-input-container>
+        </div>
+        <div class="clr-col-4"></div>
+      </div>
+
+    </form>
+  </div>
+  <div class="modal-footer">
+    <button type="submit" class="btn btn-primary btn-block"
+            (click)="onSubmit()">{{'registration.register' | translate}} </button>
+    <button type="submit" class="btn btn-secondary-outline btn-block"
+            (click)="displayRegistrationDialog= false">{{'registration.cancelButtonLabel' | translate}} </button>
+  </div>
+</clr-modal>
+
+<!--<clr-alert [clrAlertType]="'success'" [clrAlertClosed]="displayAlert" clrAlertClosable="true">-->
+<!--  <clr-alert-item>-->
+<!--        <span class="alert-text">-->
+<!--            This alert indicates success.-->
+<!--        </span>-->
+<!--  </clr-alert-item>-->
+<!--</clr-alert>-->
+<!--<clr-alert>-->
+<!--  <clr-alert-item>-->
+<!--        <span class="alert-text">-->
+<!--            This is a default info alert.-->
+<!--        </span>-->
+<!--  </clr-alert-item>-->
+<!--</clr-alert>-->

@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import { TokenStorageService } from './_services/token-storage.service';
-import { useAnimation } from '@angular/animations';
+import { TokenStorageService } from './_services/auth/token-storage.service';
+import { User } from './security/user';
 
 @Component({
   selector: 'app-root',
@@ -10,23 +10,24 @@ import { useAnimation } from '@angular/animations';
 export class AppComponent {
 
   private roles: string[];
-  isLoggedIn = false;
-  showAdminBoard = false;
-  showModeratorBoard = false;
-  username: string;
+  isLoggedIn: boolean;
+  showAdminBoard: boolean;
+  showModeratorBoard: boolean;
+  user: User;
 
-  constructor(private tokenStorageService: TokenStorageService){}
+  constructor(private tokenStorageService: TokenStorageService) {
+  }
 
   ngOnInit() {
     this.isLoggedIn = !!this.tokenStorageService.getToken();
     if (this.isLoggedIn) {
       const user = this.tokenStorageService.getUser();
-      this.roles = user.roles
+      this.roles = user.roles;
 
       this.showAdminBoard = this.roles.includes('ROLE_ADMIN');
       this.showModeratorBoard = this.roles.includes('ROLE_MODERATOR');
 
-      this.username = user.username;
+      this.user = user;
     }
   }
 

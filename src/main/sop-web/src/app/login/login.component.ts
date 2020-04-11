@@ -1,10 +1,9 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { TokenStorageService } from '../_services/token-storage.service';
-import { AuthService } from '../_services/auth.service';
+import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { TokenStorageService } from '../_services/auth/token-storage.service';
+import { AuthService } from '../_services/auth/auth.service';
 import { TranslateService } from '@ngx-translate/core';
 import { MessageService } from 'primeng';
-
 
 
 @Component({
@@ -15,7 +14,6 @@ import { MessageService } from 'primeng';
 })
 export class LoginComponent implements OnInit {
 
-  @Input()
   displayLoginDialog;
 
   @Output()
@@ -71,12 +69,14 @@ export class LoginComponent implements OnInit {
   }
 
   onSubmit() {
-   let credentials = [];
-   credentials.push(this.loginForm.get('username').value);
-   credentials.push(this.loginForm.get('password').value);
-   console.log(credentials);
+    this.blockUI = true;
+    let credentials = [];
+    credentials.push(this.loginForm.get('username').value);
+    credentials.push(this.loginForm.get('password').value);
+    console.log(credentials);
     this.authService.login(credentials).subscribe(
       data => {
+        console.log(data);
         this.tokenStorage.saveToken(data.accessToken);
         this.tokenStorage.saveUser(data);
 
@@ -88,12 +88,14 @@ export class LoginComponent implements OnInit {
       err => {
         this.errorMessage = err.error.message;
         this.isLoginFailed = true;
+        this.blockUI = false;
       }
     );
   }
 
   reloadPage() {
     window.location.reload();
+    this.blockUI = false;
   }
 
   onHide() {

@@ -11,7 +11,7 @@
         {{'header.login' | translate}}
       </a>
 
-      <a routerLink="/register" class="nav-link nav-text">
+      <a class="nav-link nav-text" (click)="showRegistrationForm()">
         {{'header.register' | translate}}
       </a>
       <clr-dropdown>
@@ -28,12 +28,12 @@
     <div class="header-actions" *ngIf="isLoggedIn">
       <a href="javascript://" class="nav-link nav-icon-text">
         <clr-icon shape="user"></clr-icon>
-        <span class="nav-text">{{username}}</span>
+        <span class="nav-text">{{user.username}}</span>
       </a>
       <clr-dropdown>
-        <button class="nav-icon" clrDropdownTrigger aria-label="toggle settings menu">
+        <button class="nav-icon" clrDropdownTrigger aria-label="settings menu">
           <clr-icon shape="cog"></clr-icon>
-          <clr-icon shape="caret down"></clr-icon>
+          <!--          <clr-icon shape="caret down"></clr-icon>-->
         </button>
         <clr-dropdown-menu *clrIfOpen clrPosition="bottom-right">
           <a (click)="aboutDialog = true" clrDropdownItem>
@@ -52,3 +52,18 @@
 </clr-main-container>
 
 <ng-template #loginForm></ng-template>
+<clr-modal [(clrModalOpen)]="aboutDialog" [clrModalClosable]="false">
+  <h3 class="modal-title"></h3>
+  <div class="modal-body">
+    <p>
+      System Obsługi Praktyk <br><br>
+      Autor: Kacper Rzymkiewicz <br>
+      Rok: 2020 <br>
+    </p>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-primary" (click)="aboutDialog = false">
+      OK!
+    </button>
+  </div>
+</clr-modal>
