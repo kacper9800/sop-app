@@ -1,0 +1,234 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
+    <!--    <include file="/initial_schema.xml"/> relativeToChangelogFile="false"/>-->
+    <changeSet author="krzymkiewicz" id="1">
+        <createTable tableName="users">
+            <column name="id" type="bigint" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="login" type="varchar(50)">
+                <constraints unique="true" nullable="false"></constraints>
+            </column>
+            <column name="password" type="varchar(60)"></column>
+            <column name="first_name" type="varchar(50)"></column>
+            <column name="last_name" type="varchar(50)"></column>
+            <column name="birth_date" type="date"></column>
+            <column name="email" type="varchar(50)">
+                <constraints unique="true" nullable="false"></constraints>
+            </column>
+            <column name="phone " type="varchar(15)"></column>
+            <column name="academic_title" type="varchar(50)"></column>
+            <column name="activation_key" type="varchar(50)"></column>
+            <column name="active" type="boolean"></column>
+            <column name="deleted" type="boolean"></column>
+        </createTable>
+    </changeSet>
+    <changeSet id="2" author="krzymkiewicz">
+        <createTable tableName="roles">
+            <column name="id" type="int" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="name" type="varchar(50)"></column>
+        </createTable>
+        <createTable tableName="user_roles">
+            <column name="user_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+            <column name="role_id" type="int">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+        <addPrimaryKey columnNames="role_id, user_id" tableName="user_roles"/>
+        <addForeignKeyConstraint baseColumnNames="role_id"
+                                 baseTableName="user_roles"
+                                 constraintName="fk_role_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="roles"/>
+        <addForeignKeyConstraint baseColumnNames="user_id"
+                                 baseTableName="user_roles"
+                                 constraintName="fk_user_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="users"/>
+        <sql>INSERT INTO roles (name) values ('ROLE_USER'),('ROLE_MODERATOR'),('ROLE_ADMIN');</sql>
+    </changeSet>
+    <changeSet id="3" author="krzymkiewicz">
+        <sql>INSERT INTO roles (name) values ('ROLE_STUDENT'),('ROLE_SUPERVISER'),('ROLE_SUPERADMIN');</sql>
+    </changeSet>
+
+    <!--    Creating organization schema -->
+    <changeSet id="4" author="krzymkiewicz">
+        <createTable tableName="colleges">
+            <column name="id" type="bigint" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"></constraints>
+            </column>
+            <column name="create_date" type="TIMESTAMP WITHOUT TIME ZONE"></column>
+            <column name="create_by" type="VARCHAR(255)"></column>
+            <column name="edit_date" type="TIMESTAMP WITHOUT TIME ZONE"></column>
+            <column name="edit_by" type="VARCHAR(255)"></column>
+            <column name="name" type="VARCHAR(255)"></column>
+            <column name="active" type="BOOLEAN"></column>
+            <column name="deleted" type="BOOLEAN"></column>
+        </createTable>
+
+        <createTable tableName="faculties">
+            <column name="id" type="BIGINT" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"></constraints>
+            </column>
+            <column name="create_date" type="TIMESTAMP WITHOUT TIME ZONE"></column>
+            <column name="create_by" type="VARCHAR(255)"></column>
+            <column name="edit_date" type="TIMESTAMP WITHOUT TIME ZONE"></column>
+            <column name="edit_by" type="VARCHAR(255)"></column>
+            <column name="name" type="VARCHAR(255)"></column>
+            <column name="college_id" type="BIGINT"></column>
+            <column name="active" type="BOOLEAN"></column>
+            <column name="deleted" type="BOOLEAN"></column>
+        </createTable>
+
+        <createTable tableName="institutes">
+            <column name="id" type="BIGINT" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"></constraints>
+            </column>
+            <column name="create_date" type="TIMESTAMP WITHOUT TIME ZONE"></column>
+            <column name="create_by" type="VARCHAR(255)"></column>
+            <column name="edit_date" type="TIMESTAMP WITHOUT TIME ZONE"></column>
+            <column name="edit_by" type="VARCHAR(255)"></column>
+            <column name="name" type="VARCHAR(255)"></column>
+            <column name="faculty_id" type="BIGINT"></column>
+            <column name="active" type="BOOLEAN"></column>
+            <column name="deleted" type="BOOLEAN"></column>
+        </createTable>
+
+        <createTable tableName="departments">
+            <column name="id" type="BIGINT" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"></constraints>
+            </column>
+            <column name="create_date" type="TIMESTAMP WITHOUT TIME ZONE"></column>
+            <column name="create_by" type="VARCHAR(255)"></column>
+            <column name="edit_date" type="TIMESTAMP WITHOUT TIME ZONE"></column>
+            <column name="edit_by" type="VARCHAR(255)"></column>
+            <column name="name" type="VARCHAR(255)"></column>
+            <column name="institute_id" type="BIGINT"></column>
+            <column name="active" type="BOOLEAN"></column>
+            <column name="deleted" type="BOOLEAN"></column>
+        </createTable>
+
+        <addForeignKeyConstraint baseColumnNames="college_id"
+                                 baseTableName="faculties"
+                                 constraintName="fk_colleges_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="colleges"/>
+
+        <addForeignKeyConstraint baseColumnNames="faculty_id"
+                                 baseTableName="institutes"
+                                 constraintName="fk_faculties_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="faculties"/>
+
+        <addForeignKeyConstraint baseColumnNames="institute_id"
+                                 baseTableName="departments"
+                                 constraintName="fk_institutes_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="institutes"/>
+    </changeSet>
+
+    <changeSet id="5" author="krzymkiewicz">
+        <createTable tableName="user_colleges">
+            <column name="user_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+            <column name="college_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+        <addForeignKeyConstraint baseColumnNames="user_id"
+                                 baseTableName="user_colleges"
+                                 constraintName="fk_user_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="users"/>
+        <addForeignKeyConstraint baseColumnNames="college_id"
+                                 baseTableName="user_colleges"
+                                 constraintName="fk_colleges_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="colleges"/>
+
+        <createTable tableName="user_faculties">
+            <column name="user_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+            <column name="faculty_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+        <addForeignKeyConstraint baseColumnNames="user_id"
+                                 baseTableName="user_faculties"
+                                 constraintName="fk_user_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="users"/>
+        <addForeignKeyConstraint baseColumnNames="faculty_id"
+                                 baseTableName="user_faculties"
+                                 constraintName="fk_faculties_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="faculties"/>
+
+        <createTable tableName="user_institutes">
+            <column name="user_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+            <column name="institute_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+        <addForeignKeyConstraint baseColumnNames="user_id"
+                                 baseTableName="user_institutes"
+                                 constraintName="fk_user_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="users"/>
+        <addForeignKeyConstraint baseColumnNames="institute_id"
+                                 baseTableName="user_institutes"
+                                 constraintName="fk_institutes_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="institutes"/>
+
+        <createTable tableName="user_departments">
+            <column name="user_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+            <column name="department_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+        <addForeignKeyConstraint baseColumnNames="user_id"
+                                 baseTableName="user_departments"
+                                 constraintName="fk_user_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="users"/>
+        <addForeignKeyConstraint baseColumnNames="department_id"
+                                 baseTableName="user_departments"
+                                 constraintName="fk_departments_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="departments"/>
+    </changeSet>
+
+    <!--    <changeSet id="4" author="krzymkiewicz">-->
+    <!--        <createTable tableName="calendar_events">-->
+    <!--            <column name="event_id"></column>-->
+    <!--            <column name="college_id"></column>-->
+    <!--            <column name="department_id"></column>-->
+    <!--            <column name="class_id"></column>-->
+    <!--            <column name="user_id"></column>-->
+    <!--            <column name="start_date"></column>-->
+    <!--            <column name="end_date"></column>-->
+    <!--            <column name="name"></column>-->
+    <!--            <column name="description"></column>-->
+
+    <!--        </createTable>-->
+    <!--        <createTable tableName="todo_items">-->
+    <!--            <column name="user_id"></column>-->
+    <!--            <column name="title"></column>-->
+    <!--            <column name="checked"></column>-->
+    <!--        </createTable>-->
+    <!--    </changeSet>-->
+</databaseChangeLog>
