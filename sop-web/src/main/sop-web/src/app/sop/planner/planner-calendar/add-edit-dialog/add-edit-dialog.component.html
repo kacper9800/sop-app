@@ -1,13 +1,13 @@
 <p-dialog [responsive]="true" appendTo="body" [baseZIndex]="400" [maximizable]="true" [(visible)]="isDialogVisible"
-          style="width: 60%"
+          style="width: 60%" [resizable]="true"
           header="{{'add-edit-dialog.header' | translate}}">
   <form [formGroup]="addEditForm">
     <div class="form-group">
-      <div class="p-grid ">
+      <div class="p-grid">
         <div class="p-col-4">
           {{"add-edit-dialog.name" | translate}}
         </div>
-        <div class="ui-grid-col-8">
+        <div class="p-col-8">
           <input pInputText formControlName="name">
         </div>
       </div>
