@@ -3,6 +3,7 @@ import { FullCalendar } from 'primeng';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import timeGridPlugin from '@fullcalendar/timegrid';
 import plLocale from '@fullcalendar/core/locales/pl';
+import { AddEditDialogComponent } from './add-edit-dialog/add-edit-dialog.component';
 
 @Component({
   selector: 'app-planner-calendar',
@@ -11,9 +12,16 @@ import plLocale from '@fullcalendar/core/locales/pl';
 })
 export class PlannerCalendarComponent implements OnInit {
 
-  events: any;
-  calOptions: any;
-  @ViewChild('calendar', {static: true}) calendarComponent: FullCalendar;
+  @ViewChild('calendar', {static: true})
+  public calendarComponent: FullCalendar;
+
+  @ViewChild(AddEditDialogComponent, {static: true})
+  public addEditDialog: AddEditDialogComponent;
+
+  public events: any;
+  public calOptions: any;
+  public showNewActivityDialog: boolean;
+
 
   constructor() {
   }
@@ -99,4 +107,11 @@ export class PlannerCalendarComponent implements OnInit {
 
     return content;
   }
+
+  public addNewEvent(): void {
+    this.showNewActivityDialog = true;
+    this.addEditDialog.showDialog();
+  }
+
+
 }

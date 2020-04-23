@@ -42,5 +42,18 @@
     "emailLabel": "Adres e-mail",
     "register": "Zarejestruj się",
     "cancelButtonLabel": "Przerwij rejestrację"
+  },
+  "calendar": {
+    "addNewEvent": "Dodaj nowe wydarzenie"
+  },
+  "add-edit-dialog": {
+    "header": "Nowa aktywność",
+    "name": "Nazwa",
+    "description": "Opis",
+    "location": "Lokalizacja",
+    "startDate": "Początek wydarzenia",
+    "stopDate": "Koniec wydarzenia",
+    "save": "Zapisz",
+    "cancel": "Odrzuć"
   }
 }

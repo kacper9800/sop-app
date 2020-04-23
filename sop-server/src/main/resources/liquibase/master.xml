@@ -211,6 +211,42 @@
                                  referencedColumnNames="id"
                                  referencedTableName="departments"/>
     </changeSet>
+    <changeSet id="6" author="krzymkiewicz">
+        <createTable tableName="events">
+            <column name="id" type="bigint">
+                <constraints nullable="true" primaryKey="true"></constraints>
+            </column>
+            <column name="create_date" type="TIMESTAMP WITHOUT TIME ZONE"></column>
+            <column name="create_by" type="VARCHAR(255)"></column>
+            <column name="edit_date" type="TIMESTAMP WITHOUT TIME ZONE"></column>
+            <column name="edit_by" type="VARCHAR(255)"></column>
+            <column name="name" type="VARCHAR(255)"></column>
+            <column name="description" type="VARCHAR(255)"></column>
+            <column name="start_date" type="TIMESTAMP WITHOUT TIME ZONE"></column>
+            <column name="end_date" type="TIMESTAMP WITHOUT TIME ZONE"></column>
+            <column name="college_id" type="bigint"></column>
+        </createTable>
+    </changeSet>
+    
+    <changeSet id="7" author="krzymkiewicz">
+        <addColumn tableName="events">
+            <column name="allDay" type="boolean"></column>
+            <column name="repeat" type="bigint"></column>
+            <column name="user_id" type="bigint"></column>
+        </addColumn>
+        <addColumn tableName="users">
+            <column name="create_date" type="TIMESTAMP WITHOUT TIME ZONE"></column>
+            <column name="create_by" type="VARCHAR(255)"></column>
+            <column name="edit_date" type="TIMESTAMP WITHOUT TIME ZONE"></column>
+            <column name="edit_by" type="VARCHAR(255)"></column>
+        </addColumn>
+        <addColumn tableName="roles">
+            <column name="create_date" type="TIMESTAMP WITHOUT TIME ZONE"></column>
+            <column name="create_by" type="VARCHAR(255)"></column>
+            <column name="edit_date" type="TIMESTAMP WITHOUT TIME ZONE"></column>
+            <column name="edit_by" type="VARCHAR(255)"></column>
+        </addColumn>
+    </changeSet>
 
     <!--    <changeSet id="4" author="krzymkiewicz">-->
     <!--        <createTable tableName="calendar_events">-->

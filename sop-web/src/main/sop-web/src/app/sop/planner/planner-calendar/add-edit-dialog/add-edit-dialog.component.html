@@ -1,0 +1,52 @@
+<p-dialog [responsive]="true" appendTo="body" [baseZIndex]="400" [maximizable]="true" [(visible)]="isDialogVisible"
+          style="width: 60%"
+          header="{{'add-edit-dialog.header' | translate}}">
+  <form [formGroup]="addEditForm">
+    <div class="form-group">
+      <div class="p-grid ">
+        <div class="p-col-4">
+          {{"add-edit-dialog.name" | translate}}
+        </div>
+        <div class="ui-grid-col-8">
+          <input pInputText formControlName="name">
+        </div>
+      </div>
+      <div class="ui-grid">
+        <div class="ui-grid-col-4">
+          {{"add-edit-dialog.description" | translate}}
+        </div>
+        <div class="ui-grid-col-8">
+          <input pInputText formControlName="description">
+        </div>
+      </div>
+      <div class="ui-grid">
+        <div class="ui-grid-col-4">
+          {{"add-edit-dialog.location" | translate}}
+        </div>
+        <div class="ui-grid-col-8">
+          <input pInputText formControlName="location">
+        </div>
+      </div>
+      <div class="ui-grid">
+        <div class="ui-grid-col-4">
+          {{"add-edit-dialog.startDate" | translate}}
+        </div>
+        <div class="ui-grid-col-8">
+          <input pInputText formControlName="startDate">
+        </div>
+      </div>
+      <div class="ui-grid">
+        <div class="ui-grid-col-4">
+          {{"add-edit-dialog.stopDate" | translate}}
+        </div>
+        <div class="ui-grid-col-8">
+          <input pInputText formControlName="stopDate">
+        </div>
+      </div>
+      <clr-button-group [clrMenuPosition]="'bottom-right'">
+        <clr-button class="btn-primary">{{'add-edit-dialog.save' | translate}}</clr-button>
+        <clr-button class="btn">{{'add-edit-dialog.cancel' | translate}}</clr-button>
+      </clr-button-group>
+    </div>
+  </form>
+</p-dialog>

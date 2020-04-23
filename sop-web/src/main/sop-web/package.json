@@ -40,8 +40,6 @@
     "fullcalendar": "^3.10.1",
     "hammerjs": "^2.0.8",
     "mdbootstrap": "^4.14.1",
-    "primeicons": "^2.0.0",
-    "primeng": "^9.0.2",
     "quill": "^1.3.7",
     "rxjs": "^6.5.4",
     "simplebar": "^5.1.0",
@@ -64,11 +62,11 @@
     "karma-coverage-istanbul-reporter": "~2.0.1",
     "karma-jasmine": "~2.0.1",
     "karma-jasmine-html-reporter": "^1.5.3",
+    "primeicons": "^2.0.0",
+    "primeng": "^9.0.6",
     "protractor": "^5.4.3",
     "ts-node": "~7.0.0",
     "tslint": "~5.15.0",
-    "typescript": "~3.5.3",
-    "primeicons": "^2.0.0",
-    "primeng": "^9.0.2"
+    "typescript": "~3.5.3"
   }
 }

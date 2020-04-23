@@ -59,6 +59,7 @@ import { PlannerCalendarComponent } from './sop/planner/planner-calendar/planner
 import { PlannerActivitiesComponent } from './sop/planner/planner-activities/planner-activities.component';
 import { PlannerWorkHoursComponent } from './sop/planner/planner-work-hours/planner-work-hours.component';
 import { PlannerLocationsComponent } from './sop/planner/planner-locations/planner-locations.component';
+import { AddEditDialogComponent } from './sop/planner/planner-calendar/add-edit-dialog/add-edit-dialog.component';
 
 @NgModule({
   declarations: [
@@ -90,6 +91,7 @@ import { PlannerLocationsComponent } from './sop/planner/planner-locations/plann
     PlannerActivitiesComponent,
     PlannerWorkHoursComponent,
     PlannerLocationsComponent,
+    AddEditDialogComponent,
   ],
   imports: [
     BrowserModule,
