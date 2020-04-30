@@ -6,6 +6,7 @@ import { TokenStorageService } from '../../_services/auth/token-storage.service'
 import { LoginComponent } from '../../login/login.component';
 import { RegistrationComponent } from '../../registration/registration.component';
 import { User } from '../../security/user';
+import { state } from '@angular/animations';
 
 @Component({
   selector: 'app-header',

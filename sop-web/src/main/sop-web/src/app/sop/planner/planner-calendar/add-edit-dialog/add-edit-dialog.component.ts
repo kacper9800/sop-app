@@ -30,4 +30,8 @@ export class AddEditDialogComponent implements OnInit {
     this.isDialogVisible = true;
 
   }
+
+  save() {
+
+  }
 }

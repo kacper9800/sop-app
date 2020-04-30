@@ -1,52 +1,142 @@
-<p-dialog [responsive]="true" appendTo="body" [baseZIndex]="400" [maximizable]="true" [(visible)]="isDialogVisible"
-          style="width: 60%" [resizable]="true"
-          header="{{'add-edit-dialog.header' | translate}}">
-  <form [formGroup]="addEditForm">
-    <div class="form-group">
-      <div class="p-grid">
-        <div class="p-col-4">
-          {{"add-edit-dialog.name" | translate}}
+<!--<p-dialog [responsive]="true" appendTo="body" [baseZIndex]="400" [maximizable]="true" [(visible)]="isDialogVisible"-->
+<!--          [resizable]="true" [modal]="true" [draggable]="false"-->
+<!--          header="{{'add-edit-dialog.header' | translate}}">-->
+<!--  <form [formGroup]="addEditForm">-->
+<!--    <div class="ui-grid-row">-->
+<!--      <div class="ui-grid-col-1"></div>-->
+<!--      <div class="ui-grid-col-4">-->
+<!--        {{"add-edit-dialog.name" | translate}}-->
+<!--      </div>-->
+<!--      <div class="ui-grid-col-6">-->
+<!--        <input pInputText formControlName="name">-->
+<!--      </div>-->
+<!--      <div class="ui-grid-col-1"></div>-->
+<!--    </div>-->
+<!--    <div class="ui-grid-row">-->
+<!--      <div class="ui-grid-col-1"></div>-->
+<!--      <div class="ui-grid-col-4">-->
+<!--        {{"add-edit-dialog.description" | translate}}-->
+<!--      </div>-->
+<!--      <div class="ui-grid-col-6">-->
+<!--        <input pInputText formControlName="description">-->
+<!--      </div>-->
+<!--      <div class="ui-grid-col-2"></div>-->
+<!--    </div>-->
+<!--    <div class="ui-grid-row">-->
+<!--      <div class="ui-grid-col-1"></div>-->
+<!--      <div class="ui-grid-col-4">-->
+<!--        {{"add-edit-dialog.location" | translate}}-->
+<!--      </div>-->
+<!--      <div class="ui-grid-col-6">-->
+<!--        <input pInputText formControlName="location">-->
+<!--      </div>-->
+<!--      <div class="ui-grid-col-2"></div>-->
+<!--    </div>-->
+<!--    <div class="ui-grid-row">-->
+<!--      <div class="ui-grid-col-1"></div>-->
+<!--      <div class="ui-grid-col-4">-->
+<!--        {{"add-edit-dialog.startDate" | translate}}-->
+<!--      </div>-->
+<!--      <div class="ui-grid-col-6">-->
+<!--        <input pInputText formControlName="startDate">-->
+<!--      </div>-->
+<!--      <div class="ui-grid-col-2"></div>-->
+<!--    </div>-->
+<!--    <div class="ui-grid-row">-->
+<!--      <div class="ui-grid-col-1"></div>-->
+<!--      <div class="ui-grid-col-4">-->
+<!--        {{"add-edit-dialog.stopDate" | translate}}-->
+<!--      </div>-->
+<!--      <div class="ui-grid-col-6">-->
+<!--        <input pInputText formControlName="stopDate">-->
+<!--      </div>-->
+<!--      <div class="ui-grid-col-2"></div>-->
+<!--    </div>-->
+<!--    <p-footer>-->
+<!--      <div class="ui-grid-row">-->
+<!--        <div class="ui-grid-col-5"></div>-->
+<!--        <div class="ui-grid-col-5">-->
+<!--          <clr-button-group>-->
+<!--            <clr-button class="btn-primary">{{'add-edit-dialog.save' | translate}}</clr-button>-->
+<!--            <clr-button class="btn"-->
+<!--                        (click)="isDialogVisible=false">{{'add-edit-dialog.cancel' | translate}}</clr-button>-->
+<!--          </clr-button-group>-->
+<!--        </div>-->
+<!--        <div class="ui-grid-col-2"></div>-->
+<!--      </div>-->
+<!--    </p-footer>-->
+<!--  </form>-->
+<!--</p-dialog>-->
+
+
+<clr-modal [(clrModalOpen)]="isDialogVisible" [clrModalStaticBackdrop]="false" [clrModalClosable]="false">
+  <h3 class="modal-title">{{'add-edit-dialog.header' | translate}}</h3>
+  <div class="modal-body">
+    <form id="addEditForm" clrForm [formGroup]="addEditForm">
+      <div class="clr-row">
+        <div class="clr-col-2"></div>
+        <div class="clr-col-8">
+          <input clrInput style="width: 100%;" [placeholder]="'add-edit-dialog.name' | translate"
+                 formControlName="name">
         </div>
-        <div class="p-col-8">
-          <input pInputText formControlName="name">
-        </div>
+        <div class="clr-col-2"></div>
       </div>
-      <div class="ui-grid">
-        <div class="ui-grid-col-4">
-          {{"add-edit-dialog.description" | translate}}
+
+      <div class="clr-row">
+        <div class="clr-col-2"></div>
+        <div class="clr-col-8">
+          <input clrInput style="width: 100%;" [placeholder]="'add-edit-dialog.description' | translate"
+                 formControlName="description">
         </div>
-        <div class="ui-grid-col-8">
-          <input pInputText formControlName="description">
-        </div>
+        <div class="clr-col-2"></div>
       </div>
-      <div class="ui-grid">
-        <div class="ui-grid-col-4">
-          {{"add-edit-dialog.location" | translate}}
+
+      <div class="clr-row">
+        <div class="clr-col-2"></div>
+        <div class="clr-col-8">
+          <input clrInput style="width: 100%;" [placeholder]="'add-edit-dialog.location' | translate"
+                 formControlName="location">
         </div>
-        <div class="ui-grid-col-8">
-          <input pInputText formControlName="location">
-        </div>
+        <div class="clr-col-2"></div>
       </div>
-      <div class="ui-grid">
-        <div class="ui-grid-col-4">
-          {{"add-edit-dialog.startDate" | translate}}
+
+      <div class="clr-row">
+        <div class="clr-col-2"></div>
+        <div class="clr-col-8">
+          <clr-date-container>
+            <input clrDate style="z-index: 600;" type="date" formControlName="startDate">
+          </clr-date-container>
         </div>
-        <div class="ui-grid-col-8">
-          <input pInputText formControlName="startDate">
-        </div>
+        <div class="clr-col-2"></div>
       </div>
-      <div class="ui-grid">
-        <div class="ui-grid-col-4">
-          {{"add-edit-dialog.stopDate" | translate}}
+
+      <div class="clr-row">
+        <div class="clr-col-2"></div>
+        <div class="clr-col-8">
+          <clr-date-container>
+            <input clrDate style="z-index: 600;" type="date" formControlName="stopDate">
+          </clr-date-container>
         </div>
-        <div class="ui-grid-col-8">
-          <input pInputText formControlName="stopDate">
-        </div>
+        <div class="clr-col-2"></div>
       </div>
-      <clr-button-group [clrMenuPosition]="'bottom-right'">
-        <clr-button class="btn-primary">{{'add-edit-dialog.save' | translate}}</clr-button>
-        <clr-button class="btn">{{'add-edit-dialog.cancel' | translate}}</clr-button>
-      </clr-button-group>
+    </form>
+  </div>
+  <div class="modal-footer">
+    <div class="clr-row">
+      <div class="clr-col-2"></div>
+      <div class="clr-col-8">
+        <clr-button-group>
+          <clr-button class="btn-primary" type="submit" form="loginForm" class="btn btn-primary"
+                      (click)="save()">{{'add-edit-dialog.save' | translate}}</clr-button>
+          <clr-button class="btn"
+                      (click)="isDialogVisible=false">{{'add-edit-dialog.cancel' | translate}}</clr-button>
+        </clr-button-group>
+      </div>
+      <div class="clr-col-2"></div>
     </div>
-  </form>
-</p-dialog>
+  </div>
+  <!--      <button type="submit" class="btn btn-primary btn-block"-->
+  <!--              (click)="onSubmit()"> </button>-->
+  <!--    <button type="submit" class="btn btn-secondary-outline btn-block"-->
+  <!--            (click)="displayLoginDialog = false">-->
+</clr-modal>
