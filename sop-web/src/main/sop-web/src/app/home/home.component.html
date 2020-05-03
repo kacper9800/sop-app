@@ -1,0 +1,52 @@
+<clr-main-container>
+  <div class="clr-row">
+    <div class="clr-col-4"></div>
+    <div class="clr-col-6">
+      <div *ngIf="isLoggedIn"><h2>Witaj w panelu głównym <br> Systemu obsługi praktyk</h2></div>
+      <div *ngIf="!isLoggedIn"><h1>Strona główna <br> Systemu Obsługi Praktyk</h1></div>
+    </div>
+    <div class="clr-col-2"></div>
+  </div>
+  <div class="clr-row">
+    <div class="clr-col-lg-6 clr-col">
+      <a class="card clickable">
+        <div *ngIf="isLoggedIn">
+          <app-todo [userDetails]="userDetails"></app-todo>
+        </div>
+        <div *ngIf="!isLoggedIn">
+          <div class="card-img">
+            <img src="../../assets/img/test1.jpg">
+          </div>
+        </div>
+      </a>
+    </div>
+    <div class="clr-col-lg-6 clr-col">
+      <a class="card clickable">
+        <div *ngIf="isLoggedIn">
+          <app-calendar></app-calendar>
+        </div>
+        <div *ngIf="!isLoggedIn">
+          <div class="card-img">
+            <img src="../../assets/img/test2.jpg">
+          </div>
+        </div>
+      </a>
+    </div>
+  </div>
+  <div class="clr-row" *ngIf="!isLoggedIn">
+    <div class="clr-col-lg-6 clr-col-6">
+      <a class="card clickable">
+        <div class="card-img">
+          <img src="../../assets/img/test3.jpg">
+        </div>
+      </a>
+    </div>
+    <div class="clr-col-lg-6 clr-col-6">
+      <a class="card clickable">
+        <div class="card-img">
+          <img src="../../assets/img/test4.jpg">
+        </div>
+      </a>
+    </div>
+  </div>
+</clr-main-container>

@@ -1,0 +1,59 @@
+{
+  "header": {
+    "SOP": "Internship service system",
+    "info": "Information",
+    "settings": "Settings",
+    "login": "Sign in",
+    "register": "Sign up"
+  },
+  "navBar": {
+    "home": "Home page",
+    "planner": {
+      "label": "Activities planner",
+      "myActivitiesList": "Activites list",
+      "myActivitiesCalendar": "Calendar",
+      "locations": "Locations",
+      "workHours": "Work hours",
+      "settings": "Settings"
+    },
+    "surveys": "Surveys",
+    "colleges": "Colleges",
+    "users": "Users",
+    "fieldsOfStudy": "Fields of study",
+    "practiceManagers": "Practice managers",
+    "practiceSupervisors": "Practice supervisors"
+  },
+  "login": {
+    "header": "Login panel",
+    "usernameLabel": "Username",
+    "passwordLabel": "Password",
+    "required": "This field is required!",
+    "loginButton": "Sign in",
+    "cancelButtonLabel": "Cancel"
+  },
+  "registration": {
+    "header": "Registration panel",
+    "tokenLabel": "Activation key",
+    "firstNameLabel": "First name",
+    "lastNameLabel": "Last name",
+    "birthDateLabel": "Birth date",
+    "passwordLabel": "Password",
+    "passwordRepeatLabel": "Repeat password",
+    "emailLabel": "E-mail address",
+    "register": "Sign up",
+    "cancelButtonLabel": "Cancel registration"
+  },
+  "calendar": {
+    "addNewEvent": "Add new event"
+  },
+  "add-edit-dialog": {
+    "header": "New activity",
+    "name": "Name",
+    "description": "Description",
+    "location": "Location",
+    "startDate": "Start date",
+    "stopDate": "Stop date",
+    "save": "Save",
+    "cancel": "Cancel"
+  }
+}

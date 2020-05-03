@@ -1,0 +1,121 @@
+<clr-main-container *ngIf="isLoggedIn">
+  <div class="content-container">
+    <nav class="sidenav" *ngIf="!planner" [clr-nav-level]="1">
+      <section class="sidenav-content">
+        <a href="/" class="nav-link">
+          <clr-icon shape="home"></clr-icon>
+          {{'navBar.home' | translate}}
+        </a>
+        <section class="nav-group collapsible">
+          <input id="tabexample1" type="checkbox">
+          <label for="tabexample1">{{'navBar.planner.label' | translate}}</label>
+          <ul class="nav-list">
+            <li>
+              <a class="nav-link" routerLink="/app/planner/activitiesList">
+                <clr-icon shape="view-list"></clr-icon>
+                {{'navBar.planner.myActivitiesList' | translate}}
+              </a>
+            </li>
+            <li>
+              <a class="nav-link" routerLink="/app/planner/activitiesCalendar">
+                <clr-icon shape="calendar"></clr-icon>
+                {{'navBar.planner.myActivitiesCalendar' | translate}}
+              </a>
+            </li>
+            <li>
+              <a class="nav-link" routerLink="/app/planner/locations">
+                <clr-icon shape="building"></clr-icon>
+                {{'navBar.planner.locations' | translate}}
+              </a>
+            </li>
+            <li>
+              <a class="nav-link" routerLink="/app/planner/workHours">
+                <clr-icon shape="clock"></clr-icon>
+                {{'navBar.planner.workHours' | translate}}
+              </a>
+            </li>
+            <li>
+              <a class="nav-link" routerLink="/app/planner/settings">
+                <clr-icon shape="clock"></clr-icon>
+                {{'navBar.planner.settings' | translate}}
+              </a>
+            </li>
+          </ul>
+        </section>
+
+        <a routerLink="/app/forms" class="nav-link" *ngIf="isStudent">
+          <clr-icon shape="form"></clr-icon>
+          {{'navBar.surveys' | translate}}
+        </a>
+        <a href="" class="nav-link" *ngIf="isSuperAdmin">
+          SuperAdmin
+        </a>
+        <a routerLink="/app/college" class="nav-link" *ngIf="isSuperAdmin">
+          <clr-icon shape="building" class="is-solid"></clr-icon>
+          {{'navBar.colleges' | translate}}
+        </a>
+        <a routerLink="/app/users" class="nav-link" *ngIf="isSuperAdmin">
+          <clr-icon shape="users" class="is-solid"></clr-icon>
+          {{'navBar.users' | translate}}
+        </a>
+
+        <a href="" class="nav-link" *ngIf="isAdmin">
+          Administrator uczelni
+        </a>
+
+        <a href="/app/activation-keys" class="nav-link" *ngIf="isAdmin">
+          <clr-icon shape="users" class="is-solid"></clr-icon>
+          {{'navBar.practiceManagers'| translate}}
+        </a>
+
+        <a href="/app/activation-keys" class="nav-link" *ngIf="isAdmin">
+          <clr-icon shape="cursor-move"></clr-icon>
+          {{'navBar.practiceSupervisors' | translate}}
+        </a>
+
+
+        <a href="" class="nav-link" *ngIf="isModerator || isSuperAdmin">
+          Kierownik praktyk
+        </a>
+        <a href="/app/activation-keys" class="nav-link" *ngIf="isModerator || isSuperAdmin">
+          <clr-icon shape="key" class="is-solid"></clr-icon>
+          Klucze aktywacyjne
+        </a>
+        <a href="/app/new-intern" class="nav-link" *ngIf="isModerator || isSuperAdmin">
+          <clr-icon shape="user" class="is-solid"></clr-icon>
+          Nowy praktykant
+        </a>
+        <a href="/app/interns" class="nav-link" *ngIf="isModerator || isSuperAdmin">
+          <clr-icon shape="users" class="is-solid"></clr-icon>
+          Lista praktykantów
+        </a>
+        <a href="/app/companies" class="nav-link" *ngIf="isModerator || isSuperAdmin">
+          <clr-icon shape="store" class="is-solid"></clr-icon>
+          Lista firm
+        </a>
+        <a href="/app/statistics" class="nav-link" *ngIf="isModerator || isSuperAdmin">
+          <clr-icon shape="line-chart"></clr-icon>
+          Statystyki
+        </a>
+        <a href="" class="nav-link" *ngIf="isStudent || isSuperAdmin">
+          Praktykant
+        </a>
+        <a href="/app/logbook" class="nav-link" *ngIf="isStudent || isSuperAdmin">
+          <clr-icon shape="calendar"></clr-icon>
+          Dziennik praktyk
+        </a>
+        <a href="" class="nav-link" *ngIf="isSuperviser || isSuperAdmin">
+          Opiekun praktyk
+        </a>
+        <a href="/app/logbook" class="nav-link" *ngIf="isSuperviser || isSuperAdmin">
+          <clr-icon shape="calendar"></clr-icon>
+          Dziennik praktyk
+        </a>
+      </section>
+    </nav>
+
+    <div class="content-area">
+      <router-outlet></router-outlet>
+    </div>
+  </div>
+</clr-main-container>

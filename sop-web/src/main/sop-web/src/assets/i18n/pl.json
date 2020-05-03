@@ -1,0 +1,59 @@
+{
+  "header": {
+    "SOP": "System obsługi praktyk",
+    "info": "Informacje",
+    "settings": "Ustawienia",
+    "login": "Logowanie",
+    "register": "Rejestracja"
+  },
+  "navBar": {
+    "home": "Strona główna",
+    "planner": {
+      "label": "Planer zajęć",
+      "myActivitiesList": "Lista zajęć",
+      "myActivitiesCalendar": "Kalendarz",
+      "locations": "Lista sal",
+      "workHours": "Godziny pracy",
+      "settings": "Ustawienia"
+    },
+    "surveys": "Ankiety",
+    "colleges": "Uczelnie",
+    "users": "Użytkownicy",
+    "fieldsOfStudy": "Kierunki studiów",
+    "practiceManagers": "Kierownicy praktyk",
+    "practiceSupervisors": "Opiekunowie praktyk"
+  },
+  "login": {
+    "header": "Panel logowania",
+    "usernameLabel": "Nazwa użytkownika",
+    "passwordLabel": "Hasło",
+    "required": "To pole jest wymagane!",
+    "loginButton": "Zaloguj",
+    "cancelButtonLabel": "Anuluj"
+  },
+  "registration": {
+    "header": "Panel rejestracji",
+    "tokenLabel": "Klucz aktywacyjny",
+    "firstNameLabel": "Imię",
+    "lastNameLabel": "Nazwisko",
+    "birthDateLabel": "Data urodzenia",
+    "passwordLabel": "Hasło",
+    "passwordRepeatLabel": "Powtórz hasło",
+    "emailLabel": "Adres e-mail",
+    "register": "Zarejestruj się",
+    "cancelButtonLabel": "Przerwij rejestrację"
+  },
+  "calendar": {
+    "addNewEvent": "Dodaj nowe wydarzenie"
+  },
+  "add-edit-dialog": {
+    "header": "Nowa aktywność",
+    "name": "Nazwa",
+    "description": "Opis",
+    "location": "Lokalizacja",
+    "startDate": "Początek wydarzenia",
+    "stopDate": "Koniec wydarzenia",
+    "save": "Zapisz",
+    "cancel": "Odrzuć"
+  }
+}

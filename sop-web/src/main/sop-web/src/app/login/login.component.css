@@ -1,0 +1,13 @@
+:host ::ng-deep .modal-content {
+  color: white;
+}
+
+:host ::ng-deep .modal-content {
+  color: white
+}
+
+/**/
+:host ::ng-deep .modal-content .modal-body .modal-footer {
+  color: white;
+}
+

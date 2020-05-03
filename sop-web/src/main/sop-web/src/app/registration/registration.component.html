@@ -1,0 +1,127 @@
+<clr-modal [(clrModalOpen)]="displayRegistrationDialog" [clrModalStaticBackdrop]="false" [clrModalClosable]="false">
+  <h3 class="modal-title">{{'registration.header' | translate}}</h3>
+  <div class="modal-body">
+    <div *ngIf="blockUI" style="text-align: center">
+      <clr-spinner *ngIf="blockUI">Loading data</clr-spinner>
+    </div>
+    <form clrForm [formGroup]="registrationForm">
+      <div class="clr-row">
+        <div class="clr-col-4"></div>
+        <div class="clr-col-4">
+          <clr-input-container>
+            <label>
+              <clr-icon shape="key"></clr-icon>
+            </label>
+            <input clrInput type="password" formControlName="password"
+                   placeholder="{{'registration.tokenLabel' | translate}}"/>
+          </clr-input-container>
+        </div>
+        <div class="clr-col-4"></div>
+      </div>
+
+      <div class="clr-row">
+        <div class="clr-col-4"></div>
+        <div class="clr-col-4">
+          <clr-input-container>
+            <label>
+              <clr-icon shape="user"></clr-icon>
+            </label>
+            <input type="text" name="firstName" clrInput placeholder="{{'registration.firstNameLabel' | translate}}"
+                   formControlName="firstName"/>
+          </clr-input-container>
+        </div>
+        <div class="clr-col-4"></div>
+      </div>
+
+      <div class="clr-row">
+        <div class="clr-col-4"></div>
+        <div class="clr-col-4">
+          <clr-input-container>
+            <label>
+              <clr-icon shape="user"></clr-icon>
+            </label>
+            <input type="text" name="lastName" clrInput placeholder="{{'registration.lastNameLabel' | translate}}"
+                   formControlName="lastName"/>
+          </clr-input-container>
+        </div>
+        <div class="clr-col-4"></div>
+      </div>
+
+      <div class="clr-row">
+        <div class="clr-col-4"></div>
+        <div class="clr-col-4">
+          <clr-input-container>
+            <label>
+              <clr-icon shape="calendar"></clr-icon>
+            </label>
+            <input clrInput formControlName="birthDate" placeholder="{{'registration.birthDateLabel' | translate}}"/>
+          </clr-input-container>
+        </div>
+        <div class="clr-col-4"></div>
+      </div>
+
+      <div class="clr-row">
+        <div class="clr-col-4"></div>
+        <div class="clr-col-4">
+          <clr-input-container>
+            <label>
+              <clr-icon shape="envelope"></clr-icon>
+            </label>
+            <input clrInput formControlName="username" placeholder="{{'registration.emailLabel' | translate}}"/>
+          </clr-input-container>
+        </div>
+        <div class="clr-col-4"></div>
+      </div>
+
+      <div class="clr-row">
+        <div class="clr-col-4"></div>
+        <div class="clr-col-4">
+          <clr-input-container>
+            <label>
+              <clr-icon shape="key"></clr-icon>
+            </label>
+            <input clrInput type="password" formControlName="password"
+                   placeholder="{{'registration.passwordLabel' | translate}}"/>
+          </clr-input-container>
+        </div>
+        <div class="clr-col-4"></div>
+      </div>
+
+      <div class="clr-row">
+        <div class="clr-col-4"></div>
+        <div class="clr-col-4">
+          <clr-input-container>
+            <label>
+              <clr-icon shape="refresh"></clr-icon>
+            </label>
+            <input clrInput type="password" formControlName="password"
+                   placeholder="{{'registration.passwordRepeatLabel' | translate}}"/>
+          </clr-input-container>
+        </div>
+        <div class="clr-col-4"></div>
+      </div>
+
+    </form>
+  </div>
+  <div class="modal-footer">
+    <button type="submit" class="btn btn-primary btn-block"
+            (click)="onSubmit()">{{'registration.register' | translate}} </button>
+    <button type="submit" class="btn btn-secondary-outline btn-block"
+            (click)="displayRegistrationDialog= false">{{'registration.cancelButtonLabel' | translate}} </button>
+  </div>
+</clr-modal>
+
+<!--<clr-alert [clrAlertType]="'success'" [clrAlertClosed]="displayAlert" clrAlertClosable="true">-->
+<!--  <clr-alert-item>-->
+<!--        <span class="alert-text">-->
+<!--            This alert indicates success.-->
+<!--        </span>-->
+<!--  </clr-alert-item>-->
+<!--</clr-alert>-->
+<!--<clr-alert>-->
+<!--  <clr-alert-item>-->
+<!--        <span class="alert-text">-->
+<!--            This is a default info alert.-->
+<!--        </span>-->
+<!--  </clr-alert-item>-->
+<!--</clr-alert>-->
