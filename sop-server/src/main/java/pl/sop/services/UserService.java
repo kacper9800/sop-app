@@ -1,11 +1,13 @@
 package pl.sop.services;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import pl.sop.dao.entities.User;
 import pl.sop.dao.repository.UserRepository;
 
 import java.util.List;
 
+@Service
 public class UserService {
 
     @Autowired

@@ -54,6 +54,8 @@
     "startDate": "Początek wydarzenia",
     "stopDate": "Koniec wydarzenia",
     "save": "Zapisz",
-    "cancel": "Odrzuć"
+    "cancel": "Odrzuć",
+    "allDay": "Cały dzień",
+    "repeat": "Powtarza się"
   }
 }

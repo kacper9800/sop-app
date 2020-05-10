@@ -54,6 +54,8 @@
     "startDate": "Start date",
     "stopDate": "Stop date",
     "save": "Save",
-    "cancel": "Cancel"
+    "cancel": "Cancel",
+    "allDay": "All day",
+    "repeat": "Repeat"
   }
 }

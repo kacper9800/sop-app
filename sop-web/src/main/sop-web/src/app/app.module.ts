@@ -6,9 +6,11 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {
   BlockUIModule,
   ButtonModule,
-  DialogModule, FullCalendarModule,
+  DialogModule,
+  FullCalendarModule,
   InputTextModule,
-  PanelModule, ProgressSpinnerModule,
+  PanelModule,
+  ProgressSpinnerModule,
   TableModule,
   ToastModule
 } from 'primeng';
@@ -60,6 +62,8 @@ import { PlannerActivitiesComponent } from './sop/planner/planner-activities/pla
 import { PlannerWorkHoursComponent } from './sop/planner/planner-work-hours/planner-work-hours.component';
 import { PlannerLocationsComponent } from './sop/planner/planner-locations/planner-locations.component';
 import { AddEditDialogComponent } from './sop/planner/planner-calendar/add-edit-dialog/add-edit-dialog.component';
+import { RouterModule } from '@angular/router';
+import { HashLocationStrategy, LocationStrategy } from '@angular/common';
 
 @NgModule({
   declarations: [
@@ -130,9 +134,8 @@ import { AddEditDialogComponent } from './sop/planner/planner-calendar/add-edit-
     ProgressSpinnerModule,
     FullCalendarModule,
     FullCalendarModule,
-
   ],
-  providers: [authInterceptorProviders],
+  providers: [{provide: LocationStrategy, useClass: HashLocationStrategy}, authInterceptorProviders],
   bootstrap: [AppComponent],
   entryComponents: [
     LoginComponent
