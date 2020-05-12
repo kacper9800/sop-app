@@ -15,7 +15,7 @@ import pl.sop.dao.entities.User;
 import java.util.Date;
 
 @RestController
-public class LoginController {
+public class    LoginController {
 
     @PostMapping("/login")
     public String login(@RequestBody User user) {
