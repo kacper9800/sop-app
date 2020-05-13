@@ -3,12 +3,9 @@ package pl.sop.controllers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
-import pl.sop.dao.entities.User;
-import pl.sop.dao.repository.UserRepository;
+import org.springframework.web.bind.annotation.*;
+import pl.sop.dto.EventDTO;
+import pl.sop.services.EventService;
 
 import java.util.List;
 
@@ -16,12 +13,18 @@ import java.util.List;
 public class EventController {
 
     @Autowired
-    UserRepository userRepository;
+    EventService eventService;
 
     @RequestMapping(value = "/api/event", method = RequestMethod.GET)
-    public ResponseEntity<List<User>> getAllUsers() {
-        final List<User> users = userRepository.findAllUsers();
-        return new ResponseEntity<>(users, HttpStatus.OK);
+    public ResponseEntity<List<EventDTO>> getAllEvents() {
+        final List<EventDTO> events = eventService.getAllEvents();
+        return new ResponseEntity(events, HttpStatus.OK);
+    }
+
+    @RequestMapping(value = "/api/event", method = RequestMethod.POST)
+    public ResponseEntity.BodyBuilder createNewEvent(@RequestBody EventDTO eventDTO) {
+        eventService.createEvent(eventDTO);
+        return ResponseEntity.status(HttpStatus.OK);
     }
 
 

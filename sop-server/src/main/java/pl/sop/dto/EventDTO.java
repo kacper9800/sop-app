@@ -1,55 +1,31 @@
-package pl.sop.dao.entities;
+package pl.sop.dto;
 
-import javax.persistence.*;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.Size;
+import pl.sop.dao.entities.User;
+
 import java.util.Date;
 
-@Entity
-@Table(name = "events")
-public class Event {
-
-    @Id
-    @Column(name = "id", nullable = false)
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+public class EventDTO {
     private Long id;
-
-    @NotBlank
-    @Size(max = 20)
-    @Column(name = "login", nullable = false)
     private String name;
-
-    @Column(name = "description")
     private String description;
-
-    @Column(name = "start_date")
+    private Integer workingHours;
     private Date startDate;
-
-    @Column(name = "stop_date")
     private Date stopDate;
-
-//    @Column(name = "college_id")
-//    private College college;
-
-    @Column(name = "allDay")
     private boolean allDay;
+    private Long userId;
 
-//    @Column(name = "repeat")
-//    private String repeat;
-
-    @Column(name = "user_id")
-    private User user;
-
-    public Event() {
+    public EventDTO() {
     }
 
-    public Event(@NotBlank @Size(max = 20) String name, String description, Date startDate, Date stopDate, boolean allDay, User user) {
+    public EventDTO(Long id, String name, String description, Integer workingHours, Date startDate, Date stopDate, boolean allDay, Long userId) {
+        this.id = id;
         this.name = name;
         this.description = description;
+        this.workingHours = workingHours;
         this.startDate = startDate;
         this.stopDate = stopDate;
         this.allDay = allDay;
-        this.user = user;
+        this.userId = userId;
     }
 
     public Long getId() {
@@ -76,11 +52,19 @@ public class Event {
         this.description = description;
     }
 
+    public Integer getWorkingHours() {
+        return workingHours;
+    }
+
+    public void setWorkingHours(Integer workingHours) {
+        this.workingHours = workingHours;
+    }
+
     public Date getStartDate() {
         return startDate;
     }
 
-    public void setStartDate(Date startdate) {
+    public void setStartDate(Date startDate) {
         this.startDate = startDate;
     }
 
@@ -100,11 +84,11 @@ public class Event {
         this.allDay = allDay;
     }
 
-    public User getUser() {
-        return user;
+    public Long getUserId() {
+        return userId;
     }
 
-    public void setUser(User user) {
-        this.user = user;
+    public void setUserId(Long userId) {
+        this.userId = userId;
     }
 }
