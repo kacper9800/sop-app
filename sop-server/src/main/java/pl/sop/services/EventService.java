@@ -9,7 +9,6 @@ import pl.sop.dao.entities.Event;
 import pl.sop.dao.repository.EventRepository;
 import pl.sop.dto.EventDTO;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import static java.util.stream.Collectors.toList;
@@ -38,4 +37,7 @@ public class EventService {
         return this.eventRepository.save(event);
     }
 
+    public void deleteEvent(Long id) {
+        this.eventRepository.deleteById(id);
+    }
 }

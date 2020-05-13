@@ -247,6 +247,12 @@
             <column name="edit_by" type="VARCHAR(255)"></column>
         </addColumn>
     </changeSet>
+    <changeSet id="8" author="krzymkiewicz">
+        <addColumn tableName="events">
+            <column name="active" type="boolean"></column>
+            <column name="deleted" type="boolean"></column>
+        </addColumn>
+    </changeSet>
 
     <!--    <changeSet id="4" author="krzymkiewicz">-->
     <!--        <createTable tableName="calendar_events">-->

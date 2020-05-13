@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class UserService implements Dao<User> {
+public class UserService {
 
     @Autowired
     public UserRepository userRepository;
@@ -23,30 +23,4 @@ public class UserService implements Dao<User> {
         return userRepository.findAllUsers();
     }
 
-    @Override
-    public Optional<User> get(long id) {
-        return Optional.empty();
-    }
-
-    @Override
-    public List<User> getAll() {
-        return userRepository.findAllUsers();
-    }
-
-    @Override
-    public User save(User user) {
-        return userRepository.save(user);
-
-    }
-
-    @Override
-    public void update(User user) {
-        userRepository.save(user);
-
-    }
-
-    @Override
-    public void delete(User user) {
-        userRepository.delete(user);
-    }
 }

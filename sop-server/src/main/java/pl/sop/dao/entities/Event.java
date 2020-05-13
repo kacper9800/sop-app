@@ -37,8 +37,14 @@ public class Event {
 //    @Column(name = "repeat")
 //    private String repeat;
 
-    @Column(name = "user_id")
+    @OneToOne(fetch = FetchType.LAZY)
     private User user;
+
+    @Column(name = "deleted")
+    private Boolean deleted;
+
+    @Column(name = "active")
+    private Boolean active;
 
     public Event() {
     }
