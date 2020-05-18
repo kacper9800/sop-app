@@ -9,15 +9,15 @@ public class EventDTO {
     private String name;
     private String description;
     private Integer workingHours;
-    private Date startDate;
-    private Date stopDate;
+    private String startDate;
+    private String stopDate;
     private boolean allDay;
     private Long userId;
 
     public EventDTO() {
     }
 
-    public EventDTO(Long id, String name, String description, Integer workingHours, Date startDate, Date stopDate, boolean allDay, Long userId) {
+    public EventDTO(Long id, String name, String description, Integer workingHours, String startDate, String stopDate, boolean allDay, Long userId) {
         this.id = id;
         this.name = name;
         this.description = description;
@@ -60,19 +60,19 @@ public class EventDTO {
         this.workingHours = workingHours;
     }
 
-    public Date getStartDate() {
+    public String getStartDate() {
         return startDate;
     }
 
-    public void setStartDate(Date startDate) {
+    public void setStartDate(String startDate) {
         this.startDate = startDate;
     }
 
-    public Date getStopDate() {
+    public String getStopDate() {
         return stopDate;
     }
 
-    public void setStopDate(Date stopDate) {
+    public void setStopDate(String stopDate) {
         this.stopDate = stopDate;
     }
 

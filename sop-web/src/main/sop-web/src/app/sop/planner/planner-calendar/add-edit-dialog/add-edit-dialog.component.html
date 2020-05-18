@@ -105,9 +105,13 @@
         <div class="clr-col-2"></div>
         <div class="clr-col-8">
           <clr-date-container>
-            <input clrDate style="z-index: 1000;" type="date" name="startDate"
+            <label>laaabel</label>
+            <input clrDate  type="date"
                    [placeholder]="'add-edit-dialog.startDate' | translate"
                    formControlName="startDate">
+          </clr-date-container>
+
+          <clr-date-container>
           </clr-date-container>
         </div>
         <div class="clr-col-2"></div>
@@ -115,10 +119,14 @@
 
       <div class="clr-row">
         <div class="clr-col-2"></div>
-        <div class="clr-col-8" style="z-index:1000">
+        <div class="clr-col-8">
           <clr-date-container>
-            <input clrDate type="date" name="stopDate" formControlName="stopDate"
-                   [placeholder]="'add-edit-dialog.stopDate' | translate">
+            <label>End date</label>
+            <input clrDate type="date"
+                   [placeholder]="'add-edit-dialog.stopDate' | translate" formControlName="stopDate">
+          </clr-date-container>
+          <clr-date-container>
+
           </clr-date-container>
         </div>
         <div class="clr-col-2"></div>

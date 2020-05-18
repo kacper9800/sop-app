@@ -26,8 +26,8 @@ export class AddEditDialogComponent implements OnInit {
       name: new FormControl({value: null, disabled: false}, Validators.required),
       description: new FormControl({value: null, disabled: false}, Validators.required),
       location: new FormControl({value: null, disabled: false}, Validators.required),
-      startDate: new FormControl({value: null, disabled: false}, Validators.required),
-      stopDate: new FormControl({value: null, disabled: false}, Validators.required),
+      startDate: new FormControl({value: new Date(), disabled: false}, Validators.required),
+      stopDate: new FormControl({value: new Date(), disabled: false}, Validators.required),
       allDay: new FormControl({value: null, disabled: false}),
       repeat: new FormControl({value: null, disabled: false}),
     });
@@ -46,8 +46,18 @@ export class AddEditDialogComponent implements OnInit {
     this.eventToSave.location = this.addEditForm.get('location').value;
     this.eventToSave.startDate = this.addEditForm.get('startDate').value;
     this.eventToSave.stopDate = this.addEditForm.get('stopDate').value;
-    this.eventToSave.allDay = this.addEditForm.get('allDay').value;
-    this.eventToSave.repeat = this.addEditForm.get('repeat').value;
+    if (this.addEditForm.get('allDay') === null) {
+      this.eventToSave.allDay = false;
+    } else {
+      this.eventToSave.allDay = this.addEditForm.get('allDay').value;
+    }
+    if (this.addEditForm.get('repeat') === null) {
+      this.eventToSave.repeat = 0;
+    } else {
+      this.eventToSave.repeat = this.addEditForm.get('repeat').value;
+    }
+
+    console.log(this.eventToSave);
     this.plannerService.createNewEvent(this.eventToSave)
       .subscribe(
         () => this.onSuccessCreate(),

@@ -3,7 +3,8 @@ import { FullCalendar } from 'primeng';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import timeGridPlugin from '@fullcalendar/timegrid';
 import plLocale from '@fullcalendar/core/locales/pl';
-import { AddEditDialogComponent } from './add-edit-dialog/add-edit-dialog.component';
+import { PlannerService } from '../../../_services/planner.service';
+import { Event } from '../../../_model/event.model';
 
 @Component({
   selector: 'app-planner-calendar',
@@ -15,18 +16,18 @@ export class PlannerCalendarComponent implements OnInit {
   @ViewChild('calendar', {static: true})
   public calendarComponent: FullCalendar;
 
-  @ViewChild(AddEditDialogComponent, {static: true})
-  public addEditDialog: AddEditDialogComponent;
 
   public events: any;
   public calOptions: any;
   public showNewActivityDialog: boolean;
+  private blockUI: boolean;
 
 
-  constructor() {
+  constructor(private plannerService: PlannerService) {
   }
 
   ngOnInit() {
+    this.loadEvents();
 
     this.calOptions = {
       plugins: [dayGridPlugin, timeGridPlugin],
@@ -91,6 +92,24 @@ export class PlannerCalendarComponent implements OnInit {
     };
   }
 
+  private loadEvents() {
+    this.plannerService.getAllEvents().subscribe(
+      (res) => this.onSuccessLoadEvents(res),
+      () => this.onErrorLoadEvents()
+    );
+  }
+
+  private onSuccessLoadEvents(res) {
+    console.log(res);
+    this.convertEventsToCalendarView(res);
+    this.blockUI = false;
+  }
+
+  private onErrorLoadEvents() {
+    this.blockUI = false;
+  }
+
+
   private generateToolTip(event: any): string {
     const formater = 'dd-MM-yyyy';
     let content = '';
@@ -108,10 +127,20 @@ export class PlannerCalendarComponent implements OnInit {
     return content;
   }
 
-  public addNewEvent(): void {
-    this.showNewActivityDialog = true;
-    this.addEditDialog.showDialog();
-  }
 
+  private convertEventsToCalendarView(events: Event[]) {
+    events.forEach(event => {
+      this.events = [...this.events, {
+        id: event.id,
+        // 'title': 'Team: ' + ele.teamName + '\nPerson: ' + ele.personName + ' $ICON',
+        start: new Date(event.startDate),
+        // "end": new Date(ele.stopDate),
+        end: new Date(event.stopDate),
+        allDay: true,
+        description: event.description,
+      }
+      ];
+    });
+  }
 
 }

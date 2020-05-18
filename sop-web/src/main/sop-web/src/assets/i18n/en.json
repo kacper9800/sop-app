@@ -1,4 +1,16 @@
 {
+  "common": {
+    "crud": {
+      "add": "Add",
+      "edit": "Edit",
+      "delete": "Delete"
+    },
+    "id": "Identify",
+    "name": "Name",
+    "description": "Description",
+    "startDate": "Start date",
+    "stopDate": "Stop date"
+  },
   "header": {
     "SOP": "Internship service system",
     "info": "Information",
@@ -44,7 +56,13 @@
     "cancelButtonLabel": "Cancel registration"
   },
   "calendar": {
-    "addNewEvent": "Add new event"
+    "title": "Generate new work schedule",
+    "addNewEvent": "Add new event",
+    "generateNewWorkSchedule": "Generate new work schedule",
+    "basicData": "Basic data",
+    "settings": "Settings",
+    "eventChooser": "Events chooser",
+    "usersChooser": "Users chooser"
   },
   "add-edit-dialog": {
     "header": "New activity",
@@ -57,5 +75,25 @@
     "cancel": "Cancel",
     "allDay": "All day",
     "repeat": "Repeat"
+  },
+  "activitiesList": {
+    "name": "Name",
+    "description": "Description",
+    "startDate": "Start date",
+    "stopDate": "Stop date",
+    "active": "Active"
+  },
+  "users": {
+    "id": "Identify",
+    "name": "Name",
+    "lastName": "Last name",
+    "college": "College",
+    "faculty": "Faculty",
+    "institute": "Institute",
+    "department": "Department"
+  },
+  "events": {
+    "hostBy": "Host by",
+    "location": "Location"
   }
 }

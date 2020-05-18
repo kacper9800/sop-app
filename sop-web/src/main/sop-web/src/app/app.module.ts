@@ -64,6 +64,7 @@ import { PlannerLocationsComponent } from './sop/planner/planner-locations/plann
 import { AddEditDialogComponent } from './sop/planner/planner-calendar/add-edit-dialog/add-edit-dialog.component';
 import { RouterModule } from '@angular/router';
 import { HashLocationStrategy, LocationStrategy } from '@angular/common';
+import { PlannerGeneratorComponent } from './sop/planner/planner-generator/planner-generator.component';
 
 @NgModule({
   declarations: [
@@ -96,6 +97,7 @@ import { HashLocationStrategy, LocationStrategy } from '@angular/common';
     PlannerWorkHoursComponent,
     PlannerLocationsComponent,
     AddEditDialogComponent,
+    PlannerGeneratorComponent,
   ],
   imports: [
     BrowserModule,

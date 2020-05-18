@@ -1,4 +1,16 @@
 {
+  "common": {
+    "crud": {
+      "add": "Dodaj",
+      "edit": "Edytuj",
+      "delete": "Usuń"
+    },
+    "id": "Identyfikator",
+    "name": "Nazwa",
+    "description": "Opis",
+    "startDate": "Data początkowa",
+    "stopDate": "Data końcowa"
+  },
   "header": {
     "SOP": "System obsługi praktyk",
     "info": "Informacje",
@@ -44,7 +56,13 @@
     "cancelButtonLabel": "Przerwij rejestrację"
   },
   "calendar": {
-    "addNewEvent": "Dodaj nowe wydarzenie"
+    "title": "Generowanie grafiku pracy",
+    "addNewEvent": "Dodaj nowe wydarzenie",
+    "generateNewWorkSchedule": "Generuj nowy grafik pracy",
+    "basicData": "Dane podstawowe",
+    "settings": "Ustawienia",
+    "eventChooser": "Wybór aktywności",
+    "usersChooser": "Wybór użytkowników"
   },
   "add-edit-dialog": {
     "header": "Nowa aktywność",
@@ -57,5 +75,26 @@
     "cancel": "Odrzuć",
     "allDay": "Cały dzień",
     "repeat": "Powtarza się"
+  },
+  "activitiesList": {
+    "name": "Nazwa",
+    "description": "Opis",
+    "startDate": "Początek wydarzenia",
+    "stopDate": "Koniec wydarzenia",
+    "active": "Aktywny"
+  },
+  "users": {
+    "id": "Identyfikator",
+    "name": "Imię",
+    "lastName": "Nazwisko",
+    "college": "Uczelnia",
+    "faculty": "Wydział",
+    "institute": "Instytut",
+    "department": "Katedra"
+  },
+  "events": {
+    "hostBy": "Prowadzący",
+    "location": "Lokalizacja"
   }
 }
+

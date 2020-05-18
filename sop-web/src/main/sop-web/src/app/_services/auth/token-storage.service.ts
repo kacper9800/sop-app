@@ -11,6 +11,8 @@ export class TokenStorageService {
   constructor() {
   }
 
+  static API = 'http://localhost:8082/api/';
+
   signOut() {
     window.sessionStorage.clear();
   }
@@ -32,6 +34,5 @@ export class TokenStorageService {
   public getUser() {
     return JSON.parse(sessionStorage.getItem(USER_KEY));
   }
-
 
 }

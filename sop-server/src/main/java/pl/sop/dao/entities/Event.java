@@ -16,7 +16,7 @@ public class Event {
 
     @NotBlank
     @Size(max = 20)
-    @Column(name = "login", nullable = false)
+    @Column(name = "name", nullable = false)
     private String name;
 
     @Column(name = "description")
@@ -31,7 +31,7 @@ public class Event {
 //    @Column(name = "college_id")
 //    private College college;
 
-    @Column(name = "allDay")
+    @Column(name = "all_day")
     private boolean allDay;
 
 //    @Column(name = "repeat")

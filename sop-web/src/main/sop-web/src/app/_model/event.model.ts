@@ -3,6 +3,9 @@ export interface IEvent {
   name: string;
   description: string;
   location: string;
+  locationId: number;
+  hostBy: string;
+  hostById: number;
   startDate: Date;
   stopDate: Date;
   allDay: boolean;
@@ -14,9 +17,12 @@ export class Event implements IEvent {
   name: string;
   description: string;
   location: string;
+  locationId: number;
+  hostBy: string;
+  hostById: number;
   startDate: Date;
   stopDate: Date;
   allDay: boolean;
   repeat: number;
-
 }
+

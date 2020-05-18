@@ -9,6 +9,7 @@ import pl.sop.dao.entities.Event;
 import pl.sop.dao.repository.EventRepository;
 import pl.sop.dto.EventDTO;
 
+import java.text.ParseException;
 import java.util.List;
 
 import static java.util.stream.Collectors.toList;
@@ -32,7 +33,7 @@ public class EventService {
         return eventDTOS;
     }
 
-    public Event createEvent(EventDTO eventDTO) {
+    public Event createEvent(EventDTO eventDTO) throws ParseException {
         Event event = dtoToEventConverter.convert(eventDTO);
         return this.eventRepository.save(event);
     }

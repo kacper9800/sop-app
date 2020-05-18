@@ -253,6 +253,13 @@
             <column name="deleted" type="boolean"></column>
         </addColumn>
     </changeSet>
+    <changeSet id="9" author="krzymkiewicz">
+        <renameColumn tableName="events" oldColumnName="allDay" newColumnName="all_day"></renameColumn>
+    </changeSet>
+    <changeSet id="10" author="krzymkiewicz">
+        <renameColumn tableName="events" oldColumnName="end_date" newColumnName="stop_date"></renameColumn>
+
+    </changeSet>
 
     <!--    <changeSet id="4" author="krzymkiewicz">-->
     <!--        <createTable tableName="calendar_events">-->

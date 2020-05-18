@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { IEvent } from '../_model/event.model';
 
 @Injectable({
@@ -12,13 +12,12 @@ export class PlannerService {
   constructor(private http: HttpClient) {
   }
 
-
-  getAllEventsForUser(userId: number): Observable<any> {
-    return this.http.get(this.API_URL + 'event/' + userId, {responseType: 'text'});
+  getAllEvents(): Observable<any> {
+    return this.http.get<Event[]>(this.API_URL + 'event');
   }
 
   createNewEvent(event: IEvent): Observable<number> {
-    return this.http.post<number>(this.API_URL + 'event/' + event, {responseType: 'text'});
+    return this.http.post<number>(this.API_URL + 'event', event);
   }
 
 
