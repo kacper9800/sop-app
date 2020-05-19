@@ -5,22 +5,19 @@
 
 package pl.sop.dao.entities.organizationStructure;
 
+import pl.sop.dao.entities.BasicEntity;
+
 import javax.persistence.*;
+import java.io.Serializable;
 
 @Entity
-public class Institute {
-
-    @Id
-    @Column(name = "id", nullable = false, unique = true)
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+public class Institute extends BasicEntity implements Serializable {
 
     @Column(name = "name", nullable = false)
     private String name;
 
     @Column(name = "short_name", nullable = false)
     private String short_name;
-
 
 
 }

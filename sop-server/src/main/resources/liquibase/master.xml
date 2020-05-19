@@ -227,7 +227,7 @@
             <column name="college_id" type="bigint"></column>
         </createTable>
     </changeSet>
-    
+
     <changeSet id="7" author="krzymkiewicz">
         <addColumn tableName="events">
             <column name="allDay" type="boolean"></column>
@@ -313,6 +313,9 @@
                                  constraintName="fk_department_id"
                                  referencedColumnNames="id"
                                  referencedTableName="departments"/>
+    </changeSet>
+    <changeSet id="13" author="krzymkiewicz">
+        <modifyDataType tableName="events" columnName="duration" newDataType="VARCHAR(50)"></modifyDataType>
     </changeSet>
     <!--    <changeSet id="4" author="krzymkiewicz">-->
     <!--        <createTable tableName="calendar_events">-->

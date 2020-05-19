@@ -4,10 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
-import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
-import pl.sop.dao.entities.User;
 import pl.sop.dto.EventDTO;
 import pl.sop.services.EventService;
 
@@ -31,9 +28,9 @@ public class EventController {
     @CrossOrigin
 //    @PreAuthorize("hasRole('ROLE_MODERATOR')")
     @RequestMapping(value = "/api/planner/event", method = RequestMethod.POST)
-    public ResponseEntity.BodyBuilder createNewEvent(@RequestBody EventDTO eventDTO) throws ParseException {
-        eventService.createEvent(eventDTO);
-        return ResponseEntity.status(HttpStatus.OK);
+    public ResponseEntity createNewEvent(@RequestBody EventDTO eventDTO) throws ParseException {
+        return ResponseEntity.ok(eventService.createEvent(eventDTO)
+        );
     }
 
     @CrossOrigin

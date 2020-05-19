@@ -1,10 +1,13 @@
 package pl.sop.dao.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonView;
 import org.springframework.data.annotation.CreatedBy;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedBy;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
+import pl.sop.jsonviews.BaseEntityView;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -14,7 +17,8 @@ import java.util.Date;
 @EntityListeners(AuditingEntityListener.class)
 public abstract class BasicEntity implements Serializable {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @JsonView(BaseEntityView.Minimal.class)
     protected Long id;
 
     @CreatedDate
@@ -79,6 +83,7 @@ public abstract class BasicEntity implements Serializable {
         this.editUser = editUser;
     }
 
+    @JsonIgnore
     public boolean isActive() {
         return active;
     }
@@ -87,6 +92,7 @@ public abstract class BasicEntity implements Serializable {
         this.active = active;
     }
 
+    @JsonIgnore
     public boolean isDeleted() {
         return deleted;
     }
