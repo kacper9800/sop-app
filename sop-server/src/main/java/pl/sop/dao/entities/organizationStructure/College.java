@@ -3,18 +3,16 @@
  * Kacper Rzymkiewicz #2020
  */
 
-package pl.sop.dao.entities;
+package pl.sop.dao.entities.organizationStructure;
 
-import javax.persistence.*;
+import pl.sop.dao.entities.BasicEntity;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import java.io.Serializable;
 
 @Entity
-public class College {
-
-    @Id
-    @Column(name = "id", nullable = false, unique = true)
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-
+public class College extends BasicEntity implements Serializable {
     @Column(name = "name", nullable = false)
     private String name;
 

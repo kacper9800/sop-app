@@ -1,31 +1,27 @@
 package pl.sop.dto;
 
-import pl.sop.dao.entities.User;
-
-import java.util.Date;
-
 public class EventDTO {
     private Long id;
     private String name;
     private String description;
-    private Integer workingHours;
+    private Integer duration;
+
+    private Long locationId;
+    private Long instructorId;
+
     private String startDate;
     private String stopDate;
-    private boolean allDay;
+
+    private Long collegeId;
+    private Long facultyId;
+    private Long instituteId;
+    private Long departmentId;
     private Long userId;
 
-    public EventDTO() {
-    }
+    private boolean allDay;
+    private Integer repeat;
 
-    public EventDTO(Long id, String name, String description, Integer workingHours, String startDate, String stopDate, boolean allDay, Long userId) {
-        this.id = id;
-        this.name = name;
-        this.description = description;
-        this.workingHours = workingHours;
-        this.startDate = startDate;
-        this.stopDate = stopDate;
-        this.allDay = allDay;
-        this.userId = userId;
+    public EventDTO() {
     }
 
     public Long getId() {
@@ -52,14 +48,6 @@ public class EventDTO {
         this.description = description;
     }
 
-    public Integer getWorkingHours() {
-        return workingHours;
-    }
-
-    public void setWorkingHours(Integer workingHours) {
-        this.workingHours = workingHours;
-    }
-
     public String getStartDate() {
         return startDate;
     }
@@ -84,11 +72,75 @@ public class EventDTO {
         this.allDay = allDay;
     }
 
+    public Long getCollegeId() {
+        return collegeId;
+    }
+
+    public void setCollegeId(Long collegeId) {
+        this.collegeId = collegeId;
+    }
+
+    public Long getFacultyId() {
+        return facultyId;
+    }
+
+    public void setFacultyId(Long facultyId) {
+        this.facultyId = facultyId;
+    }
+
+    public Long getInstituteId() {
+        return instituteId;
+    }
+
+    public void setInstituteId(Long instituteId) {
+        this.instituteId = instituteId;
+    }
+
+    public Long getDepartmentId() {
+        return departmentId;
+    }
+
+    public void setDepartmentId(Long departmentId) {
+        this.departmentId = departmentId;
+    }
+
     public Long getUserId() {
         return userId;
     }
 
     public void setUserId(Long userId) {
         this.userId = userId;
+    }
+
+    public Integer getDuration() {
+        return duration;
+    }
+
+    public void setDuration(Integer duration) {
+        this.duration = duration;
+    }
+
+    public Long getLocationId() {
+        return locationId;
+    }
+
+    public void setLocationId(Long locationId) {
+        this.locationId = locationId;
+    }
+
+    public Long getInstructorId() {
+        return instructorId;
+    }
+
+    public void setInstructorId(Long instructorId) {
+        this.instructorId = instructorId;
+    }
+
+    public Integer getRepeat() {
+        return repeat;
+    }
+
+    public void setRepeat(Integer repeat) {
+        this.repeat = repeat;
     }
 }

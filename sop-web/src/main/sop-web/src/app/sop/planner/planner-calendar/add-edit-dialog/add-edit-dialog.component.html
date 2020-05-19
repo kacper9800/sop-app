@@ -75,7 +75,7 @@
   <div class="modal-body">
     <form id="addEditForm" clrForm [formGroup]="addEditForm">
       <div class="clr-row">
-        <div class="clr-col-2"></div>
+        <div class="clr-col-2">{{'common.name' | translate}}</div>
         <div class="clr-col-8">
           <input clrInput style="width: 100%;" [placeholder]="'add-edit-dialog.name' | translate"
                  formControlName="name">
@@ -84,75 +84,95 @@
       </div>
 
       <div class="clr-row">
-        <div class="clr-col-2"></div>
+        <div class="clr-col-2">{{'common.description' | translate}}</div>
         <div class="clr-col-8">
-          <input clrInput style="width: 100%;" [placeholder]="'add-edit-dialog.description' | translate"
+          <input clrInput style="width: 100%;" [placeholder]="'common.description' | translate"
                  formControlName="description">
         </div>
         <div class="clr-col-2"></div>
       </div>
 
       <div class="clr-row">
-        <div class="clr-col-2"></div>
+        <div class="clr-col-2">
+          {{'common.duration' | translate}}
+        </div>
         <div class="clr-col-8">
-          <input clrInput style="width: 100%;" [placeholder]="'add-edit-dialog.location' | translate"
+          <select clrSelect name="options" formControlName="duration">
+            <option value="0">15 min</option>
+            <option value="1">30 min</option>
+            <option value="2">45 min</option>
+            <option value="3">1h</option>
+            <option value="4">1h 30 min</option>
+            <option value="5">2h 15 min</option>
+          </select>
+        </div>
+        <div class="clr-col-2"></div>
+      </div>
+      <div class="clr-row">
+        <div class="clr-col-2">{{'common.hostBy' | translate}}</div>
+        <div class="clr-col-8">
+<!--          <input clrInput style="width: 100%;" [placeholder]="'common.hostBy' | translate"-->
+<!--                 formControlName="hostBy">-->
+          <select clrSelect name="options" formControlName="hostBy">
+            <div *ngFor="let userOption of users">
+              <option [value]="userOption.id">{{userOption.firstName + ' ' + userOption.lastName}} </option>
+            </div>
+          </select>
+        </div>
+        <div class="clr-col-2"></div>
+      </div>
+
+      <div class="clr-row">
+        <div class="clr-col-2">{{'common.location' | translate}}</div>
+        <div class="clr-col-8">
+          <input clrInput style="width: 100%;" [placeholder]="'common.location' | translate"
                  formControlName="location">
         </div>
         <div class="clr-col-2"></div>
       </div>
+      <!--      <div class="clr-row">-->
+      <!--        <div class="clr-col-2"></div>-->
+      <!--        <div class="clr-col-8">-->
+      <!--          <div class="input-wrapper">-->
+      <!--            <input [clrDate] type="date" [placeholder]="'add-edit-dialog.startDate' | translate"-->
+      <!--                   formControlName="stopDate">-->
+      <!--          </div>-->
+      <!--        </div>-->
+      <!--        <div class="clr-col-2"></div>-->
+      <!--      </div>-->
 
-      <div class="clr-row">
-        <div class="clr-col-2"></div>
-        <div class="clr-col-8">
-          <clr-date-container>
-            <label>laaabel</label>
-            <input clrDate  type="date"
-                   [placeholder]="'add-edit-dialog.startDate' | translate"
-                   formControlName="startDate">
-          </clr-date-container>
+      <!--      <div class="clr-row">-->
+      <!--        <div class="clr-col-2"></div>-->
+      <!--        <div class="clr-col-8">-->
+      <!--            <input [clrDate] type="date" [placeholder]="'add-edit-dialog.stopDate' | translate"-->
+      <!--                   formControlName="stopDate">-->
+      <!--        </div>-->
+      <!--        <div class="clr-col-2"></div>-->
+      <!--      </div>-->
 
-          <clr-date-container>
-          </clr-date-container>
-        </div>
-        <div class="clr-col-2"></div>
-      </div>
 
-      <div class="clr-row">
-        <div class="clr-col-2"></div>
-        <div class="clr-col-8">
-          <clr-date-container>
-            <label>End date</label>
-            <input clrDate type="date"
-                   [placeholder]="'add-edit-dialog.stopDate' | translate" formControlName="stopDate">
-          </clr-date-container>
-          <clr-date-container>
+      <!--      <div class="clr-row">-->
+      <!--        <div class="clr-col-4"></div>-->
+      <!--        <div class="clr-col-4">-->
+      <!--          <clr-checkbox-wrapper>-->
+      <!--            <input type="checkbox" clrCheckbox formControlName="allDay" [value]="'add-edit-dialog.allDay'"-->
+      <!--                   name="allDay"/>-->
+      <!--            <label>{{'add-edit-dialog.allDay' | translate}}</label>-->
+      <!--          </clr-checkbox-wrapper>-->
+      <!--        </div>-->
+      <!--        <div class="clr-col-4"></div>-->
+      <!--      </div>-->
 
-          </clr-date-container>
-        </div>
-        <div class="clr-col-2"></div>
-      </div>
-
-      <div class="clr-row">
-        <div class="clr-col-4"></div>
-        <div class="clr-col-4">
-          <clr-checkbox-wrapper>
-            <input type="checkbox" clrCheckbox formControlName="allDay" [value]="'add-edit-dialog.allDay'" name="allDay"/>
-            <label>{{'add-edit-dialog.allDay' | translate}}</label>
-          </clr-checkbox-wrapper>
-        </div>
-        <div class="clr-col-4"></div>
-      </div>
-
-      <div class="clr-row">
-        <div class="clr-col-4"></div>
-        <div class="clr-col-4">
-          <clr-checkbox-wrapper>
-            <input type="checkbox" clrCheckbox formControlName="repeat" [value]="'add-edit-dialog.repeat'" name="repeat"/>
-            <label>{{'add-edit-dialog.repeat' | translate}}</label>
-          </clr-checkbox-wrapper>
-        </div>
-        <div class="clr-col-4"></div>
-      </div>
+      <!--      <div class="clr-row">-->
+      <!--        <div class="clr-col-4"></div>-->
+      <!--        <div class="clr-col-4">-->
+      <!--          <clr-checkbox-wrapper>-->
+      <!--            <input type="checkbox" clrCheckbox formControlName="repeat" [value]="'add-edit-dialog.repeat'" name="repeat"/>-->
+      <!--            <label>{{'add-edit-dialog.repeat' | translate}}</label>-->
+      <!--          </clr-checkbox-wrapper>-->
+      <!--        </div>-->
+      <!--        <div class="clr-col-4"></div>-->
+      <!--      </div>-->
     </form>
   </div>
   <div class="modal-footer">

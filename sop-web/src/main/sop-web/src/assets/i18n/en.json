@@ -9,7 +9,10 @@
     "name": "Name",
     "description": "Description",
     "startDate": "Start date",
-    "stopDate": "Stop date"
+    "stopDate": "Stop date",
+    "duration": "Duration",
+    "location": "Location",
+    "hostBy": "Host by"
   },
   "header": {
     "SOP": "Internship service system",
@@ -26,7 +29,8 @@
       "myActivitiesCalendar": "Calendar",
       "locations": "Locations",
       "workHours": "Work hours",
-      "settings": "Settings"
+      "settings": "Settings",
+      "workSchedules": "Work schedule"
     },
     "surveys": "Surveys",
     "colleges": "Colleges",

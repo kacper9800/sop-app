@@ -9,10 +9,15 @@ import { User } from './security/user';
 })
 export class AppComponent {
 
+  public hasAdminAuthorities: boolean;
+  public hasModeratorAuthorities: boolean;
+  public hasSupervisorAuthorities: boolean;
+  public hasStudentAuthorities: boolean;
+  public hasUserAuthorities: boolean;
+
   private roles: string[];
   isLoggedIn: boolean;
-  showAdminBoard: boolean;
-  showModeratorBoard: boolean;
+
   user: User;
 
   constructor(private tokenStorageService: TokenStorageService) {
@@ -24,9 +29,11 @@ export class AppComponent {
       const user = this.tokenStorageService.getUser();
       this.roles = user.roles;
 
-      this.showAdminBoard = this.roles.includes('ROLE_ADMIN');
-      this.showModeratorBoard = this.roles.includes('ROLE_MODERATOR');
-
+      this.hasAdminAuthorities = this.roles.includes('ROLE_ADMIN');
+      this.hasModeratorAuthorities = this.roles.includes('ROLE_MODERATOR');
+      this.hasSupervisorAuthorities = this.roles.includes('ROLE_SUPERVISER');
+      this.hasStudentAuthorities = this.roles.includes('ROLE_STUDENT');
+      this.hasUserAuthorities = this.roles.includes('ROLE_USER');
       this.user = user;
     }
   }

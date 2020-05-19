@@ -31,11 +31,6 @@
   <clr-icon shape="plus"></clr-icon>
   {{"calendar.addNewEvent" | translate}}</button>
 
-<button class="btn btn-outline" (click)="newWorkScheduleWizard()">
-  <clr-icon shape="calendar"></clr-icon>
-  {{"calendar.generateNewWorkSchedule" | translate}}</button>
-
-
 <p-table [value]="events" [columns]="columns">
   <ng-template pTemplate="header" let-columns>
     <tr>
@@ -46,14 +41,14 @@
         </div>
       </th>
     </tr>
-    <tr>
-      <th *ngFor="let col of columns" [ngSwitch]="col.field">
-        <div *ngIf="col.field != 'actions'">
-          <input (input)="dt.filter($event.target.value, col.field, 'contains')"
-                 [ngClass]="{'width-full': true}" type="text" size="10" pInputText/>
-        </div>
-      </th>
-    </tr>
+<!--    <tr>-->
+<!--      <th *ngFor="let col of columns" [ngSwitch]="col.field">-->
+<!--        <div *ngIf="col.field != 'actions'">-->
+<!--          <input (input)="dt.filter($event.target.value, col.field, 'contains')"-->
+<!--                 [ngClass]="{'width-full': true}" type="text" size="10" pInputText/>-->
+<!--        </div>-->
+<!--      </th>-->
+<!--    </tr>-->
   </ng-template>
   <ng-template pTemplate="body" let-rowData let-columns="columns">
     <tr [pSelectableRow]="rowData">
@@ -96,7 +91,7 @@
       <div class="clr-col-1"></div>
       <div class="clr-col-10">
         <clr-date-container>
-          <input type="date" clrDate name="demo" placeholder="{{'common.startDate' | translate}}"
+          <input type="date" ClrDateInput name="demo" placeholder="{{'common.startDate' | translate}}"
                  [(ngModel)]="startDate">
         </clr-date-container>
       </div>

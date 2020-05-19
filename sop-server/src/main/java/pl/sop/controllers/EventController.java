@@ -4,7 +4,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
+import pl.sop.dao.entities.User;
 import pl.sop.dto.EventDTO;
 import pl.sop.services.EventService;
 
@@ -18,7 +21,7 @@ public class EventController {
     EventService eventService;
 
     @CrossOrigin
-    @PreAuthorize("hasRole('MODERATOR')")
+//    @PreAuthorize("hasRole('ROLE_MODERATOR')")
     @RequestMapping(value = "/api/planner/event", method = RequestMethod.GET)
     public ResponseEntity<List<EventDTO>> getAllEvents() {
         final List<EventDTO> events = eventService.getAllEvents();
@@ -26,7 +29,7 @@ public class EventController {
     }
 
     @CrossOrigin
-    @PreAuthorize("hasRole('MODERATOR')")
+//    @PreAuthorize("hasRole('ROLE_MODERATOR')")
     @RequestMapping(value = "/api/planner/event", method = RequestMethod.POST)
     public ResponseEntity.BodyBuilder createNewEvent(@RequestBody EventDTO eventDTO) throws ParseException {
         eventService.createEvent(eventDTO);
@@ -34,7 +37,7 @@ public class EventController {
     }
 
     @CrossOrigin
-    @PreAuthorize("hasRole('MODERATOR')")
+    @PreAuthorize("hasRole('ROLE_MODERATOR')")
     @RequestMapping(value = "/api/planner/event/{id}", method = RequestMethod.DELETE)
     public ResponseEntity.BodyBuilder deleteEvent(@PathVariable("id") Long id) throws Exception {
         if (id == null) {

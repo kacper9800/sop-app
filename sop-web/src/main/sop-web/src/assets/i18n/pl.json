@@ -9,7 +9,10 @@
     "name": "Nazwa",
     "description": "Opis",
     "startDate": "Data początkowa",
-    "stopDate": "Data końcowa"
+    "stopDate": "Data końcowa",
+    "duration": "Czas trwania",
+    "location": "Lokalizacja",
+    "hostBy": "Prowadzący"
   },
   "header": {
     "SOP": "System obsługi praktyk",
@@ -26,7 +29,8 @@
       "myActivitiesCalendar": "Kalendarz",
       "locations": "Lista sal",
       "workHours": "Godziny pracy",
-      "settings": "Ustawienia"
+      "settings": "Ustawienia",
+      "workSchedules": "Grafik pracy"
     },
     "surveys": "Ankiety",
     "colleges": "Uczelnie",

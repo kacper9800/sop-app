@@ -4,7 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import pl.sop.dao.entities.College;
+import pl.sop.dao.entities.organizationStructure.College;
 import pl.sop.dao.repository.CollegeRepository;
 
 import java.util.List;

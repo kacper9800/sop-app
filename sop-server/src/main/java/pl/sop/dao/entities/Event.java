@@ -1,18 +1,25 @@
 package pl.sop.dao.entities;
 
-import javax.persistence.*;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
+import pl.sop.dao.entities.organizationStructure.College;
+import pl.sop.dao.entities.organizationStructure.Department;
+import pl.sop.dao.entities.organizationStructure.Faculty;
+import pl.sop.dao.entities.organizationStructure.Institute;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
+import java.io.Serializable;
+import java.time.Duration;
 import java.util.Date;
 
 @Entity
 @Table(name = "events")
-public class Event {
-
-    @Id
-    @Column(name = "id", nullable = false)
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+public class Event extends BasicEntity implements Serializable {
 
     @NotBlank
     @Size(max = 20)
@@ -22,14 +29,22 @@ public class Event {
     @Column(name = "description")
     private String description;
 
+    @Column(name = "duration")
+    private String duration;
+
+    @OneToOne
+    @Fetch(FetchMode.JOIN)
+    private Location location;
+
+    @OneToOne
+    @Fetch(FetchMode.JOIN)
+    private User instructor;
+
     @Column(name = "start_date")
     private Date startDate;
 
     @Column(name = "stop_date")
     private Date stopDate;
-
-//    @Column(name = "college_id")
-//    private College college;
 
     @Column(name = "all_day")
     private boolean allDay;
@@ -37,7 +52,24 @@ public class Event {
 //    @Column(name = "repeat")
 //    private String repeat;
 
-    @OneToOne(fetch = FetchType.LAZY)
+    @OneToOne
+    @Fetch(FetchMode.JOIN)
+    private College college;
+
+    @OneToOne
+    @Fetch(FetchMode.JOIN)
+    private Faculty faculty;
+
+    @OneToOne
+    @Fetch(FetchMode.JOIN)
+    private Institute institute;
+
+    @OneToOne
+    @Fetch(FetchMode.JOIN)
+    private Department department;
+
+    @OneToOne
+    @Fetch(FetchMode.JOIN)
     private User user;
 
     @Column(name = "deleted")
@@ -46,16 +78,10 @@ public class Event {
     @Column(name = "active")
     private Boolean active;
 
-    public Event() {
-    }
+//    @Column(name = "instructor_id")
+//    private Long instructorId;
 
-    public Event(@NotBlank @Size(max = 20) String name, String description, Date startDate, Date stopDate, boolean allDay, User user) {
-        this.name = name;
-        this.description = description;
-        this.startDate = startDate;
-        this.stopDate = stopDate;
-        this.allDay = allDay;
-        this.user = user;
+    public Event() {
     }
 
     public Long getId() {
@@ -82,11 +108,35 @@ public class Event {
         this.description = description;
     }
 
+    public String getDuration() {
+        return duration;
+    }
+
+    public void setDuration(String  duration) {
+        this.duration = duration;
+    }
+
+    public Location getLocation() {
+        return location;
+    }
+
+    public void setLocation(Location location) {
+        this.location = location;
+    }
+
+    public User getInstructor() {
+        return instructor;
+    }
+
+    public void setInstructor(User instructor) {
+        this.instructor = instructor;
+    }
+
     public Date getStartDate() {
         return startDate;
     }
 
-    public void setStartDate(Date startdate) {
+    public void setStartDate(Date startDate) {
         this.startDate = startDate;
     }
 
@@ -106,6 +156,38 @@ public class Event {
         this.allDay = allDay;
     }
 
+    public College getCollege() {
+        return college;
+    }
+
+    public void setCollege(College college) {
+        this.college = college;
+    }
+
+    public Faculty getFaculty() {
+        return faculty;
+    }
+
+    public void setFaculty(Faculty faculty) {
+        this.faculty = faculty;
+    }
+
+    public Institute getInstitute() {
+        return institute;
+    }
+
+    public void setInstitute(Institute institute) {
+        this.institute = institute;
+    }
+
+    public Department getDepartment() {
+        return department;
+    }
+
+    public void setDepartment(Department department) {
+        this.department = department;
+    }
+
     public User getUser() {
         return user;
     }
@@ -113,4 +195,28 @@ public class Event {
     public void setUser(User user) {
         this.user = user;
     }
+
+    public Boolean getDeleted() {
+        return deleted;
+    }
+
+    public void setDeleted(Boolean deleted) {
+        this.deleted = deleted;
+    }
+
+    public Boolean getActive() {
+        return active;
+    }
+
+    public void setActive(Boolean active) {
+        this.active = active;
+    }
+
+//    public Long getInstructorId() {
+//        return instructorId;
+//    }
+//
+//    public void setInstructorId(Long instructorId) {
+//        this.instructorId = instructorId;
+//    }
 }

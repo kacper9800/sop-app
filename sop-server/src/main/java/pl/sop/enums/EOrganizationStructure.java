@@ -1,10 +1,8 @@
 package pl.sop.enums;
 
-public enum  EOrganizationalUnit {
+public enum  EOrganizationStructure {
     COLLEGE, // UCZELNIA
     FACULTY, // WYDZIAŁ
     INSTITUTE, // INSTYTUT
     DEPARTMENT // KATEDRA
-
-
 }

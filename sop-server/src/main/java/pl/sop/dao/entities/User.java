@@ -4,6 +4,7 @@ import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
+import java.io.Serializable;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
@@ -14,12 +15,7 @@ import java.util.Set;
                 @UniqueConstraint(columnNames = "login"),
                 @UniqueConstraint(columnNames = "email")
         })
-public class User {
-
-    @Id
-    @Column(name = "id", nullable = false)
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+public class User extends BasicEntity implements Serializable {
 
     @NotBlank
     @Size(max = 20)
@@ -54,12 +50,6 @@ public class User {
 
     @Column(name = "birthDate", nullable = false)
     private Date birthDate;
-
-    @Column(name = "deleted")
-    private Boolean deleted;
-
-    @Column(name = "active")
-    private Boolean active;
 
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "user_roles",

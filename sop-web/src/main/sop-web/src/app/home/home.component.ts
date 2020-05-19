@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, Output } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from '../_services/auth/auth.service';
 import { TokenStorageService } from '../_services/auth/token-storage.service';
@@ -29,6 +29,8 @@ export class HomeComponent implements OnInit {
     if (this.tokenStorage.getToken()) {
       this.isLoggedIn = true;
       this.roles = this.tokenStorage.getUser().roles;
+      console.log(this.roles);
+
     }
     this.prepareForm();
   }

@@ -3,7 +3,7 @@
  * Kacper Rzymkiewicz #2020
  */
 
-package pl.sop.dao.entities;
+package pl.sop.dao.entities.organizationStructure;
 
 import javax.persistence.*;
 

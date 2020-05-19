@@ -11,7 +11,7 @@ import { TokenStorageService } from './auth/token-storage.service';
 import global from '../../global';
 
 const API_URL = 'http://localhost:8082/api/test/';
-const API = 'users';
+const USERS_API = '/users';
 
 
 @Injectable({
@@ -40,6 +40,7 @@ export class UserService {
   }
 
   getAllUsers(): Observable<User[]> {
-    return this.http.get<User[]>(global + API);
+    console.log(global.API);
+    return this.http.get<User[]>(global.API + USERS_API);
   }
 }

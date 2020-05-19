@@ -14,7 +14,7 @@ import java.util.Optional;
 @Repository
 public interface UserRepository extends JpaRepository<User, Long> {
 
-    @Query(value = "SELECT u FROM User u WHERE u.deleted = FALSE ")
+    @Query(value = "SELECT u FROM User u WHERE u.deleted = FALSE AND u.active = TRUE")
     List<User> findAllUsers();
 
     @Query(value = "SELECT u FROM User  u WHERE u.id = :id")

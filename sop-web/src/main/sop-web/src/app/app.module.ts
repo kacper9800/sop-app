@@ -6,7 +6,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {
   BlockUIModule,
   ButtonModule,
-  DialogModule,
+  DialogModule, DropdownModule,
   FullCalendarModule,
   InputTextModule,
   PanelModule,
@@ -65,6 +65,7 @@ import { AddEditDialogComponent } from './sop/planner/planner-calendar/add-edit-
 import { RouterModule } from '@angular/router';
 import { HashLocationStrategy, LocationStrategy } from '@angular/common';
 import { PlannerGeneratorComponent } from './sop/planner/planner-generator/planner-generator.component';
+import { OwlDateTimeModule, OwlNativeDateTimeModule } from 'ng-pick-datetime';
 
 @NgModule({
   declarations: [
@@ -136,6 +137,9 @@ import { PlannerGeneratorComponent } from './sop/planner/planner-generator/plann
     ProgressSpinnerModule,
     FullCalendarModule,
     FullCalendarModule,
+    DropdownModule,
+    OwlDateTimeModule,
+    OwlNativeDateTimeModule,
   ],
   providers: [{provide: LocationStrategy, useClass: HashLocationStrategy}, authInterceptorProviders],
   bootstrap: [AppComponent],

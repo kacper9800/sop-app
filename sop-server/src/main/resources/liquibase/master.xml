@@ -258,9 +258,62 @@
     </changeSet>
     <changeSet id="10" author="krzymkiewicz">
         <renameColumn tableName="events" oldColumnName="end_date" newColumnName="stop_date"></renameColumn>
-
     </changeSet>
+    <changeSet id="11" author="krzymkiewicz">
+        <addAutoIncrement tableName="events" columnName="id"></addAutoIncrement>
+    </changeSet>
+    <changeSet id="12" author="krzymkiewicz">
+        <addColumn tableName="events">
+            <column name="duration" type="int"></column>
+            <column name="location_id" type="int"></column>
+            <column name="instructor_id" type="bigint"></column>
+            <column name="faculty_id" type="bigint"></column>
+            <column name="institute_id" type="bigint"></column>
+            <column name="department_id" type="bigint"></column>
+        </addColumn>
+        <createTable tableName="locations">
+            <column name="id" type="BIGINT" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"></constraints>
+            </column>
+            <column name="create_date" type="TIMESTAMP WITHOUT TIME ZONE"></column>
+            <column name="create_by" type="VARCHAR(255)"></column>
+            <column name="edit_date" type="TIMESTAMP WITHOUT TIME ZONE"></column>
+            <column name="edit_by" type="VARCHAR(255)"></column>
+            <column name="name" type="VARCHAR(255)"></column>
+            <column name="room_number" type="VARCHAR(255)"></column>
+            <column name="active" type="BOOLEAN"></column>
+            <column name="deleted" type="BOOLEAN"></column>
+        </createTable>
+        <addForeignKeyConstraint baseColumnNames="location_id"
+                                 baseTableName="events"
+                                 constraintName="fk_location_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="locations"/>
 
+        <addForeignKeyConstraint baseColumnNames="instructor_id"
+                                 baseTableName="events"
+                                 constraintName="fk_instructor_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="users"/>
+
+        <addForeignKeyConstraint baseColumnNames="faculty_id"
+                                 baseTableName="events"
+                                 constraintName="fk_faculty_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="faculties"/>
+
+        <addForeignKeyConstraint baseColumnNames="institute_id"
+                                 baseTableName="events"
+                                 constraintName="fk_institute_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="institutes"/>
+
+        <addForeignKeyConstraint baseColumnNames="department_id"
+                                 baseTableName="events"
+                                 constraintName="fk_department_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="departments"/>
+    </changeSet>
     <!--    <changeSet id="4" author="krzymkiewicz">-->
     <!--        <createTable tableName="calendar_events">-->
     <!--            <column name="event_id"></column>-->

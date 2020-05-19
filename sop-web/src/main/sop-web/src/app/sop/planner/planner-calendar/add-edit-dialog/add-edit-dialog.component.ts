@@ -2,11 +2,12 @@ import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Event } from '../../../../_model/event.model';
 import { PlannerService } from '../../../../_services/planner.service';
+import { User } from '../../../../security/user';
 
 @Component({
   selector: 'app-add-edit-dialog',
   templateUrl: './add-edit-dialog.component.html',
-  styleUrls: ['./add-edit-dialog.component.css']
+  styleUrls: ['./add-edit-dialog.component.css'],
 })
 export class AddEditDialogComponent implements OnInit {
 
@@ -15,7 +16,12 @@ export class AddEditDialogComponent implements OnInit {
 
   public addEditForm: FormGroup;
   private eventToSave: Event;
-  blockUI: Boolean;
+  public blockUI = false;
+  startDate: Date;
+  stopDate: Date;
+  locations: any;
+
+  public users: User[];
 
   constructor(private formBuilder: FormBuilder,
               private plannerService: PlannerService) {
@@ -30,6 +36,8 @@ export class AddEditDialogComponent implements OnInit {
       stopDate: new FormControl({value: new Date(), disabled: false}, Validators.required),
       allDay: new FormControl({value: null, disabled: false}),
       repeat: new FormControl({value: null, disabled: false}),
+      duration: new FormControl({value: null, disabled: false}),
+      hostBy: new FormControl({value: null, disabled: false})
     });
   }
 
@@ -44,8 +52,10 @@ export class AddEditDialogComponent implements OnInit {
     this.eventToSave.name = this.addEditForm.get('name').value;
     this.eventToSave.description = this.addEditForm.get('description').value;
     this.eventToSave.location = this.addEditForm.get('location').value;
-    this.eventToSave.startDate = this.addEditForm.get('startDate').value;
-    this.eventToSave.stopDate = this.addEditForm.get('stopDate').value;
+    // this.eventToSave.startDate = this.addEditForm.get('startDate').value;
+    // this.eventToSave.stopDate = this.addEditForm.get('stopDate').value;
+    this.eventToSave.startDate = this.startDate;
+    this.eventToSave.stopDate = this.stopDate;
     if (this.addEditForm.get('allDay') === null) {
       this.eventToSave.allDay = false;
     } else {
@@ -55,6 +65,11 @@ export class AddEditDialogComponent implements OnInit {
       this.eventToSave.repeat = 0;
     } else {
       this.eventToSave.repeat = this.addEditForm.get('repeat').value;
+    }
+    if (this.addEditForm.get('duration') === null) {
+      this.eventToSave.duration = null;
+    } else {
+      this.eventToSave.duration = this.addEditForm.get('duration').value;
     }
 
     console.log(this.eventToSave);

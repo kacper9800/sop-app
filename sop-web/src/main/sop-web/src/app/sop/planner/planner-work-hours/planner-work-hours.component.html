@@ -1,1 +1,157 @@
-<p>planner-work-hours works!</p>
+<!--<button (click)="updateEvents()" id="updateEvents">Update events</button>-->
+<!--<button (click)="updateHeader()" id="updateHeader">Update header</button>-->
+<!--<full-calendar-->
+<!--  *ngIf="options"-->
+<!--  #fullcalendar-->
+<!--  [editable]="true"-->
+<!--  [events]="eventsModel"-->
+<!--  [header]="options.header"-->
+<!--  [locales]="options.locales"-->
+<!--  [locale]="options.locale"-->
+<!--  [customButtons]="options.customButtons"-->
+<!--  (dateClick)="dateClick($event)"-->
+<!--  (eventDragStop)="eventDragStop($event)"-->
+<!--  [plugins]="options.plugins"-->
+<!--  (dayRender)="dayRender($event,el)"-->
+<!--  (eventClick)="eventClick($event)"-->
+<!--  [columnHeaderHtml]="options.columnHeaderHtml"-->
+<!--&gt;</full-calendar>-->
+
+<!--<div #external>-->
+<!--  <p>-->
+<!--    <strong>Draggable Events</strong>-->
+<!--  </p>-->
+<!--  <div class='fc-event'>My Event 1</div>-->
+<!--  <div class='fc-event'>My Event 2</div>-->
+<!--  <div class='fc-event'>My Event 3</div>-->
+<!--  <div class='fc-event'>My Event 4</div>-->
+<!--  <div class='fc-event'>My Event 5</div>-->
+<!--</div>-->
+<button class="btn btn-outline" (click)="newWorkScheduleWizard()">
+  <clr-icon shape="calendar"></clr-icon>
+  {{"calendar.generateNewWorkSchedule" | translate}}</button>
+
+
+<p-table [value]="events" [columns]="columns">
+  <ng-template pTemplate="header" let-columns>
+    <tr>
+      <th *ngFor="let col of columns" [pSortableColumn]="col.field" [ngSwitch]="col.field">
+        {{col.header | translate}}
+        <div *ngIf="col.field != 'actions'">
+          <p-sortIcon [field]="col.field"></p-sortIcon>
+        </div>
+      </th>
+    </tr>
+    <tr>
+      <th *ngFor="let col of columns" [ngSwitch]="col.field">
+        <div *ngIf="col.field != 'actions'">
+          <input (input)="dt.filter($event.target.value, col.field, 'contains')"
+                 [ngClass]="{'width-full': true}" type="text" size="10" pInputText/>
+        </div>
+      </th>
+    </tr>
+  </ng-template>
+  <ng-template pTemplate="body" let-rowData let-columns="columns">
+    <tr [pSelectableRow]="rowData">
+      <td *ngFor="let col of columns" [ngSwitch]="col.field" class="table-dataColumn">
+        ok ok
+      </td>
+    </tr>
+  </ng-template>
+</p-table>
+<app-add-edit-dialog [isDialogVisible]="showNewActivityDialog">3
+</app-add-edit-dialog>
+
+
+<clr-wizard #wizardlg [(clrWizardOpen)]="isWorkScheduleGeneratorVisible" clrWizardSize="lg">
+  <clr-wizard-title>{{'calendar.title'|translate}}</clr-wizard-title>
+
+  <clr-wizard-button [type]="'cancel'">Cancel</clr-wizard-button>
+  <clr-wizard-button [type]="'previous'">Back</clr-wizard-button>
+  <clr-wizard-button [type]="'next'">Next</clr-wizard-button>
+  <clr-wizard-button [type]="'finish'">Finish</clr-wizard-button>
+
+  <clr-wizard-page>
+    <ng-template clrPageTitle>{{'calendar.basicData'|translate}}</ng-template>
+    <div class="clr-row">
+      <div class="clr-col-1"></div>
+      <div class="clr-col-10">
+        <input clrInput placeholder="{{'common.name' | translate}}" name="input" [(ngModel)]="name"/>
+      </div>
+      <div class="clr-col-1"></div>
+    </div>
+    <div class="clr-row">
+      <div class="clr-col-1"></div>
+      <div class="clr-col-10">
+        <input clrInput placeholder="{{'common.description' | translate}}" name="input" [(ngModel)]="description"/>
+      </div>
+      <div class="clr-col-1"></div>
+    </div>
+
+    <div class="clr-row">
+      <div class="clr-col-1"></div>
+      <div class="clr-col-10">
+        <clr-date-container>
+          <input type="date" clrDate name="demo" placeholder="{{'common.startDate' | translate}}"
+                 [(ngModel)]="startDate">
+        </clr-date-container>
+      </div>
+      <div class="clr-col-1"></div>
+    </div>
+
+    <div class="clr-row">
+      <div class="clr-col-1"></div>
+      <div class="clr-col-10">
+        <clr-date-container>
+          <input type="date" clrDate name="demo" placeholder="{{'common.stopDate' | translate}}" [(ngModel)]="stopDate">
+        </clr-date-container>
+      </div>
+      <div class="clr-col-1"></div>
+    </div>
+  </clr-wizard-page>
+
+  <clr-wizard-page>
+    <ng-template clrPageTitle>{{'calendar.settings' | translate}}</ng-template>
+    ...
+  </clr-wizard-page>
+
+  <clr-wizard-page>
+    <ng-template clrPageTitle>{{'calendar.eventChooser' | translate}}</ng-template>
+    <clr-datagrid>
+      <clr-dg-column>{{'common.id' | translate}}</clr-dg-column>
+      <clr-dg-column>{{'common.name' | translate}}</clr-dg-column>
+      <clr-dg-column>{{'common.startDate' | translate}}</clr-dg-column>
+      <clr-dg-column>{{'common.stopDate' | translate}}</clr-dg-column>
+      <clr-dg-column>{{'events.hostBy' | translate}}</clr-dg-column>
+
+      <clr-dg-row *ngFor="let event of events">
+        <clr-dg-cell>{{event.id}}</clr-dg-cell>
+        <clr-dg-cell>{{event.name}}</clr-dg-cell>
+        <clr-dg-cell>{{event.startDate | date}}</clr-dg-cell>
+        <clr-dg-cell>{{event.stopDate | date}}</clr-dg-cell>
+        <clr-dg-cell>{{event.hostBy}}</clr-dg-cell>
+      </clr-dg-row>
+
+      <!--      <clr-dg-footer>{{users.length}} users</clr-dg-footer>-->
+    </clr-datagrid>
+  </clr-wizard-page>
+
+  <clr-wizard-page>
+    <ng-template clrPageTitle>{{'calendar.usersChooser' | translate}}</ng-template>
+    <clr-datagrid>
+      <clr-dg-column>User ID</clr-dg-column>
+      <clr-dg-column>Name</clr-dg-column>
+      <clr-dg-column>Creation date</clr-dg-column>
+      <clr-dg-column>Favorite color</clr-dg-column>
+
+      <clr-dg-row *ngFor="let user of users">
+        <clr-dg-cell>{{user.id}}</clr-dg-cell>
+        <clr-dg-cell>{{user.firstName}}</clr-dg-cell>
+        <clr-dg-cell>{{user.lastName | date}}</clr-dg-cell>
+        <clr-dg-cell>{{user.username}}</clr-dg-cell>
+      </clr-dg-row>
+
+      <!--      <clr-dg-footer>{{users.length}} users</clr-dg-footer>-->
+    </clr-datagrid>
+  </clr-wizard-page>
+</clr-wizard>
