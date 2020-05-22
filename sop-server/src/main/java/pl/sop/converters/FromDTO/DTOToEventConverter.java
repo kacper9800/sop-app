@@ -17,7 +17,7 @@ import java.util.Date;
 
 public class DTOToEventConverter implements Converter<EventDTO, Event> {
     @Override
-    public Event convert(EventDTO input) throws ParseException {
+    public Event convert(EventDTO input) {
         Event event = new Event();
         if (input.getId() != null) {
             event.setId(input.getId());
