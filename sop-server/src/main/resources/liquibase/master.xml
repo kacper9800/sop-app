@@ -348,6 +348,51 @@
             <column name="college_id" type="bigint"></column>
         </createTable>
     </changeSet>
+
+    <changeSet id="16" author="krzymkiewicz">
+        <addColumn tableName="locations">
+            <column name="address" type="VARCHAR(255)"></column>
+            <column name="floor" type="int"></column>
+            <column name="college_id" type="bigint"></column>
+            <column name="type" type="int"></column>
+            <column name="parent_id" type="bigint"></column>
+        </addColumn>
+        <addForeignKeyConstraint baseColumnNames="college_id"
+                                 baseTableName="locations"
+                                 constraintName="fk_college_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="colleges"/>
+
+        <addForeignKeyConstraint baseColumnNames="user_id"
+                                 baseTableName="work_schedules"
+                                 constraintName="fk_users_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="users"/>
+
+        <addForeignKeyConstraint baseColumnNames="department_id"
+                                 baseTableName="work_schedules"
+                                 constraintName="fk_departments_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="departments"/>
+
+        <addForeignKeyConstraint baseColumnNames="institute_id"
+                                 baseTableName="work_schedules"
+                                 constraintName="fk_institutes_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="institutes"/>
+
+        <addForeignKeyConstraint baseColumnNames="faculty_id"
+                                 baseTableName="events"
+                                 constraintName="fk_faculties_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="faculties"/>
+
+        <addForeignKeyConstraint baseColumnNames="college_id"
+                                 baseTableName="events"
+                                 constraintName="fk_colleges_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="colleges"/>
+    </changeSet>
     <!--    <changeSet id="4" author="krzymkiewicz">-->
     <!--        <createTable tableName="calendar_events">-->
     <!--            <column name="event_id"></column>-->

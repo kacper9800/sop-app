@@ -67,8 +67,8 @@ export class PlannerActivitiesComponent implements OnInit {
 
   private prepareColumns(): void {
     this.columns = [
-      { field: 'name', header: 'activitiesList.name' },
-      { field: 'description', header: 'activitiesList.description' },
+      { field: 'name', header: 'common.name' },
+      { field: 'description', header: 'common.description' },
       { field: 'duration', header: 'common.duration' },
       { field: 'instructorName', header: 'common.instructor' },
       { field: 'active', header: 'common.active' },
