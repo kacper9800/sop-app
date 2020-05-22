@@ -13,14 +13,64 @@ public class EventToDTOConverter implements Converter<Event, EventDTO> {
     @Override
     public EventDTO convert(Event input) {
         EventDTO eventDTO = new EventDTO();
+        if (input.getId() != null) {
+            eventDTO.setId(input.getId());
+        }
         eventDTO.setId(input.getId());
         eventDTO.setName(input.getName());
-        eventDTO.setDescription(input.getDescription());
-        eventDTO.setStartDate(convertDateToStringDate(input.getStartDate()));
-        eventDTO.setStopDate(convertDateToStringDate(input.getStopDate()));
+        if (input.getDescription() != null) {
+            eventDTO.setDescription(input.getDescription());
+        } else {
+            eventDTO.setDescription(null);
+        }
+
+        if (input.getDuration() != null) {
+            eventDTO.setDuration(convertDuration(input.getDuration()));
+        } else {
+            eventDTO.setDuration(null);
+        }
+        if (input.getInstructor() != null) {
+            if (input.getInstructor().getFirstName() != null) {
+                eventDTO.setUserName(input.getInstructor().getFirstName());
+            } else {
+                eventDTO.setUserName(null);
+            }
+            if (input.getInstructor().getLastName() != null) {
+                eventDTO.setUserName(eventDTO.getUserName() + " " + input.getInstructor().getLastName());
+            } else {
+                eventDTO.setUserName(null);
+            }
+        } else {
+            eventDTO.setUserName(null);
+        }
+        if (input.getActive() != null) {
+            eventDTO.setActive(input.getActive());
+        } else {
+            eventDTO.setActive(false);
+        }
+//        eventDTO.setStartDate(convertDateToStringDate(input.getStartDate()));
+//        eventDTO.setStopDate(convertDateToStringDate(input.getStopDate()));
 //        eventDTO.setAllDay(input.getAllDay());
-        eventDTO.setUserId(input.getUser().getId());
+//        eventDTO.setUserId(input.getUser().getId());
         return eventDTO;
+    }
+
+    public Integer convertDuration(String duration) {
+        switch (duration) {
+            case "PT15M":
+                return 0;
+            case "PT30M":
+                return 1;
+            case "PT45M":
+                return 2;
+            case "PT1H":
+                return 3;
+            case "PT1H30M":
+                return 4;
+            case "PT2H15M":
+                return 5;
+        }
+        return null;
     }
 
     public String convertDateToStringDate(Date date) {

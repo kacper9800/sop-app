@@ -40,13 +40,13 @@ public class DTOToEventConverter implements Converter<EventDTO, Event> {
             }
         }
         //        event.setStartDate(convertStringDateToDate(input.getStartDate()));
-//        event.setStopDate(convertStringDateToDate(input.getStopDate()));
+        //        event.setStopDate(convertStringDateToDate(input.getStopDate()));
 
-//        if (input.getInstructorId() != null) {
-//            User instructor = new User();
-//            instructor.setId(input.getInstructorId());
-//            event.setInstructor(instructor);
-//        }
+        //        if (input.getInstructorId() != null) {
+        //            User instructor = new User();
+        //            instructor.setId(input.getInstructorId());
+        //                event.setInstructor(instructor);
+        //        }
 
         if (input.getLocationId() != null) {
             Location location = new Location();

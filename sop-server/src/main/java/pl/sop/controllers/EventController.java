@@ -26,11 +26,10 @@ public class EventController {
     }
 
     @CrossOrigin
-//    @PreAuthorize("hasRole('ROLE_MODERATOR')")
+    @PreAuthorize("hasRole('ROLE_MODERATOR')")
     @RequestMapping(value = "/api/planner/event", method = RequestMethod.POST)
     public ResponseEntity createNewEvent(@RequestBody EventDTO eventDTO) throws ParseException {
-        return ResponseEntity.ok(eventService.createEvent(eventDTO)
-        );
+        return ResponseEntity.ok(eventService.createEvent(eventDTO));
     }
 
     @CrossOrigin

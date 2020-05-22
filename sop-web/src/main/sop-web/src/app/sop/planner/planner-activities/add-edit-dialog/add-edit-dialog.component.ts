@@ -3,11 +3,15 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 import { Event } from '../../../../_model/event.model';
 import { PlannerService } from '../../../../_services/planner.service';
 import { User } from '../../../../security/user';
+import { MessageService } from 'primeng';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-add-edit-dialog',
   templateUrl: './add-edit-dialog.component.html',
-  styleUrls: ['./add-edit-dialog.component.css'],
+  styleUrls: [ './add-edit-dialog.component.css' ],
+  providers: [ MessageService ]
+
 })
 export class AddEditDialogComponent implements OnInit {
 
@@ -22,27 +26,36 @@ export class AddEditDialogComponent implements OnInit {
   locations: any;
 
   public users: User[];
+  public header: string;
 
   constructor(private formBuilder: FormBuilder,
-              private plannerService: PlannerService) {
+              private plannerService: PlannerService,
+              private messageService: MessageService,
+              private translateService: TranslateService) {
   }
 
   ngOnInit() {
     this.addEditForm = this.formBuilder.group({
-      name: new FormControl({value: null, disabled: false}, Validators.required),
-      description: new FormControl({value: null, disabled: false}, Validators.required),
-      location: new FormControl({value: null, disabled: false}, Validators.required),
-      startDate: new FormControl({value: new Date(), disabled: false}, Validators.required),
-      stopDate: new FormControl({value: new Date(), disabled: false}, Validators.required),
-      allDay: new FormControl({value: null, disabled: false}),
-      repeat: new FormControl({value: null, disabled: false}),
-      duration: new FormControl({value: null, disabled: false}),
-      hostBy: new FormControl({value: null, disabled: false})
+      name: new FormControl({ value: null, disabled: false }, Validators.required),
+      description: new FormControl({ value: null, disabled: false }, Validators.required),
+      location: new FormControl({ value: null, disabled: false }, Validators.required),
+      startDate: new FormControl({ value: new Date(), disabled: false }, Validators.required),
+      stopDate: new FormControl({ value: new Date(), disabled: false }, Validators.required),
+      allDay: new FormControl({ value: null, disabled: false }),
+      repeat: new FormControl({ value: null, disabled: false }),
+      duration: new FormControl({ value: null, disabled: false }),
+      hostBy: new FormControl({ value: null, disabled: false })
     });
   }
 
-  public showDialog() {
+  public showNewEventDialog() {
     this.isDialogVisible = true;
+    this.header = this.translateService.instant('add-edit-dialog.headerNew');
+  }
+
+  public showEditEventDialog(rowData: Event) {
+    this.isDialogVisible = true;
+    this.header = this.translateService.instant('add-edit-dialog.headerEdit') + rowData.name;
 
   }
 
@@ -83,11 +96,16 @@ export class AddEditDialogComponent implements OnInit {
   private onSuccessCreate() {
     console.log('Dodano poprawnie!');
     this.blockUI = false;
+    this.isDialogVisible = false;
+    this.messageService.add({ key: 't1', severity: 'success', summary: 'Success Message', detail: 'Order submitted' });
+
   }
 
   private onErrorCreate() {
     console.log('Dodano błędnie!');
     this.blockUI = false;
+    this.messageService.add({ key: 't1', severity: 'error', summary: 'Error Message', detail: 'Order submitted' });
+
   }
 
 

@@ -1,29 +1,38 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, ComponentFactoryResolver, OnInit, ViewChild, ViewContainerRef } from '@angular/core';
 import { PlannerService } from '../../../_services/planner.service';
-import { AddEditDialogComponent } from '../planner-calendar/add-edit-dialog/add-edit-dialog.component';
+import { AddEditDialogComponent } from './add-edit-dialog/add-edit-dialog.component';
 import { ClrWizard } from '@clr/angular';
 import { FormBuilder } from '@angular/forms';
 import { UserService } from '../../../_services/user.service';
 import { User } from '../../../security/user';
 import { Event } from '../../../_model/event.model';
+import { MessageService } from 'primeng';
 
 @Component({
   selector: 'app-planner-activities',
   templateUrl: './planner-activities.component.html',
-  styleUrls: ['./planner-activities.component.css']
+  styleUrls: ['./planner-activities.component.css'],
+  providers: [MessageService]
+
 })
 export class PlannerActivitiesComponent implements OnInit {
-  @ViewChild('wizardlg', {static: true})
+  @ViewChild('wizardlg', { static: true })
   public wizardLarge: ClrWizard;
 
-  @ViewChild(AddEditDialogComponent, {static: true})
-  public addEditDialog: AddEditDialogComponent;
+  @ViewChild('addEditDialog', { read: ViewContainerRef, static: true })
+  public addEditDialog: ViewContainerRef;
+
+  private componentRef: any;
+
+  // @ViewChild(AddEditDialogComponent, { static: true })
+  // public addEditDialog: AddEditDialogComponent;
 
   public showNewActivityDialog: boolean;
   public isWorkScheduleGeneratorVisible = false;
   public blockUI: boolean;
 
   public events: Event[];
+  public idOfEventToDelete = null;
   public users: User[];
 
   public columns: any[];
@@ -35,10 +44,13 @@ export class PlannerActivitiesComponent implements OnInit {
   public description: string;
   public startDate: Date;
   public stopDate: Date;
+  public isConfirmDeleteDialogVisible = false;
 
   constructor(private plannerService: PlannerService,
               private formBuilder: FormBuilder,
-              private userService: UserService) {
+              private userService: UserService,
+              private messageService: MessageService,
+              private resolver: ComponentFactoryResolver) {
   }
 
   public ngOnInit(): void {
@@ -48,27 +60,33 @@ export class PlannerActivitiesComponent implements OnInit {
     this.loadUsers();
   }
 
+  // ToDo Create form
+  private prepareForm() {
+
+  }
+
   private prepareColumns(): void {
     this.columns = [
-      {field: 'name', header: 'activitiesList.name'},
-      {field: 'description', header: 'activitiesList.description'},
-      {field: 'startDate', header: 'activitiesList.startDate'},
-      {field: 'stopDate', header: 'activitiesList.stopDate'},
-      {field: 'active', header: 'activitiesList.active'},
+      { field: 'name', header: 'activitiesList.name' },
+      { field: 'description', header: 'activitiesList.description' },
+      { field: 'duration', header: 'common.duration' },
+      { field: 'instructorName', header: 'common.instructor' },
+      { field: 'active', header: 'common.active' },
+      { field: 'actions', header: 'common.actions' }
     ];
     this.usersColumns = [
-      {field: 'id', header: 'users.id'},
-      {field: 'name', header: 'users.name'},
-      {field: 'lastName', header: 'users.lastName'},
-      {field: 'college', header: 'users.college'},
-      {field: 'faculty', header: 'users.faculty'},
-      {field: 'institute', header: 'users.institute'}
+      { field: 'id', header: 'users.id' },
+      { field: 'name', header: 'users.name' },
+      { field: 'lastName', header: 'users.lastName' },
+      { field: 'college', header: 'users.college' },
+      { field: 'faculty', header: 'users.faculty' },
+      { field: 'institute', header: 'users.institute' }
     ];
     this.eventsColumns = [
-      {field: 'id', header: 'common.id'},
-      {field: 'name', header: 'common.name'},
-      {field: 'startDate', header: 'common.startDate'},
-      {field: 'stopDate', header: 'common.stopDate'}
+      { field: 'id', header: 'common.id' },
+      { field: 'name', header: 'common.name' },
+      { field: 'startDate', header: 'common.startDate' },
+      { field: 'stopDate', header: 'common.stopDate' }
     ];
   }
 
@@ -104,19 +122,53 @@ export class PlannerActivitiesComponent implements OnInit {
     this.blockUI = false;
   }
 
-  // ToDo Create form
-  private prepareForm() {
-
-  }
 
   public addNewEvent(): void {
-    this.showNewActivityDialog = true;
-    this.addEditDialog.showDialog();
+    this.addEditDialog.clear();
+    const factory = this.resolver.resolveComponentFactory(AddEditDialogComponent);
+    this.componentRef = this.addEditDialog.createComponent(factory);
+    this.componentRef.instance.showNewEventDialog();
+  }
+
+  public editEvent(rowData: any): void {
+    this.addEditDialog.clear();
+    const factory = this.resolver.resolveComponentFactory(AddEditDialogComponent);
+    this.componentRef = this.addEditDialog.createComponent(factory);
+    this.componentRef.instance.showEditEventDialog(rowData);
+
+    // this.componentRef.instance.closeDialogWithSaveEmitter.subscribe(data => {
+    // });
   }
 
   public newWorkScheduleWizard(): void {
     this.isWorkScheduleGeneratorVisible = true;
   }
+
+  public confirmDelete(id: any) {
+    this.isConfirmDeleteDialogVisible = true;
+    this.idOfEventToDelete = id;
+  }
+
+  public deleteEvent(id: number): void {
+
+    // if (id != null) {
+    //   this.plannerService.deleteEvent(id).subscribe(
+    //     () => this.onSuccessDelete(),
+    //     () => this.onErrorDelete()
+    //   );
+    // }
+  }
+
+  private onSuccessDelete() {
+    this.isConfirmDeleteDialogVisible = false;
+
+  }
+
+  private onErrorDelete() {
+    this.isConfirmDeleteDialogVisible = false;
+
+  }
+
 
 }
 

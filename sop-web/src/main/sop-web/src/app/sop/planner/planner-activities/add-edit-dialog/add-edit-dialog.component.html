@@ -68,10 +68,11 @@
 <!--  </form>-->
 <!--</p-dialog>-->
 
+<p-toast key="tl"></p-toast>
 
 <clr-modal [(clrModalOpen)]="isDialogVisible" [clrModalStaticBackdrop]="false" [clrModalClosable]="false"
            style="z-index: 999;">
-  <h3 class="modal-title">{{'add-edit-dialog.header' | translate}}</h3>
+  <h3 class="modal-title">{{header}}</h3>
   <div class="modal-body">
     <form id="addEditForm" clrForm [formGroup]="addEditForm">
       <div class="clr-row">
@@ -111,8 +112,8 @@
       <div class="clr-row">
         <div class="clr-col-2">{{'common.hostBy' | translate}}</div>
         <div class="clr-col-8">
-<!--          <input clrInput style="width: 100%;" [placeholder]="'common.hostBy' | translate"-->
-<!--                 formControlName="hostBy">-->
+          <!--          <input clrInput style="width: 100%;" [placeholder]="'common.hostBy' | translate"-->
+          <!--                 formControlName="hostBy">-->
           <select clrSelect name="options" formControlName="hostBy">
             <div *ngFor="let userOption of users">
               <option [value]="userOption.id">{{userOption.firstName + ' ' + userOption.lastName}} </option>

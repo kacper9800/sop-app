@@ -317,6 +317,37 @@
     <changeSet id="13" author="krzymkiewicz">
         <modifyDataType tableName="events" columnName="duration" newDataType="VARCHAR(50)"></modifyDataType>
     </changeSet>
+    <changeSet id="14" author="krzymkiewicz">
+        <addColumn tableName="roles">
+            <column name="active" type="boolean"></column>
+        </addColumn>
+        <addColumn tableName="roles">
+            <column name="deleted" type="boolean"></column>
+        </addColumn>
+    </changeSet>
+
+    <changeSet id="15" author="krzymkiewicz">
+        <createTable tableName="work_schedules">
+            <column name="id" type="BIGINT" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"></constraints>
+            </column>
+            <column name="create_date" type="TIMESTAMP WITHOUT TIME ZONE"></column>
+            <column name="create_by" type="VARCHAR(255)"></column>
+            <column name="edit_date" type="TIMESTAMP WITHOUT TIME ZONE"></column>
+            <column name="edit_by" type="VARCHAR(255)"></column>
+            <column name="name" type="VARCHAR(255)"></column>
+            <column name="description" type="VARCHAR(255)"></column>
+            <column name="start_date" type="date"></column>
+            <column name="stop_date" type="date"></column>
+            <column name="breaks_duration" type="VARCHAR(255)"></column>
+            <column name="additional_info" type="jsonb"></column>
+            <column name="user_id" type="bigint"></column>
+            <column name="department_id" type="bigint"></column>
+            <column name="institute_id" type="bigint"></column>
+            <column name="faculty_id" type="bigint"></column>
+            <column name="college_id" type="bigint"></column>
+        </createTable>
+    </changeSet>
     <!--    <changeSet id="4" author="krzymkiewicz">-->
     <!--        <createTable tableName="calendar_events">-->
     <!--            <column name="event_id"></column>-->

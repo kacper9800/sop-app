@@ -41,116 +41,58 @@
         </div>
       </th>
     </tr>
-<!--    <tr>-->
-<!--      <th *ngFor="let col of columns" [ngSwitch]="col.field">-->
-<!--        <div *ngIf="col.field != 'actions'">-->
-<!--          <input (input)="dt.filter($event.target.value, col.field, 'contains')"-->
-<!--                 [ngClass]="{'width-full': true}" type="text" size="10" pInputText/>-->
-<!--        </div>-->
-<!--      </th>-->
-<!--    </tr>-->
+    <!--    <tr>-->
+    <!--      <th *ngFor="let col of columns" [ngSwitch]="col.field">-->
+    <!--        <div *ngIf="col.field != 'actions'">-->
+    <!--          <input (input)="dt.filter($event.target.value, col.field, 'contains')"-->
+    <!--                 [ngClass]="{'width-full': true}" type="text" size="10" pInputText/>-->
+    <!--        </div>-->
+    <!--      </th>-->
+    <!--    </tr>-->
   </ng-template>
   <ng-template pTemplate="body" let-rowData let-columns="columns">
     <tr [pSelectableRow]="rowData">
       <td *ngFor="let col of columns" [ngSwitch]="col.field" class="table-dataColumn">
-        ok ok
+        <div *ngSwitchCase="'name'">
+          {{rowData.name}}
+        </div>
+        <div *ngSwitchCase="'description'">
+          {{rowData.description}}
+        </div>
+        <div *ngSwitchCase="'active'" [ngClass]="{'center-text': true}">
+          <i class="pi {{rowData.active? 'pi-check' : 'pi-times'}} "></i>
+        </div>
+        <div *ngSwitchCase="'actions'" [ngClass]="{'table-buttons': true}">
+          <p-button icon="pi pi-pencil" [ngClass]="{'table-buttons':true}" (click)="editEvent(rowData.id)"></p-button>
+          <p-button icon="pi pi-trash" [ngClass]="{'table-buttons': true}" (click)="confirmDelete(rowData.id)"></p-button>
+        </div>
       </td>
     </tr>
   </ng-template>
 </p-table>
-<app-add-edit-dialog [isDialogVisible]="showNewActivityDialog">3
-</app-add-edit-dialog>
 
+<ng-template #addEditDialog></ng-template>
 
-<clr-wizard #wizardlg [(clrWizardOpen)]="isWorkScheduleGeneratorVisible" clrWizardSize="lg">
-  <clr-wizard-title>{{'calendar.title'|translate}}</clr-wizard-title>
-
-  <clr-wizard-button [type]="'cancel'">Cancel</clr-wizard-button>
-  <clr-wizard-button [type]="'previous'">Back</clr-wizard-button>
-  <clr-wizard-button [type]="'next'">Next</clr-wizard-button>
-  <clr-wizard-button [type]="'finish'">Finish</clr-wizard-button>
-
-  <clr-wizard-page>
-    <ng-template clrPageTitle>{{'calendar.basicData'|translate}}</ng-template>
-    <div class="clr-row">
-      <div class="clr-col-1"></div>
-      <div class="clr-col-10">
-        <input clrInput placeholder="{{'common.name' | translate}}" name="input" [(ngModel)]="name"/>
+<div *ngIf="isConfirmDeleteDialogVisible">
+  <div class="modal">
+    <div class="modal-dialog" role="dialog" aria-hidden="true">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h3 class="modal-title">I have a nice title</h3>
+        </div>
+        <div class="modal-body">
+          <p>But not much to say...</p>
+        </div>
+        <div class="modal-footer">
+          <button class="btn btn-outline" (click)="isConfirmDeleteDialogVisible = false" type="button">Cancel</button>
+          <button class="btn btn-primary" (click)="deleteEvent(idOfEventToDelete)" type="button">Ok</button>
+        </div>
       </div>
-      <div class="clr-col-1"></div>
     </div>
-    <div class="clr-row">
-      <div class="clr-col-1"></div>
-      <div class="clr-col-10">
-        <input clrInput placeholder="{{'common.description' | translate}}" name="input" [(ngModel)]="description"/>
-      </div>
-      <div class="clr-col-1"></div>
-    </div>
+  </div>
+  <div class="modal-backdrop" aria-hidden="true"></div>
+</div>
+<!--<app-add-edit-dialog [isDialogVisible]="showNewActivityDialog">3-->
+<!--</app-add-edit-dialog>-->
 
-    <div class="clr-row">
-      <div class="clr-col-1"></div>
-      <div class="clr-col-10">
-        <clr-date-container>
-          <input type="date" ClrDateInput name="demo" placeholder="{{'common.startDate' | translate}}"
-                 [(ngModel)]="startDate">
-        </clr-date-container>
-      </div>
-      <div class="clr-col-1"></div>
-    </div>
 
-    <div class="clr-row">
-      <div class="clr-col-1"></div>
-      <div class="clr-col-10">
-        <clr-date-container>
-          <input type="date" clrDate name="demo" placeholder="{{'common.stopDate' | translate}}" [(ngModel)]="stopDate">
-        </clr-date-container>
-      </div>
-      <div class="clr-col-1"></div>
-    </div>
-  </clr-wizard-page>
-
-  <clr-wizard-page>
-    <ng-template clrPageTitle>{{'calendar.settings' | translate}}</ng-template>
-    ...
-  </clr-wizard-page>
-
-  <clr-wizard-page>
-    <ng-template clrPageTitle>{{'calendar.eventChooser' | translate}}</ng-template>
-    <clr-datagrid>
-      <clr-dg-column>{{'common.id' | translate}}</clr-dg-column>
-      <clr-dg-column>{{'common.name' | translate}}</clr-dg-column>
-      <clr-dg-column>{{'common.startDate' | translate}}</clr-dg-column>
-      <clr-dg-column>{{'common.stopDate' | translate}}</clr-dg-column>
-      <clr-dg-column>{{'events.hostBy' | translate}}</clr-dg-column>
-
-      <clr-dg-row *ngFor="let event of events">
-        <clr-dg-cell>{{event.id}}</clr-dg-cell>
-        <clr-dg-cell>{{event.name}}</clr-dg-cell>
-        <clr-dg-cell>{{event.startDate | date}}</clr-dg-cell>
-        <clr-dg-cell>{{event.stopDate | date}}</clr-dg-cell>
-        <clr-dg-cell>{{event.hostBy}}</clr-dg-cell>
-      </clr-dg-row>
-
-      <!--      <clr-dg-footer>{{users.length}} users</clr-dg-footer>-->
-    </clr-datagrid>
-  </clr-wizard-page>
-
-  <clr-wizard-page>
-    <ng-template clrPageTitle>{{'calendar.usersChooser' | translate}}</ng-template>
-    <clr-datagrid>
-      <clr-dg-column>User ID</clr-dg-column>
-      <clr-dg-column>Name</clr-dg-column>
-      <clr-dg-column>Creation date</clr-dg-column>
-      <clr-dg-column>Favorite color</clr-dg-column>
-
-      <clr-dg-row *ngFor="let user of users">
-        <clr-dg-cell>{{user.id}}</clr-dg-cell>
-        <clr-dg-cell>{{user.firstName}}</clr-dg-cell>
-        <clr-dg-cell>{{user.lastName | date}}</clr-dg-cell>
-        <clr-dg-cell>{{user.username}}</clr-dg-cell>
-      </clr-dg-row>
-
-      <!--      <clr-dg-footer>{{users.length}} users</clr-dg-footer>-->
-    </clr-datagrid>
-  </clr-wizard-page>
-</clr-wizard>

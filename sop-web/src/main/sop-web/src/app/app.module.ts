@@ -6,7 +6,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {
   BlockUIModule,
   ButtonModule,
-  DialogModule, DropdownModule,
+  DialogModule,
+  DropdownModule,
   FullCalendarModule,
   InputTextModule,
   PanelModule,
@@ -61,8 +62,7 @@ import { PlannerCalendarComponent } from './sop/planner/planner-calendar/planner
 import { PlannerActivitiesComponent } from './sop/planner/planner-activities/planner-activities.component';
 import { PlannerWorkHoursComponent } from './sop/planner/planner-work-hours/planner-work-hours.component';
 import { PlannerLocationsComponent } from './sop/planner/planner-locations/planner-locations.component';
-import { AddEditDialogComponent } from './sop/planner/planner-calendar/add-edit-dialog/add-edit-dialog.component';
-import { RouterModule } from '@angular/router';
+import { AddEditDialogComponent } from './sop/planner/planner-activities/add-edit-dialog/add-edit-dialog.component';
 import { HashLocationStrategy, LocationStrategy } from '@angular/common';
 import { PlannerGeneratorComponent } from './sop/planner/planner-generator/planner-generator.component';
 import { OwlDateTimeModule, OwlNativeDateTimeModule } from 'ng-pick-datetime';
@@ -125,7 +125,7 @@ import { OwlDateTimeModule, OwlNativeDateTimeModule } from 'ng-pick-datetime';
       loader: {
         provide: TranslateLoader,
         useFactory: HttpLoaderFactory,
-        deps: [HttpClient]
+        deps: [ HttpClient ]
       }
     }),
     InputTextModule,
@@ -141,10 +141,11 @@ import { OwlDateTimeModule, OwlNativeDateTimeModule } from 'ng-pick-datetime';
     OwlDateTimeModule,
     OwlNativeDateTimeModule,
   ],
-  providers: [{provide: LocationStrategy, useClass: HashLocationStrategy}, authInterceptorProviders],
-  bootstrap: [AppComponent],
+  providers: [ { provide: LocationStrategy, useClass: HashLocationStrategy }, authInterceptorProviders ],
+  bootstrap: [ AppComponent ],
   entryComponents: [
-    LoginComponent
+    LoginComponent,
+    AddEditDialogComponent
   ]
 })
 export class AppModule {

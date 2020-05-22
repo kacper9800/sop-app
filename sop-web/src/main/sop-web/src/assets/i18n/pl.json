@@ -12,7 +12,10 @@
     "stopDate": "Data końcowa",
     "duration": "Czas trwania",
     "location": "Lokalizacja",
-    "hostBy": "Prowadzący"
+    "hostBy": "Prowadzący",
+    "actions": "Akcje",
+    "active": "Aktywny",
+    "instructor": "Prowadzący"
   },
   "header": {
     "SOP": "System obsługi praktyk",
@@ -25,7 +28,7 @@
     "home": "Strona główna",
     "planner": {
       "label": "Planer zajęć",
-      "myActivitiesList": "Lista zajęć",
+      "myActivitiesList": "Lista wydarzeń",
       "myActivitiesCalendar": "Kalendarz",
       "locations": "Lista sal",
       "workHours": "Godziny pracy",
@@ -69,7 +72,8 @@
     "usersChooser": "Wybór użytkowników"
   },
   "add-edit-dialog": {
-    "header": "Nowa aktywność",
+    "headerNew": "Dodawanie nowej aktywności",
+    "headerEdit": "Edycja aktywności",
     "name": "Nazwa",
     "description": "Opis",
     "location": "Lokalizacja",

@@ -1,22 +1,24 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { ClrWizard } from '@clr/angular';
-import { AddEditDialogComponent } from '../planner-calendar/add-edit-dialog/add-edit-dialog.component';
+import { AddEditDialogComponent } from '../planner-activities/add-edit-dialog/add-edit-dialog.component';
 import { Event } from '../../../_model/event.model';
 import { User } from '../../../security/user';
 import { PlannerService } from '../../../_services/planner.service';
 import { FormBuilder } from '@angular/forms';
 import { UserService } from '../../../_services/user.service';
+import { MessageService } from 'primeng';
 
 @Component({
   selector: 'app-planner-work-hours',
   templateUrl: './planner-work-hours.component.html',
-  styleUrls: ['./planner-work-hours.component.css']
+  styleUrls: ['./planner-work-hours.component.css'],
+  providers: [MessageService]
 })
 export class PlannerWorkHoursComponent implements OnInit {
-  @ViewChild('wizardlg', {static: true})
+  @ViewChild('wizardlg', { static: true })
   public wizardLarge: ClrWizard;
 
-  @ViewChild(AddEditDialogComponent, {static: true})
+  @ViewChild(AddEditDialogComponent, { static: true })
   public addEditDialog: AddEditDialogComponent;
 
   public showNewActivityDialog: boolean;
@@ -50,25 +52,25 @@ export class PlannerWorkHoursComponent implements OnInit {
 
   private prepareColumns(): void {
     this.columns = [
-      {field: 'name', header: 'activitiesList.name'},
-      {field: 'description', header: 'activitiesList.description'},
-      {field: 'startDate', header: 'activitiesList.startDate'},
-      {field: 'stopDate', header: 'activitiesList.stopDate'},
-      {field: 'active', header: 'activitiesList.active'},
+      { field: 'name', header: 'activitiesList.name' },
+      { field: 'description', header: 'activitiesList.description' },
+      { field: 'startDate', header: 'activitiesList.startDate' },
+      { field: 'stopDate', header: 'activitiesList.stopDate' },
+      { field: 'active', header: 'activitiesList.active' },
     ];
     this.usersColumns = [
-      {field: 'id', header: 'users.id'},
-      {field: 'name', header: 'users.name'},
-      {field: 'lastName', header: 'users.lastName'},
-      {field: 'college', header: 'users.college'},
-      {field: 'faculty', header: 'users.faculty'},
-      {field: 'institute', header: 'users.institute'}
+      { field: 'id', header: 'users.id' },
+      { field: 'name', header: 'users.name' },
+      { field: 'lastName', header: 'users.lastName' },
+      { field: 'college', header: 'users.college' },
+      { field: 'faculty', header: 'users.faculty' },
+      { field: 'institute', header: 'users.institute' }
     ];
     this.eventsColumns = [
-      {field: 'id', header: 'common.id'},
-      {field: 'name', header: 'common.name'},
-      {field: 'startDate', header: 'common.startDate'},
-      {field: 'stopDate', header: 'common.stopDate'}
+      { field: 'id', header: 'common.id' },
+      { field: 'name', header: 'common.name' },
+      { field: 'startDate', header: 'common.startDate' },
+      { field: 'stopDate', header: 'common.stopDate' }
     ];
   }
 
@@ -107,11 +109,6 @@ export class PlannerWorkHoursComponent implements OnInit {
   // ToDo Create form
   private prepareForm() {
 
-  }
-
-  public addNewEvent(): void {
-    this.showNewActivityDialog = true;
-    this.addEditDialog.showDialog();
   }
 
   public newWorkScheduleWizard(): void {

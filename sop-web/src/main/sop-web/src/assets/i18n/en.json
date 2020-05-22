@@ -12,7 +12,10 @@
     "stopDate": "Stop date",
     "duration": "Duration",
     "location": "Location",
-    "hostBy": "Host by"
+    "hostBy": "Host by",
+    "actions": "Actions",
+    "active": "Active",
+    "instructor": "Instructor"
   },
   "header": {
     "SOP": "Internship service system",
@@ -69,7 +72,8 @@
     "usersChooser": "Users chooser"
   },
   "add-edit-dialog": {
-    "header": "New activity",
+    "headerNew": "Adding new activity",
+    "headerEdit": "Editing activity",
     "name": "Name",
     "description": "Description",
     "location": "Location",

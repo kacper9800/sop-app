@@ -10,34 +10,17 @@ import pl.sop.dao.entities.organizationStructure.Institute;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.OneToOne;
-import javax.persistence.Table;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.Size;
 import java.io.Serializable;
-import java.time.Duration;
 import java.util.Date;
 
 @Entity
-@Table(name = "events")
-public class Event extends BasicEntity implements Serializable {
+public class WorkSchedule extends BasicEntity implements Serializable {
 
-    @NotBlank
-    @Column(name = "name", nullable = false)
+    @Column(name = "name")
     private String name;
 
     @Column(name = "description")
     private String description;
-
-    @Column(name = "duration")
-    private String duration;
-
-    @OneToOne
-    @Fetch(FetchMode.JOIN)
-    private Location location;
-
-    @OneToOne
-    @Fetch(FetchMode.JOIN)
-    private User instructor;
 
     @Column(name = "start_date")
     private Date startDate;
@@ -45,11 +28,11 @@ public class Event extends BasicEntity implements Serializable {
     @Column(name = "stop_date")
     private Date stopDate;
 
-    @Column(name = "all_day")
-    private boolean allDay;
+    @Column(name = "breaks_duration")
+    private String breaks_duration;
 
-//    @Column(name = "repeat")
-//    private String repeat;
+    @Column(name = "additional_info")
+    private String additionalInfo;
 
     @OneToOne
     @Fetch(FetchMode.JOIN)
@@ -71,24 +54,7 @@ public class Event extends BasicEntity implements Serializable {
     @Fetch(FetchMode.JOIN)
     private User user;
 
-    @Column(name = "deleted")
-    private Boolean deleted;
-
-    @Column(name = "active")
-    private Boolean active;
-
-//    @Column(name = "instructor_id")
-//    private Long instructorId;
-
-    public Event() {
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
+    public WorkSchedule() {
     }
 
     public String getName() {
@@ -107,30 +73,6 @@ public class Event extends BasicEntity implements Serializable {
         this.description = description;
     }
 
-    public String getDuration() {
-        return duration;
-    }
-
-    public void setDuration(String  duration) {
-        this.duration = duration;
-    }
-
-    public Location getLocation() {
-        return location;
-    }
-
-    public void setLocation(Location location) {
-        this.location = location;
-    }
-
-    public User getInstructor() {
-        return instructor;
-    }
-
-    public void setInstructor(User instructor) {
-        this.instructor = instructor;
-    }
-
     public Date getStartDate() {
         return startDate;
     }
@@ -147,12 +89,20 @@ public class Event extends BasicEntity implements Serializable {
         this.stopDate = stopDate;
     }
 
-    public boolean isAllDay() {
-        return allDay;
+    public String getBreaks_duration() {
+        return breaks_duration;
     }
 
-    public void setAllDay(boolean allDay) {
-        this.allDay = allDay;
+    public void setBreaks_duration(String breaks_duration) {
+        this.breaks_duration = breaks_duration;
+    }
+
+    public String getAdditionalInfo() {
+        return additionalInfo;
+    }
+
+    public void setAdditionalInfo(String additionalInfo) {
+        this.additionalInfo = additionalInfo;
     }
 
     public College getCollege() {
@@ -194,28 +144,4 @@ public class Event extends BasicEntity implements Serializable {
     public void setUser(User user) {
         this.user = user;
     }
-
-    public Boolean getDeleted() {
-        return deleted;
-    }
-
-    public void setDeleted(Boolean deleted) {
-        this.deleted = deleted;
-    }
-
-    public Boolean getActive() {
-        return active;
-    }
-
-    public void setActive(Boolean active) {
-        this.active = active;
-    }
-
-//    public Long getInstructorId() {
-//        return instructorId;
-//    }
-//
-//    public void setInstructorId(Long instructorId) {
-//        this.instructorId = instructorId;
-//    }
 }

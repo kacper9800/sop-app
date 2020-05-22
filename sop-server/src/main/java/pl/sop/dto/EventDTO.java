@@ -13,13 +13,20 @@ public class EventDTO {
     private String stopDate;
 
     private Long collegeId;
+    private String collegeName;
     private Long facultyId;
+    private String facultyName;
     private Long instituteId;
+    private String instituteName;
     private Long departmentId;
+    private String departmentName;
     private Long userId;
+    private String userName;
 
     private boolean allDay;
     private Integer repeat;
+    private boolean active;
+    private boolean deleted;
 
     public EventDTO() {
     }
@@ -142,5 +149,61 @@ public class EventDTO {
 
     public void setRepeat(Integer repeat) {
         this.repeat = repeat;
+    }
+
+    public String getCollegeName() {
+        return collegeName;
+    }
+
+    public void setCollegeName(String collegeName) {
+        this.collegeName = collegeName;
+    }
+
+    public String getFacultyName() {
+        return facultyName;
+    }
+
+    public void setFacultyName(String facultyName) {
+        this.facultyName = facultyName;
+    }
+
+    public String getInstituteName() {
+        return instituteName;
+    }
+
+    public void setInstituteName(String instituteName) {
+        this.instituteName = instituteName;
+    }
+
+    public String getDepartmentName() {
+        return departmentName;
+    }
+
+    public void setDepartmentName(String departmentName) {
+        this.departmentName = departmentName;
+    }
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
+
+    public boolean isActive() {
+        return active;
+    }
+
+    public void setActive(boolean active) {
+        this.active = active;
+    }
+
+    public boolean isDeleted() {
+        return deleted;
+    }
+
+    public void setDeleted(boolean deleted) {
+        this.deleted = deleted;
     }
 }
