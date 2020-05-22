@@ -15,7 +15,13 @@
     "hostBy": "Host by",
     "actions": "Actions",
     "active": "Active",
-    "instructor": "Instructor"
+    "instructor": "Instructor",
+    "firstName": "First name",
+    "lastName": "Last name",
+    "collegeName": "College name",
+    "facultyName": "Faculty name",
+    "instituteName": "Institute name",
+    "departmentName": "Department name"
   },
   "header": {
     "SOP": "Internship service system",
@@ -69,7 +75,8 @@
     "basicData": "Basic data",
     "settings": "Settings",
     "eventChooser": "Events chooser",
-    "usersChooser": "Users chooser"
+    "usersChooser": "Users chooser",
+    "locationsChooser": "Locations chooser"
   },
   "add-edit-dialog": {
     "headerNew": "Adding new activity",
@@ -84,13 +91,6 @@
     "allDay": "All day",
     "repeat": "Repeat"
   },
-  "activitiesList": {
-    "name": "Name",
-    "description": "Description",
-    "startDate": "Start date",
-    "stopDate": "Stop date",
-    "active": "Active"
-  },
   "users": {
     "id": "Identify",
     "name": "Name",
@@ -103,5 +103,16 @@
   "events": {
     "hostBy": "Host by",
     "location": "Location"
+  },
+  "workSchedules": {
+    "startDate": "Valid from",
+    "stopDate": "to ",
+    "breaks": "Breaks length"
+  },
+  "locations": {
+    "address": "Address",
+    "floor": "Floor",
+    "room": "Room",
+    "capacity": "Capacity"
   }
 }

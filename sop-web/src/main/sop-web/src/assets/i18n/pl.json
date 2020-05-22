@@ -15,7 +15,13 @@
     "hostBy": "Prowadzący",
     "actions": "Akcje",
     "active": "Aktywny",
-    "instructor": "Prowadzący"
+    "instructor": "Prowadzący",
+    "firstName": "Imię",
+    "lastName": "Nazwisko",
+    "collegeName": "Nazwa uczelni",
+    "facultyName": "Nazwa wydziału",
+    "instituteName": "Nazwa instytutu",
+    "departmentName": "Nazwa katedry"
   },
   "header": {
     "SOP": "System obsługi praktyk",
@@ -69,7 +75,8 @@
     "basicData": "Dane podstawowe",
     "settings": "Ustawienia",
     "eventChooser": "Wybór aktywności",
-    "usersChooser": "Wybór użytkowników"
+    "usersChooser": "Wybór użytkowników",
+    "locationsChooser": "Wybór lokalizacji"
   },
   "add-edit-dialog": {
     "headerNew": "Dodawanie nowej aktywności",
@@ -84,13 +91,6 @@
     "allDay": "Cały dzień",
     "repeat": "Powtarza się"
   },
-  "activitiesList": {
-    "name": "Nazwa",
-    "description": "Opis",
-    "startDate": "Początek wydarzenia",
-    "stopDate": "Koniec wydarzenia",
-    "active": "Aktywny"
-  },
   "users": {
     "id": "Identyfikator",
     "name": "Imię",
@@ -103,6 +103,17 @@
   "events": {
     "hostBy": "Prowadzący",
     "location": "Lokalizacja"
+  },
+  "workSchedules": {
+    "startDate": "Obowiązuje od",
+    "stopDate": "do",
+    "breaks": "Długość przerw"
+  },
+  "locations": {
+    "address": "Adres",
+    "floor": "Piętro",
+    "room": "Pokój/Sala",
+    "capacity": "Pojemność"
   }
 }
 

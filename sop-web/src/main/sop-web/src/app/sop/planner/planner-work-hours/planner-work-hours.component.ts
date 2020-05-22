@@ -7,6 +7,7 @@ import { PlannerService } from '../../../_services/planner.service';
 import { FormBuilder } from '@angular/forms';
 import { UserService } from '../../../_services/user.service';
 import { MessageService } from 'primeng';
+import { Location } from '../../../_model/location.model';
 
 @Component({
   selector: 'app-planner-work-hours',
@@ -27,6 +28,8 @@ export class PlannerWorkHoursComponent implements OnInit {
 
   public events: Event[];
   public users: User[];
+  public locations: Location[];
+
 
   public columns: any[];
   public usersColumns: any[];
@@ -37,6 +40,11 @@ export class PlannerWorkHoursComponent implements OnInit {
   public description: string;
   public startDate: Date;
   public stopDate: Date;
+
+  public selectedEvents: Event[];
+  public selectedUsers: User[];
+  public selectedLocations: Location[];
+
 
   constructor(private plannerService: PlannerService,
               private formBuilder: FormBuilder,
@@ -52,11 +60,11 @@ export class PlannerWorkHoursComponent implements OnInit {
 
   private prepareColumns(): void {
     this.columns = [
-      { field: 'name', header: 'activitiesList.name' },
-      { field: 'description', header: 'activitiesList.description' },
-      { field: 'startDate', header: 'activitiesList.startDate' },
-      { field: 'stopDate', header: 'activitiesList.stopDate' },
-      { field: 'active', header: 'activitiesList.active' },
+      { field: 'name', header: 'common.name' },
+      { field: 'description', header: 'common.description' },
+      { field: 'startDate', header: 'workSchedules.startDate' },
+      { field: 'stopDate', header: 'workSchedules.stopDate' },
+      { field: 'active', header: 'common.active' },
     ];
     this.usersColumns = [
       { field: 'id', header: 'users.id' },

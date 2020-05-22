@@ -2,6 +2,9 @@ package pl.sop.dao.entities;
 
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
+import pl.sop.dao.entities.BasicEntity;
+import pl.sop.dao.entities.Location;
+import pl.sop.dao.entities.User;
 import pl.sop.dao.entities.organizationStructure.College;
 import pl.sop.dao.entities.organizationStructure.Department;
 import pl.sop.dao.entities.organizationStructure.Faculty;
