@@ -64,7 +64,8 @@
         </div>
         <div *ngSwitchCase="'actions'" [ngClass]="{'table-buttons': true}">
           <p-button icon="pi pi-pencil" [ngClass]="{'table-buttons':true}" (click)="editEvent(rowData.id)"></p-button>
-          <p-button icon="pi pi-trash" [ngClass]="{'table-buttons': true}" (click)="confirmDelete(rowData.id)"></p-button>
+          <p-button icon="pi pi-trash" [ngClass]="{'table-buttons': true}"
+                    (click)="confirmDelete(rowData.id)"></p-button>
         </div>
       </td>
     </tr>
@@ -73,25 +74,32 @@
 
 <ng-template #addEditDialog></ng-template>
 
-<div *ngIf="isConfirmDeleteDialogVisible">
-  <div class="modal">
-    <div class="modal-dialog" role="dialog" aria-hidden="true">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h3 class="modal-title">I have a nice title</h3>
-        </div>
-        <div class="modal-body">
-          <p>But not much to say...</p>
-        </div>
-        <div class="modal-footer">
-          <button class="btn btn-outline" (click)="isConfirmDeleteDialogVisible = false" type="button">Cancel</button>
-          <button class="btn btn-primary" (click)="deleteEvent(idOfEventToDelete)" type="button">Ok</button>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="modal-backdrop" aria-hidden="true"></div>
-</div>
+<app-confirm-delete-dialog [isVisible]="isConfirmDeleteDialogVisible"
+                           [id]="idOfEventToDelete"></app-confirm-delete-dialog>
+
+<!--<div *ngIf="isConfirmDeleteDialogVisible">-->
+<!--  <div class="modal">-->
+<!--    <div class="modal-dialog" role="dialog" aria-hidden="true">-->
+<!--      <div class="modal-content">-->
+<!--        <div class="modal-header">-->
+<!--          <h3 class="modal-title">I have a nice title</h3>-->
+<!--        </div>-->
+<!--        <div class="modal-body">-->
+<!--          <p>But not much to say...</p>-->
+<!--        </div>-->
+<!--        <div class="modal-footer">-->
+<!--          <button class="btn btn-outline" (click)="isConfirmDeleteDialogVisible = false"-->
+<!--                  type="button">{{'common.confirm.cancel' | translate}}</button>-->
+<!--          <button class="btn btn-primary" (click)="deleteEvent(idOfEventToDelete)"-->
+<!--                  type="button">{{'common.confirm.confirm' | translate}}</button>-->
+<!--        </div>-->
+<!--      </div>-->
+<!--    </div>-->
+<!--  </div>-->
+<!--  <div class="modal-backdrop" aria-hidden="true"></div>-->
+<!--</div>-->
+
+
 <!--<app-add-edit-dialog [isDialogVisible]="showNewActivityDialog">3-->
 <!--</app-add-edit-dialog>-->
 

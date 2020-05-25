@@ -15,7 +15,6 @@ import java.util.List;
 @Repository
 public interface EventRepository extends JpaRepository<Event, Long> {
 
-    @Query(value = "SELECT e FROM Event e ")
+    @Query(value = "SELECT e FROM Event e WHERE e.active = true and e.deleted = false")
     List<Event> findAllEvents();
-
 }

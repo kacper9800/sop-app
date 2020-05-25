@@ -1,12 +1,13 @@
 import { Component, ComponentFactoryResolver, OnInit, ViewChild, ViewContainerRef } from '@angular/core';
 import { PlannerService } from '../../../_services/planner.service';
-import { AddEditDialogComponent } from './add-edit-dialog/add-edit-dialog.component';
+import { AddEditDialogActivitiesComponent } from './add-edit-dialog-activities/add-edit-dialog-activities.component';
 import { ClrWizard } from '@clr/angular';
 import { FormBuilder } from '@angular/forms';
 import { UserService } from '../../../_services/user.service';
 import { User } from '../../../security/user';
 import { Event } from '../../../_model/event.model';
 import { MessageService } from 'primeng';
+import { ConfirmDeleteDialogComponent } from '../../../common/confirm-delete-dialog/confirm-delete-dialog.component';
 
 @Component({
   selector: 'app-planner-activities',
@@ -22,10 +23,13 @@ export class PlannerActivitiesComponent implements OnInit {
   @ViewChild('addEditDialog', { read: ViewContainerRef, static: true })
   public addEditDialog: ViewContainerRef;
 
+  @ViewChild('confirmDeleteDialog', { read: ViewContainerRef, static: true })
+  public confirmDeleteDialog: ViewContainerRef;
+
   private componentRef: any;
 
-  // @ViewChild(AddEditDialogComponent, { static: true })
-  // public addEditDialog: AddEditDialogComponent;
+  // @ViewChild(AddEditDialogActivitiesComponent, { static: true })
+  // public addEditDialog: AddEditDialogActivitiesComponent;
 
   public showNewActivityDialog: boolean;
   public isWorkScheduleGeneratorVisible = false;
@@ -125,14 +129,14 @@ export class PlannerActivitiesComponent implements OnInit {
 
   public addNewEvent(): void {
     this.addEditDialog.clear();
-    const factory = this.resolver.resolveComponentFactory(AddEditDialogComponent);
+    const factory = this.resolver.resolveComponentFactory(AddEditDialogActivitiesComponent);
     this.componentRef = this.addEditDialog.createComponent(factory);
     this.componentRef.instance.showNewEventDialog();
   }
 
   public editEvent(rowData: any): void {
     this.addEditDialog.clear();
-    const factory = this.resolver.resolveComponentFactory(AddEditDialogComponent);
+    const factory = this.resolver.resolveComponentFactory(AddEditDialogActivitiesComponent);
     this.componentRef = this.addEditDialog.createComponent(factory);
     this.componentRef.instance.showEditEventDialog(rowData);
 
@@ -147,9 +151,12 @@ export class PlannerActivitiesComponent implements OnInit {
   public confirmDelete(id: any) {
     this.isConfirmDeleteDialogVisible = true;
     this.idOfEventToDelete = id;
+    this.confirmDeleteDialog.clear();
+    const factory = this.resolver.resolveComponentFactory(ConfirmDeleteDialogComponent);
+    this.componentRef = this.confirmDeleteDialog.createComponent(factory);
   }
 
-  public deleteEvent(id: number): void {
+  // public deleteEvent(id: number): void {
 
     // if (id != null) {
     //   this.plannerService.deleteEvent(id).subscribe(
@@ -157,7 +164,7 @@ export class PlannerActivitiesComponent implements OnInit {
     //     () => this.onErrorDelete()
     //   );
     // }
-  }
+  // }
 
   private onSuccessDelete() {
     this.isConfirmDeleteDialogVisible = false;

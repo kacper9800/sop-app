@@ -54,31 +54,25 @@ public class Event extends BasicEntity implements Serializable {
 //    @Column(name = "repeat")
 //    private String repeat;
 
-    @OneToOne
-    @Fetch(FetchMode.JOIN)
-    private College college;
-
-    @OneToOne
-    @Fetch(FetchMode.JOIN)
-    private Faculty faculty;
-
-    @OneToOne
-    @Fetch(FetchMode.JOIN)
-    private Institute institute;
-
-    @OneToOne
-    @Fetch(FetchMode.JOIN)
-    private Department department;
-
-    @OneToOne
-    @Fetch(FetchMode.JOIN)
-    private User user;
-
-    @Column(name = "deleted")
-    private Boolean deleted;
-
-    @Column(name = "active")
-    private Boolean active;
+//    @OneToOne
+//    @Fetch(FetchMode.JOIN)
+//    private College college;
+//
+//    @OneToOne
+//    @Fetch(FetchMode.JOIN)
+//    private Faculty faculty;
+//
+//    @OneToOne
+//    @Fetch(FetchMode.JOIN)
+//    private Institute institute;
+//
+//    @OneToOne
+//    @Fetch(FetchMode.JOIN)
+//    private Department department;
+//
+//    @OneToOne
+//    @Fetch(FetchMode.JOIN)
+//    private User user;
 
 //    @Column(name = "instructor_id")
 //    private Long instructorId;
@@ -158,45 +152,45 @@ public class Event extends BasicEntity implements Serializable {
         this.allDay = allDay;
     }
 
-    public College getCollege() {
-        return college;
-    }
-
-    public void setCollege(College college) {
-        this.college = college;
-    }
-
-    public Faculty getFaculty() {
-        return faculty;
-    }
-
-    public void setFaculty(Faculty faculty) {
-        this.faculty = faculty;
-    }
-
-    public Institute getInstitute() {
-        return institute;
-    }
-
-    public void setInstitute(Institute institute) {
-        this.institute = institute;
-    }
-
-    public Department getDepartment() {
-        return department;
-    }
-
-    public void setDepartment(Department department) {
-        this.department = department;
-    }
-
-    public User getUser() {
-        return user;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
-    }
+//    public College getCollege() {
+//        return college;
+//    }
+//
+//    public void setCollege(College college) {
+//        this.college = college;
+//    }
+//
+//    public Faculty getFaculty() {
+//        return faculty;
+//    }
+//
+//    public void setFaculty(Faculty faculty) {
+//        this.faculty = faculty;
+//    }
+//
+//    public Institute getInstitute() {
+//        return institute;
+//    }
+//
+//    public void setInstitute(Institute institute) {
+//        this.institute = institute;
+//    }
+//
+//    public Department getDepartment() {
+//        return department;
+//    }
+//
+//    public void setDepartment(Department department) {
+//        this.department = department;
+//    }
+//
+//    public User getUser() {
+//        return user;
+//    }
+//
+//    public void setUser(User user) {
+//        this.user = user;
+//    }
 
     public Boolean getDeleted() {
         return deleted;

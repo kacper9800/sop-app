@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { ClrWizard } from '@clr/angular';
-import { AddEditDialogComponent } from '../planner-activities/add-edit-dialog/add-edit-dialog.component';
+import { AddEditDialogActivitiesComponent } from '../planner-activities/add-edit-dialog-activities/add-edit-dialog-activities.component';
 import { Event } from '../../../_model/event.model';
 import { User } from '../../../security/user';
 import { PlannerService } from '../../../_services/planner.service';
@@ -19,8 +19,8 @@ export class PlannerWorkHoursComponent implements OnInit {
   @ViewChild('wizardlg', { static: true })
   public wizardLarge: ClrWizard;
 
-  @ViewChild(AddEditDialogComponent, { static: true })
-  public addEditDialog: AddEditDialogComponent;
+  @ViewChild(AddEditDialogActivitiesComponent, { static: true })
+  public addEditDialog: AddEditDialogActivitiesComponent;
 
   public showNewActivityDialog: boolean;
   public isWorkScheduleGeneratorVisible = false;

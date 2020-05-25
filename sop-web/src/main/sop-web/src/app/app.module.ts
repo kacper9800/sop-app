@@ -62,10 +62,12 @@ import { PlannerCalendarComponent } from './sop/planner/planner-calendar/planner
 import { PlannerActivitiesComponent } from './sop/planner/planner-activities/planner-activities.component';
 import { PlannerWorkHoursComponent } from './sop/planner/planner-work-hours/planner-work-hours.component';
 import { PlannerLocationsComponent } from './sop/planner/planner-locations/planner-locations.component';
-import { AddEditDialogComponent } from './sop/planner/planner-activities/add-edit-dialog/add-edit-dialog.component';
+import { AddEditDialogActivitiesComponent } from './sop/planner/planner-activities/add-edit-dialog-activities/add-edit-dialog-activities.component';
 import { HashLocationStrategy, LocationStrategy } from '@angular/common';
 import { PlannerGeneratorComponent } from './sop/planner/planner-generator/planner-generator.component';
 import { OwlDateTimeModule, OwlNativeDateTimeModule } from 'ng-pick-datetime';
+import { ConfirmDeleteDialogComponent } from './common/confirm-delete-dialog/confirm-delete-dialog.component';
+import { AddEditDialogLocationsComponent} from './sop/planner/planner-locations/add-edit-dialog-locations/add-edit-dialog-locations.component';
 
 @NgModule({
   declarations: [
@@ -97,8 +99,10 @@ import { OwlDateTimeModule, OwlNativeDateTimeModule } from 'ng-pick-datetime';
     PlannerActivitiesComponent,
     PlannerWorkHoursComponent,
     PlannerLocationsComponent,
-    AddEditDialogComponent,
+    AddEditDialogActivitiesComponent,
+    AddEditDialogLocationsComponent,
     PlannerGeneratorComponent,
+    ConfirmDeleteDialogComponent,
   ],
   imports: [
     BrowserModule,
@@ -145,7 +149,8 @@ import { OwlDateTimeModule, OwlNativeDateTimeModule } from 'ng-pick-datetime';
   bootstrap: [ AppComponent ],
   entryComponents: [
     LoginComponent,
-    AddEditDialogComponent
+    AddEditDialogActivitiesComponent,
+    AddEditDialogLocationsComponent
   ]
 })
 export class AppModule {

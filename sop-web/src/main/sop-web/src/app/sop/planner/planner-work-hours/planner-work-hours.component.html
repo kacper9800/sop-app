@@ -70,12 +70,9 @@
     </tr>
   </ng-template>
 </p-table>
-<app-add-edit-dialog [isDialogVisible]="showNewActivityDialog">3
-</app-add-edit-dialog>
-
 
 <clr-wizard #wizardlg [(clrWizardOpen)]="isWorkScheduleGeneratorVisible" clrWizardSize="lg">
-  <clr-wizard-title>{{'calendar.title'|translate}}</clr-wizard-title>
+  <clr-wizard-title>{{'calendar.workScheduleTitle'|translate}}</clr-wizard-title>
 
   <clr-wizard-button [type]="'cancel'">Cancel</clr-wizard-button>
   <clr-wizard-button [type]="'previous'">Back</clr-wizard-button>
@@ -191,10 +188,10 @@
       <clr-dg-column>{{'locations.capacity' | translate}}</clr-dg-column>
 
       <clr-dg-row *ngFor="let location of locations">
-        <clr-dg-cell>{{location.address | translate}}</clr-dg-cell>
-        <clr-dg-cell>{{location.floor | translate}}</clr-dg-cell>
-        <clr-dg-cell>{{location.room | translate}}</clr-dg-cell>
-        <clr-dg-cell>{{location.capacity | translate}}</clr-dg-cell>
+        <clr-dg-cell>{{location.address}}</clr-dg-cell>
+        <clr-dg-cell>{{location.floor}}</clr-dg-cell>
+        <clr-dg-cell>{{location.room}}</clr-dg-cell>
+        <clr-dg-cell>{{location.capacity}}</clr-dg-cell>
       </clr-dg-row>
 
       <!--      <clr-dg-footer>{{users.length}} users</clr-dg-footer>-->

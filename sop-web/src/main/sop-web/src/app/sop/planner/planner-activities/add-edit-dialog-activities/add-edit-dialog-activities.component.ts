@@ -7,13 +7,13 @@ import { MessageService } from 'primeng';
 import { TranslateService } from '@ngx-translate/core';
 
 @Component({
-  selector: 'app-add-edit-dialog',
-  templateUrl: './add-edit-dialog.component.html',
-  styleUrls: [ './add-edit-dialog.component.css' ],
+  selector: 'app-add-edit-dialog-activities',
+  templateUrl: './add-edit-dialog-activities.component.html',
+  styleUrls: [ './add-edit-dialog-activities.component.css' ],
   providers: [ MessageService ]
 
 })
-export class AddEditDialogComponent implements OnInit {
+export class AddEditDialogActivitiesComponent implements OnInit {
 
   @Input()
   public isDialogVisible: boolean;

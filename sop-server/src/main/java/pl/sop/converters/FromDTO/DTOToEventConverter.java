@@ -55,43 +55,45 @@ public class DTOToEventConverter implements Converter<EventDTO, Event> {
         } else {
             event.setLocation(null);
         }
-        if (input.getInstructorId() != null) {
-            User user = new User();
-            user.setId(input.getInstructorId());
-            event.setUser(user);
-        } else {
-            event.setUser(null);
-        }
-
-        if (input.getFacultyId() != null) {
-            Faculty faculty = new Faculty();
-            faculty.setId(input.getFacultyId());
-            event.setFaculty(faculty);
-        } else {
-            event.setFaculty(null);
-        }
-
-        if (input.getCollegeId() != null) {
-            College college = new College();
-            college.setId(input.getCollegeId());
-            event.setCollege(college);
-        } else {
-            event.setCollege(null);
-        }
-
-        if (input.getDepartmentId() != null) {
-            Department department = new Department();
-            department.setId(input.getDepartmentId());
-            event.setDepartment(department);
-        }
-
-        if (input.getUserId() != null) {
-            User user = new User();
-            user.setId(input.getUserId());
-            event.setUser(user);
-        } else {
-            event.setUser(null);
-        }
+//        if (input.getInstructorId() != null) {
+//            User user = new User();
+//            user.setId(input.getInstructorId());
+//            event.setUser(user);
+//        } else {
+//            event.setUser(null);
+//        }
+//
+//        if (input.getFacultyId() != null) {
+//            Faculty faculty = new Faculty();
+//            faculty.setId(input.getFacultyId());
+//            event.setFaculty(faculty);
+//        } else {
+//            event.setFaculty(null);
+//        }
+//
+//        if (input.getCollegeId() != null) {
+//            College college = new College();
+//            college.setId(input.getCollegeId());
+//            event.setCollege(college);
+//        } else {
+//            event.setCollege(null);
+//        }
+//
+//        if (input.getDepartmentId() != null) {
+//            Department department = new Department();
+//            department.setId(input.getDepartmentId());
+//            event.setDepartment(department);
+//        }
+//
+//        if (input.getUserId() != null) {
+//            User user = new User();
+//            user.setId(input.getUserId());
+//            event.setUser(user);
+//        } else {
+//            event.setUser(null);
+//        }
+        event.setActive(true);
+        event.setDeleted(false);
         return event;
     }
 

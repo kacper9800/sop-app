@@ -1,1 +1,23 @@
-<p>planner-locations works!</p>
+<h1 style="text-align: center">{{'locations.header' | translate}}</h1>
+
+
+<button class="btn btn-outline" (click)="addNewLocation()">
+  <clr-icon shape="plus"></clr-icon>
+  {{"calendar.addNewLocation" | translate}}</button>
+<!-- ToDo Przerobić generowanie tabeli na pętle-->
+<clr-datagrid [clrDgRowSelection]="true" [(clrDgSelected)]="selectedUsers">
+  <clr-dg-column>{{'locations.address' | translate}}</clr-dg-column>
+  <clr-dg-column>{{'locations.floor' | translate}}</clr-dg-column>
+  <clr-dg-column>{{'locations.room' | translate}}</clr-dg-column>
+  <clr-dg-column>{{'locations.capacity' | translate}}</clr-dg-column>
+
+  <clr-dg-row *ngFor="let location of locations">
+    <clr-dg-cell>{{location.address}}</clr-dg-cell>
+    <clr-dg-cell>{{location.floor}}</clr-dg-cell>
+    <clr-dg-cell>{{location.room}}</clr-dg-cell>
+    <clr-dg-cell>{{location.capacity}}</clr-dg-cell>
+  </clr-dg-row>
+</clr-datagrid>
+
+<ng-template #addEditDialog></ng-template>
+

@@ -5,6 +5,14 @@
       "edit": "Edytuj",
       "delete": "Usuń"
     },
+    "confirm": {
+      "cancel": "Anuluj",
+      "confirm": "Ok"
+    },
+    "confirmDelete": {
+      "title": "Usuwanie rekordu",
+      "mainContent": "Czy na pewno chcesz usunąć ten rekord?"
+    },
     "id": "Identyfikator",
     "name": "Nazwa",
     "description": "Opis",
@@ -69,8 +77,9 @@
     "cancelButtonLabel": "Przerwij rejestrację"
   },
   "calendar": {
-    "title": "Generowanie grafiku pracy",
+    "workScheduleTitle": "Generowanie grafiku pracy",
     "addNewEvent": "Dodaj nowe wydarzenie",
+    "addNewLocation": "Dodaj nową lokalizację",
     "generateNewWorkSchedule": "Generuj nowy grafik pracy",
     "basicData": "Dane podstawowe",
     "settings": "Ustawienia",
@@ -79,7 +88,8 @@
     "locationsChooser": "Wybór lokalizacji"
   },
   "add-edit-dialog": {
-    "headerNew": "Dodawanie nowej aktywności",
+    "headerNewEvent": "Tworzenie nowej aktywności",
+    "headerNewLocation": "Tworzenie nowej lokalizacji",
     "headerEdit": "Edycja aktywności",
     "name": "Nazwa",
     "description": "Opis",
@@ -110,6 +120,7 @@
     "breaks": "Długość przerw"
   },
   "locations": {
+    "header": "Lokalizacje",
     "address": "Adres",
     "floor": "Piętro",
     "room": "Pokój/Sala",

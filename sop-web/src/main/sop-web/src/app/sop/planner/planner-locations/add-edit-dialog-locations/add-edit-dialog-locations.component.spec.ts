@@ -1,8 +1,8 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { AddEditDialogComponent } from './add-edit-dialog.component';
+import { AddEditDialogComponent } from './add-edit-dialog-locations.component';
 
-describe('AddEditDialogComponent', () => {
+describe('AddEditDialogActivitiesComponent', () => {
   let component: AddEditDialogComponent;
   let fixture: ComponentFixture<AddEditDialogComponent>;
 

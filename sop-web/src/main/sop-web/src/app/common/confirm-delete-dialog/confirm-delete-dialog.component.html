@@ -1,0 +1,23 @@
+<p-toast key="tl" [baseZIndex]="9999"></p-toast>
+
+<div *ngIf="isVisible">
+  <div class="modal">
+    <div class="modal-dialog" role="dialog" aria-hidden="true">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h3 class="modal-title">{{'common.confirmDelete.title' | translate}}</h3>
+        </div>
+        <div class="modal-body">
+          <p>{{'common.confirmDelete.mainContent' | translate}}</p>
+        </div>
+        <div class="modal-footer">
+          <button class="btn btn-outline" (click)="isVisible = false"
+                  type="button">{{'common.confirm.cancel' | translate}}</button>
+          <button class="btn btn-primary" (click)="deleteEvent()"
+                  type="button">{{'common.confirm.confirm' | translate}}</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="modal-backdrop" aria-hidden="true"></div>
+</div>
