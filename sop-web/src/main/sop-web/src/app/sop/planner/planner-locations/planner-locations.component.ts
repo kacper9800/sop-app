@@ -32,6 +32,7 @@ export class PlannerLocationsComponent implements OnInit {
   public confirmDeleteDialog: ViewContainerRef;
 
   private componentRef: any;
+  selectedUsers: any;
 
 
   ngOnInit() {

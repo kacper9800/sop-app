@@ -28,12 +28,10 @@
           {{'common.duration' | translate}}
         </div>
         <div class="clr-col-8">
-          <clr-datalist-container>
             <input clrDatalistInput placeholder="Option" name="Option" formControlName="item"/>
             <datalist id="clr-custom-datalistid-1">
               <option *ngFor="let durationItem of durationItems" [value]="durationItem"></option>
             </datalist>
-          </clr-datalist-container>
         </div>
         <div class="clr-col-2"></div>
       </div>

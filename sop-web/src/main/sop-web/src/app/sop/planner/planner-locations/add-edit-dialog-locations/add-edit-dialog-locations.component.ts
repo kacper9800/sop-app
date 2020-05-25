@@ -14,7 +14,7 @@ export class AddEditDialogLocationsComponent implements OnInit {
   public isDialogVisible: any;
   header: any;
   public addEditForm: FormGroup;
-  public usears: User[];
+  public users: User[];
   public durationItems: string[];
 
 

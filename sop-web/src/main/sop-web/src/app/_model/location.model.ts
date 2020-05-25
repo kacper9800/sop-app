@@ -19,6 +19,7 @@ export class Location implements ILocation {
   address: string;
   floor: number;
   room: number;
+  capacity: number;
 
   collegeId: number;
   collegeName: string;

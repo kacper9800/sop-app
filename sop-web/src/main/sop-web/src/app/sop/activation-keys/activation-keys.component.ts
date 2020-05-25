@@ -11,6 +11,7 @@ export class ActivationKeysComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
+
   }
 
 }

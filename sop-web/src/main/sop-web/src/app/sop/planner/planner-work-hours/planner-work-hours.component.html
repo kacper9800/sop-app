@@ -32,7 +32,7 @@
   {{"calendar.generateNewWorkSchedule" | translate}}</button>
 
 
-<p-table [value]="events" [columns]="columns">
+<p-table [value]="events" #dt [columns]="columns">
   <ng-template pTemplate="header" let-columns>
     <tr>
       <th *ngFor="let col of columns" [pSortableColumn]="col.field" [ngSwitch]="col.field">

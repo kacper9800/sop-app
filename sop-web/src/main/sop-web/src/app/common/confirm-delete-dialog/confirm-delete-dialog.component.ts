@@ -10,7 +10,7 @@ import { MessageService } from 'primeng';
 export class ConfirmDeleteDialogComponent implements OnInit {
 
   @Input()
-  private isVisible: boolean;
+  public isVisible: boolean;
 
   @Input()
   private id: number;
