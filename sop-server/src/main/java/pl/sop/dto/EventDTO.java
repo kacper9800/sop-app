@@ -7,11 +7,12 @@ public class EventDTO {
     private Integer duration;
 
     private Long locationId;
-    private Long instructorId;
 
     private String startDate;
     private String stopDate;
 
+    private Long instructorId;
+    private String instructorName;
     private Long collegeId;
     private String collegeName;
     private Long facultyId;
@@ -142,6 +143,10 @@ public class EventDTO {
     public void setInstructorId(Long instructorId) {
         this.instructorId = instructorId;
     }
+
+    public String getInstructorName() { return instructorName; }
+
+    public void setInstructorName(String instructorName) { this.instructorName = instructorName; }
 
     public Integer getRepeat() {
         return repeat;

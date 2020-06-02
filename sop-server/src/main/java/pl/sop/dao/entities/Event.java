@@ -70,9 +70,9 @@ public class Event extends BasicEntity implements Serializable {
 //    @Fetch(FetchMode.JOIN)
 //    private Department department;
 //
-//    @OneToOne
-//    @Fetch(FetchMode.JOIN)
-//    private User user;
+    @OneToOne
+    @Fetch(FetchMode.JOIN)
+    private User user;
 
 //    @Column(name = "instructor_id")
 //    private Long instructorId;
@@ -184,13 +184,13 @@ public class Event extends BasicEntity implements Serializable {
 //        this.department = department;
 //    }
 //
-//    public User getUser() {
-//        return user;
-//    }
-//
-//    public void setUser(User user) {
-//        this.user = user;
-//    }
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
 
     public Boolean getDeleted() {
         return deleted;

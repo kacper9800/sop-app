@@ -31,17 +31,17 @@ public class EventToDTOConverter implements Converter<Event, EventDTO> {
         }
         if (input.getInstructor() != null) {
             if (input.getInstructor().getFirstName() != null) {
-                eventDTO.setUserName(input.getInstructor().getFirstName());
+                eventDTO.setInstructorName(input.getInstructor().getFirstName());
             } else {
-                eventDTO.setUserName(null);
+                eventDTO.setInstructorName(null);
             }
             if (input.getInstructor().getLastName() != null) {
-                eventDTO.setUserName(eventDTO.getUserName() + " " + input.getInstructor().getLastName());
+                eventDTO.setInstructorName(eventDTO.getInstructorName() + " " + input.getInstructor().getLastName());
             } else {
-                eventDTO.setUserName(null);
+                eventDTO.setInstructorName(null);
             }
         } else {
-            eventDTO.setUserName(null);
+            eventDTO.setInstructorName(null);
         }
         if (input.getActive() != null) {
             eventDTO.setActive(input.getActive());

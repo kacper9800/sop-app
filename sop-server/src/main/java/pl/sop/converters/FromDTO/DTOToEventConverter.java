@@ -4,9 +4,6 @@ import pl.sop.converters.Converter;
 import pl.sop.dao.entities.Event;
 import pl.sop.dao.entities.Location;
 import pl.sop.dao.entities.User;
-import pl.sop.dao.entities.organizationStructure.College;
-import pl.sop.dao.entities.organizationStructure.Department;
-import pl.sop.dao.entities.organizationStructure.Faculty;
 import pl.sop.dto.EventDTO;
 import pl.sop.enums.EventDuration;
 
@@ -42,11 +39,11 @@ public class DTOToEventConverter implements Converter<EventDTO, Event> {
         //        event.setStartDate(convertStringDateToDate(input.getStartDate()));
         //        event.setStopDate(convertStringDateToDate(input.getStopDate()));
 
-        //        if (input.getInstructorId() != null) {
-        //            User instructor = new User();
-        //            instructor.setId(input.getInstructorId());
-        //                event.setInstructor(instructor);
-        //        }
+        if (input.getInstructorId() != null) {
+            User instructor = new User();
+            instructor.setId(input.getInstructorId());
+            event.setInstructor(instructor);
+        }
 
         if (input.getLocationId() != null) {
             Location location = new Location();

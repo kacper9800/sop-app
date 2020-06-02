@@ -18,9 +18,9 @@ public class LocationController {
     LocationService locationService;
 
     @CrossOrigin
-    @PreAuthorize("hasRole('ROLE_MODERATOR')")
+    @PreAuthorize("hasRole('ROLE_USER') or hasRole('ROLE_MODERATOR')")
     @RequestMapping(value = "/api/locations", method = RequestMethod.GET)
-    public ResponseEntity<List<LocationDTO>> getAllEvents() {
+    public ResponseEntity<List<LocationDTO>> getAllLocations() {
         final List<LocationDTO> events = locationService.getAllLocations();
         return new ResponseEntity(events, HttpStatus.OK);
     }
@@ -28,14 +28,14 @@ public class LocationController {
     @CrossOrigin
     @PreAuthorize("hasRole('ROLE_MODERATOR')")
     @RequestMapping(value = "/api/locations", method = RequestMethod.POST)
-    public ResponseEntity createNewEvent(@RequestBody LocationDTO locationDTO) throws ParseException {
+    public ResponseEntity createNewLocation(@RequestBody LocationDTO locationDTO) throws ParseException {
         return ResponseEntity.ok(locationService.createLocation(locationDTO));
     }
 
     @CrossOrigin
     @PreAuthorize("hasRole('ROLE_MODERATOR')")
     @RequestMapping(value = "/api/locations/{id}", method = RequestMethod.DELETE)
-    public ResponseEntity.BodyBuilder deleteEvent(@PathVariable("id") Long id) throws Exception {
+    public ResponseEntity.BodyBuilder deleteLocation(@PathVariable("id") Long id) throws Exception {
         if (id == null) {
             throw new Exception("Provided id is wrong!");
         }

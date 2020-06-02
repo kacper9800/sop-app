@@ -18,7 +18,7 @@ public class EventController {
     EventService eventService;
 
     @CrossOrigin
-    @PreAuthorize("hasRole('ROLE_MODERATOR')")
+    @PreAuthorize("hasRole('ROLE_USER') or hasRole('ROLE_MODERATOR')")
     @RequestMapping(value = "/api/planner/event", method = RequestMethod.GET)
     public ResponseEntity<List<EventDTO>> getAllEvents() {
         final List<EventDTO> events = eventService.getAllEvents();

@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import pl.sop.dao.entities.User;
 import pl.sop.dao.repository.UserRepository;
+import pl.sop.services.UserService;
 
 import java.util.List;
 
@@ -17,9 +18,12 @@ public class UserController {
     @Autowired
     UserRepository userRepository;
 
+    @Autowired
+    UserService userService;
+
     @RequestMapping(value = "/api/users", method = RequestMethod.GET)
     public ResponseEntity<List<User>> getAllUsers() {
-        final List<User> users = userRepository.findAllUsers();
+        final List<User> users = userService.getAllUsers();
         return new ResponseEntity<>(users, HttpStatus.OK);
     }
 

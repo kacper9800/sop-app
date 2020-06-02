@@ -5,8 +5,9 @@ import org.springframework.stereotype.Service;
 import pl.sop.dao.entities.User;
 import pl.sop.dao.repository.UserRepository;
 
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class UserService {
@@ -20,7 +21,10 @@ public class UserService {
     }
 
     public List<User> getAllUsers() {
-        return userRepository.findAllUsers();
+        List<User> users = userRepository.findAllUsers();
+        Comparator<User> comparator = (User u1, User u2) -> u1.getId().compareTo(u2.getId());
+        Collections.sort(users, comparator);
+        return users;
     }
 
 }
