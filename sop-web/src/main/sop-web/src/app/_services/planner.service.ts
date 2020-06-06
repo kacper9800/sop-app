@@ -27,6 +27,6 @@ export class PlannerService {
   }
 
   public createWorkSchedule(workSchedule: WorkSchedule): Observable<number> {
-    return this.http.post<number>(this.API_URL, workSchedule);
+    return this.http.post<number>(this.API_URL_WORK_SCHEDULE, workSchedule);
   }
 }

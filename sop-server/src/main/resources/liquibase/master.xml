@@ -393,6 +393,70 @@
                                  referencedColumnNames="id"
                                  referencedTableName="colleges"/>
     </changeSet>
+
+    <changeSet id="17" author="krzymkiewicz">
+        <createTable tableName="work_schedule_users">
+            <column name="work_schedule_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+            <column name="user_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <addForeignKeyConstraint baseColumnNames="work_schedule_id"
+                                 baseTableName="work_schedule_users"
+                                 constraintName="fk_work_schedule_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="work_schedules"/>
+
+        <addForeignKeyConstraint baseColumnNames="user_id"
+                                 baseTableName="work_schedule_users"
+                                 constraintName="fk_users_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="users"/>
+
+        <createTable tableName="work_schedule_locations">
+            <column name="work_schedule_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+            <column name="location_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <addForeignKeyConstraint baseColumnNames="work_schedule_id"
+                                 baseTableName="work_schedule_locations"
+                                 constraintName="fk_work_schedules_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="work_schedules"/>
+
+        <addForeignKeyConstraint baseColumnNames="location_id"
+                                 baseTableName="work_schedule_locations"
+                                 constraintName="fk_colleges_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="locations"/>
+
+        <createTable tableName="work_schedule_events">
+            <column name="work_schedule_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+            <column name="event_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <addForeignKeyConstraint baseColumnNames="work_schedule_id"
+                                 baseTableName="work_schedule_events"
+                                 constraintName="fk_work_schedule_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="work_schedules"/>
+        <addForeignKeyConstraint baseColumnNames="event_id"
+                                 baseTableName="work_schedule_events"
+                                 constraintName="fk_event_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="events"/>
+    </changeSet>
     <!--    <changeSet id="4" author="krzymkiewicz">-->
     <!--        <createTable tableName="calendar_events">-->
     <!--            <column name="event_id"></column>-->

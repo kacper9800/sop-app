@@ -1,12 +1,13 @@
 package pl.sop.services;
 
-import org.hibernate.jdbc.Work;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import pl.sop.converters.FromDTO.DTOToWorkScheduleConverter;
 import pl.sop.converters.ToDTO.WorkScheduleToDTOConverter;
+import pl.sop.dao.entities.User;
 import pl.sop.dao.entities.WorkSchedule;
+import pl.sop.dao.repository.UserRepository;
 import pl.sop.dao.repository.WorkScheduleRepository;
 import pl.sop.dto.WorkScheduleDTO;
 
@@ -21,6 +22,9 @@ public class WorkScheduleService {
     @Autowired
     private WorkScheduleRepository workScheduleRepository;
 
+    @Autowired
+    private UserRepository userRepository;
+
     private final WorkScheduleToDTOConverter workScheduleToDTOConverter = new WorkScheduleToDTOConverter();
     private final DTOToWorkScheduleConverter dtoToWorkScheduleConverter = new DTOToWorkScheduleConverter();
 
@@ -34,7 +38,11 @@ public class WorkScheduleService {
     }
 
     public WorkSchedule createWorkSchedule(WorkScheduleDTO workScheduleDTO) {
-        WorkSchedule workSchedule = dtoToWorkScheduleConverter.convert(workScheduleDTO);
+        for (Long userId : workScheduleDTO.getUsersId()) {
+            User user = userRepository.findUserById(userId);
+
+
+        }
         // TODO
         // Typy proste dodajemy bez większych ceregieli
         // Listy/Kolekcje musimy mapować i robić zapis do innych tabel.
@@ -44,7 +52,8 @@ public class WorkScheduleService {
         // pętla for each (Long userId : users) {
         // User user = userService.getUser(id);
         // Event
-        return this.workScheduleRepository.save(workSchedule);
+//        return this.workScheduleRepository.save(workSchedule);
+        return null;
     }
 
     public void deleteWorkSchedule(Long id) {

@@ -6,14 +6,14 @@ public class WorkScheduleDTO {
     private Long id;
     private String name;
     private String description;
-    private Date startDate;
-    private Date stopDate;
+    private String startDate;
+    private String stopDate;
     private Integer breaks;
-    private Date startHour;
-    private Date stopHour;
-    private Long[] events;
-    private Long[] users;
-    private Long[] locations;
+    private String startHour;
+    private String stopHour;
+    private Long[] eventsId;
+    private Long[] usersId;
+    private Long[] locationsId;
 
 
 //    private String additionalInfo;
@@ -58,19 +58,19 @@ public class WorkScheduleDTO {
         this.description = description;
     }
 
-    public Date getStartDate() {
+    public String getStartDate() {
         return startDate;
     }
 
-    public void setStartDate(Date startDate) {
+    public void setStartDate(String startDate) {
         this.startDate = startDate;
     }
 
-    public Date getStopDate() {
+    public String getStopDate() {
         return stopDate;
     }
 
-    public void setStopDate(Date stopDate) {
+    public void setStopDate(String stopDate) {
         this.stopDate = stopDate;
     }
 
@@ -161,6 +161,55 @@ public class WorkScheduleDTO {
 //    public void setUserName(String userName) {
 //        this.userName = userName;
 //    }
+
+
+    public Integer getBreaks() {
+        return breaks;
+    }
+
+    public void setBreaks(Integer breaks) {
+        this.breaks = breaks;
+    }
+
+    public String getStartHour() {
+        return startHour;
+    }
+
+    public void setStartHour(String startHour) {
+        this.startHour = startHour;
+    }
+
+    public String getStopHour() {
+        return stopHour;
+    }
+
+    public void setStopHour(String stopHour) {
+        this.stopHour = stopHour;
+    }
+
+    public Long[] getEventsId() {
+        return eventsId;
+    }
+
+    public void setEventsId(Long[] eventsId) {
+        this.eventsId = eventsId;
+    }
+
+    public Long[] getUsersId() {
+        return usersId;
+    }
+
+    public void setUsersId(Long[] usersId) {
+        this.usersId = usersId;
+    }
+
+    public Long[] getLocationsId() {
+        return locationsId;
+    }
+
+    public void setLocationsId(Long[] locationsId) {
+        this.locationsId = locationsId;
+    }
 
     public boolean isActive() {
         return active;

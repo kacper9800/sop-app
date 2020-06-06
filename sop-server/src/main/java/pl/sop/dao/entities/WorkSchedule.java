@@ -7,11 +7,11 @@ import pl.sop.dao.entities.organizationStructure.Department;
 import pl.sop.dao.entities.organizationStructure.Faculty;
 import pl.sop.dao.entities.organizationStructure.Institute;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.OneToOne;
+import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 public class WorkSchedule extends BasicEntity implements Serializable {
@@ -53,6 +53,30 @@ public class WorkSchedule extends BasicEntity implements Serializable {
     @OneToOne
     @Fetch(FetchMode.JOIN)
     private User user;
+
+    @ManyToMany(fetch = FetchType.EAGER, cascade = {CascadeType.ALL})
+    @JoinTable(name = "work_schedule_locations", joinColumns = {
+            @JoinColumn(name = "work_schedule_id", nullable = false)}, inverseJoinColumns = {
+            @JoinColumn(name = "location_id", nullable = false)
+    })
+    @Fetch(FetchMode.JOIN)
+    private Set<Location> locations;
+
+    @ManyToMany(fetch = FetchType.EAGER, cascade = {CascadeType.ALL})
+    @JoinTable(name = "work_schedule_events", joinColumns = {
+            @JoinColumn(name = "work_schedule_id", nullable = false)}, inverseJoinColumns = {
+            @JoinColumn(name = "event_id", nullable = false)
+    })
+    @Fetch(FetchMode.JOIN)
+    private Set<Event> events;
+
+    @ManyToMany(fetch = FetchType.EAGER, cascade = {CascadeType.ALL})
+    @JoinTable(name = "work_schedule_users", joinColumns = {
+            @JoinColumn(name = "work_schedule_id", nullable = false)}, inverseJoinColumns = {
+            @JoinColumn(name = "user_id", nullable = false)})
+    @Fetch(FetchMode.JOIN)
+    private Set<User> users;
+
 
     public WorkSchedule() {
     }
@@ -143,5 +167,43 @@ public class WorkSchedule extends BasicEntity implements Serializable {
 
     public void setUser(User user) {
         this.user = user;
+    }
+
+    public Set<Location> getLocations() {
+        return locations;
+    }
+
+    public void setLocations(Set<Location> locations) {
+        this.locations = locations;
+    }
+
+    public Set<Event> getEvents() {
+        return events;
+    }
+
+    public void setEvents(Set<Event> events) {
+        this.events = events;
+    }
+
+    public void addEvent(Event event) {
+        if (this.events == null) {
+            this.events = new HashSet<>();
+        }
+        this.events.add(event);
+    }
+
+    public Set<User> getUsers() {
+        return users;
+    }
+
+    public void setUsers(Set<User> users) {
+        this.users = users;
+    }
+
+    public void addUser(User user) {
+        if (this.users == null) {
+            this.users = new HashSet<>();
+        }
+        this.users.add(user);
     }
 }

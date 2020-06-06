@@ -5,11 +5,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
-import pl.sop.dto.EventDTO;
 import pl.sop.dto.WorkScheduleDTO;
 import pl.sop.services.WorkScheduleService;
 
-import java.text.ParseException;
 import java.util.List;
 
 @RestController
