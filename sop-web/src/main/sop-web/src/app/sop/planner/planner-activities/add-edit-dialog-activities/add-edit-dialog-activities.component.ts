@@ -8,6 +8,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { UserService } from '../../../../_services/user.service';
 import { Location } from '../../../../_model/location.model';
 import { LocationService } from '../../../../_services/location.service';
+import { EventDuration } from '../../../../enums/event-duration.enum';
 
 @Component({
   selector: 'app-add-edit-dialog-activities',
@@ -78,12 +79,12 @@ export class AddEditDialogActivitiesComponent implements OnInit {
     });
 
     this.durationItems = [
-      { label: '15 min', value: 0 },
-      { label: '30 min', value: 1 },
-      { label: '45 min', value: 2 },
-      { label: '1h min', value: 3 },
-      { label: '1h 30 min', value: 4 },
-      { label: '2h 15 min', value: 5 }
+      { label: '15 min', value: EventDuration.FIFTENMINUTES },
+      { label: '30 min', value: EventDuration.HALFHOUR },
+      { label: '45 min', value: EventDuration.THREEFOURTHHOUR },
+      { label: '1h min', value: EventDuration.HOUR },
+      { label: '1h 30 min', value: EventDuration.ONEHOURANDHALF },
+      { label: '2h 15 min', value: EventDuration.TWOHOURSANDFIFTENMINUTES }
     ];
   }
 

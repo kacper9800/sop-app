@@ -11,6 +11,8 @@ import { Location } from '../../../_model/location.model';
 import { TokenStorageService } from '../../../_services/auth/token-storage.service';
 import { PrincipalService } from '../../../_services/auth/principal.service';
 import { LocationService } from '../../../_services/location.service';
+import { WorkSchedule } from '../../../_model/work-schedule.model';
+import { BreaksDuration } from '../../../enums/breaks-duration.enum';
 
 @Component({
   selector: 'app-planner-work-hours',
@@ -46,16 +48,23 @@ export class PlannerWorkHoursComponent implements OnInit {
   public stopDate: Date;
 
   public selectedEvents: Event[];
+  private selectedEventsIds: number[];
+
   public selectedUsers: User[];
+  private selectedUsersIds: number[];
+
   public selectedLocations: Location[];
+  private selectedLocationsIds: number[];
 
   public workScheduleForm: FormGroup;
+  private workScheduleToSave: WorkSchedule;
 
   public isSuperAdmin: boolean;
   public isAdmin: boolean;
   public isModerator: boolean;
   public isSuperviser: boolean;
   public isStudent: boolean;
+  public breaksItems: any;
 
 
   constructor(private plannerService: PlannerService,
@@ -104,6 +113,13 @@ export class PlannerWorkHoursComponent implements OnInit {
       allDay: new FormControl({ value: null, disabled: false }),
       repeat: new FormControl({ value: null, disabled: false }),
     });
+
+    this.breaksItems = [
+      { label: '15 min', value: BreaksDuration.FIFTENMINUTES },
+      { label: '30 min', value: BreaksDuration.HALFHOUR },
+      { label: '45 min', value: BreaksDuration.THREEFOURTHHOUR },
+      { label: '1h min', value: BreaksDuration.HOUR }
+    ];
   }
 
   private prepareColumns(): void {
@@ -145,7 +161,6 @@ export class PlannerWorkHoursComponent implements OnInit {
   }
 
   private onSuccessLoadEvents(res: Event[]): void {
-    console.log(res);
     this.events = [];
     if (res.length !== 0) {
       res.forEach((event) => {
@@ -209,6 +224,67 @@ export class PlannerWorkHoursComponent implements OnInit {
   }
 
   public saveNewWorkSchedule(): void {
+    this.collectWorkScheduleDataFromForm();
+    this.plannerService.createWorkSchedule(this.workScheduleToSave).subscribe(
+      () => this.onSuccessSaveWorkSchedule(),
+      () => this.onErrorSaveWorkSchedule()
+    );
+  }
+
+  private collectWorkScheduleDataFromForm() {
+    if (this.workScheduleForm !== null) {
+      this.workScheduleToSave = new WorkSchedule();
+      this.workScheduleToSave.name = this.workScheduleForm.get('name').value;
+      this.workScheduleToSave.description = this.workScheduleForm.get('description').value;
+      this.workScheduleToSave.startDate = this.workScheduleForm.get('startDate').value;
+      this.workScheduleToSave.stopDate = this.workScheduleForm.get('stopDate').value;
+      this.workScheduleToSave.breaks = this.workScheduleForm.get('breaks').value;
+      this.workScheduleToSave.startHour = this.workScheduleForm.get('startHour').value;
+      this.workScheduleToSave.stopHour = this.workScheduleForm.get('stopHour').value;
+
+      this.selectedEventsIds = [];
+      this.selectedUsersIds = [];
+      this.selectedLocationsIds = [];
+
+      if (this.selectedEvents.length !== 0) {
+        this.selectedEvents.forEach(event => {
+          console.log(event);
+          this.selectedEventsIds.push(event.id);
+        });
+      } else {
+        return;
+      }
+      this.workScheduleToSave.eventsId = this.selectedEventsIds
+
+      if (this.selectedUsers.length !== 0) {
+        this.selectedUsers.forEach(user => {
+          console.log(user);
+          this.selectedUsersIds.push(user.id);
+        });
+      } else {
+        return;
+      }
+      this.workScheduleToSave.usersId = this.selectedUsersIds;
+
+      if (this.selectedLocations.length !== 0) {
+        this.selectedLocations.forEach(location => {
+          console.log(location);
+          this.selectedLocationsIds.push(location.id);
+        });
+      } else {
+        return;
+      }
+
+      this.workScheduleToSave.locationsId = this.selectedLocationsIds;
+    }
+    console.log(this.workScheduleToSave);
+  }
+
+  private onSuccessSaveWorkSchedule() {
+
+  }
+
+  private onErrorSaveWorkSchedule() {
 
   }
 }

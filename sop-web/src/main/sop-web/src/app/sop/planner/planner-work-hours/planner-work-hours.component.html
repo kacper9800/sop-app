@@ -77,7 +77,8 @@
   <clr-wizard-button [type]="'cancel'">{{'common.confirm.cancel'  | translate}}</clr-wizard-button>
   <clr-wizard-button [type]="'previous'">{{'common.buttons.back' | translate}}</clr-wizard-button>
   <clr-wizard-button [type]="'next'">{{'common.buttons.next' | translate}}</clr-wizard-button>
-  <clr-wizard-button [type]="'finish'" (click)="saveNewWorkSchedule()">{{'common.buttons.create' | translate}}</clr-wizard-button>
+  <clr-wizard-button [type]="'finish'"
+                     (click)="saveNewWorkSchedule()">{{'common.buttons.create' | translate}}</clr-wizard-button>
   <form clrForm [formGroup]="workScheduleForm">
 
     <clr-wizard-page> <!-- Page #1 -->
@@ -89,6 +90,7 @@
         </div>
         <div class="clr-col-1"></div>
       </div>
+
       <div class="clr-row">
         <div class="clr-col-1"></div>
         <div class="clr-col-10">
@@ -124,25 +126,32 @@
     <clr-wizard-page> <!-- Page #2 -->
       <ng-template clrPageTitle>{{'calendar.settings' | translate}}</ng-template>
       <div class="clr-row">
-        <div class="clr-col-1"></div>
-        <div class="clr-col-10">
-          <input clrInput placeholder="{{'workSchedules.breaks' | translate}}" name="input" formControlName="breaks"/>
+        <div class="clr-col-2"></div>
+        <div class="clr-col-8">
+          <clr-datalist-container>
+            <input style="width: 100%;" clrDatalistInput required placeholder="{{'common.breaksPlaceholder' | translate}}" name="Option"
+                   formControlName="breaks"/>
+            <datalist id="clr-custom-datalistid-1">
+              <option *ngFor="let breakItem of breaksItems" [label]="breakItem.label"
+                      [value]="breakItem.value"></option>
+            </datalist>
+          </clr-datalist-container>
         </div>
-        <div class="clr-col-1"></div>
+        <div class="clr-col-2"></div>
       </div>
       <div class="clr-row">
-        <div class="clr-col-1"></div>
-        <div class="clr-col-10">
+        <div class="clr-col-2"></div>
+        <div class="clr-col-8">
           <input clrInput placeholder="{{'common.startHour' | translate}}" name="input" formControlName="startHour"/>
         </div>
-        <div class="clr-col-1"></div>
+        <div class="clr-col-2"></div>
       </div>
       <div class="clr-row">
-        <div class="clr-col-1"></div>
-        <div class="clr-col-10">
+        <div class="clr-col-2"></div>
+        <div class="clr-col-8">
           <input clrInput placeholder="{{'common.stopHour' | translate}}" name="input" formControlName="stopHour"/>
         </div>
-        <div class="clr-col-1"></div>
+        <div class="clr-col-2"></div>
       </div>
     </clr-wizard-page>
 

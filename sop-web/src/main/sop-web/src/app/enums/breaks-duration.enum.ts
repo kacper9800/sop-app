@@ -1,6 +1,6 @@
 export enum BreaksDuration {
-  FIFTENMINUTES = 15,
-  HALFHOUR = 30,
-  THREEFOURTHHOUR = 45,
-  HOUR = 60
+  FIFTENMINUTES = 0,
+  HALFHOUR = 1,
+  THREEFOURTHHOUR = 2,
+  HOUR = 3
 }
