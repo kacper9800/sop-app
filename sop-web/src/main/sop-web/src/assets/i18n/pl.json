@@ -13,14 +13,24 @@
       "title": "Usuwanie rekordu",
       "mainContent": "Czy na pewno chcesz usunąć ten rekord?"
     },
-    "id": "Identyfikator",
+    "buttons": {
+      "next": "Dalej",
+      "back": "Cofnij",
+      "create": "Utwórz nowy"
+    },
+    "id": "Id",
     "name": "Nazwa",
     "description": "Opis",
-    "startDate": "Data początkowa",
-    "stopDate": "Data końcowa",
+    "startDate": "Początek(dd/MM/yyyy)",
+    "startHour": "Godzina rozpoczęcia",
+    "stopDate": "Koniec(dd/MM/yyyy)",
+    "stopHour": "Godzina zakończenia",
     "duration": "Czas trwania",
+    "durationPlaceholder": "Wybierz czas trwania eventu",
     "location": "Lokalizacja",
+    "locationPlaceholder": "Wybierz lokalizację",
     "hostBy": "Prowadzący",
+    "hostByPlaceholder": "Wybierz prowadzącego",
     "actions": "Akcje",
     "active": "Aktywny",
     "instructor": "Prowadzący",
@@ -85,7 +95,11 @@
     "settings": "Ustawienia",
     "eventChooser": "Wybór aktywności",
     "usersChooser": "Wybór użytkowników",
-    "locationsChooser": "Wybór lokalizacji"
+    "locationsChooser": "Wybór lokalizacji",
+    "today": "Dzisiaj",
+    "dayView": "Widok dnia",
+    "weekView": "Widok tygodnia",
+    "monthView": "Widok miesiąca"
   },
   "add-edit-dialog": {
     "headerNewEvent": "Tworzenie nowej aktywności",
@@ -117,14 +131,26 @@
   "workSchedules": {
     "startDate": "Obowiązuje od",
     "stopDate": "do",
-    "breaks": "Długość przerw"
+    "breaks": "Długość przerw między zajęciami"
   },
   "locations": {
     "header": "Lokalizacje",
     "address": "Adres",
     "floor": "Piętro",
     "room": "Pokój/Sala",
-    "capacity": "Pojemność"
+    "capacity": "Pojemność",
+    "description": "Opis"
+  },
+  "toast": {
+    "success": "Sukces",
+    "error": "Błąd",
+    "defaultSuccessDetailAdd": "Dane zostały pomyślnie zapisane",
+    "defaultSuccessDetailEdit": "Zmiany zostały pomyślnie zapisane",
+    "defaultSuccessDetailDelete": "Dane został usunięte",
+    "defaultErrorDetailAdd": "Błąd zapisu danych",
+    "defaultErrorDetailEdit": "Bład zapisu zmian",
+    "defaultErrorDetailDelete": "Błąd usuwania danych",
+    "defaultErrorDetailLoad": "Błąd ładowania danych"
   }
 }
 

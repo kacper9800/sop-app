@@ -1,3 +1,3 @@
 export default Object.freeze({
-  API: 'https://localhost:8082/api'
+  API: 'http://localhost:8082/api'
 });

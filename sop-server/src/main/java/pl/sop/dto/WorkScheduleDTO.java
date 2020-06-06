@@ -8,18 +8,25 @@ public class WorkScheduleDTO {
     private String description;
     private Date startDate;
     private Date stopDate;
-    private String additionalInfo;
+    private Integer breaks;
+    private Date startHour;
+    private Date stopHour;
+    private Long[] events;
+    private Long[] users;
+    private Long[] locations;
 
-    private Long collegeId;
-    private String collegeName;
-    private Long facultyId;
-    private String facultyName;
-    private Long instituteId;
-    private String instituteName;
-    private Long departmentId;
-    private String departmentName;
-    private Long userId;
-    private String userName;
+
+//    private String additionalInfo;
+//    private Long collegeId;
+//    private String collegeName;
+//    private Long facultyId;
+//    private String facultyName;
+//    private Long instituteId;
+//    private String instituteName;
+//    private Long departmentId;
+//    private String departmentName;
+//    private Long userId;
+//    private String userName;
 
     private boolean active;
     private boolean deleted;
@@ -67,93 +74,93 @@ public class WorkScheduleDTO {
         this.stopDate = stopDate;
     }
 
-    public String getAdditionalInfo() {
-        return additionalInfo;
-    }
-
-    public void setAdditionalInfo(String additionalInfo) {
-        this.additionalInfo = additionalInfo;
-    }
-
-    public Long getCollegeId() {
-        return collegeId;
-    }
-
-    public void setCollegeId(Long collegeId) {
-        this.collegeId = collegeId;
-    }
-
-    public String getCollegeName() {
-        return collegeName;
-    }
-
-    public void setCollegeName(String collegeName) {
-        this.collegeName = collegeName;
-    }
-
-    public Long getFacultyId() {
-        return facultyId;
-    }
-
-    public void setFacultyId(Long facultyId) {
-        this.facultyId = facultyId;
-    }
-
-    public String getFacultyName() {
-        return facultyName;
-    }
-
-    public void setFacultyName(String facultyName) {
-        this.facultyName = facultyName;
-    }
-
-    public Long getInstituteId() {
-        return instituteId;
-    }
-
-    public void setInstituteId(Long instituteId) {
-        this.instituteId = instituteId;
-    }
-
-    public String getInstituteName() {
-        return instituteName;
-    }
-
-    public void setInstituteName(String instituteName) {
-        this.instituteName = instituteName;
-    }
-
-    public Long getDepartmentId() {
-        return departmentId;
-    }
-
-    public void setDepartmentId(Long departmentId) {
-        this.departmentId = departmentId;
-    }
-
-    public String getDepartmentName() {
-        return departmentName;
-    }
-
-    public void setDepartmentName(String departmentName) {
-        this.departmentName = departmentName;
-    }
-
-    public Long getUserId() {
-        return userId;
-    }
-
-    public void setUserId(Long userId) {
-        this.userId = userId;
-    }
-
-    public String getUserName() {
-        return userName;
-    }
-
-    public void setUserName(String userName) {
-        this.userName = userName;
-    }
+//    public String getAdditionalInfo() {
+//        return additionalInfo;
+//    }
+//
+//    public void setAdditionalInfo(String additionalInfo) {
+//        this.additionalInfo = additionalInfo;
+//    }
+//
+//    public Long getCollegeId() {
+//        return collegeId;
+//    }
+//
+//    public void setCollegeId(Long collegeId) {
+//        this.collegeId = collegeId;
+//    }
+//
+//    public String getCollegeName() {
+//        return collegeName;
+//    }
+//
+//    public void setCollegeName(String collegeName) {
+//        this.collegeName = collegeName;
+//    }
+//
+//    public Long getFacultyId() {
+//        return facultyId;
+//    }
+//
+//    public void setFacultyId(Long facultyId) {
+//        this.facultyId = facultyId;
+//    }
+//
+//    public String getFacultyName() {
+//        return facultyName;
+//    }
+//
+//    public void setFacultyName(String facultyName) {
+//        this.facultyName = facultyName;
+//    }
+//
+//    public Long getInstituteId() {
+//        return instituteId;
+//    }
+//
+//    public void setInstituteId(Long instituteId) {
+//        this.instituteId = instituteId;
+//    }
+//
+//    public String getInstituteName() {
+//        return instituteName;
+//    }
+//
+//    public void setInstituteName(String instituteName) {
+//        this.instituteName = instituteName;
+//    }
+//
+//    public Long getDepartmentId() {
+//        return departmentId;
+//    }
+//
+//    public void setDepartmentId(Long departmentId) {
+//        this.departmentId = departmentId;
+//    }
+//
+//    public String getDepartmentName() {
+//        return departmentName;
+//    }
+//
+//    public void setDepartmentName(String departmentName) {
+//        this.departmentName = departmentName;
+//    }
+//
+//    public Long getUserId() {
+//        return userId;
+//    }
+//
+//    public void setUserId(Long userId) {
+//        this.userId = userId;
+//    }
+//
+//    public String getUserName() {
+//        return userName;
+//    }
+//
+//    public void setUserName(String userName) {
+//        this.userName = userName;
+//    }
 
     public boolean isActive() {
         return active;

@@ -28,3 +28,8 @@ body {
   border-radius: 10px;
   background: #247bae;
 }
+
+.table-buttons {
+  text-align: center;
+  margin-right: 5px;
+}

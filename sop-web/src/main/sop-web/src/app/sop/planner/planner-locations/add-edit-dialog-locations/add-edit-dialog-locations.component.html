@@ -1,12 +1,12 @@
-<p-toast></p-toast>
+<p-toast key="toast1" [baseZIndex]="9999"></p-toast>
 
 <clr-modal [(clrModalOpen)]="isDialogVisible" [clrModalStaticBackdrop]="false" [clrModalClosable]="false"
-           style="z-index: 999;">
+           style="z-index: 999;" (close)="onClose()">
   <h3 class="modal-title">{{header}}</h3>
   <div class="modal-body">
     <form id="addEditForm" clrForm [formGroup]="addEditForm">
       <div class="clr-row">
-        <div class="clr-col-2">{{'common.name' | translate}}</div>
+        <div class="clr-col-2"></div>
         <div class="clr-col-8">
           <input clrInput style="width: 100%;" [placeholder]="'add-edit-dialog.name' | translate"
                  formControlName="name">
@@ -14,45 +14,37 @@
         <div class="clr-col-2"></div>
       </div>
 
-      <!--      <div class="clr-row">-->
-      <!--        <div class="clr-col-2">{{'common.description' | translate}}</div>-->
-      <!--        <div class="clr-col-8">-->
-      <!--          <input clrInput style="width: 100%;" [placeholder]="'common.description' | translate"-->
-      <!--                 formControlName="description">-->
-      <!--        </div>-->
-      <!--        <div class="clr-col-2"></div>-->
-      <!--      </div>-->
-
       <div class="clr-row">
-        <div class="clr-col-2">
-          {{'common.duration' | translate}}
-        </div>
-        <div class="clr-col-8">
-            <input clrDatalistInput placeholder="Option" name="Option" formControlName="item"/>
-            <datalist id="clr-custom-datalistid-1">
-              <option *ngFor="let durationItem of durationItems" [value]="durationItem"></option>
-            </datalist>
-        </div>
         <div class="clr-col-2"></div>
-      </div>
-      <div class="clr-row">
-        <div class="clr-col-2">{{'common.hostBy' | translate}}</div>
         <div class="clr-col-8">
-          <!--          <input clrInput style="width: 100%;" [placeholder]="'common.hostBy' | translate"-->
-          <!--                 formControlName="hostBy">-->
-          <select clrSelect name="options" formControlName="room">
-            <div *ngFor="let userOption of users">
-              <option [value]="userOption.id">{{userOption.firstName + ' ' + userOption.lastName}} </option>
-            </div>
-          </select>
+          <input clrInput style="width: 100%;" [placeholder]="'locations.address' | translate"
+                 formControlName="address">
         </div>
         <div class="clr-col-2"></div>
       </div>
 
       <div class="clr-row">
-        <div class="clr-col-2">{{'common.location' | translate}}</div>
+        <div class="clr-col-2"></div>
         <div class="clr-col-8">
-          <input clrInput style="width: 100%;" [placeholder]="'common.location' | translate"
+          <input clrInput style="width: 100%;" [placeholder]="'locations.floor' | translate"
+                 formControlName="floor">
+        </div>
+        <div class="clr-col-2"></div>
+      </div>
+
+      <div class="clr-row">
+        <div class="clr-col-2"></div>
+        <div class="clr-col-8">
+          <input clrInput style="width: 100%;" [placeholder]="'locations.room' | translate"
+                 formControlName="room">
+        </div>
+        <div class="clr-col-2"></div>
+      </div>
+
+      <div class="clr-row">
+        <div class="clr-col-2"></div>
+        <div class="clr-col-8">
+          <input clrInput style="width: 100%;" [placeholder]="'locations.capacity' | translate"
                  formControlName="capacity">
         </div>
         <div class="clr-col-2"></div>
@@ -64,9 +56,8 @@
       <div class="clr-col-2"></div>
       <div class="clr-col-8">
         <clr-button-group>
-          <clr-button class="btn-primary" type="submit" form="loginForm" class="btn btn-primary"
-                      (click)="save()" [disabled]="addEditForm.invalid">
-            {{'add-edit-dialog.save' | translate}}
+          <clr-button class="btn-primary" type="submit"
+                      (click)="save()">{{'add-edit-dialog.save' | translate}}
           </clr-button>
           <clr-button class="btn"
                       (click)="isDialogVisible=false">

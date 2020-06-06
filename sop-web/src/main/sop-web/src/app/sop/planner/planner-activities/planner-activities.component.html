@@ -27,7 +27,10 @@
 <!--  <div class='fc-event'>My Event 4</div>-->
 <!--  <div class='fc-event'>My Event 5</div>-->
 <!--</div>-->
-<button class="btn btn-outline" (click)="addNewEvent()">
+<h1 style="text-align: center">{{'navBar.planner.myActivitiesList' | translate}}</h1>
+
+
+<button class="btn btn-outline" (click)="addNewEvent()" *ngIf="isModerator">
   <clr-icon shape="plus"></clr-icon>
   {{"calendar.addNewEvent" | translate}}</button>
 
@@ -58,6 +61,12 @@
         </div>
         <div *ngSwitchCase="'description'">
           {{rowData.description}}
+        </div>
+        <div *ngSwitchCase="'durationConverted'">
+          {{rowData.durationConverted}}
+        </div>
+        <div *ngSwitchCase="'instructorName'">
+          {{rowData.instructorName}}
         </div>
         <div *ngSwitchCase="'active'" [ngClass]="{'center-text': true}">
           <i class="pi {{rowData.active? 'pi-check' : 'pi-times'}} "></i>

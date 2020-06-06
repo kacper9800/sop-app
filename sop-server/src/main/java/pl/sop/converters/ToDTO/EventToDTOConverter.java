@@ -16,7 +16,6 @@ public class EventToDTOConverter implements Converter<Event, EventDTO> {
         if (input.getId() != null) {
             eventDTO.setId(input.getId());
         }
-        eventDTO.setId(input.getId());
         eventDTO.setName(input.getName());
         if (input.getDescription() != null) {
             eventDTO.setDescription(input.getDescription());

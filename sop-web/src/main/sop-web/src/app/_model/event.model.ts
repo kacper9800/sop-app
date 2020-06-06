@@ -34,11 +34,13 @@ export class Event implements IEvent {
   name: string;
   description: string;
   duration: number;
+  durationConverted: string;
 
   location: string;
   locationId: number;
 
   instructor: string;
+  instructorName: string;
   instructorId: number;
 
   userId: number;

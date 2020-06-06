@@ -1,10 +1,14 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { FullCalendar } from 'primeng';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import timeGridPlugin from '@fullcalendar/timegrid';
 import plLocale from '@fullcalendar/core/locales/pl';
 import { PlannerService } from '../../../_services/planner.service';
 import { Event } from '../../../_model/event.model';
+import { TranslateService } from '@ngx-translate/core';
+import interactionPlugin, { Draggable } from '@fullcalendar/interaction';
+import resourceTimeGridPlugin from '@fullcalendar/resource-timegrid';
+import { FullCalendarComponent } from '@fullcalendar/angular';
+
 
 @Component({
   selector: 'app-planner-calendar',
@@ -12,37 +16,52 @@ import { Event } from '../../../_model/event.model';
   styleUrls: ['./planner-calendar.component.css']
 })
 export class PlannerCalendarComponent implements OnInit {
-
-  @ViewChild('calendar', {static: true})
-  public calendarComponent: FullCalendar;
-
-
   public events: any;
   public calOptions: any;
-  public showNewActivityDialog: boolean;
   private blockUI: boolean;
+  eventsModel: any;
+  public showWeekendButtonLabel: string;
 
-
-  constructor(private plannerService: PlannerService) {
+  constructor(private plannerService: PlannerService,
+              private translateService: TranslateService) {
   }
+
+  calendarPlugins = [dayGridPlugin, interactionPlugin, timeGridPlugin, resourceTimeGridPlugin];
+
+  @ViewChild('fullcalendar') fullcalendar: FullCalendarComponent;
+  @ViewChild('external') external: ElementRef;
+  public showWeekend = false;
 
   ngOnInit() {
     this.loadEvents();
-
+    this.showWeekendButtonLabel = 'Pokaż weekend';
     this.calOptions = {
-      plugins: [dayGridPlugin, timeGridPlugin],
-      defaultView: 'timeGridDay',
+      editable: true,
+      defaultView: 'timeGridMonth',
       defaultDate: new Date(),
       header: {
-        //   left: 'prevYear prev next nextYear ',
-        //   center: 'title',
+        left: ' prev,next myCustomButton',
+        center: 'title',
         right: 'today timeGridDay timeGridWeek dayGridMonth',
       },
       buttonIcons: {
-        // prev: 'left-single-arrow',
-        // next: 'right-single-arrow',
-        // prevYear: 'left-double-arrow',
-        // nextYear: 'right-double-arrow'
+        prev: 'left-single-arrow',
+        next: 'right-single-arrow',
+        prevYear: 'left-double-arrow',
+        nextYear: 'right-double-arrow'
+      },
+      customButtons: {
+        myCustomButton: {
+          text: this.showWeekendButtonLabel,
+          click: () => {
+            this.showWeekend = !this.showWeekend;
+            if (this.showWeekend) {
+              this.showWeekendButtonLabel = 'Schowaj widok weekendu';
+            } else {
+              this.showWeekendButtonLabel = 'Pokaż widok weekendu';
+            }
+          }
+        }
       },
       locales: [plLocale],
       locale: 'pl',
@@ -53,10 +72,11 @@ export class PlannerCalendarComponent implements OnInit {
         // day: this.translateService.instant('calendar.dayView'),
         // list: this.translateService.instant('calendar.list')
       },
-      height: 600,
+      height: 700,
       nowIndicator: true,
       now: new Date(),
       firstDay: 1,
+
 
       dateClick: (e) => {
 
@@ -90,7 +110,58 @@ export class PlannerCalendarComponent implements OnInit {
 
       }
     };
+
+
+    // tslint:disable-next-line:no-unused-expression
+    new Draggable(this.external.nativeElement, {
+      itemSelector: '.fc-event',
+      eventData(eventEl) {
+        return {
+          title: eventEl.innerText
+        };
+      }
+    });
   }
+
+  eventClick(model) {
+    console.log(model);
+  }
+
+  eventDragStop(model) {
+    console.log(model);
+  }
+
+  dateClick(model) {
+    console.log(model);
+  }
+
+  updateHeader() {
+    this.calOptions.header = {
+      left: 'prev,next myCustomButton',
+      center: 'title',
+      right: ''
+    };
+  }
+
+  updateEvents() {
+    this.eventsModel = [{
+      title: 'Updaten Event',
+      start: this.yearMonth + '-08',
+      end: this.yearMonth + '-10'
+    }];
+  }
+
+  get yearMonth(): string {
+    const dateObj = new Date();
+    return dateObj.getUTCFullYear() + '-' + (dateObj.getUTCMonth() + 1);
+  }
+
+  dayRender(ev) {
+    ev.el.addEventListener('dblclick', () => {
+      alert('double click!');
+    });
+  }
+
 
   private loadEvents() {
     this.plannerService.getAllEvents().subscribe(
@@ -129,18 +200,15 @@ export class PlannerCalendarComponent implements OnInit {
 
 
   private convertEventsToCalendarView(events: Event[]) {
+    console.log(events);
     events.forEach(event => {
       this.events = [...this.events, {
-        id: event.id,
-        // 'title': 'Team: ' + ele.teamName + '\nPerson: ' + ele.personName + ' $ICON',
-        start: new Date(event.startDate),
-        // "end": new Date(ele.stopDate),
-        end: new Date(event.stopDate),
-        allDay: true,
-        description: event.description,
+        title: event.name,
+        date: '2020-05-22',
       }
       ];
     });
+    console.log(this.events);
   }
 
 }

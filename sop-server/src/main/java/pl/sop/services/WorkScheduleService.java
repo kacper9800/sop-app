@@ -35,6 +35,15 @@ public class WorkScheduleService {
 
     public WorkSchedule createWorkSchedule(WorkScheduleDTO workScheduleDTO) {
         WorkSchedule workSchedule = dtoToWorkScheduleConverter.convert(workScheduleDTO);
+        // TODO
+        // Typy proste dodajemy bez większych ceregieli
+        // Listy/Kolekcje musimy mapować i robić zapis do innych tabel.
+        // W jakich tabelach będzie zapis:
+        // Work Schedules - ogólna definicja grafiku,
+        // Events - zapis każdego eventu, dla każdej osoby
+        // pętla for each (Long userId : users) {
+        // User user = userService.getUser(id);
+        // Event
         return this.workScheduleRepository.save(workSchedule);
     }
 

@@ -13,14 +13,25 @@
       "title": "Record deleting",
       "mainContent": "Are you sure you want to delete record?"
     },
+    "buttons": {
+      "next": "Next",
+      "back": "Back",
+      "create": "Create"
+
+    },
     "id": "Identify",
     "name": "Name",
     "description": "Description",
     "startDate": "Start date",
+    "startHour": "Start hour",
     "stopDate": "Stop date",
+    "stopHour": "Stop hour",
     "duration": "Duration",
+    "durationPlaceholder":"Choose duration",
     "location": "Location",
+    "locationPlaceholder": "Choose location",
     "hostBy": "Host by",
+    "hostByPlaceholder": "Choose instructor",
     "actions": "Actions",
     "active": "Active",
     "instructor": "Instructor",
@@ -85,12 +96,17 @@
     "settings": "Settings",
     "eventChooser": "Events chooser",
     "usersChooser": "Users chooser",
-    "locationsChooser": "Locations chooser"
+    "locationsChooser": "Locations chooser",
+    "today": "Today",
+    "dayView": "Day view",
+    "weekView": "Week view",
+    "monthView": "Month view"
   },
   "add-edit-dialog": {
     "headerNewEvent": "Adding new activity",
     "headerNewLocation": "Creating new localization",
-    "headerEdit": "Editing activity",
+    "headerEditEvent": "Editing activity",
+    "headerEditLocation": "Editing location",
     "name": "Name",
     "description": "Description",
     "location": "Location",
@@ -123,6 +139,18 @@
     "address": "Address",
     "floor": "Floor",
     "room": "Room",
-    "capacity": "Capacity"
+    "capacity": "Capacity",
+    "description": "Description"
+  },
+  "toast": {
+    "success": "Success",
+    "error": "Error",
+    "defaultSuccessDetailAdd": "Data was successfully saved",
+    "defaultSuccessDetailEdit": "Changes were successfully saved",
+    "defaultSuccessDetailDelete": "Data was successfully deleted",
+    "defaultErrorDetailAdd": "Error during data saving",
+    "defaultErrorDetailEdit": "Error during data updating ",
+    "defaultErrorDetailDelete": "Error during data deleting",
+    "defaultErrorDetailLoad": "Error during data loading"
   }
 }

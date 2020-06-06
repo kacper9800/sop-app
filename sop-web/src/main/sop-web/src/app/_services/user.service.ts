@@ -39,8 +39,7 @@ export class UserService {
     return this.http.get(API_URL + 'admin', {responseType: 'text'});
   }
 
-  getAllUsers(): Observable<User[]> {
-    console.log(global.API);
+  getAllUsers(): Observable<any> {
     return this.http.get<User[]>(global.API + USERS_API);
   }
 }

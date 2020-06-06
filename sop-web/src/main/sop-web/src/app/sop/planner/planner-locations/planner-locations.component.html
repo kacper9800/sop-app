@@ -1,23 +1,60 @@
 <h1 style="text-align: center">{{'locations.header' | translate}}</h1>
 
-
-<button class="btn btn-outline" (click)="addNewLocation()">
+<button class="btn btn-outline" (click)="addNewLocation()" *ngIf="isModerator">
   <clr-icon shape="plus"></clr-icon>
   {{"calendar.addNewLocation" | translate}}</button>
-<!-- ToDo Przerobić generowanie tabeli na pętle-->
-<clr-datagrid [clrDgRowSelection]="true" [(clrDgSelected)]="selectedUsers">
-  <clr-dg-column>{{'locations.address' | translate}}</clr-dg-column>
-  <clr-dg-column>{{'locations.floor' | translate}}</clr-dg-column>
-  <clr-dg-column>{{'locations.room' | translate}}</clr-dg-column>
-  <clr-dg-column>{{'locations.capacity' | translate}}</clr-dg-column>
 
-  <clr-dg-row *ngFor="let location of locations">
-    <clr-dg-cell>{{location.address}}</clr-dg-cell>
-    <clr-dg-cell>{{location.floor}}</clr-dg-cell>
-    <clr-dg-cell>{{location.room}}</clr-dg-cell>
-    <clr-dg-cell>{{location.capacity}}</clr-dg-cell>
-  </clr-dg-row>
-</clr-datagrid>
+<p-table [value]="locations" [columns]="columns">
+  <ng-template pTemplate="header" let-columns>
+    <tr>
+      <th *ngFor="let col of columns" [pSortableColumn]="col.field" [ngSwitch]="col.field">
+        {{col.header | translate}}
+        <div *ngIf="col.field != 'actions'">
+          <p-sortIcon [field]="col.field"></p-sortIcon>
+        </div>
+      </th>
+    </tr>
+  </ng-template>
+  <ng-template pTemplate="body" let-rowData let-columns="columns">
+    <tr [pSelectableRow]="rowData">
+      <td *ngFor="let col of columns" [ngSwitch]="col.field" class="table-dataColumn">
+        <div *ngSwitchCase="'name'">
+          {{rowData.name}}
+        </div>
+        <div *ngSwitchCase="'address'">
+          {{rowData.address}}
+        </div>
+        <div *ngSwitchCase="'floor'">
+          {{rowData.floor}}
+        </div>
+        <div *ngSwitchCase="'room'">
+          {{rowData.room}}
+        </div>
+        <div *ngSwitchCase="'actions'" [ngClass]="{'table-buttons' : true}">
+          <p-button icon="pi pi-pencil" [ngClass]="{'table-buttons':true}"
+                    (click)="editLocation(rowData.id)"></p-button>
+          <p-button icon="pi pi-trash" [ngClass]="{'table-buttons': true}"
+                    (click)="confirmDelete(rowData.id)"></p-button>
+        </div>
+      </td>
+    </tr>
+
+  </ng-template>
+</p-table>
+<!--<clr-datagrid [clrDgRowSelection]="true" [(clrDgSelected)]="selectedUsers">-->
+<!--  <clr-dg-column>{{'locations.address' | translate}}</clr-dg-column>-->
+<!--  <clr-dg-column>{{'locations.floor' | translate}}</clr-dg-column>-->
+<!--  <clr-dg-column>{{'locations.room' | translate}}</clr-dg-column>-->
+<!--  <clr-dg-column>{{'locations.capacity' | translate}}</clr-dg-column>-->
+
+<!--  <clr-dg-row *ngFor="let location of locations">-->
+<!--    <clr-dg-cell>{{location.address}}</clr-dg-cell>-->
+<!--    <clr-dg-cell>{{location.floor}}</clr-dg-cell>-->
+<!--    <clr-dg-cell>{{location.room}}</clr-dg-cell>-->
+<!--    <clr-dg-cell>{{location.capacity}}</clr-dg-cell>-->
+<!--  </clr-dg-row>-->
+<!--</clr-datagrid>-->
+<!-- ToDo Przerobić generowanie tabeli na pętle-->
 
 <ng-template #addEditDialog></ng-template>
 

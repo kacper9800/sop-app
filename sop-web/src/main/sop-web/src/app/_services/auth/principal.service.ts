@@ -5,42 +5,43 @@ const TOKEN_KEY = 'pl.auth-token';
 const USER_KEY = 'pl.auth-user';
 
 @Injectable({
-    providedIn: 'root'
+  providedIn: 'root'
 })
 export class PrincipalService {
 
-    private roles: string[];
-    private user: any;
+  private roles: string[];
+  private user: any;
 
-    constructor(private tokenStorage: TokenStorageService) {
-        if (this.tokenStorage.getToken()) {
-            this.getUser();
-        }
+  constructor(private tokenStorage: TokenStorageService) {
+    if (this.tokenStorage.getToken()) {
+      this.getUser();
     }
+  }
 
-    public getUser() {
-        this.user = JSON.parse(sessionStorage.getItem(USER_KEY));
-        this.roles = this.user.roles;
-    }
+  public getUser() {
+    this.user = JSON.parse(sessionStorage.getItem(USER_KEY));
+    this.roles = this.user.roles;
+    console.log(this.roles);
+  }
 
-    public isSuperAdmin(): boolean {
-        return this.roles.includes('ROLE_SUPERADMIN');
-    }
+  public isSuperAdmin(): boolean {
+    return this.roles.includes('ROLE_SUPERADMIN');
+  }
 
-    public isAdmin(): boolean {
-        return this.roles.includes('ROLE_ADMIN');
-    }
+  public isAdmin(): boolean {
+    return this.roles.includes('ROLE_ADMIN');
+  }
 
-    public isModerator(): boolean {
-        return this.roles.includes('ROLE_MODERATOR');
-    }
+  public isModerator(): boolean {
+    return this.roles.includes('ROLE_MODERATOR');
+  }
 
-    public isSuperviser(): boolean {
-        return this.roles.includes('ROLE_SUPERVISER');
-    }
+  public isSuperviser(): boolean {
+    return this.roles.includes('ROLE_SUPERVISER');
+  }
 
-    public isStudent(): boolean {
-        return this.roles.includes('ROLE_STUDENT');
-    }
+  public isStudent(): boolean {
+    return this.roles.includes('ROLE_STUDENT');
+  }
 
 }

@@ -10,7 +10,7 @@ import java.util.List;
 @Repository
 public interface LocationRepository extends JpaRepository<Location, Long> {
 
-    @Query(value = "SELECT l from Location l")
+    @Query(value = "SELECT l from Location l WHERE l.deleted = false ")
     List<Location> findAllLocations();
 
 }

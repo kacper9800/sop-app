@@ -68,26 +68,26 @@
 <!--  </form>-->
 <!--</p-dialog>-->
 
-<p-toast key="tl"></p-toast>
+<p-toast key="toast1" [baseZIndex]="9999"></p-toast>
 
 <clr-modal [(clrModalOpen)]="isDialogVisible" [clrModalStaticBackdrop]="false" [clrModalClosable]="false"
-           style="z-index: 999;">
+           style="z-index: 999;" (close)="onClose()">
   <h3 class="modal-title">{{header}}</h3>
   <div class="modal-body">
     <form id="addEditForm" clrForm [formGroup]="addEditForm">
       <div class="clr-row">
-        <div class="clr-col-2">{{'common.name' | translate}}</div>
+        <div class="clr-col-2"></div>
         <div class="clr-col-8">
-          <input clrInput style="width: 100%;" [placeholder]="'add-edit-dialog.name' | translate"
+          <input clrInput required style="width: 100%;" [placeholder]="'add-edit-dialog.name' | translate"
                  formControlName="name">
         </div>
         <div class="clr-col-2"></div>
       </div>
 
       <div class="clr-row">
-        <div class="clr-col-2">{{'common.description' | translate}}</div>
+        <div class="clr-col-2"></div>
         <div class="clr-col-8">
-          <input clrInput style="width: 100%;" [placeholder]="'common.description' | translate"
+          <input clrInput required style="width: 100%;" [placeholder]="'common.description' | translate"
                  formControlName="description">
         </div>
         <div class="clr-col-2"></div>
@@ -95,39 +95,45 @@
 
       <div class="clr-row">
         <div class="clr-col-2">
-          {{'common.duration' | translate}}
         </div>
         <div class="clr-col-8">
-          <select clrSelect name="options" formControlName="duration">
-            <option value="0">15 min</option>
-            <option value="1">30 min</option>
-            <option value="2">45 min</option>
-            <option value="3">1h</option>
-            <option value="4">1h 30 min</option>
-            <option value="5">2h 15 min</option>
-          </select>
-        </div>
-        <div class="clr-col-2"></div>
-      </div>
-      <div class="clr-row">
-        <div class="clr-col-2">{{'common.hostBy' | translate}}</div>
-        <div class="clr-col-8">
-          <!--          <input clrInput style="width: 100%;" [placeholder]="'common.hostBy' | translate"-->
-          <!--                 formControlName="hostBy">-->
-          <select clrSelect name="options" formControlName="hostBy">
-            <div *ngFor="let userOption of users">
-              <option [value]="userOption.id">{{userOption.firstName + ' ' + userOption.lastName}} </option>
-            </div>
-          </select>
+          <clr-datalist-container>
+            <input clrDatalistInput required placeholder="{{'common.durationPlaceholder' | translate}}" name="Option"
+                   formControlName="duration"/>
+            <datalist id="clr-custom-datalistid-1">
+              <option *ngFor="let durationItem of durationItems" [label]="durationItem.label"
+                      [value]="durationItem.value"></option>
+            </datalist>
+          </clr-datalist-container>
         </div>
         <div class="clr-col-2"></div>
       </div>
 
       <div class="clr-row">
-        <div class="clr-col-2">{{'common.location' | translate}}</div>
+        <div class="clr-col-2"></div>
         <div class="clr-col-8">
-          <input clrInput style="width: 100%;" [placeholder]="'common.location' | translate"
-                 formControlName="location">
+          <clr-datalist-container>
+            <input clrDatalistInput required placeholder="{{'common.hostByPlaceholder' | translate}}" name="instructor"
+                   formControlName="instructor"/>
+            <datalist id="clr-custom-datalistid-2">
+              <option *ngFor="let user of users" [text]="user.firstName" [label]="user.firstName + ' ' + user.lastName"
+                      [value]="user.id"></option>
+            </datalist>
+          </clr-datalist-container>
+        </div>
+        <div class="clr-col-2"></div>
+      </div>
+
+      <div class="clr-row">
+        <div class="clr-col-2"></div>
+        <div class="clr-col-8">
+          <clr-datalist-container>
+            <input clrDatalistInput required placeholder="{{'common.locationPlaceholder' | translate}}" name="location"
+                   formControlName="location"/>
+            <datalist id="clr-custom-datalistid-3">
+              <option *ngFor="let location of locations" [value]="location.value"></option>
+            </datalist>
+          </clr-datalist-container>
         </div>
         <div class="clr-col-2"></div>
       </div>
@@ -181,7 +187,7 @@
       <div class="clr-col-2"></div>
       <div class="clr-col-8">
         <clr-button-group>
-          <clr-button class="btn-primary" type="submit" form="loginForm" class="btn btn-primary"
+          <clr-button class="btn-primary" type="submit"
                       (click)="save()">{{'add-edit-dialog.save' | translate}}</clr-button>
           <clr-button class="btn"
                       (click)="isDialogVisible=false">{{'add-edit-dialog.cancel' | translate}}</clr-button>
