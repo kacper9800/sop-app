@@ -2,9 +2,6 @@ package pl.sop.dao.entities;
 
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
-import pl.sop.dao.entities.BasicEntity;
-import pl.sop.dao.entities.Location;
-import pl.sop.dao.entities.User;
 import pl.sop.dao.entities.organizationStructure.College;
 import pl.sop.dao.entities.organizationStructure.Department;
 import pl.sop.dao.entities.organizationStructure.Faculty;
@@ -15,9 +12,7 @@ import javax.persistence.Entity;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.Size;
 import java.io.Serializable;
-import java.time.Duration;
 import java.util.Date;
 
 @Entity
@@ -57,7 +52,6 @@ public class Event extends BasicEntity implements Serializable {
 //    @OneToOne
 //    @Fetch(FetchMode.JOIN)
 //    private College college;
-//
 //    @OneToOne
 //    @Fetch(FetchMode.JOIN)
 //    private Faculty faculty;
@@ -69,7 +63,7 @@ public class Event extends BasicEntity implements Serializable {
 //    @OneToOne
 //    @Fetch(FetchMode.JOIN)
 //    private Department department;
-//
+
     @OneToOne
     @Fetch(FetchMode.JOIN)
     private User user;
@@ -108,7 +102,7 @@ public class Event extends BasicEntity implements Serializable {
         return duration;
     }
 
-    public void setDuration(String  duration) {
+    public void setDuration(String duration) {
         this.duration = duration;
     }
 
@@ -183,7 +177,7 @@ public class Event extends BasicEntity implements Serializable {
 //    public void setDepartment(Department department) {
 //        this.department = department;
 //    }
-//
+
     public User getUser() {
         return user;
     }

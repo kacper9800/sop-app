@@ -26,6 +26,23 @@ public class EventController {
     }
 
     @CrossOrigin
+    @PreAuthorize("hasRole('ROLE_USER') or hasRole('ROLE_MODERATOR')")
+    @RequestMapping(value = "/api/planner/event/{id}", method = RequestMethod.GET)
+    public ResponseEntity<List<EventDTO>> getAllEventsForUserId(@PathVariable("id") Long id) {
+        final List<EventDTO> events = eventService.getAllEventsForUserId(id);
+        return new ResponseEntity(events, HttpStatus.OK);
+    }
+
+    @CrossOrigin
+    @PreAuthorize("hasRole('ROLE_USER') or hasRole('ROLE_MODERATOR')")
+    @RequestMapping(value = "/api/planner/event/base", method = RequestMethod.GET)
+    public ResponseEntity<List<EventDTO>> getAllBaseEvents() {
+        final List<EventDTO> events = eventService.getAllEventsWithoutDate();
+        return new ResponseEntity(events, HttpStatus.OK);
+    }
+
+
+    @CrossOrigin
     @PreAuthorize("hasRole('ROLE_MODERATOR')")
     @RequestMapping(value = "/api/planner/event", method = RequestMethod.POST)
     public ResponseEntity createNewEvent(@RequestBody EventDTO eventDTO) throws ParseException {

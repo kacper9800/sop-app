@@ -33,6 +33,18 @@ public class EventService {
         return eventDTOS;
     }
 
+    public List<EventDTO> getAllEventsForUserId(Long id) {
+        List<Event> events = eventRepository.findAllEventsForUserId(id);
+        List<EventDTO> eventDTOS = events.stream().map(event -> eventToDTOConverter.convert(event)).collect(toList());
+        return eventDTOS;
+    }
+
+    public List<EventDTO> getAllEventsWithoutDate() {
+        List<Event> events = eventRepository.findAllEventWithoutDate();
+        List<EventDTO> eventDTOS = events.stream().map(event -> eventToDTOConverter.convert(event)).collect(toList());
+        return eventDTOS;
+    }
+
     public Event createEvent(EventDTO eventDTO) throws ParseException {
         Event event = dtoToEventConverter.convert(eventDTO);
         return this.eventRepository.save(event);

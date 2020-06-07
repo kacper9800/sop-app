@@ -47,6 +47,10 @@ public class EventToDTOConverter implements Converter<Event, EventDTO> {
         } else {
             eventDTO.setActive(false);
         }
+
+        if (input.getLocation() != null) {
+            eventDTO.setLocationId(input.getLocation().getId());
+        }
 //        eventDTO.setStartDate(convertDateToStringDate(input.getStartDate()));
 //        eventDTO.setStopDate(convertDateToStringDate(input.getStopDate()));
 //        eventDTO.setAllDay(input.getAllDay());

@@ -29,9 +29,9 @@ public class Location extends BasicEntity implements Serializable {
     @Column(name = "room_number")
     private String room;
 
-    @OneToOne
-    @Fetch(FetchMode.JOIN)
-    private College college;
+//    @OneToOne
+//    @Fetch(FetchMode.JOIN)
+//    private College college;
 
     @Column(name = "type")
     private Integer type;
@@ -82,13 +82,13 @@ public class Location extends BasicEntity implements Serializable {
         this.room = room;
     }
 
-    public College getCollege() {
-        return college;
-    }
-
-    public void setCollege(College college) {
-        this.college = college;
-    }
+//    public College getCollege() {
+//        return college;
+//    }
+//
+//    public void setCollege(College college) {
+//        this.college = college;
+//    }
 
     public Integer getType() {
         return type;
