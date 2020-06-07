@@ -6,7 +6,6 @@ import org.springframework.transaction.annotation.Transactional;
 import pl.sop.converters.FromDTO.DTOToWorkScheduleConverter;
 import pl.sop.converters.ToDTO.WorkScheduleToDTOConverter;
 import pl.sop.dao.entities.Event;
-import pl.sop.dao.entities.User;
 import pl.sop.dao.entities.WorkSchedule;
 import pl.sop.dao.repository.EventRepository;
 import pl.sop.dao.repository.UserRepository;
@@ -55,46 +54,53 @@ public class WorkScheduleService {
     public WorkSchedule createWorkSchedule(WorkScheduleDTO workScheduleDTO) {
         WorkSchedule workSchedule = dtoToWorkScheduleConverter.convert(workScheduleDTO);
 
-        List<Date> listOfDates = createListOfDate(workScheduleDTO.getStartDate(), workScheduleDTO.getStopDate());
+        List<Date> listOfDates = createListOfDate(workScheduleDTO.getStartDate(), workScheduleDTO.getStopDate(), workScheduleDTO.getStartHour());
+        List<Event> listOfEvent = new ArrayList<Event>();
+        Date currentTime = listOfDates.get(0); //pobranie pierwszego dnia
+
         for (Date date : listOfDates) {
 
-            for (Long eventId : workScheduleDTO.getEventsId()) {
-                Event baseEvent = eventRepository.getOne(eventId);
-                // Kopiowanie najważniejszych informacji
-                Event newEvent = copyBaseEventDetailsToNew(baseEvent);
-                for (Long userId : workScheduleDTO.getUsersId()) {
-                    User user = userRepository.findUserById(userId);
-                    newEvent.setUser(user);
+            if (currentTime.equals(date)) {
 
-//                    newEvent.setStartDate();
-//                    newEvent.setStopDate();
+                for (Long eventId : workScheduleDTO.getEventsId()) {
+                    Event baseEvent = eventRepository.getOne(eventId);
+                    // Kopiowanie najważniejszych informacji
+                    Event newEvent = copyBaseEventDetailsToNew(baseEvent);
 
 
+                    // Ustawienie czasu
+
+                    setTimeOfEvent(newEvent, currentTime, workScheduleDTO.getStopHour(), workScheduleDTO.getBreaks());
+
+                    listOfEvent.add(newEvent);
                 }
-
+            } else {
+                break;
             }
         }
 
-        // TODO
-        // Typy proste dodajemy bez większych ceregieli
-        // Listy/Kolekcje musimy mapować i robić zapis do innych tabel.
-        // W jakich tabelach będzie zapis:
-        // Work Schedules - ogólna definicja grafiku,
-        // Events - zapis każdego eventu, dla każdej osoby
-        // pętla for each (Long userId : users) {
-        // User user = userService.getUser(id);
-        // Event
-//        return this.workScheduleRepository.save(workSchedule);
+        // Zapis wszystkich eventów dla wsakazanych userów
+        for (Event event : listOfEvent) {
+            for (Long userId : workScheduleDTO.getUsersId()) {
+                event.setUser(userRepository.findUserById(userId));
+//                eventRepository.save(event);
+            }
+        }
+
+//        workScheduleRepository.save(workSchedule);
         return null;
     }
 
 
-    // ToDo
-    private List<Date> createListOfDate(String startDate, String endDate) {
+    private List<Date> createListOfDate(String startDate, String endDate, String startTime) {
         List<Date> dates = new ArrayList<Date>();
 
         Date start = convertStringDateToDate(startDate);
         Date end = convertStringDateToDate(endDate);
+
+        String[] hours = splitStringHour(startTime);
+        start.setHours(Integer.parseInt(hours[0]));
+        start.setMinutes(Integer.parseInt(hours[1]));
 
         long interval = 24 * 1000 * 60 * 60; // 1 day in millis
         long actualTime = start.getTime();
@@ -110,6 +116,11 @@ public class WorkScheduleService {
         }
         return dates;
     }
+
+    private String[] splitStringHour(String hour) {
+        return hour.split(":");
+    }
+
 
     private Event copyBaseEventDetailsToNew(Event baseEvent) {
         Event newEvent = new Event();
@@ -138,6 +149,18 @@ public class WorkScheduleService {
     public Date convertEventDuration(String duration) {
 
         return new Date();
+    }
+
+    private Event setTimeOfEvent(Event newEvent, Date currentTime, String maxHour, Integer timeOfBreak) {
+        String[] endHour = splitStringHour(maxHour);
+        newEvent.setStartDate(currentTime);
+//        calculateEventDuration()
+//        newEvent.setStopDate(currentTime + convertEventDuration(newEvent.getDuration());
+
+        if (currentTime.getHours() > Integer.parseInt(endHour[0])) {
+
+        }
+        return newEvent;
     }
 
 }
