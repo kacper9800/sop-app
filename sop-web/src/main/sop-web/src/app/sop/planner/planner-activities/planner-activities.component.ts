@@ -119,7 +119,7 @@ export class PlannerActivitiesComponent implements OnInit {
   }
 
   private loadEvents(): void {
-    this.plannerService.getAllEvents().subscribe(
+    this.plannerService.getAllBaseEvents().subscribe(
       (res: Event[]) => this.onSuccessLoadEvents(res),
       () => this.onErrorLoadEvents()
     );

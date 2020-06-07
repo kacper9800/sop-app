@@ -131,7 +131,8 @@
             <input clrDatalistInput required placeholder="{{'common.locationPlaceholder' | translate}}" name="location"
                    formControlName="location"/>
             <datalist id="clr-custom-datalistid-3">
-              <option *ngFor="let location of locations" [value]="location.value"></option>
+              <option *ngFor="let location of locations" [value]="location.id"
+                      [label]="location.name"></option>
             </datalist>
           </clr-datalist-container>
         </div>

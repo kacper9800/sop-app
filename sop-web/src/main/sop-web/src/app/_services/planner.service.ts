@@ -18,6 +18,14 @@ export class PlannerService {
     return this.http.get<Event[]>(this.API_URL + 'event');
   }
 
+  public getAllEventsForUser(userId: number) {
+    return this.http.get<Event[]>(this.API_URL + 'event/' + userId);
+  }
+
+  public getAllBaseEvents(): Observable<any>{
+    return this.http.get<Event[]>(this.API_URL + 'event/base');
+  }
+
   public createNewEvent(event: IEvent): Observable<number> {
     return this.http.post<number>(this.API_URL + 'event', event);
   }
@@ -29,4 +37,6 @@ export class PlannerService {
   public createWorkSchedule(workSchedule: WorkSchedule): Observable<number> {
     return this.http.post<number>(this.API_URL_WORK_SCHEDULE, workSchedule);
   }
+
+
 }

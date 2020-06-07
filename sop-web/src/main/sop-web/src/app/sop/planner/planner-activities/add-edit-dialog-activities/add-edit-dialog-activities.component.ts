@@ -116,6 +116,7 @@ export class AddEditDialogActivitiesComponent implements OnInit {
   }
 
   private onSuccessLoadLocations(res: any) {
+    console.log(res);
     this.locations = res;
   }
 
@@ -132,7 +133,7 @@ export class AddEditDialogActivitiesComponent implements OnInit {
     this.eventToSave = new Event();
     this.eventToSave.name = this.addEditForm.get('name').value;
     this.eventToSave.description = this.addEditForm.get('description').value;
-    this.eventToSave.location = this.addEditForm.get('location').value;
+    this.eventToSave.locationId = this.addEditForm.get('location').value;
     // this.eventToSave.startDate = this.addEditForm.get('startDate').value;
     // this.eventToSave.stopDate = this.addEditForm.get('stopDate').value;
     // this.eventToSave.startDate = this.startDate;
@@ -173,6 +174,7 @@ export class AddEditDialogActivitiesComponent implements OnInit {
       key: 'toast1', severity: 'success', summary: this.translateService.instant('toast.success'),
       detail: this.translateService.instant('toast.defaultSuccessDetailAdd')
     });
+    this.closeDialogWithSaveEmitter.emit();
   }
 
   private onErrorCreate() {
