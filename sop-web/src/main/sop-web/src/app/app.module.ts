@@ -31,7 +31,6 @@ import { ConfirmDeleteDialogComponent } from './common/confirm-delete-dialog/con
 import { FooterComponent } from './layout/footer/footer.component';
 import { FormsComponent } from './sop/forms/forms.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { FullCalendarModule } from '@fullcalendar/angular';
 import { HashLocationStrategy, LocationStrategy } from '@angular/common';
 import { HeaderComponent } from './layout/header/header.component';
 import { InternsComponent } from './sop/interns/interns.component';
@@ -39,7 +38,7 @@ import {
   BlockUIModule,
   ButtonModule,
   DialogModule,
-  DropdownModule,
+  DropdownModule, FullCalendarModule,
   InputTextModule,
   PanelModule,
   ProgressSpinnerModule,
@@ -56,7 +55,7 @@ import { NewInternComponent } from './sop/new-intern/new-intern.component';
 import { NgModule } from '@angular/core';
 import { OwlDateTimeModule, OwlNativeDateTimeModule } from 'ng-pick-datetime';
 import { PlannerActivitiesComponent } from './sop/planner/planner-activities/planner-activities.component';
-import { PlannerCalendarComponent } from './sop/planner/planner-calendar/planner-calendar.component';
+// import { PlannerCalendarComponent } from './sop/planner/planner-calendar/planner-calendar.component';
 import { PlannerComponent } from './planner/planner.component';
 import { PlannerGeneratorComponent } from './sop/planner/planner-generator/planner-generator.component';
 import { PlannerLocationsComponent } from './sop/planner/planner-locations/planner-locations.component';
@@ -97,7 +96,7 @@ import { WidgetsComponent } from './widgets/widgets.component';
     TodoComponent,
     CalendarComponent,
     PlannerSettingsComponent,
-    PlannerCalendarComponent,
+    // PlannerCalendarComponent,
     PlannerActivitiesComponent,
     PlannerWorkHoursComponent,
     PlannerLocationsComponent,
@@ -141,11 +140,9 @@ import { WidgetsComponent } from './widgets/widgets.component';
     ButtonModule,
     BlockUIModule,
     ProgressSpinnerModule,
-    FullCalendarModule,
     DropdownModule,
     OwlDateTimeModule,
     OwlNativeDateTimeModule,
-    FullCalendarModule,
     FullCalendarModule,
   ],
   providers: [{ provide: LocationStrategy, useClass: HashLocationStrategy }, authInterceptorProviders],

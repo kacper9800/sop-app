@@ -1,7 +1,7 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { AuthService } from '../_services/auth/auth.service';
-import { User } from '../security/user';
+import {Component, EventEmitter, OnInit, Output} from '@angular/core';
+import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
+import {AuthService} from '../_services/auth/auth.service';
+import {User} from '../security/user';
 
 @Component({
   selector: 'app-registration',
@@ -42,6 +42,8 @@ export class RegistrationComponent implements OnInit {
       password: new FormControl({value: null, disabled: false}, Validators.required),
       repeatedPassword: new FormControl({value: null, disabled: false}, Validators.required),
       birthDate: new FormControl({value: null, disabled: false}),
+      sex: new FormControl({value: null, disabled: false}, Validators.required),
+      academicDegree: new FormControl({value: null, disabled: false}, Validators.required)
       // firstName: new FormControl({value: null, disabled: false}, Validators.required),
       // lastName: new FormControl({value: null, disabled: false}, Validators.required),
       //

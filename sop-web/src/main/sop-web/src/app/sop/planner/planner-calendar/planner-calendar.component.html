@@ -1,46 +1,46 @@
-<!--<p-button icon="pi pi-check" class="btn btn-primary" type="submit" iconPos="right"-->
-<!--          [disabled]="!(workScheduleForm.valid) || !isValidEndHour() || !isValidSumOfHours()"-->
-<!--          (onClick)="onClickSave(false)"-->
-<!--          [ngClass]="'buttons'" label="{{'workSchedule.dialog.save' | translate}}"></p-button>-->
-<div class="content-container">
-  <div class="clr-row">
-    <div class="clr-col-1"></div>
-    <div class="clr-col-10">
-      <full-calendar
-        [editable]="true"
-        [header]="calOptions.header"
-        [locales]="calOptions.locales"
-        [locale]="calOptions.locale"
-        (dateClick)="dateClick($event)"
-        (eventDragStop)="eventDragStop($event)"
-        (eventClick)="eventClick($event)"
-        [customButtons]="calOptions.customButtons"
-        #fullcalendar
-        [plugins]="calendarPlugins"
-        [weekends]="showWeekend"
-        [events]="events"
-      ></full-calendar>
-    </div>
-    <div class="clr-col-1"></div>
-  </div>
-</div>
+<!--&lt;!&ndash;<p-button icon="pi pi-check" class="btn btn-primary" type="submit" iconPos="right"&ndash;&gt;-->
+<!--&lt;!&ndash;          [disabled]="!(workScheduleForm.valid) || !isValidEndHour() || !isValidSumOfHours()"&ndash;&gt;-->
+<!--&lt;!&ndash;          (onClick)="onClickSave(false)"&ndash;&gt;-->
+<!--&lt;!&ndash;          [ngClass]="'buttons'" label="{{'workSchedule.dialog.save' | translate}}"></p-button>&ndash;&gt;-->
+<!--<div class="content-container">-->
+<!--  <div class="clr-row">-->
+<!--    <div class="clr-col-1"></div>-->
+<!--    <div class="clr-col-10">-->
+<!--      <full-calendar-->
+<!--        [editable]="true"-->
+<!--        [header]="calOptions.header"-->
+<!--        [locales]="calOptions.locales"-->
+<!--        [locale]="calOptions.locale"-->
+<!--        (dateClick)="dateClick($event)"-->
+<!--        (eventDragStop)="eventDragStop($event)"-->
+<!--        (eventClick)="eventClick($event)"-->
+<!--        [customButtons]="calOptions.customButtons"-->
+<!--        #fullcalendar-->
+<!--        [plugins]="calendarPlugins"-->
+<!--        [weekends]="showWeekend"-->
+<!--        [events]="events"-->
+<!--      ></full-calendar>-->
+<!--    </div>-->
+<!--    <div class="clr-col-1"></div>-->
+<!--  </div>-->
+<!--</div>-->
 
-<div class="content-container">
-  <div class="clr-row">
-    <div class="clr-col-2"></div>
-    <div class="clr-col-8">
-      <div #external>
-        <p>
-          <strong style="text-align: center">Dostępne wydarzenia</strong>
-        </p>
-        <div *ngFor="let event of events">
-          <br>
-          <div class='fc-event' style="text-align: justify">
-            {{event.name + ' ' }} {{'common.hostBy' | translate}}: {{event.instructorName}}
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="clr-col-2"></div>
-  </div>
-</div>
+<!--<div class="content-container">-->
+<!--  <div class="clr-row">-->
+<!--    <div class="clr-col-2"></div>-->
+<!--    <div class="clr-col-8">-->
+<!--      <div #external>-->
+<!--        <p>-->
+<!--          <strong style="text-align: center">Dostępne wydarzenia</strong>-->
+<!--        </p>-->
+<!--        <div *ngFor="let event of events">-->
+<!--          <br>-->
+<!--          <div class='fc-event' style="text-align: justify">-->
+<!--            {{event.name}} {{'common.hostBy' | translate}}: {{event.instructor}}-->
+<!--          </div>-->
+<!--        </div>-->
+<!--      </div>-->
+<!--    </div>-->
+<!--    <div class="clr-col-2"></div>-->
+<!--  </div>-->
+<!--</div>-->

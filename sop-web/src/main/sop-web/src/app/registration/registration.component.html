@@ -1,4 +1,5 @@
-<clr-modal [(clrModalOpen)]="displayRegistrationDialog" [clrModalStaticBackdrop]="false" [clrModalClosable]="false">
+<clr-modal [(clrModalOpen)]="displayRegistrationDialog" [clrModalStaticBackdrop]="false"
+           [clrModalClosable]="false">
   <h3 class="modal-title">{{'registration.header' | translate}}</h3>
   <div class="modal-body">
     <div *ngIf="blockUI" style="text-align: center">
@@ -26,7 +27,8 @@
             <label>
               <clr-icon shape="user"></clr-icon>
             </label>
-            <input type="text" name="firstName" clrInput placeholder="{{'registration.firstNameLabel' | translate}}"
+            <input type="text" name="firstName" clrInput
+                   placeholder="{{'registration.firstNameLabel' | translate}}"
                    formControlName="firstName"/>
           </clr-input-container>
         </div>
@@ -40,7 +42,8 @@
             <label>
               <clr-icon shape="user"></clr-icon>
             </label>
-            <input type="text" name="lastName" clrInput placeholder="{{'registration.lastNameLabel' | translate}}"
+            <input type="text" name="lastName" clrInput
+                   placeholder="{{'registration.lastNameLabel' | translate}}"
                    formControlName="lastName"/>
           </clr-input-container>
         </div>
@@ -54,7 +57,8 @@
             <label>
               <clr-icon shape="calendar"></clr-icon>
             </label>
-            <input clrInput formControlName="birthDate" placeholder="{{'registration.birthDateLabel' | translate}}"/>
+            <input clrInput formControlName="birthDate"
+                   placeholder="{{'registration.birthDateLabel' | translate}}"/>
           </clr-input-container>
         </div>
         <div class="clr-col-4"></div>
@@ -67,7 +71,51 @@
             <label>
               <clr-icon shape="envelope"></clr-icon>
             </label>
-            <input clrInput formControlName="username" placeholder="{{'registration.emailLabel' | translate}}"/>
+            <input clrInput formControlName="username"
+                   placeholder="{{'registration.emailLabel' | translate}}"/>
+          </clr-input-container>
+        </div>
+        <div class="clr-col-4"></div>
+      </div>
+
+      <div class="clr-row">
+        <div class="clr-col-4"></div>
+        <div class="clr-col-4">
+          <clr-input-container>
+            <label>
+              <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px"
+                   width="16" height="16"
+                   viewBox="0 0 172 172"
+                   style=" fill:#000000;">
+                <g fill="none" fill-rule="nonzero" stroke="none" stroke-width="1"
+                   stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="10"
+                   stroke-dasharray="" stroke-dashoffset="0" font-family="none" font-weight="none"
+                   font-size="none" text-anchor="none" style="mix-blend-mode: normal">
+                  <path d="M0,172v-172h172v172z" fill="none"></path>
+                  <g fill="#444444">
+                    <path
+                      d="M96.75,10.75v10.75h24.64942l-29.10058,29.10058c-6.29883,-4.70312 -13.98341,-7.60058 -22.42383,-7.60058c-20.70215,0 -37.625,16.92285 -37.625,37.625c0,18.85449 14.06739,34.43359 32.25,37.0791v11.2959h-21.5v10.75h21.5v21.5h10.75v-21.5h21.5v-10.75h-21.5v-11.2959c18.18261,-2.64551 32.25,-18.22461 32.25,-37.0791c0,-8.44043 -2.89746,-16.125 -7.60058,-22.42382l29.10058,-29.10059v24.64942h10.75v-43zM69.875,53.75c14.90723,0 26.875,11.96777 26.875,26.875c0,14.90723 -11.96777,26.875 -26.875,26.875c-14.90723,0 -26.875,-11.96777 -26.875,-26.875c0,-14.90723 11.96777,-26.875 26.875,-26.875z"></path>
+                  </g>
+                </g>
+              </svg>
+            </label>
+            <input clrInput formControlName="sex"
+                   placeholder="{{'registration.sexLabel' | translate}}"/>
+          </clr-input-container>
+        </div>
+        <div class="clr-col-4"></div>
+      </div>
+
+      <div class="clr-row">
+        <div class="clr-col-4"></div>
+        <div class="clr-col-4">
+          <clr-input-container>
+            <label>
+              <img style="width: 16px; height: 16px"
+                   src="https://img.icons8.com/ios/50/000000/motarboard.png"/>
+            </label>
+            <input clrInput formControlName="academicDegree"
+                   placeholder="{{'registration.academicDegreeLabel' | translate}}"/>
           </clr-input-container>
         </div>
         <div class="clr-col-4"></div>

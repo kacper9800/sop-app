@@ -1,8 +1,11 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FullCalendar } from 'primeng';
-import dayGridPlugin from '@fullcalendar/daygrid';
 import timeGridPlugin from '@fullcalendar/timegrid';
 import plLocale from '@fullcalendar/core/locales/pl';
+import { PlannerService } from '../../_services/planner.service';
+import { TokenStorageService } from '../../_services/auth/token-storage.service';
+import { Event, IEvent } from '../../_model/event.model';
+
 // import enLocale from '@fullcalendar/core/locales/en';
 
 @Component({
@@ -11,29 +14,32 @@ import plLocale from '@fullcalendar/core/locales/pl';
   styleUrls: ['./calendar.component.css']
 })
 export class CalendarComponent implements OnInit {
-  events: any;
-  calOptions: any;
-  @ViewChild('calendar', {static: true}) calendarComponent: FullCalendar;
+  public events: any;
+  public calOptions: any;
 
-  constructor() {
+  @ViewChild('calendar', { static: true })
+  public calendarComponent: FullCalendar;
+
+  constructor(private plannerService: PlannerService,
+              private tokenStorageService: TokenStorageService) {
   }
 
   ngOnInit() {
 
     this.calOptions = {
-      plugins: [ timeGridPlugin],
+      plugins: [timeGridPlugin],
       defaultView: 'timeGridDay',
       defaultDate: new Date(),
       header: {
-        //   left: 'prevYear prev next nextYear ',
-        //   center: 'title',
-        //   right: 'today timeGridDay timeGridWeek dayGridMonth',
+          left: 'prevYear prev next nextYear ',
+          center: 'title',
+          right: 'today timeGridDay timeGridWeek dayGridMonth',
       },
       buttonIcons: {
-        // prev: 'left-single-arrow',
-        // next: 'right-single-arrow',
-        // prevYear: 'left-double-arrow',
-        // nextYear: 'right-double-arrow'
+        prev: 'left-single-arrow',
+        next: 'right-single-arrow',
+        prevYear: 'left-double-arrow',
+        nextYear: 'right-double-arrow'
       },
       locales: [plLocale],
       locale: 'pl',
@@ -98,5 +104,35 @@ export class CalendarComponent implements OnInit {
     // }
 
     return content;
+  }
+
+  public loadEvents() {
+    const user = this.tokenStorageService.getUser();
+    this.plannerService.getAllEventsForUser(user.id).subscribe(
+      (res) => this.onSuccessLoadEvents(res),
+      () => this.onErrorLoadEvents()
+    );
+  }
+
+  private onSuccessLoadEvents(res) {
+    this.convertEventsToCalendarView(res);
+  }
+
+  private onErrorLoadEvents() {
+
+  }
+
+  private convertEventsToCalendarView(events: Event[]) {
+    events.forEach(event => {
+      this.events = [...this.events, {
+        id: event.id,
+        title: event.name,
+        description: event.description,
+        start: event.startDate,
+        end: event.stopDate,
+        location: event.location,
+        instructor: event.instructorId
+      }];
+    });
   }
 }

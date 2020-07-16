@@ -84,6 +84,8 @@
     "passwordLabel": "Password",
     "passwordRepeatLabel": "Repeat password",
     "emailLabel": "E-mail address",
+    "sexLabel": "Sex",
+    "academicDegreeLabel": "Academic degree",
     "register": "Sign up",
     "cancelButtonLabel": "Cancel registration"
   },

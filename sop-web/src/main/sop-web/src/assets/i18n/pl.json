@@ -84,6 +84,8 @@
     "passwordLabel": "Hasło",
     "passwordRepeatLabel": "Powtórz hasło",
     "emailLabel": "Adres e-mail",
+    "sexLabel": "Płeć",
+    "academicDegreeLabel": "Stopień naukowy",
     "register": "Zarejestruj się",
     "cancelButtonLabel": "Przerwij rejestrację"
   },

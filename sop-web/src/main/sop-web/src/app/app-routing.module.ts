@@ -15,7 +15,7 @@ import { CollegeComponent } from './sop/college/college.component';
 import { UsersComponent } from './sop/users/users.component';
 import { PlannerComponent } from './planner/planner.component';
 import { PlannerSettingsComponent } from './sop/planner/planner-settings/planner-settings.component';
-import { PlannerCalendarComponent } from './sop/planner/planner-calendar/planner-calendar.component';
+// import { PlannerCalendarComponent } from './sop/planner/planner-calendar/planner-calendar.component';
 import { PlannerActivitiesComponent } from './sop/planner/planner-activities/planner-activities.component';
 import { PlannerLocationsComponent } from './sop/planner/planner-locations/planner-locations.component';
 import { PlannerWorkHoursComponent } from './sop/planner/planner-work-hours/planner-work-hours.component';
@@ -23,28 +23,33 @@ import { PlannerWorkHoursComponent } from './sop/planner/planner-work-hours/plan
 
 const routes: Routes = [
   {path: '', component: HomeComponent},
-  {path: 'app/new-intern', component: NewInternComponent},
-  {path: 'app/interns', component: InternsComponent},
-  {path: 'app/companies', component: CompaniesComponent},
-  {path: 'app/forms', component: FormsComponent},
-  {path: 'app/statistics', component: StatisticsComponent},
-  {path: 'app/login', component: LoginComponent},
-  {path: 'app/logout', component: LogoutComponent},
-  {path: 'register', component: RegistrationComponent},
-  {path: 'app/activation-keys', component: ActivationKeysComponent},
-  {path: 'app/logbook', component: LogbookComponent},
-  {path: 'app/college', component: CollegeComponent},
-  {path: 'app/users', component: UsersComponent},
-  {
-    path: 'app/planner', children: [
+  {path: 'app/colleges', component: CollegeComponent},                      // Lista uczelni
+  {path: 'app/companies', component: CompaniesComponent},                   // Lista firm
+  // {path: 'app/college-structure', component: CollegeStructureComponent}  // Struktura uczelni
+  // {path: 'app/super-visors'},                                            // Kierownicy praktyk
+  {path: 'app/interns', component: InternsComponent},                       // Praktykanci
+  {path: 'app/users', component: UsersComponent},                           // Użytkownicy
+  {path: 'app/forms', component: FormsComponent},                           // Ankiety
+  {path: 'app/statistics', component: StatisticsComponent},                 // Statystyki
+
+  {path: 'app/activation-keys', component: ActivationKeysComponent},        // Klucze aktywacyjne
+  {path: 'app/logbook', component: LogbookComponent},                       // Dziennik praktyk
+  // {path: 'app/documents'}                                                // Dokumenty
+
+  {path: 'app/login', component: LoginComponent},                           // Logowanie
+  {path: 'app/logout', component: LogoutComponent},                         // Wylogowywanie
+  {path: 'register', component: RegistrationComponent},                     // Rejestracja
+  {path: 'app/planner', children: [
       {path: '', pathMatch: 'full', component: PlannerComponent},
       {path: 'activitiesList', component: PlannerActivitiesComponent},
-      {path: 'activitiesCalendar', component: PlannerCalendarComponent},
+      // {path: 'activitiesCalendar', component: PlannerCalendarComponent},
       {path: 'locations', component: PlannerLocationsComponent},
       {path: 'workHours', component: PlannerWorkHoursComponent},
       {path: 'settings', component: PlannerSettingsComponent}
     ]
-  }];
+  },
+  // {path: 'app/new-intern', component: NewInternComponent}
+];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
