@@ -19,7 +19,7 @@ public interface EventRepository extends JpaRepository<Event, Long> {
     @Query(value = "SELECT e FROM Event e WHERE e.deleted = false")
     List<Event> findAllEvents();
 
-    @Query(value = "SELECT e FROM Event e WHERE e.id = :id")
+    @Query(value = "SELECT e FROM Event e LEFT join fetch e.user u where u.id = :id")
     List<Event> findAllEventsForUserId(@Param("id") Long id);
 
     @Query(value = "SELECT e FROM Event e WHERE e.startDate = null AND e.stopDate = null")

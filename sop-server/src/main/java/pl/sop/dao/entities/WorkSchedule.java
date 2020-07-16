@@ -34,48 +34,48 @@ public class WorkSchedule extends BasicEntity implements Serializable {
     @Column(name = "additional_info")
     private String additionalInfo;
 
-    @OneToOne
-    @Fetch(FetchMode.JOIN)
-    private College college;
-
-    @OneToOne
-    @Fetch(FetchMode.JOIN)
-    private Faculty faculty;
-
-    @OneToOne
-    @Fetch(FetchMode.JOIN)
-    private Institute institute;
-
-    @OneToOne
-    @Fetch(FetchMode.JOIN)
-    private Department department;
+//    @OneToOne
+//    @Fetch(FetchMode.JOIN)
+//    private College college;
+//
+//    @OneToOne
+//    @Fetch(FetchMode.JOIN)
+//    private Faculty faculty;
+//
+//    @OneToOne
+//    @Fetch(FetchMode.JOIN)
+//    private Institute institute;
+//
+//    @OneToOne
+//    @Fetch(FetchMode.JOIN)
+//    private Department department;
 
     @OneToOne
     @Fetch(FetchMode.JOIN)
     private User user;
 
-    @ManyToMany(fetch = FetchType.EAGER, cascade = {CascadeType.ALL})
-    @JoinTable(name = "work_schedule_locations", joinColumns = {
-            @JoinColumn(name = "work_schedule_id", nullable = false)}, inverseJoinColumns = {
-            @JoinColumn(name = "location_id", nullable = false)
-    })
-    @Fetch(FetchMode.JOIN)
-    private Set<Location> locations;
-
-    @ManyToMany(fetch = FetchType.EAGER, cascade = {CascadeType.ALL})
-    @JoinTable(name = "work_schedule_events", joinColumns = {
-            @JoinColumn(name = "work_schedule_id", nullable = false)}, inverseJoinColumns = {
-            @JoinColumn(name = "event_id", nullable = false)
-    })
-    @Fetch(FetchMode.JOIN)
-    private Set<Event> events;
-
-    @ManyToMany(fetch = FetchType.EAGER, cascade = {CascadeType.ALL})
-    @JoinTable(name = "work_schedule_users", joinColumns = {
-            @JoinColumn(name = "work_schedule_id", nullable = false)}, inverseJoinColumns = {
-            @JoinColumn(name = "user_id", nullable = false)})
-    @Fetch(FetchMode.JOIN)
-    private Set<User> users;
+//    @ManyToMany(fetch = FetchType.EAGER, cascade = {CascadeType.ALL})
+//    @JoinTable(name = "work_schedule_locations", joinColumns = {
+//            @JoinColumn(name = "work_schedule_id", nullable = false)}, inverseJoinColumns = {
+//            @JoinColumn(name = "location_id", nullable = false)
+//    })
+//    @Fetch(FetchMode.JOIN)
+//    private Set<Location> locations;
+//
+//    @ManyToMany(fetch = FetchType.EAGER, cascade = {CascadeType.ALL})
+//    @JoinTable(name = "work_schedule_events", joinColumns = {
+//            @JoinColumn(name = "work_schedule_id", nullable = false)}, inverseJoinColumns = {
+//            @JoinColumn(name = "event_id", nullable = false)
+//    })
+//    @Fetch(FetchMode.JOIN)
+//    private Set<Event> events;
+//
+//    @ManyToMany(fetch = FetchType.EAGER, cascade = {CascadeType.ALL})
+//    @JoinTable(name = "work_schedule_users", joinColumns = {
+//            @JoinColumn(name = "work_schedule_id", nullable = false)}, inverseJoinColumns = {
+//            @JoinColumn(name = "user_id", nullable = false)})
+//    @Fetch(FetchMode.JOIN)
+//    private Set<User> users;
 
 
     public WorkSchedule() {
@@ -129,37 +129,37 @@ public class WorkSchedule extends BasicEntity implements Serializable {
         this.additionalInfo = additionalInfo;
     }
 
-    public College getCollege() {
-        return college;
-    }
-
-    public void setCollege(College college) {
-        this.college = college;
-    }
-
-    public Faculty getFaculty() {
-        return faculty;
-    }
-
-    public void setFaculty(Faculty faculty) {
-        this.faculty = faculty;
-    }
-
-    public Institute getInstitute() {
-        return institute;
-    }
-
-    public void setInstitute(Institute institute) {
-        this.institute = institute;
-    }
-
-    public Department getDepartment() {
-        return department;
-    }
-
-    public void setDepartment(Department department) {
-        this.department = department;
-    }
+//    public College getCollege() {
+//        return college;
+//    }
+//
+//    public void setCollege(College college) {
+//        this.college = college;
+//    }
+//
+//    public Faculty getFaculty() {
+//        return faculty;
+//    }
+//
+//    public void setFaculty(Faculty faculty) {
+//        this.faculty = faculty;
+//    }
+//
+//    public Institute getInstitute() {
+//        return institute;
+//    }
+//
+//    public void setInstitute(Institute institute) {
+//        this.institute = institute;
+//    }
+//
+//    public Department getDepartment() {
+//        return department;
+//    }
+//
+//    public void setDepartment(Department department) {
+//        this.department = department;
+//    }
 
     public User getUser() {
         return user;
@@ -169,41 +169,41 @@ public class WorkSchedule extends BasicEntity implements Serializable {
         this.user = user;
     }
 
-    public Set<Location> getLocations() {
-        return locations;
-    }
-
-    public void setLocations(Set<Location> locations) {
-        this.locations = locations;
-    }
-
-    public Set<Event> getEvents() {
-        return events;
-    }
-
-    public void setEvents(Set<Event> events) {
-        this.events = events;
-    }
-
-    public void addEvent(Event event) {
-        if (this.events == null) {
-            this.events = new HashSet<>();
-        }
-        this.events.add(event);
-    }
-
-    public Set<User> getUsers() {
-        return users;
-    }
-
-    public void setUsers(Set<User> users) {
-        this.users = users;
-    }
-
-    public void addUser(User user) {
-        if (this.users == null) {
-            this.users = new HashSet<>();
-        }
-        this.users.add(user);
-    }
+//    public Set<Location> getLocations() {
+//        return locations;
+//    }
+//
+//    public void setLocations(Set<Location> locations) {
+//        this.locations = locations;
+//    }
+//
+//    public Set<Event> getEvents() {
+//        return events;
+//    }
+//
+//    public void setEvents(Set<Event> events) {
+//        this.events = events;
+//    }
+//
+//    public void addEvent(Event event) {
+//        if (this.events == null) {
+//            this.events = new HashSet<>();
+//        }
+//        this.events.add(event);
+//    }
+//
+//    public Set<User> getUsers() {
+//        return users;
+//    }
+//
+//    public void setUsers(Set<User> users) {
+//        this.users = users;
+//    }
+//
+//    public void addUser(User user) {
+//        if (this.users == null) {
+//            this.users = new HashSet<>();
+//        }
+//        this.users.add(user);
+//    }
 }
