@@ -69,6 +69,9 @@ import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { UsersComponent } from './sop/users/users.component';
 import { WidgetsComponent } from './widgets/widgets.component';
+import { DocumentsComponent } from './sop/documents/documents.component';
+import { SuperVisorsComponent } from './sop/super-visors/super-visors.component';
+import { CollegeStructureComponent } from './sop/college-structure/college-structure.component';
 
 @NgModule({
   declarations: [
@@ -104,6 +107,9 @@ import { WidgetsComponent } from './widgets/widgets.component';
     AddEditDialogLocationsComponent,
     PlannerGeneratorComponent,
     ConfirmDeleteDialogComponent,
+    DocumentsComponent,
+    SuperVisorsComponent,
+    CollegeStructureComponent,
   ],
   imports: [
     BrowserModule,

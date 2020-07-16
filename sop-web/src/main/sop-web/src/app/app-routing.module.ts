@@ -19,14 +19,17 @@ import { PlannerSettingsComponent } from './sop/planner/planner-settings/planner
 import { PlannerActivitiesComponent } from './sop/planner/planner-activities/planner-activities.component';
 import { PlannerLocationsComponent } from './sop/planner/planner-locations/planner-locations.component';
 import { PlannerWorkHoursComponent } from './sop/planner/planner-work-hours/planner-work-hours.component';
+import {DocumentsComponent} from './sop/documents/documents.component';
+import {SuperVisorsComponent} from './sop/super-visors/super-visors.component';
+import {CollegeStructureComponent} from './sop/college-structure/college-structure.component';
 
 
 const routes: Routes = [
   {path: '', component: HomeComponent},
   {path: 'app/colleges', component: CollegeComponent},                      // Lista uczelni
   {path: 'app/companies', component: CompaniesComponent},                   // Lista firm
-  // {path: 'app/college-structure', component: CollegeStructureComponent}  // Struktura uczelni
-  // {path: 'app/super-visors'},                                            // Kierownicy praktyk
+  {path: 'app/college-structure', component: CollegeStructureComponent},    // Struktura uczelni
+  {path: 'app/super-visors', component: SuperVisorsComponent},              // Kierownicy praktyk
   {path: 'app/interns', component: InternsComponent},                       // Praktykanci
   {path: 'app/users', component: UsersComponent},                           // Użytkownicy
   {path: 'app/forms', component: FormsComponent},                           // Ankiety
@@ -34,7 +37,7 @@ const routes: Routes = [
 
   {path: 'app/activation-keys', component: ActivationKeysComponent},        // Klucze aktywacyjne
   {path: 'app/logbook', component: LogbookComponent},                       // Dziennik praktyk
-  // {path: 'app/documents'}                                                // Dokumenty
+  {path: 'app/documents', component: DocumentsComponent},                   // Dokumenty
 
   {path: 'app/login', component: LoginComponent},                           // Logowanie
   {path: 'app/logout', component: LogoutComponent},                         // Wylogowywanie
