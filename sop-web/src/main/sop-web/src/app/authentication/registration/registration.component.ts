@@ -1,7 +1,7 @@
 import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
-import {AuthService} from '../_services/auth/auth.service';
-import {User} from '../security/user';
+import {User} from '../../security/user';
+import {AuthService} from '../../_services/auth/auth.service';
 
 @Component({
   selector: 'app-registration',

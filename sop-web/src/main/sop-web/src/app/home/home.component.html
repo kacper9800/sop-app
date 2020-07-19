@@ -7,35 +7,37 @@
     </div>
     <div class="clr-col-sm-1 clr-col-md-3 clr-col-lg-3"></div>
   </div>
+
   <div class="clr-row">
-    <div class="clr-col-sm-12 clr-col-md-6 clr-col-lg-6">
+    <div class="clr-col-md-1 clr-col-lg-1"></div>
+    <div class="clr-col-sm-12 clr-col-md-5 clr-col-lg-5">
       <a class="card clickable">
         <div *ngIf="isLoggedIn">
           <app-todo [userDetails]="userDetails"></app-todo>
         </div>
-        <div *ngIf="!isLoggedIn" class="welcome-page">
+        <div *ngIf="!isLoggedIn" class="home-page">
           <div style="text-align: center;">
             <b>Poznaj</b> system obsługi praktyk studenckich<br>
           </div>
           <br><br>
           <clr-icon shape="success-standard"
-                    class="welcome-page-icons"></clr-icon>
+                    class="home-page-icons"></clr-icon>
           Automatyzuj procesy
           <br><br>
           <clr-icon shape="cloud-scale"
-                    class="welcome-page-icons"></clr-icon>
+                    class="home-page-icons"></clr-icon>
           Przechowuj i twórz dokmenty
           <br><br>
           <clr-icon shape="users"
-                    class="welcome-page-icons"></clr-icon >
+                    class="home-page-icons"></clr-icon>
           Śledź postęp studentów podczas praktyk
           <br><br>
           <clr-icon shape="archive"
-                    class="welcome-page-icons"></clr-icon>
+                    class="home-page-icons"></clr-icon>
           Magazynuj dane archiwalne dotyczące firm
           <br><br>
           <clr-icon shape="cluster"
-                    class="welcome-page-icons"></clr-icon>
+                    class="home-page-icons"></clr-icon>
           Zarządzaj strukturą uczelni
           <br><br>
 
@@ -45,7 +47,7 @@
         </div>
       </a>
     </div>
-    <div class="clr-col-sm-12 clr-col-md-6 clr-col-lg-6">
+    <div class="clr-col-sm-12 clr-col-md-5 clr-col-lg-5">
       <a class="card clickable">
         <div *ngIf="isLoggedIn">
           <app-calendar></app-calendar>
@@ -57,21 +59,24 @@
         </div>
       </a>
     </div>
-  </div>
-  <div class="clr-row" *ngIf="!isLoggedIn">
-    <div class="clr-col-sm-12 clr-col-md-6 clr-col-lg-6">
+    <div class="clr-col-md-1 clr-col-lg-1"></div>
+
+
+    <div class="clr-col-md-1 clr-col-lg-1"></div>
+    <div class="clr-col-sm-12 clr-col-md-5 clr-col-lg-5" *ngIf="!isLoggedIn">
       <a class="card clickable">
         <div class="card-img">
           <img src="../../assets/img/test3.jpg">
         </div>
       </a>
     </div>
-    <div class="clr-col-sm-12 clr-col-md-6 clr-col-lg-6">
+    <div class="clr-col-sm-12 clr-col-md-5 clr-col-lg-5" *ngIf="!isLoggedIn">
       <a class="card clickable">
         <div class="card-img">
           Dołącz do nas
         </div>
       </a>
     </div>
+    <div class="clr-col-md-1 clr-col-lg-1"></div>
   </div>
 </clr-main-container>

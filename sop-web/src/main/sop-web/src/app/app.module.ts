@@ -48,7 +48,7 @@ import {
 import { HomeComponent } from './home/home.component';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { LogoutComponent } from './sop/logout/logout.component';
-import { LoginComponent } from './login/login.component';
+import { LoginComponent } from './authentication/login/login.component';
 import { LogbookComponent } from './sop/logbook/logbook.component';
 import { NavBarComponent } from './layout/nav-bar/nav-bar.component';
 import { NewInternComponent } from './sop/new-intern/new-intern.component';
@@ -61,7 +61,7 @@ import { PlannerGeneratorComponent } from './sop/planner/planner-generator/plann
 import { PlannerLocationsComponent } from './sop/planner/planner-locations/planner-locations.component';
 import { PlannerSettingsComponent } from './sop/planner/planner-settings/planner-settings.component';
 import { PlannerWorkHoursComponent } from './sop/planner/planner-work-hours/planner-work-hours.component';
-import { RegistrationComponent } from './registration/registration.component';
+import { RegistrationComponent } from './authentication/registration/registration.component';
 import { SettingsComponent } from './settings/settings.component';
 import { StatisticsComponent } from './sop/statistics/statistics.component';
 import { TodoComponent } from './widgets/todo/todo.component';
@@ -72,6 +72,7 @@ import { WidgetsComponent } from './widgets/widgets.component';
 import { DocumentsComponent } from './sop/documents/documents.component';
 import { SuperVisorsComponent } from './sop/super-visors/super-visors.component';
 import { CollegeStructureComponent } from './sop/college-structure/college-structure.component';
+import { CollegeRegistrationComponent } from './authentication/college-registration/college-registration.component';
 
 @NgModule({
   declarations: [
@@ -110,6 +111,7 @@ import { CollegeStructureComponent } from './sop/college-structure/college-struc
     DocumentsComponent,
     SuperVisorsComponent,
     CollegeStructureComponent,
+    CollegeRegistrationComponent,
   ],
   imports: [
     BrowserModule,

@@ -1,10 +1,10 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
-import { TokenStorageService } from '../_services/auth/token-storage.service';
-import { AuthService } from '../_services/auth/auth.service';
-import { TranslateService } from '@ngx-translate/core';
-import { MessageService } from 'primeng';
-import { ClrLoadingState } from '@clr/angular';
+import {Component, EventEmitter, OnInit, Output} from '@angular/core';
+import {FormBuilder, FormControl, FormGroup} from '@angular/forms';
+import {TranslateService} from '@ngx-translate/core';
+import {MessageService} from 'primeng';
+import {ClrLoadingState} from '@clr/angular';
+import {AuthService} from '../../_services/auth/auth.service';
+import {TokenStorageService} from '../../_services/auth/token-storage.service';
 
 
 @Component({
@@ -30,7 +30,7 @@ export class LoginComponent implements OnInit {
 
 
   loginForm: FormGroup;
-  isLoggedIn: Boolean = false;
+  isLoggedIn = false;
   isLoginFailed = false;
   errorMessage = '';
   roles: string[] = [];
@@ -44,7 +44,7 @@ export class LoginComponent implements OnInit {
               private formBuilder: FormBuilder,
               private translateService: TranslateService) {
     this.prepareForm();
-    this.setLanguage()
+    this.setLanguage();
   }
 
   public show() {
@@ -74,7 +74,7 @@ export class LoginComponent implements OnInit {
   onSubmit() {
     this.blockUI = true;
     this.validateBtnState = ClrLoadingState.LOADING;
-    let credentials = [];
+    const credentials = [];
     credentials.push(this.loginForm.get('username').value);
     credentials.push(this.loginForm.get('password').value);
     this.authService.login(credentials).subscribe(
@@ -102,7 +102,7 @@ export class LoginComponent implements OnInit {
   }
 
   async delay(ms: number) {
-    await new Promise(resolve => setTimeout(() => resolve(), ms)).then(() => console.log("fired"));
+    await new Promise(resolve => setTimeout(() => resolve(), ms)).then(() => console.log('fired'));
   }
 
   reloadPage() {

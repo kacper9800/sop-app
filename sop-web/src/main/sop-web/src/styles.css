@@ -6,13 +6,13 @@
 html, body {
   height: 100%;
   overflow-x: hidden;
-
 }
 
 body {
   margin: 0;
   font-family: Roboto, "Helvetica Neue", sans-serif;
 }
+
 ::-webkit-scrollbar {
   width: 10px;
 }
@@ -32,4 +32,39 @@ body {
 .table-buttons {
   text-align: center;
   margin-right: 5px;
+}
+
+.home-page {
+
+}
+
+.home-page {
+  font-size: 24px;
+  margin: 20px;
+  text-align: center;
+}
+
+.home-page-icons {
+  width: 50px !important;
+  height: 50px !important;
+}
+
+.college-registration-button {
+  color: #247bae !important;
+}
+
+.college-registration-button:hover {
+  font-weight: bold;
+}
+
+@media all and (max-width: 400px) {
+  .welcome-page {
+    font-size: 18px;
+    margin: 10px;
+  }
+
+  .welcome-page-icons {
+    width: 30px !important;
+    height: 30px !important;
+  }
 }

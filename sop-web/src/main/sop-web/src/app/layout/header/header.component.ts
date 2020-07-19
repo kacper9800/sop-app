@@ -1,12 +1,18 @@
-import { Component, ComponentFactoryResolver, Input, OnInit, ViewChild, ViewContainerRef } from '@angular/core';
-import { MenuItem } from 'primeng';
-import { TranslateService } from '@ngx-translate/core';
-import { Router } from '@angular/router';
-import { TokenStorageService } from '../../_services/auth/token-storage.service';
-import { LoginComponent } from '../../login/login.component';
-import { RegistrationComponent } from '../../registration/registration.component';
-import { User } from '../../security/user';
-import { state } from '@angular/animations';
+import {
+  Component,
+  ComponentFactoryResolver,
+  Input,
+  OnInit,
+  ViewChild,
+  ViewContainerRef
+} from '@angular/core';
+import {MenuItem} from 'primeng';
+import {TranslateService} from '@ngx-translate/core';
+import {Router} from '@angular/router';
+import {TokenStorageService} from '../../_services/auth/token-storage.service';
+import {User} from '../../security/user';
+import {RegistrationComponent} from "../../authentication/registration/registration.component";
+import {LoginComponent} from "../../authentication/login/login.component";
 
 @Component({
   selector: 'app-header',
