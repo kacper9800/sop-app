@@ -1,8 +1,8 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { AuthService } from '../_services/auth/auth.service';
-import { TokenStorageService } from '../_services/auth/token-storage.service';
-import { User } from '../security/user';
+import {Component, Input, OnInit} from '@angular/core';
+import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
+import {AuthService} from '../_services/auth/auth.service';
+import {TokenStorageService} from '../_services/auth/token-storage.service';
+import {User} from '../security/user';
 
 @Component({
   selector: 'app-home',
@@ -11,13 +11,13 @@ import { User } from '../security/user';
 })
 export class HomeComponent implements OnInit {
   @Input()
-  userDetails: User;
+  public userDetails: User;
 
-  loginForm: FormGroup;
-  isLoggedIn = false;
-  isLoginFailed = false;
-  errorMessage = '';
-  roles: string[] = [];
+  public loginForm: FormGroup;
+  public isLoggedIn = false;
+  public isLoginFailed = false;
+  public errorMessage = '';
+  public roles: string[] = [];
 
 
   constructor(private authService: AuthService,
@@ -35,7 +35,7 @@ export class HomeComponent implements OnInit {
     this.prepareForm();
   }
 
-  onSubmit() {
+  public onSubmit(): void {
     this.authService.login(this.loginForm).subscribe(
       data => {
         this.tokenStorage.saveToken(data.accessToken);
@@ -53,12 +53,12 @@ export class HomeComponent implements OnInit {
     );
   }
 
-  reloadPage() {
+  public reloadPage(): void {
     window.location.reload();
   }
 
 
-  private prepareForm() {
+  private prepareForm(): void {
     this.loginForm = this.formBuilder.group({
       username: new FormControl({
         value: null,
@@ -68,4 +68,7 @@ export class HomeComponent implements OnInit {
     });
   }
 
+  public showRegisterCollegeForm(): void {
+
+  }
 }
