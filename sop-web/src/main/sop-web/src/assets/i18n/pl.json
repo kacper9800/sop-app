@@ -40,7 +40,8 @@
     "collegeName": "Nazwa uczelni",
     "facultyName": "Nazwa wydziału",
     "instituteName": "Nazwa instytutu",
-    "departmentName": "Nazwa katedry"
+    "departmentName": "Nazwa katedry",
+    "required": "To pole jest wymagane!"
   },
   "header": {
     "SOP": "System obsługi praktyk",
@@ -88,6 +89,9 @@
     "academicDegreeLabel": "Stopień naukowy",
     "register": "Zarejestruj się",
     "cancelButtonLabel": "Przerwij rejestrację"
+  },
+  "collegeRegistration": {
+    "header": "Panel rejestracji uczelnii"
   },
   "calendar": {
     "workScheduleTitle": "Generowanie grafiku pracy",

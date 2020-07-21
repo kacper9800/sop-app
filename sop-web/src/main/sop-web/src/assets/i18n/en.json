@@ -89,6 +89,9 @@
     "register": "Sign up",
     "cancelButtonLabel": "Cancel registration"
   },
+  "collegeRegistration": {
+    "header": "College registration panel"
+  },
   "calendar": {
     "workScheduleTitle": "Generate new work schedule",
     "addNewEvent": "Add new event",
