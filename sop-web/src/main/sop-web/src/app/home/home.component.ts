@@ -1,8 +1,17 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {
+  Component,
+  ComponentFactoryResolver,
+  Input,
+  OnInit,
+  ViewChild,
+  ViewContainerRef
+} from '@angular/core';
 import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {AuthService} from '../_services/auth/auth.service';
 import {TokenStorageService} from '../_services/auth/token-storage.service';
 import {User} from '../security/user';
+import {LoginComponent} from '../authentication/login/login.component';
+import {CollegeRegistrationComponent} from "../authentication/college-registration/college-registration.component";
 
 @Component({
   selector: 'app-home',
@@ -13,6 +22,9 @@ export class HomeComponent implements OnInit {
   @Input()
   public userDetails: User;
 
+  @ViewChild('collegeRegistrationForm', {read: ViewContainerRef, static: false}) entry: ViewContainerRef;
+  public componentRef: any;
+
   public loginForm: FormGroup;
   public isLoggedIn = false;
   public isLoginFailed = false;
@@ -22,7 +34,8 @@ export class HomeComponent implements OnInit {
 
   constructor(private authService: AuthService,
               private tokenStorage: TokenStorageService,
-              private formBuilder: FormBuilder) {
+              private formBuilder: FormBuilder,
+              private resolver: ComponentFactoryResolver) {
   }
 
   ngOnInit() {
@@ -69,6 +82,17 @@ export class HomeComponent implements OnInit {
   }
 
   public showRegisterCollegeForm(): void {
-
+    if (!this.isLoggedIn) {
+      this.entry.clear();
+      const factory = this.resolver.resolveComponentFactory(CollegeRegistrationComponent);
+      this.componentRef = this.entry.createComponent(factory);
+      this.componentRef.instance.show();
+      this.componentRef.instance.closeDialogWithSaveEmitter.subscribe(data => {
+        this.refresh();
+      });
+    }
+  }
+  public refresh(): void {
+    window.location.reload();
   }
 }

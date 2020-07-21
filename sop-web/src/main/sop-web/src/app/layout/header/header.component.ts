@@ -11,8 +11,8 @@ import {TranslateService} from '@ngx-translate/core';
 import {Router} from '@angular/router';
 import {TokenStorageService} from '../../_services/auth/token-storage.service';
 import {User} from '../../security/user';
-import {RegistrationComponent} from "../../authentication/registration/registration.component";
-import {LoginComponent} from "../../authentication/login/login.component";
+import {RegistrationComponent} from '../../authentication/registration/registration.component';
+import {LoginComponent} from '../../authentication/login/login.component';
 
 @Component({
   selector: 'app-header',
@@ -21,24 +21,20 @@ import {LoginComponent} from "../../authentication/login/login.component";
 })
 export class HeaderComponent implements OnInit {
   @Input()
-  isLoggedIn: boolean;
+  public isLoggedIn: boolean;
 
   @Input()
-  user: User;
-
-  displayLoginDialog = false;
+  public user: User;
+  public displayLoginDialog = false;
 
   @ViewChild('loginForm', {read: ViewContainerRef, static: false}) entry: ViewContainerRef;
-  componentRef: any;
+  public componentRef: any;
 
-
-  items: MenuItem[];
-  activeItem: MenuItem;
-  logged: boolean;
-  planner: boolean;
-
-  aboutDialog = false;
-
+  public items: MenuItem[];
+  public activeItem: MenuItem;
+  public logged: boolean;
+  public planner: boolean;
+  public aboutDialog = false;
 
   constructor(private translateService: TranslateService,
               private router: Router,
@@ -63,7 +59,7 @@ export class HeaderComponent implements OnInit {
     window.location.reload();
   }
 
-  showLoginForm() {
+  public showLoginForm(): void {
     if (!this.isLoggedIn) {
       this.entry.clear();
       const factory = this.resolver.resolveComponentFactory(LoginComponent);
@@ -75,7 +71,7 @@ export class HeaderComponent implements OnInit {
     }
   }
 
-  showRegistrationForm() {
+  public showRegistrationForm(): void {
     if (!this.isLoggedIn) {
       this.entry.clear();
       const factory = this.resolver.resolveComponentFactory(RegistrationComponent);
