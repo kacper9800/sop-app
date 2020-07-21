@@ -73,6 +73,7 @@ import { DocumentsComponent } from './sop/documents/documents.component';
 import { SuperVisorsComponent } from './sop/super-visors/super-visors.component';
 import { CollegeStructureComponent } from './sop/college-structure/college-structure.component';
 import { CollegeRegistrationComponent } from './authentication/college-registration/college-registration.component';
+import { RegistrationConfirmationComponent } from './authentication/registration-confirmation/registration-confirmation.component';
 
 @NgModule({
   declarations: [
@@ -112,6 +113,7 @@ import { CollegeRegistrationComponent } from './authentication/college-registrat
     SuperVisorsComponent,
     CollegeStructureComponent,
     CollegeRegistrationComponent,
+    RegistrationConfirmationComponent,
   ],
   imports: [
     BrowserModule,

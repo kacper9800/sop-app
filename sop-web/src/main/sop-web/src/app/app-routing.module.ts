@@ -20,6 +20,7 @@ import {RouterModule, Routes} from '@angular/router';
 import {StatisticsComponent} from './sop/statistics/statistics.component';
 import {SuperVisorsComponent} from './sop/super-visors/super-visors.component';
 import {UsersComponent} from './sop/users/users.component';
+import {RegistrationConfirmationComponent} from "./authentication/registration-confirmation/registration-confirmation.component";
 
 
 // import { PlannerCalendarComponent } from './sop/planner/planner-calendar/planner-calendar.component';
@@ -43,6 +44,7 @@ const routes: Routes = [
   {path: 'app/login', component: LoginComponent},                           // Logowanie
   {path: 'app/logout', component: LogoutComponent},                         // Wylogowywanie
   {path: 'register', component: RegistrationComponent},                     // Rejestracja
+  {path: 'registered-successfully', component: RegistrationConfirmationComponent},
   {
     path: 'app/planner', children: [
       {path: '', pathMatch: 'full', component: PlannerComponent},
