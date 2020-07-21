@@ -1,1 +1,76 @@
-<p>college-registration works!</p>
+<clr-modal [(clrModalOpen)]="displayCollegeRegistrationDialog" [clrModalStaticBackdrop]="false"
+           [clrModalClosable]="false">
+  asfnasnkasnksfnsafk
+  <h3 class="modal-title">{{'collegeRegistration.header' | translate}}</h3>
+  <div class="modal-body">
+    <form clrForm [formGroup]="collegeRegistrationForm">
+      <div class="clr-row">
+        <div class="clr-col-4"></div>
+        <div class="clr-col-4">
+          <clr-select-container>
+            <label>
+              <clr-icon shape="building"></clr-icon>
+            </label>
+            <select clrSelect name="options" formControlName="collegeId" required>
+              <div *ngFor="let college of colleges">
+                <option [value]="college.id">{{college.name}}</option>
+              </div>
+            </select>
+            <clr-control-error>{{'common.required' | translate}}</clr-control-error>
+          </clr-select-container>
+        </div>
+        <div class="clr-col-4"></div>
+      </div>
+      <div class="clr-row">
+        <div class="clr-col-4"></div>
+        <div class="clr-col-4">
+          <clr-input-container>
+            <label>
+              <clr-icon shape="envelope"></clr-icon>
+            </label>
+            <input clrInput type="text" formControlName="mail"
+                   placeholder="{{'registration.emailLabel' | translate}}"/>
+            <clr-control-error>{{'common.required' | translate}}</clr-control-error>
+          </clr-input-container>
+        </div>
+        <div class="clr-col-4"></div>
+      </div>
+
+      <div class="clr-row">
+        <div class="clr-col-4"></div>
+        <div class="clr-col-4">
+          <clr-input-container>
+            <label>
+              <clr-icon shape="key"></clr-icon>
+            </label>
+            <input clrInput type="password" formControlName="password"
+                   placeholder="{{'registration.passwordLabel' | translate}}"/>
+            <clr-control-error>{{'common.required' | translate}}</clr-control-error>
+          </clr-input-container>
+        </div>
+        <div class="clr-col-4"></div>
+      </div>
+
+      <div class="clr-row">
+        <div class="clr-col-4"></div>
+        <div class="clr-col-4">
+          <clr-input-container>
+            <label>
+              <clr-icon shape="refresh"></clr-icon>
+            </label>
+            <input clrInput type="password" formControlName="password"
+                   placeholder="{{'registration.passwordRepeatLabel' | translate}}"/>
+            <clr-control-error>{{'common.required' | translate}}</clr-control-error>
+          </clr-input-container>
+        </div>
+        <div class="clr-col-4"></div>
+      </div>
+    </form>
+  </div>
+  <div class="modal-footer">
+    <button type="submit" class="btn btn-primary btn-block"
+            (click)="onSubmit()">{{'registration.register' | translate}} </button>
+    <button type="submit" class="btn btn-secondary-outline btn-block"
+            (click)="displayCollegeRegistrationDialog = false">{{'registration.cancelButtonLabel' | translate}} </button>
+  </div>
+</clr-modal>

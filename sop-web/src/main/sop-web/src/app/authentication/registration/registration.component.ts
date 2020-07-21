@@ -2,6 +2,7 @@ import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {User} from '../../security/user';
 import {AuthService} from '../../_services/auth/auth.service';
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-registration',
@@ -10,31 +11,29 @@ import {AuthService} from '../../_services/auth/auth.service';
 })
 export class RegistrationComponent implements OnInit {
 
-  displayRegistrationDialog: any;
-
   @Output()
-  closeDialogWithSaveEmitter: EventEmitter<any> = new EventEmitter<any>();
+  public closeDialogWithSaveEmitter: EventEmitter<any> = new EventEmitter<any>();
+  public registrationForm: FormGroup;
+  public displayRegistrationDialog = false;
+  public isSuccessful = false;
+  public isSignUpFailed = false;
+  public errorMessage = '';
+  public blockUI: any;
 
-  registrationForm: FormGroup;
-  isSuccessful = false;
-  isSignUpFailed = false;
-  errorMessage = '';
-  userToRegister: User;
+  private userToRegister: User;
   private displayAlert: boolean;
-  blockUI: any;
 
   constructor(private formBuilder: FormBuilder,
-              private authService: AuthService) {
+              private authService: AuthService,
+              private router: Router) {
   }
 
-  show() {
+  public show(): void {
     this.displayRegistrationDialog = true;
   }
 
-  ngOnInit() {
-
+  public ngOnInit(): void {
     this.registrationForm = this.formBuilder.group({
-
       token: new FormControl({value: null, disabled: false}),
       username: new FormControl({value: null, disabled: false}, Validators.required),
       firstName: new FormControl({value: null, disabled: false}, Validators.required),
@@ -43,29 +42,24 @@ export class RegistrationComponent implements OnInit {
       repeatedPassword: new FormControl({value: null, disabled: false}, Validators.required),
       birthDate: new FormControl({value: null, disabled: false}),
       sex: new FormControl({value: null, disabled: false}, Validators.required),
-      academicDegree: new FormControl({value: null, disabled: false}, Validators.required)
-      // firstName: new FormControl({value: null, disabled: false}, Validators.required),
-      // lastName: new FormControl({value: null, disabled: false}, Validators.required),
-      //
-      //
-      // phone: new FormControl({value: null, disabled: false}, Validators.required),
+      academicDegree: new FormControl({value: null, disabled: false}, Validators.required),
+      phone: new FormControl({value: null, disabled: false}, Validators.required),
       // email: new FormControl({
       //   value: null,
       //   disabled: false
       // }, Validators.compose([Validators.required, Validators.email])),
-      // birthDate: new FormControl({value: null, disabled: false}, Validators.required),
-      // genderId: new FormControl({value: null, disabled: false}, Validators.required),
     });
   }
 
-  onSubmit() {
+  public onSubmit(): void {
     this.blockUI = true;
     this.collectUserData();
     this.authService.register(this.userToRegister).subscribe(
       data => {
         this.isSuccessful = true;
         this.isSignUpFailed = false;
-        this.reloadPage();
+        this.blockUI = false;
+        this.router.navigate(['registered-successfully']);
 
       },
       err => {
@@ -76,12 +70,7 @@ export class RegistrationComponent implements OnInit {
     );
   }
 
-  reloadPage() {
-    window.location.reload();
-    this.blockUI = false;
-  }
-
-  private collectUserData() {
+  private collectUserData(): void {
     this.userToRegister = new User();
     this.userToRegister.firstName = this.registrationForm.get('firstName').value;
     this.userToRegister.lastName = this.registrationForm.get('lastName').value;
