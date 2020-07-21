@@ -2,7 +2,7 @@ import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {User} from '../../security/user';
 import {AuthService} from '../../_services/auth/auth.service';
-import {Router} from "@angular/router";
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-registration',
@@ -59,6 +59,7 @@ export class RegistrationComponent implements OnInit {
         this.isSuccessful = true;
         this.isSignUpFailed = false;
         this.blockUI = false;
+        this.displayRegistrationDialog = false;
         this.router.navigate(['registered-successfully']);
 
       },
