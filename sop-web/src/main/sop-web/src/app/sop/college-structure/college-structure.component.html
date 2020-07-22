@@ -1,1 +1,17 @@
-<p>college-structure works!</p>
+<p-treeTable [value]="collegeStructure" [columns]="cols">
+  <ng-template pTemplate="header" let-columns let-rowNode>
+    <tr [ttRow]="rowNode">
+      <th *ngFor="let col of columns">
+        {{col.header}}
+      </th>
+    </tr>
+  </ng-template>
+  <ng-template pTemplate="body" let-rowNode let-rowData="rowData" let-columns="columns">
+    <tr>
+      <td *ngFor="let col of columns; let i = index">
+        <p-treeTableToggler [rowNode]="rowNode" *ngIf="i == 0"></p-treeTableToggler>
+        {{rowData[col.field]}}
+      </td>
+    </tr>
+  </ng-template>
+</p-treeTable>

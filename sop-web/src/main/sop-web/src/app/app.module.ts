@@ -43,7 +43,7 @@ import {
   PanelModule,
   ProgressSpinnerModule,
   TableModule,
-  ToastModule
+  ToastModule, TreeTableModule
 } from 'primeng';
 import { HomeComponent } from './home/home.component';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
@@ -154,6 +154,7 @@ import { RegistrationConfirmationComponent } from './authentication/registration
     OwlDateTimeModule,
     OwlNativeDateTimeModule,
     FullCalendarModule,
+    TreeTableModule,
   ],
   providers: [{ provide: LocationStrategy, useClass: HashLocationStrategy }, authInterceptorProviders],
   bootstrap: [AppComponent],

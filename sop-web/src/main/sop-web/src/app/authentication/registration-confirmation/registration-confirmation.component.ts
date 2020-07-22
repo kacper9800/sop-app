@@ -12,4 +12,5 @@ export class RegistrationConfirmationComponent implements OnInit {
   ngOnInit(): void {
   }
 
+
 }

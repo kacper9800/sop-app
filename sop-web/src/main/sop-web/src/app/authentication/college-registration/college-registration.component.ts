@@ -2,6 +2,8 @@ import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {College, ICollege} from '../../_model/college.model';
 import {CollegeService} from "../../_services/structure/college.service";
+import {AuthService} from "../../_services/auth/auth.service";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-college-registration',
@@ -14,9 +16,18 @@ export class CollegeRegistrationComponent implements OnInit {
   public displayCollegeRegistrationDialog = false;
   public collegeRegistrationForm: FormGroup;
   public colleges: College[];
+  private blockUI: boolean;
+  private collegeToRegister: College;
+  private isSuccessful: boolean;
+  private isSignUpFailed: boolean;
+  private displayRegistrationDialog: boolean;
+  private displayAlert: boolean;
+  private errorMessage: any;
 
   constructor(private formBuilder: FormBuilder,
-              private collegeService: CollegeService) {
+              private collegeService: CollegeService,
+              private authService: AuthService,
+              private router: Router) {
   }
 
   ngOnInit(): void {
@@ -34,6 +45,23 @@ export class CollegeRegistrationComponent implements OnInit {
   }
 
   public onSubmit(): void {
+    this.blockUI = true;
+    this.collectUserData();
+    this.authService.registerCollege(this.collegeToRegister).subscribe(
+      data => {
+        this.isSuccessful = true;
+        this.isSignUpFailed = false;
+        this.blockUI = false;
+        this.displayRegistrationDialog = false;
+        this.router.navigate(['registered-successfully']);
+
+      },
+      err => {
+        this.displayAlert = true;
+        this.errorMessage = err.error.message;
+        this.isSignUpFailed = true;
+      }
+    );
 
   }
 
@@ -49,6 +77,10 @@ export class CollegeRegistrationComponent implements OnInit {
   }
 
   private onErrorLoadAvailableColleges(): void {
+
+  }
+
+  private collectUserData(): void {
 
   }
 }

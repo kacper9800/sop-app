@@ -3,14 +3,15 @@
  * Kacper Rzymkiewicz #2020
  */
 
-import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import {Injectable} from '@angular/core';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
+import {Observable} from 'rxjs';
+import {College} from '../../_model/college.model';
 
 const AUTH_API = 'http://localhost:8082/api/auth/';
 
 const httpOptions = {
-  headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+  headers: new HttpHeaders({'Content-Type': 'application/json'})
 };
 
 @Injectable({
@@ -18,9 +19,10 @@ const httpOptions = {
 })
 export class AuthService {
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {
+  }
 
-  login(credentials): Observable<any> {
+  public login(credentials): Observable<any> {
     console.log(credentials);
     return this.http.post(AUTH_API + 'signIn', {
       username: credentials[0],
@@ -28,7 +30,7 @@ export class AuthService {
     }, httpOptions);
   }
 
-  register(user): Observable<any> {
+  public register(user): Observable<any> {
     return this.http.post(AUTH_API + 'signUp', {
       username: user.username,
       firstName: user.firstName,
@@ -37,5 +39,12 @@ export class AuthService {
       password: user.password,
       deleted: false,
     }, httpOptions);
+  }
+
+  public registerCollege(college: College): Observable<any> {
+    return this.http.post(AUTH_API + 'signUpCollege', {
+      collegeId: college.id,
+
+    });
   }
 }
