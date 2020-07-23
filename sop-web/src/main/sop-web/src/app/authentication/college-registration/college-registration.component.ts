@@ -1,9 +1,9 @@
 import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {College, ICollege} from '../../_model/college.model';
-import {CollegeService} from "../../_services/structure/college.service";
-import {AuthService} from "../../_services/auth/auth.service";
-import {Router} from "@angular/router";
+import {CollegeService} from '../../_services/structure/college.service';
+import {AuthService} from '../../_services/auth/auth.service';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-college-registration',
@@ -17,7 +17,7 @@ export class CollegeRegistrationComponent implements OnInit {
   public collegeRegistrationForm: FormGroup;
   public colleges: College[];
   private blockUI: boolean;
-  private collegeToRegister: College;
+  private collegeToRegister: any;
   private isSuccessful: boolean;
   private isSignUpFailed: boolean;
   private displayRegistrationDialog: boolean;
@@ -36,7 +36,6 @@ export class CollegeRegistrationComponent implements OnInit {
       mail: new FormControl({value: null, disabled: false}, Validators.required),
       password: new FormControl({value: null, disabled: false}, Validators.required)
     });
-
     this.loadAvailableColleges();
   }
 
@@ -44,26 +43,6 @@ export class CollegeRegistrationComponent implements OnInit {
     this.displayCollegeRegistrationDialog = true;
   }
 
-  public onSubmit(): void {
-    this.blockUI = true;
-    this.collectUserData();
-    this.authService.registerCollege(this.collegeToRegister).subscribe(
-      data => {
-        this.isSuccessful = true;
-        this.isSignUpFailed = false;
-        this.blockUI = false;
-        this.displayRegistrationDialog = false;
-        this.router.navigate(['registered-successfully']);
-
-      },
-      err => {
-        this.displayAlert = true;
-        this.errorMessage = err.error.message;
-        this.isSignUpFailed = true;
-      }
-    );
-
-  }
 
   private loadAvailableColleges(): void {
     this.collegeService.getAllAvailableColleges().subscribe(
@@ -80,7 +59,31 @@ export class CollegeRegistrationComponent implements OnInit {
 
   }
 
-  private collectUserData(): void {
+  public onSubmit(): void {
+    this.blockUI = true;
+    this.collectCollegeData();
+    this.authService.registerCollege(this.collegeToRegister).subscribe(
+      data => {
+        this.isSuccessful = true;
+        this.isSignUpFailed = false;
+        this.blockUI = false;
+        this.displayRegistrationDialog = false;
+        this.router.navigate(['registered-successfully']);
+
+      },
+      err => {
+        this.displayAlert = true;
+        this.errorMessage = err.error.message;
+        this.isSignUpFailed = true;
+      }
+    );
+  }
+
+  private collectCollegeData(): void {
+    this.collegeToRegister = {};
+    this.collegeToRegister.collegeId = this.collegeRegistrationForm.get('collegeId').value;
+    this.collegeToRegister.mail = this.collegeRegistrationForm.get('mail').value;
+    this.collegeToRegister.password = this.collegeRegistrationForm.get('password').value;
 
   }
 }

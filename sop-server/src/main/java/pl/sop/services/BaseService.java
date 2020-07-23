@@ -1,6 +1,8 @@
 package pl.sop.services;
 
-public abstract class BaseService<T> {
+import pl.sop.dao.entities.BasicEntity;
+
+public abstract class BaseService<T extends BasicEntity> {
 
 
 }

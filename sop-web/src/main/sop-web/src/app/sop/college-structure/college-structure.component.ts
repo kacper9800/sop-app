@@ -25,9 +25,9 @@ export class CollegeStructureComponent implements OnInit {
     );
 
     this.cols = [
-      {field: 'name', header: 'Name'},
-      {field: 'size', header: 'Size'},
-      {field: 'type', header: 'Type'}
+      {field: 'name', header: 'common.name'},
+      {field: 'location', header: 'common.location'},
+      {field: 'actions', header: 'common.actions'}
     ];
   }
 

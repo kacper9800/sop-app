@@ -17,7 +17,7 @@ import java.util.Date;
 @EntityListeners(AuditingEntityListener.class)
 public abstract class BasicEntity implements Serializable {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     @JsonView(BaseEntityView.Minimal.class)
     protected Long id;
 

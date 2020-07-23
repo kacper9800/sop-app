@@ -2,7 +2,7 @@
   <ng-template pTemplate="header" let-columns let-rowNode>
     <tr [ttRow]="rowNode">
       <th *ngFor="let col of columns">
-        {{col.header}}
+        {{col.header | translate}}
       </th>
     </tr>
   </ng-template>

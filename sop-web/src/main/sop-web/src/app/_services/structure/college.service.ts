@@ -5,6 +5,7 @@ import {Observable} from 'rxjs';
 import {ICollege} from '../../_model/college.model';
 
 const COLLEGES_API = '/colleges';
+const AVAILABLE_COLLEGES_API = '/available-colleges';
 const COLLEGE_STRUCTURE_API = '/college-structure';
 
 @Injectable({
@@ -17,7 +18,7 @@ export class CollegeService {
   }
 
   public getAllAvailableColleges(): Observable<ICollege[]> {
-    return this.httpClient.get<ICollege[]>(global.API + COLLEGES_API);
+    return this.httpClient.get<ICollege[]>(global.API + AVAILABLE_COLLEGES_API);
   }
 
   public registerCollege(collegeToSave: ICollege): Observable<ICollege> {
