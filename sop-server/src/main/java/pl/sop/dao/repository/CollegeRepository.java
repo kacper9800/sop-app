@@ -13,11 +13,11 @@ public interface CollegeRepository extends JpaRepository<College, Long> {
   @Query(value = "SELECT c FROM College c")
   List<College> findAllColleges();
 
-  @Query(value = "SELECT c FROM College c WHERE c.voivodeship_id = :voivo_id")
-  List<College> findAllCollegesByVoivodeship_id(@Param("voivo_id") Long voivo_id);
+//  @Query(value = "SELECT c FROM College c WHERE c.voivodeship_id = :voivo_id")
+//  List<College> findAllCollegesByVoivodeship_id(@Param("voivo_id") Long voivo_id);
 
   @Query(value = "SELECT c FROM College c WHERE c.active = false")
-  List<College> finAllAvailableColleges();
+  List<College> findAllAvailableColleges();
 
   @Query(value = "SELECT c FROM College c WHERE c.id = :college_id and c.deleted = false ")
   College findCollegeById(@Param("college_id") Long collegeId);

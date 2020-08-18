@@ -22,16 +22,16 @@ public class CollegeService {
 
 
   public List<College> findAllColleges() {
-    return collegeRepository.findAll();
+    return collegeRepository.findAllColleges();
   }
 
   public List<College> findAllAvailableColleges() {
-    return collegeRepository.finAllAvailableColleges();
+    return collegeRepository.findAllAvailableColleges();
   }
 
-  public List<College> findAllCollegesByVoivodeship_id(Long id) {
-    return collegeRepository.findAllCollegesByVoivodeship_id(id);
-  }
+//  public List<College> findAllCollegesByVoivodeship_id(Long id) {
+//    return collegeRepository.findAllCollegesByVoivodeship_id(id);
+//  }
 
   public void save(CollegeRegistrationDTO collegeRegistrationDTO) {
     College college = collegeRepository.findCollegeById(collegeRegistrationDTO.getCollegeId());

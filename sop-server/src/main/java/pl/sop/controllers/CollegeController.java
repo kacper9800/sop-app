@@ -4,6 +4,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -16,6 +17,7 @@ import pl.sop.dto.CollegeRegistrationDTO;
 import pl.sop.services.CollegeService;
 
 @RestController
+@CrossOrigin
 public class CollegeController {
 
   @Autowired
@@ -36,11 +38,11 @@ public class CollegeController {
     return new ResponseEntity<>(colleges, HttpStatus.OK);
   }
 
-  @GetMapping(value = "/api/college/{id}")
-  public ResponseEntity<List<College>> getAllCollegesByVoivoId(@PathVariable Long id) {
-    final List<College> colleges = collegeService.findAllCollegesByVoivodeship_id(id);
-    return new ResponseEntity<>(colleges, HttpStatus.OK);
-  }
+//  @GetMapping(value = "/api/college/{id}")
+//  public ResponseEntity<List<College>> getAllCollegesByVoivoId(@PathVariable Long id) {
+//    final List<College> colleges = collegeService.findAllCollegesByVoivodeship_id(id);
+//    return new ResponseEntity<>(colleges, HttpStatus.OK);
+//  }
 
   @PostMapping(value = "/api/college/")
   public HttpStatus saveNewCollege(@RequestBody CollegeRegistrationDTO collegeRegistrationDTO) {

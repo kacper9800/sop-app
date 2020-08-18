@@ -1,0 +1,235 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+  xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
+  <changeSet author="krzymkiewicz" id="colleges_malopolska">
+    <insert tableName="colleges">
+      <column  name="name"  value="Akademia Górniczo-Hutnicza im. Stanisława Staszica w Krakowie"/>
+      <column  name="active"  value="false"/>
+    </insert>
+    <insert tableName="colleges">
+      <column  name="name"  value="Akademia Ignatianum w Krakowie"/>
+      <column  name="active"  value="false"/>
+    </insert>
+    <insert tableName="colleges">
+      <column  name="name"  value="Akademia Wychowania Fizycznego im. Bronisława Czecha w Krakowie"/>
+      <column  name="active"  value="false"/>
+    </insert>
+    <insert tableName="colleges">
+      <column  name="name"  value="Krakowska Akademia im. Andrzeja Frycza Modrzewskiego w Krakowie"/>
+      <column  name="active"  value="false"/>
+    </insert>
+    <insert tableName="colleges">
+      <column  name="name"  value="Krakowska Wyższa Szkoła Promocji Zdrowia w Krakowie"/>
+      <column  name="active"  value="false"/>
+    </insert>
+    <insert tableName="colleges">
+      <column  name="name"  value="Małopolska Uczelnia Państwowa im. rotmistrza Witolda Pileckiego w Oświęcimiu"/>
+      <column  name="active"  value="false"/>
+    </insert>
+    <insert tableName="colleges">
+      <column  name="name"  value="Małopolska Wyższa Szkoła Ekonomiczna z siedzibą w Tarnowie"/>
+      <column  name="active"  value="false"/>
+    </insert>
+    <insert tableName="colleges">
+      <column  name="name"  value="Małopolska Wyższa Szkoła im. Józefa Dietla w Krakowie"/>
+      <column  name="active"  value="false"/>
+    </insert>
+    <insert tableName="colleges">
+      <column  name="name"  value="Państwowa Wyższa Szkoła Zawodowa w Nowym Sączu"/>
+      <column  name="active"  value="false"/>
+    </insert>
+    <insert tableName="colleges">
+      <column  name="name"  value="Państwowa Wyższa Szkoła Zawodowa w Tarnowie"/>
+      <column  name="active"  value="false"/>
+    </insert>
+    <insert tableName="colleges">
+      <column  name="name"  value="Podhalańska Państwowa Uczelnia Zawodowa w Nowym Targu"/>
+      <column  name="active"  value="false"/>
+    </insert>
+    <insert tableName="colleges">
+      <column  name="name"  value="Politechnika Krakowska im. Tadeusza Kościuszki"/>
+      <column  name="active"  value="false"/>
+    </insert>
+    <insert tableName="colleges">
+      <column  name="name"  value="Tarnowska Szkoła Wyższa z siedzibą w Tarnowie"/>
+      <column  name="active"  value="false"/>
+    </insert>
+    <insert tableName="colleges">
+      <column  name="name"  value="Uniwersytet Ekonomiczny w Krakowie"/>
+      <column  name="active"  value="false"/>
+    </insert>
+    <insert tableName="colleges">
+      <column  name="name"  value="Uniwersytet Jagielloński w Krakowie"/>
+      <column  name="active"  value="false"/>
+    </insert>
+    <insert tableName="colleges">
+      <column  name="name"  value="Uniwersytet Papieski Jana Pawła II w Krakowie"/>
+      <column  name="active"  value="false"/>
+    </insert>
+    <insert tableName="colleges">
+      <column  name="name"  value="Uniwersytet Pedagogiczny im. Komisji Edukacji Narodowej w Krakowie"/>
+      <column  name="active"  value="false"/>
+    </insert>
+    <insert tableName="colleges">
+      <column  name="name"  value="Uniwersytet Rolniczy im. Hugona Kołłątaja w Krakowie"/>
+      <column  name="active"  value="false"/>
+    </insert>
+    <insert tableName="colleges">
+      <column  name="name"  value="Wyższa Szkoła Bezpieczeństwa Publicznego i Indywidualnego 'Apeiron' w Krakowie"/>
+      <column  name="active"  value="false"/>
+    </insert>
+    <insert tableName="colleges">
+      <column  name="name"  value="Wyższa Szkoła Biznesu - National Louis University z siedzibą w Nowym Sączu"/>
+      <column  name="active"  value="false"/>
+    </insert>
+    <insert tableName="colleges">
+      <column  name="name"  value="Wyższa Szkoła Ekonomii i Informatyki w Krakowie"/>
+      <column  name="active"  value="false"/>
+    </insert>
+    <insert tableName="colleges">
+      <column  name="name"  value="Wyższa Szkoła Europejska im. Ks. Józefa Tischnera w Krakowie"/>
+      <column  name="active"  value="false"/>
+    </insert>
+    <insert tableName="colleges">
+      <column  name="name"  value="Wyższa Szkoła Gospodarki i Zarządzania w Krakowie"/>
+      <column  name="active"  value="false"/>
+    </insert>
+    <insert tableName="colleges">
+      <column  name="name"  value="Wyższa Szkoła Turystyki i Ekologii w Suchej Beskidzkiej"/>
+      <column  name="active"  value="false"/>
+    </insert>
+    <insert tableName="colleges">
+      <column  name="name"  value="Wyższa Szkoła Ubezpieczeń w Krakowie"/>
+      <column  name="active"  value="false"/>
+    </insert>
+    <insert tableName="colleges">
+      <column  name="name"  value="Wyższa Szkoła Zarządzania i Bankowości w Krakowie"/>
+      <column  name="active"  value="false"/>
+    </insert>
+  </changeSet>
+
+  <changeSet author="krzymkiewicz" id="colleges_slaskie">
+    <insert tableName="colleges">
+      <column  name="name"  value="Akademia Polonijna w Częstochowie"/>
+      <column  name="active"  value="false"/>
+    </insert>
+    <insert tableName="colleges">
+      <column  name="name"  value="Akademia Techniczno-Humanistyczna w Bielsku-Białej"/>
+      <column  name="active"  value="false"/>
+    </insert>
+    <insert tableName="colleges">
+      <column  name="name"  value="Akademia WSB"/>
+      <column  name="active"  value="false"/>
+    </insert>
+    <insert tableName="colleges">
+      <column  name="name"  value="Akademia Wychowania Fizycznego im. Jerzego Kukuczki w Katowicach"/>
+      <column  name="active"  value="false"/>
+    </insert>
+    <insert tableName="colleges">
+      <column  name="name"  value="Bielska Wyższa Szkoła im. Józefa Tyszkiewicza w Bielsku-Białej"/>
+      <column  name="active"  value="false"/>
+    </insert>
+    <insert tableName="colleges">
+      <column  name="name"  value="Górnośląska Wyższa Szkoła Handlowa im. Wojciecha Korfantego w Katowicach"/>
+      <column  name="active"  value="false"/>
+    </insert>
+    <insert tableName="colleges">
+      <column  name="name"  value="Górnośląska Wyższa Szkoła Przedsiębiorczości im. Karola Goduli w Chorzowie"/>
+      <column  name="active"  value="false"/>
+    </insert>
+    <insert tableName="colleges">
+      <column  name="name"  value="Instytut Teologiczny im. św. Jana Kantego w Bielsku-Białej"/>
+      <column  name="active"  value="false"/>
+    </insert>
+    <insert tableName="colleges">
+      <column  name="name"  value="Państwowa Wyższa Szkoła Zawodowa w Raciborzu"/>
+      <column  name="active"  value="false"/>
+    </insert>
+    <insert tableName="colleges">
+      <column  name="name"  value="Politechnika Częstochowska"/>
+      <column  name="active"  value="false"/>
+    </insert>
+    <insert tableName="colleges">
+      <column  name="name"  value="Politechnika Śląska"/>
+      <column  name="active"  value="false"/>
+    </insert>
+    <insert tableName="colleges">
+      <column  name="name"  value="Śląska Wyższa Szkoła Medyczna w Katowicach"/>
+      <column  name="active"  value="false"/>
+    </insert>
+    <insert tableName="colleges">
+      <column  name="name"  value="Uniwersytet Ekonomiczny w Katowicach"/>
+      <column  name="active"  value="false"/>
+    </insert>
+    <insert tableName="colleges">
+      <column  name="name"  value="Uniwersytet Humanistyczno-Przyrodniczy im. Jana Długosza w Częstochowie [poprzednio: Akademia im. Jana Długosza w Częstochowie]"/>
+      <column  name="active"  value="false"/>
+    </insert>
+    <insert tableName="colleges">
+      <column  name="name"  value="Uniwersytet Śląski w Katowicach"/>
+      <column  name="active"  value="false"/>
+    </insert>
+    <insert tableName="colleges">
+      <column  name="name"  value="Wyższa Szkoła Administracji w Bielsku-Białej"/>
+      <column  name="active"  value="false"/>
+    </insert>
+    <insert tableName="colleges">
+      <column  name="name"  value="Wyższa Szkoła Ekonomiczno-Humanistyczna w Bielsku-Białej"/>
+      <column  name="active"  value="false"/>
+    </insert>
+    <insert tableName="colleges">
+      <column  name="name"  value="Wyższa Szkoła Finansów i Prawa w Bielsku-Białej"/>
+      <column  name="active"  value="false"/>
+    </insert>
+    <insert tableName="colleges">
+      <column  name="name"  value="Wyższa Szkoła Humanitas w Sosnowcu"/>
+      <column  name="active"  value="false"/>
+    </insert>
+    <insert tableName="colleges">
+      <column  name="name"  value="Wyższa Szkoła Informatyki i Zarządzania w Bielsku-Białej"/>
+      <column  name="active"  value="false"/>
+    </insert>
+    <insert tableName="colleges">
+      <column  name="name"  value="Wyższa Szkoła Inżynierii Bezpieczeństwa i Ekologii w Sosnowcu"/>
+      <column  name="active"  value="false"/>
+    </insert>
+    <insert tableName="colleges">
+      <column  name="name"  value="Wyższa Szkoła Lingwistyczna w Częstochowie"/>
+      <column  name="active"  value="false"/>
+    </insert>
+    <insert tableName="colleges">
+      <column  name="name"  value="Wyższa Szkoła Medyczna w Sosnowcu"/>
+      <column  name="active"  value="false"/>
+    </insert>
+    <insert tableName="colleges">
+      <column  name="name"  value="Wyższa Szkoła Nauk Stosowanych w Rudzie Śląskiej"/>
+      <column  name="active"  value="false"/>
+    </insert>
+    <insert tableName="colleges">
+      <column  name="name"  value="Wyższa Szkoła Planowania Strategicznego w Dąbrowie Górniczej"/>
+      <column  name="active"  value="false"/>
+    </insert>
+    <insert tableName="colleges">
+      <column  name="name"  value="Wyższa Szkoła Techniczna w Katowicach"/>
+      <column  name="active"  value="false"/>
+    </insert>
+    <insert tableName="colleges">
+      <column  name="name"  value="Wyższa Szkoła Technologii Informatycznych w Katowicach"/>
+      <column  name="active"  value="false"/>
+    </insert>
+    <insert tableName="colleges">
+      <column  name="name"  value="Wyższa Szkoła Zarządzania Ochroną Pracy w Katowicach"/>
+      <column  name="active"  value="false"/>
+    </insert>
+    <insert tableName="colleges">
+      <column  name="name"  value="Wyższa Szkoła Zarządzania w Częstochowie"/>
+      <column  name="active"  value="false"/>
+    </insert>
+    <insert tableName="colleges">
+      <column  name="name"  value="Wyższy Instytut Teologiczny w Częstochowie"/>
+      <column  name="active"  value="false"/>
+    </insert>
+  </changeSet>
+</databaseChangeLog>

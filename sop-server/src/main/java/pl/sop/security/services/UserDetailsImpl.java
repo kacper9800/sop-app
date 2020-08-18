@@ -5,8 +5,7 @@
 
 package pl.sop.security.services;
 
-import com.sun.org.apache.regexp.internal.RE;
-import net.minidev.json.annotate.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;

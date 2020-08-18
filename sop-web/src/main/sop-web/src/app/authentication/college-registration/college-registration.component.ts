@@ -52,11 +52,11 @@ export class CollegeRegistrationComponent implements OnInit {
   }
 
   private onSuccessLoadAvailableColleges(res: ICollege[]): void {
-
+    console.log(res);
   }
 
   private onErrorLoadAvailableColleges(): void {
-
+  console.log('error');
   }
 
   public onSubmit(): void {
