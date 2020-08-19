@@ -13,11 +13,16 @@
             </label>
             <select clrSelect name="options" formControlName="collegeId" required>
               <div *ngFor="let college of colleges">
-                <option [value]="college.id">{{college.name}}</option>
+                <option [value]="college.value">{{college.label}}</option>
               </div>
             </select>
             <clr-control-error>{{'common.required' | translate}}</clr-control-error>
           </clr-select-container>
+
+
+            <p-dropdown [options]="colleges" formControlName="collegeId" [showClear]="true"
+                        placeholder="Select Item" [virtualScroll]="true" [itemSize]="31" [filter]="true"></p-dropdown>
+
         </div>
         <div class="clr-col-4"></div>
       </div>

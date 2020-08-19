@@ -4,6 +4,7 @@ import {College, ICollege} from '../../_model/college.model';
 import {CollegeService} from '../../_services/structure/college.service';
 import {AuthService} from '../../_services/auth/auth.service';
 import {Router} from '@angular/router';
+import {CollegeView} from "../../_model/college-view.model";
 
 @Component({
   selector: 'app-college-registration',
@@ -15,7 +16,7 @@ export class CollegeRegistrationComponent implements OnInit {
   public closeDialogWithSaveEmitter: EventEmitter<any> = new EventEmitter<any>();
   public displayCollegeRegistrationDialog = false;
   public collegeRegistrationForm: FormGroup;
-  public colleges: College[];
+  public colleges: CollegeView[] = [];
   private blockUI: boolean;
   private collegeToRegister: any;
   private isSuccessful: boolean;
@@ -52,7 +53,13 @@ export class CollegeRegistrationComponent implements OnInit {
   }
 
   private onSuccessLoadAvailableColleges(res: ICollege[]): void {
-    console.log(res);
+    res.forEach(college => {
+      const collegeView = {label: null, value: null};
+      collegeView.label = college.name;
+      collegeView.value = college.id;
+      this.colleges.push(collegeView);
+    });
+    console.log(this.colleges);
   }
 
   private onErrorLoadAvailableColleges(): void {
