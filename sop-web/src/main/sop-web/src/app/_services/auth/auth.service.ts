@@ -6,12 +6,13 @@
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Observable} from 'rxjs';
-import {College} from '../../_model/college.model';
+import {CollegeRegister} from '../../_model/college-register.model';
 
 const AUTH_API = 'http://localhost:8082/api/auth/';
 
 const httpOptions = {
-  headers: new HttpHeaders({'Content-Type': 'application/json'})
+  headers: new HttpHeaders({'Content-Type': 'application/json',
+                                    'Access-Control-Allow-Origin': '*'})
 };
 
 @Injectable({
@@ -23,7 +24,6 @@ export class AuthService {
   }
 
   public login(credentials): Observable<any> {
-    console.log(credentials);
     return this.http.post(AUTH_API + 'signIn', {
       username: credentials[0],
       password: credentials[1]
@@ -41,10 +41,11 @@ export class AuthService {
     }, httpOptions);
   }
 
-  public registerCollege(college: College): Observable<any> {
+  public registerCollege(college: CollegeRegister): Observable<any> {
     return this.http.post(AUTH_API + 'signUpCollege', {
-      collegeId: college.id,
-
-    });
+      collegeId: college.collegeId,
+      email: college.email,
+      password: college.password
+    }, httpOptions);
   }
 }

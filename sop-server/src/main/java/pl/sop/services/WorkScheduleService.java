@@ -5,11 +5,11 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import pl.sop.converters.FromDTO.DTOToWorkScheduleConverter;
 import pl.sop.converters.ToDTO.WorkScheduleToDTOConverter;
-import pl.sop.dao.entities.Event;
-import pl.sop.dao.entities.WorkSchedule;
-import pl.sop.dao.repository.EventRepository;
-import pl.sop.dao.repository.UserRepository;
-import pl.sop.dao.repository.WorkScheduleRepository;
+import pl.sop.entities.Event;
+import pl.sop.entities.WorkSchedule;
+import pl.sop.repositories.EventRepository;
+import pl.sop.repositories.UserRepository;
+import pl.sop.repositories.WorkScheduleRepository;
 import pl.sop.dto.WorkScheduleDTO;
 
 import java.text.DateFormat;

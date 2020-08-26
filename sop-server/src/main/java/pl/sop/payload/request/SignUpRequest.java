@@ -6,19 +6,45 @@
 
 package pl.sop.payload.request;
 
-import pl.sop.dao.entities.Role;
-
-import java.util.List;
 import java.util.Set;
 
 public class SignUpRequest {
 
+    private String token;
     private String firstName;
     private String lastName;
     private String username;
     private String email;
     private String password;
     private Set<String> role;
+    private Long collegeId;
+
+    public SignUpRequest() {
+    }
+
+    public SignUpRequest(String token, String firstName, String lastName, String username,
+        String email, String password, Set<String> role, Long collegeId) {
+        this.token = token;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.username = username;
+        this.email = email;
+        this.password = password;
+        this.role = role;
+        this.collegeId = collegeId;
+    }
+
+    public String getToken() { return token; }
+
+    public void setToken(String token) { this.token = token; }
+
+    public String getFirstName() { return firstName; }
+
+    public void setFirstName(String firstName) { this.firstName = firstName; }
+
+    public String getLastName() { return lastName; }
+
+    public void setLastName(String lastName) { this.lastName = lastName; }
 
     public String getUsername() {
         return username;
@@ -51,4 +77,8 @@ public class SignUpRequest {
     public void setRole(Set<String> roles) {
         this.role = roles;
     }
+
+    public Long getCollegeId() { return collegeId; }
+
+    public void setCollegeId(Long collegeId) { this.collegeId = collegeId; }
 }

@@ -1,7 +1,7 @@
 package pl.sop.converters.ToDTO;
 
 import pl.sop.converters.Converter;
-import pl.sop.dao.entities.Event;
+import pl.sop.entities.Event;
 import pl.sop.dto.EventDTO;
 
 import java.text.DateFormat;

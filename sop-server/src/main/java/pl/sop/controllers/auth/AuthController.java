@@ -14,19 +14,20 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import pl.sop.dao.repository.RoleRepository;
-import pl.sop.dao.repository.UserRepository;
+import pl.sop.repositories.RoleRepository;
+import pl.sop.repositories.UserRepository;
+import pl.sop.dto.CollegeRegistrationDTO;
 import pl.sop.payload.request.LoginRequest;
 import pl.sop.payload.request.SignUpRequest;
 import pl.sop.payload.response.JwtResponse;
 import pl.sop.security.jwt.JwtUtils;
 import pl.sop.security.services.UserDetailsImpl;
+import pl.sop.organizationStructure.CollegeService;
 import pl.sop.services.UserService;
 
 @CrossOrigin(origins = "*", maxAge = 3600)
@@ -35,19 +36,20 @@ import pl.sop.services.UserService;
 public class AuthController {
 
   @Autowired
-  AuthenticationManager authenticationManager;
+  private AuthenticationManager authenticationManager;
   @Autowired
-  UserRepository userRepository;
+  private UserRepository userRepository;
+  @Autowired
+  private RoleRepository roleRepository;
 
   @Autowired
-  RoleRepository roleRepository;
-
-
-  @Autowired
-  JwtUtils jwtUtils;
+  private JwtUtils jwtUtils;
 
   @Autowired
-  UserService userService;
+  private UserService userService;
+
+  @Autowired
+  private CollegeService collegeService;
 
   @PostMapping("/signIn")
   public ResponseEntity<?> authenticateUser(@Valid @RequestBody LoginRequest loginRequest) {
@@ -72,6 +74,10 @@ public class AuthController {
   @PostMapping("/signUp")
   public ResponseEntity<?> registerUser(@Valid @RequestBody SignUpRequest signUpRequest) {
     return userService.registerUser(signUpRequest);
+  }
 
+  @PostMapping("/signUpCollege")
+  public ResponseEntity<?> registerCollege(@Valid @RequestBody CollegeRegistrationDTO collegeRegistrationDTO) {
+    return collegeService.registerCollege(collegeRegistrationDTO);
   }
 }

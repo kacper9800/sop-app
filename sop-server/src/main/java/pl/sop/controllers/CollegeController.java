@@ -11,10 +11,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
-import pl.sop.dao.entities.organizationStructure.College;
-import pl.sop.dao.repository.CollegeRepository;
+import pl.sop.organizationStructure.College;
+import pl.sop.organizationStructure.CollegeRepository;
 import pl.sop.dto.CollegeRegistrationDTO;
-import pl.sop.services.CollegeService;
+import pl.sop.organizationStructure.CollegeService;
 
 @RestController
 @CrossOrigin
@@ -45,16 +45,15 @@ public class CollegeController {
 //  }
 
   @PostMapping(value = "/api/college/")
-  public HttpStatus saveNewCollege(@RequestBody CollegeRegistrationDTO collegeRegistrationDTO) {
+  public ResponseEntity<?> saveNewCollege(@RequestBody CollegeRegistrationDTO collegeRegistrationDTO) {
     collegeService.save(collegeRegistrationDTO);
-    return HttpStatus.OK;
+    return ResponseEntity.ok(HttpStatus.OK);
   }
 
   @PutMapping(value = "/api/college/{id}")
-  public HttpStatus updateCollege(@PathVariable("id") Long id, @RequestBody College college) {
-    //ToDo
-    collegeService.updateCollege(id,college);
-    return HttpStatus.OK;
+  public ResponseEntity<?> updateCollege(@PathVariable("id") Long id, @RequestBody College college) {
+    collegeService.update(id,college);
+    return ResponseEntity.ok(HttpStatus.OK);
   }
 
 }

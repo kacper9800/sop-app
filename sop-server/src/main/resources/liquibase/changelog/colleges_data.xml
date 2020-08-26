@@ -97,8 +97,8 @@
       <column  name="active"  value="false"/>
     </insert>
     <insert tableName="colleges">
-      <column  name="name"  value="Wyższa Szkoła Turystyki i Ekologii w Suchej Beskidzkiej"/>
-      <column  name="active"  value="false"/>
+      <column name="name"  value="Wyższa Szkoła Turystyki i Ekologii w Suchej Beskidzkiej"/>
+      <column name="active"  value="false"/>
     </insert>
     <insert tableName="colleges">
       <column  name="name"  value="Wyższa Szkoła Ubezpieczeń w Krakowie"/>

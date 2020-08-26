@@ -5,8 +5,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import pl.sop.converters.FromDTO.DTOToEventConverter;
 import pl.sop.converters.ToDTO.EventToDTOConverter;
-import pl.sop.dao.entities.Event;
-import pl.sop.dao.repository.EventRepository;
+import pl.sop.entities.Event;
+import pl.sop.repositories.EventRepository;
 import pl.sop.dto.EventDTO;
 
 import java.text.ParseException;

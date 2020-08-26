@@ -1,49 +1,42 @@
 <clr-modal [(clrModalOpen)]="displayCollegeRegistrationDialog" [clrModalStaticBackdrop]="false"
            [clrModalClosable]="false">
-  asfnasnkasnksfnsafk
   <h3 class="modal-title">{{'collegeRegistration.header' | translate}}</h3>
   <div class="modal-body">
     <form clrForm [formGroup]="collegeRegistrationForm">
       <div class="clr-row">
-        <div class="clr-col-4"></div>
-        <div class="clr-col-4">
+        <div class="clr-col-2"></div>
+        <div class="clr-col-8">
           <clr-select-container>
-            <label>
-              <clr-icon shape="building"></clr-icon>
-            </label>
+            <label><clr-icon shape="building"></clr-icon></label>
             <select clrSelect name="options" formControlName="collegeId" required>
-              <div *ngFor="let college of colleges">
-                <option [value]="college.value">{{college.label}}</option>
-              </div>
+              <option *ngFor="let college of colleges" [value]="college.value">
+                {{college.label}}
+              </option>
             </select>
             <clr-control-error>{{'common.required' | translate}}</clr-control-error>
           </clr-select-container>
-
-
-            <p-dropdown [options]="colleges" formControlName="collegeId" [showClear]="true"
-                        placeholder="Select Item" [virtualScroll]="true" [itemSize]="31" [filter]="true"></p-dropdown>
-
         </div>
-        <div class="clr-col-4"></div>
+        <div class="clr-col-2"></div>
       </div>
+
       <div class="clr-row">
-        <div class="clr-col-4"></div>
-        <div class="clr-col-4">
+        <div class="clr-col-2"></div>
+        <div class="clr-col-8">
           <clr-input-container>
             <label>
               <clr-icon shape="envelope"></clr-icon>
             </label>
-            <input clrInput type="text" formControlName="mail"
+            <input clrInput type="text" formControlName="email"
                    placeholder="{{'registration.emailLabel' | translate}}"/>
             <clr-control-error>{{'common.required' | translate}}</clr-control-error>
           </clr-input-container>
         </div>
-        <div class="clr-col-4"></div>
+        <div class="clr-col-2"></div>
       </div>
 
       <div class="clr-row">
-        <div class="clr-col-4"></div>
-        <div class="clr-col-4">
+        <div class="clr-col-2"></div>
+        <div class="clr-col-8">
           <clr-input-container>
             <label>
               <clr-icon shape="key"></clr-icon>
@@ -53,12 +46,12 @@
             <clr-control-error>{{'common.required' | translate}}</clr-control-error>
           </clr-input-container>
         </div>
-        <div class="clr-col-4"></div>
+        <div class="clr-col-2"></div>
       </div>
 
       <div class="clr-row">
-        <div class="clr-col-4"></div>
-        <div class="clr-col-4">
+        <div class="clr-col-2"></div>
+        <div class="clr-col-8">
           <clr-input-container>
             <label>
               <clr-icon shape="refresh"></clr-icon>
@@ -68,7 +61,7 @@
             <clr-control-error>{{'common.required' | translate}}</clr-control-error>
           </clr-input-container>
         </div>
-        <div class="clr-col-4"></div>
+        <div class="clr-col-2"></div>
       </div>
     </form>
   </div>

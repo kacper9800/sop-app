@@ -1,9 +1,9 @@
 package pl.sop.converters.FromDTO;
 
 import pl.sop.converters.Converter;
-import pl.sop.dao.entities.Event;
-import pl.sop.dao.entities.Location;
-import pl.sop.dao.entities.User;
+import pl.sop.entities.Event;
+import pl.sop.entities.Location;
+import pl.sop.entities.User;
 import pl.sop.dto.EventDTO;
 import pl.sop.enums.EventDuration;
 

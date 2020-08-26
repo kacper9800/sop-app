@@ -51,14 +51,11 @@
       constraintName="fk_user_id"
       referencedColumnNames="id"
       referencedTableName="users"/>
-    <sql>INSERT INTO roles (name) values ('ROLE_USER'),('ROLE_MODERATOR'),('ROLE_ADMIN');</sql>
-  </changeSet>
-  <changeSet id="3" author="krzymkiewicz">
-    <sql>INSERT INTO roles (name) values ('ROLE_STUDENT'),('ROLE_SUPERVISER'),('ROLE_SUPERADMIN');</sql>
   </changeSet>
 
+
   <!--    Creating organization schema -->
-  <changeSet id="4" author="krzymkiewicz">
+  <changeSet id="3" author="krzymkiewicz">
     <createTable tableName="colleges">
       <column name="id" type="bigint" autoIncrement="true">
         <constraints primaryKey="true" nullable="false"></constraints>
@@ -133,7 +130,7 @@
       referencedTableName="institutes"/>
   </changeSet>
 
-  <changeSet id="5" author="krzymkiewicz">
+  <changeSet id="4" author="krzymkiewicz">
     <createTable tableName="user_colleges">
       <column name="user_id" type="bigint">
         <constraints nullable="false"/>
@@ -210,7 +207,7 @@
       referencedColumnNames="id"
       referencedTableName="departments"/>
   </changeSet>
-  <changeSet id="6" author="krzymkiewicz">
+  <changeSet id="5" author="krzymkiewicz">
     <createTable tableName="events">
       <column name="id" type="bigint">
         <constraints nullable="true" primaryKey="true"></constraints>
@@ -227,7 +224,7 @@
     </createTable>
   </changeSet>
 
-  <changeSet id="7" author="krzymkiewicz">
+  <changeSet id="6" author="krzymkiewicz">
     <addColumn tableName="events">
       <column name="allDay" type="boolean"></column>
       <column name="repeat" type="bigint"></column>
@@ -246,22 +243,22 @@
       <column name="edit_by" type="VARCHAR(255)"></column>
     </addColumn>
   </changeSet>
-  <changeSet id="8" author="krzymkiewicz">
+  <changeSet id="7" author="krzymkiewicz">
     <addColumn tableName="events">
       <column name="active" type="boolean"></column>
       <column name="deleted" type="boolean"></column>
     </addColumn>
   </changeSet>
-  <changeSet id="9" author="krzymkiewicz">
+  <changeSet id="8" author="krzymkiewicz">
     <renameColumn tableName="events" oldColumnName="allDay" newColumnName="all_day"></renameColumn>
   </changeSet>
-  <changeSet id="10" author="krzymkiewicz">
+  <changeSet id="9" author="krzymkiewicz">
     <renameColumn tableName="events" oldColumnName="end_date" newColumnName="stop_date"></renameColumn>
   </changeSet>
-  <changeSet id="11" author="krzymkiewicz">
+  <changeSet id="10" author="krzymkiewicz">
     <addAutoIncrement tableName="events" columnName="id"></addAutoIncrement>
   </changeSet>
-  <changeSet id="12" author="krzymkiewicz">
+  <changeSet id="11" author="krzymkiewicz">
     <addColumn tableName="events">
       <column name="duration" type="int"></column>
       <column name="location_id" type="int"></column>
@@ -313,10 +310,10 @@
       referencedColumnNames="id"
       referencedTableName="departments"/>
   </changeSet>
-  <changeSet id="13" author="krzymkiewicz">
+  <changeSet id="12" author="krzymkiewicz">
     <modifyDataType tableName="events" columnName="duration" newDataType="VARCHAR(50)"></modifyDataType>
   </changeSet>
-  <changeSet id="14" author="krzymkiewicz">
+  <changeSet id="13" author="krzymkiewicz">
     <addColumn tableName="roles">
       <column name="active" type="boolean"></column>
     </addColumn>
@@ -325,7 +322,7 @@
     </addColumn>
   </changeSet>
 
-  <changeSet id="15" author="krzymkiewicz">
+  <changeSet id="14" author="krzymkiewicz">
     <createTable tableName="work_schedules">
       <column name="id" type="BIGINT" autoIncrement="true">
         <constraints primaryKey="true" nullable="false"></constraints>
@@ -348,7 +345,7 @@
     </createTable>
   </changeSet>
 
-  <changeSet id="16" author="krzymkiewicz">
+  <changeSet id="15" author="krzymkiewicz">
     <addColumn tableName="locations">
       <column name="address" type="VARCHAR(255)"></column>
       <column name="floor" type="int"></column>
@@ -393,7 +390,7 @@
       referencedTableName="colleges"/>
   </changeSet>
 
-  <changeSet id="17" author="krzymkiewicz">
+  <changeSet id="16" author="krzymkiewicz">
     <createTable tableName="work_schedule_users">
       <column name="work_schedule_id" type="bigint">
         <constraints nullable="false"/>
@@ -456,23 +453,34 @@
       referencedColumnNames="id"
       referencedTableName="events"/>
   </changeSet>
-  <!--    <changeSet id="4" author="krzymkiewicz">-->
-  <!--        <createTable tableName="calendar_events">-->
-  <!--            <column name="event_id"></column>-->
-  <!--            <column name="college_id"></column>-->
-  <!--            <column name="department_id"></column>-->
-  <!--            <column name="class_id"></column>-->
-  <!--            <column name="user_id"></column>-->
-  <!--            <column name="start_date"></column>-->
-  <!--            <column name="end_date"></column>-->
-  <!--            <column name="name"></column>-->
-  <!--            <column name="description"></column>-->
 
-  <!--        </createTable>-->
-  <!--        <createTable tableName="todo_items">-->
-  <!--            <column name="user_id"></column>-->
-  <!--            <column name="title"></column>-->
-  <!--            <column name="checked"></column>-->
-  <!--        </createTable>-->
-  <!--    </changeSet>-->
+  <changeSet id="17" author="krzymkiewicz">
+    <sql>INSERT INTO roles (name, active, deleted) values ('ROLE_USER', true, false),('ROLE_MODERATOR', true, false),('ROLE_ADMIN', true, false);</sql>
+    <sql>INSERT INTO roles (name, active, deleted) values ('ROLE_STUDENT', true, false),('ROLE_SUPERVISER',true, false),('ROLE_SUPERADMIN', true, false);</sql>
+  </changeSet>
+
+  <changeSet id="18" author="krzymkiewicz">
+    <createTable tableName="tokens">
+      <column name="id" type="BIGINT" autoIncrement="true">
+        <constraints primaryKey="true" nullable="false"></constraints>
+      </column>
+      <column name="create_date" type="TIMESTAMP WITHOUT TIME ZONE"></column>
+      <column name="create_by" type="VARCHAR(255)"></column>
+      <column name="edit_date" type="TIMESTAMP WITHOUT TIME ZONE"></column>
+      <column name="edit_by" type="VARCHAR(255)"></column>
+      <column name="value" type="VARCHAR(255)"></column>
+      <column name="expiration_date" type="TIMESTAMP WITHOUT TIME ZONE"></column>
+      <column name="college_id" type="bigint"></column>
+      <column name="faculty_id" type="bigint"></column>
+      <column name="institute_id" type="bigint"></column>
+      <column name="department_id" type="bigint"></column>
+      <column name="creator_id" type="bigint"></column>
+      <column name="remaining_uses" type="int"></column>
+    </createTable>
+    <addForeignKeyConstraint baseColumnNames="creator_id"
+      baseTableName="tokens"
+      constraintName="fk_creators_id"
+      referencedColumnNames="id"
+      referencedTableName="users"/>
+  </changeSet>
 </databaseChangeLog>

@@ -5,8 +5,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import pl.sop.converters.FromDTO.DTOToLocationConverter;
 import pl.sop.converters.ToDTO.LocationToDTOConverter;
-import pl.sop.dao.entities.Location;
-import pl.sop.dao.repository.LocationRepository;
+import pl.sop.entities.Location;
+import pl.sop.repositories.LocationRepository;
 import pl.sop.dto.LocationDTO;
 
 import java.util.List;

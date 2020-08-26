@@ -1,7 +1,7 @@
 package pl.sop.converters.ToDTO;
 
 import pl.sop.converters.Converter;
-import pl.sop.dao.entities.Location;
+import pl.sop.entities.Location;
 import pl.sop.dto.LocationDTO;
 
 public class LocationToDTOConverter implements Converter<Location, LocationDTO> {

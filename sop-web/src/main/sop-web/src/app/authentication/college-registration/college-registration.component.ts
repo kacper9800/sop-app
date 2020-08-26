@@ -34,7 +34,7 @@ export class CollegeRegistrationComponent implements OnInit {
   ngOnInit(): void {
     this.collegeRegistrationForm = this.formBuilder.group({
       collegeId: new FormControl({value: null, disabled: false}, Validators.required),
-      mail: new FormControl({value: null, disabled: false}, Validators.required),
+      email: new FormControl({value: null, disabled: false}, Validators.required),
       password: new FormControl({value: null, disabled: false}, Validators.required)
     });
     this.loadAvailableColleges();
@@ -80,8 +80,9 @@ export class CollegeRegistrationComponent implements OnInit {
       },
       err => {
         this.displayAlert = true;
-        this.errorMessage = err.error.message;
+        this.errorMessage = err.error;
         this.isSignUpFailed = true;
+        console.log('fail');
       }
     );
   }
@@ -89,8 +90,8 @@ export class CollegeRegistrationComponent implements OnInit {
   private collectCollegeData(): void {
     this.collegeToRegister = {};
     this.collegeToRegister.collegeId = this.collegeRegistrationForm.get('collegeId').value;
-    this.collegeToRegister.mail = this.collegeRegistrationForm.get('mail').value;
+    this.collegeToRegister.email = this.collegeRegistrationForm.get('email').value;
     this.collegeToRegister.password = this.collegeRegistrationForm.get('password').value;
-
+    console.log(this.collegeToRegister);
   }
 }

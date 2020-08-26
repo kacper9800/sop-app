@@ -10,7 +10,7 @@ import io.jsonwebtoken.SignatureAlgorithm;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
-import pl.sop.dao.entities.User;
+import pl.sop.entities.User;
 
 import java.util.Date;
 

@@ -3,8 +3,8 @@ package pl.sop.controllers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
-import pl.sop.dao.entities.FieldOfStudy;
-import pl.sop.dao.repository.FieldOfStudyRepository;
+import pl.sop.entities.FieldOfStudy;
+import pl.sop.repositories.FieldOfStudyRepository;
 
 @RestController
 public class FieldOfStudyController {
