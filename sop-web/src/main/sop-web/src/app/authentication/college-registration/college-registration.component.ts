@@ -4,7 +4,7 @@ import {College, ICollege} from '../../_model/college.model';
 import {CollegeService} from '../../_services/structure/college.service';
 import {AuthService} from '../../_services/auth/auth.service';
 import {Router} from '@angular/router';
-import {CollegeView} from "../../_model/college-view.model";
+import {CollegeView} from '../../_model/college-view.model';
 
 @Component({
   selector: 'app-college-registration',
@@ -33,6 +33,7 @@ export class CollegeRegistrationComponent implements OnInit {
 
   ngOnInit(): void {
     this.collegeRegistrationForm = this.formBuilder.group({
+      token: new FormControl({value: null, disabled: false}),
       collegeId: new FormControl({value: null, disabled: false}, Validators.required),
       email: new FormControl({value: null, disabled: false}, Validators.required),
       password: new FormControl({value: null, disabled: false}, Validators.required)
@@ -59,7 +60,6 @@ export class CollegeRegistrationComponent implements OnInit {
       collegeView.value = college.id;
       this.colleges.push(collegeView);
     });
-    console.log(this.colleges);
   }
 
   private onErrorLoadAvailableColleges(): void {
@@ -82,13 +82,13 @@ export class CollegeRegistrationComponent implements OnInit {
         this.displayAlert = true;
         this.errorMessage = err.error;
         this.isSignUpFailed = true;
-        console.log('fail');
       }
     );
   }
 
   private collectCollegeData(): void {
     this.collegeToRegister = {};
+    this.collegeToRegister.token = this.collegeRegistrationForm.get('token').value;
     this.collegeToRegister.collegeId = this.collegeRegistrationForm.get('collegeId').value;
     this.collegeToRegister.email = this.collegeRegistrationForm.get('email').value;
     this.collegeToRegister.password = this.collegeRegistrationForm.get('password').value;
