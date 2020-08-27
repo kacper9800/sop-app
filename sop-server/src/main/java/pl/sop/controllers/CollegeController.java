@@ -44,11 +44,11 @@ public class CollegeController {
 //    return new ResponseEntity<>(colleges, HttpStatus.OK);
 //  }
 
-  @PostMapping(value = "/api/college/")
-  public ResponseEntity<?> saveNewCollege(@RequestBody CollegeRegistrationDTO collegeRegistrationDTO) {
-    collegeService.save(collegeRegistrationDTO);
-    return ResponseEntity.ok(HttpStatus.OK);
-  }
+//  @PostMapping(value = "/api/college/")
+//  public ResponseEntity<?> saveNewCollege(@RequestBody CollegeRegistrationDTO collegeRegistrationDTO) {
+//    collegeService.save(collegeRegistrationDTO);
+//    return ResponseEntity.ok(HttpStatus.OK);
+//  }
 
   @PutMapping(value = "/api/college/{id}")
   public ResponseEntity<?> updateCollege(@PathVariable("id") Long id, @RequestBody College college) {

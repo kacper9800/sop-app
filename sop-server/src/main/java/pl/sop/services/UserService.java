@@ -64,15 +64,11 @@ public class UserService {
     return users;
   }
 
-  public ResponseEntity<?> registerUser(SignUpRequest signUpRequest) {
-    if (signUpRequest.getToken() == null) {
-      return ResponseEntity.badRequest()
-          .body(new MessageResponse("Error: Provided access token is null!"));
-    }
-
-    if (!tokenService.isValidToken(signUpRequest.getToken())) {
-      return ResponseEntity.badRequest()
-          .body(new MessageResponse("Error: Access token is wrong!"));
+  public ResponseEntity<?> registerUser(SignUpRequest signUpRequest, Boolean isAdminUser) {
+    if (!isAdminUser) {
+      if (checkUserToken(signUpRequest) != null) {
+        return checkUserToken(signUpRequest);
+      }
     }
 
     if (userRepository.existsByUsername(signUpRequest.getUsername())) {
@@ -125,6 +121,7 @@ public class UserService {
     user.setFirstName(signUpRequest.getFirstName() != null? signUpRequest.getFirstName() : null);
     user.setLastName(signUpRequest.getLastName() != null? signUpRequest.getLastName() : null);
     user.setRoles(roles);
+    user.setActive(Boolean.TRUE);
     College college = collegeRepository.findCollegeById(signUpRequest.getCollegeId());
     user.addCollege(college);
     Token token = tokenService.getTokenByValue(signUpRequest.getToken());
@@ -142,7 +139,18 @@ public class UserService {
         }
       }
     }
-
     return user;
+  }
+  private ResponseEntity<MessageResponse> checkUserToken(SignUpRequest signUpRequest) {
+    if (signUpRequest.getToken() == null) {
+      return ResponseEntity.badRequest()
+          .body(new MessageResponse("Error: Provided access token is null!"));
+    }
+
+    if (!tokenService.isValidTokenForUser(signUpRequest.getToken())) {
+      return ResponseEntity.badRequest()
+          .body(new MessageResponse("Error: Access token is wrong!"));
+    }
+    return null;
   }
 }

@@ -9,6 +9,9 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface InstituteRepository extends JpaRepository<Institute, Long> {
 
-  @Query(value = "select distinct institute from Institute institute where institute.id = :id")
-  public Optional<Institute> findById(@Param("id")Long instituteId);
+  @Query(value = "select institute from Institute institute where"
+      + " institute.id = :institute_id and"
+      + " (institute.active = true or institute.active = null) and"
+      + " (institute.deleted = false or institute.deleted = null)")
+  public Optional<Institute> findById(@Param("institute_id")Long instituteId);
 }

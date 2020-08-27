@@ -9,6 +9,9 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface FacultyRepository extends JpaRepository<Faculty, Long> {
 
-  @Query(value = "Select faculty from Faculty faculty where faculty.id = :id")
-  public Optional<Faculty> findById(@Param("id") Long facultyId);
+  @Query(value = "select faculty from Faculty faculty where"
+      + " faculty.id = :faculty_id and"
+      + " (faculty.active = true or faculty.active = null) and"
+      + " (faculty.deleted = false or faculty.deleted = null)")
+  public Optional<Faculty> findById(@Param("faculty_id") Long facultyId);
 }

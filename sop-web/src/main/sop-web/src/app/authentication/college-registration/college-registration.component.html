@@ -10,7 +10,7 @@
             <label>
               <clr-icon shape="key"></clr-icon>
             </label>
-            <input clrInput type="password" formControlName="token"
+            <input clrInput type="text" formControlName="token"
                    placeholder="{{'registration.tokenLabel' | translate}}"/>
           </clr-input-container>
         </div>
@@ -55,7 +55,7 @@
             <label>
               <clr-icon shape="key"></clr-icon>
             </label>
-            <input clrInput type="password" formControlName="password"
+            <input clrInput type="password" formControlName="password" required
                    placeholder="{{'registration.passwordLabel' | translate}}"/>
             <clr-control-error>{{'common.required' | translate}}</clr-control-error>
           </clr-input-container>
@@ -70,7 +70,7 @@
             <label>
               <clr-icon shape="refresh"></clr-icon>
             </label>
-            <input clrInput type="password" formControlName="password"
+            <input clrInput type="password" formControlName="password" required
                    placeholder="{{'registration.passwordRepeatLabel' | translate}}"/>
             <clr-control-error>{{'common.required' | translate}}</clr-control-error>
           </clr-input-container>
@@ -80,7 +80,7 @@
     </form>
   </div>
   <div class="modal-footer">
-    <button type="submit" class="btn btn-primary btn-block"
+    <button type="submit" class="btn btn-primary btn-block" [disabled]="!collegeRegistrationForm.valid"
             (click)="onSubmit()">{{'registration.register' | translate}} </button>
     <button type="submit" class="btn btn-secondary-outline btn-block"
             (click)="displayCollegeRegistrationDialog = false">{{'registration.cancelButtonLabel' | translate}} </button>

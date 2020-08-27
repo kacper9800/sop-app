@@ -32,8 +32,11 @@ public class Token extends BasicEntity {
   @Column(name = "remaining_uses")
   private Integer remainingUses;
 
-  @Column(name = "created_by_id")
+  @Column(name = "creator_id")
   private User createdBy;
+
+  public Token() {
+  }
 
   public Token(String value, LocalDateTime expirationDate, Long collegeId, Long facultyId,
       Long instituteId, Long departmentId, Integer remainingUses) {

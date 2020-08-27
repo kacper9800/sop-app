@@ -483,4 +483,10 @@
       referencedColumnNames="id"
       referencedTableName="users"/>
   </changeSet>
+  <changeSet id="19" author="krzymkiewicz">
+    <addColumn tableName="tokens">
+      <column name="active" type="BOOLEAN"></column>
+      <column name="deleted" type="BOOLEAN"></column>
+    </addColumn>
+  </changeSet>
 </databaseChangeLog>

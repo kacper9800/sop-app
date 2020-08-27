@@ -33,7 +33,7 @@ export class CollegeRegistrationComponent implements OnInit {
 
   ngOnInit(): void {
     this.collegeRegistrationForm = this.formBuilder.group({
-      token: new FormControl({value: null, disabled: false}),
+      token: new FormControl({value: null, disabled: false}, Validators.compose([Validators.minLength(10), Validators.required])),
       collegeId: new FormControl({value: null, disabled: false}, Validators.required),
       email: new FormControl({value: null, disabled: false}, Validators.required),
       password: new FormControl({value: null, disabled: false}, Validators.required)

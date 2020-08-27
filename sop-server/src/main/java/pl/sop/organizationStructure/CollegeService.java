@@ -3,6 +3,8 @@ package pl.sop.organizationStructure;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import liquibase.pro.packaged.A;
+import net.bytebuddy.asm.Advice.Unused;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -11,6 +13,7 @@ import pl.sop.enums.ERole;
 import pl.sop.payload.request.SignUpRequest;
 import pl.sop.payload.response.MessageResponse;
 import pl.sop.services.UserService;
+import pl.sop.token.TokenService;
 
 @Service
 public class CollegeService {
@@ -21,6 +24,9 @@ public class CollegeService {
   @Autowired
   private UserService userService;
 
+  @Autowired
+  private TokenService tokenService;
+
 
   public List<College> findAllColleges() {
     return collegeRepository.findAllColleges();
@@ -29,9 +35,17 @@ public class CollegeService {
   public List<College> findAllAvailableColleges() {
     return collegeRepository.findAllAvailableColleges();
   }
+
   public ResponseEntity<?> registerCollege(CollegeRegistrationDTO collegeRegistrationDTO) {
-    save(collegeRegistrationDTO);
-    return ResponseEntity.ok(new MessageResponse("College registered successfully"));
+    if(!tokenService.isValidTokenForCollege(collegeRegistrationDTO.getCollegeId(), collegeRegistrationDTO.getToken())) {
+      return ResponseEntity.badRequest()
+          .body(new MessageResponse("Error: Provided access token is wrong!"));
+    }
+
+    College college = collegeRepository.findCollegeById(collegeRegistrationDTO.getCollegeId());
+    college.setActive(Boolean.TRUE);
+    userService.registerUser(createCollegeAdmin(collegeRegistrationDTO), true);
+    return ResponseEntity.ok(collegeRepository.save(college));
   }
 
 
@@ -41,6 +55,7 @@ public class CollegeService {
     signUpRequest.setEmail(collegeRegistrationDTO.getEmail());
     signUpRequest.setPassword(collegeRegistrationDTO.getPassword());
     signUpRequest.setCollegeId(collegeRegistrationDTO.getCollegeId());
+    signUpRequest.setToken(collegeRegistrationDTO.getToken());
     Set<String> roles = new HashSet<>();
     roles.add(ERole.ROLE_USER.toString());
     roles.add(ERole.ROLE_ADMIN.toString());
@@ -48,13 +63,6 @@ public class CollegeService {
     return signUpRequest;
   }
 
-  public void save(CollegeRegistrationDTO collegeRegistrationDTO) {
-    userService.registerUser(createCollegeAdmin(collegeRegistrationDTO));
-
-    College college = collegeRepository.findCollegeById(collegeRegistrationDTO.getCollegeId());
-    college.setActive(Boolean.TRUE);
-    collegeRepository.save(college);
-  }
 
   public void update(Long id, College college) {
     //ToDo

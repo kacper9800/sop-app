@@ -43,6 +43,7 @@ export class AuthService {
 
   public registerCollege(college: CollegeRegister): Observable<any> {
     return this.http.post(AUTH_API + 'signUpCollege', {
+      token: college.token,
       collegeId: college.collegeId,
       email: college.email,
       password: college.password

@@ -5,8 +5,11 @@
 
 package pl.sop.organizationStructure;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.util.Set;
 import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 import pl.sop.entities.BasicEntity;
@@ -23,7 +26,11 @@ public class College extends BasicEntity implements Serializable {
     @Column(name = "name", nullable = false)
     private String name;
 
+    @JsonIgnore
     @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(name = "user_colleges",
+        joinColumns = @JoinColumn(name = "college_id"),
+        inverseJoinColumns = @JoinColumn(name = "user_id"))
     private Set<User> users;
 
     @Override
@@ -67,4 +74,5 @@ public class College extends BasicEntity implements Serializable {
     public void setUsers(Set<User> users) {
         this.users = users;
     }
+
 }
