@@ -5,11 +5,13 @@ import {CollegeService} from '../../_services/structure/college.service';
 import {AuthService} from '../../_services/auth/auth.service';
 import {Router} from '@angular/router';
 import {CollegeView} from '../../_model/college-view.model';
+import {MessageService} from 'primeng';
 
 @Component({
   selector: 'app-college-registration',
   templateUrl: './college-registration.component.html',
-  styleUrls: ['./college-registration.component.css']
+  styleUrls: ['./college-registration.component.css'],
+  providers: [MessageService]
 })
 export class CollegeRegistrationComponent implements OnInit {
   @Output()
@@ -28,7 +30,8 @@ export class CollegeRegistrationComponent implements OnInit {
   constructor(private formBuilder: FormBuilder,
               private collegeService: CollegeService,
               private authService: AuthService,
-              private router: Router) {
+              private router: Router,
+              private messageService: MessageService) {
   }
 
   ngOnInit(): void {
@@ -82,6 +85,12 @@ export class CollegeRegistrationComponent implements OnInit {
         this.displayAlert = true;
         this.errorMessage = err.error;
         this.isSignUpFailed = true;
+        console.log(err.error);
+        this.messageService.add({
+          severity: 'error',
+          summary: 'Error!',
+          detail: err.error.messagee
+        });
       }
     );
   }
