@@ -10,7 +10,7 @@ import sun.rmi.runtime.Log;
 @Repository
 public interface TokenRepository extends JpaRepository<Token, Long> {
 
-  @Query(value = "SELECT distinct token from Token token "
+  @Query(value = "SELECT distinct token from Token token"
       + " WHERE token.value = :token"
       + " and token.active = true"
       + " and token.remainingUses > 0")

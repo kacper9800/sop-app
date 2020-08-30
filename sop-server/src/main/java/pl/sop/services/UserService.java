@@ -126,6 +126,10 @@ public class UserService {
     user.addCollege(college);
     Token token = tokenService.getTokenByValue(signUpRequest.getToken());
     prepareUserDataFromToken(user, token);
+    token.setRemainingUses(token.getRemainingUses() -1);
+    if (token.getRemainingUses() <= 0) {
+      token.setActive(Boolean.FALSE);
+    }
     return user;
   }
 
