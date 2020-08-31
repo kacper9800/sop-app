@@ -11,6 +11,7 @@ import pl.sop.entities.BasicEntity;
 import javax.persistence.*;
 import java.io.Serializable;
 import pl.sop.entities.User;
+import pl.sop.entities.Token;
 
 @Entity
 @Table(name = "institutes")
@@ -21,6 +22,9 @@ public class Institute extends BasicEntity implements Serializable {
 
     @ManyToMany(fetch = FetchType.LAZY)
     private Set<User> users;
+
+    @OneToMany(mappedBy="institute")
+    private Set<Token> tokens;
 
     //ToDo Create faculty_id field
 

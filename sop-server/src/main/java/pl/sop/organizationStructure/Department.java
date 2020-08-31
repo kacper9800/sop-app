@@ -3,6 +3,7 @@ package pl.sop.organizationStructure;
 import java.util.Set;
 import javax.persistence.FetchType;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import pl.sop.entities.BasicEntity;
 import pl.sop.entities.User;
@@ -10,6 +11,7 @@ import pl.sop.entities.User;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import java.io.Serializable;
+import pl.sop.entities.Token;
 
 @Entity
 @Table(name = "departments")
@@ -21,6 +23,9 @@ public class Department extends BasicEntity implements Serializable {
 
     @ManyToMany(fetch = FetchType.LAZY)
     private Set<User> users;
+
+    @OneToMany(mappedBy="department")
+    private Set<Token> tokens;
 
     //ToDo Create institute_id field
 

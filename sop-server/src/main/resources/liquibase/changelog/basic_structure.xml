@@ -489,4 +489,30 @@
       <column name="deleted" type="BOOLEAN"></column>
     </addColumn>
   </changeSet>
+  <changeSet id="20" author="krzymkiewicz">
+    <addForeignKeyConstraint
+      baseTableName="tokens"
+      baseColumnNames="college_id"
+      constraintName="fk_colleges_id"
+      referencedTableName="colleges"
+      referencedColumnNames="id"/>
+    <addForeignKeyConstraint
+      baseTableName="tokens"
+      baseColumnNames="faculty_id"
+      constraintName="fk_faculties_id"
+      referencedTableName="faculties"
+      referencedColumnNames="id"/>
+    <addForeignKeyConstraint
+      baseTableName="tokens"
+      baseColumnNames="institute_id"
+      constraintName="fk_institutes_id"
+      referencedTableName="institutes"
+      referencedColumnNames="id"/>
+    <addForeignKeyConstraint
+      baseTableName="tokens"
+      baseColumnNames="department_id"
+      constraintName="fk_departments_id"
+      referencedTableName="departments"
+      referencedColumnNames="id"/>
+  </changeSet>
 </databaseChangeLog>

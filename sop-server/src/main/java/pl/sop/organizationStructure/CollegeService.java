@@ -3,8 +3,6 @@ package pl.sop.organizationStructure;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-import liquibase.pro.packaged.A;
-import net.bytebuddy.asm.Advice.Unused;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -12,8 +10,8 @@ import pl.sop.dto.CollegeRegistrationDTO;
 import pl.sop.enums.ERole;
 import pl.sop.payload.request.SignUpRequest;
 import pl.sop.payload.response.MessageResponse;
+import pl.sop.services.ActivationKeyService;
 import pl.sop.services.UserService;
-import pl.sop.token.TokenService;
 
 @Service
 public class CollegeService {
@@ -25,7 +23,7 @@ public class CollegeService {
   private UserService userService;
 
   @Autowired
-  private TokenService tokenService;
+  private ActivationKeyService activationKeyService;
 
 
   public List<College> findAllColleges() {
@@ -37,7 +35,7 @@ public class CollegeService {
   }
 
   public ResponseEntity<?> registerCollege(CollegeRegistrationDTO collegeRegistrationDTO) {
-    if(!tokenService.isValidTokenForCollege(collegeRegistrationDTO.getCollegeId(), collegeRegistrationDTO.getToken())) {
+    if(!activationKeyService.isValidTokenForCollege(collegeRegistrationDTO.getCollegeId(), collegeRegistrationDTO.getToken())) {
       return ResponseEntity.badRequest()
           .body(new MessageResponse("Error: Provided access token is wrong!"));
     }

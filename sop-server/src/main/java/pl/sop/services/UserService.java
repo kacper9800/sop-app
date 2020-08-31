@@ -21,8 +21,7 @@ import pl.sop.repositories.UserRepository;
 import pl.sop.enums.ERole;
 import pl.sop.payload.request.SignUpRequest;
 import pl.sop.payload.response.MessageResponse;
-import pl.sop.token.Token;
-import pl.sop.token.TokenService;
+import pl.sop.entities.Token;
 
 @Service
 public class UserService {
@@ -35,7 +34,7 @@ public class UserService {
   private RoleRepository roleRepository;
 
   @Autowired
-  private TokenService tokenService;
+  private ActivationKeyService activationKeyService;
 
   @Autowired
   private CollegeRepository collegeRepository;
@@ -124,7 +123,7 @@ public class UserService {
     user.setActive(Boolean.TRUE);
     College college = collegeRepository.findCollegeById(signUpRequest.getCollegeId());
     user.addCollege(college);
-    Token token = tokenService.getTokenByValue(signUpRequest.getToken());
+    Token token = activationKeyService.getTokenByValue(signUpRequest.getToken());
     prepareUserDataFromToken(user, token);
     token.setRemainingUses(token.getRemainingUses() -1);
     if (token.getRemainingUses() <= 0) {
@@ -134,12 +133,12 @@ public class UserService {
   }
 
   private User prepareUserDataFromToken(User user, Token token) {
-    if (token.getFacultyId() != null) { // Jeśli jest zapisany w tokenie faculty id to dodaje go
-      user.addFaculty(facultyService.getById(token.getFacultyId()));
-      if (token.getInstituteId() != null) { // Jeśli jest zapisany w tokenie institute id to dodaje go
-        user.addInstitute(instituteService.getById(token.getInstituteId()));
-        if (token.getDepartmentId() != null) { // Jeśli jest zapisany w tokenie departmen id to dodaje go
-          user.addDepartment(departmentService.getById(token.getDepartmentId()));
+    if (token.getFaculty() != null) { // Jeśli jest zapisany w tokenie faculty id to dodaje go
+      user.addFaculty(facultyService.getById(token.getFaculty().getId()));
+      if (token.getInstitute() != null) { // Jeśli jest zapisany w tokenie institute id to dodaje go
+        user.addInstitute(instituteService.getById(token.getInstitute().getId()));
+        if (token.getDepartment() != null) { // Jeśli jest zapisany w tokenie departmen id to dodaje go
+          user.addDepartment(departmentService.getById(token.getDepartment().getId()));
         }
       }
     }
@@ -151,7 +150,7 @@ public class UserService {
           .body(new MessageResponse("Error: Provided access token is null!"));
     }
 
-    if (!tokenService.isValidTokenForUser(signUpRequest.getToken())) {
+    if (!activationKeyService.isValidTokenForUser(signUpRequest.getToken())) {
       return ResponseEntity.badRequest()
           .body(new MessageResponse("Error: Access token is wrong!"));
     }

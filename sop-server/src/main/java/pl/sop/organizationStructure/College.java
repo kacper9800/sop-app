@@ -11,6 +11,7 @@ import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import pl.sop.entities.BasicEntity;
 
@@ -18,6 +19,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import java.io.Serializable;
 import pl.sop.entities.User;
+import pl.sop.entities.Token;
 
 @Entity
 @Table(name = "Colleges")
@@ -32,6 +34,9 @@ public class College extends BasicEntity implements Serializable {
         joinColumns = @JoinColumn(name = "college_id"),
         inverseJoinColumns = @JoinColumn(name = "user_id"))
     private Set<User> users;
+
+    @OneToMany(mappedBy="college")
+    private Set<Token> tokens;
 
     @Override
     public Long getId() {

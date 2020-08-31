@@ -1,16 +1,21 @@
 package pl.sop.controllers;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import pl.sop.dto.EventDTO;
 import pl.sop.dto.TokenDTO;
+import pl.sop.organizationStructure.College;
+import pl.sop.security.services.UserDetailsImpl;
 import pl.sop.services.ActivationKeyService;
 
 @RestController
@@ -20,10 +25,16 @@ public class ActivationKeyController {
   private ActivationKeyService activationKeyService;
 
   @CrossOrigin
-  @PreAuthorize("hasRole('ROLE_USER') or hasRole('ROLE_MODERATOR')")
-  @RequestMapping(value = "/api/planner/event", method = RequestMethod.GET)
-  public ResponseEntity<List<EventDTO>> getAllActivityKeys(Long collegeId) {
-    return new ResponseEntity(activationKeyService.getAllTokensForCompany(collegeId), HttpStatus.OK);
+  @PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_MODERATOR')")
+  @RequestMapping(value = "/api/activationKeys", method = RequestMethod.GET)
+  public ResponseEntity<List<TokenDTO>> getAllActivationKeys(Authentication authentication) {
+    UserDetailsImpl loggedUser = (UserDetailsImpl) authentication.getPrincipal();
+    Set<College> colleges = loggedUser.getCollege();
+    if (colleges.size() == 0) {
+      return new ResponseEntity<>(HttpStatus.NOT_ACCEPTABLE);
+    }
+    List<College> collegeList = new ArrayList<>(colleges);
+    return new ResponseEntity(activationKeyService.getAllTokensForCompany(collegeList.get(0).getId()), HttpStatus.OK);
   }
 
 //  @CrossOrigin

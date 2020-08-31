@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 import pl.sop.converters.ToDTO.ActivationKeyToDTOConverter;
 import pl.sop.dto.TokenDTO;
 import pl.sop.repositories.ActivationKeyRepository;
-import pl.sop.token.Token;
+import pl.sop.entities.Token;
 
 @Service
 public class ActivationKeyService {
@@ -22,9 +22,29 @@ public class ActivationKeyService {
 
   public ResponseEntity getAllTokensForCompany(Long id) {
     List<Token> tokens = activationKeyRepository.getAllTokensByCollegeId(id);
-    List<TokenDTO> environmentFactorDTOs = tokens.stream().map(additionalTestResult ->
+    List<TokenDTO> tokenDTOS = tokens.stream().map(additionalTestResult ->
         activationKeyToDTOConverter.convert(additionalTestResult)).collect(Collectors.toList());
-    return new ResponseEntity(environmentFactorDTOs, HttpStatus.OK);
+    return new ResponseEntity(tokenDTOS, HttpStatus.OK);
 
+  }
+
+  public Token getTokenByValue(String tokenValue) {
+    return activationKeyRepository.findValidTokenByValue(tokenValue);
+  }
+
+  public boolean isValidTokenForUser(String tokenValue) {
+    Token token = activationKeyRepository.findValidTokenByValue(tokenValue);
+    if (token != null) {
+      return true;
+    }
+    return false;
+  }
+
+  public boolean isValidTokenForCollege(Long collegeId, String tokenValue) {
+    Token token = activationKeyRepository.findValidTokenByValue(tokenValue);
+    if (token != null && token.getCollege().getId().equals(collegeId)) {
+      return true;
+    }
+    return false;
   }
 }

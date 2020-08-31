@@ -2,7 +2,7 @@ package pl.sop.converters.ToDTO;
 
 import pl.sop.converters.Converter;
 import pl.sop.dto.TokenDTO;
-import pl.sop.token.Token;
+import pl.sop.entities.Token;
 
 public class ActivationKeyToDTOConverter implements Converter<Token, TokenDTO> {
 
@@ -12,11 +12,20 @@ public class ActivationKeyToDTOConverter implements Converter<Token, TokenDTO> {
     tokenDTO.setValue(input.getValue());
     tokenDTO.setExpirationDate(input.getExpirationDate());
     tokenDTO.setRemainingUses(input.getRemainingUses());
-    tokenDTO.setCreatedBy(input.getCreatedBy().getId());
-    tokenDTO.setCollegeId(input.getCollegeId());
-    tokenDTO.setFacultyId(input.getFacultyId());
-    tokenDTO.setInstituteId(input.getInstituteId());
-    tokenDTO.setDepartmentId(input.getDepartmentId());
+//    tokenDTO.setCreatedBy(input.getCreatedBy().getId());
+    if (input.getCollege() != null) {
+      tokenDTO.setCollegeName(input.getCollege().getName());
+    }
+    if (input.getFaculty() != null) {
+      tokenDTO.setFacultyName(input.getFaculty().getName());
+    }
+    if (input.getInstitute() != null) {
+      tokenDTO.setInstituteName(input.getInstitute().getName());
+    }
+    if (input.getDepartment() != null) {
+      tokenDTO.setDepartmentName(input.getDepartment().getName());
+    }
+    tokenDTO.setActive(input.isActive());
     return tokenDTO;
   }
 }
