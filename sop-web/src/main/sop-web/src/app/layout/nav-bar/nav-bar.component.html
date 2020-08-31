@@ -61,31 +61,31 @@
           Administrator uczelni
         </a>
         <!--Administrator uczelni-->
-        <a routerLink="/app/companies" class="nav-link" *ngIf="isModerator || isSuperAdmin">
+        <a routerLink="/app/companies" class="nav-link" *ngIf="isAdmin">
           <clr-icon shape="store" class="is-solid"></clr-icon>
           Lista firm
         </a>
-        <a routerLink="/app/college-structure" class="nav-link" *ngIf="isModerator || isSuperAdmin">
+        <a routerLink="/app/college-structure" class="nav-link" *ngIf="isAdmin">
           <clr-icon shape="building" class="is-solid"></clr-icon>
           Struktura uczelni
         </a>
         <a routerLink="/app/activation-keys" class="nav-link" *ngIf="isAdmin">
-          <clr-icon shape="users" class="is-solid"></clr-icon>
-          {{'navBar.practiceManagers'| translate}}
+          <clr-icon shape="key" class="is-solid"></clr-icon>
+          {{'navBar.activationKeys'| translate}}
         </a>
-        <a routerLink="/app/interns" class="nav-link" *ngIf="isModerator || isSuperAdmin">
+        <a routerLink="/app/interns" class="nav-link" *ngIf="isAdmin">
           <clr-icon shape="users" class="is-solid"></clr-icon>
           Lista praktykantów
         </a>
-        <a routerLink="/app/users" class="nav-link" *ngIf="isModerator">
+        <a routerLink="/app/users" class="nav-link" *ngIf="isAdmin">
           <clr-icon shape="users" class="is-solid"></clr-icon>
           {{'navBar.users' | translate}}
         </a>
-        <a routerLink="/app/forms" class="nav-link" *ngIf="isStudent">
+        <a routerLink="/app/forms" class="nav-link" *ngIf="isAdmin">
           <clr-icon shape="form"></clr-icon>
           {{'navBar.surveys' | translate}}
         </a>
-        <a routerLink="/app/statistics" class="nav-link" *ngIf="isModerator || isSuperAdmin">
+        <a routerLink="/app/statistics" class="nav-link" *ngIf="isAdmin">
           <clr-icon shape="line-chart"></clr-icon>
           Statystyki
         </a>
@@ -93,36 +93,35 @@
           <clr-icon shape="cursor-move"></clr-icon>
           {{'navBar.practiceSupervisors' | translate}}
         </a>
-
         <!--Kierownik praktyk-->
-        <a routerLink="" class="nav-link" *ngIf="isModerator || isSuperAdmin" style="color: red">
+        <a routerLink="" class="nav-link" *ngIf="isModerator" style="color: red">
           Kierownik praktyk
         </a>
-        <a routerLink="/app/companies" class="nav-link" *ngIf="isModerator || isSuperAdmin">
+        <a routerLink="/app/companies" class="nav-link" *ngIf="isModerator">
           <clr-icon shape="store" class="is-solid"></clr-icon>
           Lista firm
         </a>
-        <a routerLink="/app/college-structure" class="nav-link" *ngIf="isModerator || isSuperAdmin">
+        <a routerLink="/app/college-structure" class="nav-link" *ngIf="isModerator">
           <clr-icon shape="building" class="is-solid"></clr-icon>
           Struktura uczelni
         </a>
-        <a routerLink="/app/new-intern" class="nav-link" *ngIf="isModerator || isSuperAdmin">
+        <a routerLink="/app/new-intern" class="nav-link" *ngIf="isModerator">
           <clr-icon shape="user" class="is-solid"></clr-icon>
           Nowy praktykant
         </a>
-        <a routerLink="/app/interns" class="nav-link" *ngIf="isModerator || isSuperAdmin">
+        <a routerLink="/app/interns" class="nav-link" *ngIf="isModerator">
           <clr-icon shape="users" class="is-solid"></clr-icon>
           Lista praktykantów
         </a>
-        <a routerLink="/app/activation-keys" class="nav-link" *ngIf="isModerator || isSuperAdmin">
+        <a routerLink="/app/activation-keys" class="nav-link" *ngIf="isModerator">
           <clr-icon shape="key" class="is-solid"></clr-icon>
           Klucze aktywacyjne
         </a>
-        <a routerLink="/app/forms" class="nav-link" *ngIf="isStudent">
+        <a routerLink="/app/forms" class="nav-link" *ngIf="isModerator">
           <clr-icon shape="form"></clr-icon>
           {{'navBar.surveys' | translate}}
         </a>
-        <a routerLink="/app/statistics" class="nav-link" *ngIf="isModerator || isSuperAdmin">
+        <a routerLink="/app/statistics" class="nav-link" *ngIf="isModerator">
           <clr-icon shape="line-chart"></clr-icon>
           Statystyki
         </a>

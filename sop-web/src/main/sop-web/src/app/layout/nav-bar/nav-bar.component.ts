@@ -62,6 +62,4 @@ export class NavBarComponent implements OnInit {
     this.items = this.items.filter((item, i) => i !== index);
     event.preventDefault();
   }
-
-
 }

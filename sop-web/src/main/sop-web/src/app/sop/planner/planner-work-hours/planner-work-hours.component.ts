@@ -12,7 +12,7 @@ import { TokenStorageService } from '../../../_services/auth/token-storage.servi
 import { PrincipalService } from '../../../_services/auth/principal.service';
 import { LocationService } from '../../../_services/location.service';
 import { WorkSchedule } from '../../../_model/work-schedule.model';
-import { BreaksDuration } from '../../../enums/breaks-duration.enum';
+import { BreaksDuration } from '../../../_enums/breaks-duration.enum';
 
 @Component({
   selector: 'app-planner-work-hours',

@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
-import {TreeNode} from "primeng";
-import {CollegeService} from "../../_services/structure/college.service";
-import {TranslateService} from "@ngx-translate/core";
+import {TreeNode} from 'primeng';
+import {TranslateService} from '@ngx-translate/core';
+import {CollegeService} from '../../_services/organization-structure/college.service';
 
 @Component({
   selector: 'app-college-structure',

@@ -41,7 +41,9 @@
     "facultyName": "Nazwa wydziału",
     "instituteName": "Nazwa instytutu",
     "departmentName": "Nazwa katedry",
-    "required": "To pole jest wymagane!"
+    "required": "To pole jest wymagane!",
+    "export": "Exportuj tabelę",
+    "of": "z"
   },
   "header": {
     "SOP": "System obsługi praktyk",
@@ -66,7 +68,8 @@
     "users": "Użytkownicy",
     "fieldsOfStudy": "Kierunki studiów",
     "practiceManagers": "Kierownicy praktyk",
-    "practiceSupervisors": "Opiekunowie praktyk"
+    "practiceSupervisors": "Opiekunowie praktyk",
+    "activationKeys": "Klucze aktywacyjne"
   },
   "login": {
     "header": "Panel logowania",
@@ -147,6 +150,27 @@
     "room": "Pokój/Sala",
     "capacity": "Pojemność",
     "description": "Opis"
+  },
+  "activationKeys": {
+    "keys": "Kluczy",
+    "keysPerPage": "Liczba kluczy na stronie",
+    "pageHeader": "Klucze aktywacyjne",
+    "tableColumns": {
+      "value": "Klucz aktywacyjny",
+      "expirationDate": "Data wygaśnięcia",
+      "remainingUses": "Pozostałe użycia",
+      "createdBy": "Utworzony przez",
+      "active": "Aktywny",
+      "facultyName": "Wydział",
+      "instituteName": "Instytut",
+      "departmentName": "Katedra",
+      "actions": "Akcje"
+    },
+    "CRUD": {
+      "addActivityKey": "Dodaj nowy klucz aktywacyjny"
+    },
+    "notFound": "Nie znaleziono żadnych kluczy aktywacyjnych!"
+
   },
   "toast": {
     "success": "Sukces",

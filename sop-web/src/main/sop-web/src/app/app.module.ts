@@ -1,5 +1,4 @@
 import { ActivationKeysComponent } from './sop/activation-keys/activation-keys.component';
-import { ActivationKeysDialogComponent } from './sop/activation-keys/activation-keys-dialog/activation-keys-dialog.component';
 // tslint:disable-next-line:max-line-length
 import { AddEditDialogActivitiesComponent } from './sop/planner/planner-activities/add-edit-dialog-activities/add-edit-dialog-activities.component';
 // tslint:disable-next-line:max-line-length
@@ -74,6 +73,7 @@ import { SuperVisorsComponent } from './sop/super-visors/super-visors.component'
 import { CollegeStructureComponent } from './sop/college-structure/college-structure.component';
 import { CollegeRegistrationComponent } from './authentication/college-registration/college-registration.component';
 import { RegistrationConfirmationComponent } from './authentication/registration-confirmation/registration-confirmation.component';
+import {AddEditDialogActivationKeysComponent} from "./sop/activation-keys/add-edit-dialog-activation-keys/add-edit-dialog-activation-keys.component";
 
 @NgModule({
   declarations: [
@@ -92,7 +92,7 @@ import { RegistrationConfirmationComponent } from './authentication/registration
     ActivationKeysComponent,
     LogbookComponent,
     CollegeComponent,
-    ActivationKeysDialogComponent,
+    AddEditDialogActivationKeysComponent,
     SettingsComponent,
     UsersComponent,
     PlannerComponent,

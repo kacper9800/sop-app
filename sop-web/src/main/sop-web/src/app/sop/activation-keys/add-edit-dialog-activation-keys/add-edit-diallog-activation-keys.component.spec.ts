@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ActivationKeysDialogComponent } from './activation-keys-dialog.component';
+import { AddEditDialogActivationKeysComponent } from './activation-keys-dialog.component';
 
 describe('ActivationKeysDialogComponent', () => {
-  let component: ActivationKeysDialogComponent;
-  let fixture: ComponentFixture<ActivationKeysDialogComponent>;
+  let component: AddEditDialogActivationKeysComponent;
+  let fixture: ComponentFixture<AddEditDialogActivationKeysComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ActivationKeysDialogComponent ]
+      declarations: [ AddEditDialogActivationKeysComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(ActivationKeysDialogComponent);
+    fixture = TestBed.createComponent(AddEditDialogActivationKeysComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

@@ -1,0 +1,67 @@
+<clr-modal [(clrModalOpen)]="displayDialog" [clrModalStaticBackdrop]="true">
+  <div class="modal-body">
+    <form clrForm [formGroup]="activationKeyForm">
+      <div class="clr-row">
+        <div class="clr-col-2"></div>
+        <div class="clr-col-8">
+          <clr-input-container>
+            <label>
+              <clr-icon shape="key"></clr-icon>
+            </label>
+            <input clrInput type="text" formControlName="token" style="max-width: 100% !important;"
+                   placeholder="{{'registration.tokenLabel' | translate}}"/>
+          </clr-input-container>
+        </div>
+        <div class="clr-col-2"></div>
+      </div>
+
+      <div class="clr-row">
+        <div class="clr-col-2"></div>
+        <div class="clr-col-8">
+          <clr-select-container>
+            <label><clr-icon shape="building"></clr-icon></label>
+            <select clrSelect name="options" formControlName="facultyId" required>
+              <option *ngFor="let faculty of faculties" [value]="faculty.value">
+                {{faculty.label}}
+              </option>
+            </select>
+            <clr-control-error>{{'common.required' | translate}}</clr-control-error>
+          </clr-select-container>
+        </div>
+        <div class="clr-col-2"></div>
+      </div>
+
+      <div class="clr-row">
+        <div class="clr-col-2"></div>
+        <div class="clr-col-8">
+          <clr-select-container>
+            <label><clr-icon shape="building"></clr-icon></label>
+            <select clrSelect name="options" formControlName="instituteId" required>
+              <option *ngFor="let institute of institutes" [value]="institute.value">
+                {{institute.label}}
+              </option>
+            </select>
+            <clr-control-error>{{'common.required' | translate}}</clr-control-error>
+          </clr-select-container>
+        </div>
+        <div class="clr-col-2"></div>
+      </div>
+
+      <div class="clr-row">
+        <div class="clr-col-2"></div>
+        <div class="clr-col-8">
+          <clr-select-container>
+            <label><clr-icon shape="building"></clr-icon></label>
+            <select clrSelect name="options" formControlName="departmentId" required>
+              <option *ngFor="let department of departments" [value]="department.value">
+                {{department.label}}
+              </option>
+            </select>
+            <clr-control-error>{{'common.required' | translate}}</clr-control-error>
+          </clr-select-container>
+        </div>
+        <div class="clr-col-2"></div>
+      </div>
+    </form>
+  </div>
+</clr-modal>

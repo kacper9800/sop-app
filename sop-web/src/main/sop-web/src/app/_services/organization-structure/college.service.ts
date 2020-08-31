@@ -2,7 +2,7 @@ import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import global from '../../../global';
 import {Observable} from 'rxjs';
-import {ICollege} from '../../_model/college.model';
+import {ICollege} from "../../_model/organization-structure/college.model";
 
 const COLLEGES_API = '/colleges';
 const AVAILABLE_COLLEGES_API = '/available-colleges';

@@ -1,4 +1,16 @@
-import { Component, OnInit } from '@angular/core';
+import {
+  Component,
+  ComponentFactoryResolver,
+  OnInit,
+  ViewChild,
+  ViewContainerRef
+} from '@angular/core';
+// tslint:disable-next-line:max-line-length
+import {ActivationKey, IActivationKey} from '../../_model/activation-key.model';
+import {AddEditDialogActivationKeysComponent} from './add-edit-dialog-activation-keys/add-edit-dialog-activation-keys.component';
+import {ActivationKeyService} from '../../_services/activation-key.service';
+import {HttpResponse} from "@angular/common/http";
+import {TranslateService} from "@ngx-translate/core";
 
 @Component({
   selector: 'app-activation-keys',
@@ -6,12 +18,95 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./activation-keys.component.css']
 })
 export class ActivationKeysComponent implements OnInit {
-  opened = false;
+  public opened = false;
+  public activationKeys: ActivationKey[] = [];
+  public selectedActivationKeys = [];
 
-  constructor() { }
+  public columns: any[];
+
+  @ViewChild('addEditDialog', {read: ViewContainerRef, static: true})
+  public addEditDialog: ViewContainerRef;
+
+  private componentRef: any;
+
+  constructor(private resolver: ComponentFactoryResolver,
+              private activationKeyService: ActivationKeyService,
+              private translateService: TranslateService) {
+  }
 
   ngOnInit() {
+    this.loadActivationKeys();
+    this.prepareColumns();
+  }
+
+  private loadActivationKeys(): void {
+    this.activationKeyService.getAllActivationKeysForCompany().subscribe(
+      (res: HttpResponse<IActivationKey[]>) => this.onSuccessLoadActivationKeys(res.body),
+      () => this.onErrorLoadActivationKeys());
+  }
+
+  private onSuccessLoadActivationKeys(res: IActivationKey[]): void {
+    this.activationKeys = [];
+    this.activationKeys = res;
+    console.log(this.activationKeys);
+  }
+
+  private onErrorLoadActivationKeys(): void {
+    this.activationKeys = [];
+  }
+
+  private prepareColumns() {
+    this.columns = [
+      { label: this.translateService.instant('activationKeys.tableColumns.token'),
+        fieldName: 'value'},
+      { label: this.translateService.instant('activationKeys.tableColumns.expirationDate'),
+        fieldName: 'expirationDate'},
+      { label: this.translateService.instant('activationKeys.tableColumns.remainingUses'),
+        fieldName: 'remainingUses' },
+      { label: this.translateService.instant('activationKeys.tableColumns.createdBy'),
+        fieldName: 'createdBy'},
+      { label: this.translateService.instant('activationKeys.tableColumns.faculty'),
+        fieldName: 'facultyName'},
+      { label: this.translateService.instant('activationKeys.tableColumns.institute'),
+        fieldName: 'instituteName'},
+      { label: this.translateService.instant('activationKeys.tableColumns.department'),
+        fieldName: 'departmentName'},
+      { label: this.translateService.instant('activationKeys.tableColumns.active'),
+        fieldName: 'active'},
+      { label: this.translateService.instant('activationKeys.tableColumns.actions'),
+        fieldName: 'actions' }
+    ];
+  }
+
+  public showAddNewDialog(): void {
+    this.addEditDialog.clear();
+    const factory = this.resolver.resolveComponentFactory(AddEditDialogActivationKeysComponent);
+    this.componentRef = this.addEditDialog.createComponent(factory);
+    this.componentRef.instance.showNewActivationKeyDialog();
+    this.componentRef.instance.closeDialogWithSaveEmitter.subscribe(() => {
+      this.loadActivationKeys();
+    });
+  }
+
+  public showEditDialog(value: string): void {
+    this.addEditDialog.clear();
+    const factory = this.resolver.resolveComponentFactory(AddEditDialogActivationKeysComponent);
+    this.componentRef = this.addEditDialog.createComponent(factory);
+    this.componentRef.instance.showEditActivationKeyDialog(value);
+    this.componentRef.instance.closeDialogWithSaveEmitter.subscribe(() => {
+      this.loadActivationKeys();
+    });
+  }
+
+  public showConfirmDeleteDialog() {
+    // ToDo
+  }
+
+  public onExportAll() {
 
   }
 
+  public onExportSelected() {
+
+  }
 }

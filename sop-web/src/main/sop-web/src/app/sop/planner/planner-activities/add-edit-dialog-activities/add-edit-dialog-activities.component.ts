@@ -8,7 +8,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { UserService } from '../../../../_services/user.service';
 import { Location } from '../../../../_model/location.model';
 import { LocationService } from '../../../../_services/location.service';
-import { EventDuration } from '../../../../enums/event-duration.enum';
+import { EventDuration } from '../../../../_enums/event-duration.enum';
 
 @Component({
   selector: 'app-add-edit-dialog-activities',

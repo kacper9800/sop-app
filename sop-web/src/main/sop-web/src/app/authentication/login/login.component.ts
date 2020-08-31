@@ -47,7 +47,7 @@ export class LoginComponent implements OnInit {
     this.setLanguage();
   }
 
-  public show() {
+  public show(): void {
     this.displayLoginDialog = true;
   }
 
@@ -58,12 +58,12 @@ export class LoginComponent implements OnInit {
     }
   }
 
-  private setLanguage() {
+  private setLanguage(): void {
     this.headerText = this.translateService.instant('login.header');
     this.loginButton = this.translateService.instant('login.loginButton');
   }
 
-  prepareForm() {
+  public prepareForm(): void {
     this.loginForm = this.formBuilder.group({
       username: new FormControl({value: null, disabled: false}),
       password: new FormControl({value: null, disabled: false}),
@@ -71,7 +71,7 @@ export class LoginComponent implements OnInit {
   }
 
 
-  onSubmit() {
+  public onSubmit(): void {
     this.blockUI = true;
     this.validateBtnState = ClrLoadingState.LOADING;
     const credentials = [];
@@ -105,12 +105,12 @@ export class LoginComponent implements OnInit {
     await new Promise(resolve => setTimeout(() => resolve(), ms)).then(() => console.log('fired'));
   }
 
-  reloadPage() {
+  public reloadPage(): void {
     window.location.reload();
     this.blockUI = false;
   }
 
-  onHide() {
+  public onHide(): void {
     if (this.saved) {
       this.closeDialogWithSaveEmitter.emit();
     }

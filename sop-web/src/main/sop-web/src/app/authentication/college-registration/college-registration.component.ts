@@ -1,11 +1,11 @@
 import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
-import {College, ICollege} from '../../_model/college.model';
-import {CollegeService} from '../../_services/structure/college.service';
 import {AuthService} from '../../_services/auth/auth.service';
 import {Router} from '@angular/router';
-import {CollegeView} from '../../_model/college-view.model';
 import {MessageService} from 'primeng';
+import {DropdownItem} from '../../_model/dropdown-item.model';
+import {CollegeService} from '../../_services/organization-structure/college.service';
+import {ICollege} from '../../_model/organization-structure/college.model';
 
 @Component({
   selector: 'app-college-registration',
@@ -18,7 +18,7 @@ export class CollegeRegistrationComponent implements OnInit {
   public closeDialogWithSaveEmitter: EventEmitter<any> = new EventEmitter<any>();
   public displayCollegeRegistrationDialog = false;
   public collegeRegistrationForm: FormGroup;
-  public colleges: CollegeView[] = [];
+  public colleges: DropdownItem[] = [];
   private blockUI: boolean;
   private collegeToRegister: any;
   private isSuccessful: boolean;

@@ -40,7 +40,8 @@
     "collegeName": "College name",
     "facultyName": "Faculty name",
     "instituteName": "Institute name",
-    "departmentName": "Department name"
+    "departmentName": "Department name",
+    "of": "of"
   },
   "header": {
     "SOP": "Internship service system",
@@ -65,7 +66,8 @@
     "users": "Users",
     "fieldsOfStudy": "Fields of study",
     "practiceManagers": "Practice managers",
-    "practiceSupervisors": "Practice supervisors"
+    "practiceSupervisors": "Practice supervisors",
+    "activationKeys": "Activation keys"
   },
   "login": {
     "header": "Login panel",
@@ -146,6 +148,27 @@
     "room": "Room",
     "capacity": "Capacity",
     "description": "Description"
+  },
+  "activationKeys": {
+    "keys":"Keys",
+    "keysPerPage": "Keys per page",
+    "pageHeader": "Activation keys for users",
+    "tableColumns": {
+      "token": "Activation key",
+      "expirationDate": "Expiration date",
+      "remainingUses": "Remaining uses",
+      "createdBy": "Created by",
+      "active": "Active",
+      "faculty": "Faculty",
+      "institute": "Institute",
+      "department": "Department",
+      "actions": "Actions"
+    },
+    "CRUD": {
+      "addActivityKey": "Dodaj nowy klucz aktywacyjny"
+    },
+    "notFound": "Nie znaleziono żadnych kluczy aktywacyjnych!"
+
   },
   "toast": {
     "success": "Success",
