@@ -1,6 +1,7 @@
-<clr-modal [(clrModalOpen)]="displayDialog" [clrModalStaticBackdrop]="true">
+<clr-modal [(clrModalOpen)]="displayDialog" [clrModalStaticBackdrop]="false" [clrModalSize]="'xl'" [clrModalClosable]="false">
+  <h3 class="modal-title" style="text-align: center!important;">{{dialogTitle}}</h3>
   <div class="modal-body">
-    <form clrForm [formGroup]="activationKeyForm">
+    <form clrForm [formGroup]="activationKeyForm" id="activationKeyForm">
       <div class="clr-row">
         <div class="clr-col-2"></div>
         <div class="clr-col-8">
@@ -63,5 +64,20 @@
         <div class="clr-col-2"></div>
       </div>
     </form>
+  </div>
+  <div class="modal-footer">
+    <div class="clr-row">
+      <div class="clr-col-2"></div>
+      <div class="clr-col-4">
+        <button [clrLoading]="validateBtnState" type="submit" form="activationKeyForm" class="btn btn-primary"
+                (click)="onSubmit()">
+          {{'add-edit-dialog.save' | translate}}</button>
+      </div>
+      <div class="clr-col-4">
+        <button class="btn btn-secondary-outline"
+                (click)="displayDialog = false">{{'add-edit-dialog.cancel' | translate}} </button>
+      </div>
+      <div class="clr-col-2"></div>
+    </div>
   </div>
 </clr-modal>

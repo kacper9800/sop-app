@@ -6,6 +6,8 @@ import {DropdownItem} from '../../../_model/dropdown-item.model';
 import {FacultyService} from '../../../_services/organization-structure/faculty.service';
 import {InstituteService} from '../../../_services/organization-structure/institute.service';
 import {DepartmentService} from '../../../_services/organization-structure/department.service';
+import {TranslateService} from "@ngx-translate/core";
+import {ClrLoadingState} from "@clr/angular";
 
 @Component({
   selector: 'app-add-edit-dialog-activation-keys',
@@ -24,12 +26,15 @@ export class AddEditDialogActivationKeysComponent implements OnInit {
   public faculties: DropdownItem[];
   public institutes: DropdownItem[];
   public departments: DropdownItem[];
+  public dialogTitle: string;
+  validateBtnState: any;
 
   constructor(private activationKeyService: ActivationKeyService,
               private facultyService: FacultyService,
               private instituteService: InstituteService,
               private departmentService: DepartmentService,
-              private formBuilder: FormBuilder) {
+              private formBuilder: FormBuilder,
+              private translateService: TranslateService) {
   }
 
   ngOnInit() {
@@ -58,11 +63,12 @@ export class AddEditDialogActivationKeysComponent implements OnInit {
   public showNewActivationKeyDialog() {
     this.blockUI = true;
     this.displayDialog = true;
+    this.dialogTitle = this.translateService.instant('activationKeys.dialog.titleNew');
   }
 
   public showEditActivationKeyDialog(value: string) {
     this.blockUI = true;
-    this.displayDialog = true;
+    this.dialogTitle = this.translateService.instant('activationKeys.dialog.titleEdit');
     this.activationKeyService.getActivationKeyForValue(value).subscribe(
       (res: IActivationKey) => this.onSuccessLoadActivationKey(res),
       (res) => this.onErrorLoadActivationKey(res)
@@ -86,5 +92,11 @@ export class AddEditDialogActivationKeysComponent implements OnInit {
       text += possible.charAt(Math.floor(Math.random() * possible.length));
     }
     return text;
+  }
+
+  onSubmit() {
+    this.blockUI = true;
+    this.validateBtnState = ClrLoadingState.LOADING;
+
   }
 }
