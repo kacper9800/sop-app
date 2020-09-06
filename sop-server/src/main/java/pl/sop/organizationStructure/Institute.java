@@ -26,8 +26,11 @@ public class Institute extends BasicEntity implements Serializable {
     @OneToMany(mappedBy="institute")
     private Set<Token> tokens;
 
-    //ToDo Create faculty_id field
+    @ManyToOne(fetch = FetchType.EAGER)
+    private Faculty faculty;
 
+    @OneToMany(mappedBy = "institute", cascade = CascadeType.ALL, orphanRemoval = true)
+    private Set<Department> departments;
 
     @Override
     public Long getId() {

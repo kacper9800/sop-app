@@ -2,7 +2,9 @@ package pl.sop.organizationStructure;
 
 import java.util.Set;
 import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import pl.sop.entities.BasicEntity;
@@ -27,7 +29,8 @@ public class Department extends BasicEntity implements Serializable {
     @OneToMany(mappedBy="department")
     private Set<Token> tokens;
 
-    //ToDo Create institute_id field
+    @ManyToOne(fetch = FetchType.EAGER)
+    private Institute institute;
 
     @Override
     public Long getId() {
