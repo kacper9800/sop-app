@@ -6,8 +6,8 @@ import {DropdownItem} from '../../../_model/dropdown-item.model';
 import {FacultyService} from '../../../_services/organization-structure/faculty.service';
 import {InstituteService} from '../../../_services/organization-structure/institute.service';
 import {DepartmentService} from '../../../_services/organization-structure/department.service';
-import {TranslateService} from "@ngx-translate/core";
-import {ClrLoadingState} from "@clr/angular";
+import {TranslateService} from '@ngx-translate/core';
+import {ClrLoadingState} from '@clr/angular';
 
 @Component({
   selector: 'app-add-edit-dialog-activation-keys',
@@ -27,7 +27,7 @@ export class AddEditDialogActivationKeysComponent implements OnInit {
   public institutes: DropdownItem[];
   public departments: DropdownItem[];
   public dialogTitle: string;
-  validateBtnState: any;
+  public validateBtnState: any;
 
   constructor(private activationKeyService: ActivationKeyService,
               private facultyService: FacultyService,
@@ -43,8 +43,7 @@ export class AddEditDialogActivationKeysComponent implements OnInit {
 
   private prepareForm(activationKey?: ActivationKey): void {
     this.activationKeyForm = this.formBuilder.group({
-      token: new FormControl({
-        value: activationKey ? activationKey.value : this.generateToken(),
+      token: new FormControl({value: activationKey ? activationKey.value : this.generateToken(),
         disabled: true
       }, Validators.required),
       facultyId: new FormControl({value: activationKey ? activationKey.facultyId : null,

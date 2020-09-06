@@ -80,4 +80,8 @@ export class RegistrationComponent implements OnInit {
     this.userToRegister.username = this.registrationForm.get('username').value;
     this.userToRegister.role = ['ROLE_USER', 'ROLE_ADMIN'];
   }
+
+  public passwordMatchValidator(g: FormGroup) {
+    return this.registrationForm.get('password').value === g.get('repeatedPassword').value ? null : {'mismatch': true};
+  }
 }

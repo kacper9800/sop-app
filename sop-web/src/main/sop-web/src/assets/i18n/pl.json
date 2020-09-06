@@ -43,7 +43,10 @@
     "departmentName": "Nazwa katedry",
     "required": "To pole jest wymagane!",
     "export": "Exportuj tabelę",
-    "of": "z"
+    "of": "z",
+    "faculty": "Wydział",
+    "institute": "Instytut",
+    "department": "Katedra"
   },
   "header": {
     "SOP": "System obsługi praktyk",
@@ -166,11 +169,14 @@
       "departmentName": "Katedra",
       "actions": "Akcje"
     },
+    "dialog": {
+      "titleNew": "Generowanie nowego klucza aktywacyjnego",
+      "titleEdit": "Edycja klucza aktywacyjnego"
+    },
     "CRUD": {
       "addActivityKey": "Dodaj nowy klucz aktywacyjny"
     },
     "notFound": "Nie znaleziono żadnych kluczy aktywacyjnych!"
-
   },
   "toast": {
     "success": "Sukces",
@@ -182,6 +188,16 @@
     "defaultErrorDetailEdit": "Bład zapisu zmian",
     "defaultErrorDetailDelete": "Błąd usuwania danych",
     "defaultErrorDetailLoad": "Błąd ładowania danych"
+  },
+  "collegeStructure": {
+    "header": "Struktura uczelni",
+    "addStructure": "Dodaj nową strukturę uczelni",
+    "editStructure": "Edytuj strukturę uczelni",
+    "dialog": {
+      "headerNew": "Dodawanie nowej struktury",
+      "headerEdit": "Edytowanie struktury uczelni",
+      "chooseStructureLevel": "Wybierz poziom uczelni"
+    }
   }
 }
 

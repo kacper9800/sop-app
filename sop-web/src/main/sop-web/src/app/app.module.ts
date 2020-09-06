@@ -74,6 +74,7 @@ import { CollegeStructureComponent } from './sop/college-structure/college-struc
 import { CollegeRegistrationComponent } from './authentication/college-registration/college-registration.component';
 import { RegistrationConfirmationComponent } from './authentication/registration-confirmation/registration-confirmation.component';
 import {AddEditDialogActivationKeysComponent} from "./sop/activation-keys/add-edit-dialog-activation-keys/add-edit-dialog-activation-keys.component";
+import { AddEditDialogCollegeStructureComponent } from './sop/college-structure/add-edit-dialog-college-structure/add-edit-dialog-college-structure.component';
 
 @NgModule({
   declarations: [
@@ -114,6 +115,7 @@ import {AddEditDialogActivationKeysComponent} from "./sop/activation-keys/add-ed
     CollegeStructureComponent,
     CollegeRegistrationComponent,
     RegistrationConfirmationComponent,
+    AddEditDialogCollegeStructureComponent,
   ],
   imports: [
     BrowserModule,

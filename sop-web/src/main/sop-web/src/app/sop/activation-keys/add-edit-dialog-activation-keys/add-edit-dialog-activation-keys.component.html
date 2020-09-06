@@ -1,4 +1,5 @@
-<clr-modal [(clrModalOpen)]="displayDialog" [clrModalStaticBackdrop]="false" [clrModalSize]="'xl'" [clrModalClosable]="false">
+<clr-modal [(clrModalOpen)]="displayDialog" [clrModalStaticBackdrop]="false" [clrModalSize]="'m'"
+           [clrModalClosable]="false">
   <h3 class="modal-title" style="text-align: center!important;">{{dialogTitle}}</h3>
   <div class="modal-body">
     <form clrForm [formGroup]="activationKeyForm" id="activationKeyForm">
@@ -9,7 +10,7 @@
             <label>
               <clr-icon shape="key"></clr-icon>
             </label>
-            <input clrInput type="text" formControlName="token" style="max-width: 100% !important;"
+            <input [size]="30" clrInput type="text" formControlName="token"
                    placeholder="{{'registration.tokenLabel' | translate}}"/>
           </clr-input-container>
         </div>
@@ -20,7 +21,9 @@
         <div class="clr-col-2"></div>
         <div class="clr-col-8">
           <clr-select-container>
-            <label><clr-icon shape="building"></clr-icon></label>
+            <label>
+              <clr-icon shape="building"></clr-icon>
+            </label>
             <select clrSelect name="options" formControlName="facultyId" required>
               <option *ngFor="let faculty of faculties" [value]="faculty.value">
                 {{faculty.label}}
@@ -36,7 +39,9 @@
         <div class="clr-col-2"></div>
         <div class="clr-col-8">
           <clr-select-container>
-            <label><clr-icon shape="building"></clr-icon></label>
+            <label>
+              <clr-icon shape="building"></clr-icon>
+            </label>
             <select clrSelect name="options" formControlName="instituteId" required>
               <option *ngFor="let institute of institutes" [value]="institute.value">
                 {{institute.label}}
@@ -52,7 +57,9 @@
         <div class="clr-col-2"></div>
         <div class="clr-col-8">
           <clr-select-container>
-            <label><clr-icon shape="building"></clr-icon></label>
+            <label>
+              <clr-icon shape="building"></clr-icon>
+            </label>
             <select clrSelect name="options" formControlName="departmentId" required>
               <option *ngFor="let department of departments" [value]="department.value">
                 {{department.label}}
@@ -66,18 +73,13 @@
     </form>
   </div>
   <div class="modal-footer">
-    <div class="clr-row">
-      <div class="clr-col-2"></div>
-      <div class="clr-col-4">
-        <button [clrLoading]="validateBtnState" type="submit" form="activationKeyForm" class="btn btn-primary"
-                (click)="onSubmit()">
-          {{'add-edit-dialog.save' | translate}}</button>
-      </div>
-      <div class="clr-col-4">
-        <button class="btn btn-secondary-outline"
-                (click)="displayDialog = false">{{'add-edit-dialog.cancel' | translate}} </button>
-      </div>
-      <div class="clr-col-2"></div>
+    <div class="btn-group">
+      <button [clrLoading]="validateBtnState" type="submit" form="activationKeyForm"
+              class="btn btn-primary"
+              (click)="onSubmit()">
+        {{'add-edit-dialog.save' | translate}}</button>
+      <button class="btn btn-secondary-outline"
+              (click)="displayDialog = false">{{'add-edit-dialog.cancel' | translate}} </button>
     </div>
   </div>
 </clr-modal>

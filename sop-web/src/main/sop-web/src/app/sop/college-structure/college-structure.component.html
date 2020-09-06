@@ -1,17 +1,60 @@
-<p-treeTable [value]="collegeStructure" [columns]="cols">
-  <ng-template pTemplate="header" let-columns let-rowNode>
-    <tr [ttRow]="rowNode">
-      <th *ngFor="let col of columns">
-        {{col.header | translate}}
-      </th>
-    </tr>
-  </ng-template>
-  <ng-template pTemplate="body" let-rowNode let-rowData="rowData" let-columns="columns">
-    <tr>
-      <td *ngFor="let col of columns; let i = index">
-        <p-treeTableToggler [rowNode]="rowNode" *ngIf="i == 0"></p-treeTableToggler>
-        {{rowData[col.field]}}
-      </td>
-    </tr>
-  </ng-template>
-</p-treeTable>
+<!--<p-treeTable [value]="collegeStructure" [columns]="cols">-->
+<!--  <ng-template pTemplate="header" let-columns let-rowNode>-->
+<!--    <tr [ttRow]="rowNode">-->
+<!--      <th *ngFor="let col of columns">-->
+<!--        {{col.header | translate}}-->
+<!--      </th>-->
+<!--    </tr>-->
+<!--  </ng-template>-->
+<!--  <ng-template pTemplate="body" let-rowNode let-rowData="rowData" let-columns="columns">-->
+<!--    <tr>-->
+<!--      <td *ngFor="let col of columns; let i = index">-->
+<!--        <p-treeTableToggler [rowNode]="rowNode" *ngIf="i == 0"></p-treeTableToggler>-->
+<!--        {{rowData[col.field]}}-->
+<!--      </td>-->
+<!--    </tr>-->
+<!--  </ng-template>-->
+<!--</p-treeTable>-->
+
+<h1 style="text-align: center">{{'collegeStructure.header' | translate}}</h1>
+
+<clr-stack-view>
+  <clr-stack-header>
+    <div class="btn-group">
+      <button class="btn btn-sm btn-primary"
+              (click)="showAddNewDialog()"
+              type="button">
+        <clr-icon shape="plus"></clr-icon>
+        {{'collegeStructure.addStructure' | translate}}
+      </button>
+      <button class="btn btn-sm btn-outline"
+              (click)="showEditDialog()"
+              type="button">
+        <clr-icon shape="pencil"></clr-icon>
+        {{'collegeStructure.editStructure' | translate}}
+      </button>
+    </div>
+  </clr-stack-header>
+
+  <!--  <clr-stack-block-->
+  <!--    *ngFor="let faculty of collegeStructure.faculties; let i = index"-->
+  <!--    [clrStackViewLevel]="1"-->
+  <!--    [clrStackViewSetsize]="collegeStructure.faculties.length"-->
+  <!--    [clrStackViewPosinset]="i"-->
+  <!--  >-->
+  <!--    <clr-stack-label>{{faculty.facultyName}}</clr-stack-label>-->
+  <!--    <clr-stack-content>{{faculty.facultyName}}</clr-stack-content>-->
+
+  <!--    <clr-stack-block-->
+  <!--      *ngFor="let institute of faculty.institutes; let j = index"-->
+  <!--      [clrStackViewLevel]="2"-->
+  <!--      [clrStackViewSetsize]="faculty.institutes.length"-->
+  <!--      [clrStackViewPosinset]="j"-->
+  <!--    >-->
+  <!--      <clr-stack-label>{{institute.instituteName}}</clr-stack-label>-->
+  <!--      <clr-stack-content>{{institute.instituteName}}</clr-stack-content>-->
+  <!--    </clr-stack-block>-->
+  <!--  </clr-stack-block>-->
+</clr-stack-view>
+
+<ng-template #addEditDialog></ng-template>

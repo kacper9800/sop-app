@@ -41,7 +41,11 @@
     "facultyName": "Faculty name",
     "instituteName": "Institute name",
     "departmentName": "Department name",
-    "of": "of"
+    "of": "of",
+    "college": "College",
+    "faculty": "Faculty",
+    "institute": "Institute",
+    "department": "Department"
   },
   "header": {
     "SOP": "Internship service system",
@@ -180,5 +184,15 @@
     "defaultErrorDetailEdit": "Error during data updating ",
     "defaultErrorDetailDelete": "Error during data deleting",
     "defaultErrorDetailLoad": "Error during data loading"
+  },
+  "collegeStructure": {
+    "header": "College structure",
+    "addStructure": "Add new college structure level",
+    "editStructure": "Edit college structure",
+    "dialog": {
+      "headerNew": "Adding new structure",
+      "headerEdit": "Editing college structure",
+      "chooseStructureLevel": "Choose level"
+    }
   }
 }
