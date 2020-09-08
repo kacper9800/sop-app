@@ -8,13 +8,25 @@ import pl.sop.dto.CollegeStructureToSaveDTO;
 public class DepartmentService {
 
   @Autowired
+  private InstituteRepository instituteRepository;
+
+  @Autowired
   private DepartmentRepository departmentRepository;
 
   public Department getById(Long id) {
-   return departmentRepository.findById(id).get();
+    return departmentRepository.findById(id).get();
   }
 
-  public CollegeStructureToSaveDTO createNewDepartment(CollegeStructureToSaveDTO collegeStructureToSaveDTO) {
-    return collegeStructureToSaveDTO;
+  public Department createNewDepartment(CollegeStructureToSaveDTO collegeStructureToSaveDTO) {
+    Department department = new Department();
+    department.setName(collegeStructureToSaveDTO.getStructureName());
+    if (collegeStructureToSaveDTO.getParentId() != null) {
+      Institute institute = instituteRepository
+          .findActiveInstituteById(collegeStructureToSaveDTO.getParentId());
+      department.setInstitute(institute);
+    }
+    department.setActive(Boolean.TRUE);
+    department.setDeleted(Boolean.FALSE);
+    return this.departmentRepository.save(department);
   }
 }

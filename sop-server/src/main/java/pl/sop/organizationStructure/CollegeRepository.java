@@ -39,5 +39,5 @@ public interface CollegeRepository extends JpaRepository<College, Long> {
       + " where college.id = :college_id"
       + " and college.active = true"
       + " and college.deleted = false")
-  College findActiveCollegeStrucutreById(@Param("college_id") Long collegeId);
+  College findActiveCollegeStructureById(@Param("college_id") Long collegeId);
 }

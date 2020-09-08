@@ -1,6 +1,5 @@
 package pl.sop.organizationStructure;
 
-import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import pl.sop.dto.CollegeStructureToSaveDTO;
@@ -9,14 +8,25 @@ import pl.sop.dto.CollegeStructureToSaveDTO;
 public class InstituteService {
 
   @Autowired
+  private FacultyRepository facultyRepository;
+
+  @Autowired
   private InstituteRepository instituteRepository;
 
   public Institute getById(Long id) {
     return instituteRepository.findById(id).get();
   }
 
-  // ToDo
-  public CollegeStructureToSaveDTO createNewInstitute(CollegeStructureToSaveDTO collegeStructureToSaveDTO) {
-    return collegeStructureToSaveDTO;
+  public Institute createNewInstitute(CollegeStructureToSaveDTO collegeStructureToSaveDTO) {
+    Institute institute = new Institute();
+    institute.setName(collegeStructureToSaveDTO.getStructureName());
+    if (collegeStructureToSaveDTO.getParentId() != null) {
+      Faculty faculty = facultyRepository
+          .findActiveFacultyById(collegeStructureToSaveDTO.getParentId());
+      institute.setFaculty(faculty);
+    }
+    institute.setActive(Boolean.TRUE);
+    institute.setDeleted(Boolean.FALSE);
+    return this.instituteRepository.save(institute);
   }
 }

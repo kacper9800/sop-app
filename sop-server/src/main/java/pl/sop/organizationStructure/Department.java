@@ -73,4 +73,20 @@ public class Department extends BasicEntity implements Serializable {
     public void setUsers(Set<User> users) {
         this.users = users;
     }
+
+    public Set<Token> getTokens() {
+        return tokens;
+    }
+
+    public void setTokens(Set<Token> tokens) {
+        this.tokens = tokens;
+    }
+
+    public Institute getInstitute() {
+        return institute;
+    }
+
+    public void setInstitute(Institute institute) {
+        this.institute = institute;
+    }
 }

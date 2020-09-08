@@ -91,7 +91,7 @@ public class CollegeService {
 
   public ResponseEntity<CollegeStructureToSaveDTO> createNewCollegeStructure(
       CollegeStructureToSaveDTO collegeStructureToSaveDTO) {
-    College college = this.collegeRepository.findActiveCollegeStrucutreById(collegeStructureToSaveDTO.getCollegeId());
+    College college = this.collegeRepository.findActiveCollegeStructureById(collegeStructureToSaveDTO.getCollegeId());
     switch (collegeStructureToSaveDTO.getLevel()) {
       case 1:
         return new ResponseEntity(this.facultyService.createNewFaculty(collegeStructureToSaveDTO),

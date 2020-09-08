@@ -14,4 +14,17 @@ public interface InstituteRepository extends JpaRepository<Institute, Long> {
       + " (institute.active = true or institute.active = null) and"
       + " (institute.deleted = false or institute.deleted = null)")
   public Optional<Institute> findById(@Param("institute_id")Long instituteId);
+
+  @Query(value = "select institute from Institute institute"
+      + " where institute.id = :institute_id"
+      + " and institute.active = true"
+      + " and institute.deleted = false")
+  Institute findActiveInstituteById(@Param("institute_id") Long instituteId);
+
+  @Query(value = "select institute from Institute institute"
+      + " left join fetch institute.departments departments"
+      + " where institute.id = :institute_id"
+      + " and institute.active = true"
+      + " and institute.deleted = false")
+  Institute findActiveInstituteStructureById(@Param("institute_id") Long instituteId);
 }

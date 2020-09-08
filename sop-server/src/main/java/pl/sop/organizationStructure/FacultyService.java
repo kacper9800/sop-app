@@ -20,7 +20,7 @@ public class FacultyService {
   public Faculty createNewFaculty(CollegeStructureToSaveDTO collegeStructureToSaveDTO) {
     Faculty faculty = new Faculty();
     faculty.setName(collegeStructureToSaveDTO.getStructureName());
-    if (collegeStructureToSaveDTO.getCollegeId() != null) {
+    if (collegeStructureToSaveDTO.getParentId() != null) {
       College college = collegeRepository.findActiveCollegeById(collegeStructureToSaveDTO.getParentId());
       faculty.setCollege(college);
     }
