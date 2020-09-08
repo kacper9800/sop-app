@@ -28,10 +28,10 @@ public class UserDetailsImpl implements UserDetails {
   private String password;
 
   private Collection<? extends GrantedAuthority> authorities;
-  private Set<College> college;
+  private College college;
 
   public UserDetailsImpl(Long id, String username, String email, String password,
-      Collection<? extends GrantedAuthority> authorities, Set<College> college) {
+      Collection<? extends GrantedAuthority> authorities, College college) {
     this.id = id;
     this.username = username;
     this.email = email;
@@ -45,18 +45,16 @@ public class UserDetailsImpl implements UserDetails {
         .map(role -> new SimpleGrantedAuthority(role.getName().name()))
         .collect(Collectors.toList());
     return new UserDetailsImpl(user.getId(), user.getUsername(), user.getEmail(),
-        user.getPassword(), authorities, user.getColleges());
+        user.getPassword(), authorities, user.getCollege());
   }
 
   public Collection<? extends GrantedAuthority> getAuthorities() {
     return authorities;
   }
 
-  public Set<College> getCollege() {
-    return college;
-  }
+  public College getCollege() { return college; }
 
-  public void setCollege(Set<College> college) {
+  public void setCollege(College college) {
     this.college = college;
   }
 

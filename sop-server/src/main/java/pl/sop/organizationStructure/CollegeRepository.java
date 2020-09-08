@@ -19,6 +19,25 @@ public interface CollegeRepository extends JpaRepository<College, Long> {
   @Query(value = "SELECT c FROM College c WHERE c.active = false")
   List<College> findAllAvailableColleges();
 
-  @Query(value = "select college from College college where college.id = :college_id")
+  @Query(value = "select college from College college"
+      + " left join fetch college.faculties faculties"
+      + " left join fetch faculties.institutes institutes"
+      + " left join fetch institutes.departments"
+      + " where college.id = :college_id")
   College findCollegeById(@Param("college_id") Long collegeId);
+
+  @Query(value = "select college from College college"
+      + " where college.id = :college_id"
+      + " and college.active = true"
+      + " and college.deleted = false")
+  College findActiveCollegeById(@Param("college_id") Long collegeId);
+
+  @Query(value = "select college from College college"
+      + " left join fetch college.faculties faculties"
+      + " left join fetch faculties.institutes institutes"
+      + " left join fetch institutes.departments"
+      + " where college.id = :college_id"
+      + " and college.active = true"
+      + " and college.deleted = false")
+  College findActiveCollegeStrucutreById(@Param("college_id") Long collegeId);
 }

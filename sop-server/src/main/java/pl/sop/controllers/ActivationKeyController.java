@@ -29,12 +29,11 @@ public class ActivationKeyController {
   @RequestMapping(value = "/api/activationKeys", method = RequestMethod.GET)
   public ResponseEntity<List<TokenDTO>> getAllActivationKeys(Authentication authentication) {
     UserDetailsImpl loggedUser = (UserDetailsImpl) authentication.getPrincipal();
-    Set<College> colleges = loggedUser.getCollege();
-    if (colleges.size() == 0) {
+    College college = loggedUser.getCollege();
+    if (college == null) {
       return new ResponseEntity<>(HttpStatus.NOT_ACCEPTABLE);
     }
-    List<College> collegeList = new ArrayList<>(colleges);
-    return new ResponseEntity(activationKeyService.getAllTokensForCompany(collegeList.get(0).getId()), HttpStatus.OK);
+    return new ResponseEntity(activationKeyService.getAllTokensForCompany(college.getId()), HttpStatus.OK);
   }
 
 //  @CrossOrigin

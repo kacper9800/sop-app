@@ -122,7 +122,7 @@ public class UserService {
     user.setRoles(roles);
     user.setActive(Boolean.TRUE);
     College college = collegeRepository.findCollegeById(signUpRequest.getCollegeId());
-    user.addCollege(college);
+    user.setCollege(college);
     Token token = activationKeyService.getTokenByValue(signUpRequest.getToken());
     prepareUserDataFromToken(user, token);
     token.setRemainingUses(token.getRemainingUses() -1);

@@ -7,6 +7,7 @@ package pl.sop.organizationStructure;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.io.Serializable;
+import java.util.List;
 import java.util.Set;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -15,6 +16,7 @@ import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import pl.sop.entities.BasicEntity;
@@ -29,17 +31,18 @@ public class College extends BasicEntity implements Serializable {
   private String name;
 
   @JsonIgnore
-  @ManyToMany(fetch = FetchType.LAZY)
-  @JoinTable(name = "user_colleges",
-      joinColumns = @JoinColumn(name = "college_id"),
-      inverseJoinColumns = @JoinColumn(name = "user_id"))
-  private Set<User> users;
+//  @ManyToMany(fetch = FetchType.LAZY)
+//  @JoinTable(name = "user_colleges",
+//      joinColumns = @JoinColumn(name = "college_id"),
+//      inverseJoinColumns = @JoinColumn(name = "user_id"))
+  @OneToMany(mappedBy = "college", orphanRemoval = true)
+  private List<User> users;
 
   @OneToMany(mappedBy = "college", orphanRemoval = true)
-  private Set<Token> tokens;
+  private List<Token> tokens;
 
   @OneToMany(mappedBy = "college", cascade = CascadeType.ALL, orphanRemoval = true)
-  private Set<Faculty> faculties;
+  private List<Faculty> faculties;
 
   @Override
   public Long getId() {
@@ -75,20 +78,20 @@ public class College extends BasicEntity implements Serializable {
     this.deleted = deleted;
   }
 
-  public Set<User> getUsers() {
+  public List<User> getUsers() {
     return users;
   }
 
-  public void setUsers(Set<User> users) {
+  public void setUsers(List<User> users) {
     this.users = users;
   }
 
-  public Set<Token> getTokens() { return tokens; }
+  public List<Token> getTokens() { return tokens; }
 
-  public void setTokens(Set<Token> tokens) { this.tokens = tokens; }
+  public void setTokens(List<Token> tokens) { this.tokens = tokens; }
 
-  public Set<Faculty> getFaculties() { return faculties; }
+  public List<Faculty> getFaculties() { return faculties; }
 
-  public void setFaculties(Set<Faculty> faculties) { this.faculties = faculties; }
+  public void setFaculties(List<Faculty> faculties) { this.faculties = faculties; }
 
 }

@@ -515,4 +515,15 @@
       referencedTableName="departments"
       referencedColumnNames="id"/>
   </changeSet>
+  <changeSet id="21" author="krzymkiewicz">
+    <addColumn tableName="users">
+      <column name="college_id" type="bigint"></column>
+    </addColumn>
+    <addForeignKeyConstraint
+      baseTableName="users"
+      baseColumnNames="college_id"
+      constraintName="fk_college_id"
+      referencedTableName="colleges"
+      referencedColumnNames="id"/>
+  </changeSet>
 </databaseChangeLog>
