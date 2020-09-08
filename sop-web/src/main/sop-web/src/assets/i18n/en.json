@@ -192,7 +192,9 @@
     "dialog": {
       "headerNew": "Adding new structure",
       "headerEdit": "Editing college structure",
-      "chooseStructureLevel": "Choose level"
+      "chooseStructureLevel": "Choose level",
+      "chooseFaculty": "Choose faculty",
+      "chooseInstitute": "Choose institute"
     }
   }
 }

@@ -196,7 +196,9 @@
     "dialog": {
       "headerNew": "Dodawanie nowej struktury",
       "headerEdit": "Edytowanie struktury uczelni",
-      "chooseStructureLevel": "Wybierz poziom uczelni"
+      "chooseStructureLevel": "Wybierz poziom uczelni",
+      "chooseFaculty": "Wybierz wydział",
+      "chooseInstitute": "Wybierz instytut"
     }
   }
 }

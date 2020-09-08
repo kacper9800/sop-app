@@ -1,4 +1,4 @@
-<clr-modal [(clrModalOpen)]="displayDialog" [clrModalClosable]="false" [clrModalSize]="'m'"
+<clr-modal [(clrModalOpen)]="displayDialog" [clrModalClosable]="false" [clrModalSize]="'l'"
            [clrModalStaticBackdrop]="false">
   <h3 class="modal-title">{{dialogTitle}}</h3>
   <div class="modal-body">
@@ -8,7 +8,7 @@
         <div class="clr-col-8">
           <select clrSelect id="select-level" class="clr-select" formControlName="level"
                   (change)="onCollegeStructureLevelChange()">
-            <option *ngFor="let level of collegeStructures"
+            <option *ngFor="let level of collegeStructuresLevels"
                     [value]="level.value">{{level.label}}</option>
           </select>
           <clr-icon *ngIf="collegeStructureForm.get('level').value == null"
@@ -22,7 +22,7 @@
         <div class="clr-row">
           <div class="clr-col-2"></div>
           <div class="clr-col-8">
-            <input clrInput name="input" [placeholder]="('common.facultyName' | translate)"
+            <input clrInput name="input" size="50" [placeholder]="('common.facultyName' | translate)"
                    formControlName="facultyName"/>
           </div>
           <div class="clr-col-2"></div>
@@ -35,8 +35,8 @@
           <div class="clr-col-2"></div>
           <div class="clr-col-8">
             <select clrSelect id="select-faculty-institute" class="clr-select" formControlName="facultyId">
-              <option *ngFor="let level of collegeStructures"
-                      [value]="level.value">{{level.label}}</option>
+              <option *ngFor="let faculty of faculties"
+                      [value]="faculty.id">{{faculty.name}}</option>
             </select>
             <clr-icon *ngIf="collegeStructureForm.get('level').value == null"
                       class="clr-validate-icon" shape="exclamation-circle"></clr-icon>
@@ -46,7 +46,7 @@
         <div class="clr-row">
           <div class="clr-col-2"></div>
           <div class="clr-col-8">
-            <input clrInput name="input" [placeholder]="('common.instituteName' | translate)"
+            <input clrInput name="input" size="50" [placeholder]="('common.instituteName' | translate)"
                    formControlName="instituteName"/>
           </div>
           <div class="clr-col-2"></div>
@@ -59,9 +59,9 @@
           <div class="clr-col-2"></div>
           <div class="clr-col-8">
             <select clrSelect id="select-faculty-department" class="clr-select"
-                    formControlName="facultyId">
-              <option *ngFor="let level of collegeStructures"
-                      [value]="level.value">{{level.label}}</option>
+                    formControlName="facultyId" (change)="onChangeFaculty()">
+              <option *ngFor="let faculty of faculties"
+                      [value]="faculty.id">{{faculty.name}}</option>
             </select>
             <clr-icon *ngIf="collegeStructureForm.get('level').value == null"
                       class="clr-validate-icon" shape="exclamation-circle"></clr-icon>
@@ -74,8 +74,8 @@
           <div class="clr-col-8">
             <select clrSelect id="select-institute-department" class="clr-select"
                     formControlName="instituteId">
-              <option *ngFor="let level of collegeStructures"
-                      [value]="level.value">{{level.label}}</option>
+              <option *ngFor="let institute of institutes"
+                      [value]="institute.id">{{institute.name}}</option>
             </select>
             <clr-icon *ngIf="collegeStructureForm.get('level').value == null"
                       class="clr-validate-icon" shape="exclamation-circle"></clr-icon>
@@ -86,7 +86,7 @@
         <div class="clr-row">
           <div class="clr-col-2"></div>
           <div class="clr-col-8">
-            <input clrInput name="input" [placeholder]="('common.departmentName' | translate)"
+            <input clrInput name="input" size="50" [placeholder]="('common.departmentName' | translate)"
                    formControlName="departmentName"/>
           </div>
           <div class="clr-col-2"></div>
@@ -99,7 +99,7 @@
   <div class="modal-footer">
     <div class="btn-group">
       <button [clrLoading]="validateBtnState" type="submit" form="collegeStructureForm"
-              class="btn btn-primary" [disabled]="isSaveButtonDisabled()"
+              class="btn btn-primary" [disabled]="!collegeStructureForm.valid"
               (click)="onSubmit()">
         {{'add-edit-dialog.save' | translate}}</button>
       <button class="btn btn-secondary-outline"
@@ -115,26 +115,26 @@
       <clr-stack-view>
         <clr-stack-block
           *ngFor="let faculty of collegeStructure.faculties; let blockIndex = index"
-          [clrSbNotifyChange]="faculty.facultyName!=='Content '+ (blockIndex)"
+          [clrSbNotifyChange]="faculty.name!=='Content '+ (blockIndex)"
           [clrStackViewLevel]="1"
           [clrStackViewSetsize]="collegeStructure.faculties.length"
           [clrStackViewPosinset]="blockIndex + 1"
         >
-          <clr-stack-label>{{faculty.facultyName}}</clr-stack-label>
+          <clr-stack-label>{{faculty.name}}</clr-stack-label>
           <clr-stack-content>
-            <input type="text" [(ngModel)]="faculty.facultyName" class="clr-input"/>
+            <input type="text" [(ngModel)]="faculty.name" class="clr-input"/>
           </clr-stack-content>
 
           <clr-stack-block
             *ngFor="let institute of faculty.institutes; let blockChildIndex = index"
-            [clrSbNotifyChange]="institute.instituteName!=='Sub-content '+ (blockChildIndex)"
+            [clrSbNotifyChange]="institute.name!=='Sub-content '+ (blockChildIndex)"
             [clrStackViewLevel]="2"
             [clrStackViewSetsize]="faculty.institutes.length"
             [clrStackViewPosinset]="blockChildIndex + 1"
           >
-            <clr-stack-label>{{faculty.facultyName}}</clr-stack-label>
+            <clr-stack-label>{{faculty.name}}</clr-stack-label>
             <clr-stack-content>
-              <input type="text" [(ngModel)]="faculty.facultyName" class="clr-input"/>
+              <input type="text" [(ngModel)]="faculty.name" class="clr-input"/>
             </clr-stack-content>
           </clr-stack-block>
         </clr-stack-block>

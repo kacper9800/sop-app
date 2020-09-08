@@ -4,6 +4,7 @@ import global from '../../../global';
 import {Observable} from 'rxjs';
 import {ICollege} from '../../_model/organization-structure/college.model';
 import {CollegeStructure} from '../../_model/organization-structure/college-structure.model';
+import {CollegeStructureToSave} from '../../_model/organization-structure/structure-to-save.model';
 
 const COLLEGES_API = '/colleges';
 const AVAILABLE_COLLEGES_API = '/available-colleges';
@@ -28,6 +29,9 @@ export class CollegeService {
 
   public getCollegeStructure(): Observable<CollegeStructure> {
     return this.httpClient.get<CollegeStructure>(global.API + COLLEGE_STRUCTURE_API);
+  }
 
+  public createNewStructure(structureToSave: CollegeStructureToSave): Observable<number> {
+    return this.httpClient.post<number>(global.API + COLLEGE_STRUCTURE_API, structureToSave);
   }
 }

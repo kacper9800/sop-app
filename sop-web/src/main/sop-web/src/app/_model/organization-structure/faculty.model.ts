@@ -1,14 +1,14 @@
 import {Institute} from './institute.model';
 
 export interface IFaculty {
-  facultyId: number;
-  facultyName: string;
+  id: number;
+  name: string;
   institutes: Institute[];
 }
 
 export class Faculty implements IFaculty {
-  facultyId: number;
-  facultyName: string;
-  institutes: Institute[];
+  id: number;
+  name: string;
+  institutes: Institute[] = [];
 }
 
