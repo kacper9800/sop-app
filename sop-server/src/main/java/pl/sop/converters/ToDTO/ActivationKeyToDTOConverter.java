@@ -12,7 +12,10 @@ public class ActivationKeyToDTOConverter implements Converter<Token, TokenDTO> {
     tokenDTO.setValue(input.getValue());
     tokenDTO.setExpirationDate(input.getExpirationDate());
     tokenDTO.setRemainingUses(input.getRemainingUses());
+
+    // To Do
 //    tokenDTO.setCreatedBy(input.getCreatedBy().getId());
+//    if (input)
     if (input.getCollege() != null) {
       tokenDTO.setCollegeName(input.getCollege().getName());
     }

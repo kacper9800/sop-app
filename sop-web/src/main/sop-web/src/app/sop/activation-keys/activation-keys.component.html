@@ -45,6 +45,10 @@
     </clr-dg-cell>
     <clr-dg-cell>
       <div class="btn-group">
+        <button type="button" class="btn btn-sm btn-secondary" (click)="copyKeyValue(key.value)">
+          <clr-icon shape="copy-to-clipboard"></clr-icon>
+          {{'common.copyToClipboard' | translate }}
+        </button>
         <button type="button" class="btn btn-sm btn-secondary" (click)="showEditDialog(key.value)">
           <clr-icon shape="pencil"></clr-icon>
           {{'common.crud.edit' | translate }}

@@ -46,7 +46,8 @@
     "of": "z",
     "faculty": "Wydział",
     "institute": "Instytut",
-    "department": "Katedra"
+    "department": "Katedra",
+    "copyToClipboard": "Skopiuj klucz"
   },
   "header": {
     "SOP": "System obsługi praktyk",
@@ -198,7 +199,11 @@
       "headerEdit": "Edytowanie struktury uczelni",
       "chooseStructureLevel": "Wybierz poziom uczelni",
       "chooseFaculty": "Wybierz wydział",
-      "chooseInstitute": "Wybierz instytut"
+      "facultyNotFound": "Nie zdefiniowano wydziałów",
+      "chooseInstitute": "Wybierz instytut",
+      "instituteNotFound": "Nie zdefiniowano instytutów",
+      "chooseDepartment": "Wybierz katedrę",
+      "departmentNotFound": "Nie zdefiniowano katedr"
     }
   }
 }

@@ -49,7 +49,7 @@ public class Token extends BasicEntity {
   @JsonIgnore
   @Column(name = "remaining_uses")
   private Integer remainingUses;
-//
+//  ToDO
 //  @JsonIgnore
 //  @Column(name = "creator_id")
 //  private User createdBy;

@@ -10,8 +10,47 @@
             <label>
               <clr-icon shape="key"></clr-icon>
             </label>
-            <input [size]="30" clrInput type="text" formControlName="token"
+            <input [size]="35" clrInput type="text" formControlName="token"
                    placeholder="{{'registration.tokenLabel' | translate}}"/>
+          </clr-input-container>
+        </div>
+        <div class="clr-col-2"></div>
+      </div>
+
+
+      <div class="clr-row">
+        <div class="clr-col-2"></div>
+        <div class="clr-col-8">
+          <clr-date-container>
+            <label>
+              <clr-icon shape="calendar"></clr-icon>
+            </label>
+            <input type="date" clrDate name="demo" formControlName="expirationStartDate">
+          </clr-date-container>
+        </div>
+        <div class="clr-col-2"></div>
+      </div>
+
+      <div class="clr-row">
+        <div class="clr-col-2"></div>
+        <div class="clr-col-8">
+          <clr-date-container>
+            <label>
+              <clr-icon shape="calendar"></clr-icon>
+            </label>
+            <input type="date" clrDate name="demo" formControlName="expirationEndDate">
+          </clr-date-container>
+        </div>
+        <div class="clr-col-2"></div>
+      </div>
+
+      <div class="clr-row">
+        <div class="clr-col-2"></div>
+        <div class="clr-col-8">
+          <clr-input-container>
+            <label><clr-icon shape="accessibility-2"></clr-icon></label>
+            <input type="text" clrInput formControlName="numberOfUses"/>
+            <clr-control-error>We need your first name for legal compliance</clr-control-error>
           </clr-input-container>
         </div>
         <div class="clr-col-2"></div>
@@ -22,11 +61,31 @@
         <div class="clr-col-8">
           <clr-select-container>
             <label>
-              <clr-icon shape="building"></clr-icon>
+              <clr-icon shape="tree-view"></clr-icon>
             </label>
-            <select clrSelect name="options" formControlName="facultyId" required>
-              <option *ngFor="let faculty of faculties" [value]="faculty.value">
-                {{faculty.label}}
+            <select clrSelect id="select-level" class="clr-select" formControlName="level"
+                    (change)="onCollegeStructureLevelChange()">
+              <option *ngFor="let level of collegeStructuresLevels"
+                      [value]="level.value">{{level.label}}</option>
+            </select>
+            <clr-icon *ngIf="activationKeyForm.get('level').value == null"
+                      class="clr-validate-icon" shape="exclamation-circle"></clr-icon>
+          </clr-select-container>
+        </div>
+        <div class="clr-col-2"></div>
+      </div>
+
+      <div class="clr-row" *ngIf="[1,2,3].includes(selectedLevel)">
+        <div class="clr-col-2"></div>
+        <div class="clr-col-8">
+          <clr-select-container>
+            <label>
+              <clr-icon shape="cluster"></clr-icon>
+            </label>
+            <select clrSelect name="options" formControlName="facultyId" required
+                    (change)="onFacultyChange()">
+              <option *ngFor="let faculty of faculties" [value]="faculty.id">
+                {{faculty.name}}
               </option>
             </select>
             <clr-control-error>{{'common.required' | translate}}</clr-control-error>
@@ -35,16 +94,17 @@
         <div class="clr-col-2"></div>
       </div>
 
-      <div class="clr-row">
+      <div class="clr-row" *ngIf="[2,3].includes(selectedLevel)">
         <div class="clr-col-2"></div>
         <div class="clr-col-8">
           <clr-select-container>
             <label>
               <clr-icon shape="building"></clr-icon>
             </label>
-            <select clrSelect name="options" formControlName="instituteId" required>
-              <option *ngFor="let institute of institutes" [value]="institute.value">
-                {{institute.label}}
+            <select clrSelect name="options" formControlName="instituteId" required
+                    (change)="onInstituteChange()">
+              <option *ngFor="let institute of institutes" [value]="institute.id">
+                {{institute.name}}
               </option>
             </select>
             <clr-control-error>{{'common.required' | translate}}</clr-control-error>
@@ -53,16 +113,16 @@
         <div class="clr-col-2"></div>
       </div>
 
-      <div class="clr-row">
+      <div class="clr-row" *ngIf="[3].includes(selectedLevel)">
         <div class="clr-col-2"></div>
         <div class="clr-col-8">
           <clr-select-container>
             <label>
-              <clr-icon shape="building"></clr-icon>
+              <clr-icon shape="host"></clr-icon>
             </label>
             <select clrSelect name="options" formControlName="departmentId" required>
-              <option *ngFor="let department of departments" [value]="department.value">
-                {{department.label}}
+              <option *ngFor="let department of departments" [value]="department.id">
+                {{department.name}}
               </option>
             </select>
             <clr-control-error>{{'common.required' | translate}}</clr-control-error>
@@ -70,12 +130,14 @@
         </div>
         <div class="clr-col-2"></div>
       </div>
+
+
     </form>
   </div>
   <div class="modal-footer">
     <div class="btn-group">
       <button [clrLoading]="validateBtnState" type="submit" form="activationKeyForm"
-              class="btn btn-primary"
+              class="btn btn-primary" [disabled]="activationKeyForm.invalid"
               (click)="onSubmit()">
         {{'add-edit-dialog.save' | translate}}</button>
       <button class="btn btn-secondary-outline"

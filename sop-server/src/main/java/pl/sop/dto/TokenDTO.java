@@ -15,7 +15,8 @@ public class TokenDTO {
   private Long departmentId;
   private String departmentName;
   private Integer remainingUses;
-  private Long createdBy;
+  private Long createdById;
+  private String createdByName;
   private Boolean active;
 
   public TokenDTO() {
@@ -117,11 +118,19 @@ public class TokenDTO {
     this.remainingUses = remainingUses;
   }
 
-  public Long getCreatedBy() {
-    return createdBy;
+  public Long getCreatedById() {
+    return createdById;
   }
 
-  public void setCreatedBy(Long createdBy) {
-    this.createdBy = createdBy;
+  public void setCreatedById(Long createdById) {
+    this.createdById = createdById;
+  }
+
+  public String getCreatedByName() {
+    return createdByName;
+  }
+
+  public void setCreatedByName(String createdByName) {
+    this.createdByName = createdByName;
   }
 }

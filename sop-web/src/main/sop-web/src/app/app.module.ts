@@ -73,7 +73,7 @@ import { SuperVisorsComponent } from './sop/super-visors/super-visors.component'
 import { CollegeStructureComponent } from './sop/college-structure/college-structure.component';
 import { CollegeRegistrationComponent } from './authentication/college-registration/college-registration.component';
 import { RegistrationConfirmationComponent } from './authentication/registration-confirmation/registration-confirmation.component';
-import {AddEditDialogActivationKeysComponent} from "./sop/activation-keys/add-edit-dialog-activation-keys/add-edit-dialog-activation-keys.component";
+import {AddEditDialogActivationKeysComponent} from './sop/activation-keys/add-edit-dialog-activation-keys/add-edit-dialog-activation-keys.component';
 import { AddEditDialogCollegeStructureComponent } from './sop/college-structure/add-edit-dialog-college-structure/add-edit-dialog-college-structure.component';
 
 @NgModule({

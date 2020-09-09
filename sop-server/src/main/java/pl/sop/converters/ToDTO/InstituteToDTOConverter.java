@@ -19,9 +19,9 @@ public class InstituteToDTOConverter implements Converter<Institute, InstituteDT
     if (input.getDepartments() != null) {
       List<DepartmentDTO> departmentDTOSList = input.getDepartments().stream().map(department ->
           departmentToDTOConverter.convert(department)).collect(Collectors.toList());
-      instituteDTO.setDepartmentDTO(departmentDTOSList);
+      instituteDTO.setDepartments(departmentDTOSList);
     } else {
-      instituteDTO.setDepartmentDTO(null);
+      instituteDTO.setDepartments(null);
     }
     return instituteDTO;
   }

@@ -3,17 +3,18 @@ package pl.sop.dto;
 import java.util.List;
 
 public class InstituteDTO {
+
   private Long id;
   private String name;
-  private List<DepartmentDTO> departmentDTO;
+  private List<DepartmentDTO> departments;
 
   public InstituteDTO() {
   }
 
-  public InstituteDTO(Long id, String name, List<DepartmentDTO> departmentDTO) {
+  public InstituteDTO(Long id, String name, List<DepartmentDTO> departments) {
     this.id = id;
     this.name = name;
-    this.departmentDTO = departmentDTO;
+    this.departments = departments;
   }
 
   public Long getId() {
@@ -32,11 +33,11 @@ public class InstituteDTO {
     this.name = name;
   }
 
-  public List<DepartmentDTO> getDepartmentDTO() {
-    return departmentDTO;
+  public List<DepartmentDTO> getDepartments() {
+    return departments;
   }
 
-  public void setDepartmentDTO(List<DepartmentDTO> departmentDTO) {
-    this.departmentDTO = departmentDTO;
+  public void setDepartments(List<DepartmentDTO> departments) {
+    this.departments = departments;
   }
 }

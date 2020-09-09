@@ -45,7 +45,8 @@
     "college": "College",
     "faculty": "Faculty",
     "institute": "Institute",
-    "department": "Department"
+    "department": "Department",
+    "copyToClipboard": "Copy key"
   },
   "header": {
     "SOP": "Internship service system",
@@ -194,7 +195,8 @@
       "headerEdit": "Editing college structure",
       "chooseStructureLevel": "Choose level",
       "chooseFaculty": "Choose faculty",
-      "chooseInstitute": "Choose institute"
+      "chooseInstitute": "Choose institute",
+      "chooseDepartment": "Choose department"
     }
   }
 }

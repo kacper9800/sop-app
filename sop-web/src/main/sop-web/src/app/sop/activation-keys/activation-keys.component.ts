@@ -9,8 +9,9 @@ import {
 import {ActivationKey, IActivationKey} from '../../_model/activation-key.model';
 import {AddEditDialogActivationKeysComponent} from './add-edit-dialog-activation-keys/add-edit-dialog-activation-keys.component';
 import {ActivationKeyService} from '../../_services/activation-key.service';
-import {HttpResponse} from "@angular/common/http";
-import {TranslateService} from "@ngx-translate/core";
+import {HttpResponse} from '@angular/common/http';
+import {TranslateService} from '@ngx-translate/core';
+
 
 @Component({
   selector: 'app-activation-keys',
@@ -47,7 +48,50 @@ export class ActivationKeysComponent implements OnInit {
 
   private onSuccessLoadActivationKeys(res: IActivationKey[]): void {
     this.activationKeys = [];
-    this.activationKeys = res;
+    console.log(res);
+    res.forEach(activationKey => {
+      const key = new ActivationKey();
+      key.value = activationKey.value;
+      key.expirationDate = activationKey.expirationDate;
+      key.active = activationKey.active;
+      key.remainingUses = activationKey.remainingUses;
+      if (activationKey.createdById === null || activationKey.createdById === undefined) {
+        key.createdById = null;
+        key.createdByName = '---';
+      } else {
+        key.createdById = activationKey.createdById;
+        key.createdByName = activationKey.createdByName;
+      }
+      if (activationKey.collegeId === null || activationKey.collegeId === undefined) {
+        key.collegeId = null;
+        key.collegeName = '---';
+      } else {
+        key.collegeId = activationKey.collegeId;
+        key.collegeName = activationKey.collegeName;
+      }
+      if (activationKey.facultyId === null || activationKey.facultyId  === undefined) {
+        key.facultyId = null;
+        key.facultyName = '---';
+      } else {
+        key.facultyId = activationKey.facultyId;
+        key.facultyName = activationKey.facultyName;
+      }
+      if (activationKey.instituteId === null || activationKey.instituteId === undefined) {
+        key.instituteId = null;
+        key.instituteName = '---';
+      } else {
+        key.instituteId = activationKey.instituteId;
+        key.instituteName = activationKey.instituteName;
+      }
+      if (activationKey.departmentId === null || activationKey.departmentId === undefined) {
+        key.departmentId = null;
+        key.departmentName = '---';
+      } else {
+        key.departmentId = activationKey.departmentId;
+        key.departmentName = activationKey.departmentName;
+      }
+      this.activationKeys.push(key);
+    });
     console.log(this.activationKeys);
   }
 
@@ -57,24 +101,42 @@ export class ActivationKeysComponent implements OnInit {
 
   private prepareColumns() {
     this.columns = [
-      { label: this.translateService.instant('activationKeys.tableColumns.token'),
-        fieldName: 'value'},
-      { label: this.translateService.instant('activationKeys.tableColumns.expirationDate'),
-        fieldName: 'expirationDate'},
-      { label: this.translateService.instant('activationKeys.tableColumns.remainingUses'),
-        fieldName: 'remainingUses' },
-      { label: this.translateService.instant('activationKeys.tableColumns.createdBy'),
-        fieldName: 'createdBy'},
-      { label: this.translateService.instant('activationKeys.tableColumns.faculty'),
-        fieldName: 'facultyName'},
-      { label: this.translateService.instant('activationKeys.tableColumns.institute'),
-        fieldName: 'instituteName'},
-      { label: this.translateService.instant('activationKeys.tableColumns.department'),
-        fieldName: 'departmentName'},
-      { label: this.translateService.instant('activationKeys.tableColumns.active'),
-        fieldName: 'active'},
-      { label: this.translateService.instant('activationKeys.tableColumns.actions'),
-        fieldName: 'actions' }
+      {
+        label: this.translateService.instant('activationKeys.tableColumns.token'),
+        fieldName: 'value'
+      },
+      {
+        label: this.translateService.instant('activationKeys.tableColumns.expirationDate'),
+        fieldName: 'expirationDate'
+      },
+      {
+        label: this.translateService.instant('activationKeys.tableColumns.remainingUses'),
+        fieldName: 'remainingUses'
+      },
+      {
+        label: this.translateService.instant('activationKeys.tableColumns.createdBy'),
+        fieldName: 'createdBy'
+      },
+      {
+        label: this.translateService.instant('activationKeys.tableColumns.faculty'),
+        fieldName: 'facultyName'
+      },
+      {
+        label: this.translateService.instant('activationKeys.tableColumns.institute'),
+        fieldName: 'instituteName'
+      },
+      {
+        label: this.translateService.instant('activationKeys.tableColumns.department'),
+        fieldName: 'departmentName'
+      },
+      {
+        label: this.translateService.instant('activationKeys.tableColumns.active'),
+        fieldName: 'active'
+      },
+      {
+        label: this.translateService.instant('activationKeys.tableColumns.actions'),
+        fieldName: 'actions'
+      }
     ];
   }
 
@@ -108,5 +170,14 @@ export class ActivationKeysComponent implements OnInit {
 
   public onExportSelected() {
 
+  }
+
+  public copyKeyValue(value: string) {
+    // this.clipboard.copy(value);
+    // this.messageService.add({
+    //   severity: 'info',
+    //   summary: this.translateService.instant('toast.info'),
+    //   detail: this.translateService.instant('toast.infoCopiedToClipboard'),
+    // });
   }
 }
