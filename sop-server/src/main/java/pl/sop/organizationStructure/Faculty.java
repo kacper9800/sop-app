@@ -1,5 +1,6 @@
 package pl.sop.organizationStructure;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.util.Set;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -22,15 +23,19 @@ public class Faculty extends BasicEntity implements Serializable {
   @Column(name = "name", nullable = false)
   private String name;
 
+  @JsonIgnore
   @ManyToMany(fetch = FetchType.LAZY)
   private Set<User> users;
 
+  @JsonIgnore
   @OneToMany(mappedBy="faculty")
   private Set<Token> tokens;
 
+  @JsonIgnore
   @ManyToOne(fetch = FetchType.EAGER)
   private College college;
 
+  @JsonIgnore
   @OneToMany(mappedBy = "faculty", cascade = CascadeType.ALL, orphanRemoval = true)
   private Set<Institute> institutes;
 

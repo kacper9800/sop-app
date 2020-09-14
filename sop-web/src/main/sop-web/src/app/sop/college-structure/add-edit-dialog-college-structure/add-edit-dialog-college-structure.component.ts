@@ -20,6 +20,7 @@ export class AddEditDialogCollegeStructureComponent implements OnInit {
   @Output()
   public closeDialogWithSaveEmitter: EventEmitter<any> = new EventEmitter<any>();
 
+
   public blockUI: boolean;
   public displayDialog: any;
 
@@ -107,6 +108,9 @@ export class AddEditDialogCollegeStructureComponent implements OnInit {
     this.dialogTitle = this.translateService.instant('collegeStructure.dialog.headerNew');
   }
 
+  showEditCollegeStrucutreDialog(id: number) {
+    // ToDo strzał do bazy po obiekt, wyświetlenie go w dialogu
+  }
 
   public isSaveButtonDisabled(): boolean {
     if (this.collegeStructureForm.get('level').value === '0') {
@@ -223,20 +227,12 @@ export class AddEditDialogCollegeStructureComponent implements OnInit {
   }
 
   private onSuccessCreateStructure(res: number) {
-    this.messageService.add({
-      severity: 'success', summary: this.translateService.instant('toast.success'),
-      detail: this.translateService.instant('toast.defaultSuccessDetailAdd')
-    });
-    this.closeDialogWithSaveEmitter.emit();
+    this.closeDialogWithSaveEmitter.emit(true);
     this.blockUI = false;
   }
 
   private onErrorCreateStructure(res) {
-    this.messageService.add({
-      severity: 'error',
-      summary: 'Error!',
-      detail: res.error.messagee
-    });
+    this.closeDialogWithSaveEmitter.emit(false);
     this.blockUI = false;
   }
 }

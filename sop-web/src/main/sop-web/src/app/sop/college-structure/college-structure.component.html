@@ -15,7 +15,7 @@
 <!--    </tr>-->
 <!--  </ng-template>-->
 <!--</p-treeTable>-->
-
+<p-toast [baseZIndex]="10000" autoZIndex="true"></p-toast>
 <h1 style="text-align: center">{{'collegeStructure.header' | translate}}</h1>
 
 <clr-stack-view>
@@ -27,34 +27,74 @@
         <clr-icon shape="plus"></clr-icon>
         {{'collegeStructure.addStructure' | translate}}
       </button>
-      <button class="btn btn-sm btn-outline"
-              (click)="showEditDialog()"
-              type="button">
-        <clr-icon shape="pencil"></clr-icon>
-        {{'collegeStructure.editStructure' | translate}}
-      </button>
+      <button class="stack-action btn btn-sm btn-link"
+        (click)="refreshStack()"
+        type="button">Odśwież</button>
     </div>
   </clr-stack-header>
 
-  <!--  <clr-stack-block-->
-  <!--    *ngFor="let faculty of collegeStructure.faculties; let i = index"-->
-  <!--    [clrStackViewLevel]="1"-->
-  <!--    [clrStackViewSetsize]="collegeStructure.faculties.length"-->
-  <!--    [clrStackViewPosinset]="i"-->
-  <!--  >-->
-  <!--    <clr-stack-label>{{faculty.facultyName}}</clr-stack-label>-->
-  <!--    <clr-stack-content>{{faculty.facultyName}}</clr-stack-content>-->
+    <clr-stack-block
+      *ngFor="let faculty of collegeStructure.faculties; let i = index"
+      [clrStackViewLevel]="1"
+      [clrStackViewSetsize]="collegeStructure.faculties.length"
+      [clrStackViewPosinset]="i">
 
-  <!--    <clr-stack-block-->
-  <!--      *ngFor="let institute of faculty.institutes; let j = index"-->
-  <!--      [clrStackViewLevel]="2"-->
-  <!--      [clrStackViewSetsize]="faculty.institutes.length"-->
-  <!--      [clrStackViewPosinset]="j"-->
-  <!--    >-->
-  <!--      <clr-stack-label>{{institute.instituteName}}</clr-stack-label>-->
-  <!--      <clr-stack-content>{{institute.instituteName}}</clr-stack-content>-->
-  <!--    </clr-stack-block>-->
-  <!--  </clr-stack-block>-->
+      <clr-stack-label>{{faculty.name}}</clr-stack-label>
+      <clr-stack-content>
+        <div class="btn-group">
+        <button type="button" class="btn btn-sm btn-secondary" (click)="showEditDialog(faculty.id, 1)">
+          <clr-icon shape="pencil"></clr-icon>
+          {{'common.crud.edit' | translate }}
+        </button>
+        <button type="button" class="btn btn-sm btn-danger" (click)="showConfirmDeleteDialog(faculty.id, 1)">
+          <clr-icon shape="trash"></clr-icon>
+          {{'common.crud.delete' | translate }}
+        </button>
+      </div>
+      </clr-stack-content>
+
+      <clr-stack-block
+        *ngFor="let institute of faculty.institutes; let j = index"
+        [clrStackViewLevel]="2"
+        [clrStackViewSetsize]="faculty.institutes.length"
+        [clrStackViewPosinset]="j">
+        <clr-stack-label>{{institute.name}}</clr-stack-label>
+        <clr-stack-content>
+          <div class="btn-group">
+            <button type="button" class="btn btn-sm btn-secondary" (click)="showEditDialog(institute.id, 2)">
+              <clr-icon shape="pencil"></clr-icon>
+              {{'common.crud.edit' | translate }}
+            </button>
+            <button type="button" class="btn btn-sm btn-danger" (click)="showConfirmDeleteDialog(institute.id, 2)">
+              <clr-icon shape="trash"></clr-icon>
+              {{'common.crud.delete' | translate }}
+            </button>
+          </div>
+        </clr-stack-content>
+
+        <clr-stack-block
+          *ngFor="let department of institute.departments; let k = index"
+          [clrStackViewLevel]="2"
+          [clrStackViewSetsize]="institute.departments.length"
+          [clrStackViewPosinset]="k">
+          <clr-stack-label>{{department.name}}</clr-stack-label>
+          <clr-stack-content>
+            <div class="btn-group">
+              <button type="button" class="btn btn-sm btn-secondary" (click)="showEditDialog(department.id, 3)">
+                <clr-icon shape="pencil"></clr-icon>
+                {{'common.crud.edit' | translate }}
+              </button>
+              <button type="button" class="btn btn-sm btn-danger" (click)="showConfirmDeleteDialog(department.id, 3)">
+                <clr-icon shape="trash"></clr-icon>
+                {{'common.crud.delete' | translate }}
+              </button>
+            </div>
+          </clr-stack-content>
+        </clr-stack-block>
+      </clr-stack-block>
+    </clr-stack-block>
 </clr-stack-view>
 
 <ng-template #addEditDialog></ng-template>
+<ng-template #confirmDeleteDialog></ng-template>
+

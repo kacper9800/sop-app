@@ -29,4 +29,8 @@ public class InstituteService {
     institute.setDeleted(Boolean.FALSE);
     return this.instituteRepository.save(institute);
   }
+
+  public void deleteInstitute(Long collegeStructureId) {
+    this.instituteRepository.deleteById(collegeStructureId);
+  }
 }

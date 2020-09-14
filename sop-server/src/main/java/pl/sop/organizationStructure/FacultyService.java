@@ -28,4 +28,8 @@ public class FacultyService {
     faculty.setDeleted(Boolean.FALSE);
     return this.facultyRepository.save(faculty);
   }
+
+  public void deleteFaculty(Long id) {
+    this.facultyRepository.deleteById(id);
+  }
 }

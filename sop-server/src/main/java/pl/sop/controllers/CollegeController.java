@@ -5,16 +5,20 @@ import javax.validation.constraints.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import pl.sop.dto.CollegeStructureDTO;
 import pl.sop.dto.CollegeStructureToSaveDTO;
+import pl.sop.enums.ECollegeStructure;
 import pl.sop.organizationStructure.College;
 import pl.sop.organizationStructure.CollegeRepository;
 import pl.sop.organizationStructure.CollegeService;
@@ -63,6 +67,15 @@ public class CollegeController {
       @RequestBody CollegeStructureToSaveDTO collegeStructureToSaveDTO) {
     UserDetailsImpl user = (UserDetailsImpl) authentication.getPrincipal();
     return collegeService.createNewCollegeStructure(collegeStructureToSaveDTO);
+  }
+
+  @DeleteMapping(value = "/api/college-structure")
+  @PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_USER')")
+  public ResponseEntity<Long> deleteCollegeStructure(@RequestParam Long collegeStructureId,
+      @RequestParam String collegeStructure) {
+    collegeService.deleteCollegeStructure(collegeStructureId, collegeStructure);
+    return ResponseEntity.ok(collegeStructureId);
+  }
 
 //    College college = user.getCollege();
 //    if (college == null) {
@@ -70,7 +83,6 @@ public class CollegeController {
 //    }
 //    CollegeStructureDTO collegeStructureDTO = collegeService.findAllCollegeStructures(college.getId());
 //    return new ResponseEntity<>(collegeStructureDTO,HttpStatus.OK);
-  }
 
 //  @GetMapping(value = "/api/college/{id}")
 //  public ResponseEntity<List<College>> getAllCollegesByVoivoId(@PathVariable Long id) {
@@ -90,5 +102,6 @@ public class CollegeController {
     collegeService.update(id, college);
     return ResponseEntity.ok(HttpStatus.OK);
   }
+
 
 }

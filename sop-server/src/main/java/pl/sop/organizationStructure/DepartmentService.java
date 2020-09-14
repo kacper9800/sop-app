@@ -29,4 +29,8 @@ public class DepartmentService {
     department.setDeleted(Boolean.FALSE);
     return this.departmentRepository.save(department);
   }
+
+  public void deleteDepartment(Long collegeStructureId) {
+    this.departmentRepository.deleteById(collegeStructureId);
+  }
 }

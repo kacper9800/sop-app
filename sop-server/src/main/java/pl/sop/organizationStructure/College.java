@@ -30,18 +30,20 @@ public class College extends BasicEntity implements Serializable {
   @Column(name = "name", nullable = false)
   private String name;
 
-  @JsonIgnore
 //  @ManyToMany(fetch = FetchType.LAZY)
 //  @JoinTable(name = "user_colleges",
 //      joinColumns = @JoinColumn(name = "college_id"),
 //      inverseJoinColumns = @JoinColumn(name = "user_id"))
+  @JsonIgnore
   @OneToMany(mappedBy = "college", orphanRemoval = true)
   private List<User> users;
 
+  @JsonIgnore
   @OneToMany(mappedBy = "college", orphanRemoval = true)
   private List<Token> tokens;
 
-  @OneToMany(mappedBy = "college", cascade = CascadeType.ALL, orphanRemoval = true)
+  @JsonIgnore
+  @OneToMany(mappedBy = "college", cascade = CascadeType.MERGE, orphanRemoval = true)
   private List<Faculty> faculties;
 
   @Override

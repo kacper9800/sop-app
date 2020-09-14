@@ -32,10 +32,8 @@ public interface CollegeRepository extends JpaRepository<College, Long> {
       + " and college.deleted = false")
   College findActiveCollegeById(@Param("college_id") Long collegeId);
 
-  @Query(value = "select college from College college"
+  @Query(value = "select distinct college from College college"
       + " left join fetch college.faculties faculties"
-      + " left join fetch faculties.institutes institutes"
-      + " left join fetch institutes.departments"
       + " where college.id = :college_id"
       + " and college.active = true"
       + " and college.deleted = false")

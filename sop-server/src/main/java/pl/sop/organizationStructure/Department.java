@@ -1,5 +1,6 @@
 package pl.sop.organizationStructure;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.util.Set;
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
@@ -23,12 +24,15 @@ public class Department extends BasicEntity implements Serializable {
     @Column(name = "name", nullable = false)
     private String name;
 
+    @JsonIgnore
     @ManyToMany(fetch = FetchType.LAZY)
     private Set<User> users;
 
+    @JsonIgnore
     @OneToMany(mappedBy="department")
     private Set<Token> tokens;
 
+    @JsonIgnore
     @ManyToOne(fetch = FetchType.EAGER)
     private Institute institute;
 

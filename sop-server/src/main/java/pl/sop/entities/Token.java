@@ -30,18 +30,22 @@ public class Token extends BasicEntity {
   @Column(name = "expiration_date")
   private LocalDateTime expirationDate;
 
+  @JsonIgnore
   @ManyToOne(fetch = FetchType.LAZY)
   @JoinColumn(name = "college_id",insertable = false, nullable = false, updatable = false)
   private College college;
 
+  @JsonIgnore
   @ManyToOne(fetch = FetchType.LAZY)
   @JoinColumn(name = "faculty_id", nullable = false)
   private Faculty faculty;
 
+  @JsonIgnore
   @ManyToOne(fetch = FetchType.LAZY)
   @JoinColumn(name = "institute_id", nullable = false)
   private Institute institute;
 
+  @JsonIgnore
   @ManyToOne(fetch = FetchType.LAZY)
   @JoinColumn(name = "department_id", nullable = false)
   private Department department;

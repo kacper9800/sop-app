@@ -11,6 +11,7 @@ import pl.sop.converters.ToDTO.CollegeToCollegeStructureDTOConverter;
 import pl.sop.dto.CollegeRegistrationDTO;
 import pl.sop.dto.CollegeStructureDTO;
 import pl.sop.dto.CollegeStructureToSaveDTO;
+import pl.sop.enums.ECollegeStructure;
 import pl.sop.enums.ERole;
 import pl.sop.payload.request.SignUpRequest;
 import pl.sop.payload.response.MessageResponse;
@@ -85,13 +86,14 @@ public class CollegeService {
   }
 
   public CollegeStructureDTO findAllCollegeStructures(Long collegeId) {
-    College college = this.collegeRepository.findCollegeById(collegeId);
+    College college = this.collegeRepository.findActiveCollegeStructureById(collegeId);
     return collegeToCollegeStructureDTOConverter.convert(college);
   }
 
   public ResponseEntity<CollegeStructureToSaveDTO> createNewCollegeStructure(
       CollegeStructureToSaveDTO collegeStructureToSaveDTO) {
-    College college = this.collegeRepository.findActiveCollegeStructureById(collegeStructureToSaveDTO.getCollegeId());
+    College college = this.collegeRepository
+        .findActiveCollegeStructureById(collegeStructureToSaveDTO.getCollegeId());
     switch (collegeStructureToSaveDTO.getLevel()) {
       case 1:
         return new ResponseEntity(this.facultyService.createNewFaculty(collegeStructureToSaveDTO),
@@ -104,5 +106,19 @@ public class CollegeService {
             this.departmentService.createNewDepartment(collegeStructureToSaveDTO), HttpStatus.OK);
     }
     return null;
+  }
+
+  public void deleteCollegeStructure(Long collegeStructureId, String collegeStructure) {
+    switch (collegeStructure) {
+      case "FACULTY":
+        facultyService.deleteFaculty(collegeStructureId);
+        break;
+      case "INSTITUTE":
+        instituteService.deleteInstitute(collegeStructureId);
+        break;
+      case "DEPARTMENT":
+        departmentService.deleteDepartment(collegeStructureId);
+        break;
+    }
   }
 }
