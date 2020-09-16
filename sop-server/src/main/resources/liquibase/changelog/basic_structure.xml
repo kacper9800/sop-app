@@ -526,4 +526,10 @@
       referencedTableName="colleges"
       referencedColumnNames="id"/>
   </changeSet>
+  <changeSet id="22" author="krzymkiewicz">
+    <addPrimaryKey tableName="user_colleges" columnNames="user_id, college_id"></addPrimaryKey>
+    <addPrimaryKey tableName="user_faculties" columnNames="user_id, faculty_id"></addPrimaryKey>
+    <addPrimaryKey tableName="user_institutes" columnNames="user_id, institute_id"></addPrimaryKey>
+    <addPrimaryKey tableName="user_departments" columnNames="user_id, department_id"></addPrimaryKey>
+  </changeSet>
 </databaseChangeLog>

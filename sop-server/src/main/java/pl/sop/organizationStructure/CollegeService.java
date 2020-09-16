@@ -11,7 +11,6 @@ import pl.sop.converters.ToDTO.CollegeToCollegeStructureDTOConverter;
 import pl.sop.dto.CollegeRegistrationDTO;
 import pl.sop.dto.CollegeStructureDTO;
 import pl.sop.dto.CollegeStructureToSaveDTO;
-import pl.sop.enums.ECollegeStructure;
 import pl.sop.enums.ERole;
 import pl.sop.payload.request.SignUpRequest;
 import pl.sop.payload.response.MessageResponse;
@@ -90,7 +89,7 @@ public class CollegeService {
     return collegeToCollegeStructureDTOConverter.convert(college);
   }
 
-  public ResponseEntity<CollegeStructureToSaveDTO> createNewCollegeStructure(
+  public ResponseEntity createNewCollegeStructure(
       CollegeStructureToSaveDTO collegeStructureToSaveDTO) {
     College college = this.collegeRepository
         .findActiveCollegeStructureById(collegeStructureToSaveDTO.getCollegeId());
