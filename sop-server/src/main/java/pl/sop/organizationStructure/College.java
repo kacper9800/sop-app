@@ -30,12 +30,11 @@ public class College extends BasicEntity implements Serializable {
   @Column(name = "name", nullable = false)
   private String name;
 
-//  @ManyToMany(fetch = FetchType.LAZY)
-//  @JoinTable(name = "user_colleges",
-//      joinColumns = @JoinColumn(name = "college_id"),
-//      inverseJoinColumns = @JoinColumn(name = "user_id"))
   @JsonIgnore
-  @OneToMany(mappedBy = "college", orphanRemoval = true)
+  @ManyToMany(fetch = FetchType.LAZY)
+  @JoinTable(name = "user_colleges",
+      joinColumns = @JoinColumn(name = "college_id"),
+      inverseJoinColumns = @JoinColumn(name = "user_id"))
   private List<User> users;
 
   @JsonIgnore

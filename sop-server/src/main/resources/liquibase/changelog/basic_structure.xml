@@ -532,4 +532,53 @@
     <addPrimaryKey tableName="user_institutes" columnNames="user_id, institute_id"></addPrimaryKey>
     <addPrimaryKey tableName="user_departments" columnNames="user_id, department_id"></addPrimaryKey>
   </changeSet>
+  <changeSet id="23" author="krzymkiewicz">
+    <createTable tableName="companies">
+      <column name="id" type="BIGINT" autoIncrement="true">
+        <constraints primaryKey="true" nullable="false"></constraints>
+      </column>
+      <column name="create_date" type="TIMESTAMP WITHOUT TIME ZONE"></column>
+      <column name="create_by" type="VARCHAR(255)"></column>
+      <column name="edit_date" type="TIMESTAMP WITHOUT TIME ZONE"></column>
+      <column name="edit_by" type="VARCHAR(255)"></column>
+      <column name="name" type="VARCHAR(255)"></column>
+      <column name="nip" type="VARCHAR(13)"></column>
+      <column name="nipPartnership" type="VARCHAR(13)"></column>
+      <column name="regon" type="VARCHAR(14)"></column>
+      <column name="regonPartnership" type="VARCHAR(14)"></column>
+      <column name="address_id" type="bigint"></column>
+    </createTable>
+    <createTable tableName="addresses">
+      <column name="id" type="BIGINT" autoIncrement="true">
+        <constraints primaryKey="true" nullable="false"></constraints>
+      </column>
+      <column name="create_date" type="TIMESTAMP WITHOUT TIME ZONE"></column>
+      <column name="create_by" type="VARCHAR(255)"></column>
+      <column name="edit_date" type="TIMESTAMP WITHOUT TIME ZONE"></column>
+      <column name="edit_by" type="VARCHAR(255)"></column>
+      <column name="city" type="VARCHAR(255)"></column>
+      <column name="street" type="VARCHAR(255)"></column>
+      <column name="number" type="VARCHAR(10)"></column>
+      <column name="postCode" type="VARCHAR(6)"></column>
+    </createTable>
+    <addForeignKeyConstraint
+      baseColumnNames="address_id"
+      baseTableName="companies"
+      constraintName="fk_address_id"
+      referencedColumnNames="id"
+      referencedTableName="addresses"/>
+  </changeSet>
+  <changeSet id="24" author="krzymkiewicz">
+    <addColumn tableName="users">
+      <column name="company_id" type="bigint"></column>
+    </addColumn>
+    <addForeignKeyConstraint baseColumnNames="company_id"
+      baseTableName="users"
+      constraintName="fk_company_id"
+      referencedColumnNames="id"
+      referencedTableName="companies"/>
+  </changeSet>
+  <changeSet id="25" author="krzymkiewicz">
+    <renameColumn tableName="users" oldColumnName="college_id" newColumnName="selected_college_id"></renameColumn>
+  </changeSet>
 </databaseChangeLog>

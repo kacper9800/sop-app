@@ -1,5 +1,6 @@
 package pl.sop.services;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashSet;
@@ -122,7 +123,9 @@ public class UserService {
     user.setRoles(roles);
     user.setActive(Boolean.TRUE);
     College college = collegeRepository.findCollegeById(signUpRequest.getCollegeId());
-    user.setCollege(college);
+    List<College> colleges = new ArrayList<>();
+    colleges.add(college);
+    user.setColleges(colleges);
     Token token = activationKeyService.getTokenByValue(signUpRequest.getToken());
     prepareUserDataFromToken(user, token);
     token.setRemainingUses(token.getRemainingUses() -1);

@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -71,13 +72,20 @@ public class User extends BasicEntity implements Serializable {
       inverseJoinColumns = @JoinColumn(name = "role_id"))
   private Set<Role> roles = new HashSet<>();
 
-  //    @ManyToMany(fetch = FetchType.LAZY)
-//    @JoinTable(name = "user_colleges",
-//        joinColumns = @JoinColumn(name = "user_id"),
-//        inverseJoinColumns = @JoinColumn(name = "college_id"))
+  //  @ManyToOne(fetch = FetchType.EAGER)
   @JsonIgnore
-  @ManyToOne(fetch = FetchType.EAGER)
-  private College college;
+  @ManyToMany(fetch = FetchType.LAZY)
+  @JoinTable(name = "user_colleges",
+        joinColumns = @JoinColumn(name = "user_id"),
+        inverseJoinColumns = @JoinColumn(name = "college_id"))
+  private List<College> colleges;
+
+  @JsonIgnore
+  @ManyToMany(fetch = FetchType.LAZY)
+  @JoinTable(name = "user_companies",
+      joinColumns = @JoinColumn(name = "user_id"),
+      inverseJoinColumns = @JoinColumn(name = "company_id"))
+  private List<Company> companies;
 
   @JsonIgnore
   @ManyToMany(fetch = FetchType.LAZY)
@@ -100,14 +108,17 @@ public class User extends BasicEntity implements Serializable {
       inverseJoinColumns = @JoinColumn(name = "department_id"))
   private Set<Department> departments = new HashSet<>();
 
+  @Column(name = "selected_college_id")
+  private Long selectedCollegeId;
+
   public User(@NotBlank @Size(max = 20) String username,
       @NotBlank @Size(max = 50) @Email String email,
       @NotBlank @Size(max = 120) String password,
-      @NotBlank College college) {
+      @NotBlank List<College> colleges) {
     this.username = username;
     this.email = email;
     this.password = password;
-    this.college = college;
+    this.colleges = colleges;
   }
 
   public User(@NotBlank @Size(max = 20) String username, @NotBlank @Size(max = 120) String password,
@@ -223,18 +234,17 @@ public class User extends BasicEntity implements Serializable {
     this.roles = roles;
   }
 
-  public College getCollege() {
-    return college;
-  }
+  public List<College> getColleges() { return colleges; }
 
-  public void setCollege(College colleges) {
-    this.college = colleges;
-  }
+  public void setColleges(List<College> colleges) { this.colleges = colleges; }
 
-//  public void addCollege(College college) {
-//    this.college(ollege);
-//    college.getUsers().add(this);
-//  }
+  public List<Company> getCompanies() { return companies; }
+
+  public void setCompanies(List<Company> companies) { this.companies = companies; }
+
+  public void addCollege(College college) {
+    this.colleges.add(college);
+  }
 
   public Set<Faculty> getFaculties() {
     return faculties;
@@ -274,5 +284,13 @@ public class User extends BasicEntity implements Serializable {
   public void addDepartment(Department department) {
     this.departments.add(department);
     department.getUsers().add(this);
+  }
+
+  public Long getSelectedCollegeId() {
+    return selectedCollegeId;
+  }
+
+  public void setSelectedCollegeId(Long selectedCollegeId) {
+    this.selectedCollegeId = selectedCollegeId;
   }
 }

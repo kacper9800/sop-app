@@ -28,16 +28,18 @@ public class UserDetailsImpl implements UserDetails {
   private String password;
 
   private Collection<? extends GrantedAuthority> authorities;
-  private College college;
+  private List<College> colleges;
+  private Long selectedCollegeId;
 
   public UserDetailsImpl(Long id, String username, String email, String password,
-      Collection<? extends GrantedAuthority> authorities, College college) {
+      Collection<? extends GrantedAuthority> authorities, List<College> colleges, Long selectedCollegeId) {
     this.id = id;
     this.username = username;
     this.email = email;
     this.password = password;
     this.authorities = authorities;
-    this.college = college;
+    this.colleges = colleges;
+    this.selectedCollegeId =  selectedCollegeId;
   }
 
   public static UserDetailsImpl build(User user) {
@@ -45,17 +47,17 @@ public class UserDetailsImpl implements UserDetails {
         .map(role -> new SimpleGrantedAuthority(role.getName().name()))
         .collect(Collectors.toList());
     return new UserDetailsImpl(user.getId(), user.getUsername(), user.getEmail(),
-        user.getPassword(), authorities, user.getCollege());
+        user.getPassword(), authorities, user.getColleges(), user.getSelectedCollegeId());
   }
 
   public Collection<? extends GrantedAuthority> getAuthorities() {
     return authorities;
   }
 
-  public College getCollege() { return college; }
+  public List<College> getColleges() { return colleges; }
 
-  public void setCollege(College college) {
-    this.college = college;
+  public void setColleges(List<College> college) {
+    this.colleges = college;
   }
 
   public Long getId() {
@@ -64,6 +66,14 @@ public class UserDetailsImpl implements UserDetails {
 
   public String getEmail() {
     return email;
+  }
+
+  public Long getSelectedCollegeId() {
+    return selectedCollegeId;
+  }
+
+  public void setSelectedCollegeId(Long selectedCollegeId) {
+    this.selectedCollegeId = selectedCollegeId;
   }
 
   @Override

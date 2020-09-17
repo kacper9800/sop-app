@@ -51,14 +51,14 @@ public class CollegeController {
   }
 
   @GetMapping(value = "/api/college-structure")
+  @PreAuthorize("hasRole('ROLE_ADMIN')")
   public ResponseEntity<CollegeStructureDTO> getCollegeStructure(Authentication authentication) {
     UserDetailsImpl user = (UserDetailsImpl) authentication.getPrincipal();
-    College college = user.getCollege();
-    if (college == null) {
+    if (user.getSelectedCollegeId() == null) {
       return new ResponseEntity("College not found!", HttpStatus.CONFLICT);
     }
     CollegeStructureDTO collegeStructureDTO = collegeService
-        .findAllCollegeStructures(college.getId());
+        .findAllCollegeStructures(user.getSelectedCollegeId());
     return new ResponseEntity<>(collegeStructureDTO, HttpStatus.OK);
   }
 

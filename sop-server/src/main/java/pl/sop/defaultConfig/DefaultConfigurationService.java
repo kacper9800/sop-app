@@ -2,6 +2,7 @@ package pl.sop.defaultConfig;
 
 import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 import javax.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -60,7 +61,11 @@ public class DefaultConfigurationService {
       user.setRoles(roles);
     }
 
-    user.setCollege(defaultCollege);
+    List<College> colleges = new ArrayList<>();
+
+    colleges.add(defaultCollege);
+    user.setColleges(colleges);
+    user.setSelectedCollegeId(defaultCollege.getId());
     userRepository.save(user);
   }
 

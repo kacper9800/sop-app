@@ -25,7 +25,6 @@ public class ActivationKeyService {
     List<TokenDTO> tokenDTOS = tokens.stream().map(additionalTestResult ->
         activationKeyToDTOConverter.convert(additionalTestResult)).collect(Collectors.toList());
     return new ResponseEntity(tokenDTOS, HttpStatus.OK);
-
   }
 
   public Token getTokenByValue(String tokenValue) {

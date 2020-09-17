@@ -20,7 +20,13 @@ public interface UserRepository extends JpaRepository<User, Long> {
     @Query(value = "SELECT u FROM User  u WHERE u.id = :id")
     User findUserById(@Param("id") Long id);
 
-    @Query(value = "select u from User u left join fetch u.college c where u.username = :username and u.active = true")
+    @Query(value = "select u from User u "
+        + " left join fetch u.colleges colleges"
+        + " left join fetch u.faculties faculties"
+        + " left join fetch u.institutes institutes "
+        + " left join fetch u.departments departments "
+//        + " left join fetch u.companies companies "
+        + " where u.username = :username and u.active = true")
     Optional<User> findByUsername(String username);
 
     Boolean existsByUsername(String username);

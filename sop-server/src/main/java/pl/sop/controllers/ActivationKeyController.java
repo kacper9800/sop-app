@@ -29,7 +29,7 @@ public class ActivationKeyController {
   @RequestMapping(value = "/api/activationKeys", method = RequestMethod.GET)
   public ResponseEntity<List<TokenDTO>> getAllActivationKeys(Authentication authentication) {
     UserDetailsImpl loggedUser = (UserDetailsImpl) authentication.getPrincipal();
-    College college = loggedUser.getCollege();
+    College college = loggedUser.getColleges().stream().filter(col  -> col.getId().equals(loggedUser.getSelectedCollegeId())).findFirst().get();
     if (college == null) {
       return new ResponseEntity<>(HttpStatus.NOT_ACCEPTABLE);
     }
