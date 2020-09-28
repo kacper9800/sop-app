@@ -1,3 +1,5 @@
+import {College} from '../_model/organization-structure/college.model';
+
 export interface IUser {
   id?: number;
   username?: string;
@@ -8,6 +10,9 @@ export interface IUser {
   phone?: string;
   birthDate?: Date;
   role?: any[];
+  colleges: College[];
+  selectedCollege: number;
+
 }
 
 export class User {
@@ -20,6 +25,8 @@ export class User {
   phone?: string;
   birthDate?: Date;
   role?: any[];
+  colleges: College[];
+  selectedCollege: number;
 
   static fromJson(json: IUser): User {
     const user: User = new User();

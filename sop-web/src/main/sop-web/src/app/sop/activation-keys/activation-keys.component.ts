@@ -19,15 +19,12 @@ import {TranslateService} from '@ngx-translate/core';
   styleUrls: ['./activation-keys.component.css']
 })
 export class ActivationKeysComponent implements OnInit {
-  public opened = false;
   public activationKeys: ActivationKey[] = [];
-  public selectedActivationKeys = [];
-
   public columns: any[];
+  public selectedActivationKeys = [];
 
   @ViewChild('addEditDialog', {read: ViewContainerRef, static: true})
   public addEditDialog: ViewContainerRef;
-
   private componentRef: any;
 
   constructor(private resolver: ComponentFactoryResolver,
@@ -145,9 +142,9 @@ export class ActivationKeysComponent implements OnInit {
     const factory = this.resolver.resolveComponentFactory(AddEditDialogActivationKeysComponent);
     this.componentRef = this.addEditDialog.createComponent(factory);
     this.componentRef.instance.showNewActivationKeyDialog();
-    this.componentRef.instance.closeDialogWithSaveEmitter.subscribe(() => {
-      this.loadActivationKeys();
-    });
+    this.componentRef.instance.closeDialogWithSaveEmitter.subscribe(() =>
+      this.loadActivationKeys()
+    );
   }
 
   public showEditDialog(value: string): void {

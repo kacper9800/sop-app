@@ -29,10 +29,31 @@
         <clr-icon shape="user"></clr-icon>
         <span class="nav-text">{{user.username}}</span>
       </a>
+
+      <clr-dropdown *ngIf="user.colleges && user.colleges.length > 1">
+        <button clrDropdownTrigger aria-label="toggle settings menu">
+          <clr-icon style="width: 1.1rem; height: 1.1rem; outline-color: #247bae"
+                    shape="building"></clr-icon>
+        </button>
+        <clr-dropdown-menu *clrIfOpen clrPosition="bottom-right">
+          <a (click)="onCollegeChange(college.id)" *ngFor="let college of user.colleges"
+             clrDropdownItem>
+            <div *ngIf="college.id === user.selectedCollege">
+              <clr-icon shape="check"></clr-icon>
+              <clr-icon shape="building"></clr-icon>
+              <b> {{college.name}}</b>
+            </div>
+            <div *ngIf="college.id !== user.selectedCollege">
+              <clr-icon shape="building"></clr-icon>
+              {{college.name}}
+            </div>
+          </a>
+        </clr-dropdown-menu>
+      </clr-dropdown>
+
       <clr-dropdown>
-        <button class="nav-icon" clrDropdownTrigger aria-label="settings menu">
-          <clr-icon shape="cog"></clr-icon>
-          <!--          <clr-icon shape="caret down"></clr-icon>-->
+        <button clrDropdownTrigger aria-label="toggle settings menu">
+          <clr-icon style="width: 1.1rem; height: 1.1rem;" shape="cog"></clr-icon>
         </button>
         <clr-dropdown-menu *clrIfOpen clrPosition="bottom-right">
           <a (click)="aboutDialog = true" clrDropdownItem>
@@ -66,4 +87,19 @@
   </div>
 </clr-modal>
 
+<clr-modal [(clrModalOpen)]="changeCollegeDialog" [clrModalClosable]="false">
+  <h3 class="modal-title">{{'collegeStructure.changeCollege' | translate}}</h3>
+  <div class="modal-body">
+    <p>{{'collegeStructure.changeCollegeQuestion' | translate}}</p>
+  </div>
+  <div class="modal-footer">
+    <button class="btn btn-outline" (click)="changeCollegeDialog = false"
+            type="button">{{'common.confirm.cancel' | translate}}</button>
+    <button class="btn btn-primary" (click)="changeCollege()"
+            type="button">{{'common.confirm.confirm' | translate}}</button>
+  </div>
+</clr-modal>
+
 <ng-template #loginForm></ng-template>
+<p-toast [baseZIndex]="10000" autoZIndex="true"></p-toast>
+

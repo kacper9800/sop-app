@@ -6,6 +6,7 @@ import {MessageService} from 'primeng';
 import {DropdownItem} from '../../_model/dropdown-item.model';
 import {CollegeService} from '../../_services/organization-structure/college.service';
 import {ICollege} from '../../_model/organization-structure/college.model';
+import {HttpResponse} from "@angular/common/http";
 
 @Component({
   selector: 'app-college-registration',
@@ -51,7 +52,7 @@ export class CollegeRegistrationComponent implements OnInit {
 
   private loadAvailableColleges(): void {
     this.collegeService.getAllAvailableColleges().subscribe(
-      (res: ICollege[]) => this.onSuccessLoadAvailableColleges(res),
+      (res: HttpResponse<ICollege[]>) => this.onSuccessLoadAvailableColleges(res.body),
       () => this.onErrorLoadAvailableColleges()
     );
   }

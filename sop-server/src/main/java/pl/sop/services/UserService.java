@@ -7,6 +7,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -158,5 +159,11 @@ public class UserService {
           .body(new MessageResponse("Error: Access token is wrong!"));
     }
     return null;
+  }
+
+  public ResponseEntity changeCollege(Long userId, Long selectedCollegeId) {
+    User user = userRepository.findUserById(userId);
+    user.setSelectedCollegeId(selectedCollegeId);
+    return ResponseEntity.ok(userRepository.save(user));
   }
 }

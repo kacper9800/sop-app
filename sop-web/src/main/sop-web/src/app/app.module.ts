@@ -24,7 +24,7 @@ import {
   ClrPasswordModule,
   ClrSelectModule
 } from '@clr/angular';
-import { CollegeComponent } from './sop/college/college.component';
+import { CollegesComponent } from './sop/colleges/colleges.component';
 import { CompaniesComponent } from './sop/companies/companies.component';
 import { ConfirmDeleteDialogComponent } from './common/confirm-delete-dialog/confirm-delete-dialog.component';
 import { FooterComponent } from './layout/footer/footer.component';
@@ -75,6 +75,8 @@ import { CollegeRegistrationComponent } from './authentication/college-registrat
 import { RegistrationConfirmationComponent } from './authentication/registration-confirmation/registration-confirmation.component';
 import {AddEditDialogActivationKeysComponent} from './sop/activation-keys/add-edit-dialog-activation-keys/add-edit-dialog-activation-keys.component';
 import { AddEditDialogCollegeStructureComponent } from './sop/college-structure/add-edit-dialog-college-structure/add-edit-dialog-college-structure.component';
+import {AddEditDialogCompaniesComponent} from './sop/companies/add-edit-dialog-companies/add-edit-dialog-companies.component';
+import { AddEditDialogCollegesComponent } from './sop/colleges/add-edit-dialog-colleges/add-edit-dialog-colleges.component';
 
 @NgModule({
   declarations: [
@@ -92,7 +94,7 @@ import { AddEditDialogCollegeStructureComponent } from './sop/college-structure/
     RegistrationComponent,
     ActivationKeysComponent,
     LogbookComponent,
-    CollegeComponent,
+    CollegesComponent,
     AddEditDialogActivationKeysComponent,
     SettingsComponent,
     UsersComponent,
@@ -116,6 +118,8 @@ import { AddEditDialogCollegeStructureComponent } from './sop/college-structure/
     CollegeRegistrationComponent,
     RegistrationConfirmationComponent,
     AddEditDialogCollegeStructureComponent,
+    AddEditDialogCompaniesComponent,
+    AddEditDialogCollegesComponent,
   ],
   imports: [
     BrowserModule,

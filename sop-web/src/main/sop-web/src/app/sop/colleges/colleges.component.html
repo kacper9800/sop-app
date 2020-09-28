@@ -1,13 +1,13 @@
-<h1 style="text-align: center">Klucze aktywacyjne dla użytkowników</h1>
-<h4 style="text-align: center">Aby dodać nowych użytkowników utwórz klucz aktywacyjny</h4>
+<h1 style="text-align: center">{{'colleges.header' | translate}}</h1>
+<h4 style="text-align: center">{{'colleges.secondHeader' | translate}}</h4>
 
-<clr-datagrid [(clrDgSelected)]="selectedActivationKeys" [clrDgRowSelection]="true" style="height: 50%;">
+<clr-datagrid [(clrDgSelected)]="selectedColleges" [clrDgRowSelection]="true" style="height: 50%;">
   <clr-dg-action-bar>
     <div class="btn-group">
       <button type="button" class="btn btn-sm btn-primary"
               (click)="showAddNewDialog()">
         <clr-icon shape="plus"></clr-icon>
-        {{'activationKeys.CRUD.addActivityKey' | translate}}
+        {{'colleges.CRUD.addCollege' | translate}}
       </button>
       <clr-dropdown>
         <button type="button" class="btn btn-sm btn-secondary" clrDropdownTrigger>
@@ -17,39 +17,24 @@
           <button type="button" (click)="onExportAll()" clrDropdownItem>
             {{'common.export.all' | translate}}</button>
           <button type="button" (click)="onExportSelected()"
-                  [disabled]="selectedActivationKeys.length === 0" clrDropdownItem>
+                  [disabled]="selectedColleges.length === 0" clrDropdownItem>
             {{'common.export.selected' | translate}}</button>
         </clr-dropdown-menu>
       </clr-dropdown>
     </div>
   </clr-dg-action-bar>
   <clr-dg-column *ngFor="let col of columns">
-    {{'activationKeys.tableColumns.' + col.fieldName | translate}}
+    {{col.label | translate}}
   </clr-dg-column>
 
-  <clr-dg-row *ngFor="let key of activationKeys" [clrDgItem]="key">
-    <clr-dg-cell>{{key.value}}</clr-dg-cell>
-    <clr-dg-cell>{{key.expirationDate | date}}</clr-dg-cell>
-    <clr-dg-cell>{{key.remainingUses}}</clr-dg-cell>
-    <clr-dg-cell>{{key.createdByName}}</clr-dg-cell>
-    <clr-dg-cell>{{key.facultyName}}</clr-dg-cell>
-    <clr-dg-cell>{{key.instituteName}}</clr-dg-cell>
-    <clr-dg-cell>{{key.departmentName}}</clr-dg-cell>
-    <clr-dg-cell>
-      <div *ngIf="key.active">
-        <clr-icon shape="check"></clr-icon>
-      </div>
-      <div *ngIf="!key.active">
-        <clr-icon shape="times"></clr-icon>
-      </div>
-    </clr-dg-cell>
+  <clr-dg-row *ngFor="let college of colleges" [clrDgItem]="college">
+    <clr-dg-cell>{{college.id}}</clr-dg-cell>
+    <clr-dg-cell>{{college.name}}</clr-dg-cell>
+    <clr-dg-cell>{{college.active}}</clr-dg-cell>
+    <clr-dg-cell>{{college.removed}}</clr-dg-cell>
     <clr-dg-cell>
       <div class="btn-group">
-        <button type="button" class="btn btn-sm btn-secondary" (click)="copyKeyValue(key.value)">
-          <clr-icon shape="copy-to-clipboard"></clr-icon>
-          {{'common.copyToClipboard' | translate }}
-        </button>
-        <button type="button" class="btn btn-sm btn-secondary" (click)="showEditDialog(key.value)">
+        <button type="button" class="btn btn-sm btn-secondary" (click)="showEditDialog(college.id)">
           <clr-icon shape="pencil"></clr-icon>
           {{'common.crud.edit' | translate }}
         </button>
@@ -61,13 +46,13 @@
     </clr-dg-cell>
   </clr-dg-row>
 
-  <clr-dg-placeholder>{{'activationKeys.notFound' | translate}}</clr-dg-placeholder>
+  <clr-dg-placeholder>{{'colleges.notFound' | translate}}</clr-dg-placeholder>
   <clr-dg-footer>
     <clr-dg-pagination #pagination [clrDgPageSize]="10">
       <clr-dg-page-size
-        [clrPageSizeOptions]="[10,20,50,100]">{{'activationKeys.keysPerPage' | translate}}</clr-dg-page-size>
+        [clrPageSizeOptions]="[10,20,50,100]">{{'colleges.collegePerPage' | translate}}</clr-dg-page-size>
       {{pagination.firstItem + 1}} - {{pagination.lastItem
-    + 1}} {{'common.of' | translate}} {{pagination.totalItems}} {{'activationKeys.keys' | translate}}
+    + 1}} {{'common.of' | translate}} {{pagination.totalItems}} {{'colleges.colleges' | translate}}
     </clr-dg-pagination>
   </clr-dg-footer>
 </clr-datagrid>

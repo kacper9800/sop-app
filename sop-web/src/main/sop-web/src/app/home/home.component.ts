@@ -10,8 +10,7 @@ import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {AuthService} from '../_services/auth/auth.service';
 import {TokenStorageService} from '../_services/auth/token-storage.service';
 import {User} from '../security/user';
-import {LoginComponent} from '../authentication/login/login.component';
-import {CollegeRegistrationComponent} from "../authentication/college-registration/college-registration.component";
+import {CollegeRegistrationComponent} from '../authentication/college-registration/college-registration.component';
 
 @Component({
   selector: 'app-home',

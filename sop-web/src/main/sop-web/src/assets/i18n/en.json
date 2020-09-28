@@ -17,7 +17,11 @@
       "next": "Next",
       "back": "Back",
       "create": "Create"
-
+    },
+    "export": {
+      "button": "Export",
+      "all": "Export all",
+      "selected": "Export selected"
     },
     "id": "Identify",
     "name": "Name",
@@ -27,25 +31,26 @@
     "stopDate": "Stop date",
     "stopHour": "Stop hour",
     "duration": "Duration",
-    "durationPlaceholder":"Choose duration",
+    "durationPlaceholder": "Choose duration",
     "location": "Location",
     "locationPlaceholder": "Choose location",
     "hostBy": "Host by",
     "hostByPlaceholder": "Choose instructor",
     "actions": "Actions",
     "active": "Active",
+    "removed": "Removed",
     "instructor": "Instructor",
     "firstName": "First name",
     "lastName": "Last name",
+    "college": "College",
     "collegeName": "College name",
+    "faculty": "Faculty",
     "facultyName": "Faculty name",
+    "institute": "Institute",
     "instituteName": "Institute name",
+    "department": "Department ",
     "departmentName": "Department name",
     "of": "of",
-    "college": "College",
-    "faculty": "Faculty",
-    "institute": "Institute",
-    "department": "Department",
     "copyToClipboard": "Copy key"
   },
   "header": {
@@ -68,6 +73,7 @@
     },
     "surveys": "Surveys",
     "colleges": "Colleges",
+    "companies": "Companies",
     "users": "Users",
     "fieldsOfStudy": "Fields of study",
     "practiceManagers": "Practice managers",
@@ -129,15 +135,6 @@
     "allDay": "All day",
     "repeat": "Repeat"
   },
-  "users": {
-    "id": "Identify",
-    "name": "Name",
-    "lastName": "Last name",
-    "college": "College",
-    "faculty": "Faculty",
-    "institute": "Institute",
-    "department": "Department"
-  },
   "events": {
     "hostBy": "Host by",
     "location": "Location"
@@ -154,8 +151,19 @@
     "capacity": "Capacity",
     "description": "Description"
   },
+  "toast": {
+    "success": "Success",
+    "error": "Error",
+    "defaultSuccessDetailAdd": "Data was successfully saved",
+    "defaultSuccessDetailEdit": "Changes were successfully saved",
+    "defaultSuccessDetailDelete": "Data was successfully deleted",
+    "defaultErrorDetailAdd": "Error during data saving",
+    "defaultErrorDetailEdit": "Error during data updating ",
+    "defaultErrorDetailDelete": "Error during data deleting",
+    "defaultErrorDetailLoad": "Error during data loading"
+  },
   "activationKeys": {
-    "keys":"Keys",
+    "keys": "Keys",
     "keysPerPage": "Keys per page",
     "pageHeader": "Activation keys for users",
     "tableColumns": {
@@ -169,22 +177,14 @@
       "department": "Department",
       "actions": "Actions"
     },
-    "CRUD": {
-      "addActivityKey": "Dodaj nowy klucz aktywacyjny"
+    "dialog": {
+      "titleNew": "Generating new activation key",
+      "titleEdit": "Editing activation key"
     },
-    "notFound": "Nie znaleziono żadnych kluczy aktywacyjnych!"
-
-  },
-  "toast": {
-    "success": "Success",
-    "error": "Error",
-    "defaultSuccessDetailAdd": "Data was successfully saved",
-    "defaultSuccessDetailEdit": "Changes were successfully saved",
-    "defaultSuccessDetailDelete": "Data was successfully deleted",
-    "defaultErrorDetailAdd": "Error during data saving",
-    "defaultErrorDetailEdit": "Error during data updating ",
-    "defaultErrorDetailDelete": "Error during data deleting",
-    "defaultErrorDetailLoad": "Error during data loading"
+    "CRUD": {
+      "addActivityKey": "Add new activation key"
+    },
+    "notFound": "Not found any activation keys!"
   },
   "collegeStructure": {
     "header": "College structure",
@@ -197,6 +197,56 @@
       "chooseFaculty": "Choose faculty",
       "chooseInstitute": "Choose institute",
       "chooseDepartment": "Choose department"
+    },
+    "changeCollege": "Changing college",
+    "changeCollegeQuestion": "Are you sure you want to change college?"
+  },
+  "colleges": {
+    "header": "List of colleges",
+    "secondHeader": "Colleges registered in system",
+    "notFound": "Not found any colleges!",
+    "collegePerPage": "Colleges per page",
+    "colleges": "colleges",
+    "dialog": {
+      "titleNew": "Adding new college",
+      "titleEdit": "Editing college"
+    },
+    "CRUD": {
+      "addCollege": "Add college"
+    },
+    "tableColumns": {
+    }
+  },
+  "companies": {
+    "header": "List of companies",
+    "secondHeader": "Companies that offer student internships",
+    "notFound": "Not found any companies!",
+    "companyPerPage": "Companies per page",
+    "companies": "companies",
+    "CRUD": {
+      "addCompany": "Add company"
+    },
+    "tableColumns": {
+    }
+  },
+  "users": {
+    "id": "Identify",
+    "name": "Name",
+    "lastName": "Last name",
+    "company": "Company",
+    "college": "College",
+    "faculty": "Faculty",
+    "institute": "Institute",
+    "department": "Department",
+    "header": "List of users",
+    "secondHeader": "Users that offer student internships",
+    "notFound": "Not found any users!",
+    "companyPerPage": "Users per page",
+    "companies": "users",
+    "CRUD": {
+      "addCollege": "Add user"
+    },
+    "tableColumns": {
     }
   }
 }

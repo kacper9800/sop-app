@@ -6,6 +6,7 @@
 package pl.sop.payload.response;
 
 import java.util.List;
+import pl.sop.dto.CollegeDTO;
 
 public class JwtResponse {
     private String token;
@@ -14,15 +15,18 @@ public class JwtResponse {
     private String username;
     private String email;
     private List<String> roles;
-    private List<Long> colleges;
+    private List<CollegeDTO> colleges;
+    private Long selectedCollege;
 
-    public JwtResponse(String token, Long id, String username, String email, List<String> roles, List<Long> colleges) {
+    public JwtResponse(String token, Long id, String username, String email, List<String> roles, List<CollegeDTO> colleges,
+        Long selectedCollege) {
         this.token = token;
         this.id = id;
         this.username = username;
         this.email = email;
         this.roles = roles;
         this.colleges = colleges;
+        this.selectedCollege = selectedCollege;
     }
 
     public String getAccessToken() {
@@ -73,7 +77,12 @@ public class JwtResponse {
         this.roles = roles;
     }
 
-    public List<Long> getColleges() { return colleges; }
+    public List<CollegeDTO> getColleges() { return colleges; }
 
-    public void setColleges(List<Long> colleges) { this.colleges = colleges; }
+    public void setColleges(List<CollegeDTO> colleges) { this.colleges = colleges; }
+
+    public Long getSelectedCollege() { return selectedCollege; }
+
+    public void setSelectedCollege(Long selectedCollege) { this.selectedCollege = selectedCollege; }
+
 }

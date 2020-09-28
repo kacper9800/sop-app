@@ -18,6 +18,11 @@
       "back": "Cofnij",
       "create": "Utwórz nowy"
     },
+    "export": {
+      "button": "Eksportuj",
+      "all": "Eksportuj całą tabelę",
+      "selected": "Eksportuj wybrane"
+    },
     "id": "Id",
     "name": "Nazwa",
     "description": "Opis",
@@ -34,19 +39,20 @@
     "hostByPlaceholder": "Wybierz prowadzącego",
     "actions": "Akcje",
     "active": "Aktywny",
+    "removed": "Usunięty",
     "instructor": "Prowadzący",
     "firstName": "Imię",
     "lastName": "Nazwisko",
+    "college": "Uczelnia",
     "collegeName": "Nazwa uczelni",
+    "faculty": "Wydział",
     "facultyName": "Nazwa wydziału",
+    "institute": "Instytut",
     "instituteName": "Nazwa instytutu",
+    "department": "Katedra",
     "departmentName": "Nazwa katedry",
     "required": "To pole jest wymagane!",
-    "export": "Exportuj tabelę",
     "of": "z",
-    "faculty": "Wydział",
-    "institute": "Instytut",
-    "department": "Katedra",
     "copyToClipboard": "Skopiuj klucz"
   },
   "header": {
@@ -69,6 +75,7 @@
     },
     "surveys": "Ankiety",
     "colleges": "Uczelnie",
+    "companies": "Firmy",
     "users": "Użytkownicy",
     "fieldsOfStudy": "Kierunki studiów",
     "practiceManagers": "Kierownicy praktyk",
@@ -129,15 +136,6 @@
     "allDay": "Cały dzień",
     "repeat": "Powtarza się"
   },
-  "users": {
-    "id": "Identyfikator",
-    "name": "Imię",
-    "lastName": "Nazwisko",
-    "college": "Uczelnia",
-    "faculty": "Wydział",
-    "institute": "Instytut",
-    "department": "Katedra"
-  },
   "events": {
     "hostBy": "Prowadzący",
     "location": "Lokalizacja"
@@ -154,6 +152,17 @@
     "room": "Pokój/Sala",
     "capacity": "Pojemność",
     "description": "Opis"
+  },
+  "toast": {
+    "success": "Sukces",
+    "error": "Błąd",
+    "defaultSuccessDetailAdd": "Dane zostały pomyślnie zapisane",
+    "defaultSuccessDetailEdit": "Zmiany zostały pomyślnie zapisane",
+    "defaultSuccessDetailDelete": "Dane został usunięte",
+    "defaultErrorDetailAdd": "Błąd zapisu danych",
+    "defaultErrorDetailEdit": "Bład zapisu zmian",
+    "defaultErrorDetailDelete": "Błąd usuwania danych",
+    "defaultErrorDetailLoad": "Błąd ładowania danych"
   },
   "activationKeys": {
     "keys": "Kluczy",
@@ -179,17 +188,6 @@
     },
     "notFound": "Nie znaleziono żadnych kluczy aktywacyjnych!"
   },
-  "toast": {
-    "success": "Sukces",
-    "error": "Błąd",
-    "defaultSuccessDetailAdd": "Dane zostały pomyślnie zapisane",
-    "defaultSuccessDetailEdit": "Zmiany zostały pomyślnie zapisane",
-    "defaultSuccessDetailDelete": "Dane został usunięte",
-    "defaultErrorDetailAdd": "Błąd zapisu danych",
-    "defaultErrorDetailEdit": "Bład zapisu zmian",
-    "defaultErrorDetailDelete": "Błąd usuwania danych",
-    "defaultErrorDetailLoad": "Błąd ładowania danych"
-  },
   "collegeStructure": {
     "header": "Struktura uczelni",
     "addStructure": "Dodaj nową strukturę uczelni",
@@ -204,7 +202,57 @@
       "instituteNotFound": "Nie zdefiniowano instytutów",
       "chooseDepartment": "Wybierz katedrę",
       "departmentNotFound": "Nie zdefiniowano katedr"
-    }
+    },
+    "changeCollege": "Zmiana uczelni",
+    "changeCollegeQuestion": "Zmiana uczelni spowoduje wylogowanie. Czy jesteś pewien, że chcesz przełączyć uczelnię?"
+  },
+  "colleges": {
+    "header": "Lista uczelni",
+    "secondHeader": "Lista uczelni zarejestrowanych w systemie",
+    "notFound": "Nie znaleziono żadnych uczelni!",
+    "collegePerPage": "Liczba uczelni na stronie",
+    "dialog": {
+      "titleNew": "Dodawanie nowej uczelni",
+      "titleEdit": "Edytowanie uczelni"
+    },
+    "CRUD": {
+      "addCollege": "Dodaj uczelnię"
+    },
+    "tableColumns": {
+    },
+    "colleges": "uczelni"
+  },
+  "companies": {
+    "header": "Lista firm",
+    "secondHeader": "Lista firm oferujących praktyki studenckie",
+    "notFound": "Nie znaleziono żadnych firm!",
+    "companyPerPage": "Liczba firm na stronie",
+    "CRUD": {
+      "addCompany": "Dodaj firmę"
+    },
+    "tableColumns": {
+    },
+    "companies": "firm"
+  },
+  "users": {
+    "id": "Identyfikator",
+    "name": "Imię",
+    "lastName": "Nazwisko",
+    "college": "Uczelnia",
+    "company": "Firma",
+    "faculty": "Wydział",
+    "institute": "Instytut",
+    "department": "Katedra",
+    "header": "Lista użytkowników",
+    "secondHeader": "Lista użytkowników należacych do systemu",
+    "notFound": "Nie znaleziono żadnych użytkowników!",
+    "usersPerPage": "Użytkowników na stronie",
+    "CRUD": {
+      "addUser": "Dodaj użytkownika"
+    },
+    "tableColumns": {
+    },
+    "users": "użytkowników"
   }
 }
 

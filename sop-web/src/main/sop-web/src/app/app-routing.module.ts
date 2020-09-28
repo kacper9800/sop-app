@@ -1,5 +1,5 @@
 import {ActivationKeysComponent} from './sop/activation-keys/activation-keys.component';
-import {CollegeComponent} from './sop/college/college.component';
+import {CollegesComponent} from './sop/colleges/colleges.component';
 import {CollegeStructureComponent} from './sop/college-structure/college-structure.component';
 import {CompaniesComponent} from './sop/companies/companies.component';
 import {DocumentsComponent} from './sop/documents/documents.component';
@@ -28,7 +28,7 @@ import {RegistrationConfirmationComponent} from "./authentication/registration-c
 
 const routes: Routes = [
   {path: '', component: HomeComponent},
-  {path: 'app/colleges', component: CollegeComponent},                      // Lista uczelni
+  {path: 'app/colleges', component: CollegesComponent},                      // Lista uczelni
   {path: 'app/companies', component: CompaniesComponent},                   // Lista firm
   {path: 'app/college-structure', component: CollegeStructureComponent},    // Struktura uczelni
   {path: 'app/super-visors', component: SuperVisorsComponent},              // Kierownicy praktyk

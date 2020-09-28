@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { UsersService } from '../../_services/users.service';
-import { HttpResponse } from '@angular/common/http';
+import {User} from '../../security/user';
 
 @Component({
   selector: 'app-users',
@@ -9,28 +9,46 @@ import { HttpResponse } from '@angular/common/http';
 })
 export class UsersComponent implements OnInit {
 
-  @Input()
-  isLoggedIn: Boolean = false;
+  selectedUsers: any;
+  columns: any;
+  users: User[] = [];
 
-  constructor(private usersService: UsersService) {
-  }
+  constructor(private usersService: UsersService) { }
 
   ngOnInit() {
-    this.loadTest();
+    this.loadUsers();
   }
 
-  private loadTest() {
-    this.usersService.getTest().subscribe(
-      (res: HttpResponse<any>) => this.onSuccessTest(res.body),
-      (res: HttpResponse<any>) => this.onError(res.body),
-    );
+  private loadUsers() {
+
   }
 
-  private onSuccessTest(body: any) {
-    console.log('git!');
+  editIntern() {
+
   }
 
-  private onError(body: any) {
-    console.log('lipa!')
+  showAddNewDialog() {
+
   }
+
+  onExportAll() {
+
+  }
+
+  onExportSelected() {
+
+  }
+
+  copyKeyValue(value: any) {
+
+  }
+
+  showEditDialog(value: any) {
+
+  }
+
+  showConfirmDeleteDialog() {
+
+  }
+
 }

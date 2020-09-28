@@ -48,23 +48,26 @@
         <a routerLink="" class="nav-link" *ngIf="isSuperAdmin">
           SuperAdmin
         </a>
+        <a routerLink="/app/activation-keys" class="nav-link" *ngIf="isSuperAdmin">
+          <clr-icon shape="key" class="is-solid"></clr-icon>
+          {{'navBar.activationKeys' | translate}}
+        </a>
         <a routerLink="/app/colleges" class="nav-link" *ngIf="isSuperAdmin">
           <clr-icon shape="building" class="is-solid"></clr-icon>
           {{'navBar.colleges' | translate}}
+        </a>
+        <a routerLink="/app/companies" class="nav-link" *ngIf="isSuperAdmin">
+          <clr-icon shape="store" class="is-solid"></clr-icon>
+          {{'navBar.companies' | translate}}
         </a>
         <a routerLink="/app/users" class="nav-link" *ngIf="isSuperAdmin">
           <clr-icon shape="users" class="is-solid"></clr-icon>
           {{'navBar.users' | translate}}
         </a>
-
         <a routerLink="" class="nav-link" *ngIf="isAdmin" style="color: red">
           Administrator uczelni
         </a>
         <!--Administrator uczelni-->
-        <a routerLink="/app/companies" class="nav-link" *ngIf="isAdmin">
-          <clr-icon shape="store" class="is-solid"></clr-icon>
-          Lista firm
-        </a>
         <a routerLink="/app/college-structure" class="nav-link" *ngIf="isAdmin">
           <clr-icon shape="building" class="is-solid"></clr-icon>
           Struktura uczelni
@@ -115,7 +118,7 @@
         </a>
         <a routerLink="/app/activation-keys" class="nav-link" *ngIf="isModerator">
           <clr-icon shape="key" class="is-solid"></clr-icon>
-          Klucze aktywacyjne
+          {{'navBar.activationKeys' | translate}}
         </a>
         <a routerLink="/app/forms" class="nav-link" *ngIf="isModerator">
           <clr-icon shape="form"></clr-icon>
@@ -146,9 +149,13 @@
         <a routerLink="" class="nav-link" *ngIf="isSuperviser || isSuperAdmin" style="color: red">
           Opiekun praktyk
         </a>
+        <a routerLink="/app/colleges" class="nav-link" *ngIf="isSuperviser || isSuperAdmin">
+          <clr-icon shape="building" class="is-solid"></clr-icon>
+          {{'navBar.colleges' | translate}}
+        </a>
         <a routerLink="/app/logbook" class="nav-link" *ngIf="isSuperviser || isSuperAdmin">
           <clr-icon shape="calendar"></clr-icon>
-          Dziennik praktyk
+          Dzienniki praktyk
         </a>
         <a routerLink="/app/interns" class="nav-link" *ngIf="isModerator || isSuperAdmin">
           <clr-icon shape="users" class="is-solid"></clr-icon>

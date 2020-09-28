@@ -1,3 +1,76 @@
-<p-table >
+<h1 style="text-align: center">{{'users.header' | translate}}</h1>
+<h4 style="text-align: center">{{'users.secondHeader' | translate}}</h4>
 
-</p-table>
+<clr-datagrid [(clrDgSelected)]="selectedUsers" style="height: 50%;">
+  <clr-dg-action-bar>
+    <div class="btn-group">
+      <button type="button" class="btn btn-sm btn-primary"
+              (click)="showAddNewDialog()">
+        <clr-icon shape="plus"></clr-icon>
+        {{'users.CRUD.addUser' | translate}}
+      </button>
+      <clr-dropdown>
+        <button type="button" class="btn btn-sm btn-secondary" clrDropdownTrigger>
+          {{'common.export.button' | translate}}
+        </button>
+        <clr-dropdown-menu clrPosition="bottom-left" *clrIfOpen>
+          <button type="button" (click)="onExportAll()" clrDropdownItem>
+            {{'common.export.all' | translate}}</button>
+          <button type="button" (click)="onExportSelected()"
+                  [disabled]="selectedUsers.length === 0" clrDropdownItem>
+            {{'common.export.selected' | translate}}</button>
+        </clr-dropdown-menu>
+      </clr-dropdown>
+    </div>
+  </clr-dg-action-bar>
+  <clr-dg-column *ngFor="let col of columns">
+    {{'activationKeys.tableColumns.' + col.fieldName | translate}}
+  </clr-dg-column>
+
+  <clr-dg-row *ngFor="let key of users" [clrDgItem]="key">
+    <clr-dg-cell>{{key.name}}</clr-dg-cell>
+    <clr-dg-cell>{{key.expirationDate | date}}</clr-dg-cell>
+    <clr-dg-cell>{{key.remainingUses}}</clr-dg-cell>
+    <clr-dg-cell>{{key.createdByName}}</clr-dg-cell>
+    <clr-dg-cell>{{key.facultyName}}</clr-dg-cell>
+    <clr-dg-cell>{{key.instituteName}}</clr-dg-cell>
+    <clr-dg-cell>{{key.departmentName}}</clr-dg-cell>
+    <clr-dg-cell>
+      <div *ngIf="key.active">
+        <clr-icon shape="check"></clr-icon>
+      </div>
+      <div *ngIf="!key.active">
+        <clr-icon shape="times"></clr-icon>
+      </div>
+    </clr-dg-cell>
+    <clr-dg-cell>
+      <div class="btn-group">
+        <button type="button" class="btn btn-sm btn-secondary" (click)="copyKeyValue(key.value)">
+          <clr-icon shape="copy-to-clipboard"></clr-icon>
+          {{'common.copyToClipboard' | translate }}
+        </button>
+        <button type="button" class="btn btn-sm btn-secondary" (click)="showEditDialog(key.value)">
+          <clr-icon shape="pencil"></clr-icon>
+          {{'common.crud.edit' | translate }}
+        </button>
+        <button type="button" class="btn btn-sm btn-danger" (click)="showConfirmDeleteDialog()">
+          <clr-icon shape="trash"></clr-icon>
+          {{'common.crud.delete' | translate }}
+        </button>
+      </div>
+    </clr-dg-cell>
+  </clr-dg-row>
+
+  <clr-dg-placeholder>{{'colleges.notFound' | translate}}</clr-dg-placeholder>
+  <clr-dg-footer>
+    <clr-dg-pagination #pagination [clrDgPageSize]="10">
+      <clr-dg-page-size
+        [clrPageSizeOptions]="[10,20,50,100]">{{'users.usersPerPage' | translate}}</clr-dg-page-size>
+      {{pagination.firstItem + 1}} - {{pagination.lastItem
+    + 1}} {{'common.of' | translate}} {{pagination.totalItems}} {{'users.users' | translate}}
+    </clr-dg-pagination>
+  </clr-dg-footer>
+</clr-datagrid>
+
+<ng-template #addEditDialog></ng-template>
+

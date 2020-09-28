@@ -13,6 +13,9 @@ import {Department} from '../../../_model/organization-structure/department.mode
 import {CollegeStructure} from '../../../_model/organization-structure/college-structure.model';
 import {CollegeService} from '../../../_services/organization-structure/college.service';
 import {DropdownItem} from '../../../_model/dropdown-item.model';
+import {TokenService} from '../../../_helpers/token.service';
+import {Observable} from "rxjs";
+import {HttpResponse} from "@angular/common/http";
 
 @Component({
   selector: 'app-add-edit-dialog-activation-keys',
@@ -46,7 +49,8 @@ export class AddEditDialogActivationKeysComponent implements OnInit {
               private departmentService: DepartmentService,
               private formBuilder: FormBuilder,
               private translateService: TranslateService,
-              private collegeService: CollegeService) {
+              private collegeService: CollegeService,
+              private tokenService: TokenService) {
   }
 
   ngOnInit() {
@@ -59,7 +63,7 @@ export class AddEditDialogActivationKeysComponent implements OnInit {
     this.activationKeyForm = this.formBuilder.group({
       level: new FormControl({value: null, disabled: false}, Validators.required),
       token: new FormControl({
-        value: activationKey ? activationKey.value : this.generateToken(),
+        value: activationKey ? activationKey.value : this.tokenService.generateToken(),
         disabled: true
       }, Validators.required),
       expirationStartDate: new FormControl({
@@ -144,7 +148,7 @@ export class AddEditDialogActivationKeysComponent implements OnInit {
     this.blockUI = true;
     this.dialogTitle = this.translateService.instant('activationKeys.dialog.titleEdit');
     this.activationKeyService.getActivationKeyForValue(value).subscribe(
-      (res: IActivationKey) => this.onSuccessLoadActivationKey(res),
+      (res: HttpResponse<IActivationKey>) => this.onSuccessLoadActivationKey(res.body),
       (res) => this.onErrorLoadActivationKey(res)
     );
   }
@@ -156,16 +160,6 @@ export class AddEditDialogActivationKeysComponent implements OnInit {
 
   private onErrorLoadActivationKey(res: any) {
 
-  }
-
-  public generateToken(): string {
-    const possible = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890';
-    const lengthOfCode = 25;
-    let text = '';
-    for (let i = 0; i < lengthOfCode; i++) {
-      text += possible.charAt(Math.floor(Math.random() * possible.length));
-    }
-    return text;
   }
 
   public onSubmit() {
