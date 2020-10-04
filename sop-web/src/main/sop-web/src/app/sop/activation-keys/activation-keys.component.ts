@@ -24,15 +24,16 @@ export class ActivationKeysComponent implements OnInit {
   public activationKeys: ActivationKey[] = [];
   public columns: any[];
   public selectedActivationKeys = [];
+
   @ViewChild('addEditDialog', {read: ViewContainerRef, static: true})
   public addEditDialog: ViewContainerRef;
+
   @ViewChild('exportDialog', {read: ViewContainerRef, static: true})
   public exportDialog: ViewContainerRef;
   private componentRef: any;
 
   constructor(private resolver: ComponentFactoryResolver,
-              private activationKeyService: ActivationKeyService,
-              private translateService: TranslateService) {
+              private activationKeyService: ActivationKeyService) {
   }
 
   ngOnInit() {
@@ -51,7 +52,8 @@ export class ActivationKeysComponent implements OnInit {
     res.forEach(activationKey => {
       const key = new ActivationKey();
       key.value = activationKey.value;
-      key.expirationDate = activationKey.expirationDate;
+      key.expirationDateStart = activationKey.expirationDateStart;
+      key.expirationDateEnd = activationKey.expirationDateEnd;
       key.active = activationKey.active;
       key.remainingUses = activationKey.remainingUses;
       if (activationKey.createdById === null || activationKey.createdById === undefined) {
@@ -91,7 +93,6 @@ export class ActivationKeysComponent implements OnInit {
       }
       this.activationKeys.push(key);
     });
-    console.log(this.activationKeys);
   }
 
   private onErrorLoadActivationKeys(): void {
@@ -100,46 +101,17 @@ export class ActivationKeysComponent implements OnInit {
 
   private prepareColumns() {
     this.columns = [
-      {
-        label: this.translateService.instant('activationKeys.tableColumns.token'),
-        fieldName: 'value'
-      },
-      {
-        label: this.translateService.instant('activationKeys.tableColumns.expirationDate'),
-        fieldName: 'expirationDate'
-      },
-      {
-        label: this.translateService.instant('activationKeys.tableColumns.remainingUses'),
-        fieldName: 'remainingUses'
-      },
-      {
-        label: this.translateService.instant('activationKeys.tableColumns.createdBy'),
-        fieldName: 'createdBy'
-      },
-      {
-        label: this.translateService.instant('activationKeys.tableColumns.faculty'),
-        fieldName: 'facultyName'
-      },
-      {
-        label: this.translateService.instant('activationKeys.tableColumns.institute'),
-        fieldName: 'instituteName'
-      },
-      {
-        label: this.translateService.instant('activationKeys.tableColumns.department'),
-        fieldName: 'departmentName'
-      },
-      {
-        label: this.translateService.instant('common.active'),
-        fieldName: 'active'
-      },
-      {
-        label: this.translateService.instant('common.deleted'),
-        fieldName: 'deleted'
-      },
-      {
-        label: this.translateService.instant('activationKeys.tableColumns.actions'),
-        fieldName: 'actions'
-      }
+      {label: 'activationKeys.tableColumns.value', fieldName: 'value'},
+      {label: 'activationKeys.tableColumns.expirationDateStart', fieldName: 'expirationDateStart'},
+      {label: 'activationKeys.tableColumns.expirationDateEnd', fieldName: 'expirationDateEnd'},
+      {label: 'activationKeys.tableColumns.remainingUses', fieldName: 'remainingUses'},
+      {label: 'activationKeys.tableColumns.createdBy', fieldName: 'createdBy'},
+      {label: 'common.facultyName', fieldName: 'facultyName'},
+      {label: 'common.instituteName', fieldName: 'instituteName'},
+      {label: 'common.departmentName', fieldName: 'departmentName'},
+      {label: 'common.active', fieldName: 'active'},
+      {label: 'common.deleted', fieldName: 'deleted'},
+      {label: 'common.actions', fieldName: 'actions'}
     ];
   }
 

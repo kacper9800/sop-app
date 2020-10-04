@@ -55,7 +55,8 @@
     "companyName": "Nazwa firmy",
     "required": "To pole jest wymagane!",
     "of": "z",
-    "copyToClipboard": "Skopiuj klucz"
+    "copyToClipboard": "Skopiuj klucz",
+    "amountOfUses": "Liczba użyć"
   },
   "header": {
     "SOP": "System obsługi praktyk",
@@ -172,7 +173,8 @@
     "pageHeader": "Klucze aktywacyjne",
     "tableColumns": {
       "value": "Klucz aktywacyjny",
-      "expirationDate": "Data wygaśnięcia",
+      "expirationDateStart": "Data aktywacji",
+      "expirationDateEnd": "Data wygaśnięcia",
       "remainingUses": "Pozostałe użycia",
       "createdBy": "Utworzony przez",
       "active": "Aktywny",
@@ -198,6 +200,8 @@
       "headerNew": "Dodawanie nowej struktury",
       "headerEdit": "Edytowanie struktury uczelni",
       "chooseStructureLevel": "Wybierz poziom uczelni",
+      "chooseCollege": "Wybierz uczelnię",
+      "collegeNotFound": "Nie znaleziono uczelni",
       "chooseFaculty": "Wybierz wydział",
       "facultyNotFound": "Nie zdefiniowano wydziałów",
       "chooseInstitute": "Wybierz instytut",

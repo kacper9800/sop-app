@@ -26,11 +26,15 @@ export class ActivationKeyService {
     return this.http.get<HttpResponse<IActivationKey>>(global.API + API_URL, {params: {keyValue: value}});
   }
 
-  public createActivationKeyForColllege(data: any): Observable<HttpResponse<boolean>> {
-    return this.http.post<HttpResponse<boolean>>(global.API + API_URL + '/college', {data});
+  public createActivationKeyForCollege(activationKeyToSave: any): Observable<HttpResponse<boolean>> {
+    return this.http.post<HttpResponse<boolean>>(global.API + API_URL + '/college', {activationKeyToSave});
   }
 
-  public createActivationKeyForCompany(data: any): Observable<HttpResponse<boolean>> {
-    return this.http.post<HttpResponse<boolean>>(global.API + API_URL + '/company', {data});
+  public createActivationKeyForCompany(activationKeyToSave: any): Observable<HttpResponse<boolean>> {
+    return this.http.post<HttpResponse<boolean>>(global.API + API_URL + '/company', {activationKeyToSave});
+  }
+
+  public createActivationKeyForCollegeStructure(activationKeyToSave: any): Observable<HttpResponse<boolean>> {
+    return this.http.post<HttpResponse<boolean>>(global.API + API_URL + '/college-structure', { activationKeyToSave });
   }
 }

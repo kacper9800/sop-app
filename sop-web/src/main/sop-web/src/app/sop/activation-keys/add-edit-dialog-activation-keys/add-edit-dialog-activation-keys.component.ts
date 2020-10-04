@@ -15,6 +15,8 @@ import {CollegeService} from '../../../_services/organization-structure/college.
 import {DropdownItem} from '../../../_model/dropdown-item.model';
 import {TokenService} from '../../../_helpers/token.service';
 import {HttpResponse} from '@angular/common/http';
+import {PrincipalService} from '../../../_services/auth/principal.service';
+import {College, ICollege} from '../../../_model/organization-structure/college.model';
 
 @Component({
   selector: 'app-add-edit-dialog-activation-keys',
@@ -33,6 +35,7 @@ export class AddEditDialogActivationKeysComponent implements OnInit {
   public collegeStructure: CollegeStructure;
   public collegeStructuresLevels: DropdownItem[];
 
+  public colleges: College[] = [];
   public faculties: Faculty[] = [];
   public institutes: Institute[] = [];
   public departments: Department[] = [];
@@ -40,6 +43,7 @@ export class AddEditDialogActivationKeysComponent implements OnInit {
   public dialogTitle: string;
   public validateBtnState: any;
   public selectedLevel: number;
+  private activationKeyToSave: ActivationKey;
 
   constructor(private activationKeyService: ActivationKeyService,
               private facultyService: FacultyService,
@@ -48,13 +52,17 @@ export class AddEditDialogActivationKeysComponent implements OnInit {
               private formBuilder: FormBuilder,
               private translateService: TranslateService,
               private collegeService: CollegeService,
-              private tokenService: TokenService) {
+              private tokenService: TokenService,
+              private principalService: PrincipalService) {
   }
 
   ngOnInit() {
     this.prepareForm();
     this.loadCollegeStructureData();
     this.prepareDropdownsOptions();
+    if (this.principalService.isSuperAdmin()) {
+      this.loadColleges();
+    }
   }
 
   private prepareForm(activationKey?: ActivationKey): void {
@@ -64,18 +72,22 @@ export class AddEditDialogActivationKeysComponent implements OnInit {
         value: activationKey ? activationKey.value : this.tokenService.generateToken(),
         disabled: true
       }, Validators.required),
-      expirationStartDate: new FormControl({
-        value: activationKey ? activationKey.expirationDate : null,
+      expirationDateStart: new FormControl({
+        value: activationKey ? activationKey.expirationDateStart : null,
         disabled: false
       }, Validators.required),
-      expirationEndDate: new FormControl({
-        value: activationKey ? activationKey.expirationDate : null,
+      expirationDateEnd: new FormControl({
+        value: activationKey ? activationKey.expirationDateEnd : null,
         disabled: false
       }, Validators.required),
       numberOfUses: new FormControl({
         value: activationKey ? activationKey.remainingUses : null,
         disabled: false
       }, Validators.required),
+      collegeId: new FormControl({
+        value: activationKey ? activationKey.collegeId : null,
+        disabled: false
+      }),
       facultyId: new FormControl({
         value: activationKey ? activationKey.facultyId : null,
         disabled: false
@@ -92,15 +104,29 @@ export class AddEditDialogActivationKeysComponent implements OnInit {
   }
 
   private prepareDropdownsOptions() {
-    this.collegeStructuresLevels = [
-      {
-        value: null,
-        label: this.translateService.instant('collegeStructure.dialog.chooseStructureLevel')
-      },
-      {value: '1', label: this.translateService.instant('common.faculty')},
-      {value: '2', label: this.translateService.instant('common.institute')},
-      {value: '3', label: this.translateService.instant('common.department')}
-    ];
+    if (this.principalService.isSuperAdmin()) {
+      this.collegeStructuresLevels = [
+        {
+          value: null,
+          label: this.translateService.instant('collegeStructure.dialog.chooseStructureLevel')
+        },
+        {value: '0', label: this.translateService.instant('common.college')},
+        {value: '1', label: this.translateService.instant('common.faculty')},
+        {value: '2', label: this.translateService.instant('common.institute')},
+        {value: '3', label: this.translateService.instant('common.department')}
+      ];
+    } else if (this.principalService.isAdmin()) {
+      this.collegeStructuresLevels = [
+        {
+          value: null,
+          label: this.translateService.instant('collegeStructure.dialog.chooseStructureLevel')
+        },
+        {value: '1', label: this.translateService.instant('common.faculty')},
+        {value: '2', label: this.translateService.instant('common.institute')},
+        {value: '3', label: this.translateService.instant('common.department')}
+      ];
+    }
+
     this.faculties = [{
       id: null,
       name: this.translateService.instant('collegeStructure.dialog.chooseFaculty'),
@@ -136,6 +162,39 @@ export class AddEditDialogActivationKeysComponent implements OnInit {
     this.blockUI = false;
   }
 
+  private loadColleges() {
+    this.collegeService.getAllAvailableColleges().subscribe(
+      (res: HttpResponse<ICollege[]>) => this.onSuccessLoadColleges(res),
+      (err) => this.onErrorLoadColleges(err)
+    );
+  }
+
+  private onSuccessLoadColleges(res) {
+    this.colleges = [{
+      id: null,
+      name: this.translateService.instant('collegeStructure.dialog.chooseCollege'),
+      active: false,
+      removed: false
+    }];
+    if (res.length !== 0) {
+      res.forEach(college => this.colleges.push(college));
+      this.activationKeyForm.get('collegeId').enable();
+    } else {
+      this.departments = [{
+        id: null,
+        name: this.translateService.instant('collegeStructure.dialog.collegeNotFound'),
+      }];
+      this.activationKeyForm.get('collegeId').disable();
+    }
+    console.log(this.colleges);
+    this.blockUI = false;
+  }
+
+  private onErrorLoadColleges(err: any) {
+    console.log(err);
+    this.blockUI = false;
+  }
+
   public showNewActivationKeyDialog() {
     this.blockUI = true;
     this.displayDialog = true;
@@ -160,17 +219,49 @@ export class AddEditDialogActivationKeysComponent implements OnInit {
 
   }
 
-  public onSubmit() {
-    this.blockUI = true;
-    this.validateBtnState = ClrLoadingState.LOADING;
-
-  }
 
   public onCollegeStructureLevelChange() {
     const level = this.activationKeyForm.get('level').value;
     this.selectedLevel = Number(level);
-    this.activationKeyForm.get('instituteId').disable();
-    this.activationKeyForm.get('departmentId').disable();
+    if (this.selectedLevel === 0) { // College
+      this.activationKeyForm.get('facultyId').disable();
+      this.activationKeyForm.get('instituteId').disable();
+      this.activationKeyForm.get('departmentId').disable();
+      this.activationKeyForm.get('collegeId').setValidators([Validators.required]);
+      this.activationKeyForm.get('numberOfUses').setValue(1);
+      this.activationKeyForm.get('numberOfUses').disable();
+    } else if (this.selectedLevel === 1) { // Faculty
+      this.activationKeyForm.get('collegeId').disable();
+      this.activationKeyForm.get('facultyId').enable();
+      this.activationKeyForm.get('facultyId').setValidators([Validators.required]);
+      this.activationKeyForm.get('instituteId').setValidators([]);
+      this.activationKeyForm.get('departmentId').setValidators([]);
+      this.activationKeyForm.get('numberOfUses').enable();
+      this.activationKeyForm.get('numberOfUses').setValue(null);
+      this.activationKeyForm.get('numberOfUses').setValidators([Validators.required]);
+    } else if (this.selectedLevel === 2) { // Institute
+      this.activationKeyForm.get('collegeId').disable();
+      this.activationKeyForm.get('facultyId').enable();
+      this.activationKeyForm.get('facultyId').setValidators([Validators.required]);
+      this.activationKeyForm.get('instituteId').enable();
+      this.activationKeyForm.get('instituteId').setValidators([Validators.required]);
+      this.activationKeyForm.get('departmentId').setValidators([]);
+      this.activationKeyForm.get('numberOfUses').enable();
+      this.activationKeyForm.get('numberOfUses').setValue(null);
+      this.activationKeyForm.get('numberOfUses').setValidators([Validators.required]);
+    } else if (this.selectedLevel === 3) { // Department
+      this.activationKeyForm.get('collegeId').disable();
+      this.activationKeyForm.get('facultyId').enable();
+      this.activationKeyForm.get('facultyId').setValidators([Validators.required]);
+      this.activationKeyForm.get('instituteId').enable();
+      this.activationKeyForm.get('instituteId').setValidators([Validators.required]);
+      this.activationKeyForm.get('departmentId').enable();
+      this.activationKeyForm.get('departmentId').setValidators([Validators.required]);
+      this.activationKeyForm.get('numberOfUses').enable();
+      this.activationKeyForm.get('numberOfUses').setValue(null);
+      this.activationKeyForm.get('numberOfUses').setValidators([Validators.required]);
+    }
+    console.log(this.activationKeyForm);
   }
 
   public onFacultyChange() {
@@ -218,4 +309,51 @@ export class AddEditDialogActivationKeysComponent implements OnInit {
       this.activationKeyForm.get('departmentId').disable();
     }
   }
+
+  public onSubmit() {
+    this.blockUI = true;
+    this.validateBtnState = ClrLoadingState.LOADING;
+    this.prepareActivationKey();
+    if (this.selectedLevel === 0) {
+      this.activationKeyService.createActivationKeyForCollege(this.activationKeyToSave).subscribe(
+        (res: HttpResponse<boolean>) => this.onSuccessCreateActivationKey(res),
+        (err) => this.onErrorCreateActivationKey(err)
+      );
+    } else {
+      this.activationKeyService.createActivationKeyForCollegeStructure(this.activationKeyToSave).subscribe(
+        (res: HttpResponse<boolean>) => this.onSuccessCreateActivationKey(res),
+        (err) => this.onErrorCreateActivationKey(err)
+      );
+    }
+  }
+
+  private prepareActivationKey(): void {
+    this.activationKeyToSave = new ActivationKey();
+    this.activationKeyToSave.value = this.activationKeyForm.get('token').value;
+    this.activationKeyToSave.numberOfUses = this.activationKeyForm.get('numberOfUses').value;
+    this.activationKeyToSave.expirationDateStart = this.activationKeyForm.get('expirationDateStart').value;
+    this.activationKeyToSave.expirationDateEnd = this.activationKeyForm.get('expirationDateEnd').value;
+    if (this.selectedLevel === 0) {
+      this.activationKeyToSave.collegeId = this.activationKeyForm.get('collegeId').value;
+    } else if (this.selectedLevel === 1) {
+      this.activationKeyToSave.facultyId = this.activationKeyForm.get('facultyId').value;
+    } else if (this.selectedLevel === 2) {
+      this.activationKeyToSave.instituteId = this.activationKeyForm.get('instituteId').value;
+    } else if (this.selectedLevel === 3) {
+      this.activationKeyToSave.departmentId = this.activationKeyForm.get('departmentId').value;
+    }
+  }
+
+  private onSuccessCreateActivationKey(res: HttpResponse<boolean>): void {
+    this.displayDialog = false;
+    this.blockUI = false;
+    this.validateBtnState = ClrLoadingState.SUCCESS;
+  }
+
+  private onErrorCreateActivationKey(err: any): void {
+    this.validateBtnState = ClrLoadingState.ERROR;
+    this.blockUI = false;
+  }
+
+
 }

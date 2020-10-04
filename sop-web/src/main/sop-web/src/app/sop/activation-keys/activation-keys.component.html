@@ -25,12 +25,13 @@
     </div>
   </clr-dg-action-bar>
   <clr-dg-column *ngFor="let col of columns">
-    {{'activationKeys.tableColumns.' + col.fieldName | translate}}
+    {{col.label | translate}}
   </clr-dg-column>
 
   <clr-dg-row *ngFor="let key of activationKeys" [clrDgItem]="key">
     <clr-dg-cell>{{key.value}}</clr-dg-cell>
-    <clr-dg-cell>{{key.expirationDate | date}}</clr-dg-cell>
+    <clr-dg-cell>{{key.expirationDateStart | date}}</clr-dg-cell>
+    <clr-dg-cell>{{key.expirationDateEnd | date}}</clr-dg-cell>
     <clr-dg-cell>{{key.remainingUses}}</clr-dg-cell>
     <clr-dg-cell>{{key.createdByName}}</clr-dg-cell>
     <clr-dg-cell>{{key.facultyName}}</clr-dg-cell>

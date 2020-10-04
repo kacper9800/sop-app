@@ -53,7 +53,8 @@
     "departmentName": "Department name",
     "companyName": "Company name",
     "of": "of",
-    "copyToClipboard": "Copy key"
+    "copyToClipboard": "Copy key",
+    "amountOfUses": "Amount of uses"
   },
   "header": {
     "SOP": "Internship service system",
@@ -170,7 +171,8 @@
     "pageHeader": "Activation keys for users",
     "tableColumns": {
       "token": "Activation key",
-      "expirationDate": "Expiration date",
+      "expirationDateStart": "Activation date",
+      "expirationDateEnd": "Expiration date",
       "remainingUses": "Remaining uses",
       "createdBy": "Created by",
       "active": "Active",
@@ -195,10 +197,15 @@
     "dialog": {
       "headerNew": "Adding new structure",
       "headerEdit": "Editing college structure",
-      "chooseStructureLevel": "Choose level",
+      "chooseStructureLevel": "Choose college structure level",
+      "chooseCollege": "Choose college",
+      "collegeNotFound": "College not found",
       "chooseFaculty": "Choose faculty",
+      "facultyNotFound": "Faculty not found",
       "chooseInstitute": "Choose institute",
-      "chooseDepartment": "Choose department"
+      "instituteNotFound": "Institute not found",
+      "chooseDepartment": "Choose department",
+      "departmentNotFound": "Department not found"
     },
     "changeCollege": "Changing college",
     "changeCollegeQuestion": "Are you sure you want to change college?"

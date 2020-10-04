@@ -1,6 +1,7 @@
 export interface IActivationKey {
   value: string;
-  expirationDate: Date;
+  expirationDateStart: Date;
+  expirationDateEnd: Date;
   createdById: number;
   createdByName: string;
   collegeId: number;
@@ -12,12 +13,14 @@ export interface IActivationKey {
   departmentId: number;
   departmentName: string;
   remainingUses: number;
+  numberOfUses: number;
   active: boolean;
 }
 
 export class ActivationKey implements IActivationKey {
   value: string;
-  expirationDate: Date;
+  expirationDateStart: Date;
+  expirationDateEnd: Date;
   createdById: number;
   createdByName: string;
   collegeId: number;
@@ -29,6 +32,7 @@ export class ActivationKey implements IActivationKey {
   departmentId: number;
   departmentName: string;
   remainingUses: number;
+  numberOfUses: number;
   active: boolean;
 }
 
