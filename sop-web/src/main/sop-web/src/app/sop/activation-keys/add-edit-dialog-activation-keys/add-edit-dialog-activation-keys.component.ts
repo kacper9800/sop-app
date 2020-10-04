@@ -14,8 +14,7 @@ import {CollegeStructure} from '../../../_model/organization-structure/college-s
 import {CollegeService} from '../../../_services/organization-structure/college.service';
 import {DropdownItem} from '../../../_model/dropdown-item.model';
 import {TokenService} from '../../../_helpers/token.service';
-import {Observable} from "rxjs";
-import {HttpResponse} from "@angular/common/http";
+import {HttpResponse} from '@angular/common/http';
 
 @Component({
   selector: 'app-add-edit-dialog-activation-keys',
@@ -41,7 +40,6 @@ export class AddEditDialogActivationKeysComponent implements OnInit {
   public dialogTitle: string;
   public validateBtnState: any;
   public selectedLevel: number;
-  demo: any;
 
   constructor(private activationKeyService: ActivationKeyService,
               private facultyService: FacultyService,

@@ -11,6 +11,8 @@ import {AddEditDialogActivationKeysComponent} from './add-edit-dialog-activation
 import {ActivationKeyService} from '../../_services/activation-key.service';
 import {HttpResponse} from '@angular/common/http';
 import {TranslateService} from '@ngx-translate/core';
+import {AddEditDialogCollegesComponent} from "../colleges/add-edit-dialog-colleges/add-edit-dialog-colleges.component";
+import {ExportTableComponent} from "../export-table/export-table.component";
 
 
 @Component({
@@ -22,9 +24,10 @@ export class ActivationKeysComponent implements OnInit {
   public activationKeys: ActivationKey[] = [];
   public columns: any[];
   public selectedActivationKeys = [];
-
   @ViewChild('addEditDialog', {read: ViewContainerRef, static: true})
   public addEditDialog: ViewContainerRef;
+  @ViewChild('exportDialog', {read: ViewContainerRef, static: true})
+  public exportDialog: ViewContainerRef;
   private componentRef: any;
 
   constructor(private resolver: ComponentFactoryResolver,
@@ -45,7 +48,6 @@ export class ActivationKeysComponent implements OnInit {
 
   private onSuccessLoadActivationKeys(res: IActivationKey[]): void {
     this.activationKeys = [];
-    console.log(res);
     res.forEach(activationKey => {
       const key = new ActivationKey();
       key.value = activationKey.value;
@@ -127,8 +129,12 @@ export class ActivationKeysComponent implements OnInit {
         fieldName: 'departmentName'
       },
       {
-        label: this.translateService.instant('activationKeys.tableColumns.active'),
+        label: this.translateService.instant('common.active'),
         fieldName: 'active'
+      },
+      {
+        label: this.translateService.instant('common.deleted'),
+        fieldName: 'deleted'
       },
       {
         label: this.translateService.instant('activationKeys.tableColumns.actions'),
@@ -161,12 +167,18 @@ export class ActivationKeysComponent implements OnInit {
     // ToDo
   }
 
-  public onExportAll() {
-
-  }
-
-  public onExportSelected() {
-
+  public showExportDialog(exportAll: boolean): void {
+    this.exportDialog.clear();
+    const factory = this.resolver.resolveComponentFactory(ExportTableComponent);
+    this.componentRef = this.exportDialog.createComponent(factory);
+    if (exportAll) {
+      this.componentRef.instance.showExportTableDialog(this.activationKeys);
+    } else {
+      this.componentRef.instance.showExportTableDialog(this.selectedActivationKeys);
+    }
+    this.componentRef.instance.closeDialogWithSaveEmitter.subscribe(() =>
+      this.loadActivationKeys()
+    );
   }
 
   public copyKeyValue(value: string) {

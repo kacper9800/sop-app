@@ -14,9 +14,10 @@
           {{'common.export.button' | translate}}
         </button>
         <clr-dropdown-menu clrPosition="bottom-left" *clrIfOpen>
-          <button type="button" (click)="onExportAll()" clrDropdownItem>
+          <button type="button" (click)="showExportDialog(true)"
+                  [disabled]="activationKeys.length === 0" clrDropdownItem>
             {{'common.export.all' | translate}}</button>
-          <button type="button" (click)="onExportSelected()"
+          <button type="button" (click)="showExportDialog(false)"
                   [disabled]="selectedActivationKeys.length === 0" clrDropdownItem>
             {{'common.export.selected' | translate}}</button>
         </clr-dropdown-menu>
@@ -84,3 +85,4 @@
 <!--</div>-->
 
 <ng-template #addEditDialog></ng-template>
+<ng-template #exportDialog></ng-template>
