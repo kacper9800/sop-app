@@ -20,7 +20,8 @@ import {RouterModule, Routes} from '@angular/router';
 import {StatisticsComponent} from './sop/statistics/statistics.component';
 import {SuperVisorsComponent} from './sop/super-visors/super-visors.component';
 import {UsersComponent} from './sop/users/users.component';
-import {RegistrationConfirmationComponent} from "./authentication/registration-confirmation/registration-confirmation.component";
+import {RegistrationConfirmationComponent} from './authentication/registration-confirmation/registration-confirmation.component';
+import {CanActivateGuard} from './_services/auth/can-activate.guard';
 
 
 // import { PlannerCalendarComponent } from './sop/planner/planner-calendar/planner-calendar.component';
@@ -28,18 +29,18 @@ import {RegistrationConfirmationComponent} from "./authentication/registration-c
 
 const routes: Routes = [
   {path: '', component: HomeComponent},
-  {path: 'app/colleges', component: CollegesComponent},                      // Lista uczelni
-  {path: 'app/companies', component: CompaniesComponent},                   // Lista firm
-  {path: 'app/college-structure', component: CollegeStructureComponent},    // Struktura uczelni
-  {path: 'app/super-visors', component: SuperVisorsComponent},              // Kierownicy praktyk
-  {path: 'app/interns', component: InternsComponent},                       // Praktykanci
-  {path: 'app/users', component: UsersComponent},                           // Użytkownicy
-  {path: 'app/forms', component: FormsComponent},                           // Ankiety
-  {path: 'app/statistics', component: StatisticsComponent},                 // Statystyki
+  {path: 'app/colleges', component: CollegesComponent, canActivate: [CanActivateGuard]},                      // Lista uczelni
+  {path: 'app/companies', component: CompaniesComponent, canActivate: [CanActivateGuard]},                   // Lista firm
+  {path: 'app/college-structure', component: CollegeStructureComponent, canActivate: [CanActivateGuard]},    // Struktura uczelni
+  {path: 'app/super-visors', component: SuperVisorsComponent, canActivate: [CanActivateGuard]},              // Kierownicy praktyk
+  {path: 'app/interns', component: InternsComponent, canActivate: [CanActivateGuard]},                       // Praktykanci
+  {path: 'app/users', component: UsersComponent, canActivate: [CanActivateGuard]},                           // Użytkownicy
+  {path: 'app/forms', component: FormsComponent, canActivate: [CanActivateGuard]},                           // Ankiety
+  {path: 'app/statistics', component: StatisticsComponent, canActivate: [CanActivateGuard]},                 // Statystyki
 
-  {path: 'app/activation-keys', component: ActivationKeysComponent},        // Klucze aktywacyjne
-  {path: 'app/logbook', component: LogbookComponent},                       // Dziennik praktyk
-  {path: 'app/documents', component: DocumentsComponent},                   // Dokumenty
+  {path: 'app/activation-keys', component: ActivationKeysComponent, canActivate: [CanActivateGuard]},        // Klucze aktywacyjne
+  {path: 'app/logbook', component: LogbookComponent, canActivate: [CanActivateGuard]},                       // Dziennik praktyk
+  {path: 'app/documents', component: DocumentsComponent, canActivate: [CanActivateGuard]},                   // Dokumenty
 
   {path: 'app/login', component: LoginComponent},                           // Logowanie
   {path: 'app/logout', component: LogoutComponent},                         // Wylogowywanie

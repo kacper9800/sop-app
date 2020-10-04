@@ -21,7 +21,8 @@
     "export": {
       "button": "Export",
       "all": "Export all",
-      "selected": "Export selected"
+      "selected": "Export selected",
+      "dialogTitle": "Datagrid export"
     },
     "id": "Identify",
     "name": "Name",
@@ -38,7 +39,7 @@
     "hostByPlaceholder": "Choose instructor",
     "actions": "Actions",
     "active": "Active",
-    "removed": "Removed",
+    "deleted": "Deleted",
     "instructor": "Instructor",
     "firstName": "First name",
     "lastName": "Last name",
@@ -50,6 +51,7 @@
     "instituteName": "Institute name",
     "department": "Department ",
     "departmentName": "Department name",
+    "companyName": "Company name",
     "of": "of",
     "copyToClipboard": "Copy key"
   },
@@ -233,6 +235,7 @@
     "id": "Identify",
     "name": "Name",
     "lastName": "Last name",
+    "username": "Username",
     "company": "Company",
     "college": "College",
     "faculty": "Faculty",

@@ -77,6 +77,9 @@ import {AddEditDialogActivationKeysComponent} from './sop/activation-keys/add-ed
 import { AddEditDialogCollegeStructureComponent } from './sop/college-structure/add-edit-dialog-college-structure/add-edit-dialog-college-structure.component';
 import {AddEditDialogCompaniesComponent} from './sop/companies/add-edit-dialog-companies/add-edit-dialog-companies.component';
 import { AddEditDialogCollegesComponent } from './sop/colleges/add-edit-dialog-colleges/add-edit-dialog-colleges.component';
+import { ExportTableComponent } from './sop/export-table/export-table.component';
+import { ExportAsModule } from 'ngx-export-as';
+
 
 @NgModule({
   declarations: [
@@ -120,6 +123,7 @@ import { AddEditDialogCollegesComponent } from './sop/colleges/add-edit-dialog-c
     AddEditDialogCollegeStructureComponent,
     AddEditDialogCompaniesComponent,
     AddEditDialogCollegesComponent,
+    ExportTableComponent,
   ],
   imports: [
     BrowserModule,
@@ -161,6 +165,7 @@ import { AddEditDialogCollegesComponent } from './sop/colleges/add-edit-dialog-c
     OwlNativeDateTimeModule,
     FullCalendarModule,
     TreeTableModule,
+    ExportAsModule
   ],
   providers: [{ provide: LocationStrategy, useClass: HashLocationStrategy }, authInterceptorProviders],
   bootstrap: [AppComponent],

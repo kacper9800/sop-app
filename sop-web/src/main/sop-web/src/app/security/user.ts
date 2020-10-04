@@ -12,7 +12,8 @@ export interface IUser {
   role?: any[];
   colleges: College[];
   selectedCollege: number;
-
+  active: boolean;
+  removed: boolean;
 }
 
 export class User {
@@ -27,6 +28,8 @@ export class User {
   role?: any[];
   colleges: College[];
   selectedCollege: number;
+  active: boolean;
+  removed: boolean;
 
   static fromJson(json: IUser): User {
     const user: User = new User();
@@ -38,6 +41,8 @@ export class User {
     user.phone = json.phone;
     user.birthDate = json.birthDate;
     user.role = json.role;
+    user.active = json.active;
+    user.removed = json.removed;
     return user;
   }
 }

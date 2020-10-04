@@ -21,7 +21,8 @@
     "export": {
       "button": "Eksportuj",
       "all": "Eksportuj całą tabelę",
-      "selected": "Eksportuj wybrane"
+      "selected": "Eksportuj wybrane",
+      "dialogTitle": "Eksport tabeli"
     },
     "id": "Id",
     "name": "Nazwa",
@@ -39,7 +40,7 @@
     "hostByPlaceholder": "Wybierz prowadzącego",
     "actions": "Akcje",
     "active": "Aktywny",
-    "removed": "Usunięty",
+    "deleted": "Usunięty",
     "instructor": "Prowadzący",
     "firstName": "Imię",
     "lastName": "Nazwisko",
@@ -51,6 +52,7 @@
     "instituteName": "Nazwa instytutu",
     "department": "Katedra",
     "departmentName": "Nazwa katedry",
+    "companyName": "Nazwa firmy",
     "required": "To pole jest wymagane!",
     "of": "z",
     "copyToClipboard": "Skopiuj klucz"
@@ -238,6 +240,7 @@
     "id": "Identyfikator",
     "name": "Imię",
     "lastName": "Nazwisko",
+    "username": "Nazwa użytkownika",
     "college": "Uczelnia",
     "company": "Firma",
     "faculty": "Wydział",

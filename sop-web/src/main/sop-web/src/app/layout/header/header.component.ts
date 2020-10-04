@@ -63,7 +63,6 @@ export class HeaderComponent implements OnInit {
 
   logout() {
     this.tokenStorageService.signOut();
-    window.location.reload();
   }
 
   public showLoginForm(): void {
