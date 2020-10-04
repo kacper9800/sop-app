@@ -117,10 +117,12 @@ export class AddEditDialogCollegesComponent implements OnInit {
   private onSuccessActivateCollege(res) {
     this.blockUI = false;
     this.validateBtnState = ClrLoadingState.SUCCESS;
+    this.displayDialog = false;
   }
 
   private onErrorActivateCollege(error: any) {
     this.blockUI = false;
     this.validateBtnState = ClrLoadingState.ERROR;
+    this.displayDialog = false;
   }
 }

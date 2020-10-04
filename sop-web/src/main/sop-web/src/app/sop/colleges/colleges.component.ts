@@ -10,6 +10,7 @@ import {TranslateService} from '@ngx-translate/core';
 import {CollegeService} from '../../_services/organization-structure/college.service';
 import {HttpResponse} from '@angular/common/http';
 import {AddEditDialogCollegesComponent} from './add-edit-dialog-colleges/add-edit-dialog-colleges.component';
+import {ExportTableComponent} from "../export-table/export-table.component";
 
 @Component({
   selector: 'app-colleges',
@@ -19,10 +20,13 @@ import {AddEditDialogCollegesComponent} from './add-edit-dialog-colleges/add-edi
 export class CollegesComponent implements OnInit {
   public colleges: College[] = [];
   public columns: any[];
-  public selectedColleges: any;
+  public selectedColleges: any = [];
+  public blockUI: boolean;
 
   @ViewChild('addEditDialog', {read: ViewContainerRef, static: true})
   public addEditDialog: ViewContainerRef;
+  @ViewChild('exportDialog', {read: ViewContainerRef, static: true})
+  public exportDialog: ViewContainerRef;
   private componentRef: any;
 
   constructor(private resolver: ComponentFactoryResolver,
@@ -31,24 +35,27 @@ export class CollegesComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.blockUI = true;
     this.loadColleges();
     this.prepareColumns();
   }
 
   private loadColleges() {
     this.collegeService.getAllAvailableColleges().subscribe(
-      (res: HttpResponse<ICollege[]>) => this.onSuccessLoadColleges(res.body),
+      (res: HttpResponse<ICollege[]>) => this.onSuccessLoadColleges(res),
       (err) => this.onErrorLoadColleges(err));
   }
 
 
-  private onSuccessLoadColleges(body: ICollege[]) {
+  private onSuccessLoadColleges(body) {
     this.colleges = [];
     this.colleges = body;
+    this.blockUI = false;
   }
 
   private onErrorLoadColleges(err: any) {
     console.log(err);
+    this.blockUI = false;
   }
 
   private prepareColumns() {
@@ -62,16 +69,16 @@ export class CollegesComponent implements OnInit {
         fieldName: 'name'
       },
       {
-        label: this.translateService.instant('common.actions'),
-        fieldName: 'actions'
-      },
-      {
         label: this.translateService.instant('common.active'),
         fieldName: 'active'
       },
       {
-        label: this.translateService.instant('common.removed'),
-        fieldName: 'removed'
+        label: this.translateService.instant('common.deleted'),
+        fieldName: 'deleted'
+      },
+      {
+        label: this.translateService.instant('common.actions'),
+        fieldName: 'actions'
       }];
   }
 
@@ -99,11 +106,17 @@ export class CollegesComponent implements OnInit {
     // ToDo
   }
 
-  public onExportAll(): void {
-
-  }
-
-  public onExportSelected(): void {
-
+  public showExportDialog(exportAll: boolean): void {
+    this.exportDialog.clear();
+    const factory = this.resolver.resolveComponentFactory(ExportTableComponent);
+    this.componentRef = this.exportDialog.createComponent(factory);
+    if (exportAll) {
+      this.componentRef.instance.showExportTableDialog(this.colleges);
+    } else {
+      this.componentRef.instance.showExportTableDialog(this.selectedColleges);
+    }
+    this.componentRef.instance.closeDialogWithSaveEmitter.subscribe(() =>
+      this.loadColleges()
+    );
   }
 }

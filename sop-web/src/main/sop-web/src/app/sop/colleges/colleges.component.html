@@ -1,7 +1,8 @@
 <h1 style="text-align: center">{{'colleges.header' | translate}}</h1>
 <h4 style="text-align: center">{{'colleges.secondHeader' | translate}}</h4>
 
-<clr-datagrid [(clrDgSelected)]="selectedColleges" [clrDgRowSelection]="true" style="height: 50%;">
+<clr-datagrid [(clrDgSelected)]="selectedColleges" [clrDgRowSelection]="true" [clrDgLoading]="blockUI"
+              style="height: 50%;">
   <clr-dg-action-bar>
     <div class="btn-group">
       <button type="button" class="btn btn-sm btn-primary"
@@ -14,9 +15,10 @@
           {{'common.export.button' | translate}}
         </button>
         <clr-dropdown-menu clrPosition="bottom-left" *clrIfOpen>
-          <button type="button" (click)="onExportAll()" clrDropdownItem>
+          <button type="button" (click)="showExportDialog(true)"
+                  [disabled]="colleges.length === 0" clrDropdownItem>
             {{'common.export.all' | translate}}</button>
-          <button type="button" (click)="onExportSelected()"
+          <button type="button" (click)="showExportDialog(false)"
                   [disabled]="selectedColleges.length === 0" clrDropdownItem>
             {{'common.export.selected' | translate}}</button>
         </clr-dropdown-menu>
@@ -30,11 +32,26 @@
   <clr-dg-row *ngFor="let college of colleges" [clrDgItem]="college">
     <clr-dg-cell>{{college.id}}</clr-dg-cell>
     <clr-dg-cell>{{college.name}}</clr-dg-cell>
-    <clr-dg-cell>{{college.active}}</clr-dg-cell>
-    <clr-dg-cell>{{college.removed}}</clr-dg-cell>
+    <clr-dg-cell>
+      <div *ngIf="college.active">
+        <clr-icon shape="check"></clr-icon>
+      </div>
+      <div *ngIf="!college.active">
+        <clr-icon shape="times"></clr-icon>
+      </div>
+    </clr-dg-cell>
+    <clr-dg-cell>
+      <div *ngIf="college.removed">
+        <clr-icon shape="check"></clr-icon>
+      </div>
+      <div *ngIf="!college.removed">
+        <clr-icon shape="times"></clr-icon>
+      </div>
+    </clr-dg-cell>
     <clr-dg-cell>
       <div class="btn-group">
-        <button type="button" class="btn btn-sm btn-secondary" (click)="showEditDialog(college.id)">
+        <button type="button" class="btn btn-sm btn-secondary"
+                (click)="showEditDialog(college.id)">
           <clr-icon shape="pencil"></clr-icon>
           {{'common.crud.edit' | translate }}
         </button>
@@ -69,3 +86,5 @@
 <!--</div>-->
 
 <ng-template #addEditDialog></ng-template>
+<ng-template #exportDialog></ng-template>
+
