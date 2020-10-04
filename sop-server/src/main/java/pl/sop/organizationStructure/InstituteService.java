@@ -13,7 +13,7 @@ public class InstituteService {
   @Autowired
   private InstituteRepository instituteRepository;
 
-  public Institute getById(Long id) {
+  public Institute findById(Long id) {
     return instituteRepository.findById(id).get();
   }
 
@@ -33,4 +33,5 @@ public class InstituteService {
   public void deleteInstitute(Long collegeStructureId) {
     this.instituteRepository.deleteById(collegeStructureId);
   }
+
 }

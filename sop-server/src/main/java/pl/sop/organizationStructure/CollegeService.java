@@ -1,5 +1,6 @@
 package pl.sop.organizationStructure;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -7,10 +8,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import pl.sop.converters.FromDTO.DTOToActivationKeyConverter;
+import pl.sop.converters.FromDTO.DTOToCollegeConverter;
 import pl.sop.converters.ToDTO.CollegeToCollegeStructureDTOConverter;
+import pl.sop.converters.ToDTO.CollegeToDTOConverter;
+import pl.sop.dto.CollegeDTO;
 import pl.sop.dto.CollegeRegistrationDTO;
 import pl.sop.dto.CollegeStructureDTO;
 import pl.sop.dto.CollegeStructureToSaveDTO;
+import pl.sop.dto.TokenDTO;
+import pl.sop.entities.Token;
 import pl.sop.enums.ERole;
 import pl.sop.payload.request.SignUpRequest;
 import pl.sop.payload.response.MessageResponse;
@@ -38,17 +45,49 @@ public class CollegeService {
   @Autowired
   private DepartmentService departmentService;
 
+  private final DTOToActivationKeyConverter dtoToActivationKeyConverter = new DTOToActivationKeyConverter(
+      this, instituteService, facultyService, departmentService);
+
+  private final DTOToCollegeConverter dtoToCollegeConverter = new DTOToCollegeConverter();
+
+  private final CollegeToDTOConverter collegeToDTOConverter = new CollegeToDTOConverter();
+
   private final CollegeToCollegeStructureDTOConverter collegeToCollegeStructureDTOConverter = new CollegeToCollegeStructureDTOConverter();
 
   public CollegeService() {
+  }
+
+  public College findById(Long id) {
+    return this.collegeRepository.findById(id).get();
   }
 
   public List<College> findAllColleges() {
     return collegeRepository.findAllColleges();
   }
 
-  public List<College> findAllAvailableColleges() {
-    return collegeRepository.findAllAvailableColleges();
+  public List<CollegeDTO> findAllAvailableColleges() {
+    List<College> colleges = collegeRepository.findAllAvailableColleges();
+    List<CollegeDTO> collegeDTOS = new ArrayList<>();
+    for (College college : colleges) {
+      collegeDTOS.add(collegeToDTOConverter.convert(college));
+    }
+    return collegeDTOS;
+  }
+
+  public void createNewCollege(CollegeDTO collegeDTO) {
+    College college = dtoToCollegeConverter.convert(collegeDTO);
+    this.collegeRepository.save(college);
+  }
+
+  public ResponseEntity<HttpStatus> activateCollege(TokenDTO tokenDTO) {
+    if (tokenDTO != null && tokenDTO.getValue() != null) {
+      College college = collegeRepository.findOnlyCollegeById(tokenDTO.getCollegeId());
+      Token token = dtoToActivationKeyConverter.convert(tokenDTO);
+      token.setCollege(college);
+      this.activationKeyService.saveToken(token);
+
+    }
+    return ResponseEntity.ok(HttpStatus.NOT_FOUND);
   }
 
   public ResponseEntity<?> registerCollege(CollegeRegistrationDTO collegeRegistrationDTO) {
@@ -58,9 +97,12 @@ public class CollegeService {
           .body(new MessageResponse("Error: Provided access token is wrong!"));
     }
 
+    Token token = this.activationKeyService.getTokenByValue(collegeRegistrationDTO.getToken());
     College college = collegeRepository.findCollegeById(collegeRegistrationDTO.getCollegeId());
     college.setActive(Boolean.TRUE);
     userService.registerUser(createCollegeAdmin(collegeRegistrationDTO), true);
+    this.activationKeyService.deactivateToken(token);
+    this.activationKeyService.saveToken(token);
     return ResponseEntity.ok(collegeRepository.save(college));
   }
 

@@ -46,4 +46,13 @@ public class ActivationKeyService {
     }
     return false;
   }
+
+  public void deactivateToken(Token token) {
+    token.setActive(Boolean.FALSE);
+    token.setRemainingUses(0);
+  }
+
+  public void saveToken(Token token) {
+    this.activationKeyRepository.save(token);
+  }
 }

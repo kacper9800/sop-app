@@ -138,11 +138,11 @@ public class UserService {
 
   private User prepareUserDataFromToken(User user, Token token) {
     if (token.getFaculty() != null) { // Jeśli jest zapisany w tokenie faculty id to dodaje go
-      user.addFaculty(facultyService.getById(token.getFaculty().getId()));
+      user.addFaculty(facultyService.findById(token.getFaculty().getId()));
       if (token.getInstitute() != null) { // Jeśli jest zapisany w tokenie institute id to dodaje go
-        user.addInstitute(instituteService.getById(token.getInstitute().getId()));
+        user.addInstitute(instituteService.findById(token.getInstitute().getId()));
         if (token.getDepartment() != null) { // Jeśli jest zapisany w tokenie departmen id to dodaje go
-          user.addDepartment(departmentService.getById(token.getDepartment().getId()));
+          user.addDepartment(departmentService.findById(token.getDepartment().getId()));
         }
       }
     }

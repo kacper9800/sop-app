@@ -5,7 +5,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
-import pl.sop.organizationStructure.College;
 
 @Repository
 public interface CollegeRepository extends JpaRepository<College, Long> {
@@ -18,6 +17,9 @@ public interface CollegeRepository extends JpaRepository<College, Long> {
 
   @Query(value = "SELECT c FROM College c WHERE c.active = false")
   List<College> findAllAvailableColleges();
+
+  @Query(value = "SELECT college from College college where college.id = :college_id")
+  College findOnlyCollegeById(@Param("college_id") Long collegeId);
 
   @Query(value = "select college from College college"
       + " left join fetch college.faculties faculties"

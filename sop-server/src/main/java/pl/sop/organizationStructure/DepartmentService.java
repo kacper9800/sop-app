@@ -13,7 +13,7 @@ public class DepartmentService {
   @Autowired
   private DepartmentRepository departmentRepository;
 
-  public Department getById(Long id) {
+  public Department findById(Long id) {
     return departmentRepository.findById(id).get();
   }
 

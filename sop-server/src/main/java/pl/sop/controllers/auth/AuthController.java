@@ -20,6 +20,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import pl.sop.dto.CollegeDTO;
+import pl.sop.organizationStructure.College;
 import pl.sop.repositories.RoleRepository;
 import pl.sop.repositories.UserRepository;
 import pl.sop.dto.CollegeRegistrationDTO;
@@ -64,14 +66,21 @@ public class AuthController {
     UserDetailsImpl userDetails = (UserDetailsImpl) authentication.getPrincipal();
     List<String> roles = userDetails.getAuthorities().stream().map(item -> item.getAuthority())
         .collect(Collectors.toList());
-    List<Long> colleges = userDetails.getColleges().stream().map(college -> college.getId()).collect(Collectors.toList());
+    List<CollegeDTO> colleges = new ArrayList<>();
+    if (userDetails.getColleges().size() != 0) {
+      userDetails.getColleges().forEach(college -> {
+        CollegeDTO collegeDTO = new CollegeDTO(college.getId(), college.getName(), college.getActive(), college.getDeleted());
+        colleges.add(collegeDTO);
+      });
+    }
 
     return ResponseEntity.ok(new JwtResponse(jwt,
         userDetails.getId(),
         userDetails.getUsername(),
         userDetails.getEmail(),
         roles,
-        colleges));
+        colleges,
+        userDetails.getSelectedCollegeId()));
   }
 
   @PostMapping("/signUp")

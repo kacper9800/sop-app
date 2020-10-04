@@ -16,9 +16,11 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import pl.sop.dto.CollegeDTO;
+import pl.sop.dto.CollegeRegistrationDTO;
 import pl.sop.dto.CollegeStructureDTO;
 import pl.sop.dto.CollegeStructureToSaveDTO;
-import pl.sop.enums.ECollegeStructure;
+import pl.sop.dto.TokenDTO;
 import pl.sop.organizationStructure.College;
 import pl.sop.organizationStructure.CollegeRepository;
 import pl.sop.organizationStructure.CollegeService;
@@ -30,23 +32,38 @@ import pl.sop.services.UserService;
 public class CollegeController {
 
   @Autowired
-  private UserService userService;
-
-  @Autowired
   private CollegeService collegeService;
 
-  @Autowired
-  private CollegeRepository collegeRepository;
-
-  @GetMapping(value = "/api/college")
+  @GetMapping(value = "/api/colleges")
   public ResponseEntity<List<College>> getAllColleges() {
     final List<College> colleges = collegeService.findAllColleges();
     return new ResponseEntity<>(colleges, HttpStatus.OK);
   }
 
+  @PostMapping(value = "/api/colleges/createNew")
+  @PreAuthorize("hasRole('ROLE_SUPERADMIN')")
+  public ResponseEntity createNewCollege(@RequestBody CollegeDTO collegeDTO) {
+    this.collegeService.createNewCollege(collegeDTO);
+    return ResponseEntity.ok(HttpStatus.OK);
+  }
+
+  @PostMapping(value = "/api/colleges/activate")
+  @PreAuthorize("hasRole('ROLE_SUPERADMIN')")
+  public ResponseEntity activateCollege(@RequestBody TokenDTO tokenDTO) {
+    this.collegeService.activateCollege(tokenDTO);
+    return ResponseEntity.ok(HttpStatus.OK);
+  }
+
+  @PostMapping(value = "/api/colleges/register")
+  @PreAuthorize("hasRole('ROLE_SUPERADMIN')")
+  public ResponseEntity registerCollege(@RequestBody CollegeRegistrationDTO collegeRegistrationDTO) {
+    this.collegeService.registerCollege(collegeRegistrationDTO);
+    return ResponseEntity.ok(HttpStatus.OK);
+  }
+
   @GetMapping(value = "/api/available-colleges")
-  public ResponseEntity<List<College>> getAllAvailableColleges() {
-    final List<College> colleges = collegeService.findAllAvailableColleges();
+  public ResponseEntity<List<CollegeDTO>> getAllAvailableColleges() {
+    final List<CollegeDTO> colleges = collegeService.findAllAvailableColleges();
     return new ResponseEntity<>(colleges, HttpStatus.OK);
   }
 

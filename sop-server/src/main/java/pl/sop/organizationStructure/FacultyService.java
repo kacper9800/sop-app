@@ -13,8 +13,8 @@ public class FacultyService {
   @Autowired
   private FacultyRepository facultyRepository;
 
-  public Faculty getById(Long id) {
-    return facultyRepository.findById(id).get();
+  public Faculty findById(Long id) {
+    return this.facultyRepository.findById(id).get();
   }
 
   public Faculty createNewFaculty(CollegeStructureToSaveDTO collegeStructureToSaveDTO) {

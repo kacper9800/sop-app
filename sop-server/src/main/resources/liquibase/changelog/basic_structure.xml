@@ -581,4 +581,10 @@
   <changeSet id="25" author="krzymkiewicz">
     <renameColumn tableName="users" oldColumnName="college_id" newColumnName="selected_college_id"></renameColumn>
   </changeSet>
+  <changeSet id="26" author="krzymkiewicz">
+    <addColumn tableName="companies">
+      <column name="active" type="boolean"></column>
+      <column name="deleted" type="boolean"></column>
+    </addColumn>
+  </changeSet>
 </databaseChangeLog>
