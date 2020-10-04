@@ -1,7 +1,7 @@
 <h1 style="text-align: center">{{'companies.header' | translate}}</h1>
 <h4 style="text-align: center">{{'companies.secondHeader' | translate}}</h4>
 
-<clr-datagrid [(clrDgSelected)]="selectedCompanies" style="height: 50%;">
+<clr-datagrid [(clrDgSelected)]="selectedCompanies" style="height: 50%;"  [clrDgLoading]="blockUI">
   <clr-dg-action-bar>
     <div class="btn-group">
       <button type="button" class="btn btn-sm btn-primary"
@@ -14,9 +14,10 @@
           {{'common.export.button' | translate}}
         </button>
         <clr-dropdown-menu clrPosition="bottom-left" *clrIfOpen>
-          <button type="button" (click)="onExportAll()" clrDropdownItem>
+          <button type="button" (click)="showExportDialog(true)"
+                  [disabled]="companies.length === 0" clrDropdownItem>
             {{'common.export.all' | translate}}</button>
-          <button type="button" (click)="onExportSelected()"
+          <button type="button" (click)="showExportDialog(false)"
                   [disabled]="selectedCompanies.length === 0" clrDropdownItem>
             {{'common.export.selected' | translate}}</button>
         </clr-dropdown-menu>
@@ -66,3 +67,4 @@
 <!--</div>-->
 
 <ng-template #addEditDialog></ng-template>
+<ng-template #exportDialog></ng-template>
