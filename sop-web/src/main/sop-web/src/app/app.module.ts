@@ -51,7 +51,7 @@ import { LoginComponent } from './authentication/login/login.component';
 import { LogbookComponent } from './sop/logbook/logbook.component';
 import { NavBarComponent } from './layout/nav-bar/nav-bar.component';
 import { NewInternComponent } from './sop/new-intern/new-intern.component';
-import { NgModule } from '@angular/core';
+import {LOCALE_ID, NgModule} from '@angular/core';
 import { OwlDateTimeModule, OwlNativeDateTimeModule } from 'ng-pick-datetime';
 import { PlannerActivitiesComponent } from './sop/planner/planner-activities/planner-activities.component';
 // import { PlannerCalendarComponent } from './sop/planner/planner-calendar/planner-calendar.component';
@@ -79,6 +79,7 @@ import {AddEditDialogCompaniesComponent} from './sop/companies/add-edit-dialog-c
 import { AddEditDialogCollegesComponent } from './sop/colleges/add-edit-dialog-colleges/add-edit-dialog-colleges.component';
 import { ExportTableComponent } from './sop/export-table/export-table.component';
 import { ExportAsModule } from 'ngx-export-as';
+import '@angular/common/locales/global/pl';
 
 
 @NgModule({
@@ -167,7 +168,10 @@ import { ExportAsModule } from 'ngx-export-as';
     TreeTableModule,
     ExportAsModule
   ],
-  providers: [{ provide: LocationStrategy, useClass: HashLocationStrategy }, authInterceptorProviders],
+  providers: [
+    { provide: LocationStrategy, useClass: HashLocationStrategy },
+    authInterceptorProviders,
+    { provide: LOCALE_ID, useValue: 'pl' } ],
   bootstrap: [AppComponent],
   entryComponents: [
     LoginComponent,

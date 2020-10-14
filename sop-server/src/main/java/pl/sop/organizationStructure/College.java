@@ -8,7 +8,6 @@ package pl.sop.organizationStructure;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.io.Serializable;
 import java.util.List;
-import java.util.Set;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -16,11 +15,10 @@ import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import pl.sop.entities.ActivationKey;
 import pl.sop.entities.BasicEntity;
-import pl.sop.entities.Token;
 import pl.sop.entities.User;
 
 @Entity
@@ -39,7 +37,7 @@ public class College extends BasicEntity implements Serializable {
 
   @JsonIgnore
   @OneToMany(mappedBy = "college", orphanRemoval = true)
-  private List<Token> tokens;
+  private List<ActivationKey> activationKeys;
 
   @JsonIgnore
   @OneToMany(mappedBy = "college", cascade = CascadeType.MERGE, orphanRemoval = true)
@@ -87,9 +85,9 @@ public class College extends BasicEntity implements Serializable {
     this.users = users;
   }
 
-  public List<Token> getTokens() { return tokens; }
+  public List<ActivationKey> getActivationKeys() { return activationKeys; }
 
-  public void setTokens(List<Token> tokens) { this.tokens = tokens; }
+  public void setActivationKeys(List<ActivationKey> activationKeys) { this.activationKeys = activationKeys; }
 
   public List<Faculty> getFaculties() { return faculties; }
 

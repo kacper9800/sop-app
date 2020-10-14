@@ -3,18 +3,17 @@ package pl.sop.organizationStructure;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.util.Set;
 import javax.persistence.FetchType;
-import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import pl.sop.entities.ActivationKey;
 import pl.sop.entities.BasicEntity;
 import pl.sop.entities.User;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import java.io.Serializable;
-import pl.sop.entities.Token;
 
 @Entity
 @Table(name = "departments")
@@ -30,7 +29,7 @@ public class Department extends BasicEntity implements Serializable {
 
     @JsonIgnore
     @OneToMany(mappedBy="department")
-    private Set<Token> tokens;
+    private Set<ActivationKey> activationKeys;
 
     @JsonIgnore
     @ManyToOne(fetch = FetchType.EAGER)
@@ -78,12 +77,12 @@ public class Department extends BasicEntity implements Serializable {
         this.users = users;
     }
 
-    public Set<Token> getTokens() {
-        return tokens;
+    public Set<ActivationKey> getActivationKeys() {
+        return activationKeys;
     }
 
-    public void setTokens(Set<Token> tokens) {
-        this.tokens = tokens;
+    public void setActivationKeys(Set<ActivationKey> activationKeys) {
+        this.activationKeys = activationKeys;
     }
 
     public Institute getInstitute() {

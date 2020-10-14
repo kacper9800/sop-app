@@ -587,4 +587,11 @@
       <column name="deleted" type="boolean"></column>
     </addColumn>
   </changeSet>
+  <changeSet id="27" author="krzymkiewicz">
+    <renameTable oldTableName="tokens" newTableName="activation_keys"></renameTable>
+    <addColumn tableName="activation_keys">
+      <column name="start_expiration_date" type="timestamp without timezone"></column>
+    </addColumn>
+    <renameColumn tableName="activation_keys" oldColumnName="expiration_date" newColumnName="end_expiration_date"></renameColumn>
+  </changeSet>
 </databaseChangeLog>

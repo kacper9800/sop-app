@@ -1,34 +1,37 @@
 package pl.sop.converters.ToDTO;
 
 import pl.sop.converters.Converter;
-import pl.sop.dto.TokenDTO;
-import pl.sop.entities.Token;
+import pl.sop.dto.ActivationKeyDTO;
+import pl.sop.entities.ActivationKey;
 
-public class ActivationKeyToDTOConverter implements Converter<Token, TokenDTO> {
+public class ActivationKeyToDTOConverter implements Converter<ActivationKey, ActivationKeyDTO> {
 
   @Override
-  public TokenDTO convert(Token input) {
-    TokenDTO tokenDTO = new TokenDTO();
-    tokenDTO.setValue(input.getValue());
-    tokenDTO.setExpirationDate(input.getExpirationDate());
-    tokenDTO.setRemainingUses(input.getRemainingUses());
-
-    // To Do
-//    tokenDTO.setCreatedBy(input.getCreatedBy().getId());
-//    if (input)
+  public ActivationKeyDTO convert(ActivationKey input) {
+    ActivationKeyDTO activationKeyDTO = new ActivationKeyDTO();
+    activationKeyDTO.setValue(input.getValue());
+    activationKeyDTO.setStartExpirationDate(input.getStartExpirationDate());
+    activationKeyDTO.setEndExpirationDate(input.getEndExpirationDate());
+    activationKeyDTO.setNumberOfUses(input.getNumberOfUses());
+    // ToDo
+    //    tokenDTO.setCreatedBy(input.getCreatedBy().getId());
     if (input.getCollege() != null) {
-      tokenDTO.setCollegeName(input.getCollege().getName());
+      activationKeyDTO.setCollegeId(input.getCollege().getId());
+      activationKeyDTO.setCollegeName(input.getCollege().getName());
     }
     if (input.getFaculty() != null) {
-      tokenDTO.setFacultyName(input.getFaculty().getName());
+      activationKeyDTO.setFacultyId(input.getFaculty().getId());
+      activationKeyDTO.setFacultyName(input.getFaculty().getName());
     }
     if (input.getInstitute() != null) {
-      tokenDTO.setInstituteName(input.getInstitute().getName());
+      activationKeyDTO.setInstituteId(input.getInstitute().getId());
+      activationKeyDTO.setInstituteName(input.getInstitute().getName());
     }
     if (input.getDepartment() != null) {
-      tokenDTO.setDepartmentName(input.getDepartment().getName());
+      activationKeyDTO.setDepartmentId(input.getDepartment().getId());
+      activationKeyDTO.setDepartmentName(input.getDepartment().getName());
     }
-    tokenDTO.setActive(input.isActive());
-    return tokenDTO;
+    activationKeyDTO.setActive(input.isActive());
+    return activationKeyDTO;
   }
 }

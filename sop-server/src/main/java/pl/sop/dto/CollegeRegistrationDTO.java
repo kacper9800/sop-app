@@ -2,14 +2,14 @@ package pl.sop.dto;
 
 public class CollegeRegistrationDTO {
 
-  private String token;
+  private String activationKey;
   private Long collegeId;
   private String email;
   private String password;
 
-  public String getToken() { return token; }
+  public String getActivationKey() { return activationKey; }
 
-  public void setToken(String token) { this.token = token; }
+  public void setActivationKey(String activationKey) { this.activationKey = activationKey; }
 
   public Long getCollegeId() {
     return collegeId;

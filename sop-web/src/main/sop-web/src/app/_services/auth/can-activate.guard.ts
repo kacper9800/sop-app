@@ -10,7 +10,6 @@ export class CanActivateGuard implements CanActivate {
   constructor(private tokenStorageService: TokenStorageService) {
   }
 
-
   public canActivate(
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {

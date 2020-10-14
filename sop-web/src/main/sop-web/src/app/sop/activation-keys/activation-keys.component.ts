@@ -11,8 +11,9 @@ import {AddEditDialogActivationKeysComponent} from './add-edit-dialog-activation
 import {ActivationKeyService} from '../../_services/activation-key.service';
 import {HttpResponse} from '@angular/common/http';
 import {TranslateService} from '@ngx-translate/core';
-import {AddEditDialogCollegesComponent} from "../colleges/add-edit-dialog-colleges/add-edit-dialog-colleges.component";
-import {ExportTableComponent} from "../export-table/export-table.component";
+import {AddEditDialogCollegesComponent} from '../colleges/add-edit-dialog-colleges/add-edit-dialog-colleges.component';
+import {ExportTableComponent} from '../export-table/export-table.component';
+import {PrincipalService} from '../../_services/auth/principal.service';
 
 
 @Component({
@@ -33,6 +34,7 @@ export class ActivationKeysComponent implements OnInit {
   private componentRef: any;
 
   constructor(private resolver: ComponentFactoryResolver,
+              private principal: PrincipalService,
               private activationKeyService: ActivationKeyService) {
   }
 
@@ -52,10 +54,10 @@ export class ActivationKeysComponent implements OnInit {
     res.forEach(activationKey => {
       const key = new ActivationKey();
       key.value = activationKey.value;
-      key.expirationDateStart = activationKey.expirationDateStart;
-      key.expirationDateEnd = activationKey.expirationDateEnd;
+      key.startExpirationDate = activationKey.startExpirationDate;
+      key.endExpirationDate = activationKey.endExpirationDate;
       key.active = activationKey.active;
-      key.remainingUses = activationKey.remainingUses;
+      key.numberOfUses = activationKey.numberOfUses;
       if (activationKey.createdById === null || activationKey.createdById === undefined) {
         key.createdById = null;
         key.createdByName = '---';
@@ -91,6 +93,7 @@ export class ActivationKeysComponent implements OnInit {
         key.departmentId = activationKey.departmentId;
         key.departmentName = activationKey.departmentName;
       }
+      console.log(key);
       this.activationKeys.push(key);
     });
   }
@@ -100,19 +103,37 @@ export class ActivationKeysComponent implements OnInit {
   }
 
   private prepareColumns() {
-    this.columns = [
-      {label: 'activationKeys.tableColumns.value', fieldName: 'value'},
-      {label: 'activationKeys.tableColumns.expirationDateStart', fieldName: 'expirationDateStart'},
-      {label: 'activationKeys.tableColumns.expirationDateEnd', fieldName: 'expirationDateEnd'},
-      {label: 'activationKeys.tableColumns.remainingUses', fieldName: 'remainingUses'},
-      {label: 'activationKeys.tableColumns.createdBy', fieldName: 'createdBy'},
-      {label: 'common.facultyName', fieldName: 'facultyName'},
-      {label: 'common.instituteName', fieldName: 'instituteName'},
-      {label: 'common.departmentName', fieldName: 'departmentName'},
-      {label: 'common.active', fieldName: 'active'},
-      {label: 'common.deleted', fieldName: 'deleted'},
-      {label: 'common.actions', fieldName: 'actions'}
-    ];
+    if (this.principal.isSuperAdmin()) {
+      this.columns = [
+        {label: 'activationKeys.tableColumns.value', fieldName: 'value'},
+        {label: 'activationKeys.tableColumns.expirationDateStart', fieldName: 'startExpirationDate'},
+        {label: 'activationKeys.tableColumns.expirationDateEnd', fieldName: 'endExpirationDate'},
+        {label: 'activationKeys.tableColumns.remainingUses', fieldName: 'numberOfUses'},
+        {label: 'activationKeys.tableColumns.createdBy', fieldName: 'createdBy'},
+        {label: 'common.facultyName', fieldName: 'facultyName'},
+        {label: 'common.instituteName', fieldName: 'instituteName'},
+        {label: 'common.departmentName', fieldName: 'departmentName'},
+        {label: 'common.collegeName', fieldName: 'collegeName'},
+        {label: 'common.companyName', fieldName: 'companyName'},
+        {label: 'common.active', fieldName: 'active'},
+        {label: 'common.deleted', fieldName: 'deleted'},
+        {label: 'common.actions', fieldName: 'actions'}
+      ];
+    } else {
+      this.columns = [
+        {label: 'activationKeys.tableColumns.value', fieldName: 'value'},
+        {label: 'activationKeys.tableColumns.expirationDateStart', fieldName: 'expirationDateStart'},
+        {label: 'activationKeys.tableColumns.expirationDateEnd', fieldName: 'expirationDateEnd'},
+        {label: 'activationKeys.tableColumns.remainingUses', fieldName: 'numberOfUses'},
+        {label: 'activationKeys.tableColumns.createdBy', fieldName: 'createdBy'},
+        {label: 'common.facultyName', fieldName: 'facultyName'},
+        {label: 'common.instituteName', fieldName: 'instituteName'},
+        {label: 'common.departmentName', fieldName: 'departmentName'},
+        {label: 'common.active', fieldName: 'active'},
+        {label: 'common.actions', fieldName: 'actions'}
+      ];
+    }
+
   }
 
   public showAddNewDialog(): void {
@@ -160,5 +181,13 @@ export class ActivationKeysComponent implements OnInit {
     //   summary: this.translateService.instant('toast.info'),
     //   detail: this.translateService.instant('toast.infoCopiedToClipboard'),
     // });
+  }
+
+  get isSuperAdmin() {
+   return this.principal.isSuperAdmin();
+  }
+
+  get isAdmin() {
+    return this.principal.isAdmin();
   }
 }

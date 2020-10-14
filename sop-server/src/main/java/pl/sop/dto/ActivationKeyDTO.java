@@ -2,10 +2,11 @@ package pl.sop.dto;
 
 import java.time.LocalDateTime;
 
-public class TokenDTO {
+public class ActivationKeyDTO {
 
   private String value;
-  private LocalDateTime expirationDate;
+  private LocalDateTime startExpirationDate;
+  private LocalDateTime endExpirationDate;
   private Long collegeId;
   private String collegeName;
   private Long facultyId;
@@ -14,12 +15,12 @@ public class TokenDTO {
   private String instituteName;
   private Long departmentId;
   private String departmentName;
-  private Integer remainingUses;
+  private Integer numberOfUses;
   private Long createdById;
   private String createdByName;
   private Boolean active;
 
-  public TokenDTO() {
+  public ActivationKeyDTO() {
   }
 
   public String getValue() {
@@ -30,12 +31,20 @@ public class TokenDTO {
     this.value = value;
   }
 
-  public LocalDateTime getExpirationDate() {
-    return expirationDate;
+  public LocalDateTime getStartExpirationDate() {
+    return startExpirationDate;
   }
 
-  public void setExpirationDate(LocalDateTime expirationDate) {
-    this.expirationDate = expirationDate;
+  public void setStartExpirationDate(LocalDateTime startExpirationDate) {
+    this.startExpirationDate = startExpirationDate;
+  }
+
+  public LocalDateTime getEndExpirationDate() {
+    return endExpirationDate;
+  }
+
+  public void setEndExpirationDate(LocalDateTime endExpirationDate) {
+    this.endExpirationDate = endExpirationDate;
   }
 
   public Long getCollegeId() {
@@ -110,12 +119,12 @@ public class TokenDTO {
     this.active = active;
   }
 
-  public Integer getRemainingUses() {
-    return remainingUses;
+  public Integer getNumberOfUses() {
+    return numberOfUses;
   }
 
-  public void setRemainingUses(Integer remainingUses) {
-    this.remainingUses = remainingUses;
+  public void setNumberOfUses(Integer numberOfUses) {
+    this.numberOfUses = numberOfUses;
   }
 
   public Long getCreatedById() {

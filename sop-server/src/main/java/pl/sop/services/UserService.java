@@ -7,10 +7,10 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import pl.sop.entities.ActivationKey;
 import pl.sop.entities.Role;
 import pl.sop.entities.User;
 import pl.sop.organizationStructure.College;
@@ -23,7 +23,6 @@ import pl.sop.repositories.UserRepository;
 import pl.sop.enums.ERole;
 import pl.sop.payload.request.SignUpRequest;
 import pl.sop.payload.response.MessageResponse;
-import pl.sop.entities.Token;
 
 @Service
 public class UserService {
@@ -127,22 +126,22 @@ public class UserService {
     List<College> colleges = new ArrayList<>();
     colleges.add(college);
     user.setColleges(colleges);
-    Token token = activationKeyService.getTokenByValue(signUpRequest.getToken());
-    prepareUserDataFromToken(user, token);
-    token.setRemainingUses(token.getRemainingUses() -1);
-    if (token.getRemainingUses() <= 0) {
-      token.setActive(Boolean.FALSE);
+    ActivationKey activationKey = activationKeyService.getTokenByValue(signUpRequest.getToken());
+    prepareUserDataFromToken(user, activationKey);
+    activationKey.setNumberOfUses(activationKey.getNumberOfUses() -1);
+    if (activationKey.getNumberOfUses() <= 0) {
+      activationKey.setActive(Boolean.FALSE);
     }
     return user;
   }
 
-  private User prepareUserDataFromToken(User user, Token token) {
-    if (token.getFaculty() != null) { // Jeśli jest zapisany w tokenie faculty id to dodaje go
-      user.addFaculty(facultyService.findById(token.getFaculty().getId()));
-      if (token.getInstitute() != null) { // Jeśli jest zapisany w tokenie institute id to dodaje go
-        user.addInstitute(instituteService.findById(token.getInstitute().getId()));
-        if (token.getDepartment() != null) { // Jeśli jest zapisany w tokenie departmen id to dodaje go
-          user.addDepartment(departmentService.findById(token.getDepartment().getId()));
+  private User prepareUserDataFromToken(User user, ActivationKey activationKey) {
+    if (activationKey.getFaculty() != null) { // Jeśli jest zapisany w tokenie faculty id to dodaje go
+      user.addFaculty(facultyService.findById(activationKey.getFaculty().getId()));
+      if (activationKey.getInstitute() != null) { // Jeśli jest zapisany w tokenie institute id to dodaje go
+        user.addInstitute(instituteService.findById(activationKey.getInstitute().getId()));
+        if (activationKey.getDepartment() != null) { // Jeśli jest zapisany w tokenie departmen id to dodaje go
+          user.addDepartment(departmentService.findById(activationKey.getDepartment().getId()));
         }
       }
     }

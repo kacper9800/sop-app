@@ -73,11 +73,11 @@ export class AddEditDialogActivationKeysComponent implements OnInit {
         disabled: true
       }, Validators.required),
       expirationDateStart: new FormControl({
-        value: activationKey ? activationKey.expirationDateStart : null,
+        value: activationKey ? activationKey.startExpirationDate : null,
         disabled: false
       }, Validators.required),
       expirationDateEnd: new FormControl({
-        value: activationKey ? activationKey.expirationDateEnd : null,
+        value: activationKey ? activationKey.endExpirationDate : null,
         disabled: false
       }, Validators.required),
       numberOfUses: new FormControl({
@@ -261,7 +261,6 @@ export class AddEditDialogActivationKeysComponent implements OnInit {
       this.activationKeyForm.get('numberOfUses').setValue(null);
       this.activationKeyForm.get('numberOfUses').setValidators([Validators.required]);
     }
-    console.log(this.activationKeyForm);
   }
 
   public onFacultyChange() {
@@ -296,7 +295,6 @@ export class AddEditDialogActivationKeysComponent implements OnInit {
       id: null,
       name: this.translateService.instant('collegeStructure.dialog.chooseDepartment'),
     }];
-    console.log(this.institutes);
     const departments = this.institutes.find(institute => institute.id === Number(instituteId)).departments;
     if (departments.length !== 0) {
       departments.forEach(department => this.departments.push(department));
@@ -331,8 +329,8 @@ export class AddEditDialogActivationKeysComponent implements OnInit {
     this.activationKeyToSave = new ActivationKey();
     this.activationKeyToSave.value = this.activationKeyForm.get('token').value;
     this.activationKeyToSave.numberOfUses = this.activationKeyForm.get('numberOfUses').value;
-    this.activationKeyToSave.expirationDateStart = this.activationKeyForm.get('expirationDateStart').value;
-    this.activationKeyToSave.expirationDateEnd = this.activationKeyForm.get('expirationDateEnd').value;
+    this.activationKeyToSave.startExpirationDate = this.prepareDateObject(this.activationKeyForm.get('expirationDateStart').value);
+    this.activationKeyToSave.endExpirationDate = this.prepareDateObject(this.activationKeyForm.get('expirationDateEnd').value);
     if (this.selectedLevel === 0) {
       this.activationKeyToSave.collegeId = this.activationKeyForm.get('collegeId').value;
     } else if (this.selectedLevel === 1) {
@@ -342,12 +340,14 @@ export class AddEditDialogActivationKeysComponent implements OnInit {
     } else if (this.selectedLevel === 3) {
       this.activationKeyToSave.departmentId = this.activationKeyForm.get('departmentId').value;
     }
+    console.log(this.activationKeyToSave);
   }
 
   private onSuccessCreateActivationKey(res: HttpResponse<boolean>): void {
     this.displayDialog = false;
     this.blockUI = false;
     this.validateBtnState = ClrLoadingState.SUCCESS;
+    this.closeDialogWithSaveEmitter.emit();
   }
 
   private onErrorCreateActivationKey(err: any): void {
@@ -355,5 +355,23 @@ export class AddEditDialogActivationKeysComponent implements OnInit {
     this.blockUI = false;
   }
 
-
+  private prepareDateObject(date: string): Date {
+    if (date !== null && this.translateService.getBrowserLang() === 'pl') {
+      const dateParts = date.split('.');
+      const finalDate = dateParts[1] + '-' + dateParts[0] + '-' + dateParts[2];
+      const convertedDate = new Date(finalDate);
+      const userTimezoneOffset = convertedDate.getTimezoneOffset() * 60000;
+      const dateWithoutTimezone = convertedDate.getTime() - userTimezoneOffset;
+      return new Date(dateWithoutTimezone);
+    } else if (date !== null && this.translateService.getBrowserLang() === 'en') {
+      const dateParts = date.split('.');
+      const finalDate = dateParts[1] + '-' + dateParts[0] + '-' + dateParts[2];
+      const convertedDate = new Date(finalDate);
+      const userTimezoneOffset = convertedDate.getTimezoneOffset() * 60000;
+      const dateWithoutTimezone = convertedDate.getTime() - userTimezoneOffset;
+      return new Date(dateWithoutTimezone);
+    } else {
+      return null;
+    }
+  }
 }

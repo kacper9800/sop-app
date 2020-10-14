@@ -16,16 +16,14 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import pl.sop.dto.ActivationKeyDTO;
 import pl.sop.dto.CollegeDTO;
 import pl.sop.dto.CollegeRegistrationDTO;
 import pl.sop.dto.CollegeStructureDTO;
 import pl.sop.dto.CollegeStructureToSaveDTO;
-import pl.sop.dto.TokenDTO;
 import pl.sop.organizationStructure.College;
-import pl.sop.organizationStructure.CollegeRepository;
 import pl.sop.organizationStructure.CollegeService;
 import pl.sop.security.services.UserDetailsImpl;
-import pl.sop.services.UserService;
 
 @RestController
 @CrossOrigin
@@ -49,8 +47,8 @@ public class CollegeController {
 
   @PostMapping(value = "/api/colleges/activate")
   @PreAuthorize("hasRole('ROLE_SUPERADMIN')")
-  public ResponseEntity activateCollege(@RequestBody TokenDTO tokenDTO) {
-    this.collegeService.activateCollege(tokenDTO);
+  public ResponseEntity activateCollege(@RequestBody ActivationKeyDTO activationKeyDTO) {
+    this.collegeService.activateCollege(activationKeyDTO);
     return ResponseEntity.ok(HttpStatus.OK);
   }
 

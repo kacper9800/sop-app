@@ -2,8 +2,8 @@ package pl.sop.converters.FromDTO;
 
 import org.springframework.stereotype.Service;
 import pl.sop.converters.Converter;
-import pl.sop.dto.TokenDTO;
-import pl.sop.entities.Token;
+import pl.sop.dto.ActivationKeyDTO;
+import pl.sop.entities.ActivationKey;
 import pl.sop.organizationStructure.College;
 import pl.sop.organizationStructure.CollegeService;
 import pl.sop.organizationStructure.Department;
@@ -14,7 +14,7 @@ import pl.sop.organizationStructure.Institute;
 import pl.sop.organizationStructure.InstituteService;
 
 @Service
-public class DTOToActivationKeyConverter implements Converter<TokenDTO, Token> {
+public class DTOToActivationKeyConverter implements Converter<ActivationKeyDTO, ActivationKey> {
 
   private CollegeService collegeService;
   private InstituteService instituteService;
@@ -31,26 +31,26 @@ public class DTOToActivationKeyConverter implements Converter<TokenDTO, Token> {
   }
 
   @Override
-  public Token convert(TokenDTO input) {
-    Token token = new Token();
-    token.setValue(input.getValue());
-    token.setExpirationDate(input.getExpirationDate());
-    token.setRemainingUses(input.getRemainingUses());
+  public ActivationKey convert(ActivationKeyDTO input) {
+    ActivationKey activationKey = new ActivationKey();
+    activationKey.setValue(input.getValue());
+    activationKey.setStartExpirationDate(input.getStartExpirationDate());
+    activationKey.setEndExpirationDate(input.getEndExpirationDate());
+    activationKey.setNumberOfUses(input.getNumberOfUses());
     College college = collegeService.findById(input.getCollegeId());
-    token.setCollege(college);
+    activationKey.setCollege(college);
     if (input.getFacultyId() != null) {
       Faculty faculty = facultyService.findById(input.getFacultyId());
-      token.setFaculty(faculty);
+      activationKey.setFaculty(faculty);
     }
     if (input.getInstituteId() != null) {
       Institute institute = instituteService.findById(input.getInstituteId());
-      token.setInstitute(institute);
+      activationKey.setInstitute(institute);
     }
     if (input.getDepartmentId() != null) {
       Department department = departmentService.findById(input.getDepartmentId());
-      token.setDepartment(department);
+      activationKey.setDepartment(department);
     }
-
-    return token;
+    return activationKey;
   }
 }

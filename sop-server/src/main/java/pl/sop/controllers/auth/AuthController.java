@@ -92,4 +92,9 @@ public class AuthController {
   public ResponseEntity<?> registerCollege(@Valid @RequestBody CollegeRegistrationDTO collegeRegistrationDTO) {
     return collegeService.registerCollege(collegeRegistrationDTO);
   }
+
+//  @PostMapping("/signUpCompany")
+//  public ResponseEntity<?> registerCompany(@Valid @RequestBody CompanyRegistartionDTO companyRegistartionDTO) {
+//    return collegeService.registerCollege(collegeRegistrationDTO);
+//  }
 }

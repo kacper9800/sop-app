@@ -12,12 +12,12 @@ import pl.sop.converters.FromDTO.DTOToActivationKeyConverter;
 import pl.sop.converters.FromDTO.DTOToCollegeConverter;
 import pl.sop.converters.ToDTO.CollegeToCollegeStructureDTOConverter;
 import pl.sop.converters.ToDTO.CollegeToDTOConverter;
+import pl.sop.dto.ActivationKeyDTO;
 import pl.sop.dto.CollegeDTO;
 import pl.sop.dto.CollegeRegistrationDTO;
 import pl.sop.dto.CollegeStructureDTO;
 import pl.sop.dto.CollegeStructureToSaveDTO;
-import pl.sop.dto.TokenDTO;
-import pl.sop.entities.Token;
+import pl.sop.entities.ActivationKey;
 import pl.sop.enums.ERole;
 import pl.sop.payload.request.SignUpRequest;
 import pl.sop.payload.response.MessageResponse;
@@ -79,12 +79,12 @@ public class CollegeService {
     this.collegeRepository.save(college);
   }
 
-  public ResponseEntity<HttpStatus> activateCollege(TokenDTO tokenDTO) {
-    if (tokenDTO != null && tokenDTO.getValue() != null) {
-      College college = collegeRepository.findOnlyCollegeById(tokenDTO.getCollegeId());
-      Token token = dtoToActivationKeyConverter.convert(tokenDTO);
-      token.setCollege(college);
-      this.activationKeyService.saveToken(token);
+  public ResponseEntity<HttpStatus> activateCollege(ActivationKeyDTO activationKeyDTO) {
+    if (activationKeyDTO != null && activationKeyDTO.getValue() != null) {
+      College college = collegeRepository.findOnlyCollegeById(activationKeyDTO.getCollegeId());
+      ActivationKey activationKey = dtoToActivationKeyConverter.convert(activationKeyDTO);
+      activationKey.setCollege(college);
+      this.activationKeyService.saveActivationKey(activationKey);
 
     }
     return ResponseEntity.ok(HttpStatus.NOT_FOUND);
@@ -92,17 +92,17 @@ public class CollegeService {
 
   public ResponseEntity<?> registerCollege(CollegeRegistrationDTO collegeRegistrationDTO) {
     if (!activationKeyService.isValidTokenForCollege(collegeRegistrationDTO.getCollegeId(),
-        collegeRegistrationDTO.getToken())) {
+        collegeRegistrationDTO.getActivationKey())) {
       return ResponseEntity.badRequest()
           .body(new MessageResponse("Error: Provided access token is wrong!"));
     }
 
-    Token token = this.activationKeyService.getTokenByValue(collegeRegistrationDTO.getToken());
+    ActivationKey activationKey = this.activationKeyService.getTokenByValue(collegeRegistrationDTO.getActivationKey());
     College college = collegeRepository.findCollegeById(collegeRegistrationDTO.getCollegeId());
     college.setActive(Boolean.TRUE);
     userService.registerUser(createCollegeAdmin(collegeRegistrationDTO), true);
-    this.activationKeyService.deactivateToken(token);
-    this.activationKeyService.saveToken(token);
+    this.activationKeyService.deactivateActivationKey(activationKey);
+    this.activationKeyService.saveActivationKey(activationKey);
     return ResponseEntity.ok(collegeRepository.save(college));
   }
 
@@ -113,7 +113,7 @@ public class CollegeService {
     signUpRequest.setEmail(collegeRegistrationDTO.getEmail());
     signUpRequest.setPassword(collegeRegistrationDTO.getPassword());
     signUpRequest.setCollegeId(collegeRegistrationDTO.getCollegeId());
-    signUpRequest.setToken(collegeRegistrationDTO.getToken());
+    signUpRequest.setToken(collegeRegistrationDTO.getActivationKey());
     Set<String> roles = new HashSet<>();
     roles.add(ERole.ROLE_USER.toString());
     roles.add(ERole.ROLE_ADMIN.toString());
