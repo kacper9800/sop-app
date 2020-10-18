@@ -1,7 +1,10 @@
+<p-toast [baseZIndex]="10000" autoZIndex="true"></p-toast>
+
 <h1 style="text-align: center">{{'colleges.header' | translate}}</h1>
 <h4 style="text-align: center">{{'colleges.secondHeader' | translate}}</h4>
 
-<clr-datagrid [(clrDgSelected)]="selectedColleges" [clrDgRowSelection]="true" [clrDgLoading]="blockUI"
+<clr-datagrid [(clrDgSelected)]="selectedColleges" [clrDgRowSelection]="true"
+              [clrDgLoading]="blockUI"
               style="height: 50%;">
   <clr-dg-action-bar>
     <div class="btn-group">
@@ -50,15 +53,23 @@
     </clr-dg-cell>
     <clr-dg-cell>
       <div class="btn-group">
+        <button *ngIf="college.active" type="button" class="btn btn-sm btn-danger-outline"
+                (click)="activateAction(college)">
+          <clr-icon shape="times"></clr-icon>
+        </button>
+        <button *ngIf="!college.active" type="button" class="btn btn-sm btn-success-outline"
+                (click)="activateAction(college)">
+          <clr-icon shape="check"></clr-icon>
+
+        </button>
         <button type="button" class="btn btn-sm btn-secondary"
                 (click)="showEditDialog(college.id)">
           <clr-icon shape="pencil"></clr-icon>
-          {{'common.crud.edit' | translate }}
         </button>
-        <button type="button" class="btn btn-sm btn-danger" (click)="showConfirmDeleteDialog()">
+        <button type="button" class="btn btn-sm btn-danger" (click)="showConfirmDeleteDialog(college.id)">
           <clr-icon shape="trash"></clr-icon>
-          {{'common.crud.delete' | translate }}
         </button>
+
       </div>
     </clr-dg-cell>
   </clr-dg-row>
@@ -87,4 +98,5 @@
 
 <ng-template #addEditDialog></ng-template>
 <ng-template #exportDialog></ng-template>
+<ng-template #confirmDeleteDialog></ng-template>
 

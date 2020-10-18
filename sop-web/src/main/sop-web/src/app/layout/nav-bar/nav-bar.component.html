@@ -46,7 +46,7 @@
 
 
         <a routerLink="" class="nav-link" *ngIf="isSuperAdmin">
-          SuperAdmin
+          Administrator systemu
         </a>
         <a routerLink="/app/activation-keys" class="nav-link" *ngIf="isSuperAdmin">
           <clr-icon shape="key" class="is-solid"></clr-icon>
@@ -62,9 +62,11 @@
         </a>
         <a routerLink="/app/users" class="nav-link" *ngIf="isSuperAdmin">
           <clr-icon shape="users" class="is-solid"></clr-icon>
-          {{'navBar.users' | translate}}
+          {{'navBar.allUsers' | translate}}
         </a>
-        <a routerLink="" class="nav-link" *ngIf="isAdmin" style="color: red">
+
+        <div class="nav-divider"></div>
+        <a routerLink="" class="nav-link" id="adminRole" *ngIf="isAdmin">
           Administrator uczelni
         </a>
         <!--Administrator uczelni-->
@@ -72,18 +74,30 @@
           <clr-icon shape="building" class="is-solid"></clr-icon>
           Struktura uczelni
         </a>
+        <a routerLink="/app/companies" class="nav-link" *ngIf="isModerator">
+          <clr-icon shape="store" class="is-solid"></clr-icon>
+          Lista firm
+        </a>
         <a routerLink="/app/activation-keys" class="nav-link" *ngIf="isAdmin">
           <clr-icon shape="key" class="is-solid"></clr-icon>
           {{'navBar.activationKeys'| translate}}
         </a>
-        <a routerLink="/app/interns" class="nav-link" *ngIf="isAdmin">
-          <clr-icon shape="users" class="is-solid"></clr-icon>
-          Lista praktykantów
-        </a>
-        <a routerLink="/app/users" class="nav-link" *ngIf="isAdmin">
-          <clr-icon shape="users" class="is-solid"></clr-icon>
-          {{'navBar.users' | translate}}
-        </a>
+        <section class="nav-group collapsible" *ngIf="isAdmin">
+          <input id="dropdown2" type="checkbox">
+          <label for="dropdown2">
+            <clr-icon shape="users" class="is-solid"></clr-icon>{{'navBar.users' | translate}}
+          </label>
+          <ul class="nav-list">
+            <li>
+              <a routerLink="/app/users" class="nav-link" *ngIf="isAdmin">
+                {{'navBar.allUsers' | translate}}</a>
+            </li>
+            <li>
+              <a routerLink="/app/interns" class="nav-link" *ngIf="isAdmin">
+                Lista praktykantów</a>
+            </li>
+          </ul>
+        </section>
         <a routerLink="/app/forms" class="nav-link" *ngIf="isAdmin">
           <clr-icon shape="form"></clr-icon>
           {{'navBar.surveys' | translate}}
@@ -92,10 +106,11 @@
           <clr-icon shape="line-chart"></clr-icon>
           Statystyki
         </a>
-        <a routerLink="/app/activation-keys" class="nav-link" *ngIf="isAdmin">
-          <clr-icon shape="cursor-move"></clr-icon>
-          {{'navBar.practiceSupervisors' | translate}}
+        <a routerLink="/app/documents" class="nav-link" *ngIf="isAdmin">
+          <clr-icon shape="clipboard"></clr-icon>
+          Dokumenty
         </a>
+
         <!--Kierownik praktyk-->
         <a routerLink="" class="nav-link" *ngIf="isModerator" style="color: red">
           Kierownik praktyk
@@ -137,7 +152,7 @@
           <clr-icon shape="calendar"></clr-icon>
           Dziennik praktyk
         </a>
-        <a routerLink="/app/logbook" class="nav-link" *ngIf="isStudent || isSuperAdmin">
+        <a routerLink="/app/documents" class="nav-link" *ngIf="isStudent || isSuperAdmin">
           <clr-icon shape="clipboard"></clr-icon>
           Dokumenty
         </a>

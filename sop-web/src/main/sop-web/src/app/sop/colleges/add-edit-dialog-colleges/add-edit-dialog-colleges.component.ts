@@ -110,7 +110,7 @@ export class AddEditDialogCollegesComponent implements OnInit {
     this.activationKeyToSave = new ActivationKey();
     this.activationKeyToSave.collegeId = this.collegeForm.get('collegeId').value;
     this.activationKeyToSave.value = this.collegeForm.get('token').value;
-    this.activationKeyToSave.remainingUses = 1;
+    this.activationKeyToSave.numberOfUses = 1;
     this.activationKeyToSave.active = true;
   }
 

@@ -139,15 +139,20 @@
       </div>
 
       <div class="clr-row">
-        <div class="clr-col-2"></div>
-        <div class="clr-col-8">
-          <clr-input-container>
-            <label><clr-icon shape="accessibility-2"></clr-icon></label>
-            <input type="text" clrInput formControlName="numberOfUses" [placeholder]="'common.amountOfUses' | translate"/>
-            <clr-control-error>We need your first name for legal compliance</clr-control-error>
-          </clr-input-container>
+        <div class="clr-col-4"></div>
+        <div class="clr-col-4">
+          <clr-checkbox-container>
+            <clr-checkbox-wrapper>
+              <label>{{'common.active' | translate}}</label>
+              <input type="checkbox" clrCheckbox  formControlName="active" name="options" />
+            </clr-checkbox-wrapper>
+            <clr-checkbox-wrapper>
+              <label>{{'common.deleted' | translate}}</label>
+              <input type="checkbox" clrCheckbox  formControlName="deleted" name="options" />
+            </clr-checkbox-wrapper>
+          </clr-checkbox-container>
         </div>
-        <div class="clr-col-2"></div>
+        <div class="clr-col-4"></div>
       </div>
     </form>
   </div>

@@ -37,7 +37,7 @@ export class CollegeRegistrationComponent implements OnInit {
 
   ngOnInit(): void {
     this.collegeRegistrationForm = this.formBuilder.group({
-      token: new FormControl({value: null, disabled: false}, Validators.compose([Validators.minLength(10), Validators.required])),
+      activationKey: new FormControl({value: null, disabled: false}, Validators.compose([Validators.minLength(10), Validators.required])),
       collegeId: new FormControl({value: null, disabled: false}, Validators.required),
       email: new FormControl({value: null, disabled: false}, Validators.required),
       password: new FormControl({value: null, disabled: false}, Validators.required)
@@ -52,12 +52,12 @@ export class CollegeRegistrationComponent implements OnInit {
 
   private loadAvailableColleges(): void {
     this.collegeService.getAllAvailableColleges().subscribe(
-      (res: HttpResponse<ICollege[]>) => this.onSuccessLoadAvailableColleges(res.body),
+      (res: HttpResponse<ICollege[]>) => this.onSuccessLoadAvailableColleges(res),
       () => this.onErrorLoadAvailableColleges()
     );
   }
 
-  private onSuccessLoadAvailableColleges(res: ICollege[]): void {
+  private onSuccessLoadAvailableColleges(res): void {
     res.forEach(college => {
       const collegeView = {label: null, value: null};
       collegeView.label = college.name;
@@ -86,7 +86,6 @@ export class CollegeRegistrationComponent implements OnInit {
         this.displayAlert = true;
         this.errorMessage = err.error;
         this.isSignUpFailed = true;
-        console.log(err.error);
         this.messageService.add({
           severity: 'error',
           summary: 'Error!',
@@ -98,10 +97,9 @@ export class CollegeRegistrationComponent implements OnInit {
 
   private collectCollegeData(): void {
     this.collegeToRegister = {};
-    this.collegeToRegister.token = this.collegeRegistrationForm.get('token').value;
+    this.collegeToRegister.activationKey = this.collegeRegistrationForm.get('activationKey').value;
     this.collegeToRegister.collegeId = this.collegeRegistrationForm.get('collegeId').value;
     this.collegeToRegister.email = this.collegeRegistrationForm.get('email').value;
     this.collegeToRegister.password = this.collegeRegistrationForm.get('password').value;
-    console.log(this.collegeToRegister);
   }
 }

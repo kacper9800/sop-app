@@ -56,7 +56,9 @@
     "required": "To pole jest wymagane!",
     "of": "z",
     "copyToClipboard": "Skopiuj klucz",
-    "amountOfUses": "Liczba użyć"
+    "amountOfUses": "Liczba użyć",
+    "activate": "Aktywuj",
+    "deactivate": "Dezaktywuj"
   },
   "header": {
     "SOP": "System obsługi praktyk",
@@ -80,6 +82,7 @@
     "colleges": "Uczelnie",
     "companies": "Firmy",
     "users": "Użytkownicy",
+    "allUsers": "Wszyscy użytkownicy",
     "fieldsOfStudy": "Kierunki studiów",
     "practiceManagers": "Kierownicy praktyk",
     "practiceSupervisors": "Opiekunowie praktyk",
@@ -217,6 +220,7 @@
     "secondHeader": "Lista uczelni zarejestrowanych w systemie",
     "notFound": "Nie znaleziono żadnych uczelni!",
     "collegePerPage": "Liczba uczelni na stronie",
+    "colleges": "uczelni",
     "dialog": {
       "titleNew": "Dodawanie nowej uczelni",
       "titleEdit": "Edytowanie uczelni"
@@ -226,7 +230,11 @@
     },
     "tableColumns": {
     },
-    "colleges": "uczelni"
+    "activate" : {
+      "successActivate": "Pomyślnie aktywowano uczelnię",
+      "successDeactivate": "Pomyślnie dezaktywowano uczelnię",
+      "error": "Błąd zmiany stanu aktywności uczelnii"
+    }
   },
   "companies": {
     "header": "Lista firm",
@@ -260,6 +268,9 @@
     "tableColumns": {
     },
     "users": "użytkowników"
+  },
+  "interns": {
+
   }
 }
 

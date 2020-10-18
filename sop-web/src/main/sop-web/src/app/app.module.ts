@@ -73,9 +73,11 @@ import { SuperVisorsComponent } from './sop/super-visors/super-visors.component'
 import { CollegeStructureComponent } from './sop/college-structure/college-structure.component';
 import { CollegeRegistrationComponent } from './authentication/college-registration/college-registration.component';
 import { RegistrationConfirmationComponent } from './authentication/registration-confirmation/registration-confirmation.component';
-import {AddEditDialogActivationKeysComponent} from './sop/activation-keys/add-edit-dialog-activation-keys/add-edit-dialog-activation-keys.component';
+// tslint:disable-next-line:max-line-length
+import { AddEditDialogActivationKeysComponent } from './sop/activation-keys/add-edit-dialog-activation-keys/add-edit-dialog-activation-keys.component';
+// tslint:disable-next-line:max-line-length
 import { AddEditDialogCollegeStructureComponent } from './sop/college-structure/add-edit-dialog-college-structure/add-edit-dialog-college-structure.component';
-import {AddEditDialogCompaniesComponent} from './sop/companies/add-edit-dialog-companies/add-edit-dialog-companies.component';
+import { AddEditDialogCompaniesComponent } from './sop/companies/add-edit-dialog-companies/add-edit-dialog-companies.component';
 import { AddEditDialogCollegesComponent } from './sop/colleges/add-edit-dialog-colleges/add-edit-dialog-colleges.component';
 import { ExportTableComponent } from './sop/export-table/export-table.component';
 import { ExportAsModule } from 'ngx-export-as';
@@ -125,6 +127,7 @@ import '@angular/common/locales/global/pl';
     AddEditDialogCompaniesComponent,
     AddEditDialogCollegesComponent,
     ExportTableComponent,
+    InternsComponent
   ],
   imports: [
     BrowserModule,

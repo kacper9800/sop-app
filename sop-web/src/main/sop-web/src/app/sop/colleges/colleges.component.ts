@@ -10,12 +10,17 @@ import {TranslateService} from '@ngx-translate/core';
 import {CollegeService} from '../../_services/organization-structure/college.service';
 import {HttpResponse} from '@angular/common/http';
 import {AddEditDialogCollegesComponent} from './add-edit-dialog-colleges/add-edit-dialog-colleges.component';
-import {ExportTableComponent} from "../export-table/export-table.component";
+import {ExportTableComponent} from '../export-table/export-table.component';
+import {PrincipalService} from '../../_services/auth/principal.service';
+import {MessageService} from 'primeng';
+import {ConfirmDeleteDialogComponent} from "../../common/confirm-delete-dialog/confirm-delete-dialog.component";
+import {CollegeStructureEnum} from "../../_enums/college-structure.enum";
 
 @Component({
   selector: 'app-colleges',
   templateUrl: './colleges.component.html',
-  styleUrls: ['./colleges.component.css']
+  styleUrls: ['./colleges.component.css'],
+  providers: [MessageService]
 })
 export class CollegesComponent implements OnInit {
   public colleges: College[] = [];
@@ -27,10 +32,14 @@ export class CollegesComponent implements OnInit {
   public addEditDialog: ViewContainerRef;
   @ViewChild('exportDialog', {read: ViewContainerRef, static: true})
   public exportDialog: ViewContainerRef;
+  @ViewChild('confirmDeleteDialog', {read: ViewContainerRef, static: true})
+  public confirmDeleteDialog: ViewContainerRef;
   private componentRef: any;
 
   constructor(private resolver: ComponentFactoryResolver,
+              private principal: PrincipalService,
               private collegeService: CollegeService,
+              private messageService: MessageService,
               private translateService: TranslateService) {
   }
 
@@ -41,7 +50,7 @@ export class CollegesComponent implements OnInit {
   }
 
   private loadColleges() {
-    this.collegeService.getAllAvailableColleges().subscribe(
+    this.collegeService.getAllColleges().subscribe(
       (res: HttpResponse<ICollege[]>) => this.onSuccessLoadColleges(res),
       (err) => this.onErrorLoadColleges(err));
   }
@@ -102,8 +111,14 @@ export class CollegesComponent implements OnInit {
     );
   }
 
-  public showConfirmDeleteDialog(): void {
-    // ToDo
+  public showConfirmDeleteDialog(collegeId: number): void {
+    this.confirmDeleteDialog.clear();
+    const factory = this.resolver.resolveComponentFactory(ConfirmDeleteDialogComponent);
+    this.componentRef = this.confirmDeleteDialog.createComponent(factory);
+    this.componentRef.instance.prepareCollegeData(collegeId);
+    this.componentRef.instance.closeDialogWithSaveEmitter.subscribe( () => {
+      this.loadColleges();
+    });
   }
 
   public showExportDialog(exportAll: boolean): void {
@@ -118,5 +133,39 @@ export class CollegesComponent implements OnInit {
     this.componentRef.instance.closeDialogWithSaveEmitter.subscribe(() =>
       this.loadColleges()
     );
+  }
+
+  public activateAction(college: College): void {
+    const newActiveStatus = !college.active;
+    this.collegeService.changeActiveStatus(college.id, newActiveStatus).subscribe(
+      (res) => this.onSuccessChangeActiveStatus(res),
+      (error) => this.onErrorChangeActivateStatus(error)
+    );
+  }
+
+  private onSuccessChangeActiveStatus(res) {
+    // If college was active return false
+    this.loadColleges();
+    if (res) {
+      this.messageService.add({
+        severity: 'success',
+        summary: this.translateService.instant('toast.success'),
+        detail: this.translateService.instant('colleges.activate.successActivate')
+      });
+    } else {
+      this.messageService.add({
+        severity: 'success',
+        summary: this.translateService.instant('toast.success'),
+        detail: this.translateService.instant('colleges.activate.successDeactivate')
+      });
+    }
+  }
+
+  private onErrorChangeActivateStatus(error) {
+    this.messageService.add({
+      severity: 'error',
+      summary: this.translateService.instant('toast.error'),
+      detail: this.translateService.instant('colleges.activate.error')
+    });
   }
 }

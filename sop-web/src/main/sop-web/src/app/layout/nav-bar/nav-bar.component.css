@@ -6,3 +6,8 @@
 .modal-body p {
   text-align: center;
 }
+
+#adminRole {
+  font-weight: bold;
+  font-style: italic;
+}

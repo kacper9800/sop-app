@@ -54,7 +54,9 @@
     "companyName": "Company name",
     "of": "of",
     "copyToClipboard": "Copy key",
-    "amountOfUses": "Amount of uses"
+    "amountOfUses": "Amount of uses",
+    "activate": "Activate",
+    "deactivate": "Deactivate"
   },
   "header": {
     "SOP": "Internship service system",
@@ -78,6 +80,7 @@
     "colleges": "Colleges",
     "companies": "Companies",
     "users": "Users",
+    "allUsers": "All users",
     "fieldsOfStudy": "Fields of study",
     "practiceManagers": "Practice managers",
     "practiceSupervisors": "Practice supervisors",
@@ -224,6 +227,11 @@
       "addCollege": "Add college"
     },
     "tableColumns": {
+    },
+    "activate" : {
+      "successActivate": "Successfully activated college",
+      "successDeactivate": "Successfully deactivated college",
+      "error": "Error during changing activity status"
     }
   },
   "companies": {
@@ -258,5 +266,8 @@
     },
     "tableColumns": {
     }
+  },
+  "interns": {
+
   }
 }

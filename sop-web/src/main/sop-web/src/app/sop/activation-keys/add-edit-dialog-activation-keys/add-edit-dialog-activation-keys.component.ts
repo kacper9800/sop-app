@@ -44,6 +44,8 @@ export class AddEditDialogActivationKeysComponent implements OnInit {
   public validateBtnState: any;
   public selectedLevel: number;
   private activationKeyToSave: ActivationKey;
+  private editMode = false;
+  private activationKeyValue: string;
 
   constructor(private activationKeyService: ActivationKeyService,
               private facultyService: FacultyService,
@@ -57,12 +59,33 @@ export class AddEditDialogActivationKeysComponent implements OnInit {
   }
 
   ngOnInit() {
+    console.log('onInit');
+    if (this.editMode) {
+      this.loadActivationKey(this.activationKeyValue);
+    }
     this.prepareForm();
     this.loadCollegeStructureData();
     this.prepareDropdownsOptions();
     if (this.principalService.isSuperAdmin()) {
       this.loadColleges();
     }
+    this.displayDialog = true;
+  }
+
+  private loadActivationKey(keyValue: string) {
+    this.activationKeyService.getActivationKeyForValue(keyValue).subscribe(
+      (res) => this.onSuccessLoadActivationKey(res),
+      (res) => this.onErrorLoadActivationKey(res)
+    );
+  }
+
+  private onSuccessLoadActivationKey(res) {
+    this.editMode = true;
+    this.prepareForm(res);
+    this.displayDialog = true;
+  }
+
+  private onErrorLoadActivationKey(res: any) {
   }
 
   private prepareForm(activationKey?: ActivationKey): void {
@@ -81,7 +104,7 @@ export class AddEditDialogActivationKeysComponent implements OnInit {
         disabled: false
       }, Validators.required),
       numberOfUses: new FormControl({
-        value: activationKey ? activationKey.remainingUses : null,
+        value: activationKey ? activationKey.numberOfUses : null,
         disabled: false
       }, Validators.required),
       collegeId: new FormControl({
@@ -99,8 +122,31 @@ export class AddEditDialogActivationKeysComponent implements OnInit {
       departmentId: new FormControl({
         value: activationKey ? activationKey.departmentId : null,
         disabled: false
+      }, Validators.required),
+      active: new FormControl({
+        value: activationKey ? activationKey.active : null,
+        disabled: false
+      }, Validators.required),
+      deleted: new FormControl({
+        value: activationKey ? activationKey.deleted : null,
+        disabled: false
       }, Validators.required)
     });
+    if (activationKey) {
+      this.setActivationKeyLevel(activationKey);
+    }
+  }
+
+  private setActivationKeyLevel(activationKey: IActivationKey): void {
+    if (activationKey.collegeId && activationKey.facultyId == null && activationKey.instituteId == null && activationKey.departmentId == null) {
+      this.activationKeyForm.controls.level.setValue(0);
+    } else if (activationKey.collegeId && activationKey.facultyId && activationKey.instituteId == null && activationKey.departmentId == null) {
+      this.activationKeyForm.controls.level.setValue(1);
+    } else if (activationKey.collegeId && activationKey.facultyId && activationKey.instituteId && activationKey.departmentId == null) {
+      this.activationKeyForm.controls.level.setValue(2);
+    } else if (activationKey.collegeId && activationKey.facultyId && activationKey.instituteId && activationKey.departmentId) {
+      this.activationKeyForm.controls.level.setValue(3);
+    }
   }
 
   private prepareDropdownsOptions() {
@@ -202,23 +248,14 @@ export class AddEditDialogActivationKeysComponent implements OnInit {
   }
 
   public showEditActivationKeyDialog(value: string) {
+    console.log('edit');
     this.blockUI = true;
     this.dialogTitle = this.translateService.instant('activationKeys.dialog.titleEdit');
-    this.activationKeyService.getActivationKeyForValue(value).subscribe(
-      (res: HttpResponse<IActivationKey>) => this.onSuccessLoadActivationKey(res.body),
-      (res) => this.onErrorLoadActivationKey(res)
-    );
+    this.editMode = true;
+    this.activationKeyValue = value;
+    console.log(this.editMode);
+    console.log(this.activationKeyValue);
   }
-
-  private onSuccessLoadActivationKey(res: IActivationKey) {
-    this.activationKey = res;
-    this.displayDialog = true;
-  }
-
-  private onErrorLoadActivationKey(res: any) {
-
-  }
-
 
   public onCollegeStructureLevelChange() {
     const level = this.activationKeyForm.get('level').value;
@@ -374,4 +411,5 @@ export class AddEditDialogActivationKeysComponent implements OnInit {
       return null;
     }
   }
+
 }

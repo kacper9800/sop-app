@@ -6,8 +6,8 @@ import {ICollege} from '../../_model/organization-structure/college.model';
 import {CollegeStructure} from '../../_model/organization-structure/college-structure.model';
 import {CollegeStructureToSave} from '../../_model/organization-structure/structure-to-save.model';
 import {CollegeStructureEnum} from '../../_enums/college-structure.enum';
-import {ActivationKey, IActivationKey} from "../../_model/activation-key.model";
-import {ICollegeRegister} from "../../_model/college-register.model";
+import {IActivationKey} from '../../_model/activation-key.model';
+import {ICollegeRegister} from '../../_model/college-register.model';
 
 const COLLEGES_API = '/colleges';
 const AVAILABLE_COLLEGES_API = '/available-colleges';
@@ -24,7 +24,10 @@ export class CollegeService {
 
   public getCollegeForId(id: number): Observable<HttpResponse<ICollege>> {
     return this.httpClient.get<HttpResponse<ICollege>>(global.API + COLLEGES_API + '/' + id);
+  }
 
+  public getAllColleges(): Observable<HttpResponse<ICollege[]>> {
+    return this.httpClient.get<HttpResponse<ICollege[]>>(global.API + COLLEGES_API);
   }
 
   public getAllAvailableColleges(): Observable<HttpResponse<ICollege[]>> {
@@ -46,6 +49,16 @@ export class CollegeService {
     return this.httpClient.post<number>(global.API + COLLEGES_API + '/register', collegeRegister);
   }
 
+  // Super admin can change active status
+  public changeActiveStatus(collegeId: number, newActiveStatus: boolean): Observable<boolean> {
+    return this.httpClient.post<boolean>(global.API + COLLEGES_API + '/change-active-status/' +
+      collegeId + '/' + newActiveStatus, {observe: 'body'});
+  }
+
+  public deleteCollege(id: number): Observable<HttpResponse<number>> {
+    return this.httpClient.delete<number>(global.API + COLLEGES_API + '/' + id, {observe: 'response'});
+  }
+
   public getCollegeStructure(): Observable<CollegeStructure> {
     return this.httpClient.get<CollegeStructure>(global.API + COLLEGE_STRUCTURE_API);
   }
@@ -63,6 +76,4 @@ export class CollegeService {
       observe: 'response'
     });
   }
-
-
 }

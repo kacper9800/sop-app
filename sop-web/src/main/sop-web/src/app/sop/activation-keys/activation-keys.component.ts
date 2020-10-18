@@ -10,21 +10,24 @@ import {ActivationKey, IActivationKey} from '../../_model/activation-key.model';
 import {AddEditDialogActivationKeysComponent} from './add-edit-dialog-activation-keys/add-edit-dialog-activation-keys.component';
 import {ActivationKeyService} from '../../_services/activation-key.service';
 import {HttpResponse} from '@angular/common/http';
-import {TranslateService} from '@ngx-translate/core';
-import {AddEditDialogCollegesComponent} from '../colleges/add-edit-dialog-colleges/add-edit-dialog-colleges.component';
 import {ExportTableComponent} from '../export-table/export-table.component';
 import {PrincipalService} from '../../_services/auth/principal.service';
-
+import {ConfirmDeleteDialogComponent} from '../../common/confirm-delete-dialog/confirm-delete-dialog.component';
+import {MessageService} from 'primeng';
+import {TranslateService} from '@ngx-translate/core';
 
 @Component({
   selector: 'app-activation-keys',
   templateUrl: './activation-keys.component.html',
-  styleUrls: ['./activation-keys.component.css']
+  styleUrls: ['./activation-keys.component.css'],
+  providers: [MessageService]
 })
 export class ActivationKeysComponent implements OnInit {
   public activationKeys: ActivationKey[] = [];
   public columns: any[];
   public selectedActivationKeys = [];
+  public blockUI = false;
+
 
   @ViewChild('addEditDialog', {read: ViewContainerRef, static: true})
   public addEditDialog: ViewContainerRef;
@@ -33,8 +36,13 @@ export class ActivationKeysComponent implements OnInit {
   public exportDialog: ViewContainerRef;
   private componentRef: any;
 
+  @ViewChild('confirmDeleteDialog', {read: ViewContainerRef, static: true})
+  public confirmDeleteDialog: ViewContainerRef;
+
   constructor(private resolver: ComponentFactoryResolver,
               private principal: PrincipalService,
+              private messageService: MessageService,
+              private translateService: TranslateService,
               private activationKeyService: ActivationKeyService) {
   }
 
@@ -44,6 +52,7 @@ export class ActivationKeysComponent implements OnInit {
   }
 
   private loadActivationKeys(): void {
+    this.blockUI = true;
     this.activationKeyService.getAllActivationKeysForCompany().subscribe(
       (res: HttpResponse<IActivationKey[]>) => this.onSuccessLoadActivationKeys(res.body),
       () => this.onErrorLoadActivationKeys());
@@ -53,10 +62,12 @@ export class ActivationKeysComponent implements OnInit {
     this.activationKeys = [];
     res.forEach(activationKey => {
       const key = new ActivationKey();
+      key.id = activationKey.id;
       key.value = activationKey.value;
       key.startExpirationDate = activationKey.startExpirationDate;
       key.endExpirationDate = activationKey.endExpirationDate;
       key.active = activationKey.active;
+      key.deleted = activationKey.deleted;
       key.numberOfUses = activationKey.numberOfUses;
       if (activationKey.createdById === null || activationKey.createdById === undefined) {
         key.createdById = null;
@@ -65,6 +76,13 @@ export class ActivationKeysComponent implements OnInit {
         key.createdById = activationKey.createdById;
         key.createdByName = activationKey.createdByName;
       }
+      if (activationKey.companyId === null || activationKey.companyId === undefined) {
+        key.companyId = null;
+        key.companyName = '---';
+      } else {
+        key.companyId = activationKey.companyId;
+        key.companyName = activationKey.companyName;
+      }
       if (activationKey.collegeId === null || activationKey.collegeId === undefined) {
         key.collegeId = null;
         key.collegeName = '---';
@@ -72,7 +90,7 @@ export class ActivationKeysComponent implements OnInit {
         key.collegeId = activationKey.collegeId;
         key.collegeName = activationKey.collegeName;
       }
-      if (activationKey.facultyId === null || activationKey.facultyId  === undefined) {
+      if (activationKey.facultyId === null || activationKey.facultyId === undefined) {
         key.facultyId = null;
         key.facultyName = '---';
       } else {
@@ -93,23 +111,25 @@ export class ActivationKeysComponent implements OnInit {
         key.departmentId = activationKey.departmentId;
         key.departmentName = activationKey.departmentName;
       }
-      console.log(key);
       this.activationKeys.push(key);
     });
+    this.blockUI = false;
   }
 
   private onErrorLoadActivationKeys(): void {
     this.activationKeys = [];
+    this.blockUI = false;
   }
 
   private prepareColumns() {
     if (this.principal.isSuperAdmin()) {
       this.columns = [
+        {label: 'common.id', fieldName: 'id'},
         {label: 'activationKeys.tableColumns.value', fieldName: 'value'},
         {label: 'activationKeys.tableColumns.expirationDateStart', fieldName: 'startExpirationDate'},
         {label: 'activationKeys.tableColumns.expirationDateEnd', fieldName: 'endExpirationDate'},
         {label: 'activationKeys.tableColumns.remainingUses', fieldName: 'numberOfUses'},
-        {label: 'activationKeys.tableColumns.createdBy', fieldName: 'createdBy'},
+        // {label: 'activationKeys.tableColumns.createdBy', fieldName: 'createdBy'},
         {label: 'common.facultyName', fieldName: 'facultyName'},
         {label: 'common.instituteName', fieldName: 'instituteName'},
         {label: 'common.departmentName', fieldName: 'departmentName'},
@@ -121,11 +141,12 @@ export class ActivationKeysComponent implements OnInit {
       ];
     } else {
       this.columns = [
+        {label: 'common.id', fieldName: 'id'},
         {label: 'activationKeys.tableColumns.value', fieldName: 'value'},
         {label: 'activationKeys.tableColumns.expirationDateStart', fieldName: 'expirationDateStart'},
         {label: 'activationKeys.tableColumns.expirationDateEnd', fieldName: 'expirationDateEnd'},
         {label: 'activationKeys.tableColumns.remainingUses', fieldName: 'numberOfUses'},
-        {label: 'activationKeys.tableColumns.createdBy', fieldName: 'createdBy'},
+        // {label: 'activationKeys.tableColumns.createdBy', fieldName: 'createdBy'},
         {label: 'common.facultyName', fieldName: 'facultyName'},
         {label: 'common.instituteName', fieldName: 'instituteName'},
         {label: 'common.departmentName', fieldName: 'departmentName'},
@@ -133,7 +154,6 @@ export class ActivationKeysComponent implements OnInit {
         {label: 'common.actions', fieldName: 'actions'}
       ];
     }
-
   }
 
   public showAddNewDialog(): void {
@@ -156,8 +176,14 @@ export class ActivationKeysComponent implements OnInit {
     });
   }
 
-  public showConfirmDeleteDialog() {
-    // ToDo
+  public showConfirmDeleteDialog(value: number) {
+    this.confirmDeleteDialog.clear();
+    const factory = this.resolver.resolveComponentFactory(ConfirmDeleteDialogComponent);
+    this.componentRef = this.confirmDeleteDialog.createComponent(factory);
+    this.componentRef.instance.prepareActivationKeyData(value);
+    this.componentRef.instance.closeDialogWithSaveEmitter.subscribe(() => {
+      this.loadActivationKeys();
+    });
   }
 
   public showExportDialog(exportAll: boolean): void {
@@ -184,7 +210,7 @@ export class ActivationKeysComponent implements OnInit {
   }
 
   get isSuperAdmin() {
-   return this.principal.isSuperAdmin();
+    return this.principal.isSuperAdmin();
   }
 
   get isAdmin() {

@@ -2,7 +2,7 @@
   <h1 style="text-align: center">Klucze aktywacyjne dla użytkowników</h1>
   <h4 style="text-align: center">Aby dodać nowych użytkowników utwórz klucz aktywacyjny</h4>
 
-  <clr-datagrid [(clrDgSelected)]="selectedActivationKeys" [clrDgRowSelection]="true">
+  <clr-datagrid [(clrDgSelected)]="selectedActivationKeys" [clrDgRowSelection]="true" [clrDgLoading]="blockUI">
     <clr-dg-action-bar>
       <div class="btn-group">
         <button type="button" class="btn btn-sm btn-primary"
@@ -30,11 +30,12 @@
     </clr-dg-column>
 
     <clr-dg-row *ngFor="let key of activationKeys" [clrDgItem]="key">
+      <clr-dg-cell>{{key.id}}</clr-dg-cell>
       <clr-dg-cell>{{key.value}}</clr-dg-cell>
       <clr-dg-cell>{{key.startExpirationDate | date}}</clr-dg-cell>
       <clr-dg-cell>{{key.endExpirationDate | date}}</clr-dg-cell>
       <clr-dg-cell>{{key.numberOfUses}}</clr-dg-cell>
-      <clr-dg-cell>{{key.createdByName}}</clr-dg-cell>
+<!--      <clr-dg-cell>{{key.createdByName}}</clr-dg-cell>-->
       <clr-dg-cell>{{key.facultyName}}</clr-dg-cell>
       <clr-dg-cell>{{key.instituteName}}</clr-dg-cell>
       <clr-dg-cell>{{key.departmentName}}</clr-dg-cell>
@@ -61,11 +62,10 @@
           <button type="button" class="btn btn-sm btn-secondary" (click)="copyKeyValue(key.value)">
             <clr-icon shape="copy-to-clipboard"></clr-icon>
           </button>
-          <button type="button" class="btn btn-sm btn-secondary"
-                  (click)="showEditDialog(key.value)">
+          <button type="button" class="btn btn-sm btn-secondary" (click)="showEditDialog(key.value)">
             <clr-icon shape="pencil"></clr-icon>
           </button>
-          <button type="button" class="btn btn-sm btn-danger" (click)="showConfirmDeleteDialog()">
+          <button type="button" class="btn btn-sm btn-danger" (click)="showConfirmDeleteDialog(key.id)">
             <clr-icon shape="trash"></clr-icon>
           </button>
         </div>
@@ -97,3 +97,4 @@
 
 <ng-template #addEditDialog></ng-template>
 <ng-template #exportDialog></ng-template>
+<ng-template #confirmDeleteDialog></ng-template>
