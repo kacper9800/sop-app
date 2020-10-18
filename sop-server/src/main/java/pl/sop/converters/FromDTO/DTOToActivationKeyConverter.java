@@ -33,6 +33,7 @@ public class DTOToActivationKeyConverter implements Converter<ActivationKeyDTO, 
   @Override
   public ActivationKey convert(ActivationKeyDTO input) {
     ActivationKey activationKey = new ActivationKey();
+    activationKey.setId(input.getId());
     activationKey.setValue(input.getValue());
     activationKey.setStartExpirationDate(input.getStartExpirationDate());
     activationKey.setEndExpirationDate(input.getEndExpirationDate());

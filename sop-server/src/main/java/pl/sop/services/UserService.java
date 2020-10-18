@@ -6,23 +6,26 @@ import java.util.Comparator;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import pl.sop.converters.ToDTO.UserViewToDTOConverter;
+import pl.sop.dto.UserDTO;
 import pl.sop.entities.ActivationKey;
 import pl.sop.entities.Role;
 import pl.sop.entities.User;
+import pl.sop.enums.ERole;
 import pl.sop.organizationStructure.College;
 import pl.sop.organizationStructure.CollegeRepository;
 import pl.sop.organizationStructure.DepartmentService;
 import pl.sop.organizationStructure.FacultyService;
 import pl.sop.organizationStructure.InstituteService;
-import pl.sop.repositories.RoleRepository;
-import pl.sop.repositories.UserRepository;
-import pl.sop.enums.ERole;
 import pl.sop.payload.request.SignUpRequest;
 import pl.sop.payload.response.MessageResponse;
+import pl.sop.repositories.RoleRepository;
+import pl.sop.repositories.UserRepository;
 
 @Service
 public class UserService {
@@ -52,17 +55,31 @@ public class UserService {
   @Autowired
   private PasswordEncoder encoder;
 
-  public User getUser(Long id) {
-    return userRepository.findUserById(id);
+  private final UserViewToDTOConverter userViewToDTOConverter = new UserViewToDTOConverter();
 
+  public UserDTO getUser(Long id) {
+    User user = userRepository.findUserById(id);
+    return userViewToDTOConverter.convert(user);
   }
 
-  public List<User> getAllUsers() {
+  public List<UserDTO> getAllUsers() {
     List<User> users = userRepository.findAllUsers();
-    Comparator<User> comparator = (User u1, User u2) -> u1.getId().compareTo(u2.getId());
+    Comparator<User> comparator = Comparator.comparing(User::getId);
     Collections.sort(users, comparator);
-    return users;
+    List<UserDTO> userDTOS = users.stream().map(userViewToDTOConverter::convert).collect(
+        Collectors.toList());
+    return userDTOS;
   }
+
+  public List<UserDTO> getAllUsersForCollegeId(Long collegeId) {
+    List<User> users = userRepository.findAllUsersForCollegeId(collegeId);
+    Comparator<User> comparator = Comparator.comparing(User::getId);
+    Collections.sort(users, comparator);
+    List<UserDTO> userDTOS = users.stream().map(userViewToDTOConverter::convert).collect(
+        Collectors.toList());
+    return userDTOS;
+  }
+
 
   public ResponseEntity<?> registerUser(SignUpRequest signUpRequest, Boolean isAdminUser) {
     if (!isAdminUser) {
@@ -118,17 +135,18 @@ public class UserService {
     user.setUsername(signUpRequest.getUsername());
     user.setEmail(signUpRequest.getEmail());
     user.setPassword(encoder.encode(signUpRequest.getPassword()));
-    user.setFirstName(signUpRequest.getFirstName() != null? signUpRequest.getFirstName() : null);
-    user.setLastName(signUpRequest.getLastName() != null? signUpRequest.getLastName() : null);
+    user.setFirstName(signUpRequest.getFirstName() != null ? signUpRequest.getFirstName() : null);
+    user.setLastName(signUpRequest.getLastName() != null ? signUpRequest.getLastName() : null);
     user.setRoles(roles);
     user.setActive(Boolean.TRUE);
     College college = collegeRepository.findCollegeById(signUpRequest.getCollegeId());
     List<College> colleges = new ArrayList<>();
     colleges.add(college);
     user.setColleges(colleges);
+    user.setSelectedCollegeId(college.getId());
     ActivationKey activationKey = activationKeyService.getTokenByValue(signUpRequest.getToken());
     prepareUserDataFromToken(user, activationKey);
-    activationKey.setNumberOfUses(activationKey.getNumberOfUses() -1);
+    activationKey.setNumberOfUses(activationKey.getNumberOfUses() - 1);
     if (activationKey.getNumberOfUses() <= 0) {
       activationKey.setActive(Boolean.FALSE);
     }
@@ -136,17 +154,21 @@ public class UserService {
   }
 
   private User prepareUserDataFromToken(User user, ActivationKey activationKey) {
-    if (activationKey.getFaculty() != null) { // Jeśli jest zapisany w tokenie faculty id to dodaje go
+    if (activationKey.getFaculty()
+        != null) { // Jeśli jest zapisany w tokenie faculty id to dodaje go
       user.addFaculty(facultyService.findById(activationKey.getFaculty().getId()));
-      if (activationKey.getInstitute() != null) { // Jeśli jest zapisany w tokenie institute id to dodaje go
+      if (activationKey.getInstitute()
+          != null) { // Jeśli jest zapisany w tokenie institute id to dodaje go
         user.addInstitute(instituteService.findById(activationKey.getInstitute().getId()));
-        if (activationKey.getDepartment() != null) { // Jeśli jest zapisany w tokenie departmen id to dodaje go
+        if (activationKey.getDepartment()
+            != null) { // Jeśli jest zapisany w tokenie departmen id to dodaje go
           user.addDepartment(departmentService.findById(activationKey.getDepartment().getId()));
         }
       }
     }
     return user;
   }
+
   private ResponseEntity<MessageResponse> checkUserToken(SignUpRequest signUpRequest) {
     if (signUpRequest.getToken() == null) {
       return ResponseEntity.badRequest()

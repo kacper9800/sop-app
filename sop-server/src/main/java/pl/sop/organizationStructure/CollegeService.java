@@ -1,6 +1,7 @@
 package pl.sop.organizationStructure;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -61,8 +62,14 @@ public class CollegeService {
     return this.collegeRepository.findById(id).get();
   }
 
-  public List<College> findAllColleges() {
-    return collegeRepository.findAllColleges();
+  public List<CollegeDTO> findAllColleges() {
+    List<College> colleges = collegeRepository.findAllColleges();
+    List<CollegeDTO> collegeDTOS = new ArrayList<>();
+    for (College college : colleges) {
+      collegeDTOS.add(collegeToDTOConverter.convert(college));
+    }
+    collegeDTOS.sort(Comparator.comparing(CollegeDTO::getId));
+    return collegeDTOS;
   }
 
   public List<CollegeDTO> findAllAvailableColleges() {
@@ -96,7 +103,6 @@ public class CollegeService {
       return ResponseEntity.badRequest()
           .body(new MessageResponse("Error: Provided access token is wrong!"));
     }
-
     ActivationKey activationKey = this.activationKeyService.getTokenByValue(collegeRegistrationDTO.getActivationKey());
     College college = collegeRepository.findCollegeById(collegeRegistrationDTO.getCollegeId());
     college.setActive(Boolean.TRUE);
@@ -121,9 +127,12 @@ public class CollegeService {
     return signUpRequest;
   }
 
-
   public void update(Long id, College college) {
     //ToDo
+  }
+
+  public void delete(Long id) {
+    this.collegeRepository.deleteCollegeById(id);
   }
 
   public CollegeStructureDTO findAllCollegeStructures(Long collegeId) {
@@ -162,4 +171,18 @@ public class CollegeService {
         break;
     }
   }
+
+  public ResponseEntity<Boolean> changeCollegeActiveStatus(Boolean newStatus, Long collegeId) {
+    College college = collegeRepository.findById(collegeId).get();
+    college.setActive(newStatus);
+    collegeRepository.save(college);
+    return ResponseEntity.ok(newStatus);
+  }
+
+  public void updateCollege(CollegeDTO collegeDTO) {
+//    College actualCollege = collegeRepository.findCollegeById(collegeDTO.getId());
+//    actualCollege.set
+
+  }
+
 }

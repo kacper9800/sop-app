@@ -9,6 +9,7 @@ public class ActivationKeyToDTOConverter implements Converter<ActivationKey, Act
   @Override
   public ActivationKeyDTO convert(ActivationKey input) {
     ActivationKeyDTO activationKeyDTO = new ActivationKeyDTO();
+    activationKeyDTO.setId(input.getId());
     activationKeyDTO.setValue(input.getValue());
     activationKeyDTO.setStartExpirationDate(input.getStartExpirationDate());
     activationKeyDTO.setEndExpirationDate(input.getEndExpirationDate());
@@ -32,6 +33,7 @@ public class ActivationKeyToDTOConverter implements Converter<ActivationKey, Act
       activationKeyDTO.setDepartmentName(input.getDepartment().getName());
     }
     activationKeyDTO.setActive(input.isActive());
+    activationKeyDTO.setDeleted(input.isDeleted());
     return activationKeyDTO;
   }
 }

@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import pl.sop.converters.FromDTO.DTOToActivationKeyConverter;
 import pl.sop.converters.ToDTO.ActivationKeyToDTOConverter;
 import pl.sop.dto.ActivationKeyDTO;
 import pl.sop.entities.ActivationKey;
@@ -38,6 +39,7 @@ public class ActivationKeyService {
   private DepartmentService departmentService;
 
   private final ActivationKeyToDTOConverter activationKeyToDTOConverter = new ActivationKeyToDTOConverter();
+  private final DTOToActivationKeyConverter dtoToActivationKeyConverter = new DTOToActivationKeyConverter(collegeService,instituteService, facultyService, departmentService);
 
   public ResponseEntity getAllTokens() {
     List<ActivationKey> activationKeys = activationKeyRepository.getAllActivationKeys();
@@ -64,6 +66,12 @@ public class ActivationKeyService {
     return activationKeyRepository.findValidActivationKeyByValue(tokenValue);
   }
 
+  public ResponseEntity<ActivationKeyDTO> getActivationKeyByValue(String activationKeyValue) {
+    ActivationKey activationKey = activationKeyRepository.findValidActivationKeyByValue(activationKeyValue);
+    ActivationKeyDTO activationKeyDTO = activationKeyToDTOConverter.convert(activationKey);
+    return ResponseEntity.ok(activationKeyDTO);
+  }
+
   public boolean isValidTokenForUser(String tokenValue) {
     ActivationKey token = activationKeyRepository.findValidActivationKeyByValue(tokenValue);
     if (token != null) {
@@ -78,6 +86,11 @@ public class ActivationKeyService {
       return true;
     }
     return false;
+  }
+
+  public ResponseEntity deleteActivationKey(Long id) {
+    this.activationKeyRepository.deleteActivationKeyById(id);
+    return ResponseEntity.ok(true);
   }
 
   public void deactivateActivationKey(ActivationKey activationKey) {
@@ -107,6 +120,8 @@ public class ActivationKeyService {
   }
 
   public ResponseEntity<ActivationKey> createNewActivationKey(ActivationKeyDTO tokenDTO) {
+//    dtoToActivationKeyConverter.convert()
+    //ToDo
     ActivationKey activationKey = new ActivationKey();
     activationKey.setValue(tokenDTO.getValue());
     Department department = new Department();
@@ -145,4 +160,12 @@ public class ActivationKeyService {
     activationKey.setNumberOfUses(tokenDTO.getNumberOfUses());
     return ResponseEntity.ok(saveActivationKey(activationKey));
   }
+  public ResponseEntity<ActivationKeyDTO> updateActivationKey(ActivationKeyDTO activationKeyDTO) {
+    if (activationKeyDTO != null) {
+//      this.activationKeyRepository.save(activationKeyDTO);
+      return ResponseEntity.ok(activationKeyDTO);
+    }
+    return new ResponseEntity<>(HttpStatus.NOT_ACCEPTABLE);
+  }
+
 }

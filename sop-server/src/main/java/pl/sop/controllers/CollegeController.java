@@ -1,7 +1,6 @@
 package pl.sop.controllers;
 
 import java.util.List;
-import javax.validation.constraints.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -33,9 +32,25 @@ public class CollegeController {
   private CollegeService collegeService;
 
   @GetMapping(value = "/api/colleges")
-  public ResponseEntity<List<College>> getAllColleges() {
-    final List<College> colleges = collegeService.findAllColleges();
+  public ResponseEntity<List<CollegeDTO>> getAllColleges() {
+    final List<CollegeDTO> colleges = collegeService.findAllColleges();
     return new ResponseEntity<>(colleges, HttpStatus.OK);
+  }
+
+  @GetMapping(value = "/api/available-colleges")
+  public ResponseEntity<List<CollegeDTO>> getAllAvailableColleges() {
+    final List<CollegeDTO> colleges = collegeService.findAllAvailableColleges();
+    return new ResponseEntity<>(colleges, HttpStatus.OK);
+  }
+
+  @PostMapping(value = "/api/colleges/change-active-status/{collegeId}/{newStatus}")
+  @PreAuthorize("hasRole('ROLE_SUPERADMIN')")
+  public ResponseEntity<Boolean> changeCollegeActiveStatus(@PathVariable(name = "collegeId") String collegeId,
+                                  @PathVariable(name = "newStatus") Boolean newStatus) {
+    if (newStatus == null && collegeId == null) {
+      return new ResponseEntity<>(HttpStatus.NOT_ACCEPTABLE);
+    }
+    return collegeService.changeCollegeActiveStatus(newStatus, Long.parseLong(collegeId));
   }
 
   @PostMapping(value = "/api/colleges/createNew")
@@ -44,6 +59,14 @@ public class CollegeController {
     this.collegeService.createNewCollege(collegeDTO);
     return ResponseEntity.ok(HttpStatus.OK);
   }
+
+  @PutMapping(value = "/api/colleges/update")
+  @PreAuthorize("hasRole('ROLE_SUPERADMIN')")
+  public ResponseEntity updateCollege(@RequestBody CollegeDTO collegeDTO) {
+    this.collegeService.updateCollege(collegeDTO);
+    return ResponseEntity.ok(HttpStatus.OK);
+  }
+
 
   @PostMapping(value = "/api/colleges/activate")
   @PreAuthorize("hasRole('ROLE_SUPERADMIN')")
@@ -54,15 +77,17 @@ public class CollegeController {
 
   @PostMapping(value = "/api/colleges/register")
   @PreAuthorize("hasRole('ROLE_SUPERADMIN')")
-  public ResponseEntity registerCollege(@RequestBody CollegeRegistrationDTO collegeRegistrationDTO) {
+  public ResponseEntity registerCollege(
+      @RequestBody CollegeRegistrationDTO collegeRegistrationDTO) {
     this.collegeService.registerCollege(collegeRegistrationDTO);
     return ResponseEntity.ok(HttpStatus.OK);
   }
 
-  @GetMapping(value = "/api/available-colleges")
-  public ResponseEntity<List<CollegeDTO>> getAllAvailableColleges() {
-    final List<CollegeDTO> colleges = collegeService.findAllAvailableColleges();
-    return new ResponseEntity<>(colleges, HttpStatus.OK);
+  @DeleteMapping(value = "/api/colleges")
+  @PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_USER')")
+  public ResponseEntity<Long> deleteCollege(@RequestParam Long collegeId) {
+    collegeService.delete(collegeId);
+    return ResponseEntity.ok(collegeId);
   }
 
   @GetMapping(value = "/api/college-structure")
@@ -78,7 +103,9 @@ public class CollegeController {
   }
 
   @PostMapping(value = "/api/college-structure")
-  public ResponseEntity<CollegeStructureToSaveDTO> createNewCollegeStructure(Authentication authentication,
+  @PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_SUPERADMIN')")
+  public ResponseEntity<CollegeStructureToSaveDTO> createNewCollegeStructure(
+      Authentication authentication,
       @RequestBody CollegeStructureToSaveDTO collegeStructureToSaveDTO) {
     UserDetailsImpl user = (UserDetailsImpl) authentication.getPrincipal();
     return collegeService.createNewCollegeStructure(collegeStructureToSaveDTO);
@@ -112,6 +139,7 @@ public class CollegeController {
 //  }
 
   @PutMapping(value = "/api/college/{id}")
+  @PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_SUPERADMIN')")
   public ResponseEntity<?> updateCollege(@PathVariable("id") Long id,
       @RequestBody College college) {
     collegeService.update(id, college);

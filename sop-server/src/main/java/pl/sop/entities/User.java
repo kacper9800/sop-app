@@ -2,6 +2,7 @@ package pl.sop.entities;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.io.Serializable;
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
@@ -18,6 +19,7 @@ import javax.persistence.UniqueConstraint;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
+import net.bytebuddy.asm.Advice.Local;
 import pl.sop.organizationStructure.College;
 import pl.sop.organizationStructure.Department;
 import pl.sop.organizationStructure.Faculty;
@@ -63,7 +65,7 @@ public class User extends BasicEntity implements Serializable {
   private String academic_title;
 
   @Column(name = "birthDate", nullable = false)
-  private Date birthDate;
+  private LocalDate birthDate;
 
   @JsonIgnore
   @ManyToMany(fetch = FetchType.LAZY)
@@ -123,7 +125,7 @@ public class User extends BasicEntity implements Serializable {
 
   public User(@NotBlank @Size(max = 20) String username, @NotBlank @Size(max = 120) String password,
       String firstName, String lastName, @NotBlank @Size(max = 50) @Email String email,
-      String phone, String activationKey, String academic_title, Date birthDate) {
+      String phone, String activationKey, String academic_title, LocalDate birthDate) {
     this.username = username;
     this.password = password;
     this.firstName = firstName;
@@ -210,11 +212,11 @@ public class User extends BasicEntity implements Serializable {
     this.academic_title = academic_title;
   }
 
-  public Date getBirthDate() {
+  public LocalDate getBirthDate() {
     return birthDate;
   }
 
-  public void setBirthDate(Date birthDate) {
+  public void setBirthDate(LocalDate birthDate) {
     this.birthDate = birthDate;
   }
 

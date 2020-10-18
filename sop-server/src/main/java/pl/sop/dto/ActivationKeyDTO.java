@@ -4,6 +4,7 @@ import java.time.LocalDateTime;
 
 public class ActivationKeyDTO {
 
+  private Long id;
   private String value;
   private LocalDateTime startExpirationDate;
   private LocalDateTime endExpirationDate;
@@ -19,8 +20,17 @@ public class ActivationKeyDTO {
   private Long createdById;
   private String createdByName;
   private Boolean active;
+  private Boolean deleted;
 
   public ActivationKeyDTO() {
+  }
+
+  public Long getId() {
+    return id;
+  }
+
+  public void setId(Long id) {
+    this.id = id;
   }
 
   public String getValue() {
@@ -141,5 +151,13 @@ public class ActivationKeyDTO {
 
   public void setCreatedByName(String createdByName) {
     this.createdByName = createdByName;
+  }
+
+  public Boolean getDeleted() {
+    return deleted;
+  }
+
+  public void setDeleted(Boolean deleted) {
+    this.deleted = deleted;
   }
 }
