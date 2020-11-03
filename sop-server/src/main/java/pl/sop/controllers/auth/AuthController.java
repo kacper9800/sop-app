@@ -10,8 +10,10 @@ import java.util.List;
 import java.util.stream.Collectors;
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -56,31 +58,35 @@ public class AuthController {
 
   @PostMapping("/signIn")
   public ResponseEntity<?> authenticateUser(@Valid @RequestBody LoginRequest loginRequest) {
+    try {
+      Authentication authentication = authenticationManager.authenticate(
+          new UsernamePasswordAuthenticationToken(loginRequest.getUsername(),
+              loginRequest.getPassword()));
+      SecurityContextHolder.getContext().setAuthentication(authentication);
+      String jwt = jwtUtils.generateJwtToken(authentication);
 
-    Authentication authentication = authenticationManager.authenticate(
-        new UsernamePasswordAuthenticationToken(loginRequest.getUsername(),
-            loginRequest.getPassword()));
-    SecurityContextHolder.getContext().setAuthentication(authentication);
-    String jwt = jwtUtils.generateJwtToken(authentication);
+      UserDetailsImpl userDetails = (UserDetailsImpl) authentication.getPrincipal();
+      List<String> roles = userDetails.getAuthorities().stream().map(item -> item.getAuthority())
+          .collect(Collectors.toList());
+      List<CollegeDTO> colleges = new ArrayList<>();
+      if (userDetails.getColleges().size() != 0) {
+        userDetails.getColleges().forEach(college -> {
+          CollegeDTO collegeDTO = new CollegeDTO(college.getId(), college.getName(),
+              college.getActive(), college.getDeleted());
+          colleges.add(collegeDTO);
+        });
+      }
 
-    UserDetailsImpl userDetails = (UserDetailsImpl) authentication.getPrincipal();
-    List<String> roles = userDetails.getAuthorities().stream().map(item -> item.getAuthority())
-        .collect(Collectors.toList());
-    List<CollegeDTO> colleges = new ArrayList<>();
-    if (userDetails.getColleges().size() != 0) {
-      userDetails.getColleges().forEach(college -> {
-        CollegeDTO collegeDTO = new CollegeDTO(college.getId(), college.getName(), college.getActive(), college.getDeleted());
-        colleges.add(collegeDTO);
-      });
+      return ResponseEntity.ok(new JwtResponse(jwt,
+          userDetails.getId(),
+          userDetails.getUsername(),
+          userDetails.getEmail(),
+          roles,
+          colleges,
+          userDetails.getSelectedCollegeId()));
+    } catch (BadCredentialsException exception) {
+      return new ResponseEntity(HttpStatus.UNAUTHORIZED);
     }
-
-    return ResponseEntity.ok(new JwtResponse(jwt,
-        userDetails.getId(),
-        userDetails.getUsername(),
-        userDetails.getEmail(),
-        roles,
-        colleges,
-        userDetails.getSelectedCollegeId()));
   }
 
   @PostMapping("/signUp")

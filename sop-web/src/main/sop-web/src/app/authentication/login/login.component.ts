@@ -42,7 +42,8 @@ export class LoginComponent implements OnInit {
   constructor(private authService: AuthService,
               private tokenStorage: TokenStorageService,
               private formBuilder: FormBuilder,
-              private translateService: TranslateService) {
+              private translateService: TranslateService,
+              private messageService: MessageService) {
     this.prepareForm();
     this.setLanguage();
   }
@@ -91,8 +92,15 @@ export class LoginComponent implements OnInit {
       },
 
       err => {
-        console.log('error');
-        this.errorMessage = err.error.message;
+        console.log(err);
+        if (err.status === 401) {
+          this.messageService.add({
+            severity: 'error',
+            summary: this.translateService.instant('login.loginError'),
+            detail: this.translateService.instant('login.loginErrorDetails')
+          });
+        }
+        // this.errorMessage = err.error.message;
         this.validateBtnState = ClrLoadingState.ERROR;
         this.delay(3000);
         this.isLoginFailed = true;

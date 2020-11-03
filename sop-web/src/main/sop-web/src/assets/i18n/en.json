@@ -92,7 +92,9 @@
     "passwordLabel": "Password",
     "required": "This field is required!",
     "loginButton": "Sign in",
-    "cancelButtonLabel": "Cancel"
+    "cancelButtonLabel": "Cancel",
+    "loginError": "Occurred error during authentication",
+    "loginErrorDetails": "Wrong username or password"
   },
   "registration": {
     "header": "Registration panel",

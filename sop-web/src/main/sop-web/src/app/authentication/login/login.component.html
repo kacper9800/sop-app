@@ -1,3 +1,5 @@
+<p-toast [baseZIndex]="10000" autoZIndex="true"></p-toast>
+
 <clr-modal [(clrModalOpen)]="displayLoginDialog" [clrModalStaticBackdrop]="false" [clrModalClosable]="false">
   <h3 class="modal-title">{{'login.header' | translate}}</h3>
   <div class="modal-body">
@@ -12,7 +14,7 @@
             <label>
               <clr-icon shape="user"></clr-icon>
             </label>
-            <input style="width: 100%; margin-right: 5px" clrInput formControlName="username"
+            <input style="width: 100%; margin-right: 5px" clrInput formControlName="username" required="true"
                    placeholder="{{'login.usernameLabel' | translate}}"/>
           </clr-input-container>
         </div>
@@ -25,7 +27,7 @@
             <label>
               <clr-icon shape="key"></clr-icon>
             </label>
-            <input style="width: 100%;" clrInput type="password" formControlName="password"
+            <input style="width: 100%;" clrInput type="password" formControlName="password" required="true"
                    placeholder="{{'login.passwordLabel' | translate}}"/>
           </clr-input-container>
         </div>
@@ -38,7 +40,7 @@
       <div class="clr-col-2"></div>
       <div class="clr-col-4">
         <button [clrLoading]="validateBtnState" type="submit" form="loginForm" class="btn btn-primary"
-                (click)="onSubmit()">
+                (click)="onSubmit()" [disabled]="this.loginForm.invalid">
           {{'login.loginButton' | translate}}</button>
       </div>
       <div class="clr-col-4">

@@ -94,7 +94,9 @@
     "passwordLabel": "Hasło",
     "required": "To pole jest wymagane!",
     "loginButton": "Zaloguj",
-    "cancelButtonLabel": "Anuluj"
+    "cancelButtonLabel": "Anuluj",
+    "loginError": "Wystąpił błąd w trakcie logowania",
+    "loginErrorDetails": "Błędna nazwa użytkownika, bądź hasło"
   },
   "registration": {
     "header": "Panel rejestracji",

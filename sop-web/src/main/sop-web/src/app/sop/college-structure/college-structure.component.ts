@@ -11,7 +11,7 @@ import {CollegeStructure} from '../../_model/organization-structure/college-stru
 import {AddEditDialogCollegeStructureComponent} from './add-edit-dialog-college-structure/add-edit-dialog-college-structure.component';
 import {MessageService} from 'primeng';
 import {ConfirmDeleteDialogComponent} from '../../common/confirm-delete-dialog/confirm-delete-dialog.component';
-import {CollegeStructureEnum} from "../../_enums/college-structure.enum";
+import {CollegeStructureEnum} from '../../_enums/college-structure.enum';
 
 @Component({
   selector: 'app-college-structure',
