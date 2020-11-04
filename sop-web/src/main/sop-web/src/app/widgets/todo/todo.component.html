@@ -1,37 +1,48 @@
-<div class="content-container">
-  <div class="clr-row">
-    <div class="clr-col-3"></div>
-    <div class="clr-col-6">
-      Lista zadań:
-    </div>
-    <div class="clr-col-3"></div>
-  </div>
-</div>
-<div class="content-container">
-  <div class="clr-row">
-    <div class="clr-col-2"></div>
-    <div class="clr-col-8">
-      <div class="clr-input-group">
-        <input type="text" class="clr-form-control" #itemTitle>
-        <div class="input-group-addon hover-cursor" (click)="onAdd(itemTitle)">
-          <i class="pi pi-plus"></i>
-        </div>
-      </div>
-    </div>
-    <div class="clr-col-2"></div>
-  </div>
-  <div class="clr-row">
-    <ul class="list-group">
-      <li class="list-group-item" *ngFor="let item of toDoList">
-          <span class="hover-curson" [class.text-success]="item.isChecked">
-            <i class="fa fa-lg" [ngClass]="item.isChecked? 'pi pi-plus': 'pi pi-plus'"></i>
-          </span>
-        {{item.title}}
-        <span class="hover-cursor tex-danger pull-right">
-          <i class="pi pi-trash"></i>
-        </span>
-      </li>
-    </ul>
-  </div>
-</div>
+<clr-datagrid>
+  <clr-dg-column>Zadania</clr-dg-column>
+
+<!--  <clr-dg-row *ngFor="let user of users">-->
+  <clr-dg-row>
+    <clr-dg-cell>id</clr-dg-cell>
+  </clr-dg-row>
+
+  <clr-dg-footer>users.length}} users</clr-dg-footer>
+</clr-datagrid>
+
+<!--<div class="content-container">-->
+<!--  <div class="clr-row">-->
+<!--    <div class="clr-col-3"></div>-->
+<!--    <div class="clr-col-6">-->
+<!--      Lista zadań:-->
+<!--    </div>-->
+<!--    <div class="clr-col-3"></div>-->
+<!--  </div>-->
+<!--</div>-->
+<!--<div class="content-container">-->
+<!--  <div class="clr-row">-->
+<!--    <div class="clr-col-2"></div>-->
+<!--    <div class="clr-col-8">-->
+<!--      <div class="clr-input-group">-->
+<!--        <input type="text" class="clr-form-control" #itemTitle>-->
+<!--        <div class="input-group-addon hover-cursor" (click)="onAdd(itemTitle)">-->
+<!--          <i class="pi pi-plus"></i>-->
+<!--        </div>-->
+<!--      </div>-->
+<!--    </div>-->
+<!--    <div class="clr-col-2"></div>-->
+<!--  </div>-->
+<!--  <div class="clr-row">-->
+<!--    <ul class="list-group">-->
+<!--      <li class="list-group-item" *ngFor="let item of toDoList">-->
+<!--          <span class="hover-curson" [class.text-success]="item.isChecked">-->
+<!--            <i class="fa fa-lg" [ngClass]="item.isChecked? 'pi pi-plus': 'pi pi-plus'"></i>-->
+<!--          </span>-->
+<!--        {{item.title}}-->
+<!--        <span class="hover-cursor tex-danger pull-right">-->
+<!--          <i class="pi pi-trash"></i>-->
+<!--        </span>-->
+<!--      </li>-->
+<!--    </ul>-->
+<!--  </div>-->
+<!--</div>-->
 

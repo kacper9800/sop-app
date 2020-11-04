@@ -124,7 +124,7 @@ export class ActivationKeysComponent implements OnInit {
   private prepareColumns() {
     if (this.principal.isSuperAdmin()) {
       this.columns = [
-        {label: 'common.id', fieldName: 'id'},
+        // {label: 'common.id', fieldName: 'id'},
         {label: 'activationKeys.tableColumns.value', fieldName: 'value'},
         {label: 'activationKeys.tableColumns.expirationDateStart', fieldName: 'startExpirationDate'},
         {label: 'activationKeys.tableColumns.expirationDateEnd', fieldName: 'endExpirationDate'},
@@ -141,7 +141,7 @@ export class ActivationKeysComponent implements OnInit {
       ];
     } else {
       this.columns = [
-        {label: 'common.id', fieldName: 'id'},
+        // {label: 'common.id', fieldName: 'id'},
         {label: 'activationKeys.tableColumns.value', fieldName: 'value'},
         {label: 'activationKeys.tableColumns.expirationDateStart', fieldName: 'expirationDateStart'},
         {label: 'activationKeys.tableColumns.expirationDateEnd', fieldName: 'expirationDateEnd'},

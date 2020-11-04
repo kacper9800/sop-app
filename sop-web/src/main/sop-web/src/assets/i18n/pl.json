@@ -272,7 +272,12 @@
     "users": "użytkowników"
   },
   "interns": {
-
+    "header": "Lista praktykantów",
+    "showIntern": "Pokaż",
+    "CRUD": {
+      "addIntern": "Dodaj praktykanta"
+    },
+    "notFound": "Nie znaleziono żadnych wyników"
   }
 }
 

@@ -31,15 +31,13 @@ export class CalendarComponent implements OnInit {
       defaultView: 'timeGridDay',
       defaultDate: new Date(),
       header: {
-          left: 'prevYear prev next nextYear ',
+          left: 'prev next',
           center: 'title',
-          right: 'today timeGridDay timeGridWeek dayGridMonth',
+          right: 'today timeGridDay timeGridWeek',
       },
       buttonIcons: {
         prev: 'left-single-arrow',
         next: 'right-single-arrow',
-        prevYear: 'left-double-arrow',
-        nextYear: 'right-double-arrow'
       },
       locales: [plLocale],
       locale: 'pl',
@@ -50,7 +48,7 @@ export class CalendarComponent implements OnInit {
         // day: this.translateService.instant('calendar.dayView'),
         // list: this.translateService.instant('calendar.list')
       },
-      height: 600,
+      height: 700,
       nowIndicator: true,
       now: new Date(),
       firstDay: 1,

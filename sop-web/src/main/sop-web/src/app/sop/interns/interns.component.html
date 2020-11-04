@@ -1,5 +1,5 @@
-<h1 style="text-align: center">{{'users.header' | translate}}</h1>
-<h4 style="text-align: center">{{'users.secondHeader' | translate}}</h4>
+<h1 style="text-align: center">{{'interns.header' | translate}}</h1>
+<!--<h4 style="text-align: center">{{'interns.secondHeader' | translate}}</h4>-->
 
 <clr-datagrid [(clrDgSelected)]="selectedUsers" style="height: 50%;" [clrDgLoading]="blockUI">
   <clr-dg-action-bar>
@@ -7,7 +7,7 @@
       <button type="button" class="btn btn-sm btn-primary"
               (click)="showAddNewDialog()">
         <clr-icon shape="plus"></clr-icon>
-        {{'users.CRUD.addUser' | translate}}
+        {{'interns.CRUD.addIntern' | translate}}
       </button>
       <clr-dropdown>
         <button type="button" class="btn btn-sm btn-secondary" clrDropdownTrigger>
@@ -23,9 +23,25 @@
         </clr-dropdown-menu>
       </clr-dropdown>
     </div>
+    <clr-combobox-container>
+      <label>Favorite States</label>
+      <clr-combobox [(ngModel)]="selectedClasses" name="multiSelect" clrMulti="true" required>
+        <ng-container *clrOptionSelected="let selected">
+          <clr-icon shape="house" role="img" aria-label="welcome home"></clr-icon> {{selected?.name}}
+        </ng-container>
+        <clr-options>
+          <clr-option *clrOptionItems="let state of classes; field:'name'" [clrValue]="state">
+            <clr-icon shape="world" role="img" aria-label="World is turning"></clr-icon> {{state.name}}
+            <clr-icon shape="sun" role="img" aria-label="Sun is shining"></clr-icon>
+          </clr-option>
+        </clr-options>
+      </clr-combobox>
+      <clr-control-helper>Helper text</clr-control-helper>
+      <clr-control-error>There was an error</clr-control-error>
+    </clr-combobox-container>
   </clr-dg-action-bar>
   <clr-dg-column *ngFor="let col of columns">
-    {{col.label}}
+    {{col.label | translate}}
   </clr-dg-column>
 
   <clr-dg-row *ngFor="let user of users" [clrDgItem]="user">
@@ -50,18 +66,24 @@
       </div>
     </clr-dg-cell>
     <clr-dg-cell>
-      <button type="button" class="btn btn-sm btn-secondary" (click)="showEditDialog(user.id)">
-        <clr-icon shape="pencil"></clr-icon>
-        {{'common.crud.edit' | translate }}
-      </button>
-      <button type="button" class="btn btn-sm btn-danger" (click)="showConfirmDeleteDialog()">
-        <clr-icon shape="trash"></clr-icon>
-        {{'common.crud.delete' | translate }}
-      </button>
+      <div class="btn-group">
+        <button type="button" class="btn btn-sm btn-secondary" (click)="showEditDialog(user.id)">
+          <clr-icon shape="id-badge"></clr-icon>
+          {{'interns.showIntern' | translate }}
+        </button>
+        <button type="button" class="btn btn-sm btn-secondary" (click)="showEditDialog(user.id)">
+          <clr-icon shape="pencil"></clr-icon>
+          {{'common.crud.edit' | translate }}
+        </button>
+        <button type="button" class="btn btn-sm btn-danger" (click)="showConfirmDeleteDialog()">
+          <clr-icon shape="trash"></clr-icon>
+          {{'common.crud.delete' | translate }}
+        </button>
+      </div>
     </clr-dg-cell>
   </clr-dg-row>
 
-  <clr-dg-placeholder>{{'colleges.notFound' | translate}}</clr-dg-placeholder>
+  <clr-dg-placeholder>{{'interns.notFound' | translate}}</clr-dg-placeholder>
   <clr-dg-footer>
     <clr-dg-pagination #pagination [clrDgPageSize]="10">
       <clr-dg-page-size

@@ -12,6 +12,7 @@ import {AddEditDialogCollegeStructureComponent} from './add-edit-dialog-college-
 import {MessageService} from 'primeng';
 import {ConfirmDeleteDialogComponent} from '../../common/confirm-delete-dialog/confirm-delete-dialog.component';
 import {CollegeStructureEnum} from '../../_enums/college-structure.enum';
+import {PrincipalService} from "../../_services/auth/principal.service";
 
 @Component({
   selector: 'app-college-structure',
@@ -34,11 +35,14 @@ export class CollegeStructureComponent implements OnInit {
   editModal: boolean;
   private blockUI: boolean;
   CollegeStructureEnum: CollegeStructureEnum;
+  public isSuperAdmin: boolean;
+  public isAdmin: boolean;
 
   constructor(private resolver: ComponentFactoryResolver,
               private collegeService: CollegeService,
               private translateService: TranslateService,
-              private messageService: MessageService) {
+              private messageService: MessageService,
+              private principalService: PrincipalService) {
   }
 
   ngOnInit() {
@@ -48,6 +52,8 @@ export class CollegeStructureComponent implements OnInit {
       {field: 'actions', header: 'common.actions'}
     ];
     this.loadCollegeStructure();
+    this.isAdmin = this.principalService.isAdmin();
+    this.isSuperAdmin = this.principalService.isSuperAdmin();
   }
 
   private loadCollegeStructure() {

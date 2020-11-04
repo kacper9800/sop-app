@@ -20,7 +20,7 @@
   <b style="font-weight: bold">{{collegeStructure.collegeName}}</b>
 </h1>
 <clr-stack-view>
-  <clr-stack-header>
+  <clr-stack-header *ngIf="isSuperAdmin || isAdmin">
     <div class="btn-group">
       <button class="btn btn-sm btn-primary"
               (click)="showAddNewDialog()"
@@ -54,7 +54,7 @@
       [clrStackViewPosinset]="i">
 
       <clr-stack-label>{{faculty.name}}</clr-stack-label>
-      <clr-stack-content>
+      <clr-stack-content *ngIf="isAdmin || isSuperAdmin">
         <div class="btn-group">
           <button type="button" class="btn btn-sm btn-secondary"
                   (click)="showEditDialog(faculty.id, 1)">
@@ -75,7 +75,7 @@
         [clrStackViewSetsize]="faculty.institutes.length"
         [clrStackViewPosinset]="j">
         <clr-stack-label>{{institute.name}}</clr-stack-label>
-        <clr-stack-content>
+        <clr-stack-content *ngIf="isAdmin || isSuperAdmin">
           <div class="btn-group">
             <button type="button" class="btn btn-sm btn-secondary"
                     (click)="showEditDialog(institute.id, 2)">
@@ -96,7 +96,7 @@
           [clrStackViewSetsize]="institute.departments.length"
           [clrStackViewPosinset]="k">
           <clr-stack-label><b>{{department.name}}</b></clr-stack-label>
-          <clr-stack-content>
+          <clr-stack-content *ngIf="isAdmin || isSuperAdmin">
             <div class="btn-group">
               <button type="button" class="btn btn-sm btn-secondary"
                       (click)="showEditDialog(department.id, 3)">

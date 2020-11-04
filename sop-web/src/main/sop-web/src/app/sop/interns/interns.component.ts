@@ -10,6 +10,7 @@ import {IUser, User} from '../../security/user';
 import {HttpResponse} from '@angular/common/http';
 import {ExportTableComponent} from '../export-table/export-table.component';
 import {TranslateService} from '@ngx-translate/core';
+import {Class} from '../../_model/class.model';
 
 @Component({
   selector: 'app-interns',
@@ -27,6 +28,14 @@ export class InternsComponent implements OnInit {
   @ViewChild('exportDialog', {read: ViewContainerRef, static: true})
   public exportDialog: ViewContainerRef;
   private componentRef: any;
+
+  // ToDo
+  public selectedClasses: Class[];
+  public classes: Class[] = [
+    {name: 'Informatyka 2017/2021'},
+    {name: 'Informatyka 2018/2022'},
+    {name: 'Informatyka 2019/2023'}
+  ];
 
   constructor(private resolver: ComponentFactoryResolver,
               private usersService: UsersService,
@@ -60,31 +69,31 @@ export class InternsComponent implements OnInit {
   private prepareColumns() {
     this.columns = [
       {
-        label: this.translateService.instant('common.id'),
+        label: 'common.id',
         fieldName: 'id'
       },
       {
-        label: this.translateService.instant('users.name'),
+        label: 'users.name',
         fieldName: 'name'
       },
       {
-        label: this.translateService.instant('users.lastName'),
+        label: 'users.lastName',
         fieldName: 'lastName'
       },
       {
-        label: this.translateService.instant('users.username'),
+        label: 'users.username',
         fieldName: 'username'
       },
       {
-        label: this.translateService.instant('common.active'),
+        label: 'common.active',
         fieldName: 'active'
       },
       {
-        label: this.translateService.instant('common.deleted'),
+        label: 'common.deleted',
         fieldName: 'deleted'
       },
       {
-        label: this.translateService.instant('common.actions'),
+        label: 'common.actions',
         fieldName: 'actions'
       }];
   }

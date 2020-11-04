@@ -30,7 +30,7 @@
     </clr-dg-column>
 
     <clr-dg-row *ngFor="let key of activationKeys" [clrDgItem]="key">
-      <clr-dg-cell>{{key.id}}</clr-dg-cell>
+<!--      <clr-dg-cell>{{key.id}}</clr-dg-cell>-->
       <clr-dg-cell>{{key.value}}</clr-dg-cell>
       <clr-dg-cell>{{key.startExpirationDate | date}}</clr-dg-cell>
       <clr-dg-cell>{{key.endExpirationDate | date}}</clr-dg-cell>

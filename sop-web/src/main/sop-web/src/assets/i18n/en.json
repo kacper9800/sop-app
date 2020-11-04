@@ -270,6 +270,11 @@
     }
   },
   "interns": {
-
+    "header": "All interns",
+    "showIntern": "Show",
+    "CRUD": {
+      "addIntern": "Add intern"
+    },
+    "notFound": "Not found any interns"
   }
 }

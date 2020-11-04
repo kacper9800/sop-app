@@ -9,7 +9,7 @@ import {UsersService} from '../../_services/users.service';
 import {IUser, User} from '../../security/user';
 import {HttpResponse} from '@angular/common/http';
 import {ExportTableComponent} from '../export-table/export-table.component';
-import {TranslateService} from "@ngx-translate/core";
+import {TranslateService} from '@ngx-translate/core';
 
 @Component({
   selector: 'app-users',
@@ -54,7 +54,6 @@ export class UsersComponent implements OnInit {
   }
 
   private onErrorLoadUsers(err: any) {
-    console.log(err);
     this.blockUI = false;
   }
 
