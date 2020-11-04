@@ -1,0 +1,58 @@
+version: '3'
+
+services:
+
+  sop-database:
+    image: "postgres:9.6-alpine"
+    container_name: sop-database
+    volumes:
+      - sop-data:/var/lib/postgresql/data
+    ports:
+      - 5432:5432
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+
+  sop-backend:
+    build: ./sop-server
+    container_name: sop-backend
+
+    ports:
+      - 8080:8080
+    links:
+      - sop-database
+
+  sop-frontend:
+    build: ./sop-web/src/main/sop-web
+    ports:
+      - 4200:80
+    links:
+      - sop-backend
+volumes:
+  sop-data:
+
+
+#  springapp:
+#    build: .
+#    container_name: springapp
+#    environment:
+#      SPRING_DATASOURCE_URL: jdbc:postgresql://db:5432/sop
+#    ports:
+#      - 8000:8080
+#    restart: always
+#    depends_on:
+#      - db
+#  db:
+#    image: postgres
+#    container_name: db
+#    environment:
+#      - POSTGRES_USER=postgres
+#      - POSTGRES_PASSWORD=postgres
+#      - POSTGRES_DB=sop
+#      - PGDATA=/var/lib/postgresql/data/pgdata
+#    ports:
+#      - 5000:5432
+#    volumes:
+#      - pgdata:/var/lib/postgresql/data
+#    restart: always
+

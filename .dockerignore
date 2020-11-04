@@ -1,0 +1,21 @@
+# https://docs.docker.com/engine/reference/builder/#dockerignore-file
+classes/
+generated-sources/
+generated-test-sources/
+maven-archiver/
+maven-status/
+reports/
+surefire-reports/
+test-classes/
+test-results/
+www/
+!*.jar
+!*.war
+.git
+.editorconfig
+/node_modules
+/e2e
+/docs
+.gitignore
+*.zip
+*.md
