@@ -23,6 +23,9 @@ public interface CollegeRepository extends JpaRepository<College, Long> {
   @Query(value = "SELECT college from College college where college.id = :college_id")
   College findOnlyCollegeById(@Param("college_id") Long collegeId);
 
+  @Query(value = "SELECT college from College college where college.name = :college_name")
+  College findCollegeByName(@Param("college_name") String collegeName);
+
   @Query(value = "select college from College college"
       + " left join fetch college.faculties faculties"
       + " left join fetch faculties.institutes institutes"
@@ -47,4 +50,6 @@ public interface CollegeRepository extends JpaRepository<College, Long> {
   @Transactional
   @Query(nativeQuery = true, value = "update College set deleted = true where deleted = false and id = :college_id ")
   void deleteCollegeById(@Param("college_id") Long collegeId);
+
+  Boolean existsByName(String name);
 }

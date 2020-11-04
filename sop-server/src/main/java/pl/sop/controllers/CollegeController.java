@@ -91,7 +91,7 @@ public class CollegeController {
   }
 
   @GetMapping(value = "/api/college-structure")
-  @PreAuthorize("hasRole('ROLE_ADMIN')")
+  @PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_MODERATOR')")
   public ResponseEntity<CollegeStructureDTO> getCollegeStructure(Authentication authentication) {
     UserDetailsImpl user = (UserDetailsImpl) authentication.getPrincipal();
     if (user.getSelectedCollegeId() == null) {

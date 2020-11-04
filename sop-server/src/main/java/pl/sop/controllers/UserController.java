@@ -29,11 +29,13 @@ public class UserController {
   @PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_SUPERADMIN')")
   public ResponseEntity<List<UserDTO>> getAllUsers(Authentication authentication) {
     UserDetailsImpl user = (UserDetailsImpl) authentication.getPrincipal();
-    List<UserDTO> users = new ArrayList<>();
-    if (user.getAuthorities().iterator().next().getAuthority().equals("ROLE_SUPERADMIN")) {
-        users = userService.getAllUsers();
-      } else {
-        users = userService.getAllUsersForCollegeId(user.getSelectedCollegeId());
+    List<UserDTO> users;
+    if (user.getAuthorities().stream().anyMatch(
+        grantedAuthorities -> grantedAuthorities.getAuthority()
+            .equals("ROLE_SUPERADMIN"))) {
+      users = userService.getAllUsers();
+    } else {
+      users = userService.getAllUsersForCollegeId(user.getSelectedCollegeId());
     }
     return new ResponseEntity<>(users, HttpStatus.OK);
   }
