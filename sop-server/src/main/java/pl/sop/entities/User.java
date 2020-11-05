@@ -62,7 +62,7 @@ public class User extends BasicEntity implements Serializable {
   private String activationKey;
 
   @Column(name = "academic_title", nullable = false)
-  private String academic_title;
+  private String academicTitle;
 
   @Column(name = "birthDate", nullable = false)
   private LocalDate birthDate;
@@ -125,7 +125,7 @@ public class User extends BasicEntity implements Serializable {
 
   public User(@NotBlank @Size(max = 20) String username, @NotBlank @Size(max = 120) String password,
       String firstName, String lastName, @NotBlank @Size(max = 50) @Email String email,
-      String phone, String activationKey, String academic_title, LocalDate birthDate) {
+      String phone, String activationKey, String academicTitle, LocalDate birthDate) {
     this.username = username;
     this.password = password;
     this.firstName = firstName;
@@ -133,7 +133,7 @@ public class User extends BasicEntity implements Serializable {
     this.email = email;
     this.phone = phone;
     this.activationKey = activationKey;
-    this.academic_title = academic_title;
+    this.academicTitle = academicTitle;
     this.birthDate = birthDate;
   }
 
@@ -204,12 +204,12 @@ public class User extends BasicEntity implements Serializable {
     this.activationKey = activationKey;
   }
 
-  public String getAcademic_title() {
-    return academic_title;
+  public String getAcademicTitle() {
+    return academicTitle;
   }
 
-  public void setAcademic_title(String academic_title) {
-    this.academic_title = academic_title;
+  public void setAcademicTitle(String academicTitle) {
+    this.academicTitle = academicTitle;
   }
 
   public LocalDate getBirthDate() {
@@ -218,14 +218,6 @@ public class User extends BasicEntity implements Serializable {
 
   public void setBirthDate(LocalDate birthDate) {
     this.birthDate = birthDate;
-  }
-
-  public Boolean getDeleted() {
-    return deleted;
-  }
-
-  public void setDeleted(Boolean deleted) {
-    this.deleted = deleted;
   }
 
   public Set<Role> getRoles() {

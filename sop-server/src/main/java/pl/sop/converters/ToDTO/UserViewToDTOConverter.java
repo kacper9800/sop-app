@@ -10,12 +10,14 @@ public class UserViewToDTOConverter implements Converter<User, UserDTO> {
   public UserDTO convert(User input) {
     UserDTO userDTO = new UserDTO();
     userDTO.setId(input.getId());
-    userDTO.setAcademic_title(input.getAcademic_title());
-    userDTO.setFirst_name(input.getFirstName());
-    userDTO.setLast_name(input.getLastName());
+    userDTO.setAcademicTitle(input.getAcademicTitle());
+    userDTO.setFirstName(input.getFirstName());
+    userDTO.setLastName(input.getLastName());
     userDTO.setUsername(input.getUsername());
     userDTO.setPhone(input.getPhone());
     userDTO.setBirthDate(input.getBirthDate());
+    userDTO.setActive(input.isActive());
+    userDTO.setRemoved(input.isDeleted());
     return userDTO;
   }
 }
