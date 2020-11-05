@@ -17,6 +17,10 @@ export class UsersService {
     return this.http.get<IUser[]>(this.endpointURL, {observe: 'response'});
   }
 
+  public loadInternsForClasses(selectedClassId: any[]): Observable<HttpResponse<IUser[]>> {
+    return this.http.get<IUser[]>(this.endpointURL, {observe: 'response'});
+  }
+
   public updateUser(iDictionary: IUser): Observable<number> {
     return this.http.put<number>(this.endpointURL, iDictionary);
   }
@@ -32,4 +36,5 @@ export class UsersService {
   public getTest(): Observable<HttpResponse<any>> {
     return this.http.get<any>(this.endpointURL + '/tests');
   }
+
 }

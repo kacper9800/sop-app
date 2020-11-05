@@ -7,7 +7,7 @@ import {CollegeService} from '../../../_services/organization-structure/college.
 import {Institute} from '../../../_model/organization-structure/institute.model';
 import {Faculty} from '../../../_model/organization-structure/faculty.model';
 import {CollegeStructureToSave} from '../../../_model/organization-structure/structure-to-save.model';
-import {MessageService} from 'primeng';
+import {MessageService} from 'primeng/api';
 
 @Component({
   selector: 'app-add-edit-dialog-college-structure',

@@ -2,11 +2,11 @@ import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {AuthService} from '../../_services/auth/auth.service';
 import {Router} from '@angular/router';
-import {MessageService} from 'primeng';
+import {MessageService} from 'primeng/api';
 import {DropdownItem} from '../../_model/dropdown-item.model';
 import {CollegeService} from '../../_services/organization-structure/college.service';
 import {ICollege} from '../../_model/organization-structure/college.model';
-import {HttpResponse} from "@angular/common/http";
+import {HttpResponse} from '@angular/common/http';
 
 @Component({
   selector: 'app-college-registration',

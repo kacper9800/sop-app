@@ -6,7 +6,7 @@ import { User } from '../../../security/user';
 import { PlannerService } from '../../../_services/planner.service';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { UserService } from '../../../_services/user.service';
-import { MessageService } from 'primeng';
+import { MessageService } from 'primeng/api';
 import { Location } from '../../../_model/location.model';
 import { TokenStorageService } from '../../../_services/auth/token-storage.service';
 import { PrincipalService } from '../../../_services/auth/principal.service';

@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { FullCalendar } from 'primeng';
+import { FullCalendar} from 'primeng/fullcalendar';
 import timeGridPlugin from '@fullcalendar/timegrid';
 import plLocale from '@fullcalendar/core/locales/pl';
 import { PlannerService } from '../../_services/planner.service';

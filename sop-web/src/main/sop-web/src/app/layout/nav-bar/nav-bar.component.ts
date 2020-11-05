@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { MenuItem } from 'primeng';
+import { MenuItem} from 'primeng/api';
 import { TranslateService } from '@ngx-translate/core';
 import { TokenStorageService } from '../../_services/auth/token-storage.service';
 import { User } from '../../security/user';

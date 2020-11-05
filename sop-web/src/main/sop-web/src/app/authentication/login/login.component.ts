@@ -1,7 +1,7 @@
 import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {FormBuilder, FormControl, FormGroup} from '@angular/forms';
 import {TranslateService} from '@ngx-translate/core';
-import {MessageService} from 'primeng';
+import {MessageService} from 'primeng/api';
 import {ClrLoadingState} from '@clr/angular';
 import {AuthService} from '../../_services/auth/auth.service';
 import {TokenStorageService} from '../../_services/auth/token-storage.service';

@@ -3,7 +3,7 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 import { Event } from '../../../../_model/event.model';
 import { PlannerService } from '../../../../_services/planner.service';
 import { User } from '../../../../security/user';
-import { MessageService } from 'primeng';
+import {MessageService} from 'primeng/api';
 import { TranslateService } from '@ngx-translate/core';
 import { UserService } from '../../../../_services/user.service';
 import { Location } from '../../../../_model/location.model';

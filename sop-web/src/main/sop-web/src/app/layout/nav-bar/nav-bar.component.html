@@ -74,7 +74,7 @@
           <clr-icon shape="building" class="is-solid"></clr-icon>
           Struktura uczelni
         </a>
-        <a routerLink="/app/companies" class="nav-link" *ngIf="isModerator">
+        <a routerLink="/app/companies" class="nav-link" *ngIf="isAdmin">
           <clr-icon shape="store" class="is-solid"></clr-icon>
           Lista firm
         </a>
@@ -112,7 +112,7 @@
         </a>
 
         <!--Kierownik praktyk-->
-        <a routerLink="" class="nav-link" *ngIf="isModerator" style="color: red">
+        <a routerLink="" class="nav-link" *ngIf="isModerator">
           Kierownik praktyk
         </a>
         <a routerLink="/app/interns" class="nav-link" *ngIf="isModerator">

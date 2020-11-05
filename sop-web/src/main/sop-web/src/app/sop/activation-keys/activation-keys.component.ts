@@ -13,8 +13,8 @@ import {HttpResponse} from '@angular/common/http';
 import {ExportTableComponent} from '../export-table/export-table.component';
 import {PrincipalService} from '../../_services/auth/principal.service';
 import {ConfirmDeleteDialogComponent} from '../../common/confirm-delete-dialog/confirm-delete-dialog.component';
-import {MessageService} from 'primeng';
 import {TranslateService} from '@ngx-translate/core';
+import {MessageService} from 'primeng/api';
 
 @Component({
   selector: 'app-activation-keys',

@@ -9,10 +9,10 @@ import {TranslateService} from '@ngx-translate/core';
 import {CollegeService} from '../../_services/organization-structure/college.service';
 import {CollegeStructure} from '../../_model/organization-structure/college-structure.model';
 import {AddEditDialogCollegeStructureComponent} from './add-edit-dialog-college-structure/add-edit-dialog-college-structure.component';
-import {MessageService} from 'primeng';
+import {MessageService} from 'primeng/api';
 import {ConfirmDeleteDialogComponent} from '../../common/confirm-delete-dialog/confirm-delete-dialog.component';
 import {CollegeStructureEnum} from '../../_enums/college-structure.enum';
-import {PrincipalService} from "../../_services/auth/principal.service";
+import {PrincipalService} from '../../_services/auth/principal.service';
 
 @Component({
   selector: 'app-college-structure',

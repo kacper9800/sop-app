@@ -6,7 +6,7 @@ import { FormBuilder } from '@angular/forms';
 import { UserService } from '../../../_services/user.service';
 import { User } from '../../../security/user';
 import { Event } from '../../../_model/event.model';
-import { MessageService } from 'primeng';
+import { MessageService } from "primeng/api";
 import { ConfirmDeleteDialogComponent } from '../../../common/confirm-delete-dialog/confirm-delete-dialog.component';
 import { PrincipalService } from '../../../_services/auth/principal.service';
 import { TokenStorageService } from '../../../_services/auth/token-storage.service';

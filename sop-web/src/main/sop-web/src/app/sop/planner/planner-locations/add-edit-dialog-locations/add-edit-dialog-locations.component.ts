@@ -2,7 +2,7 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { User } from '../../../../security/user';
 import { PlannerService } from '../../../../_services/planner.service';
-import { MessageService } from 'primeng';
+import {MessageService} from 'primeng/api';
 import { TranslateService } from '@ngx-translate/core';
 import { Location } from '../../../../_model/location.model';
 import { LocationService } from '../../../../_services/location.service';

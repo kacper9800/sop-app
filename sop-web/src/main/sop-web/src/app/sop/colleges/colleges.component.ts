@@ -12,9 +12,9 @@ import {HttpResponse} from '@angular/common/http';
 import {AddEditDialogCollegesComponent} from './add-edit-dialog-colleges/add-edit-dialog-colleges.component';
 import {ExportTableComponent} from '../export-table/export-table.component';
 import {PrincipalService} from '../../_services/auth/principal.service';
-import {MessageService} from 'primeng';
-import {ConfirmDeleteDialogComponent} from "../../common/confirm-delete-dialog/confirm-delete-dialog.component";
-import {CollegeStructureEnum} from "../../_enums/college-structure.enum";
+import {MessageService} from 'primeng/api';
+import {ConfirmDeleteDialogComponent} from '../../common/confirm-delete-dialog/confirm-delete-dialog.component';
+import {CollegeStructureEnum} from '../../_enums/college-structure.enum';
 
 @Component({
   selector: 'app-colleges',

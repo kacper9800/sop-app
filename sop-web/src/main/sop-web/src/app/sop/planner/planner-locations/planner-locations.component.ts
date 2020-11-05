@@ -3,7 +3,7 @@ import { FormBuilder } from '@angular/forms';
 import { UserService } from '../../../_services/user.service';
 import { LocationService } from '../../../_services/location.service';
 import { HttpResponse } from '@angular/common/http';
-import { MessageService } from 'primeng';
+import { MessageService } from 'primeng/api';
 import { AddEditDialogLocationsComponent } from './add-edit-dialog-locations/add-edit-dialog-locations.component';
 import { Location } from '../../../_model/location.model';
 import { TokenStorageService } from '../../../_services/auth/token-storage.service';

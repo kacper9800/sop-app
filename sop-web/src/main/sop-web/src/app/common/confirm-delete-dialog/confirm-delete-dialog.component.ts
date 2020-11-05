@@ -1,6 +1,6 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {PlannerService} from '../../_services/planner.service';
-import {MessageService} from 'primeng';
+import {MessageService} from 'primeng/api';
 import {CollegeService} from '../../_services/organization-structure/college.service';
 import {CollegeStructureEnum} from '../../_enums/college-structure.enum';
 import {ActivationKeyService} from '../../_services/activation-key.service';

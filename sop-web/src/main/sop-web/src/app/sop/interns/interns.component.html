@@ -3,6 +3,21 @@
 
 <clr-datagrid [(clrDgSelected)]="selectedUsers" style="height: 50%;" [clrDgLoading]="blockUI">
   <clr-dg-action-bar>
+    <clr-combobox-container style="text-align: center">
+      <label>Wybór rocznika</label>
+      <clr-combobox [(ngModel)]="selectedClasses" name="multiSelect" clrMulti="true" required (ngModelChange)="onSelectedClassesChange()">
+        <ng-container *clrOptionSelected="let selected">
+          <clr-icon shape="users" role="img" aria-label="welcome home"></clr-icon> {{selected?.name}}
+        </ng-container>
+        <clr-options>
+          <clr-option *clrOptionItems="let state of classes; field:'name'" [clrValue]="state">
+            <clr-icon shape="users" role="img" aria-label="World is turning"></clr-icon> {{state.name}}
+<!--            <clr-icon shape="sun" role="img" aria-label="Sun is shining"></clr-icon>-->
+          </clr-option>
+        </clr-options>
+      </clr-combobox>
+<!--      <clr-control-helper>Helper text</clr-control-helper>-->
+    </clr-combobox-container>
     <div class="btn-group">
       <button type="button" class="btn btn-sm btn-primary"
               (click)="showAddNewDialog()">
@@ -23,22 +38,6 @@
         </clr-dropdown-menu>
       </clr-dropdown>
     </div>
-    <clr-combobox-container>
-      <label>Favorite States</label>
-      <clr-combobox [(ngModel)]="selectedClasses" name="multiSelect" clrMulti="true" required>
-        <ng-container *clrOptionSelected="let selected">
-          <clr-icon shape="house" role="img" aria-label="welcome home"></clr-icon> {{selected?.name}}
-        </ng-container>
-        <clr-options>
-          <clr-option *clrOptionItems="let state of classes; field:'name'" [clrValue]="state">
-            <clr-icon shape="world" role="img" aria-label="World is turning"></clr-icon> {{state.name}}
-            <clr-icon shape="sun" role="img" aria-label="Sun is shining"></clr-icon>
-          </clr-option>
-        </clr-options>
-      </clr-combobox>
-      <clr-control-helper>Helper text</clr-control-helper>
-      <clr-control-error>There was an error</clr-control-error>
-    </clr-combobox-container>
   </clr-dg-action-bar>
   <clr-dg-column *ngFor="let col of columns">
     {{col.label | translate}}

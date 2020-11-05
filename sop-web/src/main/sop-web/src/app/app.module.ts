@@ -33,17 +33,16 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HashLocationStrategy, LocationStrategy } from '@angular/common';
 import { HeaderComponent } from './layout/header/header.component';
 import { InternsComponent } from './sop/interns/interns.component';
-import {
-  BlockUIModule,
-  ButtonModule,
-  DialogModule,
-  DropdownModule, FullCalendarModule,
-  InputTextModule,
-  PanelModule,
-  ProgressSpinnerModule,
-  TableModule,
-  ToastModule, TreeTableModule
-} from 'primeng';
+import { BlockUIModule} from 'primeng/blockui';
+import { ButtonModule } from 'primeng/button';
+import { DialogModule } from 'primeng/dialog';
+import { DropdownModule } from 'primeng/dropdown';
+import { InputTextModule } from 'primeng/inputtext';
+import { PanelModule } from 'primeng/panel';
+import { ProgressSpinnerModule } from 'primeng/progressspinner';
+import { TableModule } from 'primeng/table';
+import { ToastModule } from 'primeng/toast';
+import { TreeTableModule } from 'primeng/treetable';
 import { HomeComponent } from './home/home.component';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { LogoutComponent } from './sop/logout/logout.component';
@@ -82,7 +81,7 @@ import { AddEditDialogCollegesComponent } from './sop/colleges/add-edit-dialog-c
 import { ExportTableComponent } from './sop/export-table/export-table.component';
 import { ExportAsModule } from 'ngx-export-as';
 import '@angular/common/locales/global/pl';
-
+import {FullCalendarModule} from 'primeng/fullcalendar';
 
 @NgModule({
   declarations: [
@@ -169,7 +168,7 @@ import '@angular/common/locales/global/pl';
     OwlNativeDateTimeModule,
     FullCalendarModule,
     TreeTableModule,
-    ExportAsModule
+    ExportAsModule,
   ],
   providers: [
     { provide: LocationStrategy, useClass: HashLocationStrategy },

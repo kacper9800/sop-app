@@ -6,7 +6,7 @@ import {
   ViewChild,
   ViewContainerRef
 } from '@angular/core';
-import {MenuItem, MessageService} from 'primeng';
+import {MenuItem, MessageService} from 'primeng/api';
 import {TranslateService} from '@ngx-translate/core';
 import {Router} from '@angular/router';
 import {TokenStorageService} from '../../_services/auth/token-storage.service';

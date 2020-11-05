@@ -62,7 +62,6 @@ export class InternsComponent implements OnInit {
   }
 
   private onErrorLoadUsers(err: any) {
-    console.log(err);
     this.blockUI = false;
   }
 
@@ -133,4 +132,15 @@ export class InternsComponent implements OnInit {
   }
 
 
+  public onSelectedClassesChange() {
+    this.blockUI = true;
+    const selectedClassId = [];
+    this.selectedClasses.forEach(selectedClass => {
+      selectedClassId.push(selectedClass.id);
+    });
+    this.usersService.loadInternsForClasses(selectedClassId).subscribe(
+      (res: HttpResponse<User[]>) => this.onSuccessLoadUsers(res.body),
+      (error) => this.onErrorLoadUsers(error)
+    );
+  }
 }
