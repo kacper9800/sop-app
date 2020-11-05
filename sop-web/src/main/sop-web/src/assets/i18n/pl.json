@@ -58,7 +58,15 @@
     "copyToClipboard": "Skopiuj klucz",
     "amountOfUses": "Liczba użyć",
     "activate": "Aktywuj",
-    "deactivate": "Dezaktywuj"
+    "deactivate": "Dezaktywuj",
+    "close": "Zamknij",
+    "download": "Pobierz",
+    "editDate": "Data edycji",
+    "createDate": "Data utworzenia",
+    "size": "Wielkość",
+    "status": "Status",
+    "accept": "Akceptuj",
+    "date": "Data"
   },
   "header": {
     "SOP": "System obsługi praktyk",
@@ -273,11 +281,17 @@
   },
   "interns": {
     "header": "Lista praktykantów",
-    "showIntern": "Pokaż",
+    "showIntern": "Pogląd",
     "CRUD": {
       "addIntern": "Dodaj praktykanta"
     },
-    "notFound": "Nie znaleziono żadnych wyników"
+    "notFound": "Nie znaleziono żadnych wyników",
+    "basicData": "Dane podstawowe",
+    "documents": "Dokumenty",
+    "logBook": "Dziennik praktyk",
+    "tasks": "Zadania"
+
+
   }
 }
 

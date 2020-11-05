@@ -1,0 +1,34 @@
+<clr-datagrid [clrDgLoading]="blockUI" >
+  <clr-dg-action-bar>
+    <div class="btn-group">
+      <clr-dropdown>
+        <button type="button" class="btn btn-sm btn-secondary" clrDropdownTrigger>
+          {{'common.export.button' | translate}}
+        </button>
+        <clr-dropdown-menu clrPosition="bottom-left" *clrIfOpen>
+          <button type="button" (click)="showExportDialog(true)"
+                  [disabled]="logbookPosts.length === 0" clrDropdownItem>
+            {{'common.export.all' | translate}}</button>
+        </clr-dropdown-menu>
+      </clr-dropdown>
+    </div>
+  </clr-dg-action-bar>
+  <clr-dg-column *ngFor="let col of columns">
+    {{col.label | translate}}
+  </clr-dg-column>
+
+  <clr-dg-row *ngFor="let logbookPost of logbookPosts" [clrDgItem]="logbookPost">
+    <clr-dg-cell>{{logbookPost.name}}</clr-dg-cell>
+    <clr-dg-cell>{{logbookPost.date | date}}</clr-dg-cell>
+  </clr-dg-row>
+
+  <clr-dg-placeholder>{{'interns.notFound' | translate}}</clr-dg-placeholder>
+<!--  <clr-dg-footer>-->
+<!--    <clr-dg-pagination #pagination [clrDgPageSize]="10">-->
+<!--      <clr-dg-page-size-->
+<!--        [clrPageSizeOptions]="[5,10,20,50]">{{'users.usersPerPage' | translate}}</clr-dg-page-size>-->
+<!--      {{pagination.firstItem + 1}} - {{pagination.lastItem-->
+<!--    + 1}} {{'common.of' | translate}} {{logbookPosts.length}} {{'users.users' | translate}}-->
+<!--    </clr-dg-pagination>-->
+<!--  </clr-dg-footer>-->
+</clr-datagrid>

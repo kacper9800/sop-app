@@ -82,6 +82,10 @@ import { ExportTableComponent } from './sop/export-table/export-table.component'
 import { ExportAsModule } from 'ngx-export-as';
 import '@angular/common/locales/global/pl';
 import {FullCalendarModule} from 'primeng/fullcalendar';
+import { InternDialogComponent } from './sop/interns/intern-dialog/intern-dialog.component';
+import { InternDialogBasicDataComponent } from './sop/interns/intern-dialog/intern-dialog-basic-data/intern-dialog-basic-data.component';
+import { InternDialogLogbookComponent } from './sop/interns/intern-dialog/intern-dialog-logbook/intern-dialog-logbook.component';
+import { InternDialogDocumentsComponent } from './sop/interns/intern-dialog/intern-dialog-documents/intern-dialog-documents.component';
 
 @NgModule({
   declarations: [
@@ -126,7 +130,11 @@ import {FullCalendarModule} from 'primeng/fullcalendar';
     AddEditDialogCompaniesComponent,
     AddEditDialogCollegesComponent,
     ExportTableComponent,
-    InternsComponent
+    InternsComponent,
+    InternDialogComponent,
+    InternDialogBasicDataComponent,
+    InternDialogLogbookComponent,
+    InternDialogDocumentsComponent,
   ],
   imports: [
     BrowserModule,

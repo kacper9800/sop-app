@@ -56,7 +56,15 @@
     "copyToClipboard": "Copy key",
     "amountOfUses": "Amount of uses",
     "activate": "Activate",
-    "deactivate": "Deactivate"
+    "deactivate": "Deactivate",
+    "close": "Close",
+    "download": "Download",
+    "editDate": "Edit date",
+    "createDate": "Create date",
+    "size": "Size",
+    "status": "Status",
+    "accept": "Accept",
+    "date": "Date"
   },
   "header": {
     "SOP": "Internship service system",
@@ -275,6 +283,10 @@
     "CRUD": {
       "addIntern": "Add intern"
     },
-    "notFound": "Not found any interns"
+    "notFound": "Not found any interns",
+    "basicData": "Basic data",
+    "documents": "Documents",
+    "logBook": "Logbook",
+    "tasks": "Tasks"
   }
 }

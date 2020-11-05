@@ -1,6 +1,6 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import {AddEditDialogCompaniesComponent} from './add-edit-dialog-companies.component';
 
-import { AddEditDialogCompaniesComponent } from './add-edit-companies.component';
 
 describe('AddEditCompaniesComponent', () => {
   let component: AddEditDialogCompaniesComponent;

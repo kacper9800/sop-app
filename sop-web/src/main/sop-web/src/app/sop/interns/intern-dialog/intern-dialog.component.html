@@ -1,0 +1,36 @@
+<clr-modal [(clrModalOpen)]="displayDialog" [clrModalStaticBackdrop]="false" [clrModalSize]="'xl'"
+           [clrModalClosable]="false">
+  <h3 class="modal-title" style="text-align: center!important;">{{dialogTitle}}</h3>
+  <div class="modal-body">
+    <clr-tabs clrLayout="vertical">
+      <clr-tab>
+        <button clrTabLink>{{'interns.basicData' | translate}}</button>
+        <clr-tab-content *clrIfActive="true">
+          <app-intern-dialog-basic-data></app-intern-dialog-basic-data>
+        </clr-tab-content>
+      </clr-tab>
+      <clr-tab>
+        <button clrTabLink>{{'interns.logBook' | translate}}</button>
+        <clr-tab-content *clrIfActive>
+          <app-intern-dialog-logbook></app-intern-dialog-logbook>
+        </clr-tab-content>
+      </clr-tab>
+      <clr-tab>
+        <button clrTabLink>{{'interns.documents' | translate}}</button>
+        <clr-tab-content *clrIfActive>
+          <app-intern-dialog-documents></app-intern-dialog-documents>
+        </clr-tab-content>
+      </clr-tab>
+    </clr-tabs>
+  </div>
+  <div class="modal-footer">
+    <div class="btn-group">
+<!--      <button type="submit"-->
+<!--              class="btn btn-primary" [disabled]="internForm.invalid"-->
+<!--              (click)="onSubmit()">-->
+<!--        {{'add-edit-dialog.save' | translate}}</button>-->
+      <button class="btn btn-secondary-outline"
+              (click)="displayDialog = false">{{'common.close' | translate}} </button>
+    </div>
+  </div>
+</clr-modal>

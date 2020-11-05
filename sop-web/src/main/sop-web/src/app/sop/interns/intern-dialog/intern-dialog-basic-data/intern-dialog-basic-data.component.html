@@ -1,0 +1,59 @@
+<form clrForm [formGroup]="basicDataForm">
+  <div class="clr-row">
+    <div class="clr-col-4"></div>
+    <div class="clr-col-4">
+      <clr-input-container>
+        <label>
+          <clr-icon shape="user"></clr-icon>
+        </label>
+        <input type="text" name="firstName" clrInput
+               placeholder="{{'registration.firstNameLabel' | translate}}"
+               formControlName="firstName"/>
+      </clr-input-container>
+    </div>
+    <div class="clr-col-4"></div>
+  </div>
+
+  <div class="clr-row">
+    <div class="clr-col-4"></div>
+    <div class="clr-col-4">
+      <clr-input-container>
+        <label>
+          <clr-icon shape="user"></clr-icon>
+        </label>
+        <input type="text" name="lastName" clrInput
+               placeholder="{{'registration.lastNameLabel' | translate}}"
+               formControlName="lastName"/>
+      </clr-input-container>
+    </div>
+    <div class="clr-col-4"></div>
+  </div>
+
+  <div class="clr-row">
+    <div class="clr-col-4"></div>
+    <div class="clr-col-4">
+      <clr-input-container>
+        <label>
+          <clr-icon shape="envelope"></clr-icon>
+        </label>
+        <input clrInput formControlName="username"
+               placeholder="{{'registration.emailLabel' | translate}}"/>
+      </clr-input-container>
+    </div>
+    <div class="clr-col-4"></div>
+  </div>
+
+  <div class="clr-row">
+    <div class="clr-col-4"></div>
+    <div class="clr-col-4">
+      <clr-input-container>
+        <label>
+          <clr-icon shape="certificate"></clr-icon>
+        </label>
+        <input clrInput formControlName="academicDegree"
+               placeholder="{{'registration.academicDegreeLabel' | translate}}"/>
+      </clr-input-container>
+    </div>
+    <div class="clr-col-4"></div>
+  </div>
+</form>

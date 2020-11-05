@@ -11,6 +11,8 @@ import {HttpResponse} from '@angular/common/http';
 import {ExportTableComponent} from '../export-table/export-table.component';
 import {TranslateService} from '@ngx-translate/core';
 import {Class} from '../../_model/class.model';
+import {PrincipalService} from '../../_services/auth/principal.service';
+import {InternDialogComponent} from "./intern-dialog/intern-dialog.component";
 
 @Component({
   selector: 'app-interns',
@@ -27,7 +29,12 @@ export class InternsComponent implements OnInit {
   public addEditDialog: ViewContainerRef;
   @ViewChild('exportDialog', {read: ViewContainerRef, static: true})
   public exportDialog: ViewContainerRef;
+  @ViewChild('internDialog', {read: ViewContainerRef, static: true})
+  public internDialog: ViewContainerRef;
   private componentRef: any;
+
+  public isAdmin: boolean;
+  public isSuperAdmin: boolean;
 
   // ToDo
   public selectedClasses: Class[];
@@ -39,6 +46,7 @@ export class InternsComponent implements OnInit {
 
   constructor(private resolver: ComponentFactoryResolver,
               private usersService: UsersService,
+              private principalService: PrincipalService,
               private translateService: TranslateService) {
   }
 
@@ -46,6 +54,8 @@ export class InternsComponent implements OnInit {
     this.blockUI = true;
     this.loadUsers();
     this.prepareColumns();
+    this.isAdmin = this.principalService.isAdmin();
+    this.isSuperAdmin = this.principalService.isSuperAdmin();
   }
 
   private loadUsers() {
@@ -141,6 +151,16 @@ export class InternsComponent implements OnInit {
     this.usersService.loadInternsForClasses(selectedClassId).subscribe(
       (res: HttpResponse<User[]>) => this.onSuccessLoadUsers(res.body),
       (error) => this.onErrorLoadUsers(error)
+    );
+  }
+
+  public showInternsDialog(id: number) {
+    this.internDialog.clear();
+    const factory = this.resolver.resolveComponentFactory(InternDialogComponent);
+    this.componentRef = this.exportDialog.createComponent(factory);
+    this.componentRef.instance.showInternDialog(id);
+    this.componentRef.instance.closeDialogWithSaveEmitter.subscribe(() =>
+      this.loadUsers()
     );
   }
 }

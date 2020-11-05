@@ -1,7 +1,7 @@
 <h1 style="text-align: center">{{'interns.header' | translate}}</h1>
 <!--<h4 style="text-align: center">{{'interns.secondHeader' | translate}}</h4>-->
 
-<clr-datagrid [(clrDgSelected)]="selectedUsers" style="height: 50%;" [clrDgLoading]="blockUI">
+<clr-datagrid [(clrDgSelected)]="selectedUsers" [clrDgLoading]="blockUI" >
   <clr-dg-action-bar>
     <clr-combobox-container style="text-align: center">
       <label>Wybór rocznika</label>
@@ -66,15 +66,15 @@
     </clr-dg-cell>
     <clr-dg-cell>
       <div class="btn-group">
-        <button type="button" class="btn btn-sm btn-secondary" (click)="showEditDialog(user.id)">
+        <button type="button" class="btn btn-sm btn-secondary" (click)="showInternsDialog(user.id)">
           <clr-icon shape="id-badge"></clr-icon>
           {{'interns.showIntern' | translate }}
         </button>
-        <button type="button" class="btn btn-sm btn-secondary" (click)="showEditDialog(user.id)">
+        <button *ngIf="isSuperAdmin || isAdmin" type="button" class="btn btn-sm btn-secondary" (click)="showEditDialog(user.id)">
           <clr-icon shape="pencil"></clr-icon>
           {{'common.crud.edit' | translate }}
         </button>
-        <button type="button" class="btn btn-sm btn-danger" (click)="showConfirmDeleteDialog()">
+        <button *ngIf="isSuperAdmin || isAdmin" type="button" class="btn btn-sm btn-danger" (click)="showConfirmDeleteDialog()">
           <clr-icon shape="trash"></clr-icon>
           {{'common.crud.delete' | translate }}
         </button>
@@ -86,14 +86,15 @@
   <clr-dg-footer>
     <clr-dg-pagination #pagination [clrDgPageSize]="10">
       <clr-dg-page-size
-        [clrPageSizeOptions]="[10,20,50,100]">{{'users.usersPerPage' | translate}}</clr-dg-page-size>
+        [clrPageSizeOptions]="[5,10,20,50]">{{'users.usersPerPage' | translate}}</clr-dg-page-size>
       {{pagination.firstItem + 1}} - {{pagination.lastItem
-    + 1}} {{'common.of' | translate}} {{pagination.totalItems}} {{'users.users' | translate}}
+    + 1}} {{'common.of' | translate}} {{users.length}} {{'users.users' | translate}}
     </clr-dg-pagination>
   </clr-dg-footer>
 </clr-datagrid>
 
 <ng-template #addEditDialog></ng-template>
 <ng-template #exportDialog></ng-template>
+<ng-template #internDialog></ng-template>
 
 

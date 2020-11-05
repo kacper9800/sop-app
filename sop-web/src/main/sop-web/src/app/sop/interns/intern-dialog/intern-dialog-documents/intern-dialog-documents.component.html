@@ -1,0 +1,61 @@
+<clr-datagrid [(clrDgSelected)]="selectedDocuments" [clrDgLoading]="blockUI" >
+  <clr-dg-action-bar>
+    <div class="btn-group">
+      <clr-dropdown>
+        <button type="button" class="btn btn-sm btn-secondary" clrDropdownTrigger>
+          {{'common.export.button' | translate}}
+        </button>
+        <clr-dropdown-menu clrPosition="bottom-left" *clrIfOpen>
+          <button type="button" (click)="showExportDialog(true)"
+                  [disabled]="documents.length === 0" clrDropdownItem>
+            {{'common.export.all' | translate}}</button>
+          <button type="button" (click)="showExportDialog(false)"
+                  [disabled]="selectedDocuments.length === 0" clrDropdownItem>
+            {{'common.export.selected' | translate}}</button>
+        </clr-dropdown-menu>
+      </clr-dropdown>
+    </div>
+  </clr-dg-action-bar>
+  <clr-dg-column *ngFor="let col of columns">
+    {{col.label | translate}}
+  </clr-dg-column>
+
+  <clr-dg-row *ngFor="let document of documents" [clrDgItem]="document">
+    <clr-dg-cell>{{document.name}}</clr-dg-cell>
+    <clr-dg-cell>{{document.description}}</clr-dg-cell>
+    <clr-dg-cell>{{document.size}}</clr-dg-cell>
+    <clr-dg-cell>{{document.createDate}}</clr-dg-cell>
+    <clr-dg-cell>{{document.editDate}}</clr-dg-cell>
+    <clr-dg-cell>{{document.statusName}}</clr-dg-cell>
+    <clr-dg-cell>
+      <div class="btn-group">
+        <button type="button" class="btn btn-sm btn-success-outline" (click)="downloadDocument(document.id)">
+          <clr-icon shape="check"></clr-icon>
+          {{'common.accept' | translate }}
+        </button>
+        <button type="button" class="btn btn-sm btn-info-outline" (click)="downloadDocument(document.id)">
+          <clr-icon shape="download"></clr-icon>
+          {{'common.download' | translate }}
+        </button>
+        <button *ngIf="isSuperAdmin || isAdmin" type="button" class="btn btn-sm btn-secondary" (click)="showEditDialog(document.id)">
+          <clr-icon shape="pencil"></clr-icon>
+          {{'common.crud.edit' | translate }}
+        </button>
+        <button *ngIf="isSuperAdmin || isAdmin" type="button" class="btn btn-sm btn-danger" (click)="showConfirmDeleteDialog()">
+          <clr-icon shape="trash"></clr-icon>
+          {{'common.crud.delete' | translate }}
+        </button>
+      </div>
+    </clr-dg-cell>
+  </clr-dg-row>
+
+  <clr-dg-placeholder>{{'interns.notFound' | translate}}</clr-dg-placeholder>
+  <clr-dg-footer>
+    <clr-dg-pagination #pagination [clrDgPageSize]="10">
+      <clr-dg-page-size
+        [clrPageSizeOptions]="[5,10,20,50]">{{'users.usersPerPage' | translate}}</clr-dg-page-size>
+      {{pagination.firstItem + 1}} - {{pagination.lastItem
+    + 1}} {{'common.of' | translate}} {{documents.length}} {{'users.users' | translate}}
+    </clr-dg-pagination>
+  </clr-dg-footer>
+</clr-datagrid>
