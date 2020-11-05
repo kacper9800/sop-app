@@ -1,0 +1,80 @@
+<h1 style="text-align: center">{{'directions.header' | translate}}</h1>
+<!--<h4 style="text-align: center">{{'interns.secondHeader' | translate}}</h4>-->
+
+<clr-datagrid [(clrDgSelected)]="selectedDirections" [clrDgLoading]="blockUI" >
+  <clr-dg-action-bar>
+    <div class="btn-group">
+      <button type="button" class="btn btn-sm btn-primary"
+              (click)="showAddNewDialog()">
+        <clr-icon shape="plus"></clr-icon>
+        {{'directions.CRUD.addDirection' | translate}}
+      </button>
+      <clr-dropdown>
+        <button type="button" class="btn btn-sm btn-secondary" clrDropdownTrigger>
+          {{'common.export.button' | translate}}
+        </button>
+        <clr-dropdown-menu clrPosition="bottom-left" *clrIfOpen>
+          <button type="button" (click)="showExportDialog(true)"
+                  [disabled]="directions.length === 0" clrDropdownItem>
+            {{'common.export.all' | translate}}</button>
+          <button type="button" (click)="showExportDialog(false)"
+                  [disabled]="selectedDirections.length === 0" clrDropdownItem>
+            {{'common.export.selected' | translate}}</button>
+        </clr-dropdown-menu>
+      </clr-dropdown>
+    </div>
+  </clr-dg-action-bar>
+  <clr-dg-column *ngFor="let col of columns">
+    {{col.label | translate}}
+  </clr-dg-column>
+
+  <clr-dg-row *ngFor="let direction of directions" [clrDgItem]="direction">
+    <clr-dg-cell>{{direction.name}}</clr-dg-cell>
+    <clr-dg-cell>{{direction.description}}</clr-dg-cell>
+    <clr-dg-cell>{{direction.studyMode}}</clr-dg-cell>
+    <clr-dg-cell>{{direction.instituteName}}</clr-dg-cell>
+    <clr-dg-cell>
+      <div *ngIf="direction.active">
+        <clr-icon shape="check"></clr-icon>
+      </div>
+      <div *ngIf="!direction.active">
+        <clr-icon shape="times"></clr-icon>
+      </div>
+    </clr-dg-cell>
+    <clr-dg-cell>
+      <div *ngIf="direction.removed">
+        <clr-icon shape="check"></clr-icon>
+      </div>
+      <div *ngIf="!direction.removed">
+        <clr-icon shape="times"></clr-icon>
+      </div>
+    </clr-dg-cell>
+    <clr-dg-cell>
+      <div class="btn-group">
+        <button *ngIf="isSuperAdmin || isAdmin" type="button" class="btn btn-sm btn-secondary" (click)="showEditDialog(direction.id)">
+          <clr-icon shape="pencil"></clr-icon>
+          {{'common.crud.edit' | translate }}
+        </button>
+        <button *ngIf="isSuperAdmin || isAdmin" type="button" class="btn btn-sm btn-danger" (click)="showConfirmDeleteDialog()">
+          <clr-icon shape="trash"></clr-icon>
+          {{'common.crud.delete' | translate }}
+        </button>
+      </div>
+    </clr-dg-cell>
+  </clr-dg-row>
+
+  <clr-dg-placeholder>{{'interns.notFound' | translate}}</clr-dg-placeholder>
+  <clr-dg-footer>
+    <clr-dg-pagination #pagination [clrDgPageSize]="10">
+      <clr-dg-page-size
+        [clrPageSizeOptions]="[5,10,20,50]">{{'users.usersPerPage' | translate}}</clr-dg-page-size>
+      {{pagination.firstItem + 1}} - {{pagination.lastItem
+    + 1}} {{'common.of' | translate}} {{directions.length}} {{'users.users' | translate}}
+    </clr-dg-pagination>
+  </clr-dg-footer>
+</clr-datagrid>
+
+<ng-template #addEditDialog></ng-template>
+<ng-template #exportDialog></ng-template>
+
+

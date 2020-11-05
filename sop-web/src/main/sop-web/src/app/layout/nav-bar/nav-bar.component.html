@@ -74,6 +74,10 @@
           <clr-icon shape="building" class="is-solid"></clr-icon>
           Struktura uczelni
         </a>
+        <a routerLink="/app/directions" class="nav-link" *ngIf="isAdmin">
+          <clr-icon shape="two-way-arrows" class="is-solid"></clr-icon>
+          Kierunki studiów
+        </a>
         <a routerLink="/app/companies" class="nav-link" *ngIf="isAdmin">
           <clr-icon shape="store" class="is-solid"></clr-icon>
           Lista firm
@@ -122,6 +126,10 @@
         <a routerLink="/app/college-structure" class="nav-link" *ngIf="isModerator">
           <clr-icon shape="building" class="is-solid"></clr-icon>
           Struktura uczelni
+        </a>
+        <a routerLink="/app/directions" class="nav-link" *ngIf="isModerator">
+          <clr-icon shape="two-way-arrows" class="is-solid"></clr-icon>
+          Kierunki studiów
         </a>
 <!--        <a routerLink="/app/new-intern" class="nav-link" *ngIf="isModerator">-->
 <!--          <clr-icon shape="user" class="is-solid"></clr-icon>-->

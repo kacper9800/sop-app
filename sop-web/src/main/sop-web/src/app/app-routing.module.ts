@@ -22,6 +22,7 @@ import {SuperVisorsComponent} from './sop/super-visors/super-visors.component';
 import {UsersComponent} from './sop/users/users.component';
 import {RegistrationConfirmationComponent} from './authentication/registration-confirmation/registration-confirmation.component';
 import {CanActivateGuard} from './_services/auth/can-activate.guard';
+import {DirectionsComponent} from "./sop/directions/directions.component";
 
 
 // import { PlannerCalendarComponent } from './sop/planner/planner-calendar/planner-calendar.component';
@@ -32,6 +33,7 @@ const routes: Routes = [
   {path: 'app/colleges', component: CollegesComponent, canActivate: [CanActivateGuard]},                      // Lista uczelni
   {path: 'app/companies', component: CompaniesComponent, canActivate: [CanActivateGuard]},                   // Lista firm
   {path: 'app/college-structure', component: CollegeStructureComponent, canActivate: [CanActivateGuard]},    // Struktura uczelni
+  {path: 'app/directions', component: DirectionsComponent, canActivate: [CanActivateGuard]},                 // Kierunki studiów
   {path: 'app/super-visors', component: SuperVisorsComponent, canActivate: [CanActivateGuard]},              // Kierownicy praktyk
   {path: 'app/interns', component: InternsComponent, canActivate: [CanActivateGuard]},                       // Praktykanci
   {path: 'app/users', component: UsersComponent, canActivate: [CanActivateGuard]},                           // Użytkownicy

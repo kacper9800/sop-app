@@ -12,7 +12,7 @@ import {ExportTableComponent} from '../export-table/export-table.component';
 import {TranslateService} from '@ngx-translate/core';
 import {Class} from '../../_model/class.model';
 import {PrincipalService} from '../../_services/auth/principal.service';
-import {InternDialogComponent} from "./intern-dialog/intern-dialog.component";
+import {InternDialogComponent} from './intern-dialog/intern-dialog.component';
 
 @Component({
   selector: 'app-interns',
@@ -20,9 +20,9 @@ import {InternDialogComponent} from "./intern-dialog/intern-dialog.component";
   styleUrls: ['./interns.component.css']
 })
 export class InternsComponent implements OnInit {
-  public selectedUsers: any = [];
-  public columns: any;
+  public selectedUsers: User[] = [];
   public users: User[] = [];
+  public columns: any;
   public blockUI: boolean;
 
   @ViewChild('addEditDialog', {read: ViewContainerRef, static: true})

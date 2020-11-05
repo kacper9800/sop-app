@@ -8,7 +8,6 @@ import {HttpResponse} from '@angular/common/http';
 import {TokenService} from '../../../_helpers/token.service';
 import {ActivationKeyService} from '../../../_services/activation-key.service';
 import {ActivationKey} from '../../../_model/activation-key.model';
-import {Observable} from "rxjs";
 
 @Component({
   selector: 'app-add-edit-dialog-colleges',

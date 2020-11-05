@@ -288,5 +288,11 @@
     "documents": "Documents",
     "logBook": "Logbook",
     "tasks": "Tasks"
+  },
+  "directions": {
+    "header": "Directions",
+    "CRUD": {
+      "addDirection": "Add study direction"
+    }
   }
 }

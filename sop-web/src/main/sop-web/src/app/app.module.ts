@@ -86,6 +86,8 @@ import { InternDialogComponent } from './sop/interns/intern-dialog/intern-dialog
 import { InternDialogBasicDataComponent } from './sop/interns/intern-dialog/intern-dialog-basic-data/intern-dialog-basic-data.component';
 import { InternDialogLogbookComponent } from './sop/interns/intern-dialog/intern-dialog-logbook/intern-dialog-logbook.component';
 import { InternDialogDocumentsComponent } from './sop/interns/intern-dialog/intern-dialog-documents/intern-dialog-documents.component';
+import { DirectionsComponent } from './sop/directions/directions.component';
+import { AddEditDialogDirectionsComponent } from './sop/directions/add-edit-dialog-directions/add-edit-dialog-directions.component';
 
 @NgModule({
   declarations: [
@@ -135,6 +137,8 @@ import { InternDialogDocumentsComponent } from './sop/interns/intern-dialog/inte
     InternDialogBasicDataComponent,
     InternDialogLogbookComponent,
     InternDialogDocumentsComponent,
+    DirectionsComponent,
+    AddEditDialogDirectionsComponent,
   ],
   imports: [
     BrowserModule,

@@ -240,7 +240,7 @@
     },
     "tableColumns": {
     },
-    "activate" : {
+    "activate": {
       "successActivate": "Pomyślnie aktywowano uczelnię",
       "successDeactivate": "Pomyślnie dezaktywowano uczelnię",
       "error": "Błąd zmiany stanu aktywności uczelnii"
@@ -290,8 +290,12 @@
     "documents": "Dokumenty",
     "logBook": "Dziennik praktyk",
     "tasks": "Zadania"
-
-
+  },
+  "directions": {
+    "header": "Kierunki studiów",
+    "CRUD": {
+      "addDirection": "Dodaj kierunek studiów"
+    }
   }
 }
 
