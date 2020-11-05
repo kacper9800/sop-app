@@ -25,7 +25,7 @@ public class UserController {
   UserService userService;
 
   @GetMapping(value = "/api/users")
-  @PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_SUPERADMIN')")
+  @PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_SUPERADMIN') or hasRole('ROLE_MODERATOR')")
   public ResponseEntity<List<UserDTO>> getAllUsers(Authentication authentication) {
     UserDetailsImpl user = (UserDetailsImpl) authentication.getPrincipal();
     List<UserDTO> users;

@@ -253,7 +253,8 @@
     <renameColumn tableName="events" oldColumnName="allDay" newColumnName="all_day"></renameColumn>
   </changeSet>
   <changeSet id="9" author="krzymkiewicz">
-    <renameColumn tableName="events" oldColumnName="end_date" newColumnName="stop_date"></renameColumn>
+    <renameColumn tableName="events" oldColumnName="end_date"
+      newColumnName="stop_date"></renameColumn>
   </changeSet>
   <changeSet id="10" author="krzymkiewicz">
     <addAutoIncrement tableName="events" columnName="id"></addAutoIncrement>
@@ -311,7 +312,8 @@
       referencedTableName="departments"/>
   </changeSet>
   <changeSet id="12" author="krzymkiewicz">
-    <modifyDataType tableName="events" columnName="duration" newDataType="VARCHAR(50)"></modifyDataType>
+    <modifyDataType tableName="events" columnName="duration"
+      newDataType="VARCHAR(50)"></modifyDataType>
   </changeSet>
   <changeSet id="13" author="krzymkiewicz">
     <addColumn tableName="roles">
@@ -455,8 +457,12 @@
   </changeSet>
 
   <changeSet id="17" author="krzymkiewicz">
-    <sql>INSERT INTO roles (name, active, deleted) values ('ROLE_USER', true, false),('ROLE_MODERATOR', true, false),('ROLE_ADMIN', true, false);</sql>
-    <sql>INSERT INTO roles (name, active, deleted) values ('ROLE_STUDENT', true, false),('ROLE_SUPERVISER',true, false),('ROLE_SUPERADMIN', true, false);</sql>
+    <sql>INSERT INTO roles (name, active, deleted) values ('ROLE_USER', true,
+      false),('ROLE_MODERATOR', true, false),('ROLE_ADMIN', true, false);
+    </sql>
+    <sql>INSERT INTO roles (name, active, deleted) values ('ROLE_STUDENT', true,
+      false),('ROLE_SUPERVISER',true, false),('ROLE_SUPERADMIN', true, false);
+    </sql>
   </changeSet>
 
   <changeSet id="18" author="krzymkiewicz">
@@ -530,7 +536,8 @@
     <addPrimaryKey tableName="user_colleges" columnNames="user_id, college_id"></addPrimaryKey>
     <addPrimaryKey tableName="user_faculties" columnNames="user_id, faculty_id"></addPrimaryKey>
     <addPrimaryKey tableName="user_institutes" columnNames="user_id, institute_id"></addPrimaryKey>
-    <addPrimaryKey tableName="user_departments" columnNames="user_id, department_id"></addPrimaryKey>
+    <addPrimaryKey tableName="user_departments"
+      columnNames="user_id, department_id"></addPrimaryKey>
   </changeSet>
   <changeSet id="23" author="krzymkiewicz">
     <createTable tableName="companies">
@@ -579,7 +586,8 @@
       referencedTableName="companies"/>
   </changeSet>
   <changeSet id="25" author="krzymkiewicz">
-    <renameColumn tableName="users" oldColumnName="college_id" newColumnName="selected_college_id"></renameColumn>
+    <renameColumn tableName="users" oldColumnName="college_id"
+      newColumnName="selected_college_id"></renameColumn>
   </changeSet>
   <changeSet id="26" author="krzymkiewicz">
     <addColumn tableName="companies">
@@ -592,6 +600,127 @@
     <addColumn tableName="activation_keys">
       <column name="start_expiration_date" type="timestamp without timezone"></column>
     </addColumn>
-    <renameColumn tableName="activation_keys" oldColumnName="expiration_date" newColumnName="end_expiration_date"></renameColumn>
+    <renameColumn tableName="activation_keys" oldColumnName="expiration_date"
+      newColumnName="end_expiration_date"></renameColumn>
+  </changeSet>
+  <changeSet id="28" author="krzymkiewicz">
+    <createTable tableName="dictionaries">
+      <column name="id" type="BIGINT" autoIncrement="true">
+        <constraints primaryKey="true" nullable="false"></constraints>
+      </column>
+      <column name="create_date" type="TIMESTAMP WITHOUT TIME ZONE"></column>
+      <column name="create_by" type="VARCHAR(255)"></column>
+      <column name="edit_date" type="TIMESTAMP WITHOUT TIME ZONE"></column>
+      <column name="edit_by" type="VARCHAR(255)"></column>
+      <column name="active" type="boolean"></column>
+      <column name="deleted" type="boolean"></column>
+      <column name="name" type="VARCHAR(255)"></column>
+      <column name="value" type="VARCHAR(255)"></column>
+      <column name="dictionary_type" type="VARCHAR(255)"/>
+      <column name="start_expiration_date" type="VARCHAR(255)"></column>
+      <column name="end_expiration_date" type="VARCHAR(255)"></column>
+    </createTable>
+
+    <!--    SEX TYPE-->
+    <insert tableName="dictionaries">
+      <column name="active" value="true"/>
+      <column name="deleted" value="false"/>
+      <column name="value" value="MALE"/>
+      <column name="DICTIONARY_TYPE" value="SEX_TYPE"/>
+    </insert>
+    <insert tableName="dictionaries">
+      <column name="active" value="true"/>
+      <column name="deleted" value="false"/>
+      <column name="value" value="FEMALE"/>
+      <column name="DICTIONARY_TYPE" value="SEX_TYPE"/>
+    </insert>
+    <insert tableName="dictionaries">
+      <column name="active" value="true"/>
+      <column name="deleted" value="false"/>
+      <column name="value" value="OTHER"/>
+      <column name="DICTIONARY_TYPE" value="SEX_TYPE"/>
+    </insert>
+
+    <!--    STUDY_MODE-->
+    <insert tableName="dictionaries">
+      <column name="active" value="true"/>
+      <column name="deleted" value="false"/>
+      <column name="value" value="FULLTIME"/>
+      <column name="DICTIONARY_TYPE" value="STUDY_MODE"/>
+    </insert>
+    <insert tableName="dictionaries">
+      <column name="active" value="true"/>
+      <column name="deleted" value="false"/>
+      <column name="value" value="EXTRAMURAL"/>
+      <column name="DICTIONARY_TYPE" value="STUDY_MODE"/>
+    </insert>
+  </changeSet>
+  <changeSet id="29" author="krzymkiewicz">
+    <modifyDataType tableName="dictionaries" columnName="start_expiration_date" newDataType="TIMESTAMP WITHOUT TIME ZONE"/>
+    <modifyDataType tableName="dictionaries" columnName="end_expiration_date" newDataType="TIMESTAMP WITHOUT TIME ZONE"/>
+    <createTable tableName="directions">
+      <column name="id" type="BIGINT" autoIncrement="true">
+        <constraints primaryKey="true" nullable="false"></constraints>
+      </column>
+      <column name="create_date" type="TIMESTAMP WITHOUT TIME ZONE"></column>
+      <column name="create_by" type="VARCHAR(255)"></column>
+      <column name="edit_date" type="TIMESTAMP WITHOUT TIME ZONE"></column>
+      <column name="edit_by" type="VARCHAR(255)"></column>
+      <column name="active" type="boolean"></column>
+      <column name="deleted" type="boolean"></column>
+      <column name="name" type="VARCHAR(255)"></column>
+      <column name="description" type="VARCHAR(255)"></column>
+      <column name="amount_of_students" type="bigint"></column>
+      <column name="study_mode" type="integer"></column> <!-- foreign key -->
+      <column name="start_date" type="TIMESTAMP WITHOUT TIME ZONE"></column>
+      <column name="end_date" type="TIMESTAMP WITHOUT TIME ZONE"></column>
+    </createTable>
+
+    <createTable tableName="user_directions">
+      <column name="user_id" type="bigint">
+        <constraints nullable="false" primaryKey="true"/>
+      </column>
+      <column name="direction_id" type="bigint">
+        <constraints nullable="false" primaryKey="true"/>
+      </column>
+    </createTable>
+    <addForeignKeyConstraint baseColumnNames="user_id"
+      baseTableName="user_directions"
+      constraintName="fk_user_id"
+      referencedColumnNames="id"
+      referencedTableName="users"/>
+    <addForeignKeyConstraint baseColumnNames="direction_id"
+      baseTableName="user_directions"
+      constraintName="fk_direction_id"
+      referencedColumnNames="id"
+      referencedTableName="directions"/>
   </changeSet>
 </databaseChangeLog>
+
+
+  <!--    ACADEMIC_DEGREE ToDo-->
+  <!--    <insert tableName="dictionaries">-->
+  <!--      <column  name="active"  value="true"/>-->
+  <!--      <column  name="deleted"  value="false"/>-->
+  <!--      <column  name="value"  value="OTHER"/>-->
+  <!--      <column name="DICTIONARY_TYPE" value="ACADEMIC_DEGREE"/>-->
+  <!--    </insert>-->
+  <!--    <insert tableName="dictionaries">-->
+  <!--      <column  name="active"  value="true"/>-->
+  <!--      <column  name="deleted"  value="false"/>-->
+  <!--      <column  name="value"  value="OTHER"/>-->
+  <!--      <column name="DICTIONARY_TYPE" value="ACADEMIC_DEGREE"/>-->
+  <!--    </insert>-->
+  <!--    <insert tableName="dictionaries">-->
+  <!--      <column  name="active"  value="true"/>-->
+  <!--      <column  name="deleted"  value="false"/>-->
+  <!--      <column  name="value"  value="OTHER"/>-->
+  <!--      <column name="DICTIONARY_TYPE" value="ACADEMIC_DEGREE"/>-->
+  <!--    </insert>-->
+  <!--    <insert tableName="dictionaries">-->
+  <!--      <column  name="active"  value="true"/>-->
+  <!--      <column  name="deleted"  value="false"/>-->
+  <!--      <column  name="value"  value="OTHER"/>-->
+  <!--      <column name="DICTIONARY_TYPE" value="ACADEMIC_DEGREE"/>-->
+  <!--    </insert>-->
+
