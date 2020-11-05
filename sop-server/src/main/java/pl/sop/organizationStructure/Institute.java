@@ -6,12 +6,14 @@
 package pl.sop.organizationStructure;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import java.util.List;
 import java.util.Set;
 import pl.sop.entities.ActivationKey;
 import pl.sop.entities.BasicEntity;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import pl.sop.entities.Direction;
 import pl.sop.entities.User;
 
 @Entity
@@ -36,6 +38,10 @@ public class Institute extends BasicEntity implements Serializable {
     @JsonIgnore
     @OneToMany(mappedBy = "institute", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<Department> departments;
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "institute", orphanRemoval = true)
+    private List<Direction> directions;
 
     @Override
     public Long getId() {
@@ -101,5 +107,13 @@ public class Institute extends BasicEntity implements Serializable {
 
     public void setDepartments(Set<Department> departments) {
         this.departments = departments;
+    }
+
+    public List<Direction> getDirections() {
+        return directions;
+    }
+
+    public void setDirections(List<Direction> directions) {
+        this.directions = directions;
     }
 }

@@ -1,8 +1,13 @@
 package pl.sop.organizationStructure;
 
+import java.util.List;
+import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import pl.sop.converters.ToDTO.InstituteToDTOConverter;
 import pl.sop.dto.CollegeStructureToSaveDTO;
+import pl.sop.dto.InstituteDTO;
 
 @Service
 public class InstituteService {
@@ -12,6 +17,8 @@ public class InstituteService {
 
   @Autowired
   private InstituteRepository instituteRepository;
+
+  private InstituteToDTOConverter instituteToDTOConverter = new InstituteToDTOConverter();
 
   public Institute findById(Long id) {
     return instituteRepository.findById(id).get();
@@ -34,4 +41,9 @@ public class InstituteService {
     this.instituteRepository.deleteById(collegeStructureId);
   }
 
+  public ResponseEntity<List<InstituteDTO>> getAllInstitutesForCollege(Long collegeId) {
+    List<Institute> institutes = instituteRepository.findAllForCollegeId(collegeId);
+    List<InstituteDTO> instituteDTOS = institutes.stream().map(instituteToDTOConverter::convert).collect(Collectors.toList());
+    return ResponseEntity.ok(instituteDTOS);
+  }
 }

@@ -60,6 +60,9 @@ public class ActivationKeyController {
   @RequestMapping(value = "/api/activationKeys/college", method = RequestMethod.POST)
   public ResponseEntity<ActivationKey> createActivationKeyForCollege(Authentication authentication,
       @RequestBody ActivationKeyDTO activationKeyDTO) {
+    if (activationKeyDTO == null) {
+      return new ResponseEntity<>(HttpStatus.NOT_ACCEPTABLE);
+    }
     UserDetailsImpl loggedUser = (UserDetailsImpl) authentication.getPrincipal();
     return activationKeyService.createNewActivationKeyForCollege(activationKeyDTO);
   }

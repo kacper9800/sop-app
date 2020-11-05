@@ -695,6 +695,16 @@
       referencedColumnNames="id"
       referencedTableName="directions"/>
   </changeSet>
+  <changeSet id="30" author="krzymkiewicz">
+    <addColumn tableName="directions">
+      <column name="institute_id" type="bigint"></column>
+    </addColumn>
+    <addForeignKeyConstraint baseColumnNames="institute_id"
+      baseTableName="directions"
+      constraintName="fk_institute_id"
+      referencedColumnNames="id"
+      referencedTableName="institutes"/>
+  </changeSet>
 </databaseChangeLog>
 
 

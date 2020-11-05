@@ -1,5 +1,6 @@
 package pl.sop.organizationStructure;
 
+import java.util.List;
 import java.util.Optional;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -27,4 +28,12 @@ public interface InstituteRepository extends JpaRepository<Institute, Long> {
       + " and institute.active = true"
       + " and institute.deleted = false")
   Institute findActiveInstituteStructureById(@Param("institute_id") Long instituteId);
+
+
+  @Query(value = "SELECT institute from Institute institute "
+      + " left join fetch institute.faculty faculty"
+      + " left join fetch faculty.college college"
+      + " where college.id = :collegeId"
+      + " and institute.deleted = false")
+  List<Institute> findAllForCollegeId(Long collegeId);
 }
