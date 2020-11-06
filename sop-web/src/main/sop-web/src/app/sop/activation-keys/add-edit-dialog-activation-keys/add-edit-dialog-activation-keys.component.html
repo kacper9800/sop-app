@@ -44,6 +44,25 @@
         <div class="clr-col-2"></div>
       </div>
 
+      <div class="clr-row">
+        <div class="clr-col-2"></div>
+        <div class="clr-col-8">
+          <clr-select-container>
+            <label>
+              <clr-icon shape="two-way-arrows"></clr-icon>
+            </label>
+            <select clrSelect id="select-direction" class="clr-select" formControlName="directionId">
+              <option *ngFor="let direction of directions" [value]="direction.id">
+                {{direction.name + '/' + direction.startExpirationDate+ ' -> '+ direction.endExpirationDate + '/' }} {{'directions.' + direction.studyMode.toString() | translate}}</option>
+            </select>
+            <clr-icon *ngIf="activationKeyForm.get('level').value == null"
+                      class="clr-validate-icon" shape="exclamation-circle"></clr-icon>
+          </clr-select-container>
+        </div>
+        <div class="clr-col-2"></div>
+      </div>
+
+
 
       <div class="clr-row">
         <div class="clr-col-2"></div>

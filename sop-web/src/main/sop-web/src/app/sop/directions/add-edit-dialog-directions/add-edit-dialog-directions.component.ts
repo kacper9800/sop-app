@@ -8,7 +8,7 @@ import {ClrLoadingState} from '@clr/angular';
 import {Direction, IDirection} from '../../../_model/direction.model';
 import {DirectionsService} from '../../../_services/directions.service';
 import {DictionariesService} from '../../../_services/dictionaries.service';
-import {IInstitute, Institute} from '../../../_model/organization-structure/institute.model';
+import {IInstitute} from '../../../_model/organization-structure/institute.model';
 import {InstituteService} from '../../../_services/organization-structure/institute.service';
 import {IDictionary} from '../../../_model/dictionary.model';
 
@@ -26,6 +26,9 @@ export class AddEditDialogDirectionsComponent implements OnInit {
   public displayDialog: any;
   public directionForm: FormGroup;
   private directionToSave: Direction;
+  public studyModes: IDictionary[] = [];
+  public institutes: IInstitute[] = [];
+
 
   public dialogTitle: string;
   public validateBtnState: any;
@@ -36,35 +39,61 @@ export class AddEditDialogDirectionsComponent implements OnInit {
               private translateService: TranslateService,
               private instituteService: InstituteService,
               private dictionariesService: DictionariesService,
-              private directionsSerivce: DirectionsService) {
+              private directionsService: DirectionsService) {
   }
 
   ngOnInit() {
     this.blockUI = true;
-    this.prepareForm();
     this.loadInstitutes();
     this.loadStudyModes();
   }
 
-  private prepareForm(): void {
+  private prepareForm(direction: Direction): void {
     this.directionForm = this.formBuilder.group({
-
-      token: new FormControl({value: this.tokenService.generateToken(), disabled: true},
-        Validators.required),
-      numberOfUses: new FormControl({value: 1, disabled: true}, Validators.required),
-      collegeId: new FormControl({value: null, disabled: false}, Validators.required)
+      name: new FormControl({
+        value: direction ? direction.name : null,
+        disabled: false
+      }, Validators.required),
+      description: new FormControl({
+        value: direction ? direction.startExpirationDate : null,
+        disabled: false
+      }),
+      expirationDateStart: new FormControl({
+        value: direction ? direction.startExpirationDate : null,
+        disabled: false
+      }),
+      expirationDateEnd: new FormControl({
+        value: direction ? direction.endExpirationDate : null,
+        disabled: false
+      }),
+      studyMode: new FormControl({
+        value: direction ? direction.studyMode : null,
+        disabled: false
+      }, Validators.required),
+      instituteId: new FormControl({
+        value: direction ? direction.instituteId : null,
+        disabled: false
+      }, Validators.required)
     });
   }
 
   private loadInstitutes() {
     this.instituteService.getAllInstitutesForCollege().subscribe(
-      (res: HttpResponse<IInstitute[]>) => this.onSuccessLoadInstitutes(res.body),
+      (res) => this.onSuccessLoadInstitutes(res),
       (error) => this.onErrorLoadInstitutes(error)
     );
   }
 
-  private onSuccessLoadInstitutes(body: IInstitute[]) {
-
+  private onSuccessLoadInstitutes(response) {
+    this.institutes = [];
+    this.institutes.push({
+      id: null,
+      name: this.translateService.instant('directions.chooseInstitute')
+    });
+    response.forEach(institute => {
+      this.institutes.push({id: institute.id, name: institute.name});
+    });
+    this.blockUI = false;
   }
 
   private onErrorLoadInstitutes(error: any) {
@@ -73,72 +102,102 @@ export class AddEditDialogDirectionsComponent implements OnInit {
 
   private loadStudyModes() {
     this.dictionariesService.getStudyModes().subscribe(
-      (res: HttpResponse<IDictionary[]>) => this.onSuccessLoadStudyModes(res.body),
+      (res: any) => this.onSuccessLoadStudyModes(res),
       (error) => this.onErrorLoadStudyModes(error)
     );
   }
 
   private onSuccessLoadStudyModes(res: IDictionary[]) {
-
+    this.studyModes = [];
+    this.studyModes.push({label: 'chooseStudyMode', value: null});
+    res.forEach(studyMode => {
+      this.studyModes.push({label: studyMode.value, value: studyMode.value});
+    });
+    this.blockUI = false;
   }
 
   private onErrorLoadStudyModes(error: any) {
-
+    this.blockUI = false;
   }
 
-  public showNewCollegeDialog() {
+  public showNewDirectionDialog() {
     this.blockUI = true;
-    this.dialogTitle = this.translateService.instant('colleges.dialog.titleNew');
+    this.dialogTitle = this.translateService.instant('directions.dialog.titleNew');
     this.displayDialog = true;
+    this.prepareForm(null);
   }
 
-  public showEditCollegeDialog(id: number) {
+  public showEditDirectionDialog(id: number) {
     this.blockUI = true;
     this.dialogTitle = this.translateService.instant('colleges.dialog.titleEdit');
-    this.collegeService.getCollegeForId(id).subscribe(
-      (res: HttpResponse<IDirection>) => this.onSuccessLoadCollege(res.body),
-      (res) => this.onErrorLoadCollege(res)
+    this.directionsService.getDirectionForId(id).subscribe(
+      (res: HttpResponse<IDirection>) => this.onSuccessLoadDirection(res.body),
+      (res) => this.onErrorLoadDirection(res)
     );
   }
 
-  private onSuccessLoadCollege(res: IDirection) {
+  private onSuccessLoadDirection(res: IDirection) {
     this.direction = res;
     this.displayDialog = true;
     this.blockUI = false;
   }
 
-  private onErrorLoadCollege(res: any) {
+  private onErrorLoadDirection(res: any) {
     console.log(res);
     this.blockUI = false;
+  }
+
+  private collectFormData() {
+    this.directionToSave = new Direction();
+    this.directionToSave.name = this.directionForm.get('name').value;
+    this.directionToSave.description = this.directionForm.get('description').value;
+    this.directionToSave.startExpirationDate = this.prepareDateObject(this.directionForm.get('expirationDateStart').value);
+    this.directionToSave.endExpirationDate = this.prepareDateObject(this.directionForm.get('expirationDateEnd').value);
+    this.directionToSave.studyMode = this.directionForm.get('studyMode').value;
+    this.directionToSave.instituteId = this.directionForm.get('instituteId').value;
+    this.directionToSave.active = true;
   }
 
   public onSubmit() {
     this.blockUI = true;
     this.validateBtnState = ClrLoadingState.LOADING;
     this.collectFormData();
-    this.directionsSerivce.createDirection(this.directionToSave).subscribe(
-      (res: number) => this.onSuccessActivateCollege(res),
-      (error) => this.onErrorActivateCollege(error)
+    this.directionsService.createDirection(this.directionToSave).subscribe(
+      (res: number) => this.onSuccessCreateDirection(res),
+      (error) => this.onErrorCreateDirection(error)
     );
   }
 
-  private collectFormData() {
-    this.directionToSave = new Direction();
-    this.directionToSave.name = this.directionForm.get('name').value;
-    this.directionToSave.instituteId = this.directionForm.get('token').value;
-    this.directionToSave.active = true;
-  }
-
-  private onSuccessActivateCollege(res) {
+  private onSuccessCreateDirection(res) {
     this.blockUI = false;
     this.validateBtnState = ClrLoadingState.SUCCESS;
     this.displayDialog = false;
+    this.closeDialogWithSaveEmitter.emit();
   }
 
-  private onErrorActivateCollege(error: any) {
+  private onErrorCreateDirection(error: any) {
     this.blockUI = false;
     this.validateBtnState = ClrLoadingState.ERROR;
-    this.displayDialog = false;
+    this.closeDialogWithSaveEmitter.emit();
   }
 
+  private prepareDateObject(date: string): Date {
+    if (date !== null && this.translateService.getBrowserLang() === 'pl') {
+      const dateParts = date.split('.');
+      const finalDate = dateParts[1] + '-' + dateParts[0] + '-' + dateParts[2];
+      const convertedDate = new Date(finalDate);
+      const userTimezoneOffset = convertedDate.getTimezoneOffset() * 60000;
+      const dateWithoutTimezone = convertedDate.getTime() - userTimezoneOffset;
+      return new Date(dateWithoutTimezone);
+    } else if (date !== null && this.translateService.getBrowserLang() === 'en') {
+      const dateParts = date.split('.');
+      const finalDate = dateParts[1] + '-' + dateParts[0] + '-' + dateParts[2];
+      const convertedDate = new Date(finalDate);
+      const userTimezoneOffset = convertedDate.getTimezoneOffset() * 60000;
+      const dateWithoutTimezone = convertedDate.getTime() - userTimezoneOffset;
+      return new Date(dateWithoutTimezone);
+    } else {
+      return null;
+    }
+  }
 }

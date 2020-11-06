@@ -17,6 +17,8 @@ import {TokenService} from '../../../_helpers/token.service';
 import {HttpResponse} from '@angular/common/http';
 import {PrincipalService} from '../../../_services/auth/principal.service';
 import {College, ICollege} from '../../../_model/organization-structure/college.model';
+import {DirectionsService} from '../../../_services/directions.service';
+import {Direction} from '../../../_model/direction.model';
 
 @Component({
   selector: 'app-add-edit-dialog-activation-keys',
@@ -35,6 +37,7 @@ export class AddEditDialogActivationKeysComponent implements OnInit {
   public collegeStructure: CollegeStructure;
   public collegeStructuresLevels: DropdownItem[];
 
+  public directions: Direction[];
   public colleges: College[] = [];
   public faculties: Faculty[] = [];
   public institutes: Institute[] = [];
@@ -55,7 +58,8 @@ export class AddEditDialogActivationKeysComponent implements OnInit {
               private translateService: TranslateService,
               private collegeService: CollegeService,
               private tokenService: TokenService,
-              private principalService: PrincipalService) {
+              private principalService: PrincipalService,
+              private directionsService: DirectionsService) {
   }
 
   ngOnInit() {
@@ -66,6 +70,7 @@ export class AddEditDialogActivationKeysComponent implements OnInit {
     this.prepareForm();
     this.loadCollegeStructureData();
     this.prepareDropdownsOptions();
+    this.loadDirections();
     if (this.principalService.isSuperAdmin()) {
       this.loadColleges();
     }
@@ -107,6 +112,10 @@ export class AddEditDialogActivationKeysComponent implements OnInit {
         value: activationKey ? activationKey.numberOfUses : null,
         disabled: false
       }, Validators.required),
+      directionId: new FormControl({
+        value: activationKey ? activationKey.directionId : null,
+        disabled: false
+      }),
       collegeId: new FormControl({
         value: activationKey ? activationKey.collegeId : null,
         disabled: false
@@ -232,12 +241,10 @@ export class AddEditDialogActivationKeysComponent implements OnInit {
       }];
       this.activationKeyForm.get('collegeId').disable();
     }
-    console.log(this.colleges);
     this.blockUI = false;
   }
 
   private onErrorLoadColleges(err: any) {
-    console.log(err);
     this.blockUI = false;
   }
 
@@ -248,13 +255,10 @@ export class AddEditDialogActivationKeysComponent implements OnInit {
   }
 
   public showEditActivationKeyDialog(value: string) {
-    console.log('edit');
     this.blockUI = true;
     this.dialogTitle = this.translateService.instant('activationKeys.dialog.titleEdit');
     this.editMode = true;
     this.activationKeyValue = value;
-    console.log(this.editMode);
-    console.log(this.activationKeyValue);
   }
 
   public onCollegeStructureLevelChange() {
@@ -366,6 +370,7 @@ export class AddEditDialogActivationKeysComponent implements OnInit {
     this.activationKeyToSave = new ActivationKey();
     this.activationKeyToSave.value = this.activationKeyForm.get('token').value;
     this.activationKeyToSave.numberOfUses = this.activationKeyForm.get('numberOfUses').value;
+    this.activationKeyToSave.directionId = this.activationKeyForm.get('directionId').value;
     this.activationKeyToSave.startExpirationDate = this.prepareDateObject(this.activationKeyForm.get('expirationDateStart').value);
     this.activationKeyToSave.endExpirationDate = this.prepareDateObject(this.activationKeyForm.get('expirationDateEnd').value);
     if (this.selectedLevel === 0) {
@@ -412,4 +417,22 @@ export class AddEditDialogActivationKeysComponent implements OnInit {
     }
   }
 
+  private loadDirections() {
+    this.directionsService.getAllDirections().subscribe(
+      (res: any) => this.onSuccessLoadDirections(res),
+      (error) => this.onErrorLoadDirections(error)
+    );
+  }
+
+  private onSuccessLoadDirections(res) {
+    this.directions = [];
+    this.directions.push({id: null, name: this.translateService.instant('directions.chooseDirection')});
+    this.directions = res;
+    this.blockUI = false;
+  }
+
+  private onErrorLoadDirections(errror: any) {
+    console.log('error');
+    this.blockUI = false;
+  }
 }

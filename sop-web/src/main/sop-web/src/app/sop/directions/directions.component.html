@@ -31,21 +31,22 @@
   <clr-dg-row *ngFor="let direction of directions" [clrDgItem]="direction">
     <clr-dg-cell>{{direction.name}}</clr-dg-cell>
     <clr-dg-cell>{{direction.description}}</clr-dg-cell>
-    <clr-dg-cell>{{direction.studyMode}}</clr-dg-cell>
+    <clr-dg-cell>{{'directions.' + direction.studyMode.toString() | translate}}</clr-dg-cell>
+    <clr-dg-cell>{{direction.facultyName}}</clr-dg-cell>
     <clr-dg-cell>{{direction.instituteName}}</clr-dg-cell>
-    <clr-dg-cell>
-      <div *ngIf="direction.active">
-        <clr-icon shape="check"></clr-icon>
-      </div>
-      <div *ngIf="!direction.active">
-        <clr-icon shape="times"></clr-icon>
-      </div>
-    </clr-dg-cell>
     <clr-dg-cell>
       <div *ngIf="direction.removed">
         <clr-icon shape="check"></clr-icon>
       </div>
       <div *ngIf="!direction.removed">
+        <clr-icon shape="times"></clr-icon>
+      </div>
+    </clr-dg-cell>
+    <clr-dg-cell>
+      <div *ngIf="direction.active">
+        <clr-icon shape="check"></clr-icon>
+      </div>
+      <div *ngIf="!direction.active">
         <clr-icon shape="times"></clr-icon>
       </div>
     </clr-dg-cell>

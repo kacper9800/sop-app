@@ -291,8 +291,19 @@
   },
   "directions": {
     "header": "Directions",
+    "directionName": "Direction name",
+    "studyMode": "Study mode",
     "CRUD": {
       "addDirection": "Add study direction"
+    },
+    "chooseDirection": "Choose study direction",
+    "chooseStudyMode": "Choose study mode",
+    "chooseInstitute": "Choose institute",
+    "FULLTIME": "Full-time",
+    "EXTRAMURAL": "Extramural",
+    "dialog": {
+      "titleNew": "Adding new study direction",
+      "titleEdit": "Editing study direction"
     }
   }
 }

@@ -12,6 +12,7 @@ import {TranslateService} from '@ngx-translate/core';
 import {DirectionsService} from '../../_services/directions.service';
 import {HttpResponse} from '@angular/common/http';
 import {ExportTableComponent} from '../export-table/export-table.component';
+import {AddEditDialogDirectionsComponent} from './add-edit-dialog-directions/add-edit-dialog-directions.component';
 
 @Component({
   selector: 'app-directions',
@@ -49,14 +50,15 @@ export class DirectionsComponent implements OnInit {
   }
 
   private loadDirections() {
-    this.directionsService.getAllDirections(1).subscribe(
-      (res: HttpResponse<IDirection[]>) => this.onSuccessLoadDirections(res.body),
+    this.directionsService.getAllDirections().subscribe(
+      (res: any) => this.onSuccessLoadDirections(res),
       (error) => this.onErrorLoadDirections(error)
     );
   }
 
-  private onSuccessLoadDirections(res: IDirection[]) {
-    console.log('success');
+  private onSuccessLoadDirections(res) {
+    this.directions = [];
+    this.directions = res;
     this.blockUI = false;
   }
 
@@ -69,7 +71,7 @@ export class DirectionsComponent implements OnInit {
     this.columns = [
       {label: 'common.name', fieldName: 'name'},
       {label: 'common.description', fieldName: 'description'},
-      {label: 'common.studyMode', fieldName: 'studyMode'},
+      {label: 'directions.studyMode', fieldName: 'studyMode'},
       {label: 'common.facultyName', fieldName: 'facultyName'},
       {label: 'common.instituteName', fieldName: 'instituteName'},
       {label: 'common.deleted', fieldName: 'removed'},
@@ -79,7 +81,13 @@ export class DirectionsComponent implements OnInit {
   }
 
   public showAddNewDialog() {
-
+    this.addEditDialog.clear();
+    const factory = this.resolver.resolveComponentFactory(AddEditDialogDirectionsComponent);
+    this.componentRef = this.addEditDialog.createComponent(factory);
+    this.componentRef.instance.showNewDirectionDialog();
+    this.componentRef.instance.closeDialogWithSaveEmitter.subscribe(() =>
+      this.loadDirections()
+    );
   }
 
   public showExportDialog(exportAll: boolean): void {

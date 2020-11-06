@@ -293,8 +293,19 @@
   },
   "directions": {
     "header": "Kierunki studiów",
+    "directionName": "Nazwa kierunku",
+    "studyMode": "Typ studiów",
     "CRUD": {
       "addDirection": "Dodaj kierunek studiów"
+    },
+    "chooseDirection": "Wybierz kierunek studiów",
+    "chooseStudyMode": "Wybierz rodzaj studiów",
+    "chooseInstitute": "Wybierz instytut",
+    "FULLTIME": "Stacjonarne",
+    "EXTRAMURAL": "Niestacjonarne",
+    "dialog": {
+      "titleNew": "Dodawanie nowego kierunku studiów",
+      "titleEdit": "Edycja kierunku studiów"
     }
   }
 }

@@ -2,16 +2,17 @@
            [clrModalClosable]="false">
   <h3 class="modal-title" style="text-align: center!important;">{{dialogTitle}}</h3>
   <div class="modal-body">
-    <form clrForm [formGroup]="collegeForm" id="activationKeyForm">
+    <form clrForm [formGroup]="directionForm" id="activationKeyForm">
+
       <div class="clr-row">
         <div class="clr-col-2"></div>
         <div class="clr-col-8">
           <clr-input-container>
             <label>
-              <clr-icon shape="key"></clr-icon>
+              <clr-icon shape="highlighter"></clr-icon>
             </label>
-            <input [size]="35" clrInput type="text" formControlName="token"
-                   placeholder="{{'registration.tokenLabel' | translate}}"/>
+            <input [size]="35" clrInput type="text" formControlName="name"
+                   placeholder="{{'directions.directionName' | translate}}"/>
           </clr-input-container>
         </div>
         <div class="clr-col-2"></div>
@@ -21,9 +22,11 @@
         <div class="clr-col-2"></div>
         <div class="clr-col-8">
           <clr-input-container>
-            <label><clr-icon shape="accessibility-2"></clr-icon></label>
-            <input type="text" clrInput formControlName="numberOfUses"/>
-            <clr-control-error>We need your first name for legal compliance</clr-control-error>
+            <label>
+              <clr-icon shape="highlighter"></clr-icon>
+            </label>
+            <input [size]="35" clrInput type="text" formControlName="description"
+                   placeholder="{{'common.description' | translate}}"/>
           </clr-input-container>
         </div>
         <div class="clr-col-2"></div>
@@ -33,16 +36,57 @@
         <div class="clr-col-2"></div>
         <div class="clr-col-8">
           <clr-select-container>
-            <label>
-              <clr-icon shape="building"></clr-icon>
-            </label>
-            <select clrSelect id="select-level" class="clr-select" formControlName="collegeId">
-              <option *ngFor="let college of availableColleges"
-                      [value]="college.id">{{college.name}}</option>
+            <label><clr-icon shape="building"></clr-icon></label>
+            <select clrSelect name="options" formControlName="studyMode" required>
+              <option *ngFor="let studyMode of studyModes" [value]="studyMode.value">
+                {{'directions.' + studyMode.label.toString() | translate}}
+              </option>
             </select>
-            <clr-icon *ngIf="collegeForm.get('collegeId').value == null"
-                      class="clr-validate-icon" shape="exclamation-circle"></clr-icon>
+            <clr-control-error>{{'common.required' | translate}}</clr-control-error>
           </clr-select-container>
+        </div>
+        <div class="clr-col-2"></div>
+      </div>
+
+
+      <div class="clr-row">
+        <div class="clr-col-2"></div>
+        <div class="clr-col-8">
+          <clr-select-container>
+            <label><clr-icon shape="building"></clr-icon></label>
+            <select clrSelect name="options" formControlName="instituteId" required>
+              <option *ngFor="let institute of institutes" [value]="institute.id">
+                {{institute.name}}
+              </option>
+            </select>
+            <clr-control-error>{{'common.required' | translate}}</clr-control-error>
+          </clr-select-container>
+        </div>
+        <div class="clr-col-2"></div>
+      </div>
+
+      <div class="clr-row">
+        <div class="clr-col-2"></div>
+        <div class="clr-col-8">
+          <clr-date-container>
+            <label>
+              <clr-icon shape="calendar"></clr-icon>
+            </label>
+            <input type="date" clrDate name="demo" formControlName="expirationDateStart">
+          </clr-date-container>
+        </div>
+        <div class="clr-col-2"></div>
+      </div>
+
+      <div class="clr-row">
+        <div class="clr-col-2"></div>
+        <div class="clr-col-8">
+          <clr-date-container>
+            <label>
+              <clr-icon shape="calendar"></clr-icon>
+            </label>
+            <input type="date" clrDate name="demo" formControlName="expirationDateEnd">
+          </clr-date-container>
         </div>
         <div class="clr-col-2"></div>
       </div>
@@ -51,7 +95,7 @@
   <div class="modal-footer">
     <div class="btn-group">
       <button [clrLoading]="validateBtnState" type="submit" form="activationKeyForm"
-              class="btn btn-primary" [disabled]="collegeForm.invalid"
+              class="btn btn-primary" [disabled]="directionForm.invalid"
               (click)="onSubmit()">
         {{'add-edit-dialog.save' | translate}}</button>
       <button class="btn btn-secondary-outline"
