@@ -1,6 +1,8 @@
 package pl.sop.entities;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonView;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -8,6 +10,8 @@ import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 import pl.sop.organizationStructure.Institute;
 
 @Entity
@@ -23,14 +27,16 @@ public class Direction extends BasicEntity{
   @Column(name = "amount_of_students")
   private Long amountOfStudents;
 
-  @Column(name = "study_mode")
-  private Integer studyMode;
+  @ManyToOne(fetch = FetchType.LAZY)
+  @JoinColumn(name = "study_mode")
+  @Fetch(FetchMode.JOIN)
+  private Dictionary studyMode;
 
   @Column(name = "start_date")
-  private LocalDateTime startDate;
+  private LocalDate startDate;
 
   @Column(name = "end_date")
-  private LocalDateTime endDate;
+  private LocalDate endDate;
 
   @JsonIgnore
   @ManyToOne(fetch = FetchType.LAZY)
@@ -60,31 +66,27 @@ public class Direction extends BasicEntity{
     return amountOfStudents;
   }
 
-  public void setAmountOfStudents(Long amountOfStudents) {
-    this.amountOfStudents = amountOfStudents;
-  }
+  public void setAmountOfStudents(Long amountOfStudents) { this.amountOfStudents = amountOfStudents; }
 
-  public Integer getStudyMode() {
+  public Dictionary getStudyMode() {
     return studyMode;
   }
 
-  public void setStudyMode(Integer studyMode) {
+  public void setStudyMode(Dictionary studyMode) {
     this.studyMode = studyMode;
   }
 
-  public LocalDateTime getStartDate() {
-    return startDate;
-  }
+  public LocalDate getStartDate() { return startDate; }
 
-  public void setStartDate(LocalDateTime startDate) {
+  public void setStartDate(LocalDate startDate) {
     this.startDate = startDate;
   }
 
-  public LocalDateTime getEndDate() {
+  public LocalDate getEndDate() {
     return endDate;
   }
 
-  public void setEndDate(LocalDateTime endDate) {
+  public void setEndDate(LocalDate endDate) {
     this.endDate = endDate;
   }
 
@@ -95,4 +97,6 @@ public class Direction extends BasicEntity{
   public void setInstitute(Institute institute) {
     this.institute = institute;
   }
+
+
 }

@@ -1,20 +1,22 @@
 package pl.sop.converters.FromDTO;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import pl.sop.converters.Converter;
 import pl.sop.dto.DirectionDTO;
+import pl.sop.entities.Dictionary;
 import pl.sop.entities.Direction;
+import pl.sop.services.DictionaryService;
 
 public class DTOToDirectionConverter implements Converter<DirectionDTO, Direction> {
 
+  private DictionaryService dictionaryService;
+
+  public DTOToDirectionConverter(DictionaryService dictionaryService) {
+    this.dictionaryService = dictionaryService;
+  }
+
   @Override
-  public Direction convert(DirectionDTO input) {
-    Direction direction = new Direction();
-    direction.setName(input.getName());
-    direction.setDescription(input.getDescription());
-    direction.setAmountOfStudents(input.getAmountOfStudents());
-    direction.setStudyMode(input.getStudyMode());
-    direction.setStartDate(input.getStartDate());
-    direction.setEndDate(input.getEndDate());
-    return direction;
+  public Direction convert(DirectionDTO input){
+    return null;
   }
 }

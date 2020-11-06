@@ -22,11 +22,11 @@ public class Dictionary extends BasicEntity{
   @Column(name = "VALUE")
   private String value;
 
-  @Column(name = "ACTIVE_START")
-  private LocalDateTime activeStart;
+  @Column(name = "START_EXPIRATION_DATE")
+  private LocalDateTime startExpirationDate;
 
-  @Column(name = "ACTIVE_END")
-  private LocalDateTime activeEnd;
+  @Column(name = "END_EXPIRATION_dATE")
+  private LocalDateTime endExpirationDate;
 
   public Dictionary() {
   }
@@ -55,19 +55,19 @@ public class Dictionary extends BasicEntity{
     this.value = value;
   }
 
-  public LocalDateTime getActiveStart() {
-    return activeStart;
+  public LocalDateTime getStartExpirationDate() {
+    return startExpirationDate;
   }
 
-  public void setActiveStart(LocalDateTime activeStart) {
-    this.activeStart = activeStart;
+  public void setStartExpirationDate(LocalDateTime startExpirationDate) {
+    this.startExpirationDate = startExpirationDate;
   }
 
-  public LocalDateTime getActiveEnd() {
-    return activeEnd;
+  public LocalDateTime getEndExpirationDate() {
+    return endExpirationDate;
   }
 
-  public void setActiveEnd(LocalDateTime activeEnd) {
-    this.activeEnd = activeEnd;
+  public void setEndExpirationDate(LocalDateTime endExpirationDate) {
+    this.endExpirationDate = endExpirationDate;
   }
 }

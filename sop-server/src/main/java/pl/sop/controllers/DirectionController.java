@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import pl.sop.dto.ActivationKeyDTO;
 import pl.sop.dto.DirectionDTO;
+import pl.sop.security.services.UserDetailsImpl;
 import pl.sop.services.ActivationKeyService;
 import pl.sop.services.DirectionService;
 
@@ -36,13 +37,14 @@ public class DirectionController {
 
   @CrossOrigin
   @PreAuthorize("hasRole('ROLE_SUPERADMIN') or hasRole('ROLE_ADMIN') or hasRole('ROLE_MODERATOR')")
-  @RequestMapping(value = "/api/college-directions/{id}", method = RequestMethod.GET)
-  public ResponseEntity<List<DirectionDTO>> getAllDirections(Authentication authentication, @PathVariable("id") Long id) {
-    if (id == null) {
+  @RequestMapping(value = "/api/college-directions", method = RequestMethod.GET)
+  public ResponseEntity<List<DirectionDTO>> getAllDirections(Authentication authentication) {
+    UserDetailsImpl loggedUser = (UserDetailsImpl) authentication.getPrincipal();
+    Long collegeId = loggedUser.getSelectedCollegeId();
+    if (collegeId == null) {
       return ResponseEntity.notFound().build();
     }
-//    return this.directionService.getAllDirectionForCollege(id);
-  return null;
+    return this.directionService.getAllDirectionForCollege(collegeId);
   }
 
   @CrossOrigin

@@ -46,4 +46,9 @@ public class InstituteService {
     List<InstituteDTO> instituteDTOS = institutes.stream().map(instituteToDTOConverter::convert).collect(Collectors.toList());
     return ResponseEntity.ok(instituteDTOS);
   }
+
+  public Institute getById(Long instituteId) {
+    Institute institute = instituteRepository.findActiveInstituteById(instituteId);
+    return institute;
+  }
 }

@@ -1,14 +1,18 @@
 package pl.sop.dto;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 public class DirectionDTO {
   private String name;
   private String description;
-  private Integer studyMode;
+  private String studyMode;
+  private Long instituteId;
+  private String instituteName;
+  private String facultyName;
   private Long amountOfStudents;
-  private LocalDateTime startDate;
-  private LocalDateTime endDate;
+  private LocalDate startExpirationDate;
+  private LocalDate endExpirationDate;
   private Boolean active;
   private Boolean removed;
 
@@ -31,12 +35,36 @@ public class DirectionDTO {
     this.description = description;
   }
 
-  public Integer getStudyMode() {
+  public String getStudyMode() {
     return studyMode;
   }
 
-  public void setStudyMode(Integer studyMode) {
+  public void setStudyMode(String studyMode) {
     this.studyMode = studyMode;
+  }
+
+  public Long getInstituteId() {
+    return instituteId;
+  }
+
+  public void setInstituteId(Long instituteId) {
+    this.instituteId = instituteId;
+  }
+
+  public String getInstituteName() {
+    return instituteName;
+  }
+
+  public void setInstituteName(String instituteName) {
+    this.instituteName = instituteName;
+  }
+
+  public String getFacultyName() {
+    return facultyName;
+  }
+
+  public void setFacultyName(String facultyName) {
+    this.facultyName = facultyName;
   }
 
   public Long getAmountOfStudents() {
@@ -47,19 +75,35 @@ public class DirectionDTO {
     this.amountOfStudents = amountOfStudents;
   }
 
-  public LocalDateTime getStartDate() {
-    return startDate;
+  public LocalDate getStartExpirationDate() {
+    return startExpirationDate;
   }
 
-  public void setStartDate(LocalDateTime startDate) {
-    this.startDate = startDate;
+  public void setStartExpirationDate(LocalDate startExpirationDate) {
+    this.startExpirationDate = startExpirationDate;
   }
 
-  public LocalDateTime getEndDate() {
-    return endDate;
+  public LocalDate getEndExpirationDate() {
+    return endExpirationDate;
   }
 
-  public void setEndDate(LocalDateTime endDate) {
-    this.endDate = endDate;
+  public void setEndExpirationDate(LocalDate endExpirationDate) {
+    this.endExpirationDate = endExpirationDate;
+  }
+
+  public Boolean getActive() {
+    return active;
+  }
+
+  public void setActive(Boolean active) {
+    this.active = active;
+  }
+
+  public Boolean getRemoved() {
+    return removed;
+  }
+
+  public void setRemoved(Boolean removed) {
+    this.removed = removed;
   }
 }

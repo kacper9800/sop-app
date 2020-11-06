@@ -11,10 +11,15 @@ public class DirectionToDTOConverter implements Converter<Direction, DirectionDT
     DirectionDTO directionDTO = new DirectionDTO();
     directionDTO.setName(input.getName());
     directionDTO.setDescription(input.getDescription());
-    directionDTO.setStartDate(input.getStartDate());
-    directionDTO.setEndDate(input.getEndDate());
+    directionDTO.setStartExpirationDate(input.getStartDate());
+    directionDTO.setEndExpirationDate(input.getEndDate());
     directionDTO.setAmountOfStudents(input.getAmountOfStudents());
-    directionDTO.setStudyMode(input.getStudyMode());
+    directionDTO.setStudyMode(input.getStudyMode().getValue());
+    directionDTO.setInstituteId(input.getInstitute().getId());
+    directionDTO.setInstituteName(input.getInstitute().getName());
+    directionDTO.setFacultyName(input.getInstitute().getFaculty().getName());
+    directionDTO.setActive(input.isActive());
+    directionDTO.setRemoved(input.isDeleted());
     return directionDTO;
   }
 }
