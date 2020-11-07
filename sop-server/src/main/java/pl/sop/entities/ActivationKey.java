@@ -7,6 +7,7 @@ import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import pl.sop.organizationStructure.College;
 import pl.sop.organizationStructure.Department;
@@ -52,6 +53,16 @@ public class ActivationKey extends BasicEntity {
   @JsonIgnore
   @Column(name = "remaining_uses")
   private Integer numberOfUses;
+
+  @JsonIgnore
+  @OneToOne(fetch = FetchType.LAZY)
+  @JoinColumn(name = "direction_id")
+  private Direction direction;
+
+
+//  @JsonIgnore
+//  @Column
+
 //  ToDO
 //  @JsonIgnore
 //  @Column(name = "creator_id")
@@ -141,4 +152,9 @@ public class ActivationKey extends BasicEntity {
 //  public User getCreatedBy() { return createdBy; }
 //
 //  public void setCreatedBy(User createdBy) { this.createdBy = createdBy; }
+
+
+  public Direction getDirection() { return direction; }
+
+  public void setDirection(Direction direction) { this.direction = direction; }
 }

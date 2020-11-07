@@ -45,13 +45,7 @@ public class ActivationKeyController {
     if (college == null) {
       return new ResponseEntity<>(HttpStatus.NOT_ACCEPTABLE);
     }
-    for (GrantedAuthority grantedAuthority : loggedUser.getAuthorities()) {
-      if ("ROLE_SUPERADMIN".equals(grantedAuthority.getAuthority())) {
-        return new ResponseEntity(activationKeyService.getAllTokens(), HttpStatus.OK);
-      }
-    }
-    return new ResponseEntity(activationKeyService.getAllTokensForCollege(college.getId()),
-        HttpStatus.OK);
+    return new ResponseEntity(activationKeyService.getAllTokensForCollege(college.getId()), HttpStatus.OK);
   }
 
   @CrossOrigin
@@ -82,6 +76,9 @@ public class ActivationKeyController {
   @PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_SUPERADMIN')")
   @RequestMapping(value = "/api/activationKeys/college-structure", method = RequestMethod.POST)
   public ResponseEntity<ActivationKey> createActivationKey(@RequestBody ActivationKeyDTO activationKeyDTO) {
+    if (activationKeyDTO == null) {
+      return ResponseEntity.badRequest().build();
+    }
     return activationKeyService.createNewActivationKey(activationKeyDTO);
   }
 

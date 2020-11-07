@@ -4,6 +4,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 public class DirectionDTO {
+  private Long id;
   private String name;
   private String description;
   private String studyMode;
@@ -18,6 +19,10 @@ public class DirectionDTO {
 
   public DirectionDTO() {
   }
+
+  public Long getId() { return id; }
+
+  public void setId(Long id) { this.id = id; }
 
   public String getName() {
     return name;

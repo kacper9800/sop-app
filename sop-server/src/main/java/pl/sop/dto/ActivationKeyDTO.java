@@ -8,6 +8,8 @@ public class ActivationKeyDTO {
   private String value;
   private LocalDateTime startExpirationDate;
   private LocalDateTime endExpirationDate;
+  private Long directionId;
+  private String directionName;
   private Long collegeId;
   private String collegeName;
   private Long facultyId;
@@ -45,17 +47,21 @@ public class ActivationKeyDTO {
     return startExpirationDate;
   }
 
-  public void setStartExpirationDate(LocalDateTime startExpirationDate) {
-    this.startExpirationDate = startExpirationDate;
-  }
+  public void setStartExpirationDate(LocalDateTime startExpirationDate) { this.startExpirationDate = startExpirationDate; }
 
   public LocalDateTime getEndExpirationDate() {
     return endExpirationDate;
   }
 
-  public void setEndExpirationDate(LocalDateTime endExpirationDate) {
-    this.endExpirationDate = endExpirationDate;
-  }
+  public void setEndExpirationDate(LocalDateTime endExpirationDate) { this.endExpirationDate = endExpirationDate; }
+
+  public Long getDirectionId() { return directionId; }
+
+  public void setDirectionId(Long directionId) { this.directionId = directionId; }
+
+  public String getDirectionName() { return directionName; }
+
+  public void setDirectionName(String directionName) { this.directionName = directionName; }
 
   public Long getCollegeId() {
     return collegeId;

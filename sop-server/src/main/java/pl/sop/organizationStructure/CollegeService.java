@@ -23,6 +23,7 @@ import pl.sop.enums.ERole;
 import pl.sop.payload.request.SignUpRequest;
 import pl.sop.payload.response.MessageResponse;
 import pl.sop.services.ActivationKeyService;
+import pl.sop.services.DirectionService;
 import pl.sop.services.UserService;
 
 @Service
@@ -30,12 +31,6 @@ public class CollegeService {
 
   @Autowired
   private CollegeRepository collegeRepository;
-
-  @Autowired
-  private UserService userService;
-
-  @Autowired
-  private ActivationKeyService activationKeyService;
 
   @Autowired
   private FacultyService facultyService;
@@ -46,8 +41,19 @@ public class CollegeService {
   @Autowired
   private DepartmentService departmentService;
 
+  @Autowired
+  private UserService userService;
+
+  @Autowired
+  private ActivationKeyService activationKeyService;
+
+  @Autowired
+  private DirectionService directionService;
+
+
+
   private final DTOToActivationKeyConverter dtoToActivationKeyConverter = new DTOToActivationKeyConverter(
-      this, instituteService, facultyService, departmentService);
+      this, directionService, instituteService, facultyService, departmentService);
 
   private final DTOToCollegeConverter dtoToCollegeConverter = new DTOToCollegeConverter();
 

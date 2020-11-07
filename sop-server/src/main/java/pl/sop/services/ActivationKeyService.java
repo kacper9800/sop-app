@@ -10,6 +10,7 @@ import pl.sop.converters.FromDTO.DTOToActivationKeyConverter;
 import pl.sop.converters.ToDTO.ActivationKeyToDTOConverter;
 import pl.sop.dto.ActivationKeyDTO;
 import pl.sop.entities.ActivationKey;
+import pl.sop.entities.Direction;
 import pl.sop.organizationStructure.College;
 import pl.sop.organizationStructure.CollegeService;
 import pl.sop.organizationStructure.Department;
@@ -38,8 +39,13 @@ public class ActivationKeyService {
   @Autowired
   private DepartmentService departmentService;
 
+  @Autowired
+  private DirectionService directionService;
+
   private final ActivationKeyToDTOConverter activationKeyToDTOConverter = new ActivationKeyToDTOConverter();
-  private final DTOToActivationKeyConverter dtoToActivationKeyConverter = new DTOToActivationKeyConverter(collegeService,instituteService, facultyService, departmentService);
+  private final DTOToActivationKeyConverter dtoToActivationKeyConverter
+      = new DTOToActivationKeyConverter(collegeService, directionService, instituteService,
+      facultyService, departmentService);
 
   public ResponseEntity getAllTokens() {
     List<ActivationKey> activationKeys = activationKeyRepository.getAllActivationKeys();
@@ -67,7 +73,8 @@ public class ActivationKeyService {
   }
 
   public ResponseEntity<ActivationKeyDTO> getActivationKeyByValue(String activationKeyValue) {
-    ActivationKey activationKey = activationKeyRepository.findValidActivationKeyByValue(activationKeyValue);
+    ActivationKey activationKey = activationKeyRepository
+        .findValidActivationKeyByValue(activationKeyValue);
     ActivationKeyDTO activationKeyDTO = activationKeyToDTOConverter.convert(activationKey);
     return ResponseEntity.ok(activationKeyDTO);
   }
@@ -102,7 +109,8 @@ public class ActivationKeyService {
     return this.activationKeyRepository.save(activationKey);
   }
 
-  public ResponseEntity<ActivationKey> createNewActivationKeyForCollege(ActivationKeyDTO activationKeyDTO) {
+  public ResponseEntity<ActivationKey> createNewActivationKeyForCollege(
+      ActivationKeyDTO activationKeyDTO) {
     ActivationKey activationKey = new ActivationKey();
     if (activationKeyDTO.getValue() == null) {
       return new ResponseEntity<>(HttpStatus.NOT_ACCEPTABLE);
@@ -124,6 +132,7 @@ public class ActivationKeyService {
     //ToDo
     ActivationKey activationKey = new ActivationKey();
     activationKey.setValue(tokenDTO.getValue());
+    Direction direction = new Direction();
     Department department = new Department();
     Institute institute = new Institute();
     Faculty faculty = new Faculty();
@@ -150,16 +159,28 @@ public class ActivationKeyService {
       institute = null;
       faculty = null;
       college = collegeService.findById(tokenDTO.getCollegeId());
+    } else {
+      direction = directionService.getById(tokenDTO.getDirectionId());
+      if (direction != null) {
+        activationKey.setDirection(direction);
+        college = collegeService.findById(direction.getInstitute().getFaculty().getCollege().getId());
+      }
     }
+    if (department.getId() != null)
     activationKey.setDepartment(department);
+    if (institute.getId() != null)
     activationKey.setInstitute(institute);
+    if (faculty.getId() != null)
     activationKey.setFaculty(faculty);
+    if (college.getId() != null)
     activationKey.setCollege(college);
-//    token.setActive(tokenDTO.getActive());
+    activationKey.setStartExpirationDate(tokenDTO.getStartExpirationDate());
+    activationKey.setEndExpirationDate(tokenDTO.getEndExpirationDate());
     activationKey.setActive(Boolean.TRUE);
     activationKey.setNumberOfUses(tokenDTO.getNumberOfUses());
     return ResponseEntity.ok(saveActivationKey(activationKey));
   }
+
   public ResponseEntity<ActivationKeyDTO> updateActivationKey(ActivationKeyDTO activationKeyDTO) {
     if (activationKeyDTO != null) {
 //      this.activationKeyRepository.save(activationKeyDTO);

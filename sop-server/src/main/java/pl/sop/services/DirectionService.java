@@ -32,6 +32,11 @@ public class DirectionService {
     this.directionRepository = directionRepository;
   }
 
+  public Direction getById(Long id) {
+    Direction direction = directionRepository.findDirectionById(id);
+    return direction;
+  }
+
   public ResponseEntity<DirectionDTO> getDirectionById(Long id) {
     Direction direction = directionRepository.findDirectionById(id);
     DirectionDTO directionDTO = directionToDTOConverter.convert(direction);

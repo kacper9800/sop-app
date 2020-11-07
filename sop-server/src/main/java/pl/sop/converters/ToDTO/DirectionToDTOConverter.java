@@ -9,6 +9,7 @@ public class DirectionToDTOConverter implements Converter<Direction, DirectionDT
   @Override
   public DirectionDTO convert(Direction input) {
     DirectionDTO directionDTO = new DirectionDTO();
+    directionDTO.setId(input.getId());
     directionDTO.setName(input.getName());
     directionDTO.setDescription(input.getDescription());
     directionDTO.setStartExpirationDate(input.getStartDate());

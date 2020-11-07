@@ -705,6 +705,17 @@
       referencedColumnNames="id"
       referencedTableName="institutes"/>
   </changeSet>
+  <changeSet id="31" author="krzymkiewicz">
+    <addColumn tableName="activation_keys">
+      <column name="direction_id" type="bigint"></column>
+    </addColumn>
+    <addForeignKeyConstraint
+      baseTableName="activation_keys"
+      baseColumnNames="direction_id"
+      constraintName="fk_direction_id"
+      referencedTableName="directions"
+      referencedColumnNames="id"/>
+  </changeSet>
 </databaseChangeLog>
 
 
