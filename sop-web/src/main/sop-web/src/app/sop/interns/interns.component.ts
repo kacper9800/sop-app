@@ -13,6 +13,8 @@ import {TranslateService} from '@ngx-translate/core';
 import {Class} from '../../_model/class.model';
 import {PrincipalService} from '../../_services/auth/principal.service';
 import {InternDialogComponent} from './intern-dialog/intern-dialog.component';
+import {Direction} from '../../_model/direction.model';
+import {DirectionsService} from '../../_services/directions.service';
 
 @Component({
   selector: 'app-interns',
@@ -37,15 +39,12 @@ export class InternsComponent implements OnInit {
   public isSuperAdmin: boolean;
 
   // ToDo
-  public selectedClasses: Class[];
-  public classes: Class[] = [
-    {name: 'Informatyka 2017/2021'},
-    {name: 'Informatyka 2018/2022'},
-    {name: 'Informatyka 2019/2023'}
-  ];
+  public selectedDirections: Direction[] = [];
+  public directions: Direction[] = [];
 
   constructor(private resolver: ComponentFactoryResolver,
               private usersService: UsersService,
+              private directionsService: DirectionsService,
               private principalService: PrincipalService,
               private translateService: TranslateService) {
   }
@@ -53,6 +52,7 @@ export class InternsComponent implements OnInit {
   ngOnInit() {
     this.blockUI = true;
     this.loadUsers();
+    this.loadDirections();
     this.prepareColumns();
     this.isAdmin = this.principalService.isAdmin();
     this.isSuperAdmin = this.principalService.isSuperAdmin();
@@ -74,6 +74,27 @@ export class InternsComponent implements OnInit {
   private onErrorLoadUsers(err: any) {
     this.blockUI = false;
   }
+
+  private loadDirections() {
+    this.directionsService.getAllDirections().subscribe(
+      (res: any) => this.onSuccessLoadDirections(res),
+      (error) => this.onErrorLoadDirections(error)
+    );
+  }
+
+  private onSuccessLoadDirections(res) {
+    this.directions = [];
+    this.directions.push({id: null, name: this.translateService.instant('directions.chooseDirection')});
+    res.forEach(direction => this.directions.push(direction));
+    console.log(this.directions);
+    this.blockUI = false;
+  }
+
+  private onErrorLoadDirections(errror: any) {
+    console.log('error');
+    this.blockUI = false;
+  }
+
 
   private prepareColumns() {
     this.columns = [
@@ -141,11 +162,10 @@ export class InternsComponent implements OnInit {
 
   }
 
-
   public onSelectedClassesChange() {
     this.blockUI = true;
     const selectedClassId = [];
-    this.selectedClasses.forEach(selectedClass => {
+    this.selectedDirections.forEach(selectedClass => {
       selectedClassId.push(selectedClass.id);
     });
     this.usersService.loadInternsForClasses(selectedClassId).subscribe(
@@ -162,5 +182,16 @@ export class InternsComponent implements OnInit {
     this.componentRef.instance.closeDialogWithSaveEmitter.subscribe(() =>
       this.loadUsers()
     );
+  }
+
+  public getName(direction: Direction): string {
+    let name;
+    if (direction.startExpirationDate && direction.endExpirationDate && direction.studyMode) {
+      name = direction.name + '/' + direction.startExpirationDate + ' -> ' + direction.endExpirationDate + '/' +
+        this.translateService.instant('directions.' + direction.studyMode.toString());
+    } else {
+      name = direction.name;
+    }
+    return name;
   }
 }

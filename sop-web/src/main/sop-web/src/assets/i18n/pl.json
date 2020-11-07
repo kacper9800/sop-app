@@ -198,7 +198,10 @@
     },
     "dialog": {
       "titleNew": "Generowanie nowego klucza aktywacyjnego",
-      "titleEdit": "Edycja klucza aktywacyjnego"
+      "titleEdit": "Edycja klucza aktywacyjnego",
+      "chooseMode": "Wybierz typ klucza aktywacyjnego",
+      "direction": "Dla kierunku studiów",
+      "collegeStructure": "Dla struktury uczelni"
     },
     "CRUD": {
       "addActivityKey": "Dodaj nowy klucz aktywacyjny"

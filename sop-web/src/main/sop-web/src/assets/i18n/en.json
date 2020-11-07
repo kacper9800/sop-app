@@ -196,7 +196,10 @@
     },
     "dialog": {
       "titleNew": "Generating new activation key",
-      "titleEdit": "Editing activation key"
+      "titleEdit": "Editing activation key",
+      "chooseMode": "Choose activation key type",
+      "direction": "For study direction",
+      "collegeStructure": "For college structure"
     },
     "CRUD": {
       "addActivityKey": "Add new activation key"

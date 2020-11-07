@@ -5,13 +5,13 @@
   <clr-dg-action-bar>
     <clr-combobox-container style="text-align: center">
       <label>Wybór rocznika</label>
-      <clr-combobox [(ngModel)]="selectedClasses" name="multiSelect" clrMulti="true" required (ngModelChange)="onSelectedClassesChange()">
+      <clr-combobox [(ngModel)]="selectedDirections" name="multiSelect" clrMulti="true" required (ngModelChange)="onSelectedClassesChange()">
         <ng-container *clrOptionSelected="let selected">
-          <clr-icon shape="users" role="img" aria-label="welcome home"></clr-icon> {{selected?.name}}
+          <clr-icon shape="users" role="img" aria-label="welcome home"></clr-icon> {{selected.name}}
         </ng-container>
         <clr-options>
-          <clr-option *clrOptionItems="let state of classes; field:'name'" [clrValue]="state">
-            <clr-icon shape="users" role="img" aria-label="World is turning"></clr-icon> {{state.name}}
+          <clr-option *clrOptionItems="let direction of directions; field:'name'" [clrValue]="direction">
+            <clr-icon shape="users" role="img" aria-label="World is turning"></clr-icon> {{getName(direction)}}
 <!--            <clr-icon shape="sun" role="img" aria-label="Sun is shining"></clr-icon>-->
           </clr-option>
         </clr-options>

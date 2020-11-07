@@ -17,6 +17,17 @@
         <div class="clr-col-2"></div>
       </div>
 
+      <div class="clr-row">
+        <div class="clr-col-2"></div>
+        <div class="clr-col-8">
+          <clr-input-container>
+            <label><clr-icon shape="accessibility-2"></clr-icon></label>
+            <input type="text" clrInput formControlName="numberOfUses"/>
+            <clr-control-error>{{'common.required' | translate}}</clr-control-error>
+          </clr-input-container>
+        </div>
+        <div class="clr-col-2"></div>
+      </div>
 
       <div class="clr-row">
         <div class="clr-col-2"></div>
@@ -51,128 +62,138 @@
             <label>
               <clr-icon shape="two-way-arrows"></clr-icon>
             </label>
-            <select clrSelect id="select-direction" class="clr-select" formControlName="directionId">
-              <option *ngFor="let direction of directions" [value]="direction.id">
-                {{direction.name + '/' + direction.startExpirationDate+ ' -> '+ direction.endExpirationDate + '/' }} {{'directions.' + direction.studyMode.toString() | translate}}</option>
+            <select clrSelect id="select-mode" class="clr-select" formControlName="mode"
+                    (ngModelChange)="onModeChange()">
+              <option *ngFor="let mode of modes" [value]="mode.value">
+                {{'activationKeys.dialog.' + mode.name.toString() | translate }}</option>
             </select>
-            <clr-icon *ngIf="activationKeyForm.get('level').value == null"
+            <clr-control-error>{{'common.required' | translate}}</clr-control-error>
+            <clr-icon *ngIf="!activationKeyForm.get('level').value"
                       class="clr-validate-icon" shape="exclamation-circle"></clr-icon>
           </clr-select-container>
         </div>
         <div class="clr-col-2"></div>
       </div>
 
-
-
-      <div class="clr-row">
-        <div class="clr-col-2"></div>
-        <div class="clr-col-8">
-          <clr-select-container>
-            <label>
-              <clr-icon shape="tree-view"></clr-icon>
-            </label>
-            <select clrSelect id="select-level" class="clr-select" formControlName="level"
-                    (change)="onCollegeStructureLevelChange()">
-              <option *ngFor="let level of collegeStructuresLevels"
-                      [value]="level.value">{{level.label}}</option>
-            </select>
-            <clr-icon *ngIf="activationKeyForm.get('level').value == null"
-                      class="clr-validate-icon" shape="exclamation-circle"></clr-icon>
-          </clr-select-container>
+      <ng-container *ngIf="mode == 1">
+        <div class="clr-row">
+          <div class="clr-col-2"></div>
+          <div class="clr-col-8">
+            <clr-select-container>
+              <label>
+                <clr-icon shape="two-way-arrows"></clr-icon>
+              </label>
+              <select clrSelect id="select-direction" class="clr-select"
+                      formControlName="directionId" (ngModelChange)="onDirectionChange()">
+                <option *ngFor="let direction of directions" [value]="direction.id">
+                  {{getName(direction)}}
+                </option>
+              </select>
+              <clr-control-error>{{'common.required' | translate}}</clr-control-error>
+              <clr-icon *ngIf="!activationKeyForm.get('directionId').value"
+                        class="clr-validate-icon" shape="exclamation-circle"></clr-icon>
+            </clr-select-container>
+          </div>
+          <div class="clr-col-2"></div>
         </div>
-        <div class="clr-col-2"></div>
-      </div>
+      </ng-container>
 
-      <div class="clr-row" *ngIf="[0].includes(selectedLevel)">
-        <div class="clr-col-2"></div>
-        <div class="clr-col-8">
-          <clr-select-container>
-            <label>
-              <clr-icon shape="building"></clr-icon>
-            </label>
-            <select clrSelect name="options" formControlName="collegeId" required>
-              <option *ngFor="let college of colleges" [value]="college.id">
-                {{college.name}}
-              </option>
-            </select>
-            <clr-control-error>{{'common.required' | translate}}</clr-control-error>
-          </clr-select-container>
-        </div>
-        <div class="clr-col-2"></div>
-      </div>
 
-      <div class="clr-row" *ngIf="[1,2,3].includes(selectedLevel)">
-        <div class="clr-col-2"></div>
-        <div class="clr-col-8">
-          <clr-select-container>
-            <label>
-              <clr-icon shape="cluster"></clr-icon>
-            </label>
-            <select clrSelect name="options" formControlName="facultyId" required
-                    (change)="onFacultyChange()">
-              <option *ngFor="let faculty of faculties" [value]="faculty.id">
-                {{faculty.name}}
-              </option>
-            </select>
-            <clr-control-error>{{'common.required' | translate}}</clr-control-error>
-          </clr-select-container>
-        </div>
-        <div class="clr-col-2"></div>
-      </div>
+      <ng-container *ngIf="mode == 2">
+        <div class="clr-row">
+          <div class="clr-col-2"></div>
+          <div class="clr-col-8">
+            <clr-select-container>
+              <label>
+                <clr-icon shape="tree-view"></clr-icon>
+              </label>
+              <select clrSelect id="select-level" class="clr-select" formControlName="level"
+                      (change)="onCollegeStructureLevelChange()">
+                <option *ngFor="let level of collegeStructuresLevels"
+                        [value]="level.value">{{level.label}}</option>
+              </select>
+              <clr-control-error>{{'common.required' | translate}}</clr-control-error>
 
-      <div class="clr-row" *ngIf="[2,3].includes(selectedLevel)">
-        <div class="clr-col-2"></div>
-        <div class="clr-col-8">
-          <clr-select-container>
-            <label>
-              <clr-icon shape="building"></clr-icon>
-            </label>
-            <select clrSelect name="options" formControlName="instituteId" required
-                    (change)="onInstituteChange()">
-              <option *ngFor="let institute of institutes" [value]="institute.id">
-                {{institute.name}}
-              </option>
-            </select>
-            <clr-control-error>{{'common.required' | translate}}</clr-control-error>
-          </clr-select-container>
+              <clr-icon *ngIf="activationKeyForm.get('level').value == null"
+                        class="clr-validate-icon" shape="exclamation-circle"></clr-icon>
+            </clr-select-container>
+          </div>
+          <div class="clr-col-2"></div>
         </div>
-        <div class="clr-col-2"></div>
-      </div>
 
-      <div class="clr-row" *ngIf="[3].includes(selectedLevel)">
-        <div class="clr-col-2"></div>
-        <div class="clr-col-8">
-          <clr-select-container>
-            <label>
-              <clr-icon shape="host"></clr-icon>
-            </label>
-            <select clrSelect name="options" formControlName="departmentId" required>
-              <option *ngFor="let department of departments" [value]="department.id">
-                {{department.name}}
-              </option>
-            </select>
-            <clr-control-error>{{'common.required' | translate}}</clr-control-error>
-          </clr-select-container>
+        <div class="clr-row" *ngIf="[0].includes(selectedLevel) && mode == 2">
+          <div class="clr-col-2"></div>
+          <div class="clr-col-8">
+            <clr-select-container>
+              <label>
+                <clr-icon shape="building"></clr-icon>
+              </label>
+              <select clrSelect name="options" formControlName="collegeId">
+                <option *ngFor="let college of colleges" [value]="college.id">
+                  {{college.name}}
+                </option>
+              </select>
+              <clr-control-error>{{'common.required' | translate}}</clr-control-error>
+            </clr-select-container>
+          </div>
+          <div class="clr-col-2"></div>
         </div>
-        <div class="clr-col-2"></div>
-      </div>
 
-      <div class="clr-row">
-        <div class="clr-col-4"></div>
-        <div class="clr-col-4">
-          <clr-checkbox-container>
-            <clr-checkbox-wrapper>
-              <label>{{'common.active' | translate}}</label>
-              <input type="checkbox" clrCheckbox  formControlName="active" name="options" />
-            </clr-checkbox-wrapper>
-            <clr-checkbox-wrapper>
-              <label>{{'common.deleted' | translate}}</label>
-              <input type="checkbox" clrCheckbox  formControlName="deleted" name="options" />
-            </clr-checkbox-wrapper>
-          </clr-checkbox-container>
+        <div class="clr-row" *ngIf="[1,2,3].includes(selectedLevel) && mode == 2">
+          <div class="clr-col-2"></div>
+          <div class="clr-col-8">
+            <clr-select-container>
+              <label>
+                <clr-icon shape="cluster"></clr-icon>
+              </label>
+              <select clrSelect name="options" formControlName="facultyId"
+                      (change)="onFacultyChange()">
+                <option *ngFor="let faculty of faculties" [value]="faculty.id">
+                  {{faculty.name}}
+                </option>
+              </select>
+              <clr-control-error>{{'common.required' | translate}}</clr-control-error>
+            </clr-select-container>
+          </div>
+          <div class="clr-col-2"></div>
         </div>
-        <div class="clr-col-4"></div>
-      </div>
+
+        <div class="clr-row" *ngIf="[2,3].includes(selectedLevel) && mode == 2">
+          <div class="clr-col-2"></div>
+          <div class="clr-col-8">
+            <clr-select-container>
+              <label>
+                <clr-icon shape="building"></clr-icon>
+              </label>
+              <select clrSelect name="options" formControlName="instituteId"
+                      (change)="onInstituteChange()">
+                <option *ngFor="let institute of institutes" [value]="institute.id">
+                  {{institute.name}}
+                </option>
+              </select>
+              <clr-control-error>{{'common.required' | translate}}</clr-control-error>
+            </clr-select-container>
+          </div>
+          <div class="clr-col-2"></div>
+        </div>
+        <div class="clr-row" *ngIf="[3].includes(selectedLevel) && mode == 2">
+          <div class="clr-col-2"></div>
+          <div class="clr-col-8">
+            <clr-select-container>
+              <label>
+                <clr-icon shape="host"></clr-icon>
+              </label>
+              <select clrSelect name="options" formControlName="departmentId">
+                <option *ngFor="let department of departments" [value]="department.id">
+                  {{department.name}}
+                </option>
+              </select>
+              <clr-control-error>{{'common.required' | translate}}</clr-control-error>
+            </clr-select-container>
+          </div>
+          <div class="clr-col-2"></div>
+        </div>
+      </ng-container>
     </form>
   </div>
   <div class="modal-footer">

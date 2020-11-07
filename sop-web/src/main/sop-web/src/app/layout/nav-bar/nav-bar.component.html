@@ -71,16 +71,12 @@
         </a>
         <!--Administrator uczelni-->
         <a routerLink="/app/college-structure" class="nav-link" *ngIf="isAdmin">
-          <clr-icon shape="building" class="is-solid"></clr-icon>
+          <clr-icon shape="building"></clr-icon>
           Struktura uczelni
         </a>
         <a routerLink="/app/directions" class="nav-link" *ngIf="isAdmin">
           <clr-icon shape="two-way-arrows" class="is-solid"></clr-icon>
           Kierunki studiów
-        </a>
-        <a routerLink="/app/companies" class="nav-link" *ngIf="isAdmin">
-          <clr-icon shape="store" class="is-solid"></clr-icon>
-          Lista firm
         </a>
         <a routerLink="/app/activation-keys" class="nav-link" *ngIf="isAdmin">
           <clr-icon shape="key" class="is-solid"></clr-icon>
@@ -102,6 +98,10 @@
             </li>
           </ul>
         </section>
+        <a routerLink="/app/companies" class="nav-link" *ngIf="isAdmin">
+          <clr-icon shape="store" class="is-solid"></clr-icon>
+          Lista firm
+        </a>
         <a routerLink="/app/forms" class="nav-link" *ngIf="isAdmin">
           <clr-icon shape="form"></clr-icon>
           {{'navBar.surveys' | translate}}
@@ -124,7 +124,7 @@
           Lista praktykantów
         </a>
         <a routerLink="/app/college-structure" class="nav-link" *ngIf="isModerator">
-          <clr-icon shape="building" class="is-solid"></clr-icon>
+          <clr-icon shape="building"></clr-icon>
           Struktura uczelni
         </a>
         <a routerLink="/app/directions" class="nav-link" *ngIf="isModerator">

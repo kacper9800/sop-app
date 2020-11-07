@@ -42,6 +42,8 @@ export class AddEditDialogActivationKeysComponent implements OnInit {
   public faculties: Faculty[] = [];
   public institutes: Institute[] = [];
   public departments: Department[] = [];
+  public modes: any[] = [];
+  public mode: number;
 
   public dialogTitle: string;
   public validateBtnState: any;
@@ -63,7 +65,6 @@ export class AddEditDialogActivationKeysComponent implements OnInit {
   }
 
   ngOnInit() {
-    console.log('onInit');
     if (this.editMode) {
       this.loadActivationKey(this.activationKeyValue);
     }
@@ -95,23 +96,21 @@ export class AddEditDialogActivationKeysComponent implements OnInit {
 
   private prepareForm(activationKey?: ActivationKey): void {
     this.activationKeyForm = this.formBuilder.group({
-      level: new FormControl({value: null, disabled: false}, Validators.required),
-      token: new FormControl({
-        value: activationKey ? activationKey.value : this.tokenService.generateToken(),
-        disabled: true
-      }, Validators.required),
-      expirationDateStart: new FormControl({
-        value: activationKey ? activationKey.startExpirationDate : null,
-        disabled: false
-      }, Validators.required),
+      level: new FormControl({value: null,
+        disabled: false}, Validators.required),
+      token: new FormControl({value: activationKey ? activationKey.value : this.tokenService.generateToken(),
+        disabled: true}, Validators.required),
+      expirationDateStart: new FormControl({value: activationKey ? activationKey.startExpirationDate : null,
+        disabled: false}, Validators.required),
       expirationDateEnd: new FormControl({
         value: activationKey ? activationKey.endExpirationDate : null,
-        disabled: false
-      }, Validators.required),
+        disabled: false}, Validators.required),
       numberOfUses: new FormControl({
         value: activationKey ? activationKey.numberOfUses : null,
-        disabled: false
-      }, Validators.required),
+        disabled: false}, Validators.required),
+      mode: new FormControl({
+        value: activationKey ? activationKey.directionId ? 1 : 2 : null,
+        disabled: false}, Validators.required),
       directionId: new FormControl({
         value: activationKey ? activationKey.directionId : null,
         disabled: false
@@ -132,14 +131,6 @@ export class AddEditDialogActivationKeysComponent implements OnInit {
         value: activationKey ? activationKey.departmentId : null,
         disabled: false
       }, Validators.required),
-      active: new FormControl({
-        value: activationKey ? activationKey.active : null,
-        disabled: false
-      }, Validators.required),
-      deleted: new FormControl({
-        value: activationKey ? activationKey.deleted : null,
-        disabled: false
-      }, Validators.required)
     });
     if (activationKey) {
       this.setActivationKeyLevel(activationKey);
@@ -196,6 +187,12 @@ export class AddEditDialogActivationKeysComponent implements OnInit {
       id: null,
       name: this.translateService.instant('collegeStructure.dialog.chooseDepartment'),
     }];
+
+    this.modes = [
+      {value: null, name: 'chooseMode'},
+      {value: 1, name: 'direction'},
+      {value: 2, name: 'collegeStructure'}
+    ];
 
   }
 
@@ -259,6 +256,34 @@ export class AddEditDialogActivationKeysComponent implements OnInit {
     this.dialogTitle = this.translateService.instant('activationKeys.dialog.titleEdit');
     this.editMode = true;
     this.activationKeyValue = value;
+  }
+
+  public onModeChange() {
+    console.log(this.activationKeyForm);
+    this.mode = this.activationKeyForm.get('mode').value;
+    if (this.mode == 1) {
+      this.activationKeyForm.get('directionId').enable();
+      this.activationKeyForm.get('directionId').setValidators([Validators.required]);
+      this.activationKeyForm.get('level').disable();
+      this.activationKeyForm.get('level').setValidators([]);
+      this.activationKeyForm.get('collegeId').disable();
+      this.activationKeyForm.get('collegeId').setValidators([]);
+      this.activationKeyForm.get('facultyId').disable();
+      this.activationKeyForm.get('facultyId').setValidators([]);
+      this.activationKeyForm.get('instituteId').disable();
+      this.activationKeyForm.get('instituteId').setValidators([]);
+      this.activationKeyForm.get('departmentId').disable();
+      this.activationKeyForm.get('departmentId').setValidators([]);
+    } else if (this.mode == 2) {
+      this.activationKeyForm.get('directionId').disable();
+      this.activationKeyForm.get('directionId').setValidators([]);
+      this.activationKeyForm.get('level').setValidators([Validators.required]);
+      this.activationKeyForm.get('level').enable();
+      this.activationKeyForm.get('collegeId').enable();
+      this.activationKeyForm.get('facultyId').enable();
+      this.activationKeyForm.get('instituteId').enable();
+      this.activationKeyForm.get('departmentId').enable();
+    }
   }
 
   public onCollegeStructureLevelChange() {
@@ -427,12 +452,29 @@ export class AddEditDialogActivationKeysComponent implements OnInit {
   private onSuccessLoadDirections(res) {
     this.directions = [];
     this.directions.push({id: null, name: this.translateService.instant('directions.chooseDirection')});
-    this.directions = res;
+    res.forEach(direction => this.directions.push(direction));
+    console.log(this.directions);
     this.blockUI = false;
   }
 
   private onErrorLoadDirections(errror: any) {
     console.log('error');
     this.blockUI = false;
+  }
+
+  public getName(direction: Direction): string {
+    let name;
+    if (direction.startExpirationDate && direction.endExpirationDate && direction.studyMode) {
+      name = direction.name + '/' + direction.startExpirationDate + ' -> ' + direction.endExpirationDate + '/' +
+        this.translateService.instant('directions.' + direction.studyMode.toString());
+    } else {
+      name = direction.name;
+    }
+    return name;
+  }
+
+  public onDirectionChange() {
+    console.log(this.mode);
+    console.log(this.activationKeyForm);
   }
 }
