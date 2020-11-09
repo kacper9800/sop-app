@@ -1,6 +1,7 @@
 package pl.sop.dto;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 public class ActivationKeyDTO {
 
@@ -8,6 +9,7 @@ public class ActivationKeyDTO {
   private String value;
   private LocalDateTime startExpirationDate;
   private LocalDateTime endExpirationDate;
+  private String role;
   private Long directionId;
   private String directionName;
   private Long collegeId;
@@ -54,6 +56,10 @@ public class ActivationKeyDTO {
   }
 
   public void setEndExpirationDate(LocalDateTime endExpirationDate) { this.endExpirationDate = endExpirationDate; }
+
+  public String getRole() { return role; }
+
+  public void setRole(String role) { this.role = role; }
 
   public Long getDirectionId() { return directionId; }
 

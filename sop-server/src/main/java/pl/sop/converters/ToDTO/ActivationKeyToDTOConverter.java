@@ -16,6 +16,10 @@ public class ActivationKeyToDTOConverter implements Converter<ActivationKey, Act
     activationKeyDTO.setNumberOfUses(input.getNumberOfUses());
     // ToDo
     //    tokenDTO.setCreatedBy(input.getCreatedBy().getId());
+    if(input.getDirection() != null) {
+      activationKeyDTO.setDirectionId(input.getDirection().getId());
+      activationKeyDTO.setDirectionName(input.getDirection().getName());
+    }
     if (input.getCollege() != null) {
       activationKeyDTO.setCollegeId(input.getCollege().getId());
       activationKeyDTO.setCollegeName(input.getCollege().getName());

@@ -2,6 +2,7 @@ package pl.sop.entities;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.time.LocalDateTime;
+import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -59,6 +60,9 @@ public class ActivationKey extends BasicEntity {
   @JoinColumn(name = "direction_id")
   private Direction direction;
 
+  @JsonIgnore
+  @Column(name = "role")
+  private String role;
 
 //  @JsonIgnore
 //  @Column
@@ -148,6 +152,10 @@ public class ActivationKey extends BasicEntity {
   public void setNumberOfUses(Integer numberOfUses) {
     this.numberOfUses = numberOfUses;
   }
+
+  public String getRole() { return role; }
+
+  public void setRole(String role) { this.role = role; }
 
 //  public User getCreatedBy() { return createdBy; }
 //

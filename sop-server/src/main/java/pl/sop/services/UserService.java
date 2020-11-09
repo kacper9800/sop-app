@@ -7,10 +7,12 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
+import liquibase.pro.packaged.E;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import pl.sop.configuration.mail.EmailServiceImpl;
 import pl.sop.converters.ToDTO.UserViewToDTOConverter;
 import pl.sop.dto.UserDTO;
 import pl.sop.entities.ActivationKey;
@@ -55,6 +57,9 @@ public class UserService {
   @Autowired
   private PasswordEncoder encoder;
 
+  @Autowired
+  private EmailServiceImpl emailService;
+
   private final UserViewToDTOConverter userViewToDTOConverter = new UserViewToDTOConverter();
 
   public UserDTO getUser(Long id) {
@@ -98,48 +103,32 @@ public class UserService {
           .body(new MessageResponse("Error: Email is already in use!"));
     }
 
-    Set<String> strRoles = signUpRequest.getRole();
+    ActivationKey activationKey = activationKeyService.getTokenByValue(signUpRequest.getToken());
+    College college = activationKey.getCollege();
+    Role userRole = roleRepository.findByName(ERole.ROLE_USER)
+        .orElseThrow(() -> new RuntimeException("Error: Role is not found!"));
+    ERole eRole = ERole.valueOf(activationKey.getRole());
+    Role specificRole = roleRepository.findByName(eRole).get();
     Set<Role> roles = new HashSet<>();
-
-    if (strRoles == null) {
-      Role userRole = roleRepository.findByName(ERole.ROLE_USER)
-          .orElseThrow(() -> new RuntimeException("Error: Role is not found!"));
-      roles.add(userRole);
-    } else {
-      strRoles.forEach(role -> {
-        switch (role) {
-          case "ROLE_ADMIN":
-            Role adminRole = roleRepository.findByName(ERole.ROLE_ADMIN)
-                .orElseThrow(() -> new RuntimeException("Error: Role is not found"));
-            roles.add(adminRole);
-            break;
-          case "ROLE_MODERATOR":
-            Role modRole = roleRepository.findByName(ERole.ROLE_MODERATOR)
-                .orElseThrow(() -> new RuntimeException("Error: Role is not found."));
-            roles.add(modRole);
-            break;
-          default:
-            Role userRole = roleRepository.findByName(ERole.ROLE_USER)
-                .orElseThrow(() -> new RuntimeException("Error: Role is not found."));
-            roles.add(userRole);
-        }
-      });
-    }
-    User user = prepareUser(signUpRequest, roles);
+    roles.add(userRole);
+    roles.add(specificRole);
+    User user = prepareUser(signUpRequest, roles, college);
     userRepository.save(user);
+    emailService.sendSimpleMessage(user.getEmail(), "System obsługi praktyk",
+        "Rejestracja pomyślnie zakończona\n"
+            + "Twoja nazwa użytkownika: " + user.getUsername());
     return ResponseEntity.ok(new MessageResponse("User registered successfully"));
   }
 
-  private User prepareUser(SignUpRequest signUpRequest, Set<Role> roles) {
+  private User prepareUser(SignUpRequest signUpRequest, Set<Role> roles, College college) {
     User user = new User();
-    user.setUsername(signUpRequest.getUsername());
+    user.setUsername(getNextUsername(signUpRequest.getFirstName(), signUpRequest.getLastName()));
     user.setEmail(signUpRequest.getEmail());
     user.setPassword(encoder.encode(signUpRequest.getPassword()));
     user.setFirstName(signUpRequest.getFirstName() != null ? signUpRequest.getFirstName() : null);
     user.setLastName(signUpRequest.getLastName() != null ? signUpRequest.getLastName() : null);
     user.setRoles(roles);
     user.setActive(Boolean.TRUE);
-    College college = collegeRepository.findCollegeById(signUpRequest.getCollegeId());
     List<College> colleges = new ArrayList<>();
     colleges.add(college);
     user.setColleges(colleges);
@@ -151,6 +140,31 @@ public class UserService {
       activationKey.setActive(Boolean.FALSE);
     }
     return user;
+  }
+
+  private String getNextUsername(String firstName, String lastName) {
+    String username = firstName.substring(0, 3).toLowerCase() + lastName.substring(0, 3).toLowerCase();
+    String propsalUsername = username + '1';
+
+    List<String> sameUserNames = new ArrayList<>();
+    List<Long> numbers = new ArrayList<>();
+    if(userRepository.existsByUsername(propsalUsername)) { // jeśli istnieją inne osoby, które mają takie same username
+      sameUserNames = userRepository.findSameUserNames(propsalUsername); // to znajdźmy je!
+      for (String sameUserName: sameUserNames) {
+        char[] chars = sameUserName.toCharArray();
+        StringBuilder sb = new StringBuilder();
+        for(char c : chars){
+          if(Character.isDigit(c)){
+            sb.append(c);
+          }
+        }
+        numbers.add(Long.parseLong(sb.toString()));
+      }
+      Long lastNumber = Collections.max(numbers);
+      return username + ++lastNumber;
+    } else {
+      return propsalUsername;
+    }
   }
 
   private User prepareUserDataFromToken(User user, ActivationKey activationKey) {
@@ -172,7 +186,7 @@ public class UserService {
   private ResponseEntity<MessageResponse> checkUserToken(SignUpRequest signUpRequest) {
     if (signUpRequest.getToken() == null) {
       return ResponseEntity.badRequest()
-          .body(new MessageResponse("Error: Provided access token is null!"));
+          .body(new MessageResponse("Error: Provided access token is empty  !"));
     }
 
     if (!activationKeyService.isValidTokenForUser(signUpRequest.getToken())) {

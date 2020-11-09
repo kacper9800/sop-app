@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import pl.sop.dto.DictionaryDTO;
-import pl.sop.dto.InstituteDTO;
 import pl.sop.security.services.UserDetailsImpl;
 import pl.sop.services.DictionaryService;
 
@@ -35,12 +34,13 @@ public class DictionaryController {
   @CrossOrigin
   @RequestMapping(value = "/api/dictionaries/sex-types", method = RequestMethod.GET)
   public ResponseEntity<List<DictionaryDTO>> getAllSexTypes(Authentication authentication) {
-    UserDetailsImpl loggedUser = (UserDetailsImpl) authentication.getPrincipal();
-    Long collegeId = loggedUser.getSelectedCollegeId();
-    if (collegeId == null) {
-      return ResponseEntity.notFound().build();
-    }
     return this.dictionaryService.getAllSexTypes();
+  }
+
+  @CrossOrigin
+  @RequestMapping(value = "/api/dictionaries/academic-degrees", method = RequestMethod.GET)
+  public ResponseEntity<List<DictionaryDTO>> getAllAcademicDegrees(Authentication authentication) {
+    return this.dictionaryService.getAllAcademicDegrees();
   }
 
 }

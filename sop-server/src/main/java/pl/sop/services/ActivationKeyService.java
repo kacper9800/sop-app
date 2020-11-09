@@ -109,8 +109,7 @@ public class ActivationKeyService {
     return this.activationKeyRepository.save(activationKey);
   }
 
-  public ResponseEntity<ActivationKey> createNewActivationKeyForCollege(
-      ActivationKeyDTO activationKeyDTO) {
+  public ResponseEntity<ActivationKey> createNewActivationKeyForCollege(ActivationKeyDTO activationKeyDTO) {
     ActivationKey activationKey = new ActivationKey();
     if (activationKeyDTO.getValue() == null) {
       return new ResponseEntity<>(HttpStatus.NOT_ACCEPTABLE);
@@ -128,10 +127,9 @@ public class ActivationKeyService {
   }
 
   public ResponseEntity<ActivationKey> createNewActivationKey(ActivationKeyDTO tokenDTO) {
-//    dtoToActivationKeyConverter.convert()
-    //ToDo
     ActivationKey activationKey = new ActivationKey();
     activationKey.setValue(tokenDTO.getValue());
+    activationKey.setRole(tokenDTO.getRole());
     Direction direction = new Direction();
     Department department = new Department();
     Institute institute = new Institute();
@@ -166,13 +164,13 @@ public class ActivationKeyService {
         college = collegeService.findById(direction.getInstitute().getFaculty().getCollege().getId());
       }
     }
-    if (department.getId() != null)
+    if (department != null)
     activationKey.setDepartment(department);
-    if (institute.getId() != null)
+    if (institute != null)
     activationKey.setInstitute(institute);
-    if (faculty.getId() != null)
+    if (faculty != null)
     activationKey.setFaculty(faculty);
-    if (college.getId() != null)
+    if (college != null)
     activationKey.setCollege(college);
     activationKey.setStartExpirationDate(tokenDTO.getStartExpirationDate());
     activationKey.setEndExpirationDate(tokenDTO.getEndExpirationDate());

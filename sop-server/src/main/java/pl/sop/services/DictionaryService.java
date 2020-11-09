@@ -39,8 +39,19 @@ public class DictionaryService {
     return ResponseEntity.ok(dictionaryDTOS);
   }
 
+  public ResponseEntity<List<DictionaryDTO>> getAllAcademicDegrees() {
+    List<Dictionary> dictionaries = dictionaryRepository.getAllAcademicDegrees();
+    if (dictionaries.size() == 0) {
+      return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+    }
+    List<DictionaryDTO> dictionaryDTOS = dictionaries.stream().map(dictionaryToDTOConverter::convert).collect(Collectors.toList());
+    return ResponseEntity.ok(dictionaryDTOS);
+  }
+
   public Dictionary getByValue(String value) {
     Dictionary dictionary = this.dictionaryRepository.getByValue(value);
     return dictionary;
   }
+
+
 }

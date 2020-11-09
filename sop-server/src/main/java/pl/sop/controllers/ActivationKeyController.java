@@ -6,7 +6,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.core.GrantedAuthority;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -37,8 +36,7 @@ public class ActivationKeyController {
   @CrossOrigin
   @PreAuthorize("hasRole('ROLE_SUPERADMIN') or hasRole('ROLE_ADMIN') or hasRole('ROLE_MODERATOR')")
   @RequestMapping(value = "/api/activationKeys", method = RequestMethod.GET)
-  public ResponseEntity<List<ActivationKeyDTO>> getAllActivationKeys(
-      Authentication authentication) {
+  public ResponseEntity<List<ActivationKeyDTO>> getAllActivationKeys(Authentication authentication) {
     UserDetailsImpl loggedUser = (UserDetailsImpl) authentication.getPrincipal();
     College college = loggedUser.getColleges().stream()
         .filter(col -> col.getId().equals(loggedUser.getSelectedCollegeId())).findFirst().get();
@@ -48,9 +46,9 @@ public class ActivationKeyController {
     return new ResponseEntity(activationKeyService.getAllTokensForCollege(college.getId()), HttpStatus.OK);
   }
 
+  // Only superadmin can create activation key for college
   @CrossOrigin
   @PreAuthorize("hasRole('ROLE_SUPERADMIN')")
-  // Only superadmin can create activation key for college
   @RequestMapping(value = "/api/activationKeys/college", method = RequestMethod.POST)
   public ResponseEntity<ActivationKey> createActivationKeyForCollege(Authentication authentication,
       @RequestBody ActivationKeyDTO activationKeyDTO) {
@@ -61,9 +59,9 @@ public class ActivationKeyController {
     return activationKeyService.createNewActivationKeyForCollege(activationKeyDTO);
   }
 
+  // Only superadmin can create activation key for company
   @CrossOrigin
   @PreAuthorize("hasRole('ROLE_SUPERADMIN')")
-  // Only superadmin can create activation key for company
   @RequestMapping(value = "/api/activationKeys/company", method = RequestMethod.POST)
   public ResponseEntity<ActivationKey> createActivationKeyForCompany(Authentication authentication,
       @RequestBody ActivationKeyDTO activationKeyDTO) {
@@ -74,7 +72,7 @@ public class ActivationKeyController {
 
   @CrossOrigin
   @PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_SUPERADMIN')")
-  @RequestMapping(value = "/api/activationKeys/college-structure", method = RequestMethod.POST)
+  @RequestMapping(value = "/api/activationKeys", method = RequestMethod.POST)
   public ResponseEntity<ActivationKey> createActivationKey(@RequestBody ActivationKeyDTO activationKeyDTO) {
     if (activationKeyDTO == null) {
       return ResponseEntity.badRequest().build();
@@ -85,7 +83,8 @@ public class ActivationKeyController {
   @CrossOrigin
   @PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_SUPERADMIN')")
   @RequestMapping(value = "/api/activationKeys", method = RequestMethod.PUT)
-  public ResponseEntity<ActivationKeyDTO> updateActivationKey(@RequestBody ActivationKeyDTO activationKeyDTO) {
+  public ResponseEntity<ActivationKeyDTO> updateActivationKey(
+      @RequestBody ActivationKeyDTO activationKeyDTO) {
     return activationKeyService.updateActivationKey(activationKeyDTO);
   }
 

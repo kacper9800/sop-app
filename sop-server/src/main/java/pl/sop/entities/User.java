@@ -28,12 +28,10 @@ import pl.sop.organizationStructure.Institute;
 @Entity
 @Table(name = "users",
     uniqueConstraints = {
-        @UniqueConstraint(columnNames = "login"),
         @UniqueConstraint(columnNames = "email")
     })
 public class User extends BasicEntity implements Serializable {
 
-  @NotBlank
   @Size(max = 20)
   @Column(name = "login", nullable = false)
   private String username;

@@ -716,32 +716,39 @@
       referencedTableName="directions"
       referencedColumnNames="id"/>
   </changeSet>
+  <changeSet id="32" author="krzymkiewicz">
+    <addColumn tableName="activation_keys">
+      <column name="role" type="varchar(100)"></column>
+    </addColumn>
+  </changeSet>
+<!--  <changeSet id="32" author="krzymkiewicz">-->
+<!--    <insert tableName="dictionaries">-->
+<!--      <column  name="active"  value="true"/>-->
+<!--      <column  name="deleted"  value="false"/>-->
+<!--      <column  name="name"  value="Doctortak"/>-->
+<!--      <column  name="value"  value="Phd"/>-->
+<!--      <column name="DICTIONARY_TYPE" value="ACADEMIC_DEGREE"/>-->
+<!--    </insert>-->
+<!--    <insert tableName="dictionaries">-->
+<!--      <column  name="active"  value="true"/>-->
+<!--      <column  name="deleted"  value="false"/>-->
+<!--      <column  name="value"  value="OTHER"/>-->
+<!--      <column name="DICTIONARY_TYPE" value="ACADEMIC_DEGREE"/>-->
+<!--    </insert>-->
+<!--    <insert tableName="dictionaries">-->
+<!--      <column  name="active"  value="true"/>-->
+<!--      <column  name="deleted"  value="false"/>-->
+<!--      <column  name="value"  value="OTHER"/>-->
+<!--      <column name="DICTIONARY_TYPE" value="ACADEMIC_DEGREE"/>-->
+<!--    </insert>-->
+<!--    <insert tableName="dictionaries">-->
+<!--      <column  name="active"  value="true"/>-->
+<!--      <column  name="deleted"  value="false"/>-->
+<!--      <column  name="value"  value="OTHER"/>-->
+<!--      <column name="DICTIONARY_TYPE" value="ACADEMIC_DEGREE"/>-->
+<!--    </insert>-->
+<!--  </changeSet>-->
 </databaseChangeLog>
 
 
-  <!--    ACADEMIC_DEGREE ToDo-->
-  <!--    <insert tableName="dictionaries">-->
-  <!--      <column  name="active"  value="true"/>-->
-  <!--      <column  name="deleted"  value="false"/>-->
-  <!--      <column  name="value"  value="OTHER"/>-->
-  <!--      <column name="DICTIONARY_TYPE" value="ACADEMIC_DEGREE"/>-->
-  <!--    </insert>-->
-  <!--    <insert tableName="dictionaries">-->
-  <!--      <column  name="active"  value="true"/>-->
-  <!--      <column  name="deleted"  value="false"/>-->
-  <!--      <column  name="value"  value="OTHER"/>-->
-  <!--      <column name="DICTIONARY_TYPE" value="ACADEMIC_DEGREE"/>-->
-  <!--    </insert>-->
-  <!--    <insert tableName="dictionaries">-->
-  <!--      <column  name="active"  value="true"/>-->
-  <!--      <column  name="deleted"  value="false"/>-->
-  <!--      <column  name="value"  value="OTHER"/>-->
-  <!--      <column name="DICTIONARY_TYPE" value="ACADEMIC_DEGREE"/>-->
-  <!--    </insert>-->
-  <!--    <insert tableName="dictionaries">-->
-  <!--      <column  name="active"  value="true"/>-->
-  <!--      <column  name="deleted"  value="false"/>-->
-  <!--      <column  name="value"  value="OTHER"/>-->
-  <!--      <column name="DICTIONARY_TYPE" value="ACADEMIC_DEGREE"/>-->
-  <!--    </insert>-->
 

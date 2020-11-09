@@ -36,4 +36,7 @@ public interface UserRepository extends JpaRepository<User, Long> {
       + "left join fetch u.colleges colleges "
       + "where colleges.id = :collegeId")
   List<User> findAllUsersForCollegeId(@Param("collegeId") Long collegeId);
+
+  @Query(value = "SELECT u.username from User u where u.username like :newUserName")
+  List<String> findSameUserNames(@Param("newUserName")String newUserName);
 }
