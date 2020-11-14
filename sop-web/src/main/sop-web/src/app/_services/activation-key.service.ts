@@ -34,8 +34,8 @@ export class ActivationKeyService {
     return this.http.post<HttpResponse<boolean>>(global.API + API_URL + '/company', activationKeyToSave);
   }
 
-  public createActivationKeyForCollegeStructure(activationKeyToSave: any): Observable<HttpResponse<boolean>> {
-    return this.http.post<HttpResponse<boolean>>(global.API + API_URL + '/college-structure', activationKeyToSave );
+  public createActivationKey(activationKeyToSave: any): Observable<HttpResponse<boolean>> {
+    return this.http.post<HttpResponse<boolean>>(global.API + API_URL, activationKeyToSave );
   }
 
   public deleteActivationKeyForId(id: number): Observable<HttpResponse<boolean>> {

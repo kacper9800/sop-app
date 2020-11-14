@@ -5,6 +5,7 @@ import {Dictionary, IDictionary} from '../_model/dictionary.model';
 import global from '../../global';
 
 const DICTIONARY_STUDY_MODES = '/dictionaries/study-modes';
+const DICTIONARY_ACADEMIC_DEGREES = '/dictionaries/academic-degrees';
 const DICTIONARY_SEX_TYPES = '/dictionaries/sex-types';
 
 @Injectable({
@@ -20,6 +21,10 @@ export class DictionariesService {
   }
 
   public getSexTypes(): Observable<HttpResponse<IDictionary[]>> {
-    return this.httpClient.get<HttpResponse<IDictionary[]>>(global.API + DICTIONARY_STUDY_MODES);
+    return this.httpClient.get<HttpResponse<IDictionary[]>>(global.API + DICTIONARY_SEX_TYPES);
+  }
+
+  public getAcademicDegrees(): Observable<HttpResponse<IDictionary[]>> {
+    return this.httpClient.get<HttpResponse<IDictionary[]>>(global.API + DICTIONARY_ACADEMIC_DEGREES);
   }
 }

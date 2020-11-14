@@ -13,7 +13,6 @@ export class LocationService {
   API_URL = 'http://localhost:8082/api/locations/';
 
   constructor(private http: HttpClient) {
-    console.log(global.API);
   }
 
   public getAllLocations(): Observable<any> {

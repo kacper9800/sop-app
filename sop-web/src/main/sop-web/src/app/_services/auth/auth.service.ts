@@ -7,6 +7,7 @@ import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {CollegeRegister} from '../../_model/college-register.model';
+import {UserRegistration} from "../../_model/user-registration.model";
 
 const AUTH_API = 'http://localhost:8082/api/auth/';
 
@@ -30,14 +31,15 @@ export class AuthService {
     }, httpOptions);
   }
 
-  public register(user): Observable<any> {
+  public register(user: UserRegistration): Observable<any> {
     return this.http.post(AUTH_API + 'signUp', {
-      username: user.username,
+      token: user.token,
       firstName: user.firstName,
       lastName: user.lastName,
+      birthDate: user.birthDate,
       email: user.email,
+      sex: user.sex,
       password: user.password,
-      deleted: false,
     }, httpOptions);
   }
 
