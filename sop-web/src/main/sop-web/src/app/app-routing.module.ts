@@ -22,15 +22,12 @@ import {SuperVisorsComponent} from './sop/super-visors/super-visors.component';
 import {UsersComponent} from './sop/users/users.component';
 import {RegistrationConfirmationComponent} from './authentication/registration-confirmation/registration-confirmation.component';
 import {CanActivateGuard} from './_services/auth/can-activate.guard';
-import {DirectionsComponent} from "./sop/directions/directions.component";
-
-
-// import { PlannerCalendarComponent } from './sop/planner/planner-calendar/planner-calendar.component';
-
+import {DirectionsComponent} from './sop/directions/directions.component';
+import {RequestsComponent} from './sop/requests/requests.component';
 
 const routes: Routes = [
   {path: '', component: HomeComponent},
-  {path: 'app/colleges', component: CollegesComponent, canActivate: [CanActivateGuard]},                      // Lista uczelni
+  {path: 'app/colleges', component: CollegesComponent, canActivate: [CanActivateGuard]},                     // Lista uczelni
   {path: 'app/companies', component: CompaniesComponent, canActivate: [CanActivateGuard]},                   // Lista firm
   {path: 'app/college-structure', component: CollegeStructureComponent, canActivate: [CanActivateGuard]},    // Struktura uczelni
   {path: 'app/directions', component: DirectionsComponent, canActivate: [CanActivateGuard]},                 // Kierunki studiów
@@ -41,12 +38,13 @@ const routes: Routes = [
   {path: 'app/statistics', component: StatisticsComponent, canActivate: [CanActivateGuard]},                 // Statystyki
 
   {path: 'app/activation-keys', component: ActivationKeysComponent, canActivate: [CanActivateGuard]},        // Klucze aktywacyjne
+  {path: 'app/requests', component: RequestsComponent, canActivate: [CanActivateGuard]},                     // Wnioski o praktyki
   {path: 'app/logbook', component: LogbookComponent, canActivate: [CanActivateGuard]},                       // Dziennik praktyk
   {path: 'app/documents', component: DocumentsComponent, canActivate: [CanActivateGuard]},                   // Dokumenty
 
-  {path: 'app/login', component: LoginComponent},                           // Logowanie
-  {path: 'app/logout', component: LogoutComponent},                         // Wylogowywanie
-  {path: 'register', component: RegistrationComponent},                     // Rejestracja
+  {path: 'app/login', component: LoginComponent},                                                            // Logowanie
+  {path: 'app/logout', component: LogoutComponent},                                                          // Wylogowywanie
+  {path: 'register', component: RegistrationComponent},                                                      // Rejestracja
   {path: 'registered-successfully', component: RegistrationConfirmationComponent},
   {
     path: 'app/planner', children: [
@@ -57,8 +55,7 @@ const routes: Routes = [
       {path: 'workHours', component: PlannerWorkHoursComponent},
       {path: 'settings', component: PlannerSettingsComponent}
     ]
-  },
-  // {path: 'app/new-intern', component: NewInternComponent}
+  }
 ];
 
 @NgModule({

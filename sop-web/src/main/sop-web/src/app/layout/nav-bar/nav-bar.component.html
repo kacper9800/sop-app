@@ -45,7 +45,7 @@
         <!--        </section>-->
 
 
-        <a routerLink="" class="nav-link" *ngIf="isSuperAdmin">
+        <a routerLink="" class="nav-link" *ngIf="isSuperAdmin" style="color: red">
           Administrator systemu
         </a>
         <a routerLink="/app/activation-keys" class="nav-link" *ngIf="isSuperAdmin">
@@ -65,14 +65,19 @@
           {{'navBar.allUsers' | translate}}
         </a>
 
+
+
+
+
+
         <div class="nav-divider"></div>
-        <a routerLink="" class="nav-link" id="adminRole" *ngIf="isAdmin">
+        <a routerLink="" class="nav-link" id="adminRole" *ngIf="isAdmin" style="color: red">
           Administrator uczelni
         </a>
         <!--Administrator uczelni-->
-        <a routerLink="/app/college-structure" class="nav-link" *ngIf="isAdmin">
-          <clr-icon shape="building"></clr-icon>
-          Struktura uczelni
+        <a routerLink="/app/requests" class="nav-link" *ngIf="isStudent || isSuperAdmin">
+          <clr-icon shape="arrow"></clr-icon>
+          <b>Wnioski o praktyki</b>
         </a>
         <a routerLink="/app/directions" class="nav-link" *ngIf="isAdmin">
           <clr-icon shape="two-way-arrows" class="is-solid"></clr-icon>
@@ -81,6 +86,10 @@
         <a routerLink="/app/activation-keys" class="nav-link" *ngIf="isAdmin">
           <clr-icon shape="key" class="is-solid"></clr-icon>
           {{'navBar.activationKeys'| translate}}
+        </a>
+        <a routerLink="/app/college-structure" class="nav-link" *ngIf="isAdmin">
+          <clr-icon shape="building"></clr-icon>
+          Struktura uczelni
         </a>
         <section class="nav-group collapsible" *ngIf="isAdmin">
           <input id="dropdown2" type="checkbox">
@@ -102,6 +111,10 @@
           <clr-icon shape="store" class="is-solid"></clr-icon>
           Lista firm
         </a>
+        <a routerLink="/app/documents" class="nav-link" *ngIf="isAdmin">
+          <clr-icon shape="clipboard"></clr-icon>
+          Dokumenty
+        </a>
         <a routerLink="/app/forms" class="nav-link" *ngIf="isAdmin">
           <clr-icon shape="form"></clr-icon>
           {{'navBar.surveys' | translate}}
@@ -110,14 +123,14 @@
           <clr-icon shape="line-chart"></clr-icon>
           Statystyki
         </a>
-        <a routerLink="/app/documents" class="nav-link" *ngIf="isAdmin">
-          <clr-icon shape="clipboard"></clr-icon>
-          Dokumenty
-        </a>
 
         <!--Kierownik praktyk-->
-        <a routerLink="" class="nav-link" *ngIf="isModerator">
+        <a routerLink="" class="nav-link" *ngIf="isModerator" style="color: red">
           Kierownik praktyk
+        </a>
+        <a routerLink="/app/requests" class="nav-link" *ngIf="isStudent || isSuperAdmin">
+          <clr-icon shape="arrow"></clr-icon>
+          <b>Wnioski o praktyki</b>
         </a>
         <a routerLink="/app/interns" class="nav-link" *ngIf="isModerator">
           <clr-icon shape="users" class="is-solid"></clr-icon>
@@ -155,6 +168,10 @@
         <!--        Praktykant-->
         <a routerLink="" class="nav-link" *ngIf="isStudent || isSuperAdmin" style="color: red">
           Praktykant
+        </a>
+        <a routerLink="/app/requests" class="nav-link" *ngIf="isStudent || isSuperAdmin">
+          <clr-icon shape="arrow"></clr-icon>
+          <b>Wnioski o praktyki</b>
         </a>
         <a routerLink="/app/logbook" class="nav-link" *ngIf="isStudent || isSuperAdmin">
           <clr-icon shape="calendar"></clr-icon>

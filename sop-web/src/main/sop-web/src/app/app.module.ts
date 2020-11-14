@@ -88,6 +88,11 @@ import { InternDialogLogbookComponent } from './sop/interns/intern-dialog/intern
 import { InternDialogDocumentsComponent } from './sop/interns/intern-dialog/intern-dialog-documents/intern-dialog-documents.component';
 import { DirectionsComponent } from './sop/directions/directions.component';
 import { AddEditDialogDirectionsComponent } from './sop/directions/add-edit-dialog-directions/add-edit-dialog-directions.component';
+import { AddEditDialogDocumentsComponent } from './sop/documents/add-edit-dialog-documents/add-edit-dialog-documents.component';
+import {FileUploadModule} from "primeng/fileupload";
+import { FileUploadComponent } from './common/file-upload/file-upload.component';
+import { RequestsComponent } from './sop/requests/requests.component';
+import { AddEditDialogRequestsComponent } from './sop/requests/add-edit-dialog-requests/add-edit-dialog-requests.component';
 
 @NgModule({
   declarations: [
@@ -139,6 +144,10 @@ import { AddEditDialogDirectionsComponent } from './sop/directions/add-edit-dial
     InternDialogDocumentsComponent,
     DirectionsComponent,
     AddEditDialogDirectionsComponent,
+    AddEditDialogDocumentsComponent,
+    FileUploadComponent,
+    RequestsComponent,
+    AddEditDialogRequestsComponent,
   ],
   imports: [
     BrowserModule,
@@ -181,6 +190,7 @@ import { AddEditDialogDirectionsComponent } from './sop/directions/add-edit-dial
     FullCalendarModule,
     TreeTableModule,
     ExportAsModule,
+    FileUploadModule,
   ],
   providers: [
     { provide: LocationStrategy, useClass: HashLocationStrategy },
