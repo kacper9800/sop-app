@@ -1,4 +1,4 @@
-export interface ILogbook {
+export interface IRequest {
   id: number;
   name: string;
   description: string;
@@ -7,7 +7,7 @@ export interface ILogbook {
   removed: boolean;
 }
 
-export class Logbook implements ILogbook {
+export class Request implements IRequest {
   id: number;
   name: string;
   description: string;

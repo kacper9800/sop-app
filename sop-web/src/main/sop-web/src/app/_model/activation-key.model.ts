@@ -18,6 +18,7 @@ export interface IActivationKey {
   companyId?: number;
   companyName?: string;
   numberOfUses?: number;
+  role?: string;
   active?: boolean;
   deleted?: boolean;
 }
@@ -42,6 +43,7 @@ export class ActivationKey implements IActivationKey {
   companyId?: number;
   companyName?: string;
   numberOfUses?: number;
+  role?: string;
   active?: boolean;
   deleted?: boolean;
 }

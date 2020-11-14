@@ -8,6 +8,8 @@ export interface IDocument {
   editDate?: Date;
   statusId?: number;
   statusName?: string;
+  active?: boolean;
+  removed?: boolean;
 }
 
 export class Document implements IDocument {
@@ -20,5 +22,7 @@ export class Document implements IDocument {
   editDate?: Date;
   statusId?: number;
   statusName?: string;
+  active?: boolean;
+  removed?: boolean;
 }
 
