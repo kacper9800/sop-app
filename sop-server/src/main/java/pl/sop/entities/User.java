@@ -248,7 +248,6 @@ public class User extends BasicEntity implements Serializable {
 
   public void addFaculty(Faculty faculty) {
     this.faculties.add(faculty);
-    faculty.getUsers().add(this);
   }
 
   public Set<Institute> getInstitutes() {
@@ -261,7 +260,6 @@ public class User extends BasicEntity implements Serializable {
 
   public void addInstitute(Institute institute) {
     this.institutes.add(institute);
-    institute.getUsers().add(this);
   }
 
   public Set<Department> getDepartments() {
@@ -275,7 +273,6 @@ public class User extends BasicEntity implements Serializable {
 
   public void addDepartment(Department department) {
     this.departments.add(department);
-    department.getUsers().add(this);
   }
 
   public Long getSelectedCollegeId() {

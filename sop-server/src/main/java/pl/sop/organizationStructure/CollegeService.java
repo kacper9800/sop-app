@@ -68,6 +68,12 @@ public class CollegeService {
     return this.collegeRepository.findById(id).get();
   }
 
+  public CollegeDTO findCollegeById(Long id) {
+    College college = this.collegeRepository.findById(id).get();
+    CollegeDTO collegeDTO = collegeToDTOConverter.convert(college);
+    return collegeDTO;
+  }
+
   public List<CollegeDTO> findAllColleges() {
     List<College> colleges = collegeRepository.findAllColleges();
     List<CollegeDTO> collegeDTOS = new ArrayList<>();
@@ -190,5 +196,4 @@ public class CollegeService {
 //    actualCollege.set
 
   }
-
 }

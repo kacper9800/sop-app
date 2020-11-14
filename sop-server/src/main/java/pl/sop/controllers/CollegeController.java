@@ -32,9 +32,20 @@ public class CollegeController {
   private CollegeService collegeService;
 
   @GetMapping(value = "/api/colleges")
+  @PreAuthorize("hasRole('ROLE_SUPERADMIN')")
   public ResponseEntity<List<CollegeDTO>> getAllColleges() {
     final List<CollegeDTO> colleges = collegeService.findAllColleges();
     return new ResponseEntity<>(colleges, HttpStatus.OK);
+  }
+
+  @GetMapping(value = "/api/colleges/{id}")
+  @PreAuthorize("hasRole('ROLE_SUPERADMIN')")
+  public ResponseEntity<CollegeDTO> getCollegeById(@PathVariable("id") Long id) {
+    if(id == null) {
+      return new ResponseEntity<>(HttpStatus.NOT_ACCEPTABLE);
+    }
+    final CollegeDTO collegeDTO = collegeService.findCollegeById(id);
+    return new ResponseEntity<>(collegeDTO, HttpStatus.OK);
   }
 
   @GetMapping(value = "/api/available-colleges")
@@ -45,8 +56,9 @@ public class CollegeController {
 
   @PostMapping(value = "/api/colleges/change-active-status/{collegeId}/{newStatus}")
   @PreAuthorize("hasRole('ROLE_SUPERADMIN')")
-  public ResponseEntity<Boolean> changeCollegeActiveStatus(@PathVariable(name = "collegeId") String collegeId,
-                                  @PathVariable(name = "newStatus") Boolean newStatus) {
+  public ResponseEntity<Boolean> changeCollegeActiveStatus(
+      @PathVariable(name = "collegeId") String collegeId,
+      @PathVariable(name = "newStatus") Boolean newStatus) {
     if (newStatus == null && collegeId == null) {
       return new ResponseEntity<>(HttpStatus.NOT_ACCEPTABLE);
     }

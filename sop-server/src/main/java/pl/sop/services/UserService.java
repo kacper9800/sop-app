@@ -114,9 +114,9 @@ public class UserService {
     roles.add(specificRole);
     User user = prepareUser(signUpRequest, roles, college);
     userRepository.save(user);
-    emailService.sendSimpleMessage(user.getEmail(), "System obsługi praktyk",
-        "Rejestracja pomyślnie zakończona\n"
-            + "Twoja nazwa użytkownika: " + user.getUsername());
+//    emailService.sendSimpleMessage(user.getEmail(), "System obsługi praktyk",
+//        "Rejestracja pomyślnie zakończona\n"
+//            + "Twoja nazwa użytkownika: " + user.getUsername());
     return ResponseEntity.ok(new MessageResponse("User registered successfully"));
   }
 
