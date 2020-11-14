@@ -1,7 +1,7 @@
 <h1 style="text-align: center">{{'users.header' | translate}}</h1>
 <h4 style="text-align: center">{{'users.secondHeader' | translate}}</h4>
 
-<clr-datagrid [(clrDgSelected)]="selectedUsers" [clrDgLoading]="blockUI">
+<clr-datagrid [(clrDgSelected)]="selectedUsers" [clrDgLoading]="blockUI" style="height: 75%;">
   <clr-dg-action-bar>
     <div class="btn-group">
       <button type="button" class="btn btn-sm btn-primary"
@@ -50,14 +50,16 @@
       </div>
     </clr-dg-cell>
     <clr-dg-cell>
-      <button type="button" class="btn btn-sm btn-secondary" (click)="showEditDialog(user.id)">
-        <clr-icon shape="pencil"></clr-icon>
-        {{'common.crud.edit' | translate }}
-      </button>
-      <button type="button" class="btn btn-sm btn-danger" (click)="showConfirmDeleteDialog()">
-        <clr-icon shape="trash"></clr-icon>
-        {{'common.crud.delete' | translate }}
-      </button>
+      <div class="btn-group">
+        <button type="button" class="btn btn-sm btn-secondary" (click)="showEditDialog(user.id)">
+          <clr-icon shape="pencil"></clr-icon>
+          {{'common.crud.edit' | translate }}
+        </button>
+        <button type="button" class="btn btn-sm btn-danger" (click)="showConfirmDeleteDialog()">
+          <clr-icon shape="trash"></clr-icon>
+          {{'common.crud.delete' | translate }}
+        </button>
+      </div>
     </clr-dg-cell>
   </clr-dg-row>
 

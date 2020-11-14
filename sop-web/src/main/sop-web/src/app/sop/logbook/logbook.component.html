@@ -1,63 +1,100 @@
-<div class="card">
-  <h5>Row Editing</h5>
-  <p-table [value]="products2" dataKey="id" editMode="row">
-    <ng-template pTemplate="header">
-      <tr>
-        <th>Code</th>
-        <th>Name</th>
-        <th>Category</th>
-        <th>Quantity</th>
-        <th style="width:8rem"></th>
-      </tr>
-    </ng-template>
-    <ng-template pTemplate="body" let-product let-editing="editing" let-ri="rowIndex">
-      <tr [pEditableRow]="product">
-        <td pEditableColumn>
-          <p-cellEditor>
-            <ng-template pTemplate="input">
-              <input pInputText type="text" [(ngModel)]="product.code">
-            </ng-template>
-            <ng-template pTemplate="output">
-              {{product.code}}
-            </ng-template>
-          </p-cellEditor>
-        </td>
-        <td pEditableColumn>
-          <p-cellEditor>
-            <ng-template pTemplate="input">
-              <input pInputText type="text" [(ngModel)]="product.name" required>
-            </ng-template>
-            <ng-template pTemplate="output">
-              {{product.name}}
-            </ng-template>
-          </p-cellEditor>
-        </td>
-        <td pEditableColumn>
-          <p-cellEditor>
-            <ng-template pTemplate="input">
-              <p-dropdown [options]="statuses" [(ngModel)]="product.inventoryStatus" [style]="{'width':'100%'}"></p-dropdown>
-            </ng-template>
-            <ng-template pTemplate="output">
-              {{product.inventoryStatus}}
-            </ng-template>
-          </p-cellEditor>
-        </td>
-        <td pEditableColumn>
-          <p-cellEditor>
-            <ng-template pTemplate="input">
-              <input pInputText type="text" [(ngModel)]="product.price">
-            </ng-template>
-            <ng-template pTemplate="output">
-              {{product.price | currency: 'USD'}}
-            </ng-template>
-          </p-cellEditor>
-        </td>
-        <td style="text-align:center">
-          <button *ngIf="!editing" pButton pRipple type="button" pInitEditableRow icon="pi pi-pencil" (click)="onRowEditInit(product)" class="p-button-rounded p-button-text"></button>
-          <button *ngIf="editing" pButton pRipple type="button" pSaveEditableRow icon="pi pi-check" (click)="onRowEditSave(product)" class="p-button-rounded p-button-text p-button-success p-mr-2"></button>
-          <button *ngIf="editing" pButton pRipple type="button" pCancelEditableRow icon="pi pi-times" (click)="onRowEditCancel(product, ri)" class="p-button-rounded p-button-text p-button-danger"></button>
-        </td>
-      </tr>
-    </ng-template>
-  </p-table>
-</div>
+<p-toast [baseZIndex]="10000" autoZIndex="true"></p-toast>
+
+<h1 style="text-align: center">{{'logbooks.header' | translate}}</h1>
+<!--<h4 style="text-align: center">{{'logbooks.secondHeader' | translate}}</h4>-->
+
+<clr-datagrid [(clrDgSelected)]="selectedLogbook" [clrDgRowSelection]="true"
+              [clrDgLoading]="blockUI" style="height: 75%;">
+  <clr-dg-action-bar>
+    <div class="btn-group">
+      <button type="button" class="btn btn-sm btn-primary"
+              (click)="showAddNewDialog()">
+        <clr-icon shape="plus"></clr-icon>
+        {{'logbooks.CRUD.addLogbook' | translate}}
+      </button>
+      <clr-dropdown>
+        <button type="button" class="btn btn-sm btn-secondary" clrDropdownTrigger>
+          {{'common.export.button' | translate}}
+        </button>
+        <clr-dropdown-menu clrPosition="bottom-left" *clrIfOpen>
+          <button type="button" (click)="showExportDialog(true)"
+                  [disabled]="logbooks.length === 0" clrDropdownItem>
+            {{'common.export.all' | translate}}</button>
+          <button type="button" (click)="showExportDialog(false)"
+                  [disabled]="selectedLogbook.length === 0" clrDropdownItem>
+            {{'common.export.selected' | translate}}</button>
+        </clr-dropdown-menu>
+      </clr-dropdown>
+    </div>
+  </clr-dg-action-bar>
+  <clr-dg-column *ngFor="let col of columns">
+    {{col.label | translate}}
+  </clr-dg-column>
+
+  <clr-dg-row *ngFor="let logbook of logbooks" [clrDgItem]="logbook">
+    <!--    <clr-dg-cell>{{college.id}}</clr-dg-cell>-->
+    <clr-dg-cell>{{logbook.name}}</clr-dg-cell>
+    <clr-dg-cell>
+      <div *ngIf="logbook.active">
+        <clr-icon shape="check"></clr-icon>
+      </div>
+      <div *ngIf="!logbook.active">
+        <clr-icon shape="times"></clr-icon>
+      </div>
+    </clr-dg-cell>
+    <clr-dg-cell>
+      <div *ngIf="logbook.removed">
+        <clr-icon shape="check"></clr-icon>
+      </div>
+      <div *ngIf="!logbook.removed">
+        <clr-icon shape="times"></clr-icon>
+      </div>
+    </clr-dg-cell>
+    <clr-dg-cell>
+      <div class="btn-group">
+<!--        <button *ngIf="logbook.active" type="button" class="btn btn-sm btn-danger-outline"-->
+<!--                (click)="activateAction(college)">-->
+<!--          <clr-icon shape="times"></clr-icon>-->
+<!--        </button>-->
+<!--        <button *ngIf="!logbook.active" type="button" class="btn btn-sm btn-success-outline"-->
+<!--                (click)="activateAction(college)">-->
+<!--          <clr-icon shape="check"></clr-icon>-->
+<!--        </button>-->
+        <button type="button" class="btn btn-sm btn-secondary"
+                (click)="showEditDialog(logbook.id)">
+          <clr-icon shape="pencil"></clr-icon>
+        </button>
+        <button type="button" class="btn btn-sm btn-danger" (click)="showConfirmDeleteDialog(logbook.id)">
+          <clr-icon shape="trash"></clr-icon>
+        </button>
+
+      </div>
+    </clr-dg-cell>
+  </clr-dg-row>
+
+  <clr-dg-placeholder>{{'logbooks.notFound' | translate}}</clr-dg-placeholder>
+  <clr-dg-footer>
+    <clr-dg-pagination #pagination [clrDgPageSize]="10">
+      <clr-dg-page-size
+        [clrPageSizeOptions]="[10,20,50,100]">{{'logbooks.logbooksPerPage' | translate}}</clr-dg-page-size>
+      {{pagination.firstItem + 1}} - {{pagination.lastItem
+    + 1}} {{'common.of' | translate}} {{pagination.totalItems}} {{'logbooks.logbooks' | translate}}
+    </clr-dg-pagination>
+  </clr-dg-footer>
+</clr-datagrid>
+
+<!--<div class="row">-->
+<!--  <div class="clr-col-2"></div>-->
+<!--  <div class="clr-col-4">-->
+<!--    <div class="btn-group btn-primary">-->
+<!--      <button class="btn btn-success" (click)="opened=true">Dodaj klucz</button>-->
+<!--      <button class="btn btn-danger" (click)="opened=true">Usuń klucz</button>-->
+<!--    </div>-->
+<!--  </div>-->
+<!--  <div class="clr-col-2"></div>-->
+<!--</div>-->
+
+<ng-template #addEditDialog></ng-template>
+<ng-template #exportDialog></ng-template>
+<ng-template #confirmDeleteDialog></ng-template>
+

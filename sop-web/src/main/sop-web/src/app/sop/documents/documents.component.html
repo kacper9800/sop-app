@@ -1,1 +1,88 @@
-<p>documents works!</p>
+<h1 style="text-align: center">{{'documents.header' | translate}}</h1>
+<!--<h4 style="text-align: center">{{'interns.secondHeader' | translate}}</h4>-->
+
+<clr-datagrid [(clrDgSelected)]="selectedDocuments" [clrDgLoading]="blockUI" style="height: 75%;">
+  <clr-dg-action-bar>
+    <div class="btn-group">
+      <button type="button" class="btn btn-sm btn-primary"
+              (click)="showAddNewDialog()">
+        <clr-icon shape="plus"></clr-icon>
+        {{'documents.CRUD.addDocument' | translate}}
+      </button>
+      <clr-dropdown>
+        <button type="button" class="btn btn-sm btn-secondary" clrDropdownTrigger>
+          {{'common.export.button' | translate}}
+        </button>
+        <clr-dropdown-menu clrPosition="bottom-left" *clrIfOpen>
+          <button type="button" (click)="showExportDialog(true)"
+                  [disabled]="documents.length === 0" clrDropdownItem>
+            {{'common.export.all' | translate}}</button>
+          <button type="button" (click)="showExportDialog(false)"
+                  [disabled]="selectedDocuments.length === 0" clrDropdownItem>
+            {{'common.export.selected' | translate}}</button>
+        </clr-dropdown-menu>
+      </clr-dropdown>
+    </div>
+  </clr-dg-action-bar>
+  <clr-dg-column *ngFor="let col of columns">
+    {{col.label | translate}}
+  </clr-dg-column>
+
+  <clr-dg-row *ngFor="let document of documents" [clrDgItem]="document">
+    <clr-dg-cell>{{document.name}}</clr-dg-cell>
+    <clr-dg-cell>{{document.description}}</clr-dg-cell>
+    <clr-dg-cell>{{document.createDate | date}}</clr-dg-cell>
+    <clr-dg-cell>{{document.editDate | date}}</clr-dg-cell>
+    <clr-dg-cell>{{document.statusName}}</clr-dg-cell>
+    <clr-dg-cell>
+      <div *ngIf="document.active">
+        <clr-icon shape="check"></clr-icon>
+      </div>
+      <div *ngIf="!document.active">
+        <clr-icon shape="times"></clr-icon>
+      </div>
+    </clr-dg-cell>
+    <clr-dg-cell>
+      <div *ngIf="document.removed">
+        <clr-icon shape="check"></clr-icon>
+      </div>
+      <div *ngIf="!document.removed">
+        <clr-icon shape="times"></clr-icon>
+      </div>
+    </clr-dg-cell>
+    <clr-dg-cell>
+      <div class="btn-group">
+        <button type="button" class="btn btn-sm btn-secondary" (click)="showInternsDialog(document.id)">
+          <clr-icon shape="id-badge"></clr-icon>
+          {{'interns.showIntern' | translate }}
+        </button>
+        <button *ngIf="isSuperAdmin || isAdmin" type="button" class="btn btn-sm btn-secondary"
+                (click)="showEditDialog(document.id)">
+          <clr-icon shape="pencil"></clr-icon>
+          {{'common.crud.edit' | translate }}
+        </button>
+        <button *ngIf="isSuperAdmin || isAdmin" type="button" class="btn btn-sm btn-danger"
+                (click)="showConfirmDeleteDialog(document.id)">
+          <clr-icon shape="trash"></clr-icon>
+          {{'common.crud.delete' | translate }}
+        </button>
+      </div>
+    </clr-dg-cell>
+  </clr-dg-row>
+
+  <clr-dg-placeholder>{{'documents.notFound' | translate}}</clr-dg-placeholder>
+  <clr-dg-footer>
+    <clr-dg-pagination #pagination [clrDgPageSize]="10">
+      <clr-dg-page-size
+        [clrPageSizeOptions]="[5,10,20,50]">{{'documents.documentsPerPage' | translate}}</clr-dg-page-size>
+      {{pagination.firstItem + 1}} - {{pagination.lastItem
+    + 1}} {{'common.of' | translate}} {{documents.length}} {{'documents.documents' | translate}}
+    </clr-dg-pagination>
+  </clr-dg-footer>
+</clr-datagrid>
+
+<ng-template #addEditDialog></ng-template>
+<ng-template #exportDialog></ng-template>
+<ng-template #internDialog></ng-template>
+
+

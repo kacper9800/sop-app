@@ -19,6 +19,7 @@ import {PrincipalService} from '../../../_services/auth/principal.service';
 import {College, ICollege} from '../../../_model/organization-structure/college.model';
 import {DirectionsService} from '../../../_services/directions.service';
 import {Direction} from '../../../_model/direction.model';
+import {RoleService} from "../../../_services/auth/role.service";
 
 @Component({
   selector: 'app-add-edit-dialog-activation-keys',
@@ -36,6 +37,7 @@ export class AddEditDialogActivationKeysComponent implements OnInit {
 
   public collegeStructure: CollegeStructure;
   public collegeStructuresLevels: DropdownItem[];
+  public roles: any[] = [];
 
   public directions: Direction[];
   public colleges: College[] = [];
@@ -61,6 +63,7 @@ export class AddEditDialogActivationKeysComponent implements OnInit {
               private collegeService: CollegeService,
               private tokenService: TokenService,
               private principalService: PrincipalService,
+              private roleService: RoleService,
               private directionsService: DirectionsService) {
   }
 
@@ -72,6 +75,7 @@ export class AddEditDialogActivationKeysComponent implements OnInit {
     this.loadCollegeStructureData();
     this.prepareDropdownsOptions();
     this.loadDirections();
+    this.loadRoles();
     if (this.principalService.isSuperAdmin()) {
       this.loadColleges();
     }
@@ -96,21 +100,34 @@ export class AddEditDialogActivationKeysComponent implements OnInit {
 
   private prepareForm(activationKey?: ActivationKey): void {
     this.activationKeyForm = this.formBuilder.group({
-      level: new FormControl({value: null,
-        disabled: false}, Validators.required),
-      token: new FormControl({value: activationKey ? activationKey.value : this.tokenService.generateToken(),
-        disabled: true}, Validators.required),
-      expirationDateStart: new FormControl({value: activationKey ? activationKey.startExpirationDate : null,
-        disabled: false}, Validators.required),
+      level: new FormControl({
+        value: null,
+        disabled: false
+      }, Validators.required),
+      token: new FormControl({
+        value: activationKey ? activationKey.value : this.tokenService.generateToken(),
+        disabled: true
+      }, Validators.required),
+      expirationDateStart: new FormControl({
+        value: activationKey ? activationKey.startExpirationDate : null,
+        disabled: false
+      }, Validators.required),
       expirationDateEnd: new FormControl({
         value: activationKey ? activationKey.endExpirationDate : null,
-        disabled: false}, Validators.required),
+        disabled: false
+      }, Validators.required),
       numberOfUses: new FormControl({
         value: activationKey ? activationKey.numberOfUses : null,
-        disabled: false}, Validators.required),
+        disabled: false
+      }, Validators.required),
+      role: new FormControl({
+        value: activationKey ? activationKey.numberOfUses : null,
+        disabled: false
+      }, Validators.required),
       mode: new FormControl({
         value: activationKey ? activationKey.directionId ? 1 : 2 : null,
-        disabled: false}, Validators.required),
+        disabled: false
+      }, Validators.required),
       directionId: new FormControl({
         value: activationKey ? activationKey.directionId : null,
         disabled: false
@@ -378,16 +395,20 @@ export class AddEditDialogActivationKeysComponent implements OnInit {
     this.blockUI = true;
     this.validateBtnState = ClrLoadingState.LOADING;
     this.prepareActivationKey();
-    if (this.selectedLevel === 0) {
-      this.activationKeyService.createActivationKeyForCollege(this.activationKeyToSave).subscribe(
+    if (this.activationKeyForm.get('mode').value == 1) {
+      this.activationKeyService.createActivationKey(this.activationKeyToSave).subscribe(
         (res: HttpResponse<boolean>) => this.onSuccessCreateActivationKey(res),
-        (err) => this.onErrorCreateActivationKey(err)
-      );
-    } else {
-      this.activationKeyService.createActivationKeyForCollegeStructure(this.activationKeyToSave).subscribe(
-        (res: HttpResponse<boolean>) => this.onSuccessCreateActivationKey(res),
-        (err) => this.onErrorCreateActivationKey(err)
-      );
+        (err) => this.onErrorCreateActivationKey(err));
+    } else if (this.activationKeyForm.get('mode').value == 2) {
+      if (this.selectedLevel === 0) {
+        this.activationKeyService.createActivationKeyForCollege(this.activationKeyToSave).subscribe(
+          (res: HttpResponse<boolean>) => this.onSuccessCreateActivationKey(res),
+          (err) => this.onErrorCreateActivationKey(err));
+      } else {
+        this.activationKeyService.createActivationKey(this.activationKeyToSave).subscribe(
+          (res: HttpResponse<boolean>) => this.onSuccessCreateActivationKey(res),
+          (err) => this.onErrorCreateActivationKey(err));
+      }
     }
   }
 
@@ -398,6 +419,7 @@ export class AddEditDialogActivationKeysComponent implements OnInit {
     this.activationKeyToSave.directionId = this.activationKeyForm.get('directionId').value;
     this.activationKeyToSave.startExpirationDate = this.prepareDateObject(this.activationKeyForm.get('expirationDateStart').value);
     this.activationKeyToSave.endExpirationDate = this.prepareDateObject(this.activationKeyForm.get('expirationDateEnd').value);
+    this.activationKeyToSave.role = this.activationKeyForm.get('role').value;
     if (this.selectedLevel === 0) {
       this.activationKeyToSave.collegeId = this.activationKeyForm.get('collegeId').value;
     } else if (this.selectedLevel === 1) {
@@ -407,7 +429,6 @@ export class AddEditDialogActivationKeysComponent implements OnInit {
     } else if (this.selectedLevel === 3) {
       this.activationKeyToSave.departmentId = this.activationKeyForm.get('departmentId').value;
     }
-    console.log(this.activationKeyToSave);
   }
 
   private onSuccessCreateActivationKey(res: HttpResponse<boolean>): void {
@@ -451,14 +472,15 @@ export class AddEditDialogActivationKeysComponent implements OnInit {
 
   private onSuccessLoadDirections(res) {
     this.directions = [];
-    this.directions.push({id: null, name: this.translateService.instant('directions.chooseDirection')});
+    this.directions.push({
+      id: null,
+      name: this.translateService.instant('directions.chooseDirection')
+    });
     res.forEach(direction => this.directions.push(direction));
-    console.log(this.directions);
     this.blockUI = false;
   }
 
   private onErrorLoadDirections(errror: any) {
-    console.log('error');
     this.blockUI = false;
   }
 
@@ -474,7 +496,22 @@ export class AddEditDialogActivationKeysComponent implements OnInit {
   }
 
   public onDirectionChange() {
-    console.log(this.mode);
-    console.log(this.activationKeyForm);
+  }
+
+  private loadRoles(): void {
+    this.roleService.getAllRoles().subscribe(
+      (res) => this.onSuccessLoadRoles(res),
+      (error) => this.onErrorLoadRoles(error)
+    );
+  }
+
+  private onSuccessLoadRoles(res): void {
+    this.roles = [];
+    this.roles.push({name: 'chooseRole', value: null});
+    res.forEach(role => this.roles.push({name: role, value: role}));
+  }
+
+  private onErrorLoadRoles(error: any): void {
+
   }
 }

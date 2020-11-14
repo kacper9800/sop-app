@@ -76,6 +76,13 @@ export class ActivationKeysComponent implements OnInit {
         key.createdById = activationKey.createdById;
         key.createdByName = activationKey.createdByName;
       }
+      if (activationKey.directionId === null || activationKey.directionId === undefined) {
+        key.directionId = null;
+        key.directionName = '---';
+      } else {
+        key.directionId = activationKey.directionId;
+        key.directionName = activationKey.directionName;
+      }
       if (activationKey.companyId === null || activationKey.companyId === undefined) {
         key.companyId = null;
         key.companyName = '---';

@@ -4,8 +4,7 @@
 <h4 style="text-align: center">{{'colleges.secondHeader' | translate}}</h4>
 
 <clr-datagrid [(clrDgSelected)]="selectedColleges" [clrDgRowSelection]="true"
-              [clrDgLoading]="blockUI"
-              style="height: 50%;">
+              [clrDgLoading]="blockUI" style="height: 75%;">
   <clr-dg-action-bar>
     <div class="btn-group">
       <button type="button" class="btn btn-sm btn-primary"
@@ -33,7 +32,6 @@
   </clr-dg-column>
 
   <clr-dg-row *ngFor="let college of colleges" [clrDgItem]="college">
-    <clr-dg-cell>{{college.id}}</clr-dg-cell>
     <clr-dg-cell>{{college.name}}</clr-dg-cell>
     <clr-dg-cell>
       <div *ngIf="college.active">
@@ -69,8 +67,7 @@
         <button type="button" class="btn btn-sm btn-danger" (click)="showConfirmDeleteDialog(college.id)">
           <clr-icon shape="trash"></clr-icon>
         </button>
-
-      </div>
+       </div>
     </clr-dg-cell>
   </clr-dg-row>
 

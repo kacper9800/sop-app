@@ -10,7 +10,6 @@ import {IUser, User} from '../../security/user';
 import {HttpResponse} from '@angular/common/http';
 import {ExportTableComponent} from '../export-table/export-table.component';
 import {TranslateService} from '@ngx-translate/core';
-import {Class} from '../../_model/class.model';
 import {PrincipalService} from '../../_services/auth/principal.service';
 import {InternDialogComponent} from './intern-dialog/intern-dialog.component';
 import {Direction} from '../../_model/direction.model';
@@ -84,10 +83,12 @@ export class InternsComponent implements OnInit {
 
   private onSuccessLoadDirections(res) {
     this.directions = [];
-    this.directions.push({id: null, name: this.translateService.instant('directions.chooseDirection')});
     res.forEach(direction => this.directions.push(direction));
-    console.log(this.directions);
     this.blockUI = false;
+    // this.directions.push({
+    //   id: null,
+    //   name: this.translateService.instant('directions.chooseDirection')
+    // });
   }
 
   private onErrorLoadDirections(errror: any) {
@@ -163,15 +164,17 @@ export class InternsComponent implements OnInit {
   }
 
   public onSelectedClassesChange() {
-    this.blockUI = true;
     const selectedClassId = [];
     this.selectedDirections.forEach(selectedClass => {
       selectedClassId.push(selectedClass.id);
     });
-    this.usersService.loadInternsForClasses(selectedClassId).subscribe(
-      (res: HttpResponse<User[]>) => this.onSuccessLoadUsers(res.body),
-      (error) => this.onErrorLoadUsers(error)
-    );
+    if (selectedClassId.length > 0) {
+      this.blockUI = true;
+      this.usersService.loadInternsForClasses(selectedClassId).subscribe(
+        (res: HttpResponse<User[]>) => this.onSuccessLoadUsers(res.body),
+        (error) => this.onErrorLoadUsers(error)
+      );
+    }
   }
 
   public showInternsDialog(id: number) {

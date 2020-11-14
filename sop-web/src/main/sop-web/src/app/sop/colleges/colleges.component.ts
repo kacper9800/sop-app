@@ -14,7 +14,6 @@ import {ExportTableComponent} from '../export-table/export-table.component';
 import {PrincipalService} from '../../_services/auth/principal.service';
 import {MessageService} from 'primeng/api';
 import {ConfirmDeleteDialogComponent} from '../../common/confirm-delete-dialog/confirm-delete-dialog.component';
-import {CollegeStructureEnum} from '../../_enums/college-structure.enum';
 
 @Component({
   selector: 'app-colleges',
@@ -63,16 +62,15 @@ export class CollegesComponent implements OnInit {
   }
 
   private onErrorLoadColleges(err: any) {
-    console.log(err);
     this.blockUI = false;
   }
 
   private prepareColumns() {
     this.columns = [
-      {
-        label: this.translateService.instant('common.id'),
-        fieldName: 'id'
-      },
+      // {
+      //   label: this.translateService.instant('common.id'),
+      //   fieldName: 'id'
+      // },
       {
         label: this.translateService.instant('common.collegeName'),
         fieldName: 'name'

@@ -1,37 +1,41 @@
 import {Component, EventEmitter, OnInit, Output} from '@angular/core';
+import {Direction, IDirection} from '../../../_model/direction.model';
 import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
+import {IDictionary} from '../../../_model/dictionary.model';
+import {IInstitute} from '../../../_model/organization-structure/institute.model';
 import {CollegeService} from '../../../_services/organization-structure/college.service';
 import {TokenService} from '../../../_helpers/token.service';
 import {TranslateService} from '@ngx-translate/core';
+import {InstituteService} from '../../../_services/organization-structure/institute.service';
+import {DictionariesService} from '../../../_services/dictionaries.service';
+import {DirectionsService} from '../../../_services/directions.service';
 import {HttpResponse} from '@angular/common/http';
 import {ClrLoadingState} from '@clr/angular';
-import {Direction, IDirection} from '../../../_model/direction.model';
-import {DirectionsService} from '../../../_services/directions.service';
-import {DictionariesService} from '../../../_services/dictionaries.service';
-import {IInstitute} from '../../../_model/organization-structure/institute.model';
-import {InstituteService} from '../../../_services/organization-structure/institute.service';
-import {IDictionary} from '../../../_model/dictionary.model';
+import {Document} from '../../../_model/document.model';
+import {requiredFileType} from "../../../common/file-upload/file-upload.component";
 
 @Component({
-  selector: 'app-add-edit-dialog-directions',
-  templateUrl: './add-edit-dialog-directions.component.html',
-  styleUrls: ['./add-edit-dialog-directions.component.css']
+  selector: 'app-add-edit-dialog-documents',
+  templateUrl: './add-edit-dialog-documents.component.html',
+  styleUrls: ['./add-edit-dialog-documents.component.css']
 })
-export class AddEditDialogDirectionsComponent implements OnInit {
+export class AddEditDialogDocumentsComponent implements OnInit {
 
   @Output()
   public closeDialogWithSaveEmitter: EventEmitter<any> = new EventEmitter<any>();
-  public direction: Direction;
+  public document: Document;
   public blockUI: boolean;
   public displayDialog: any;
-  public directionForm: FormGroup;
-  private directionToSave: Direction;
+  public documentForm: FormGroup;
+  private documentToSave: Document;
   public studyModes: IDictionary[] = [];
   public institutes: IInstitute[] = [];
 
 
   public dialogTitle: string;
   public validateBtnState: any;
+  public uploadedDocuments: Document[] = [];
+  public progress: any;
 
   constructor(private collegeService: CollegeService,
               private formBuilder: FormBuilder,
@@ -48,34 +52,17 @@ export class AddEditDialogDirectionsComponent implements OnInit {
     this.loadStudyModes();
   }
 
-  private prepareForm(direction: Direction): void {
-    this.directionForm = this.formBuilder.group({
-      name: new FormControl({
-        value: direction ? direction.name : null,
-        disabled: false
-      }, Validators.required),
-      description: new FormControl({
-        value: direction ? direction.description : null,
-        disabled: false
-      }),
-      expirationDateStart: new FormControl({
-        value: direction ? direction.startExpirationDate : null,
-        disabled: false
-      }),
-      expirationDateEnd: new FormControl({
-        value: direction ? direction.endExpirationDate : null,
-        disabled: false
-      }),
-      studyMode: new FormControl({
-        value: direction ? direction.studyMode : null,
-        disabled: false
-      }, Validators.required),
-      instituteId: new FormControl({
-        value: direction ? direction.instituteId : null,
-        disabled: false
-      }, Validators.required)
+  private prepareForm(document: Document): void {
+    this.documentForm = this.formBuilder.group({
+      name: new FormControl({value: document ? document.name : null, disabled: false}, Validators.required),
+      description: new FormControl({value: document ? document.description : null, disabled: false}),
+      createDate: new FormControl({value: document ? document.createDate : null, disabled: false}),
+      editDate: new FormControl({value: document ? document.editDate : null, disabled: false}),
+      documentData: new FormControl({value: document ? document.data : null, disabled: false},
+        Validators.compose([Validators.required, requiredFileType('docx')]))
     });
   }
+
 
   private loadInstitutes() {
     this.instituteService.getAllInstitutesForCollege().subscribe(
@@ -120,14 +107,14 @@ export class AddEditDialogDirectionsComponent implements OnInit {
     this.blockUI = false;
   }
 
-  public showNewDirectionDialog() {
+  public showNewDocumentDialog() {
     this.blockUI = true;
-    this.dialogTitle = this.translateService.instant('directions.dialog.titleNew');
+    this.dialogTitle = this.translateService.instant('documents.dialog.titleNew');
     this.displayDialog = true;
     this.prepareForm(null);
   }
 
-  public showEditDirectionDialog(id: number) {
+  public showEditDocumentDialog(id: number) {
     this.blockUI = true;
     this.dialogTitle = this.translateService.instant('colleges.dialog.titleEdit');
     this.directionsService.getDirectionForId(id).subscribe(
@@ -137,7 +124,7 @@ export class AddEditDialogDirectionsComponent implements OnInit {
   }
 
   private onSuccessLoadDirection(res: IDirection) {
-    this.direction = res;
+    this.document = res;
     this.displayDialog = true;
     this.blockUI = false;
   }
@@ -148,21 +135,18 @@ export class AddEditDialogDirectionsComponent implements OnInit {
   }
 
   private collectFormData() {
-    this.directionToSave = new Direction();
-    this.directionToSave.name = this.directionForm.get('name').value;
-    this.directionToSave.description = this.directionForm.get('description').value;
-    this.directionToSave.startExpirationDate = this.prepareDateObject(this.directionForm.get('expirationDateStart').value);
-    this.directionToSave.endExpirationDate = this.prepareDateObject(this.directionForm.get('expirationDateEnd').value);
-    this.directionToSave.studyMode = this.directionForm.get('studyMode').value;
-    this.directionToSave.instituteId = this.directionForm.get('instituteId').value;
-    this.directionToSave.active = true;
+    this.documentToSave = new Document();
+    this.documentToSave.name = this.documentForm.get('name').value;
+    this.documentToSave.description = this.documentForm.get('description').value;
+    this.documentToSave.createDate = this.prepareDateObject(this.documentForm.get('createDate').value);
+    this.documentToSave.editDate = this.prepareDateObject(this.documentForm.get('editDate').value);
   }
 
   public onSubmit() {
     this.blockUI = true;
     this.validateBtnState = ClrLoadingState.LOADING;
     this.collectFormData();
-    this.directionsService.createDirection(this.directionToSave).subscribe(
+    this.directionsService.createDirection(this.documentToSave).subscribe(
       (res: number) => this.onSuccessCreateDirection(res),
       (error) => this.onErrorCreateDirection(error)
     );
@@ -200,4 +184,10 @@ export class AddEditDialogDirectionsComponent implements OnInit {
       return null;
     }
   }
+
+  public onUpload($event: any) {
+
+
+  }
 }
+

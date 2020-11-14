@@ -1,11 +1,11 @@
 <h1 style="text-align: center">{{'interns.header' | translate}}</h1>
 <!--<h4 style="text-align: center">{{'interns.secondHeader' | translate}}</h4>-->
 
-<clr-datagrid [(clrDgSelected)]="selectedUsers" [clrDgLoading]="blockUI" >
+<clr-datagrid [(clrDgSelected)]="selectedUsers" [clrDgLoading]="blockUI" style="height: 75%;">
   <clr-dg-action-bar>
     <clr-combobox-container style="text-align: center">
       <label>Wybór rocznika</label>
-      <clr-combobox [(ngModel)]="selectedDirections" name="multiSelect" clrMulti="true" required (ngModelChange)="onSelectedClassesChange()">
+      <clr-combobox [(ngModel)]="selectedDirections" name="multiSelect" clrMulti="true" (ngModelChange)="onSelectedClassesChange()">
         <ng-container *clrOptionSelected="let selected">
           <clr-icon shape="users" role="img" aria-label="welcome home"></clr-icon> {{selected.name}}
         </ng-container>

@@ -1,0 +1,134 @@
+<clr-modal [(clrModalOpen)]="displayDialog" [clrModalStaticBackdrop]="false" [clrModalSize]="'m'"
+           [clrModalClosable]="false">
+  <h3 class="modal-title" style="text-align: center!important;">{{dialogTitle}}</h3>
+  <div class="modal-body">
+    <form clrForm [formGroup]="documentForm" id="activationKeyForm">
+
+      <div class="clr-row">
+        <div class="clr-col-2"></div>
+        <div class="clr-col-8">
+          <clr-input-container>
+            <label>
+              <clr-icon shape="highlighter"></clr-icon>
+            </label>
+            <input [size]="35" clrInput type="text" formControlName="name"
+                   placeholder="{{'documents.name' | translate}}"/>
+          </clr-input-container>
+        </div>
+        <div class="clr-col-2"></div>
+      </div>
+
+      <div class="clr-row">
+        <div class="clr-col-2"></div>
+        <div class="clr-col-8">
+          <clr-input-container>
+            <label>
+              <clr-icon shape="highlighter"></clr-icon>
+            </label>
+            <input [size]="35" clrInput type="text" formControlName="description"
+                   placeholder="{{'common.description' | translate}}"/>
+          </clr-input-container>
+        </div>
+        <div class="clr-col-2"></div>
+      </div>
+
+<!--      <div class="clr-row">-->
+<!--        <div class="clr-col-2"></div>-->
+<!--        <div class="clr-col-8">-->
+<!--          <clr-select-container>-->
+<!--            <label>-->
+<!--              <clr-icon shape="building"></clr-icon>-->
+<!--            </label>-->
+<!--            <select clrSelect name="options" formControlName="studyMode" required>-->
+<!--              <option *ngFor="let studyMode of studyModes" [value]="studyMode.value">-->
+<!--                {{'directions.' + studyMode.label.toString() | translate}}-->
+<!--              </option>-->
+<!--            </select>-->
+<!--            <clr-control-error>{{'common.required' | translate}}</clr-control-error>-->
+<!--          </clr-select-container>-->
+<!--        </div>-->
+<!--        <div class="clr-col-2"></div>-->
+<!--      </div>-->
+
+<!--      <div class="clr-row">-->
+<!--        <br>-->
+<!--      </div>-->
+
+      <div class="clr-row">
+        <div class="clr-col-4"></div>
+        <div class="clr-col-4">
+          <div class="clr-control-container clr-error">
+            <div class="clr-file-wrapper">
+              <app-file-upload formControlName="documentData" [progress]="progress"></app-file-upload>
+            </div>
+          </div>
+        </div>
+        <div class="clr-col-4"></div>
+      </div>
+      <!--      <div class="clr-row">-->
+      <!--        <div class="clr-col-4"></div>-->
+      <!--        <div class="clr-col-4">-->
+      <!--          <div class="clr-control-container clr-error">-->
+      <!--            <div class="clr-file-wrapper">-->
+      <!--              <input type="file" id="disabled-default" placeholder="Enter value here"/>-->
+      <!--            </div>-->
+      <!--          </div>-->
+      <!--        </div>-->
+      <!--        <div class="clr-col-4"></div>-->
+      <!--      </div>-->
+
+
+      <!--      <div class="clr-row">-->
+      <!--        <div class="clr-col-2"></div>-->
+      <!--        <div class="clr-col-8">-->
+      <!--          <clr-select-container>-->
+      <!--            <label><clr-icon shape="building"></clr-icon></label>-->
+      <!--            <select clrSelect name="options" formControlName="instituteId" required>-->
+      <!--              <option *ngFor="let institute of institutes" [value]="institute.id">-->
+      <!--                {{institute.name}}-->
+      <!--              </option>-->
+      <!--            </select>-->
+      <!--            <clr-control-error>{{'common.required' | translate}}</clr-control-error>-->
+      <!--          </clr-select-container>-->
+      <!--        </div>-->
+      <!--        <div class="clr-col-2"></div>-->
+      <!--      </div>-->
+
+      <!--      <div class="clr-row">-->
+      <!--        <div class="clr-col-2"></div>-->
+      <!--        <div class="clr-col-8">-->
+      <!--          <clr-date-container>-->
+      <!--            <label>-->
+      <!--              <clr-icon shape="calendar"></clr-icon>-->
+      <!--            </label>-->
+      <!--            <input type="date" clrDate name="demo" formControlName="expirationDateStart">-->
+      <!--          </clr-date-container>-->
+      <!--        </div>-->
+      <!--        <div class="clr-col-2"></div>-->
+      <!--      </div>-->
+
+      <!--      <div class="clr-row">-->
+      <!--        <div class="clr-col-2"></div>-->
+      <!--        <div class="clr-col-8">-->
+      <!--          <clr-date-container>-->
+      <!--            <label>-->
+      <!--              <clr-icon shape="calendar"></clr-icon>-->
+      <!--            </label>-->
+      <!--            <input type="date" clrDate name="demo" formControlName="expirationDateEnd">-->
+      <!--          </clr-date-container>-->
+      <!--        </div>-->
+      <!--        <div class="clr-col-2"></div>-->
+      <!--      </div>-->
+    </form>
+  </div>
+  <div class="modal-footer">
+    <div class="btn-group">
+      <button [clrLoading]="validateBtnState" type="submit" form="activationKeyForm"
+              class="btn btn-primary" [disabled]="documentForm.invalid"
+              (click)="onSubmit()">
+        {{'add-edit-dialog.save' | translate}}</button>
+      <button class="btn btn-secondary-outline"
+              (click)="displayDialog = false">{{'add-edit-dialog.cancel' | translate}} </button>
+    </div>
+  </div>
+</clr-modal>

@@ -37,17 +37,8 @@ export class AddEditDialogCollegesComponent implements OnInit {
 
   ngOnInit() {
     this.blockUI = true;
-    this.prepareForm();
     this.loadAvailableColleges();
-  }
-
- private prepareForm(): void {
-    this.collegeForm = this.formBuilder.group({
-      token: new FormControl({value: this.tokenService.generateToken(), disabled: true},
-        Validators.required),
-      numberOfUses: new FormControl({value: 1, disabled: true}, Validators.required),
-      collegeId: new FormControl({value: null, disabled: false}, Validators.required)
-    });
+    this.prepareForm(this.college);
   }
 
   private loadAvailableColleges() {
@@ -59,7 +50,7 @@ export class AddEditDialogCollegesComponent implements OnInit {
 
   private onSuccessLoadAvailableColleges(body) {
     this.availableColleges = [];
-    body.forEach( college =>
+    body.forEach(college =>
       this.availableColleges.push(college)
     );
     this.blockUI = false;
@@ -73,26 +64,45 @@ export class AddEditDialogCollegesComponent implements OnInit {
     this.blockUI = true;
     this.dialogTitle = this.translateService.instant('colleges.dialog.titleNew');
     this.displayDialog = true;
+    this.prepareForm(null);
   }
 
   public showEditCollegeDialog(id: number) {
     this.blockUI = true;
     this.dialogTitle = this.translateService.instant('colleges.dialog.titleEdit');
     this.collegeService.getCollegeForId(id).subscribe(
-      (res: HttpResponse<ICollege>) => this.onSuccessLoadCollege(res.body),
+      (res) => this.onSuccessLoadCollege(res),
       (res) => this.onErrorLoadCollege(res)
     );
   }
 
-  private onSuccessLoadCollege(res: ICollege) {
+  private onSuccessLoadCollege(res) {
     this.college = res;
     this.displayDialog = true;
     this.blockUI = false;
+    this.prepareForm(res);
   }
 
   private onErrorLoadCollege(res: any) {
     console.log(res);
     this.blockUI = false;
+  }
+
+  private prepareForm(college: College): void {
+    console.log(college);
+    this.collegeForm = this.formBuilder.group({
+      collegeId: new FormControl({value: college ? college.id : null, disabled: false}),
+      collegeName: new FormControl({value: college ? college.name : null, disabled: false}, Validators.required),
+      voivodeshipId: new FormControl(),
+      voivodeshipName: new FormControl(),
+      districtId: new FormControl(),
+      districtName: new FormControl(),
+      communityId: new FormControl(),
+      communityName: new FormControl(),
+      // city: new FormControl({value: college ? college.cityName : null, disabled: false}, Validators.required),
+      active: new FormControl({value: college ? college.active : null, disabled: false}),
+      deleted: new FormControl({value: college ? college.removed : null, disabled: false})
+    });
   }
 
   public onSubmit() {

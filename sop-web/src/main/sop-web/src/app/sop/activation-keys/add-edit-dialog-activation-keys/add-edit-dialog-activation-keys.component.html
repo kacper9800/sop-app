@@ -22,7 +22,7 @@
         <div class="clr-col-8">
           <clr-input-container>
             <label><clr-icon shape="accessibility-2"></clr-icon></label>
-            <input type="text" clrInput formControlName="numberOfUses"/>
+            <input type="text" clrInput formControlName="numberOfUses" [placeholder]="'common.amountOfUses' | translate"/>
             <clr-control-error>{{'common.required' | translate}}</clr-control-error>
           </clr-input-container>
         </div>
@@ -36,7 +36,8 @@
             <label>
               <clr-icon shape="calendar"></clr-icon>
             </label>
-            <input type="date" clrDate name="demo" formControlName="expirationDateStart">
+            <input type="date" clrDate name="demo" formControlName="expirationDateStart"
+                   [placeholder]="'activationKeys.tableColumns.expirationDateStart' | translate">
           </clr-date-container>
         </div>
         <div class="clr-col-2"></div>
@@ -49,8 +50,28 @@
             <label>
               <clr-icon shape="calendar"></clr-icon>
             </label>
-            <input type="date" clrDate name="demo" formControlName="expirationDateEnd">
+            <input type="date" clrDate name="demo" formControlName="expirationDateEnd"
+                   [placeholder]="'activationKeys.tableColumns.expirationDateEnd' | translate">
           </clr-date-container>
+        </div>
+        <div class="clr-col-2"></div>
+      </div>
+
+      <div class="clr-row">
+        <div class="clr-col-2"></div>
+        <div class="clr-col-8">
+          <clr-select-container>
+            <label>
+              <clr-icon shape="two-way-arrows"></clr-icon>
+            </label>
+            <select clrSelect id="select-role" class="clr-select" formControlName="role">
+              <option *ngFor="let role of roles" [value]="role.value">
+                {{'roles.' + role.name.toString() | translate }}</option>
+            </select>
+            <clr-control-error>{{'common.required' | translate}}</clr-control-error>
+            <clr-icon *ngIf="!activationKeyForm.get('level').value"
+                      class="clr-validate-icon" shape="exclamation-circle"></clr-icon>
+          </clr-select-container>
         </div>
         <div class="clr-col-2"></div>
       </div>

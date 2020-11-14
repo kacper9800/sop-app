@@ -1,7 +1,7 @@
 <h1 style="text-align: center">{{'directions.header' | translate}}</h1>
 <!--<h4 style="text-align: center">{{'interns.secondHeader' | translate}}</h4>-->
 
-<clr-datagrid [(clrDgSelected)]="selectedDirections" [clrDgLoading]="blockUI" >
+<clr-datagrid [(clrDgSelected)]="selectedDirections" [clrDgLoading]="blockUI" style="height: 75%;">
   <clr-dg-action-bar>
     <div class="btn-group">
       <button type="button" class="btn btn-sm btn-primary"
@@ -52,11 +52,13 @@
     </clr-dg-cell>
     <clr-dg-cell>
       <div class="btn-group">
-        <button *ngIf="isSuperAdmin || isAdmin" type="button" class="btn btn-sm btn-secondary" (click)="showEditDialog(direction.id)">
+        <button *ngIf="isSuperAdmin || isAdmin" type="button" class="btn btn-sm btn-secondary"
+                (click)="showEditDialog(direction.id)">
           <clr-icon shape="pencil"></clr-icon>
           {{'common.crud.edit' | translate }}
         </button>
-        <button *ngIf="isSuperAdmin || isAdmin" type="button" class="btn btn-sm btn-danger" (click)="showConfirmDeleteDialog()">
+        <button *ngIf="isSuperAdmin || isAdmin" type="button" class="btn btn-sm btn-danger"
+                (click)="showConfirmDeleteDialog()">
           <clr-icon shape="trash"></clr-icon>
           {{'common.crud.delete' | translate }}
         </button>
