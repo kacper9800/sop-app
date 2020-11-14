@@ -52,6 +52,7 @@
     "department": "Department ",
     "departmentName": "Department name",
     "companyName": "Company name",
+    "directionName": "Study direction",
     "of": "of",
     "copyToClipboard": "Copy key",
     "amountOfUses": "Amount of uses",
@@ -64,7 +65,13 @@
     "size": "Size",
     "status": "Status",
     "accept": "Accept",
-    "date": "Date"
+    "date": "Date",
+    "sex": {
+      "chooseSexType": "Choose sex",
+      "MALE": "Male",
+      "FEMALE": "Female",
+      "OTHER": "Other"
+    }
   },
   "header": {
     "SOP": "Internship service system",
@@ -307,6 +314,44 @@
     "dialog": {
       "titleNew": "Adding new study direction",
       "titleEdit": "Editing study direction"
+    }
+  },
+  "roles": {
+    "chooseRole": "Choose role",
+    "ROLE_ADMIN": "College admin",
+    "ROLE_MODERATOR": "Internship moderator",
+    "ROLE_SUPERVISER": "Internship supervise",
+    "ROLE_STUDENT": "Student"
+  },
+  "documents": {
+    "header": "Documents",
+    "CRUD": {
+      "addDocument": "Add document"
+    },
+    "dialog": {
+      "titleNew": "Adding new document",
+      "titleEdit": "Editing document"
+    },
+    "name": "Document name",
+    "description": "Description",
+    "size": "Size",
+    "createDate": "Create date",
+    "editDate": "Edit date",
+    "statusName": "Status",
+    "documentsPerPage": "Documents per page",
+    "documents": "documents"
+  },
+  "logbooks": {
+    "header": "Internship logbooks",
+    "notFound": "Not found any logbooks!",
+    "logbooksPerPage": "Logbooks per page",
+    "logbooks": "logbooks",
+    "dialog": {
+      "titleNew": "Adding new logbook",
+      "titleEdit": "Editing logBook"
+    },
+    "CRUD": {
+      "addLogbook": "Add logbook"
     }
   }
 }
