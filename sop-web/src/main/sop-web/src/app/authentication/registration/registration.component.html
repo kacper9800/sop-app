@@ -13,7 +13,7 @@
             <label>
               <clr-icon shape="key"></clr-icon>
             </label>
-            <input clrInput type="password" formControlName="token"
+            <input clrInput formControlName="token" [size]="35"
                    placeholder="{{'registration.tokenLabel' | translate}}"/>
           </clr-input-container>
         </div>
@@ -53,13 +53,14 @@
       <div class="clr-row">
         <div class="clr-col-4"></div>
         <div class="clr-col-4">
-          <clr-input-container>
+          <clr-date-container>
             <label>
               <clr-icon shape="calendar"></clr-icon>
             </label>
-            <input clrInput formControlName="birthDate"
-                   placeholder="{{'registration.birthDateLabel' | translate}}"/>
-          </clr-input-container>
+            <input type="date" clrDate name="demo"
+                   placeholder="{{'registration.birthDateLabel' | translate}}"
+                   formControlName="birthDate"/>
+          </clr-date-container>
         </div>
         <div class="clr-col-4"></div>
       </div>
@@ -71,7 +72,7 @@
             <label>
               <clr-icon shape="envelope"></clr-icon>
             </label>
-            <input clrInput formControlName="username"
+            <input clrInput formControlName="email"
                    placeholder="{{'registration.emailLabel' | translate}}"/>
           </clr-input-container>
         </div>
@@ -81,7 +82,7 @@
       <div class="clr-row">
         <div class="clr-col-4"></div>
         <div class="clr-col-4">
-          <clr-input-container>
+          <clr-select-container>
             <label>
               <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px"
                    width="16" height="16"
@@ -99,26 +100,35 @@
                 </g>
               </svg>
             </label>
-            <input clrInput formControlName="sex"
-                   placeholder="{{'registration.sexLabel' | translate}}"/>
-          </clr-input-container>
+            <select clrSelect id="select-sex" class="clr-select"
+                    formControlName="sex">
+              <option *ngFor="let sexType of sexTypes" [value]="sexType.value">
+                {{'common.sex.' + sexType.label.toString() | translate}}
+              </option>
+            </select>
+            <clr-control-error>{{'common.required' | translate}}</clr-control-error>
+            <clr-icon *ngIf="!registrationForm.get('sex').value"
+                      class="clr-validate-icon" shape="exclamation-circle"></clr-icon>
+          </clr-select-container>
         </div>
         <div class="clr-col-4"></div>
       </div>
 
-      <div class="clr-row">
-        <div class="clr-col-4"></div>
-        <div class="clr-col-4">
-          <clr-input-container>
-            <label>
-              <clr-icon shape="certificate"></clr-icon>
-            </label>
-            <input clrInput formControlName="academicDegree"
-                   placeholder="{{'registration.academicDegreeLabel' | translate}}"/>
-          </clr-input-container>
-        </div>
-        <div class="clr-col-4"></div>
-      </div>
+<!--      <div class="clr-row">-->
+<!--        <div class="clr-col-4"></div>-->
+<!--        <div class="clr-col-4">-->
+<!--          <clr-select-container>-->
+<!--            <label><clr-icon shape="certificate"></clr-icon></label>-->
+<!--            <select clrSelect name="options" formControlName="academicDegree" required>-->
+<!--              <option *ngFor="let academicDegree of academicDegrees" [value]="academicDegree.value">-->
+<!--                {{'directions.' + academicDegree.label.toString() | translate}}-->
+<!--              </option>-->
+<!--            </select>-->
+<!--            <clr-control-error>{{'common.required' | translate}}</clr-control-error>-->
+<!--          </clr-select-container>-->
+<!--        </div>-->
+<!--        <div class="clr-col-4"></div>-->
+<!--      </div>-->
 
       <div class="clr-row">
         <div class="clr-col-4"></div>
@@ -141,17 +151,16 @@
             <label>
               <clr-icon shape="refresh"></clr-icon>
             </label>
-            <input clrInput type="password" formControlName="password"
+            <input clrInput type="password" formControlName="repeatedPassword"
                    placeholder="{{'registration.passwordRepeatLabel' | translate}}"/>
           </clr-input-container>
         </div>
         <div class="clr-col-4"></div>
       </div>
-
     </form>
   </div>
   <div class="modal-footer">
-    <button type="submit" class="btn btn-primary btn-block"
+    <button type="submit" class="btn btn-primary btn-block" [disabled]="!isPasswordCorrect() && this.registrationForm.invalid"
             (click)="onSubmit()">{{'registration.register' | translate}} </button>
     <button type="submit" class="btn btn-secondary-outline btn-block"
             (click)="displayRegistrationDialog= false">{{'registration.cancelButtonLabel' | translate}} </button>
