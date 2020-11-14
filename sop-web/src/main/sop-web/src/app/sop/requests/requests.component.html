@@ -1,0 +1,97 @@
+<p-toast [baseZIndex]="10000" autoZIndex="true"></p-toast>
+
+<h1 style="text-align: center">{{'requests.header' | translate}}</h1>
+
+<clr-datagrid [(clrDgSelected)]="selectedRequests" [clrDgRowSelection]="true"
+              [clrDgLoading]="blockUI" style="height: 75%;">
+  <clr-dg-action-bar>
+    <div class="btn-group">
+      <button type="button" class="btn btn-sm btn-primary"
+              (click)="showAddNewDialog()">
+        <clr-icon shape="plus"></clr-icon>
+        {{'colleges.CRUD.addCollege' | translate}}
+      </button>
+      <clr-dropdown>
+        <button type="button" class="btn btn-sm btn-secondary" clrDropdownTrigger>
+          {{'common.export.button' | translate}}
+        </button>
+        <clr-dropdown-menu clrPosition="bottom-left" *clrIfOpen>
+          <button type="button" (click)="showExportDialog(true)"
+                  [disabled]="requests.length === 0" clrDropdownItem>
+            {{'common.export.all' | translate}}</button>
+          <button type="button" (click)="showExportDialog(false)"
+                  [disabled]="selectedRequests.length === 0" clrDropdownItem>
+            {{'common.export.selected' | translate}}</button>
+        </clr-dropdown-menu>
+      </clr-dropdown>
+    </div>
+  </clr-dg-action-bar>
+  <clr-dg-column *ngFor="let col of columns">
+    {{col.label | translate}}
+  </clr-dg-column>
+
+  <clr-dg-row *ngFor="let request of requests" [clrDgItem]="request">
+    <clr-dg-cell>{{request.name}}</clr-dg-cell>
+    <clr-dg-cell>
+      <div *ngIf="request.active">
+        <clr-icon shape="check"></clr-icon>
+      </div>
+      <div *ngIf="!request.active">
+        <clr-icon shape="times"></clr-icon>
+      </div>
+    </clr-dg-cell>
+    <clr-dg-cell>
+      <div *ngIf="request.removed">
+        <clr-icon shape="check"></clr-icon>
+      </div>
+      <div *ngIf="!request.removed">
+        <clr-icon shape="times"></clr-icon>
+      </div>
+    </clr-dg-cell>
+    <clr-dg-cell>
+      <div class="btn-group">
+<!--        <button *ngIf="request.active" type="button" class="btn btn-sm btn-danger-outline"-->
+<!--                (click)="activateAction(college)">-->
+<!--          <clr-icon shape="times"></clr-icon>-->
+<!--        </button>-->
+<!--        <button *ngIf="!college.active" type="button" class="btn btn-sm btn-success-outline"-->
+<!--                (click)="activateAction(college)">-->
+<!--          <clr-icon shape="check"></clr-icon>-->
+<!--        </button>-->
+        <button type="button" class="btn btn-sm btn-secondary"
+                (click)="showEditDialog(request.id)">
+          <clr-icon shape="pencil"></clr-icon>
+        </button>
+        <button type="button" class="btn btn-sm btn-danger" (click)="showConfirmDeleteDialog(request.id)">
+          <clr-icon shape="trash"></clr-icon>
+        </button>
+      </div>
+    </clr-dg-cell>
+  </clr-dg-row>
+
+  <clr-dg-placeholder>{{'colleges.notFound' | translate}}</clr-dg-placeholder>
+  <clr-dg-footer>
+    <clr-dg-pagination #pagination [clrDgPageSize]="10">
+      <clr-dg-page-size
+        [clrPageSizeOptions]="[10,20,50,100]">{{'colleges.collegePerPage' | translate}}</clr-dg-page-size>
+      {{pagination.firstItem + 1}} - {{pagination.lastItem
+    + 1}} {{'common.of' | translate}} {{pagination.totalItems}} {{'colleges.colleges' | translate}}
+    </clr-dg-pagination>
+  </clr-dg-footer>
+</clr-datagrid>
+
+<!--<div class="row">-->
+<!--  <div class="clr-col-2"></div>-->
+<!--  <div class="clr-col-4">-->
+<!--    <div class="btn-group btn-primary">-->
+<!--      <button class="btn btn-success" (click)="opened=true">Dodaj klucz</button>-->
+<!--      <button class="btn btn-danger" (click)="opened=true">Usuń klucz</button>-->
+<!--    </div>-->
+<!--  </div>-->
+<!--  <div class="clr-col-2"></div>-->
+<!--</div>-->
+
+<ng-template #addEditDialog></ng-template>
+<ng-template #exportDialog></ng-template>
+<ng-template #confirmDeleteDialog></ng-template>
+
