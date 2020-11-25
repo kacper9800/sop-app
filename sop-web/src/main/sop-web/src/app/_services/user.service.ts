@@ -9,8 +9,8 @@ import {Observable} from 'rxjs';
 import {User} from '../security/user';
 import {TokenStorageService} from './auth/token-storage.service';
 import global from '../../global';
+import {IUserView} from '../_model/user-view.model';
 
-const API_URL = 'http://localhost:8082/api/test/';
 const USERS_API = '/users';
 
 
@@ -23,27 +23,19 @@ export class UserService {
               private token: TokenStorageService) {
   }
 
-  getPublicContent(): Observable<any> {
-    return this.http.get(API_URL + 'all', {responseType: 'text'});
-  }
-
-  getUserBoard(): Observable<any> {
-    return this.http.get(API_URL + 'user', {responseType: 'text'});
-  }
-
-  getModeratorBoard(): Observable<any> {
-    return this.http.get(API_URL + 'mod', {responseType: 'text'});
-  }
-
-  getAdminBoard(): Observable<any> {
-    return this.http.get(API_URL + 'admin', {responseType: 'text'});
-  }
-
   getAllUsers(): Observable<any> {
     return this.http.get<User[]>(global.API + USERS_API);
   }
 
   public changeCollege(selectedCollegeId: any): Observable<HttpResponse<number>> {
     return this.http.get<HttpResponse<number>>(global.API + USERS_API + '/changeCollege/' + selectedCollegeId);
+  }
+
+  public getModeratorsForInstitute(): Observable<HttpResponse<IUserView[]>> {
+    return this.http.get<HttpResponse<IUserView[]>>(global.API + USERS_API + '/institute/moderators');
+  }
+
+  public getAdminsForInstitute(): Observable<HttpResponse<IUserView[]>> {
+    return this.http.get<HttpResponse<IUserView[]>>(global.API + USERS_API + '/institute/admins');
   }
 }

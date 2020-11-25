@@ -9,7 +9,7 @@
       <button type="button" class="btn btn-sm btn-primary"
               (click)="showAddNewDialog()">
         <clr-icon shape="plus"></clr-icon>
-        {{'colleges.CRUD.addCollege' | translate}}
+        {{'requests.CRUD.addRequest' | translate}}
       </button>
       <clr-dropdown>
         <button type="button" class="btn btn-sm btn-secondary" clrDropdownTrigger>
@@ -69,13 +69,13 @@
     </clr-dg-cell>
   </clr-dg-row>
 
-  <clr-dg-placeholder>{{'colleges.notFound' | translate}}</clr-dg-placeholder>
+  <clr-dg-placeholder>{{'requests.notFound' | translate}}</clr-dg-placeholder>
   <clr-dg-footer>
     <clr-dg-pagination #pagination [clrDgPageSize]="10">
       <clr-dg-page-size
-        [clrPageSizeOptions]="[10,20,50,100]">{{'colleges.collegePerPage' | translate}}</clr-dg-page-size>
+        [clrPageSizeOptions]="[10,20,50,100]">{{'requests.requestPerPage' | translate}}</clr-dg-page-size>
       {{pagination.firstItem + 1}} - {{pagination.lastItem
-    + 1}} {{'common.of' | translate}} {{pagination.totalItems}} {{'colleges.colleges' | translate}}
+    + 1}} {{'common.of' | translate}} {{pagination.totalItems}} {{'requests.requests' | translate}}
     </clr-dg-pagination>
   </clr-dg-footer>
 </clr-datagrid>

@@ -18,7 +18,8 @@ import {AddEditDialogRequestsComponent} from './add-edit-dialog-requests/add-edi
 @Component({
   selector: 'app-requests',
   templateUrl: './requests.component.html',
-  styleUrls: ['./requests.component.css']
+  styleUrls: ['./requests.component.css'],
+  providers: [MessageService]
 })
 export class RequestsComponent implements OnInit {
 

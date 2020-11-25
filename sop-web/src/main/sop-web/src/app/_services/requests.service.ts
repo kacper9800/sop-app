@@ -17,4 +17,12 @@ export class RequestsService {
   public getAllRequests(): Observable<HttpResponse<IRequest[]>> {
     return this.http.get<HttpResponse<IRequest[]>>(global.API + API_URL);
   }
+
+  public getRequestForId(id: number) {
+    return this.http.get<HttpResponse<IRequest>>(global.API + API_URL + '/' + id);
+  }
+
+  public createRequest(requestToSave: IRequest) {
+    return this.http.post(global.API + API_URL, requestToSave);
+  }
 }

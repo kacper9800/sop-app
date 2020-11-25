@@ -1,6 +1,7 @@
 export interface IUserView {
   id: number;
   name: string;
+  lastName: string;
   description: string;
   duration: number;
 
@@ -32,6 +33,7 @@ export interface IUserView {
 export class UserView implements IUserView {
   id: number;
   name: string;
+  lastName: string;
   description: string;
   duration: number;
 

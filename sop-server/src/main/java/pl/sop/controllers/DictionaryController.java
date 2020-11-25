@@ -43,4 +43,11 @@ public class DictionaryController {
     return this.dictionaryService.getAllAcademicDegrees();
   }
 
+  @CrossOrigin
+//  @PreAuthorize("hasRole('ROLE_STUDENT')")
+  @RequestMapping(value = "/api/dictionaries/request-types", method = RequestMethod.GET)
+  public ResponseEntity<List<DictionaryDTO>> getAllRequestTypes(Authentication authentication) {
+    return this.dictionaryService.getAllRequestTypes();
+  }
+
 }

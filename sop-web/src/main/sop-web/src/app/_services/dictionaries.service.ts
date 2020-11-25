@@ -7,6 +7,7 @@ import global from '../../global';
 const DICTIONARY_STUDY_MODES = '/dictionaries/study-modes';
 const DICTIONARY_ACADEMIC_DEGREES = '/dictionaries/academic-degrees';
 const DICTIONARY_SEX_TYPES = '/dictionaries/sex-types';
+const DICTIONARY_REQUEST_TYPES = '/dictionaries/request-types';
 
 @Injectable({
   providedIn: 'root'
@@ -16,15 +17,19 @@ export class DictionariesService {
   constructor(private httpClient: HttpClient) {
   }
 
-  public getStudyModes(): Observable<HttpResponse<IDictionary[]>> {
-    return this.httpClient.get<HttpResponse<IDictionary[]>>(global.API + DICTIONARY_STUDY_MODES);
+  public getAcademicDegrees(): Observable<HttpResponse<IDictionary[]>> {
+    return this.httpClient.get<HttpResponse<IDictionary[]>>(global.API + DICTIONARY_ACADEMIC_DEGREES);
   }
 
   public getSexTypes(): Observable<HttpResponse<IDictionary[]>> {
     return this.httpClient.get<HttpResponse<IDictionary[]>>(global.API + DICTIONARY_SEX_TYPES);
   }
 
-  public getAcademicDegrees(): Observable<HttpResponse<IDictionary[]>> {
-    return this.httpClient.get<HttpResponse<IDictionary[]>>(global.API + DICTIONARY_ACADEMIC_DEGREES);
+  public getStudyModes(): Observable<HttpResponse<IDictionary[]>> {
+    return this.httpClient.get<HttpResponse<IDictionary[]>>(global.API + DICTIONARY_STUDY_MODES);
+  }
+
+  public getRequestTypes(): Observable<HttpResponse<IDictionary[]>> {
+    return this.httpClient.get<HttpResponse<IDictionary[]>>(global.API + DICTIONARY_REQUEST_TYPES);
   }
 }

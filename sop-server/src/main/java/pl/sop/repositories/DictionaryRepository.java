@@ -19,6 +19,8 @@ public interface DictionaryRepository extends JpaRepository<Dictionary, Long> {
   @Query(value = "SELECT d FROM Dictionary d WHERE d.dictionaryType = 'ACADEMIC_DEGREE'")
   List<Dictionary> getAllAcademicDegrees();
 
+  @Query(value = "SELECT d FROM Dictionary d WHERE d.dictionaryType = 'REQUEST_TYPE'")
+  List<Dictionary> getAllRequestTypes();
 
   @Query(value = "SELECT d from Dictionary d WHERE d.value = :dictionaryValue")
   Dictionary getByValue(@Param("dictionaryValue") String value);

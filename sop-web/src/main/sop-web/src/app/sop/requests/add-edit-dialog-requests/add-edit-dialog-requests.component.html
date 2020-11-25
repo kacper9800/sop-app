@@ -1,1 +1,118 @@
-<p>add-edit-dialog-requests works!</p>
+<clr-modal [(clrModalOpen)]="displayDialog" [clrModalStaticBackdrop]="false" [clrModalSize]="'m'"
+           [clrModalClosable]="false">
+  <h3 class="modal-title" style="text-align: center!important;">{{dialogTitle}}</h3>
+  <div class="modal-body">
+    <form clrForm [formGroup]="requestForm" id="requestForm">
+      <div class="clr-row">
+        <div class="clr-col-2"></div>
+        <div class="clr-col-8">
+          <clr-select-container>
+            <label>
+              <clr-icon shape="form"></clr-icon>
+            </label>
+            <select clrSelect id="select-requestType" class="clr-select"
+                    formControlName="requestType">
+              <option *ngFor="let requestType of requestTypes" [value]="requestType.value">
+                {{'requests.requestTypes.' + requestType.name.toString() | translate }}</option>
+            </select>
+            <clr-control-error>{{'common.required' | translate}}</clr-control-error>
+            <clr-icon *ngIf="!requestForm.get('requestType').value"
+                      class="clr-validate-icon" shape="exclamation-circle"></clr-icon>
+          </clr-select-container>
+        </div>
+        <div class="clr-col-2"></div>
+      </div>
+
+      <div *ngIf="requestForm.get('requestType').value == 'START_INTERNSHIP'">
+        <div class="clr-row">
+          <div class="clr-col-2"></div>
+          <div class="clr-col-8">
+            <clr-input-container>
+              <label>
+                <clr-icon shape="building"></clr-icon>
+              </label>
+              <input [size]="12" clrInput type="text" formControlName="nip" required
+                     placeholder="{{'companies.nipPlaceholder' | translate}}"/>
+            </clr-input-container>
+          </div>
+          <div class="clr-col-2"></div>
+        </div>
+
+        <div class="clr-row">
+          <div class="clr-col-2"></div>
+          <div class="clr-col-8">
+            <clr-select-container>
+              <label>
+                <clr-icon shape="user"></clr-icon>
+              </label>
+              <select clrSelect id="select-moderators" class="clr-select"
+                      formControlName="moderator">
+                <option *ngFor="let moderator of moderators" [value]="moderator.id">
+                  {{ moderator.name + ' ' + moderator.lastName }}</option>
+              </select>
+              <clr-control-error>{{'common.required' | translate}}</clr-control-error>
+              <clr-icon *ngIf="!requestForm.get('requestType').value"
+                        class="clr-validate-icon" shape="exclamation-circle"></clr-icon>
+            </clr-select-container>
+          </div>
+          <div class="clr-col-2"></div>
+        </div>
+      </div>
+
+
+      <!--      <div class="clr-row">-->
+      <!--        <div class="clr-col-1"></div>-->
+      <!--        <div class="clr-col-10">-->
+      <!--          <clr-input-container>-->
+      <!--            <label>-->
+      <!--              <clr-icon shape="building"></clr-icon>-->
+      <!--            </label>-->
+      <!--            <input [size]="250" clrInput type="text" formControlName="name"-->
+      <!--                   placeholder="{{'common.collegeName' | translate}}"/>-->
+      <!--          </clr-input-container>-->
+      <!--        </div>-->
+      <!--        <div class="clr-col-1"></div>-->
+      <!--      </div>-->
+
+      <!--      <div class="clr-row">-->
+      <!--        <div class="clr-col-2"></div>-->
+      <!--        <div class="clr-col-8">-->
+      <!--          <clr-input-container>-->
+      <!--            <label><clr-icon shape="accessibility-2"></clr-icon></label>-->
+      <!--            <input type="text" clrInput formControlName="numberOfUses"/>-->
+      <!--            <clr-control-error>We need your first name for legal compliance</clr-control-error>-->
+      <!--          </clr-input-container>-->
+      <!--        </div>-->
+      <!--        <div class="clr-col-2"></div>-->
+      <!--      </div>-->
+
+      <!--      <div class="clr-row">-->
+      <!--        <div class="clr-col-2"></div>-->
+      <!--        <div class="clr-col-8">-->
+      <!--          <clr-select-container>-->
+      <!--            <label>-->
+      <!--              <clr-icon shape="building"></clr-icon>-->
+      <!--            </label>-->
+      <!--            <select clrSelect id="select-level" class="clr-select" formControlName="collegeId">-->
+      <!--              <option *ngFor="let college of availableColleges"-->
+      <!--                      [value]="college.id">{{college.name}}</option>-->
+      <!--            </select>-->
+      <!--            <clr-icon *ngIf="collegeForm.get('collegeId').value == null"-->
+      <!--                      class="clr-validate-icon" shape="exclamation-circle"></clr-icon>-->
+      <!--          </clr-select-container>-->
+      <!--        </div>-->
+      <!--        <div class="clr-col-2"></div>-->
+      <!--      </div>-->
+    </form>
+  </div>
+  <div class="modal-footer">
+    <div class="btn-group">
+      <button [clrLoading]="validateBtnState" type="submit" form="activationKeyForm"
+              class="btn btn-primary" [disabled]="requestForm.invalid"
+              (click)="onSubmit()">
+        {{'add-edit-dialog.save' | translate}}</button>
+      <button class="btn btn-secondary-outline"
+              (click)="displayDialog = false">{{'add-edit-dialog.cancel' | translate}} </button>
+    </div>
+  </div>
+</clr-modal>

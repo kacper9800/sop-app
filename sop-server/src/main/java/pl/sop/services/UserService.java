@@ -7,7 +7,6 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
-import liquibase.pro.packaged.E;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -23,6 +22,7 @@ import pl.sop.organizationStructure.College;
 import pl.sop.organizationStructure.CollegeRepository;
 import pl.sop.organizationStructure.DepartmentService;
 import pl.sop.organizationStructure.FacultyService;
+import pl.sop.organizationStructure.Institute;
 import pl.sop.organizationStructure.InstituteService;
 import pl.sop.payload.request.SignUpRequest;
 import pl.sop.payload.response.MessageResponse;
@@ -143,18 +143,20 @@ public class UserService {
   }
 
   private String getNextUsername(String firstName, String lastName) {
-    String username = firstName.substring(0, 3).toLowerCase() + lastName.substring(0, 3).toLowerCase();
+    String username =
+        firstName.substring(0, 3).toLowerCase() + lastName.substring(0, 3).toLowerCase();
     String propsalUsername = username + '1';
 
     List<String> sameUserNames = new ArrayList<>();
     List<Long> numbers = new ArrayList<>();
-    if(userRepository.existsByUsername(propsalUsername)) { // jeśli istnieją inne osoby, które mają takie same username
+    if (userRepository.existsByUsername(
+        propsalUsername)) { // jeśli istnieją inne osoby, które mają takie same username
       sameUserNames = userRepository.findSameUserNames(propsalUsername); // to znajdźmy je!
-      for (String sameUserName: sameUserNames) {
+      for (String sameUserName : sameUserNames) {
         char[] chars = sameUserName.toCharArray();
         StringBuilder sb = new StringBuilder();
-        for(char c : chars){
-          if(Character.isDigit(c)){
+        for (char c : chars) {
+          if (Character.isDigit(c)) {
             sb.append(c);
           }
         }
@@ -200,5 +202,23 @@ public class UserService {
     User user = userRepository.findUserById(userId);
     user.setSelectedCollegeId(selectedCollegeId);
     return ResponseEntity.ok(userRepository.save(user));
+  }
+
+  public ResponseEntity<List<UserDTO>> getAllModeratorsForInstitute(Long userId) {
+    User user = userRepository.findUserById(userId);
+    Set<Institute> institutes = user.getInstitutes();
+    List<User> users = new ArrayList<>();
+    if (institutes != null) {
+      for (Institute institute : institutes) {
+        userRepository.findModeratorByInstituteId(institute.getId());
+      }
+    }
+    return null;
+  }
+
+  public ResponseEntity<List<UserDTO>> getAllAdminsForInstitute(Long userId) {
+    User user = userRepository.findUserById(userId);
+    Set<Institute> institutes = user.getInstitutes();
+    return null;
   }
 }

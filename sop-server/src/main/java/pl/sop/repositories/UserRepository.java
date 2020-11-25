@@ -39,4 +39,7 @@ public interface UserRepository extends JpaRepository<User, Long> {
 
   @Query(value = "SELECT u.username from User u where u.username like :newUserName")
   List<String> findSameUserNames(@Param("newUserName")String newUserName);
+
+  @Query(value = "SELECT u FROM User u ")
+  List<User> findModeratorByInstituteId(Long id);
 }

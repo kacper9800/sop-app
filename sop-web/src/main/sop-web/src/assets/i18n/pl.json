@@ -266,7 +266,8 @@
     },
     "tableColumns": {
     },
-    "companies": "firm"
+    "companies": "firm",
+    "nipPlaceholder": "Numer NIP"
   },
   "users": {
     "id": "Identyfikator",
@@ -321,6 +322,7 @@
   "roles": {
     "chooseRole": "Wybierz role",
     "ROLE_ADMIN": "Administrator uczelni",
+    "ROLE_DIRECTOR": "Dyrektor struktury5",
     "ROLE_MODERATOR": "Kierownik praktyk",
     "ROLE_SUPERVISER": "Opiekun praktyk",
     "ROLE_STUDENT": "Student"
@@ -356,6 +358,27 @@
     "CRUD": {
       "addLogbook": "Dodaj dziennik praktyk"
     }
+  },
+  "requests": {
+    "header": "Wnioski o praktyki",
+    "notFound": "Nie znaleziono żadnych wniosków!",
+    "requestsPerPage": "Wniosków na stronie",
+    "requests": "wnioski",
+    "dialog": {
+      "titleNew": "Dodawanie nowego wniosku",
+      "titleEdit": "Edytowanie wniosku"
+    },
+    "CRUD": {
+      "addRequest": "Dodaj wniosek"
+    },
+    "requestTypes": {
+      "chooseRequestType": "Wybierz rodzaj wniosku",
+      "START_INTERNSHIP": "Wniosek o rozpoczęcie praktyk",
+      "AFTER_FIRST_STAGE": "Wniosek po 1 etapie praktyk",
+      "AFTER_SECOND_STAGE": "Wniosek po 2 etapie prakyk",
+      "EXEMPTION": "Wniosek o zwolnienie z praktyk"
+    },
+    "chooseModerator": "Wybierz kierwonika praktyk"
   }
 }
 

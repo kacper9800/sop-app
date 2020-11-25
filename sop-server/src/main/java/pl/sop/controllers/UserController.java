@@ -52,4 +52,27 @@ public class UserController {
     UserDetailsImpl user = (UserDetailsImpl) authentication.getPrincipal();
     return userService.changeCollege(user.getId(), id);
   }
+
+  // Returns for logged user
+  @GetMapping(value = "/api/institute/moderators")
+  public ResponseEntity<List<UserDTO>> getModeratorsForInstitute(Authentication authentication) {
+    UserDetailsImpl user = (UserDetailsImpl) authentication.getPrincipal();
+    Long userId = user.getId();
+    if (userId == null) {
+      return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+    }
+    return userService.getAllModeratorsForInstitute(userId);
+  }
+
+  // Returns for logged user
+  @GetMapping(value = "/api/institute/admins")
+  public ResponseEntity<List<UserDTO>> getAdminsForInstitute(Authentication authentication) {
+    UserDetailsImpl user = (UserDetailsImpl) authentication.getPrincipal();
+    Long userId = user.getId();
+    if (userId == null) {
+      return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+    }
+    return userService.getAllAdminsForInstitute(userId);
+  }
+
 }

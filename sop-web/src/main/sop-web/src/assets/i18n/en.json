@@ -264,7 +264,8 @@
       "addCompany": "Add company"
     },
     "tableColumns": {
-    }
+    },
+    "nipPlaceholder": "NIP number"
   },
   "users": {
     "id": "Identify",
@@ -319,6 +320,7 @@
   "roles": {
     "chooseRole": "Choose role",
     "ROLE_ADMIN": "College admin",
+    "ROLE_DIRECTOR": "Structure director",
     "ROLE_MODERATOR": "Internship moderator",
     "ROLE_SUPERVISER": "Internship supervise",
     "ROLE_STUDENT": "Student"
@@ -348,10 +350,31 @@
     "logbooks": "logbooks",
     "dialog": {
       "titleNew": "Adding new logbook",
-      "titleEdit": "Editing logBook"
+      "titleEdit": "Editing logbook"
     },
     "CRUD": {
       "addLogbook": "Add logbook"
     }
+  },
+  "requests": {
+    "header": "Requests",
+    "notFound": "Not found any requests!",
+    "requestsPerPage": "Requests per page",
+    "requests": "requests",
+    "dialog": {
+      "titleNew": "Adding new request",
+      "titleEdit": "Editing request"
+    },
+    "CRUD": {
+      "addLogbook": "Add request"
+    },
+    "requestTypes": {
+      "chooseRequestType": "Choose request type",
+      "START_INTERNSHIP": "Application to start the internship",
+      "AFTER_FIRST_STAGE": "Application after 1 stage",
+      "AFTER_SECOND_STAGE": "Application after 2 stage",
+      "EXEMPTION": "Application for exemption from internships"
+    },
+    "chooseModerator": "Choose moderator"
   }
 }
