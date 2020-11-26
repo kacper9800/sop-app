@@ -9,7 +9,7 @@
     <relativePath>../pom.xml</relativePath>
   </parent>
   <modelVersion>4.0.0</modelVersion>
-
+  <description>API dla Systemu Obsługi Praktyk</description>
   <artifactId>sop-server</artifactId>
   <packaging>jar</packaging>
 
