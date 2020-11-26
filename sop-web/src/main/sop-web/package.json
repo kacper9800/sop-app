@@ -3,15 +3,23 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve --proxy-config proxy.conf.json",
+    "heroku-postbuild": "ng build --prod && npm install -g http-server-spa",
+    "start": "http-server-spa dist/sop-web index.html $PORT",
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
-    "e2e": "ng e2e"
+    "e2e": "ng e2e",
+    "postinstall": "ng build --prod --aot"
+  },
+  "engines": {
+    "node": "13.7.0",
+    "npm": "6.14.8"
   },
   "private": true,
   "dependencies": {
     "@angular/animations": "^10.2.2",
+    "@angular/cli": "^10.2.0",
+    "@angular/compiler-cli": "^10.2.2",
     "@angular/cdk": "^10.2.7",
     "@angular/common": "^10.2.2",
     "@angular/compiler": "^10.2.2",
@@ -52,6 +60,7 @@
     "rxjs": "^6.6.3",
     "simplebar": "^5.3.0",
     "tslib": "^1.14.1",
+    "typescript": "^4.0.5",
     "zone.js": "~0.10.2"
   },
   "devDependencies": {

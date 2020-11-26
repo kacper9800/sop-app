@@ -3,6 +3,7 @@ import {HttpClient, HttpResponse} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {ActivationKey, IActivationKey} from '../_model/activation-key.model';
 import global from '../../global';
+import {environment} from '../../environments/environment';
 
 const API_URL = '/activationKeys';
 
@@ -11,8 +12,11 @@ const API_URL = '/activationKeys';
 })
 export class ActivationKeyService {
 
+  baseUrl = environment.baseURL;
+
   constructor(private http: HttpClient) {
   }
+
 
   public getAllActivationKeysForCompany(): Observable<HttpResponse<IActivationKey[]>> {
     return this.http.get<HttpResponse<ActivationKey[]>>(global.API + API_URL);
@@ -35,7 +39,7 @@ export class ActivationKeyService {
   }
 
   public createActivationKey(activationKeyToSave: any): Observable<HttpResponse<boolean>> {
-    return this.http.post<HttpResponse<boolean>>(global.API + API_URL, activationKeyToSave );
+    return this.http.post<HttpResponse<boolean>>(global.API + API_URL, activationKeyToSave);
   }
 
   public deleteActivationKeyForId(id: number): Observable<HttpResponse<boolean>> {
