@@ -16,8 +16,9 @@ import pl.sop.repositories.UserRepository;
 
 @Service
 public class UserDetailsServiceImpl implements UserDetailsService {
+
     @Autowired
-    UserRepository userRepository;
+    public UserRepository userRepository;
 
     @Override
     @Transactional

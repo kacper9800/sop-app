@@ -9,8 +9,8 @@ import org.springframework.stereotype.Repository;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import pl.sop.entities.User;
 
-@CrossOrigin(origins = "*")
 @Repository
+@CrossOrigin(origins = "*")
 public interface UserRepository extends JpaRepository<User, Long> {
 
   @Query(value = "SELECT u FROM User u WHERE u.deleted = FALSE AND u.active = TRUE")
