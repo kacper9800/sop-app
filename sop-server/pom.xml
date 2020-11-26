@@ -9,7 +9,6 @@
     <artifactId>sop</artifactId>
     <groupId>pl.sop</groupId>
     <version>0.0.1-SNAPSHOT</version>
-    <relativePath>../pom.xml</relativePath>
   </parent>
   <properties>
     <skip.integration.tests>false</skip.integration.tests>
