@@ -7,9 +7,10 @@ import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {CollegeRegister} from '../../_model/college-register.model';
-import {UserRegistration} from "../../_model/user-registration.model";
+import {UserRegistration} from '../../_model/user-registration.model';
+import global from '../../../global';
 
-const AUTH_API = 'http://localhost:8082/api/auth/';
+const AUTH_API = '/auth';
 
 const httpOptions = {
   headers: new HttpHeaders({'Content-Type': 'application/json',
@@ -25,14 +26,14 @@ export class AuthService {
   }
 
   public login(credentials): Observable<any> {
-    return this.http.post(AUTH_API + 'signIn', {
+    return this.http.post(global.API + AUTH_API + '/signIn', {
       username: credentials[0],
       password: credentials[1]
     }, httpOptions);
   }
 
   public register(user: UserRegistration): Observable<any> {
-    return this.http.post(AUTH_API + 'signUp', {
+    return this.http.post(global.API + AUTH_API + '/signUp', {
       token: user.token,
       firstName: user.firstName,
       lastName: user.lastName,
@@ -44,7 +45,7 @@ export class AuthService {
   }
 
   public registerCollege(college: CollegeRegister): Observable<any> {
-    return this.http.post(AUTH_API + 'signUpCollege', {
+    return this.http.post(global.API + AUTH_API + '/signUpCollege', {
       activationKey: college.activationKey,
       collegeId: college.collegeId,
       email: college.email,
