@@ -1,1 +1,1 @@
-web: java -jar sop-server/target/sop-server-0.0.1-SNAPSHOT.jar --prod
+web: java -jar -Dspring.profiles.active=prod sop-server/target/sop-server-0.0.1-SNAPSHOT.jar
