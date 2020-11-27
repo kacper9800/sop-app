@@ -13,6 +13,7 @@
   <artifactId>sop</artifactId>
   <packaging>pom</packaging>
   <version>0.0.1-SNAPSHOT</version>
+
   <modules>
     <module>sop-web/src/main/sop-web</module>
     <module>sop-server</module>
@@ -39,4 +40,12 @@
       <url>http://oss.jfrog.org/artifactory/oss-snapshot-local/</url>
     </repository>
   </repositories>
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-maven-plugin</artifactId>
+      </plugin>
+    </plugins>
+  </build>
 </project>
