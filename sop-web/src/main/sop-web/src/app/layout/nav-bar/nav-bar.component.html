@@ -2,7 +2,7 @@
   <div class="content-container">
     <nav class="sidenav" *ngIf="!planner" [clr-nav-level]="1">
       <section class="sidenav-content">
-        <a routerLink="/" class="nav-link">
+        <a routerLink="/app/home" class="nav-link">
           <clr-icon shape="home"></clr-icon>
           {{'navBar.home' | translate}}
         </a>
@@ -45,7 +45,7 @@
         <!--        </section>-->
 
 
-        <a routerLink="" class="nav-link" *ngIf="isSuperAdmin" style="color: red">
+        <a routerLink="/app/home" class="nav-link" *ngIf="isSuperAdmin" style="color: red">
           Administrator systemu
         </a>
         <a routerLink="/app/activation-keys" class="nav-link" *ngIf="isSuperAdmin">
@@ -71,7 +71,7 @@
 
 
         <div class="nav-divider"></div>
-        <a routerLink="" class="nav-link" id="adminRole" *ngIf="isAdmin" style="color: red">
+        <a routerLink="/app/home" class="nav-link" id="adminRole" *ngIf="isAdmin" style="color: red">
           Administrator uczelni
         </a>
         <!--Administrator uczelni-->
@@ -125,7 +125,7 @@
         </a>
 
         <!--Kierownik praktyk-->
-        <a routerLink="" class="nav-link" *ngIf="isModerator" style="color: red">
+        <a routerLink="/app/home" class="nav-link" *ngIf="isModerator" style="color: red">
           Kierownik praktyk
         </a>
         <a routerLink="/app/requests" class="nav-link" *ngIf="isModerator">
@@ -166,7 +166,7 @@
         </a>
 
         <!--        Praktykant-->
-        <a routerLink="" class="nav-link" *ngIf="isStudent || isSuperAdmin" style="color: red">
+        <a routerLink="/app/home" class="nav-link" *ngIf="isStudent || isSuperAdmin" style="color: red">
           Praktykant
         </a>
         <a routerLink="/app/requests" class="nav-link" *ngIf="isStudent || isSuperAdmin">
@@ -186,7 +186,7 @@
           {{'navBar.surveys' | translate}}
         </a>
         <!--        Opiekun PRAKTYK-->
-        <a routerLink="" class="nav-link" *ngIf="isSuperviser || isSuperAdmin" style="color: red">
+        <a routerLink="/app/home" class="nav-link" *ngIf="isSuperviser || isSuperAdmin" style="color: red">
           Opiekun praktyk
         </a>
         <a routerLink="/app/colleges" class="nav-link" *ngIf="isSuperviser || isSuperAdmin">

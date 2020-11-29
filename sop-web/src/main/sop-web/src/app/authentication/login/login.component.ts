@@ -5,6 +5,7 @@ import {MessageService} from 'primeng/api';
 import {ClrLoadingState} from '@clr/angular';
 import {AuthService} from '../../_services/auth/auth.service';
 import {TokenStorageService} from '../../_services/auth/token-storage.service';
+import {Router} from '@angular/router';
 
 
 @Component({
@@ -42,6 +43,7 @@ export class LoginComponent implements OnInit {
   constructor(private authService: AuthService,
               private tokenStorage: TokenStorageService,
               private formBuilder: FormBuilder,
+              private router: Router,
               private translateService: TranslateService,
               private messageService: MessageService) {
     this.prepareForm();
@@ -114,7 +116,10 @@ export class LoginComponent implements OnInit {
   }
 
   public reloadPage(): void {
-    window.location.reload();
+    this.router.navigate(['app/home'])
+    .then(() => {
+      window.location.reload();
+    });
     this.blockUI = false;
   }
 

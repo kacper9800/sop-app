@@ -24,9 +24,11 @@ import {RegistrationConfirmationComponent} from './authentication/registration-c
 import {CanActivateGuard} from './_services/auth/can-activate.guard';
 import {DirectionsComponent} from './sop/directions/directions.component';
 import {RequestsComponent} from './sop/requests/requests.component';
+import {LandingPageComponent} from './landing-page/landing-page.component';
 
 const routes: Routes = [
-  {path: '', component: HomeComponent},
+  {path: '', component: LandingPageComponent},
+  {path: 'app/home', component: HomeComponent, canActivate: [CanActivateGuard]},
   {path: 'app/colleges', component: CollegesComponent, canActivate: [CanActivateGuard]},                     // Lista uczelni
   {path: 'app/companies', component: CompaniesComponent, canActivate: [CanActivateGuard]},                   // Lista firm
   {path: 'app/college-structure', component: CollegeStructureComponent, canActivate: [CanActivateGuard]},    // Struktura uczelni

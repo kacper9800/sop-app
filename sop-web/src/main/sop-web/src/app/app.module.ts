@@ -93,6 +93,7 @@ import {FileUploadModule} from "primeng/fileupload";
 import { FileUploadComponent } from './common/file-upload/file-upload.component';
 import { RequestsComponent } from './sop/requests/requests.component';
 import { AddEditDialogRequestsComponent } from './sop/requests/add-edit-dialog-requests/add-edit-dialog-requests.component';
+import { LandingPageComponent } from './landing-page/landing-page.component';
 
 @NgModule({
   declarations: [
@@ -148,6 +149,7 @@ import { AddEditDialogRequestsComponent } from './sop/requests/add-edit-dialog-r
     FileUploadComponent,
     RequestsComponent,
     AddEditDialogRequestsComponent,
+    LandingPageComponent,
   ],
   imports: [
     BrowserModule,
