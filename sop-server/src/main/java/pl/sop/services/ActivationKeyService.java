@@ -126,7 +126,7 @@ public class ActivationKeyService {
     return ResponseEntity.ok(saveActivationKey(activationKey));
   }
 
-  public ResponseEntity<ActivationKey> createNewActivationKey(ActivationKeyDTO tokenDTO) {
+  public ActivationKey createNewActivationKey(ActivationKeyDTO tokenDTO) {
     ActivationKey activationKey = new ActivationKey();
     activationKey.setValue(tokenDTO.getValue());
     activationKey.setRole(tokenDTO.getRole());
@@ -176,7 +176,7 @@ public class ActivationKeyService {
     activationKey.setEndExpirationDate(tokenDTO.getEndExpirationDate());
     activationKey.setActive(Boolean.TRUE);
     activationKey.setNumberOfUses(tokenDTO.getNumberOfUses());
-    return ResponseEntity.ok(saveActivationKey(activationKey));
+    return saveActivationKey(activationKey);
   }
 
   public ResponseEntity<ActivationKeyDTO> updateActivationKey(ActivationKeyDTO activationKeyDTO) {

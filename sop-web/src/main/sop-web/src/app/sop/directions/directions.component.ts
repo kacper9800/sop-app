@@ -10,14 +10,16 @@ import {UsersService} from '../../_services/users.service';
 import {PrincipalService} from '../../_services/auth/principal.service';
 import {TranslateService} from '@ngx-translate/core';
 import {DirectionsService} from '../../_services/directions.service';
-import {HttpResponse} from '@angular/common/http';
 import {ExportTableComponent} from '../export-table/export-table.component';
 import {AddEditDialogDirectionsComponent} from './add-edit-dialog-directions/add-edit-dialog-directions.component';
+import {ConfirmDeleteDialogComponent} from '../../common/confirm-delete-dialog/confirm-delete-dialog.component';
+import {MessageService} from 'primeng/api';
 
 @Component({
   selector: 'app-directions',
   templateUrl: './directions.component.html',
-  styleUrls: ['./directions.component.css']
+  styleUrls: ['./directions.component.css'],
+  providers: [MessageService]
 })
 export class DirectionsComponent implements OnInit {
   public selectedDirections: Direction[] = [];
@@ -29,6 +31,9 @@ export class DirectionsComponent implements OnInit {
   public addEditDialog: ViewContainerRef;
   @ViewChild('exportDialog', {read: ViewContainerRef, static: true})
   public exportDialog: ViewContainerRef;
+  @ViewChild('confirmDeleteDialog', {read: ViewContainerRef, static: true})
+  public confirmDeleteDialog: ViewContainerRef;
+
   private componentRef: any;
 
   public isAdmin: boolean;
@@ -104,11 +109,23 @@ export class DirectionsComponent implements OnInit {
     );
   }
 
-  showEditDialog(id: any) {
-
+  public showEditDialog(id: number): void {
+    this.addEditDialog.clear();
+    const factory = this.resolver.resolveComponentFactory(AddEditDialogDirectionsComponent);
+    this.componentRef = this.addEditDialog.createComponent(factory);
+    this.componentRef.instance.showEditDirectionDialog(id);
+    this.componentRef.instance.closeDialogWithSaveEmitter.subscribe(() =>
+      this.loadDirections()
+    );
   }
 
-  showConfirmDeleteDialog() {
-
+  public showConfirmDeleteDialog(id: number) {
+    this.confirmDeleteDialog.clear();
+    const factory = this.resolver.resolveComponentFactory(ConfirmDeleteDialogComponent);
+    this.componentRef = this.confirmDeleteDialog.createComponent(factory);
+    this.componentRef.instance.prepareDirectionData(id);
+    this.componentRef.instance.closeDialogWithSaveEmitter.subscribe(() => {
+      this.loadDirections();
+    });
   }
 }

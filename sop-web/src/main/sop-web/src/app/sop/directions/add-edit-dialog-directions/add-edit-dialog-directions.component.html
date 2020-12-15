@@ -95,7 +95,7 @@
   <div class="modal-footer">
     <div class="btn-group">
       <button [clrLoading]="validateBtnState" type="submit" form="activationKeyForm"
-              class="btn btn-primary" [disabled]="directionForm.invalid"
+              class="btn btn-primary" [disabled]="directionForm.invalid || !directionForm.touched"
               (click)="onSubmit()">
         {{'add-edit-dialog.save' | translate}}</button>
       <button class="btn btn-secondary-outline"

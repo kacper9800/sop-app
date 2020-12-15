@@ -49,6 +49,7 @@ export class AddEditDialogDirectionsComponent implements OnInit {
   }
 
   private prepareForm(direction: Direction): void {
+    console.log(direction);
     this.directionForm = this.formBuilder.group({
       name: new FormControl({
         value: direction ? direction.name : null,
@@ -124,22 +125,23 @@ export class AddEditDialogDirectionsComponent implements OnInit {
     this.blockUI = true;
     this.dialogTitle = this.translateService.instant('directions.dialog.titleNew');
     this.displayDialog = true;
-    this.prepareForm(null);
+    this.direction = new Direction();
   }
 
   public showEditDirectionDialog(id: number) {
     this.blockUI = true;
-    this.dialogTitle = this.translateService.instant('colleges.dialog.titleEdit');
     this.directionsService.getDirectionForId(id).subscribe(
-      (res: HttpResponse<IDirection>) => this.onSuccessLoadDirection(res.body),
+      (res: IDirection) => this.onSuccessLoadDirection(res),
       (res) => this.onErrorLoadDirection(res)
     );
   }
 
   private onSuccessLoadDirection(res: IDirection) {
     this.direction = res;
+    this.dialogTitle = this.translateService.instant('colleges.dialog.titleEdit');
     this.displayDialog = true;
     this.blockUI = false;
+    this.prepareForm(this.direction);
   }
 
   private onErrorLoadDirection(res: any) {

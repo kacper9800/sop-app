@@ -94,6 +94,8 @@ import { FileUploadComponent } from './common/file-upload/file-upload.component'
 import { RequestsComponent } from './sop/requests/requests.component';
 import { AddEditDialogRequestsComponent } from './sop/requests/add-edit-dialog-requests/add-edit-dialog-requests.component';
 import { LandingPageComponent } from './landing-page/landing-page.component';
+import { AddDialogRequestsComponent } from './sop/requests/add-dialog-requests/add-dialog-requests.component';
+import { ViewDialogRequestsComponent } from './sop/requests/view-dialog-requests/view-dialog-requests.component';
 
 @NgModule({
   declarations: [
@@ -150,6 +152,8 @@ import { LandingPageComponent } from './landing-page/landing-page.component';
     RequestsComponent,
     AddEditDialogRequestsComponent,
     LandingPageComponent,
+    AddDialogRequestsComponent,
+    ViewDialogRequestsComponent,
   ],
   imports: [
     BrowserModule,

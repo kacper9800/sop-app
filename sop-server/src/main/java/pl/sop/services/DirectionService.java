@@ -47,7 +47,7 @@ public class DirectionService {
 //    return ResponseEntity.ok(directionRepository.(collegeId));
 //  }
 
-  public ResponseEntity<DirectionDTO> saveDirection(DirectionDTO directionDTO) {
+  public Direction saveDirection(DirectionDTO directionDTO) {
     Direction direction = new Direction();
     direction.setName(directionDTO.getName());
     direction.setDescription(directionDTO.getDescription());
@@ -61,8 +61,8 @@ public class DirectionService {
     direction.setEndDate(directionDTO.getEndExpirationDate());
     direction.setActive(Boolean.TRUE);
     direction.setDeleted(Boolean.FALSE);
-    this.directionRepository.save(direction);
-    return ResponseEntity.ok(directionDTO);
+    return this.directionRepository.save(direction);
+
   }
 
 

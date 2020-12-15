@@ -82,7 +82,12 @@ export class LoginComponent implements OnInit {
     credentials.push(this.loginForm.get('password').value);
     this.authService.login(credentials).subscribe(
       data => {
-        console.log('success');
+        this.messageService.add({
+          severity: 'success',
+          key: 'loginToast',
+          summary: this.translateService.instant('login.loginSuccess'),
+          detail: this.translateService.instant('login.loginSuccessDetails')
+        });
         this.validateBtnState = ClrLoadingState.SUCCESS;
         this.tokenStorage.saveToken(data.accessToken);
         this.tokenStorage.saveUser(data);
@@ -98,11 +103,11 @@ export class LoginComponent implements OnInit {
         if (err.status === 401) {
           this.messageService.add({
             severity: 'error',
+            key: 'loginToast',
             summary: this.translateService.instant('login.loginError'),
             detail: this.translateService.instant('login.loginErrorDetails')
           });
         }
-        // this.errorMessage = err.error.message;
         this.validateBtnState = ClrLoadingState.ERROR;
         this.delay(3000);
         this.isLoginFailed = true;

@@ -14,6 +14,8 @@ import {ExportTableComponent} from '../export-table/export-table.component';
 import {IRequest, Request} from '../../_model/request.model';
 import {RequestsService} from '../../_services/requests.service';
 import {AddEditDialogRequestsComponent} from './add-edit-dialog-requests/add-edit-dialog-requests.component';
+import {AddDialogRequestsComponent} from './add-dialog-requests/add-dialog-requests.component';
+import {ViewDialogRequestsComponent} from "./view-dialog-requests/view-dialog-requests.component";
 
 @Component({
   selector: 'app-requests',
@@ -34,6 +36,10 @@ export class RequestsComponent implements OnInit {
   public exportDialog: ViewContainerRef;
   @ViewChild('confirmDeleteDialog', {read: ViewContainerRef, static: true})
   public confirmDeleteDialog: ViewContainerRef;
+  @ViewChild('addDialog', {read: ViewContainerRef, static: true})
+  public addDialog: ViewContainerRef;
+  @ViewChild('viewDialog', {read: ViewContainerRef, static: true})
+  public viewDialog: ViewContainerRef;
   private componentRef: any;
 
   constructor(private resolver: ComponentFactoryResolver,
@@ -92,7 +98,7 @@ export class RequestsComponent implements OnInit {
 
   public showAddNewDialog(): void {
     this.addEditDialog.clear();
-    const factory = this.resolver.resolveComponentFactory(AddEditDialogRequestsComponent);
+    const factory = this.resolver.resolveComponentFactory(AddDialogRequestsComponent);
     this.componentRef = this.addEditDialog.createComponent(factory);
     this.componentRef.instance.showNewRequestDialog();
     this.componentRef.instance.closeDialogWithSaveEmitter.subscribe(() =>
@@ -129,6 +135,16 @@ export class RequestsComponent implements OnInit {
     } else {
       this.componentRef.instance.showExportTableDialog(this.selectedRequests);
     }
+    this.componentRef.instance.closeDialogWithSaveEmitter.subscribe(() =>
+      this.loadRequests()
+    );
+  }
+
+  public showViewDialog() {
+    this.viewDialog.clear();
+    const factory = this.resolver.resolveComponentFactory(ViewDialogRequestsComponent);
+    this.componentRef = this.addEditDialog.createComponent(factory);
+    this.componentRef.instance.showRequestDialog();
     this.componentRef.instance.closeDialogWithSaveEmitter.subscribe(() =>
       this.loadRequests()
     );

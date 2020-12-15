@@ -1,0 +1,75 @@
+<clr-modal [(clrModalOpen)]="displayDialog" [clrModalStaticBackdrop]="false" [clrModalSize]="'md'"
+           [clrModalClosable]="false">
+  <h3 class="modal-title" style="text-align: center;">{{dialogTitle}}</h3>
+  <div class="modal-body" style="margin-left: 20px">
+    <ul class="clr-timeline">
+      <li class="clr-timeline-step">
+        <div class="clr-timeline-step-header">{{request.sendRequestDate | date}}</div>
+        <clr-icon shape="success-standard" aria-label="Completed"></clr-icon>
+        <div class="clr-timeline-step-body">
+          <span
+            class="clr-timeline-step-title">{{'requests.process.sendRequest' | translate}}</span>
+          <span
+            class="clr-timeline-step-description">{{'requests.process.sendRequestDescription' | translate}}</span>
+        </div>
+      </li>
+
+      <!--      Moderator-->
+      <li class="clr-timeline-step">
+        <div class="clr-timeline-step-header"
+             *ngIf="request.moderatorDecisionDate">{{request.moderatorDecisionDate | date}}</div>
+        <div class="clr-timeline-step-header" *ngIf="!request.moderatorDecisionDate">
+          Brak decyzji
+        </div>
+        <clr-icon shape="dot-circle" aria-current="true" aria-label="Current" *ngIf="true"></clr-icon>
+        <clr-icon shape="success-standard" aria-label="Completed" *ngIf="request.moderatorDecisionStatus.toString() === 'ACCEPTED'"></clr-icon>
+        <clr-icon shape="success-standard" aria-label="Completed" *ngIf="request.moderatorDecisionStatus.toString() === 'ACCEPTED'"></clr-icon>
+        <div class="clr-timeline-step-body">
+          <span class="clr-timeline-step-title"
+                *ngIf="request.moderatorDecisionFeedback">{{request.moderatorDecisionFeedback}}</span>
+          <span class="clr-timeline-step-description"
+                *ngIf="request.moderatorDecisionFeedback">{{request.moderatorDecisionFeedback}}</span>
+        </div>
+      </li>
+
+      <!--Admin-->
+      <li class="clr-timeline-step">
+        <div class="clr-timeline-step-header" *ngIf="request.adminDecisionDate">{{request.adminDecisionDate | date}}</div>
+        <div class="clr-timeline-step-header" *ngIf="!request.adminDecisionDate">Brak decyzji</div>
+        <clr-icon shape="error-standard" aria-label="Error"></clr-icon>
+        <!--        <clr-spinner clrMedium aria-label="In progress">Fetching data</clr-spinner>-->
+
+        <div class="clr-timeline-step-body">
+          <span class="clr-timeline-step-title">{{request.adminDecisionFeedback}}</span>
+          <span class="clr-timeline-step-description">{{request.adminDecisionFeedback}}</span>
+        </div>
+      </li>
+      <!--     -->
+      <!--      <li class="clr-timeline-step">-->
+      <!--        <div class="clr-timeline-step-header">11:59 am</div>-->
+      <!--        <clr-icon shape="success-standard" aria-label="Completed"></clr-icon>-->
+      <!--        <div class="clr-timeline-step-body">-->
+      <!--          <span class="clr-timeline-step-title">Make KMS trust vCenter</span>-->
+      <!--          <span class="clr-timeline-step-description">Upload it to the KMS to complete the connection. Thirdsentence.</span>-->
+      <!--        </div>-->
+      <!--      </li>-->
+
+      <!--      <li class="clr-timeline-step">-->
+      <!--        <div class="clr-timeline-step-header">11:59 am</div>-->
+      <!--        <clr-icon shape="circle" aria-label="Not started"></clr-icon>-->
+      <!--        <clr-icon shape="error-standard" aria-label="Error"></clr-icon>-->
+      <!--        <div class="clr-timeline-step-body">-->
+      <!--          <span class="clr-timeline-step-title">Connected</span>-->
+      <!--          <span class="clr-timeline-step-description">No. It's not connected.</span>-->
+      <!--        </div>-->
+      <!--      </li>-->
+    </ul>
+
+  </div>
+  <div class="modal-footer">
+    <div class="btn-group">
+      <button class="btn btn-secondary-outline"
+              (click)="displayDialog = false">{{'add-edit-dialog.close' | translate}} </button>
+    </div>
+  </div>
+</clr-modal>

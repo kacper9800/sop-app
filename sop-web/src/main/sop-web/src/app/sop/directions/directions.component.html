@@ -58,7 +58,7 @@
           {{'common.crud.edit' | translate }}
         </button>
         <button *ngIf="isSuperAdmin || isAdmin" type="button" class="btn btn-sm btn-danger"
-                (click)="showConfirmDeleteDialog()">
+                (click)="showConfirmDeleteDialog(direction.id)">
           <clr-icon shape="trash"></clr-icon>
           {{'common.crud.delete' | translate }}
         </button>
@@ -79,5 +79,6 @@
 
 <ng-template #addEditDialog></ng-template>
 <ng-template #exportDialog></ng-template>
+<ng-template #confirmDeleteDialog></ng-template>
 
 

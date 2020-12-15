@@ -13,23 +13,23 @@
       <a class="nav-link nav-text" (click)="showRegistrationForm()" style="cursor: pointer">
         {{'header.register' | translate}}
       </a>
-      <clr-dropdown>
-        <button class="nav-icon" clrDropdownTrigger aria-label="toggle settings menu">
-          <span class="flag-icon flag-icon-pl"></span>
-          <clr-icon shape="caret down"></clr-icon>
-        </button>
-        <clr-dropdown-menu *clrIfOpen>
-          <span class="flag-icon flag-icon-gb"></span>
-        </clr-dropdown-menu>
-      </clr-dropdown>
-    </div>
 
+<!--      Language chooser-->
+<!--      <clr-dropdown>-->
+<!--        <button class="nav-icon" clrDropdownTrigger aria-label="toggle settings menu">-->
+<!--          <span class="flag-icon flag-icon-pl"></span>-->
+<!--          <clr-icon shape="caret down"></clr-icon>-->
+<!--        </button>-->
+<!--        <clr-dropdown-menu *clrIfOpen>-->
+<!--          <span class="flag-icon flag-icon-gb"></span>-->
+<!--        </clr-dropdown-menu>-->
+<!--      </clr-dropdown>-->
+    </div>
     <div class="header-actions" *ngIf="isLoggedIn">
       <a href="javascript://" class="nav-link nav-icon-text">
         <clr-icon shape="user"></clr-icon>
         <span class="nav-text">{{user.username}}</span>
       </a>
-
       <clr-dropdown *ngIf="user.colleges && user.colleges.length > 1">
         <button clrDropdownTrigger aria-label="toggle settings menu">
           <clr-icon style="width: 1.1rem; height: 1.1rem; outline-color: #247bae"
@@ -50,7 +50,6 @@
           </a>
         </clr-dropdown-menu>
       </clr-dropdown>
-
       <clr-dropdown>
         <button clrDropdownTrigger aria-label="toggle settings menu">
           <clr-icon style="width: 1.1rem; height: 1.1rem;" shape="cog"></clr-icon>
@@ -70,36 +69,36 @@
     </div>
   </clr-header>
 </clr-main-container>
-
-<clr-modal [(clrModalOpen)]="aboutDialog" [clrModalClosable]="false">
-  <h3 class="modal-title"></h3>
-  <div class="modal-body">
-    <p>
-      System Obsługi Praktyk <br><br>
-      Autor: Kacper Rzymkiewicz <br>
-      Rok: 2020 <br>
-    </p>
-  </div>
-  <div class="modal-footer">
-    <button type="button" class="btn btn-primary" (click)="aboutDialog = false">
-      OK!
-    </button>
-  </div>
-</clr-modal>
-
-<clr-modal [(clrModalOpen)]="changeCollegeDialog" [clrModalClosable]="false">
-  <h3 class="modal-title">{{'collegeStructure.changeCollege' | translate}}</h3>
-  <div class="modal-body">
-    <p>{{'collegeStructure.changeCollegeQuestion' | translate}}</p>
-  </div>
-  <div class="modal-footer">
-    <button class="btn btn-outline" (click)="changeCollegeDialog = false"
-            type="button">{{'common.confirm.cancel' | translate}}</button>
-    <button class="btn btn-primary" (click)="changeCollege()"
-            type="button">{{'common.confirm.confirm' | translate}}</button>
-  </div>
-</clr-modal>
-
+<!---->
+<!--<clr-modal [(clrModalOpen)]="aboutDialog" [clrModalClosable]="false">-->
+<!--  <h3 class="modal-title"></h3>-->
+<!--  <div class="modal-body">-->
+<!--    <p>-->
+<!--      System Obsługi Praktyk <br><br>-->
+<!--      Autor: Kacper Rzymkiewicz <br>-->
+<!--      Rok: 2020 <br>-->
+<!--    </p>-->
+<!--  </div>-->
+<!--  <div class="modal-footer">-->
+<!--    <button type="button" class="btn btn-primary" (click)="aboutDialog = false">-->
+<!--      OK!-->
+<!--    </button>-->
+<!--  </div>-->
+<!--</clr-modal>-->
+<!---->
+<!--<clr-modal [(clrModalOpen)]="changeCollegeDialog" [clrModalClosable]="false">-->
+<!--  <h3 class="modal-title">{{'collegeStructure.changeCollege' | translate}}</h3>-->
+<!--  <div class="modal-body">-->
+<!--    <p>{{'collegeStructure.changeCollegeQuestion' | translate}}</p>-->
+<!--  </div>-->
+<!--  <div class="modal-footer">-->
+<!--    <button class="btn btn-outline" (click)="changeCollegeDialog = false"-->
+<!--            type="button">{{'common.confirm.cancel' | translate}}</button>-->
+<!--    <button class="btn btn-primary" (click)="changeCollege()"-->
+<!--            type="button">{{'common.confirm.confirm' | translate}}</button>-->
+<!--  </div>-->
+<!--</clr-modal>-->
+<!---->
 <ng-template #loginForm></ng-template>
 <p-toast [baseZIndex]="10000" autoZIndex="true"></p-toast>
 

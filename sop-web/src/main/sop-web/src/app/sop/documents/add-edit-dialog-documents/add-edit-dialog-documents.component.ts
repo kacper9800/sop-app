@@ -118,7 +118,7 @@ export class AddEditDialogDocumentsComponent implements OnInit {
     this.blockUI = true;
     this.dialogTitle = this.translateService.instant('colleges.dialog.titleEdit');
     this.directionsService.getDirectionForId(id).subscribe(
-      (res: HttpResponse<IDirection>) => this.onSuccessLoadDirection(res.body),
+      (res: IDirection) => this.onSuccessLoadDirection(res),
       (res) => this.onErrorLoadDirection(res)
     );
   }

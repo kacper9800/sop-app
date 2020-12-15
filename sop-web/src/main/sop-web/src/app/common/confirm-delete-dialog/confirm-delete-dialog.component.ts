@@ -4,6 +4,7 @@ import {MessageService} from 'primeng/api';
 import {CollegeService} from '../../_services/organization-structure/college.service';
 import {CollegeStructureEnum} from '../../_enums/college-structure.enum';
 import {ActivationKeyService} from '../../_services/activation-key.service';
+import {DirectionsService} from "../../_services/directions.service";
 
 @Component({
   selector: 'app-confirm-delete-dialog',
@@ -23,11 +24,19 @@ export class ConfirmDeleteDialogComponent implements OnInit {
   constructor(private plannerService: PlannerService,
               private messageService: MessageService,
               private collegeService: CollegeService,
+              private directionService: DirectionsService,
               private activationKeyService: ActivationKeyService) {
   }
 
   ngOnInit() {
   }
+
+  public prepareActivationKeyData(id: number): void {
+    this.isVisible = true;
+    this.id = id;
+    this.componentName = 'activationKeys';
+  }
+
   public prepareCollegeData(id: number): void {
     this.isVisible = true;
     this.id = id;
@@ -41,21 +50,24 @@ export class ConfirmDeleteDialogComponent implements OnInit {
     this.collegeStructureLevel = collegeStructureLevel;
   }
 
-  public prepareActivationKeyData(id: number): void {
+  public prepareDirectionData(id: number): void {
     this.isVisible = true;
     this.id = id;
-    this.componentName = 'activationKeys';
+    this.componentName = 'directions';
   }
 
+
   public delete() {
-    if (this.componentName === 'collegeStructure') {
-      this.deleteCollegeStructure();
+    if (this.componentName === 'activationKeys') {
+      this.deleteActivationKey();
     } else if (this.componentName === 'events') {
       this.deleteEvent();
-    } else if (this.componentName === 'activationKeys') {
-      this.deleteActivationKey();
+    } else if (this.componentName === 'collegeStructure') {
+      this.deleteCollegeStructure();
     } else if (this.componentName === 'colleges') {
       this.deleteCollege();
+    } else if (this.componentName === 'directions') {
+      this.deleteDirection();
     }
   }
 
@@ -101,6 +113,15 @@ export class ConfirmDeleteDialogComponent implements OnInit {
   private deleteCollege() {
     if (this.id != null) {
       this.collegeService.deleteCollege(this.id).subscribe(
+        () => this.onSuccessDelete(),
+        () => this.onErrorDelete()
+      );
+    }
+  }
+
+  private deleteDirection() {
+    if (this.id != null) {
+      this.directionService.deleteDirection(this.id).subscribe(
         () => this.onSuccessDelete(),
         () => this.onErrorDelete()
       );

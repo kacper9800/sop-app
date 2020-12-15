@@ -156,6 +156,7 @@
     "stopDate": "Koniec wydarzenia",
     "save": "Zapisz",
     "cancel": "Odrzuć",
+    "close": "Zamknij",
     "allDay": "Cały dzień",
     "repeat": "Powtarza się"
   },
@@ -364,9 +365,32 @@
     "notFound": "Nie znaleziono żadnych wniosków!",
     "requestsPerPage": "Wniosków na stronie",
     "requests": "wnioski",
+    "process": {
+      "sendRequest": "Przesłano wniosek.",
+      "sendRequestDescription": "Wniosek został przyjęty przez system.",
+      "success": "Rozpatrzono pomyślnie",
+      "error": "Odrzucono"
+    },
     "dialog": {
       "titleNew": "Dodawanie nowego wniosku",
-      "titleEdit": "Edytowanie wniosku"
+      "titleView": "Podgląd statusu wniosku",
+      "titleEdit": "Edytowanie wniosku",
+      "buttons": {
+        "cancel": "Anuluj",
+        "previous": "Powrót",
+        "next": "Dalej",
+        "finish": "Zatwierdź"
+      },
+      "titles": {
+        "chooseRequestTypeTitle": "Wybór rodzaju tworzonego wniosku",
+        "chooseRequestTypeNav": "Wybór wniosku ",
+        "basicDataTitle": "Dane podstawowe praktykanta",
+        "basicDataNav": "Dane praktykanta",
+        "companyDataTitle": "Dane podstawowe firmy",
+        "companyDataNav": "Dane firmy",
+        "summaryTitle": "Podsumowanie",
+        "summaryNav": "Podsumowanie"
+      }
     },
     "CRUD": {
       "addRequest": "Dodaj wniosek"

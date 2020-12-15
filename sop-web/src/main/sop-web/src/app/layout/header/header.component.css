@@ -1,5 +1,6 @@
 .mainContainer {
   max-height: 7%;
+  height: 5vh;
 }
 #nav {
   text-align: center;

@@ -11,12 +11,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-import pl.sop.dto.ActivationKeyDTO;
 import pl.sop.dto.DirectionDTO;
 import pl.sop.security.services.UserDetailsImpl;
-import pl.sop.services.ActivationKeyService;
 import pl.sop.services.DirectionService;
 
 @RestController
@@ -28,7 +25,8 @@ public class DirectionController {
   @CrossOrigin
   @PreAuthorize("hasRole('ROLE_SUPERADMIN') or hasRole('ROLE_ADMIN') or hasRole('ROLE_MODERATOR')")
   @RequestMapping(value = "/api/directions/{id}", method = RequestMethod.GET)
-  public ResponseEntity<DirectionDTO> getDirectionById(Authentication authentication, @PathVariable("id") Long id) {
+  public ResponseEntity<DirectionDTO> getDirectionById(Authentication authentication,
+      @PathVariable("id") Long id) {
     if (id == null) {
       return ResponseEntity.notFound().build();
     }
@@ -50,22 +48,36 @@ public class DirectionController {
   @CrossOrigin
   @PreAuthorize("hasRole('ROLE_SUPERADMIN') or hasRole('ROLE_ADMIN')")
   @RequestMapping(value = "/api/directions", method = RequestMethod.POST)
-  public ResponseEntity<DirectionDTO> createDirection(Authentication authentication, @RequestBody DirectionDTO directionDTO) {
+  public ResponseEntity createDirection(Authentication authentication,
+      @RequestBody DirectionDTO directionDTO) {
     if (directionDTO == null) {
       return new ResponseEntity<>(HttpStatus.NOT_ACCEPTABLE);
     }
-    return this.directionService.saveDirection(directionDTO);
+    return ResponseEntity.status(HttpStatus.CREATED).body(this.directionService.saveDirection(directionDTO));
   }
 
   @CrossOrigin
   @PreAuthorize("hasRole('ROLE_SUPERADMIN') or hasRole('ROLE_ADMIN')")
+  @RequestMapping(value = "/api/directions/{id}", method = RequestMethod.PUT)
+  public ResponseEntity<DirectionDTO> updateDirection(Authentication authentication, @PathVariable("id") Long id) {
+    if (id == null) {
+      return ResponseEntity.badRequest().build();
+    }
+    return this.directionService.deleteDirection(id);
+  }
+
+
+  @CrossOrigin
+  @PreAuthorize("hasRole('ROLE_SUPERADMIN') or hasRole('ROLE_ADMIN')")
   @RequestMapping(value = "/api/directions/{id}", method = RequestMethod.DELETE)
-  public ResponseEntity<DirectionDTO> deleteDirection(Authentication authentication, @PathVariable("id") Long id) {
+  public ResponseEntity<DirectionDTO> deleteDirection(Authentication authentication,
+      @PathVariable("id") Long id) {
     if (id == null) {
       return ResponseEntity.notFound().build();
     }
     return this.directionService.deleteDirection(id);
   }
+
 
 
 }

@@ -10,22 +10,26 @@ import global from '../../global';
 })
 export class DirectionsService {
 
-  private DIRECTIONS_ENDPOINT = 'api/directions';
-  private COLLEGE_DIRECTIONS_ENDPOINT = 'api/college-directions';
+  private DIRECTIONS_ENDPOINT = '/directions';
+  private COLLEGE_DIRECTIONS_ENDPOINT = '/college-directions';
 
 
   constructor(private http: HttpClient, private token: TokenStorageService) {
   }
 
-  public getDirectionForId(id: number): Observable<HttpResponse<IDirection>> {
-    return this.http.get<HttpResponse<IDirection>>(global.API + this.DIRECTIONS_ENDPOINT + '/' + id);
+  public getDirectionForId(id: number): Observable<IDirection> {
+    return this.http.get<IDirection>(global.API + this.DIRECTIONS_ENDPOINT + '/' + id);
   }
 
   public getAllDirections(): Observable<HttpResponse<IDirection[]>> {
-    return this.http.get<HttpResponse<IDirection[]> >(this.COLLEGE_DIRECTIONS_ENDPOINT);
+    return this.http.get<HttpResponse<IDirection[]>>(global.API + this.COLLEGE_DIRECTIONS_ENDPOINT);
   }
 
   public createDirection(directionToSave: Direction) {
-    return this.http.post(this.DIRECTIONS_ENDPOINT, directionToSave);
+    return this.http.post(global.API + this.DIRECTIONS_ENDPOINT, directionToSave);
+  }
+
+  public deleteDirection(id: number) {
+    return this.http.delete(global.API + this.DIRECTIONS_ENDPOINT + '/' + id);
   }
 }

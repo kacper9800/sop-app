@@ -69,7 +69,7 @@ public class CollegeController {
   @PreAuthorize("hasRole('ROLE_SUPERADMIN')")
   public ResponseEntity createNewCollege(@RequestBody CollegeDTO collegeDTO) {
     this.collegeService.createNewCollege(collegeDTO);
-    return ResponseEntity.ok(HttpStatus.OK);
+    return ResponseEntity.ok(HttpStatus.CREATED);
   }
 
   @PutMapping(value = "/api/colleges/update")

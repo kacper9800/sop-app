@@ -4,10 +4,10 @@
       <b>Przyśpiesz</b> procesy.
     </div>
     <div>
-      Śledź <b>postęp</b>.
+      <b>Śledź</b> postęp.
     </div>
     <div>
-      Zyskaj <b>czas.</b>
+      <b>Zyskaj</b> czas.
     </div>
   </div>
   <div id="sectionOneFooter">
@@ -27,13 +27,18 @@
 </section>
 
 <section #sectionTwo id="sectionTwo">
-  <div class="sectionTwoContent">
-    <b>System Obsługi Praktyk Studenckich</b>
+  <div id="sectionTwoContent">
+    <div>
+      <b>System Obsługi Praktyk Studenckich</b>
+    </div>
+    <div>
+     Zarządzanie strukturą uczelni<br>
+    </div>
 
   </div>
   <div id="sectionTwoFooter">
     <div class="container">
-      <div class="content" (click)="scroll(sectionTwo)">
+      <div class="content" (click)="scroll(sectionThree)">
         <p id="joinUs">Dołącz do nas!</p>
         <svg id="more-white-arrows">
           <polygon class="white-arrow-top" points="37.6,27.9 1.8,1.3 3.3,0 37.6,25.3 71.9,0 73.7,1.3 "/>
@@ -48,6 +53,9 @@
 </section>
 
 <section #sectionThree id="sectionThree">
-
+  <button (click)="showRegisterCollegeForm()" class="college-registration-button">
+    Dołącz uczelnię do systemu
+  </button>
 </section>
 
+<!--<ng-template #collegeRegistrationForm></ng-template>-->

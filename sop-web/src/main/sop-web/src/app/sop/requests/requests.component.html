@@ -24,6 +24,11 @@
             {{'common.export.selected' | translate}}</button>
         </clr-dropdown-menu>
       </clr-dropdown>
+      <button type="button" class="btn btn-sm btn-primary"
+              (click)="showViewDialog()">
+        <clr-icon shape="plus"></clr-icon>
+          Eksperymentalny przycisk
+      </button>
     </div>
   </clr-dg-action-bar>
   <clr-dg-column *ngFor="let col of columns">
@@ -91,7 +96,9 @@
 <!--  <div class="clr-col-2"></div>-->
 <!--</div>-->
 
+<ng-template #addDialog></ng-template>
 <ng-template #addEditDialog></ng-template>
+<ng-template #viewDialog></ng-template>
 <ng-template #exportDialog></ng-template>
 <ng-template #confirmDeleteDialog></ng-template>
 

@@ -73,11 +73,12 @@ public class ActivationKeyController {
   @CrossOrigin
   @PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_SUPERADMIN')")
   @RequestMapping(value = "/api/activationKeys", method = RequestMethod.POST)
-  public ResponseEntity<ActivationKey> createActivationKey(@RequestBody ActivationKeyDTO activationKeyDTO) {
+  public ResponseEntity createActivationKey(@RequestBody ActivationKeyDTO activationKeyDTO) {
     if (activationKeyDTO == null) {
       return ResponseEntity.badRequest().build();
     }
-    return activationKeyService.createNewActivationKey(activationKeyDTO);
+    activationKeyService.createNewActivationKey(activationKeyDTO);
+    return ResponseEntity.ok(HttpStatus.CREATED);
   }
 
   @CrossOrigin
