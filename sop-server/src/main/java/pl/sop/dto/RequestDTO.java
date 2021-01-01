@@ -1,153 +1,115 @@
-package pl.sop.entities;
+package pl.sop.dto;
 
 import java.time.LocalDate;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
-import javax.persistence.FetchType;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
-import org.hibernate.annotations.Fetch;
-import org.hibernate.annotations.FetchMode;
 import pl.sop.enums.ERequestStatus;
-import pl.sop.entities.organizationStructure.College;
-import pl.sop.entities.organizationStructure.Institute;
 
-@Entity
-@Table(name = "DIRECTIONS")
-public class Request extends BasicEntity {
+public class RequestDTO {
 
-  @Column(name = "name")
+  private Long id;
   private String name;
-
-  @Column(name = "description")
   private String description;
 
-  @ManyToOne
-  @JoinColumn(name = "intern_id", nullable = false)
-  private User intern;
+  private Long requestTypeId;
+  private String requestTypeName;
 
-  @ManyToOne(fetch = FetchType.LAZY)
-  @JoinColumn(name = "request_type_id")
-  @Fetch(FetchMode.JOIN)
-  private Dictionary requestType;
-
-  @ManyToOne
-  @JoinColumn(name = "college_id", nullable = false)
-  private College college;
-
-  @ManyToOne
-  @JoinColumn(name = "institute_id", nullable = false)
-  private Institute institute;
+  private Long collegeId;
+  private String collegeName;
+  private Long instituteId;
+  private String instituteName;
+  private Long internId;
+  private String internName;
 
   // Intern data
-  @Column(name = "position")
   private String position;
-
-  @Column(name = "positionDescription")
   private String positionDescription;
-
-  @Column(name = "amountOfHours")
   private Integer amountOfHours;
-
-  @Column(name = "responsibilities")
   private String responsibilities;
 
-  @Column(name = "company_id")
-  private Company company;
+  // Company data
+  private String nip;
+  private String companyName;
+  private String companyDescription;
+  private String departmentName;
 
-  @Column(name = "practice_superviser_name")
+  // Superviser data
   private String practiceSuperviserName;
-
-  @Column(name = "practice_superviser_last_name")
   private String practiceSuperviserLastName;
-
-  @Column(name = "practice_superviser_phone")
   private String practiceSuperviserPhone;
+  private String practiceSuperviserEmail;
 
-  @Column(name = "practice_superviser_email")
-  private String practiceSuperviseEmail;
-
-  @Column(name = "info_agreement")
+  // Agreements
   private Boolean infoAgreement;
-
-  @Column(name = "processing_agreement")
   private Boolean processingAgreement;
 
-  @ManyToOne
-  @JoinColumn(name = "moderator_id", nullable = false)
-  private User moderator;
+  // Receivers
+  private Long moderatorId;
+  private String moderatorName;
 
-  @ManyToOne
-  @JoinColumn(name = "admin_id", nullable = false)
-  private User admin;
+  private Long adminId;
+  private String adminName;
 
-  @Column(name = "actual_request_status")
-  @Enumerated(EnumType.STRING)
+  // Status
   private ERequestStatus actualRequestStatus;
 
-  @Column(name = "send_request_date")
   private LocalDate sendRequestDate;
-
-  @Column(name = "send_request_status")
-  @Enumerated(EnumType.STRING)
   private ERequestStatus sendRequestStatus;
 
-  @Column(name = "moderator_decision_date")
   private LocalDate moderatorDecisionDate;
-
-  @Column(name = "moderator_decision_status")
-  @Enumerated(EnumType.STRING)
   private ERequestStatus moderatorDecisionStatus;
-
-  @Column(name = "moderator_decision_feedback")
   private String moderatorDecisionFeedback;
 
-  @Column(name = "admin_decision_date")
   private LocalDate adminDecisionDate;
-
-  @Column(name = "admin_decision_status")
-  @Enumerated(EnumType.STRING)
   private ERequestStatus adminDecisionStatus;
-
-  @Column(name = "admin_decision_feedback")
   private String adminDecisionFeedback;
 
-  public Request() {
+  private Boolean active;
+  private Boolean removed;
+
+  public RequestDTO() {
   }
 
-  public Request(String name, String description, User intern, Dictionary requestType,
-      College college, Institute institute, String position, String positionDescription,
-      Integer amountOfHours, String responsibilities, Company company,
+  public RequestDTO(Long id, String name, String description, Long requestTypeId,
+      String requestTypeName, Long collegeId, String collegeName, Long instituteId,
+      String instituteName, Long internId, String internName, String position,
+      String positionDescription, Integer amountOfHours, String responsibilities,
+      String nip, String companyName, String companyDescription, String departmentName,
       String practiceSuperviserName, String practiceSuperviserLastName,
-      String practiceSuperviserPhone, String practiceSuperviseEmail, Boolean infoAgreement,
-      Boolean processingAgreement, User moderator, User admin,
-      ERequestStatus actualRequestStatus, LocalDate sendRequestDate,
+      String practiceSuperviserPhone, String practiceSuperviserEmail, Boolean infoAgreement,
+      Boolean processingAgreement, Long moderatorId, String moderatorName, Long adminId,
+      String adminName, ERequestStatus actualRequestStatus, LocalDate sendRequestDate,
       ERequestStatus sendRequestStatus, LocalDate moderatorDecisionDate,
       ERequestStatus moderatorDecisionStatus, String moderatorDecisionFeedback,
       LocalDate adminDecisionDate, ERequestStatus adminDecisionStatus,
-      String adminDecisionFeedback) {
+      String adminDecisionFeedback, Boolean active, Boolean removed) {
+    this.id = id;
     this.name = name;
     this.description = description;
-    this.intern = intern;
-    this.requestType = requestType;
-    this.college = college;
-    this.institute = institute;
+    this.requestTypeId = requestTypeId;
+    this.requestTypeName = requestTypeName;
+    this.collegeId = collegeId;
+    this.collegeName = collegeName;
+    this.instituteId = instituteId;
+    this.instituteName = instituteName;
+    this.internId = internId;
+    this.internName = internName;
     this.position = position;
     this.positionDescription = positionDescription;
     this.amountOfHours = amountOfHours;
     this.responsibilities = responsibilities;
-    this.company = company;
+    this.nip = nip;
+    this.companyName = companyName;
+    this.companyDescription = companyDescription;
+    this.departmentName = departmentName;
     this.practiceSuperviserName = practiceSuperviserName;
     this.practiceSuperviserLastName = practiceSuperviserLastName;
     this.practiceSuperviserPhone = practiceSuperviserPhone;
-    this.practiceSuperviseEmail = practiceSuperviseEmail;
+    this.practiceSuperviserEmail = practiceSuperviserEmail;
     this.infoAgreement = infoAgreement;
     this.processingAgreement = processingAgreement;
-    this.moderator = moderator;
-    this.admin = admin;
+    this.moderatorId = moderatorId;
+    this.moderatorName = moderatorName;
+    this.adminId = adminId;
+    this.adminName = adminName;
     this.actualRequestStatus = actualRequestStatus;
     this.sendRequestDate = sendRequestDate;
     this.sendRequestStatus = sendRequestStatus;
@@ -157,6 +119,16 @@ public class Request extends BasicEntity {
     this.adminDecisionDate = adminDecisionDate;
     this.adminDecisionStatus = adminDecisionStatus;
     this.adminDecisionFeedback = adminDecisionFeedback;
+    this.active = active;
+    this.removed = removed;
+  }
+
+  public Long getId() {
+    return id;
+  }
+
+  public void setId(Long id) {
+    this.id = id;
   }
 
   public String getName() {
@@ -175,36 +147,68 @@ public class Request extends BasicEntity {
     this.description = description;
   }
 
-  public User getIntern() {
-    return intern;
+  public Long getRequestTypeId() {
+    return requestTypeId;
   }
 
-  public void setIntern(User intern) {
-    this.intern = intern;
+  public void setRequestTypeId(Long requestTypeId) {
+    this.requestTypeId = requestTypeId;
   }
 
-  public Dictionary getRequestType() {
-    return requestType;
+  public String getRequestTypeName() {
+    return requestTypeName;
   }
 
-  public void setRequestType(Dictionary requestType) {
-    this.requestType = requestType;
+  public void setRequestTypeName(String requestTypeName) {
+    this.requestTypeName = requestTypeName;
   }
 
-  public College getCollege() {
-    return college;
+  public Long getCollegeId() {
+    return collegeId;
   }
 
-  public void setCollege(College college) {
-    this.college = college;
+  public void setCollegeId(Long collegeId) {
+    this.collegeId = collegeId;
   }
 
-  public Institute getInstitute() {
-    return institute;
+  public String getCollegeName() {
+    return collegeName;
   }
 
-  public void setInstitute(Institute institute) {
-    this.institute = institute;
+  public void setCollegeName(String collegeName) {
+    this.collegeName = collegeName;
+  }
+
+  public Long getInstituteId() {
+    return instituteId;
+  }
+
+  public void setInstituteId(Long instituteId) {
+    this.instituteId = instituteId;
+  }
+
+  public String getInstituteName() {
+    return instituteName;
+  }
+
+  public void setInstituteName(String instituteName) {
+    this.instituteName = instituteName;
+  }
+
+  public Long getInternId() {
+    return internId;
+  }
+
+  public void setInternId(Long internId) {
+    this.internId = internId;
+  }
+
+  public String getInternName() {
+    return internName;
+  }
+
+  public void setInternName(String internName) {
+    this.internName = internName;
   }
 
   public String getPosition() {
@@ -239,12 +243,36 @@ public class Request extends BasicEntity {
     this.responsibilities = responsibilities;
   }
 
-  public Company getCompany() {
-    return company;
+  public String getNip() {
+    return nip;
   }
 
-  public void setCompany(Company company) {
-    this.company = company;
+  public void setNip(String nip) {
+    this.nip = nip;
+  }
+
+  public String getCompanyName() {
+    return companyName;
+  }
+
+  public void setCompanyName(String companyName) {
+    this.companyName = companyName;
+  }
+
+  public String getCompanyDescription() {
+    return companyDescription;
+  }
+
+  public void setCompanyDescription(String companyDescription) {
+    this.companyDescription = companyDescription;
+  }
+
+  public String getDepartmentName() {
+    return departmentName;
+  }
+
+  public void setDepartmentName(String departmentName) {
+    this.departmentName = departmentName;
   }
 
   public String getPracticeSuperviserName() {
@@ -271,12 +299,12 @@ public class Request extends BasicEntity {
     this.practiceSuperviserPhone = practiceSuperviserPhone;
   }
 
-  public String getPracticeSuperviseEmail() {
-    return practiceSuperviseEmail;
+  public String getPracticeSuperviserEmail() {
+    return practiceSuperviserEmail;
   }
 
-  public void setPracticeSuperviseEmail(String practiceSuperviseEmail) {
-    this.practiceSuperviseEmail = practiceSuperviseEmail;
+  public void setPracticeSuperviserEmail(String practiceSuperviserEmail) {
+    this.practiceSuperviserEmail = practiceSuperviserEmail;
   }
 
   public Boolean getInfoAgreement() {
@@ -295,20 +323,36 @@ public class Request extends BasicEntity {
     this.processingAgreement = processingAgreement;
   }
 
-  public User getModerator() {
-    return moderator;
+  public Long getModeratorId() {
+    return moderatorId;
   }
 
-  public void setModerator(User moderator) {
-    this.moderator = moderator;
+  public void setModeratorId(Long moderatorId) {
+    this.moderatorId = moderatorId;
   }
 
-  public User getAdmin() {
-    return admin;
+  public String getModeratorName() {
+    return moderatorName;
   }
 
-  public void setAdmin(User admin) {
-    this.admin = admin;
+  public void setModeratorName(String moderatorName) {
+    this.moderatorName = moderatorName;
+  }
+
+  public Long getAdminId() {
+    return adminId;
+  }
+
+  public void setAdminId(Long adminId) {
+    this.adminId = adminId;
+  }
+
+  public String getAdminName() {
+    return adminName;
+  }
+
+  public void setAdminName(String adminName) {
+    this.adminName = adminName;
   }
 
   public ERequestStatus getActualRequestStatus() {
@@ -381,5 +425,21 @@ public class Request extends BasicEntity {
 
   public void setAdminDecisionFeedback(String adminDecisionFeedback) {
     this.adminDecisionFeedback = adminDecisionFeedback;
+  }
+
+  public Boolean getActive() {
+    return active;
+  }
+
+  public void setActive(Boolean active) {
+    this.active = active;
+  }
+
+  public Boolean getRemoved() {
+    return removed;
+  }
+
+  public void setRemoved(Boolean removed) {
+    this.removed = removed;
   }
 }

@@ -21,6 +21,25 @@ public class CompanyService {
   private final CompanyToDTOConverter companyToDTOConverter = new CompanyToDTOConverter();
   private final DTOToCompanyConverter dtoToCompanyConverter = new DTOToCompanyConverter();
 
+  public Boolean isNipValid(String nip) {
+    if (nip.length() == 13) {
+      nip = nip.replaceAll("-", "");
+    }
+    if (nip.length() != 10) {
+      return false;
+    }
+    int[] weights = {6, 5, 7, 2, 3, 4, 5, 6, 7};
+    try {
+      int sum = 0;
+      for (int i = 0; i < weights.length; ++i) {
+        sum += Integer.parseInt(nip.substring(i, i + 1)) * weights[i];
+      }
+      return (sum % 11) == Integer.parseInt(nip.substring(9, 10));
+    } catch (NumberFormatException e) {
+      return false;
+    }
+  }
+
   public ResponseEntity getAllCompanies(Long id) {
     List<Company> companies = companyRepository.getAllCompanies(id);
     List<CompanyDTO> companyDTOS = companies.stream().map(companyToDTOConverter::convert).collect(Collectors.toList());
@@ -34,6 +53,11 @@ public class CompanyService {
     Company company = companyRepository.getOne(id);
     CompanyDTO companyDTO = companyToDTOConverter.convert(company);
     return new ResponseEntity(companyDTO, HttpStatus.OK);
+  }
+
+  public Company getCompanyByNip(String nip) {
+    Company company = companyRepository.getCompanyByNip(nip);
+    return company;
   }
 
   public ResponseEntity createCompany(CompanyDTO companyDTO) {
@@ -51,4 +75,13 @@ public class CompanyService {
     companyRepository.deleteById(id);
     return ResponseEntity.ok("Company deleted!");
   }
+
+  public boolean checkIfCompanyExists(String nip) {
+    List<Company> companies =  companyRepository.checkIfCompanyExists(nip);
+    if (companies.size() > 0) {
+      return true;
+    }
+    return false;
+  }
+
 }

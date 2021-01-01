@@ -5,5 +5,10 @@
 
 package pl.sop.entities;
 
-public class Logbook {
+import javax.persistence.Entity;
+
+@Entity
+public class Logbook extends BasicEntity{
+
+
 }

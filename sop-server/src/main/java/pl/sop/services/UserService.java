@@ -18,12 +18,12 @@ import pl.sop.entities.ActivationKey;
 import pl.sop.entities.Role;
 import pl.sop.entities.User;
 import pl.sop.enums.ERole;
-import pl.sop.organizationStructure.College;
-import pl.sop.organizationStructure.CollegeRepository;
-import pl.sop.organizationStructure.DepartmentService;
-import pl.sop.organizationStructure.FacultyService;
-import pl.sop.organizationStructure.Institute;
-import pl.sop.organizationStructure.InstituteService;
+import pl.sop.entities.organizationStructure.College;
+import pl.sop.entities.organizationStructure.CollegeRepository;
+import pl.sop.entities.organizationStructure.DepartmentService;
+import pl.sop.entities.organizationStructure.FacultyService;
+import pl.sop.entities.organizationStructure.Institute;
+import pl.sop.entities.organizationStructure.InstituteService;
 import pl.sop.payload.request.SignUpRequest;
 import pl.sop.payload.response.MessageResponse;
 import pl.sop.repositories.RoleRepository;
@@ -61,6 +61,11 @@ public class UserService {
   private EmailServiceImpl emailService;
 
   private final UserViewToDTOConverter userViewToDTOConverter = new UserViewToDTOConverter();
+
+  public User findUser(Long id) {
+    User user = userRepository.findUserById(id);
+    return user;
+  }
 
   public UserDTO getUser(Long id) {
     User user = userRepository.findUserById(id);
@@ -149,9 +154,8 @@ public class UserService {
 
     List<String> sameUserNames = new ArrayList<>();
     List<Long> numbers = new ArrayList<>();
-    if (userRepository.existsByUsername(
-        propsalUsername)) { // jeśli istnieją inne osoby, które mają takie same username
-      sameUserNames = userRepository.findSameUserNames(propsalUsername); // to znajdźmy je!
+    if (userRepository.existsByUsername(propsalUsername)) { // jeśli istnieją inne osoby, które mają takie same username
+      sameUserNames = userRepository.findSameUserNames(username); // to znajdźmy je!
       for (String sameUserName : sameUserNames) {
         char[] chars = sameUserName.toCharArray();
         StringBuilder sb = new StringBuilder();

@@ -1,4 +1,4 @@
-package pl.sop.organizationStructure;
+package pl.sop.entities.organizationStructure;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

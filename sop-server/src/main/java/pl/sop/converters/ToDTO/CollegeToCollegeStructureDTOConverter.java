@@ -7,8 +7,8 @@ import java.util.stream.Collectors;
 import pl.sop.converters.Converter;
 import pl.sop.dto.CollegeStructureDTO;
 import pl.sop.dto.FacultyDTO;
-import pl.sop.organizationStructure.College;
-import pl.sop.organizationStructure.Faculty;
+import pl.sop.entities.organizationStructure.College;
+import pl.sop.entities.organizationStructure.Faculty;
 
 public class CollegeToCollegeStructureDTOConverter implements
     Converter<College, CollegeStructureDTO> {

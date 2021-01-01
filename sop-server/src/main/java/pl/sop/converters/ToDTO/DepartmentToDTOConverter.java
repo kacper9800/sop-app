@@ -2,7 +2,7 @@ package pl.sop.converters.ToDTO;
 
 import pl.sop.converters.Converter;
 import pl.sop.dto.DepartmentDTO;
-import pl.sop.organizationStructure.Department;
+import pl.sop.entities.organizationStructure.Department;
 
 public class DepartmentToDTOConverter implements Converter<Department, DepartmentDTO> {
 

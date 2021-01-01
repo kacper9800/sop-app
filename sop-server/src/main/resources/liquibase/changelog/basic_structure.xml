@@ -869,6 +869,84 @@
   <changeSet id="38" author="krzymkiewicz">
     <sql>INSERT INTO roles (name, active, deleted) values ('ROLE_DIRECTOR', true, false);</sql>
   </changeSet>
+  <changeSet id="39" author="krzymkiewicz">
+    <dropPrimaryKey tableName="activation_keys"/>
+    <addPrimaryKey tableName="activation_keys" columnNames="id"/>
+  </changeSet>
+
+  <changeSet id="40" author="krzymkiewicz">
+    <sql>drop table "activation_keys" cascade</sql>
+
+    <createTable tableName="activation_keys">
+      <column name="id" type="BIGINT" autoIncrement="true">
+        <constraints primaryKey="true" nullable="false"></constraints>
+      </column>
+      <column name="create_date" type="TIMESTAMP WITHOUT TIME ZONE"></column>
+      <column name="create_by" type="VARCHAR(255)"></column>
+      <column name="edit_date" type="TIMESTAMP WITHOUT TIME ZONE"></column>
+      <column name="edit_by" type="VARCHAR(255)"></column>
+      <column name="active" type="BOOLEAN"></column>
+      <column name="deleted" type="BOOLEAN"></column>
+      <column name="value" type="VARCHAR(255)"></column>
+      <column name="start_expiration_date" type="timestamp without timezone"></column>
+      <column name="end_expiration_date" type="timestamp without timezone"></column>
+      <column name="direction_id" type="bigint"></column>
+      <column name="college_id" type="bigint"></column>
+      <column name="faculty_id" type="bigint"></column>
+      <column name="institute_id" type="bigint"></column>
+      <column name="department_id" type="bigint"></column>
+      <column name="creator_id" type="bigint"></column>
+      <column name="remaining_uses" type="int"></column>
+      <column name="role" type="varchar(100)"></column>
+    </createTable>
+
+    <addForeignKeyConstraint
+      baseColumnNames="direction_id"
+      baseTableName="activation_keys"
+      constraintName="fk_direction_id"
+      referencedTableName="directions"
+      referencedColumnNames="id"/>
+    <addForeignKeyConstraint
+      baseColumnNames="college_id"
+      baseTableName="activation_keys"
+      constraintName="fk_colleges_id"
+      referencedTableName="colleges"
+      referencedColumnNames="id"/>
+    <addForeignKeyConstraint
+      baseColumnNames="faculty_id"
+      baseTableName="activation_keys"
+      constraintName="fk_faculties_id"
+      referencedTableName="faculties"
+      referencedColumnNames="id"/>
+    <addForeignKeyConstraint
+      baseColumnNames="institute_id"
+      baseTableName="activation_keys"
+      constraintName="fk_institutes_id"
+      referencedTableName="institutes"
+      referencedColumnNames="id"/>
+    <addForeignKeyConstraint
+      baseColumnNames="department_id"
+      baseTableName="activation_keys"
+      constraintName="fk_departments_id"
+      referencedTableName="departments"
+      referencedColumnNames="id"/>
+    <addForeignKeyConstraint
+      baseColumnNames="creator_id"
+      baseTableName="activation_keys"
+      constraintName="fk_creators_id"
+      referencedColumnNames="id"
+      referencedTableName="users"/>
+  </changeSet>
+  <changeSet id="41" author="krzymkieiwcz">
+    <addColumn tableName="users">
+      <column name="isInternshipActive" type="boolean"></column>
+    </addColumn>
+  </changeSet>
+  <changeSet id="42" author="krzymkiewicz">
+    <addColumn tableName="requests">
+      <column name="request_type_id" type="bigint"></column>
+    </addColumn>
+  </changeSet>
 <!--  <changeSet id="32" author="krzymkiewicz">-->
 <!--    <insert tableName="dictionaries">-->
 <!--      <column  name="active"  value="true"/>-->

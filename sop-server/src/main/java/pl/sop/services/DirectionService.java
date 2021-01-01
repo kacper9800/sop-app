@@ -5,13 +5,12 @@ import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-import pl.sop.converters.FromDTO.DTOToDirectionConverter;
 import pl.sop.converters.ToDTO.DirectionToDTOConverter;
 import pl.sop.dto.DirectionDTO;
 import pl.sop.entities.Dictionary;
 import pl.sop.entities.Direction;
-import pl.sop.organizationStructure.Institute;
-import pl.sop.organizationStructure.InstituteService;
+import pl.sop.entities.organizationStructure.Institute;
+import pl.sop.entities.organizationStructure.InstituteService;
 import pl.sop.repositories.DirectionRepository;
 
 @Service

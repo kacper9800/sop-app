@@ -19,7 +19,7 @@ public class FieldOfStudyController {
 //    }
 
     @PostMapping(value = "/api/field/")
-    public HttpStatus saveNewCollege(@RequestBody FieldOfStudy fieldOfStudy) {
+    public HttpStatus createNewFieldOfStudy(@RequestBody FieldOfStudy fieldOfStudy) {
         //ToDo
         fieldOfStudyRepository.save(fieldOfStudy);
         return HttpStatus.OK;

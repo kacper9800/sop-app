@@ -2,7 +2,6 @@ package pl.sop.entities;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.time.LocalDateTime;
-import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -10,10 +9,10 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
-import pl.sop.organizationStructure.College;
-import pl.sop.organizationStructure.Department;
-import pl.sop.organizationStructure.Faculty;
-import pl.sop.organizationStructure.Institute;
+import pl.sop.entities.organizationStructure.College;
+import pl.sop.entities.organizationStructure.Department;
+import pl.sop.entities.organizationStructure.Faculty;
+import pl.sop.entities.organizationStructure.Institute;
 
 @Entity
 @Table(name = "activation_keys")

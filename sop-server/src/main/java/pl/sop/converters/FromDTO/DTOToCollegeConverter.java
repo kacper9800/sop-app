@@ -2,7 +2,7 @@ package pl.sop.converters.FromDTO;
 
 import pl.sop.converters.Converter;
 import pl.sop.dto.CollegeDTO;
-import pl.sop.organizationStructure.College;
+import pl.sop.entities.organizationStructure.College;
 
 public class DTOToCollegeConverter implements Converter<CollegeDTO, College> {
 

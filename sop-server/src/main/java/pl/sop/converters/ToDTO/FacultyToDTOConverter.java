@@ -5,7 +5,7 @@ import java.util.stream.Collectors;
 import pl.sop.converters.Converter;
 import pl.sop.dto.FacultyDTO;
 import pl.sop.dto.InstituteDTO;
-import pl.sop.organizationStructure.Faculty;
+import pl.sop.entities.organizationStructure.Faculty;
 
 public class FacultyToDTOConverter implements Converter<Faculty, FacultyDTO> {
 

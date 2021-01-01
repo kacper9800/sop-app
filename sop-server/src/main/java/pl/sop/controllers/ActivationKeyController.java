@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import pl.sop.dto.ActivationKeyDTO;
 import pl.sop.entities.ActivationKey;
-import pl.sop.organizationStructure.College;
+import pl.sop.entities.organizationStructure.College;
 import pl.sop.security.services.UserDetailsImpl;
 import pl.sop.services.ActivationKeyService;
 

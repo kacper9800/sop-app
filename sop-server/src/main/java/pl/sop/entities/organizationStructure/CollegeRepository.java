@@ -1,4 +1,4 @@
-package pl.sop.organizationStructure;
+package pl.sop.entities.organizationStructure;
 
 import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;

@@ -20,8 +20,8 @@ import pl.sop.dto.CollegeDTO;
 import pl.sop.dto.CollegeRegistrationDTO;
 import pl.sop.dto.CollegeStructureDTO;
 import pl.sop.dto.CollegeStructureToSaveDTO;
-import pl.sop.organizationStructure.College;
-import pl.sop.organizationStructure.CollegeService;
+import pl.sop.entities.organizationStructure.College;
+import pl.sop.entities.organizationStructure.CollegeService;
 import pl.sop.security.services.UserDetailsImpl;
 
 @RestController

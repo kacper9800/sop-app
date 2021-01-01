@@ -11,14 +11,14 @@ import pl.sop.converters.ToDTO.ActivationKeyToDTOConverter;
 import pl.sop.dto.ActivationKeyDTO;
 import pl.sop.entities.ActivationKey;
 import pl.sop.entities.Direction;
-import pl.sop.organizationStructure.College;
-import pl.sop.organizationStructure.CollegeService;
-import pl.sop.organizationStructure.Department;
-import pl.sop.organizationStructure.DepartmentService;
-import pl.sop.organizationStructure.Faculty;
-import pl.sop.organizationStructure.FacultyService;
-import pl.sop.organizationStructure.Institute;
-import pl.sop.organizationStructure.InstituteService;
+import pl.sop.entities.organizationStructure.College;
+import pl.sop.entities.organizationStructure.CollegeService;
+import pl.sop.entities.organizationStructure.Department;
+import pl.sop.entities.organizationStructure.DepartmentService;
+import pl.sop.entities.organizationStructure.Faculty;
+import pl.sop.entities.organizationStructure.FacultyService;
+import pl.sop.entities.organizationStructure.Institute;
+import pl.sop.entities.organizationStructure.InstituteService;
 import pl.sop.repositories.ActivationKeyRepository;
 
 @Service
@@ -109,7 +109,8 @@ public class ActivationKeyService {
     return this.activationKeyRepository.save(activationKey);
   }
 
-  public ResponseEntity<ActivationKey> createNewActivationKeyForCollege(ActivationKeyDTO activationKeyDTO) {
+  public ResponseEntity<ActivationKey> createNewActivationKeyForCollege(
+      ActivationKeyDTO activationKeyDTO) {
     ActivationKey activationKey = new ActivationKey();
     if (activationKeyDTO.getValue() == null) {
       return new ResponseEntity<>(HttpStatus.NOT_ACCEPTABLE);
@@ -128,50 +129,61 @@ public class ActivationKeyService {
 
   public ActivationKey createNewActivationKey(ActivationKeyDTO tokenDTO) {
     ActivationKey activationKey = new ActivationKey();
+    Department department = null;
+    Direction direction = null;
+    Institute institute = null;
+    Faculty faculty = null;
+    College college = null;
     activationKey.setValue(tokenDTO.getValue());
     activationKey.setRole(tokenDTO.getRole());
-    Direction direction = new Direction();
-    Department department = new Department();
-    Institute institute = new Institute();
-    Faculty faculty = new Faculty();
-    College college = new College();
-    if (tokenDTO.getDepartmentId() != null) {
-      department = departmentService.findById(tokenDTO.getDepartmentId());
-      institute = department.getInstitute();
-      faculty = institute.getFaculty();
-      college = faculty.getCollege();
-    } else if (tokenDTO.getDepartmentId() == null && tokenDTO.getInstituteId() != null) {
-      department = null;
-      institute = instituteService.findById(tokenDTO.getInstituteId());
-      faculty = institute.getFaculty();
-      college = faculty.getCollege();
-    } else if (tokenDTO.getDepartmentId() == null && tokenDTO.getInstituteId() == null
-        && tokenDTO.getFacultyId() != null) {
-      department = null;
-      institute = null;
-      faculty = facultyService.findById(tokenDTO.getFacultyId());
-      college = faculty.getCollege();
-    } else if (tokenDTO.getDepartmentId() == null && tokenDTO.getInstituteId() == null
-        && tokenDTO.getFacultyId() == null && tokenDTO.getCollegeId() != null) {
-      department = null;
-      institute = null;
-      faculty = null;
-      college = collegeService.findById(tokenDTO.getCollegeId());
-    } else {
+
+    if (tokenDTO.getDirectionId() != null) {
       direction = directionService.getById(tokenDTO.getDirectionId());
       if (direction != null) {
-        activationKey.setDirection(direction);
-        college = collegeService.findById(direction.getInstitute().getFaculty().getCollege().getId());
+        college = direction.getInstitute().getFaculty().getCollege();
+        faculty = direction.getInstitute().getFaculty();
+        institute = direction.getInstitute();
+      }
+    } else {
+      if (tokenDTO.getDepartmentId() != null) {
+        department = departmentService.findById(tokenDTO.getDepartmentId());
+        institute = department.getInstitute();
+        faculty = institute.getFaculty();
+        college = faculty.getCollege();
+      } else if (tokenDTO.getDepartmentId() == null && tokenDTO.getInstituteId() != null) {
+        department = null;
+        institute = instituteService.findById(tokenDTO.getInstituteId());
+        faculty = institute.getFaculty();
+        college = faculty.getCollege();
+      } else if (tokenDTO.getDepartmentId() == null && tokenDTO.getInstituteId() == null
+          && tokenDTO.getFacultyId() != null) {
+        department = null;
+        institute = null;
+        faculty = facultyService.findById(tokenDTO.getFacultyId());
+        college = faculty.getCollege();
+      } else if (tokenDTO.getDepartmentId() == null && tokenDTO.getInstituteId() == null
+          && tokenDTO.getFacultyId() == null && tokenDTO.getCollegeId() != null) {
+        department = null;
+        institute = null;
+        faculty = null;
+        college = collegeService.findById(tokenDTO.getCollegeId());
       }
     }
-    if (department != null)
-    activationKey.setDepartment(department);
-    if (institute != null)
-    activationKey.setInstitute(institute);
-    if (faculty != null)
-    activationKey.setFaculty(faculty);
-    if (college != null)
-    activationKey.setCollege(college);
+    if (direction != null) {
+      activationKey.setDirection(direction);
+    }
+    if (department != null) {
+      activationKey.setDepartment(department);
+    }
+    if (institute != null) {
+      activationKey.setInstitute(institute);
+    }
+    if (faculty != null) {
+      activationKey.setFaculty(faculty);
+    }
+    if (college != null) {
+      activationKey.setCollege(college);
+    }
     activationKey.setStartExpirationDate(tokenDTO.getStartExpirationDate());
     activationKey.setEndExpirationDate(tokenDTO.getEndExpirationDate());
     activationKey.setActive(Boolean.TRUE);

@@ -5,7 +5,7 @@ import java.util.stream.Collectors;
 import pl.sop.converters.Converter;
 import pl.sop.dto.DepartmentDTO;
 import pl.sop.dto.InstituteDTO;
-import pl.sop.organizationStructure.Institute;
+import pl.sop.entities.organizationStructure.Institute;
 
 public class InstituteToDTOConverter implements Converter<Institute, InstituteDTO> {
 

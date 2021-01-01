@@ -1,4 +1,4 @@
-package pl.sop.organizationStructure;
+package pl.sop.entities.organizationStructure;
 
 import java.util.ArrayList;
 import java.util.Comparator;

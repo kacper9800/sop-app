@@ -1,24 +1,24 @@
-/*
- * System Obsługi Praktyk
- * Kacper Rzymkiewicz #2020
- */
-
-package pl.sop.organizationStructure;
+package pl.sop.entities.organizationStructure;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import java.util.List;
 import java.util.Set;
+import javax.persistence.FetchType;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
 import pl.sop.entities.ActivationKey;
 import pl.sop.entities.BasicEntity;
-
-import javax.persistence.*;
-import java.io.Serializable;
-import pl.sop.entities.Direction;
 import pl.sop.entities.User;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import java.io.Serializable;
+
 @Entity
-@Table(name = "institutes")
-public class Institute extends BasicEntity implements Serializable {
+@Table(name = "departments")
+public class Department extends BasicEntity implements Serializable {
+
 
     @Column(name = "name", nullable = false)
     private String name;
@@ -28,20 +28,12 @@ public class Institute extends BasicEntity implements Serializable {
     private Set<User> users;
 
     @JsonIgnore
-    @OneToMany(mappedBy="institute")
+    @OneToMany(mappedBy="department")
     private Set<ActivationKey> activationKeys;
 
     @JsonIgnore
     @ManyToOne(fetch = FetchType.EAGER)
-    private Faculty faculty;
-
-    @JsonIgnore
-    @OneToMany(mappedBy = "institute", cascade = CascadeType.ALL, orphanRemoval = true)
-    private Set<Department> departments;
-
-    @JsonIgnore
-    @OneToMany(mappedBy = "institute", orphanRemoval = true)
-    private List<Direction> directions;
+    private Institute institute;
 
     @Override
     public Long getId() {
@@ -93,27 +85,11 @@ public class Institute extends BasicEntity implements Serializable {
         this.activationKeys = activationKeys;
     }
 
-    public Faculty getFaculty() {
-        return faculty;
+    public Institute getInstitute() {
+        return institute;
     }
 
-    public void setFaculty(Faculty faculty) {
-        this.faculty = faculty;
-    }
-
-    public Set<Department> getDepartments() {
-        return departments;
-    }
-
-    public void setDepartments(Set<Department> departments) {
-        this.departments = departments;
-    }
-
-    public List<Direction> getDirections() {
-        return directions;
-    }
-
-    public void setDirections(List<Direction> directions) {
-        this.directions = directions;
+    public void setInstitute(Institute institute) {
+        this.institute = institute;
     }
 }

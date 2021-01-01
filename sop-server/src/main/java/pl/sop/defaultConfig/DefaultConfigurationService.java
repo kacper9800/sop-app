@@ -11,8 +11,8 @@ import org.springframework.stereotype.Service;
 import pl.sop.entities.Role;
 import pl.sop.entities.User;
 import pl.sop.enums.ERole;
-import pl.sop.organizationStructure.College;
-import pl.sop.organizationStructure.CollegeRepository;
+import pl.sop.entities.organizationStructure.College;
+import pl.sop.entities.organizationStructure.CollegeRepository;
 import pl.sop.repositories.RoleRepository;
 import pl.sop.repositories.UserRepository;
 

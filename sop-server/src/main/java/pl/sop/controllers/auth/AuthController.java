@@ -23,7 +23,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import pl.sop.dto.CollegeDTO;
-import pl.sop.organizationStructure.College;
 import pl.sop.repositories.RoleRepository;
 import pl.sop.repositories.UserRepository;
 import pl.sop.dto.CollegeRegistrationDTO;
@@ -32,7 +31,7 @@ import pl.sop.payload.request.SignUpRequest;
 import pl.sop.payload.response.JwtResponse;
 import pl.sop.security.jwt.JwtUtils;
 import pl.sop.security.services.UserDetailsImpl;
-import pl.sop.organizationStructure.CollegeService;
+import pl.sop.entities.organizationStructure.CollegeService;
 import pl.sop.services.UserService;
 
 @CrossOrigin(origins = "*", maxAge = 3600)

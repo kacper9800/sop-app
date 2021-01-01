@@ -3,7 +3,6 @@ package pl.sop.entities;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.io.Serializable;
 import java.time.LocalDate;
-import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -13,17 +12,15 @@ import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
-import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
-import net.bytebuddy.asm.Advice.Local;
-import pl.sop.organizationStructure.College;
-import pl.sop.organizationStructure.Department;
-import pl.sop.organizationStructure.Faculty;
-import pl.sop.organizationStructure.Institute;
+import pl.sop.entities.organizationStructure.College;
+import pl.sop.entities.organizationStructure.Department;
+import pl.sop.entities.organizationStructure.Faculty;
+import pl.sop.entities.organizationStructure.Institute;
 
 @Entity
 @Table(name = "users",

@@ -13,6 +13,9 @@ import pl.sop.entities.User;
 @CrossOrigin(origins = "*")
 public interface UserRepository extends JpaRepository<User, Long> {
 
+  @Override
+  <S extends User> S save(S entity);
+
   @Query(value = "SELECT u FROM User u WHERE u.deleted = FALSE AND u.active = TRUE")
   List<User> findAllUsers();
 
@@ -37,7 +40,7 @@ public interface UserRepository extends JpaRepository<User, Long> {
       + "where colleges.id = :collegeId")
   List<User> findAllUsersForCollegeId(@Param("collegeId") Long collegeId);
 
-  @Query(value = "SELECT u.username from User u where u.username like :newUserName")
+  @Query(value = "SELECT u.username from User u where u.username like :newUserName%")
   List<String> findSameUserNames(@Param("newUserName")String newUserName);
 
   @Query(value = "SELECT u FROM User u ")

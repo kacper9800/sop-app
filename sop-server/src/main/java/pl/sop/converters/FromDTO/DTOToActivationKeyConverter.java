@@ -5,14 +5,14 @@ import pl.sop.converters.Converter;
 import pl.sop.dto.ActivationKeyDTO;
 import pl.sop.entities.ActivationKey;
 import pl.sop.entities.Direction;
-import pl.sop.organizationStructure.College;
-import pl.sop.organizationStructure.CollegeService;
-import pl.sop.organizationStructure.Department;
-import pl.sop.organizationStructure.DepartmentService;
-import pl.sop.organizationStructure.Faculty;
-import pl.sop.organizationStructure.FacultyService;
-import pl.sop.organizationStructure.Institute;
-import pl.sop.organizationStructure.InstituteService;
+import pl.sop.entities.organizationStructure.College;
+import pl.sop.entities.organizationStructure.CollegeService;
+import pl.sop.entities.organizationStructure.Department;
+import pl.sop.entities.organizationStructure.DepartmentService;
+import pl.sop.entities.organizationStructure.Faculty;
+import pl.sop.entities.organizationStructure.FacultyService;
+import pl.sop.entities.organizationStructure.Institute;
+import pl.sop.entities.organizationStructure.InstituteService;
 import pl.sop.services.DirectionService;
 
 @Service

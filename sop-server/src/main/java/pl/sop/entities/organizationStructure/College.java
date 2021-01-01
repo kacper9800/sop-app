@@ -3,7 +3,7 @@
  * Kacper Rzymkiewicz #2020
  */
 
-package pl.sop.organizationStructure;
+package pl.sop.entities.organizationStructure;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.io.Serializable;
