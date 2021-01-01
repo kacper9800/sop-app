@@ -2,7 +2,7 @@
            [clrModalClosable]="false">
   <h3 class="modal-title" style="text-align: center!important;">{{dialogTitle}}</h3>
   <div class="modal-body">
-    <form clrForm [formGroup]="directionForm" id="activationKeyForm">
+    <form clrForm [formGroup]="directionForm" id="directionForm">
 
       <div class="clr-row">
         <div class="clr-col-2"></div>
@@ -13,6 +13,7 @@
             </label>
             <input [size]="35" clrInput type="text" formControlName="name"
                    placeholder="{{'directions.directionName' | translate}}"/>
+            <clr-control-error>{{'common.required' | translate}}</clr-control-error>
           </clr-input-container>
         </div>
         <div class="clr-col-2"></div>
@@ -73,6 +74,7 @@
               <clr-icon shape="calendar"></clr-icon>
             </label>
             <input type="date" clrDate name="demo" formControlName="expirationDateStart">
+            <clr-control-error>{{'common.required' | translate}}</clr-control-error>
           </clr-date-container>
         </div>
         <div class="clr-col-2"></div>
@@ -86,6 +88,7 @@
               <clr-icon shape="calendar"></clr-icon>
             </label>
             <input type="date" clrDate name="demo" formControlName="expirationDateEnd">
+            <clr-control-error>{{'common.required' | translate}}</clr-control-error>
           </clr-date-container>
         </div>
         <div class="clr-col-2"></div>
@@ -94,8 +97,9 @@
   </div>
   <div class="modal-footer">
     <div class="btn-group">
-      <button [clrLoading]="validateBtnState" type="submit" form="activationKeyForm"
-              class="btn btn-primary" [disabled]="directionForm.invalid || !directionForm.touched"
+      <button [clrLoading]="validateBtnState" type="submit" form="directionForm"
+              class="btn btn-primary" [disabled]="directionForm === null
+              || directionForm.valid === false"
               (click)="onSubmit()">
         {{'add-edit-dialog.save' | translate}}</button>
       <button class="btn btn-secondary-outline"

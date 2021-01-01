@@ -5,12 +5,14 @@ import {Router} from '@angular/router';
 import {Dictionary} from '../../_model/dictionary.model';
 import {DictionariesService} from '../../_services/dictionaries.service';
 import {TranslateService} from '@ngx-translate/core';
-import {UserRegistration} from "../../_model/user-registration.model";
+import {UserRegistration} from '../../_model/user-registration.model';
+import {MessageService} from 'primeng/api';
 
 @Component({
   selector: 'app-registration',
   templateUrl: './registration.component.html',
-  styleUrls: ['./registration.component.css']
+  styleUrls: ['./registration.component.css'],
+  providers: [MessageService]
 })
 export class RegistrationComponent implements OnInit {
 
@@ -32,7 +34,8 @@ export class RegistrationComponent implements OnInit {
               private authService: AuthService,
               private router: Router,
               private translateService: TranslateService,
-              private dictionaryService: DictionariesService) {
+              private dictionaryService: DictionariesService,
+              private messageService: MessageService) {
   }
 
   public show(): void {
@@ -112,6 +115,13 @@ export class RegistrationComponent implements OnInit {
         this.displayAlert = true;
         this.errorMessage = err.error.message;
         this.isSignUpFailed = true;
+        this.blockUI = false;
+        this.messageService.add({
+          severity: 'error',
+          summary: 'Błąd!',
+          detail: 'Błędny kod aktywacyjny',
+          key: 'registrationToast'
+        });
       }
     );
   }

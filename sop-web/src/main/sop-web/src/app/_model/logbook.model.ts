@@ -1,3 +1,5 @@
+import {LogbookPost} from "./logbook-post.model";
+
 export interface ILogbook {
   id: number;
   name: string;
@@ -5,6 +7,7 @@ export interface ILogbook {
   date: Date;
   active: boolean;
   removed: boolean;
+  posts: LogbookPost[];
 }
 
 export class Logbook implements ILogbook {
@@ -14,5 +17,6 @@ export class Logbook implements ILogbook {
   date: Date;
   active: boolean;
   removed: boolean;
+  posts: LogbookPost[];
 }
 

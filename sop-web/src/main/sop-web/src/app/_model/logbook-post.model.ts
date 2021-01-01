@@ -1,14 +1,14 @@
 export interface ILogbookPost {
   id: number;
-  name: string;
-  tasks: string;
+  description: string;
   date: Date;
+  amountOfHours: number;
 }
 
 export class LogbookPost implements ILogbookPost {
   id: number;
-  name: string;
-  tasks: string;
+  description: string;
   date: Date;
+  amountOfHours: number;
 }
 

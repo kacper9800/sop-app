@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { TokenStorageService } from './token-storage.service';
+import {User} from "../../security/user";
 
 const TOKEN_KEY = 'pl.auth-token';
 const USER_KEY = 'pl.auth-user';
@@ -18,10 +19,10 @@ export class PrincipalService {
     }
   }
 
-  public getUser() {
+  public getUser(): User {
     this.user = JSON.parse(sessionStorage.getItem(USER_KEY));
     this.roles = this.user.roles;
-    console.log(this.roles);
+    return this.user;
   }
 
   public isSuperAdmin(): boolean {

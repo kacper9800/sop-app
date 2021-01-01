@@ -3,7 +3,6 @@ import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {CollegeService} from '../../../_services/organization-structure/college.service';
 import {TokenService} from '../../../_helpers/token.service';
 import {TranslateService} from '@ngx-translate/core';
-import {HttpResponse} from '@angular/common/http';
 import {ClrLoadingState} from '@clr/angular';
 import {Direction, IDirection} from '../../../_model/direction.model';
 import {DirectionsService} from '../../../_services/directions.service';
@@ -32,6 +31,7 @@ export class AddEditDialogDirectionsComponent implements OnInit {
 
   public dialogTitle: string;
   public validateBtnState: any;
+  public isSaveButtonDisabled: any;
 
   constructor(private collegeService: CollegeService,
               private formBuilder: FormBuilder,
@@ -44,6 +44,7 @@ export class AddEditDialogDirectionsComponent implements OnInit {
 
   ngOnInit() {
     this.blockUI = true;
+    this.prepareForm(null);
     this.loadInstitutes();
     this.loadStudyModes();
   }
@@ -62,11 +63,11 @@ export class AddEditDialogDirectionsComponent implements OnInit {
       expirationDateStart: new FormControl({
         value: direction ? direction.startExpirationDate : null,
         disabled: false
-      }),
+      }, Validators.required),
       expirationDateEnd: new FormControl({
         value: direction ? direction.endExpirationDate : null,
         disabled: false
-      }),
+      }, Validators.required),
       studyMode: new FormControl({
         value: direction ? direction.studyMode : null,
         disabled: false

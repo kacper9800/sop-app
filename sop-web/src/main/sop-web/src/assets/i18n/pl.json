@@ -371,6 +371,19 @@
       "success": "Rozpatrzono pomyślnie",
       "error": "Odrzucono"
     },
+    "wizard": {
+      "position": "Stanowisko",
+      "positionDescription": "Opis stanowiska",
+      "amountOfHours": "Liczba godzin",
+      "responsibilities": "Zakres obowiązków",
+      "companyName": "Nazwa firmy",
+      "companyNip": "Numer NIP firmy",
+      "departmentName": "Nazwa działu",
+      "practiceSuperviserName": "Imię opiekuna praktyk",
+      "practiceSuperviserLastName": "Nazwisko opiekuna praktyk",
+      "practiceSuperviserPhone": "Telefon opiekuna praktyk",
+      "practiceSuperviserEmail": "E-mail opiekuna praktyk"
+    },
     "dialog": {
       "titleNew": "Dodawanie nowego wniosku",
       "titleView": "Podgląd statusu wniosku",
@@ -381,6 +394,7 @@
         "next": "Dalej",
         "finish": "Zatwierdź"
       },
+
       "titles": {
         "chooseRequestTypeTitle": "Wybór rodzaju tworzonego wniosku",
         "chooseRequestTypeNav": "Wybór wniosku ",
@@ -388,6 +402,8 @@
         "basicDataNav": "Dane praktykanta",
         "companyDataTitle": "Dane podstawowe firmy",
         "companyDataNav": "Dane firmy",
+        "agreementsTitle": "Zgody",
+        "agreementsNav": "Zgody",
         "summaryTitle": "Podsumowanie",
         "summaryNav": "Podsumowanie"
       }

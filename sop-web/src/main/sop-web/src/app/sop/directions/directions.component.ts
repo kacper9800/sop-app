@@ -79,8 +79,8 @@ export class DirectionsComponent implements OnInit {
       {label: 'directions.studyMode', fieldName: 'studyMode'},
       {label: 'common.facultyName', fieldName: 'facultyName'},
       {label: 'common.instituteName', fieldName: 'instituteName'},
-      {label: 'common.deleted', fieldName: 'removed'},
-      {label: 'common.active', fieldName: 'active'},
+      // {label: 'common.deleted', fieldName: 'removed'},
+      // {label: 'common.active', fieldName: 'active'},
       {label: 'common.actions', fieldName: 'actions'}
     ];
   }

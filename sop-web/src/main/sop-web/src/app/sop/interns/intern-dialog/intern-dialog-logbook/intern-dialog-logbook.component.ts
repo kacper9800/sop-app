@@ -49,11 +49,6 @@ export class InternDialogLogbookComponent implements OnInit {
   }
 
   private loadLogbookPosts() {
-    this.selectedLogbookPosts = [
-      {id: 1, name: 'Budowa szkieletu HTML w aplikacji', tasks: 'Budowa szkieletu HTML w aplikacji', date: new Date()},
-      {id: 2, name: '', tasks: 'Przygotowanie struktury bazy danych', date: new Date()},
-      {id: 3, name: '', tasks: 'Utworzenie encji', date: new Date()}
-      ];
   }
 }
 

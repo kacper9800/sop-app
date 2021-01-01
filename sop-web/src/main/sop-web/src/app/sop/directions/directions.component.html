@@ -34,22 +34,22 @@
     <clr-dg-cell>{{'directions.' + direction.studyMode.toString() | translate}}</clr-dg-cell>
     <clr-dg-cell>{{direction.facultyName}}</clr-dg-cell>
     <clr-dg-cell>{{direction.instituteName}}</clr-dg-cell>
-    <clr-dg-cell>
-      <div *ngIf="direction.removed">
-        <clr-icon shape="check"></clr-icon>
-      </div>
-      <div *ngIf="!direction.removed">
-        <clr-icon shape="times"></clr-icon>
-      </div>
-    </clr-dg-cell>
-    <clr-dg-cell>
-      <div *ngIf="direction.active">
-        <clr-icon shape="check"></clr-icon>
-      </div>
-      <div *ngIf="!direction.active">
-        <clr-icon shape="times"></clr-icon>
-      </div>
-    </clr-dg-cell>
+<!--    <clr-dg-cell>-->
+<!--      <div *ngIf="direction.removed">-->
+<!--        <clr-icon shape="check"></clr-icon>-->
+<!--      </div>-->
+<!--      <div *ngIf="!direction.removed">-->
+<!--        <clr-icon shape="times"></clr-icon>-->
+<!--      </div>-->
+<!--    </clr-dg-cell>-->
+<!--    <clr-dg-cell>-->
+<!--      <div *ngIf="direction.active">-->
+<!--        <clr-icon shape="check"></clr-icon>-->
+<!--      </div>-->
+<!--      <div *ngIf="!direction.active">-->
+<!--        <clr-icon shape="times"></clr-icon>-->
+<!--      </div>-->
+<!--    </clr-dg-cell>-->
     <clr-dg-cell>
       <div class="btn-group">
         <button *ngIf="isSuperAdmin || isAdmin" type="button" class="btn btn-sm btn-secondary"

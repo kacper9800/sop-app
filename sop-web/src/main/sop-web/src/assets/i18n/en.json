@@ -368,6 +368,19 @@
       "success": "Considered successfully",
       "error": "Rejected"
     },
+    "wizard": {
+      "position": "Position",
+      "positionDescription": "Position description",
+      "amountOfHours": "Amount of hours",
+      "responsibilities": "Responsibilities",
+      "companyName": "Company name",
+      "companyNip": "Company NIP number",
+      "departmentName": "Department name",
+      "practiceSuperviserName": "Practice superviser name",
+      "practiceSuperviserLastName": "Practice superviser last name",
+      "practiceSuperviserPhone": "Practice superviser phone",
+      "practiceSuperviserEmail": "Practice superviser email"
+    },
     "dialog": {
       "titleNew": "Adding new request",
       "titleView": "Show request",
@@ -378,6 +391,7 @@
         "next": "Next",
         "finish": "Finish"
       },
+
       "titles": {
         "chooseRequestTypeTitle": "Choose request type",
         "chooseRequestTypeNav": "Choose request",
@@ -385,6 +399,8 @@
         "basicDataNav": "Basic data",
         "companyDataTitle": "Company basic data",
         "companyDataNav": "Company's data",
+        "agreementsTitle": "Agreements",
+        "agreementsNav": "Agreements",
         "summaryTitle": "Summary",
         "summaryNav": "Summary"
       }

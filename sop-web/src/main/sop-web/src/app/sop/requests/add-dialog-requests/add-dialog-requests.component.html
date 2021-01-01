@@ -1,7 +1,7 @@
 <clr-wizard #wizard [clrWizardOpen]="displayDialog" (clrWizardOpenChange)="reset($event)"
+            (clrWizardOnFinish)="sendRequest()"
             clrWizardSize="lg">
   <clr-wizard-title>{{'requests.dialog.titleNew' | translate}}</clr-wizard-title>
-
   <clr-wizard-button
     [type]="'cancel'">{{'requests.dialog.buttons.cancel' | translate}}</clr-wizard-button>
   <clr-wizard-button
@@ -40,168 +40,202 @@
     </form>
   </clr-wizard-page>
 
-  <clr-wizard-page #pageTwo [clrWizardPageNextDisabled]="!secondPageFormValid">
-    <ng-template clrPageTitle>{{'requests.dialog.titles.basicDataTitle' | translate}}</ng-template>
-    <ng-template clrPageNavTitle>{{'requests.dialog.titles.basicDataNav' |translate}}</ng-template>
-<!--    <form [formGroup]="secondPageForm">-->
-<!--      <section class="form-block">-->
-<!--        <label></label>-->
-<!--        &lt;!&ndash;        <div class="clr-row wizdemo-color-block-row">&ndash;&gt;-->
-<!--        &lt;!&ndash;          <div *ngFor="let color of colorList" class="wizdemo-color-block-wrapper clr-col-3">&ndash;&gt;-->
-<!--        &lt;!&ndash;            <div&ndash;&gt;-->
-<!--        &lt;!&ndash;              class="wizdemo-color-block"&ndash;&gt;-->
-<!--        &lt;!&ndash;              [style.backgroundColor]="color"&ndash;&gt;-->
-<!--        &lt;!&ndash;              [class.active]="color === model.color"&ndash;&gt;-->
-<!--        &lt;!&ndash;              (click)="model.color = color"&ndash;&gt;-->
-<!--        &lt;!&ndash;            >&ndash;&gt;-->
-<!--        &lt;!&ndash;              &nbsp;&ndash;&gt;-->
-<!--        &lt;!&ndash;            </div>&ndash;&gt;-->
-<!--        &lt;!&ndash;          </div>&ndash;&gt;-->
-<!--        &lt;!&ndash;        </div>&ndash;&gt;-->
-<!--      </section>-->
-<!--    </form>-->
+  <clr-wizard-page #pageTwo [clrWizardPageNextDisabled]="secondPageForm.invalid">
+    <ng-template
+      clrPageTitle>{{'requests.dialog.titles.basicDataTitle' | translate}}</ng-template>
+    <ng-template
+      clrPageNavTitle>{{'requests.dialog.titles.basicDataNav' |translate}}</ng-template>
+    <form [formGroup]="secondPageForm">
+      <div class="clr-row">
+        <div class="clr-col-2"></div>
+        <div class="clr-col-8">
+          <clr-input-container>
+            <label>{{'requests.wizard.position' |translate}}</label>
+            <input clrInput required clrInput type="text" formControlName="position"
+                   [placeholder]="'requests.wizard.position' | translate"/>
+            <clr-control-error>{{'common.required' | translate}}</clr-control-error>
+          </clr-input-container>
+        </div>
+        <div class="clr-col-2"></div>
+      </div>
+
+      <div class="clr-row">
+        <div class="clr-col-2"></div>
+        <div class="clr-col-8">
+          <clr-input-container>
+            <label>{{'requests.wizard.positionDescription' |translate}}</label>
+            <input [size]="35" required clrInput type="text" formControlName="positionDescription"
+                   placeholder="{{'requests.wizard.positionDescription' | translate}}"/>
+            <clr-control-error>{{'common.required' | translate}}</clr-control-error>
+          </clr-input-container>
+        </div>
+        <div class="clr-col-2"></div>
+      </div>
+
+      <div class="clr-row">
+        <div class="clr-col-2"></div>
+        <div class="clr-col-8">
+          <clr-input-container>
+            <label>{{'requests.wizard.amountOfHours' |translate}}</label>
+            <input [size]="35" required clrInput type="number" formControlName="amountOfHours"
+                   min="0"
+                   max="500"
+                   placeholder="{{'requests.wizard.amountOfHours' | translate}}"/>
+            <clr-control-error>{{'common.required' | translate}}</clr-control-error>
+          </clr-input-container>
+        </div>
+        <div class="clr-col-2"></div>
+      </div>
+
+      <div class="clr-row">
+        <div class="clr-col-2"></div>
+        <div class="clr-col-8">
+          <clr-input-container>
+            <label>{{'requests.wizard.responsibilities' |translate}}</label>
+            <input [size]="35" required clrInput type="text" formControlName="responsibilities"
+                   placeholder="{{'requests.wizard.responsibilities' | translate}}"/>
+            <clr-control-error>{{'common.required' | translate}}</clr-control-error>
+          </clr-input-container>
+        </div>
+        <div class="clr-col-2"></div>
+      </div>
+    </form>
   </clr-wizard-page>
 
 
-  <clr-wizard-page #pageThree [clrWizardPageNextDisabled]="!thirdPageFormValid">
-    <ng-template clrPageTitle>{{'requests.dialog.titles.companyDataTitle' | translate}}</ng-template>
-    <ng-template clrPageNavTitle>{{'requests.dialog.titles.companyDataNav' |translate}}</ng-template>
-<!--    <form [formGroup]="secondPageForm">-->
-<!--      <section class="form-block">-->
-<!--        <label>Your pok&egrave;mon will be</label>-->
-<!--      </section>-->
-<!--    </form>-->
+  <clr-wizard-page #pageThree [clrWizardPageNextDisabled]="thirdPageForm.invalid">
+    <ng-template
+      clrPageTitle>{{'requests.dialog.titles.companyDataTitle' | translate}}</ng-template>
+    <ng-template
+      clrPageNavTitle>{{'requests.dialog.titles.companyDataNav' |translate}}</ng-template>
+    <form [formGroup]="thirdPageForm">
+      <div class="clr-row">
+        <div class="clr-col-2"></div>
+        <div class="clr-col-8">
+          <clr-input-container>
+            <label>{{'requests.wizard.companyName' |translate}}</label>
+            <input clrInput required clrInput type="text" formControlName="companyName"
+                   [placeholder]="'requests.wizard.companyName' | translate"/>
+            <clr-control-error>{{'common.required' | translate}}</clr-control-error>
+          </clr-input-container>
+        </div>
+        <div class="clr-col-2"></div>
+      </div>
+
+      <div class="clr-row">
+        <div class="clr-col-2"></div>
+        <div class="clr-col-8">
+          <clr-input-container>
+            <label>{{'requests.wizard.companyNip' |translate}}</label>
+            <input [size]="35" required clrInput type="text" formControlName="companyNip"
+                   placeholder="{{'requests.wizard.companyNip' | translate}}"/>
+            <clr-control-error>{{'common.required' | translate}}</clr-control-error>
+          </clr-input-container>
+        </div>
+        <div class="clr-col-2"></div>
+      </div>
+
+      <div class="clr-row">
+        <div class="clr-col-2"></div>
+        <div class="clr-col-8">
+          <clr-input-container>
+            <label>{{'requests.wizard.departmentName' |translate}}</label>
+            <input [size]="35" required clrInput type="text" formControlName="departmentName"
+                   placeholder="{{'requests.wizard.departmentName' | translate}}"/>
+            <clr-control-error>{{'common.required' | translate}}</clr-control-error>
+          </clr-input-container>
+        </div>
+        <div class="clr-col-2"></div>
+      </div>
+
+      <div class="clr-row">
+        <div class="clr-col-2"></div>
+        <div class="clr-col-8">
+          <clr-input-container>
+            <label>{{'requests.wizard.practiceSuperviserName' |translate}}</label>
+            <input [size]="35" required clrInput type="text" formControlName="practiceSuperviserName"
+                   placeholder="{{'requests.wizard.practiceSuperviserName' | translate}}"/>
+            <clr-control-error>{{'common.required' | translate}}</clr-control-error>
+          </clr-input-container>
+        </div>
+        <div class="clr-col-2"></div>
+      </div>
+
+      <div class="clr-row">
+        <div class="clr-col-2"></div>
+        <div class="clr-col-8">
+          <clr-input-container>
+            <label>{{'requests.wizard.practiceSuperviserLastName' |translate}}</label>
+            <input [size]="35" required clrInput type="text" formControlName="practiceSuperviserLastName"
+                   placeholder="{{'requests.wizard.practiceSuperviserLastName' | translate}}"/>
+            <clr-control-error>{{'common.required' | translate}}</clr-control-error>
+          </clr-input-container>
+        </div>
+        <div class="clr-col-2"></div>
+      </div>
+
+      <div class="clr-row">
+        <div class="clr-col-2"></div>
+        <div class="clr-col-8">
+          <clr-input-container>
+            <label>{{'requests.wizard.practiceSuperviserPhone' |translate}}</label>
+            <input [size]="35" required clrInput type="text" formControlName="practiceSuperviserPhone"
+                   placeholder="{{'requests.wizard.practiceSuperviserPhone' | translate}}"/>
+            <clr-control-error>{{'common.required' | translate}}</clr-control-error>
+          </clr-input-container>
+        </div>
+        <div class="clr-col-2"></div>
+      </div>
+
+      <div class="clr-row">
+        <div class="clr-col-2"></div>
+        <div class="clr-col-8">
+          <clr-input-container>
+            <label>{{'requests.wizard.practiceSuperviserEmail' |translate}}</label>
+            <input [size]="35" required clrInput type="text" formControlName="practiceSuperviserEmail"
+                   placeholder="{{'requests.wizard.practiceSuperviserEmail' | translate}}"/>
+            <clr-control-error>{{'common.required' | translate}}</clr-control-error>
+          </clr-input-container>
+        </div>
+        <div class="clr-col-2"></div>
+      </div>
+    </form>
   </clr-wizard-page>
 
-  <clr-wizard-page #pageFour>
+  <clr-wizard-page #pageFourfth [clrWizardPageNextDisabled]="false">
+    <ng-template
+      clrPageTitle>{{'requests.dialog.titles.agreementsTitle' | translate}}</ng-template>
+    <ng-template
+      clrPageNavTitle>{{'requests.dialog.titles.agreementsNav' |translate}}</ng-template>
+    <form [formGroup]="fourthPageForm">
+      <clr-checkbox-container>
+        <clr-checkbox-wrapper>
+          <input type="checkbox" clrCheckbox required name="options"
+                 formControlName="infoAgreement"/>
+          <label>INFORMACJA O PRZETWARZANIU DANYCH OSOBOWYCH</label>
+        </clr-checkbox-wrapper>
+        <clr-checkbox-wrapper>
+          <input type="checkbox" clrCheckbox required name="options"
+                 formControlName="processingAgreement"/>
+          <label>ZGODA NA PRZETWARZANIE DANYCH OSOBOWYCH</label>
+        </clr-checkbox-wrapper>
+      </clr-checkbox-container>
+    </form>
+  </clr-wizard-page>
+
+  <clr-wizard-page #pageFifth (clrWizardPageOnLoad)="prepareData()">
     <ng-template clrPageTitle>{{'requests.dialog.titles.summaryTitle' | translate}}</ng-template>
     <ng-template clrPageNavTitle>{{'requests.dialog.titles.summaryNav' |translate}}</ng-template>
-<!--    <form [formGroup]="secondPageForm">-->
-<!--      <section class="form-block">-->
-<!--        <label>Your pok&egrave;mon will be</label>-->
-<!--      </section>-->
-<!--    </form>-->
+
+    <div class="clr-row">
+      <div class="clr-col-2"></div>
+      <div class="clr-col-8">
+        <label>{{'requests.wizard.companyName' | translate}}</label>
+        {{requestToSave.companyName}}
+      </div>
+      <div class="clr-col-2"></div>
+    </div>
+
+
   </clr-wizard-page>
-
-
-  <!--      <clr-select-container>-->
-  <!--        <label>Height (Feet)</label>-->
-  <!--        <select clrSelect name="ht_feet" [(ngModel)]="request.description">-->
-  <!--          <option *ngFor="let measure of [ '0 ft.', '1 ft.', '2 ft.', '3 ft.', '4 ft.' ]" [value]="measure">-->
-  <!--            {{measure}}-->
-  <!--          </option>-->
-  <!--        </select>-->
-  <!--      </clr-select-container>-->
-
-  <!--      <clr-select-container>-->
-  <!--        <label>Height (Inches)</label>-->
-  <!--        <select clrSelect name="ht_inches" [(ngModel)]="request.name">-->
-  <!--          <option-->
-  <!--            *ngFor="let inch of [ '0 in.', '1 in.', '2 in.', '3 in.', '4 in.', '5 in.', '6 in.', '7 in.', '8 in.', '9 in.', '10 in.', '11 in.' ]"-->
-  <!--            [value]="inch"-->
-  <!--          >-->
-  <!--            {{inch}}-->
-  <!--          </option>-->
-  <!--        </select>-->
-  <!--      </clr-select-container>-->
-
-  <!--      <clr-input-container>-->
-  <!--        <label>Weight</label>-->
-  <!--        <input clrInput placeholder="lbs." name="weight" [(ngModel)]="request.active" />-->
-  <!--        <clr-control-error>This field cannot be empty!</clr-control-error>-->
-  <!--      </clr-input-container>-->
-
-  <!--      <clr-select-container>-->
-  <!--        <label>Gender</label>-->
-  <!--        <select clrSelect name="gender" [(ngModel)]="request.companyDescription">-->
-  <!--          <option *ngFor="let g of [ 'Male', 'Female' ]" [value]="g">-->
-  <!--            {{g}}-->
-  <!--          </option>-->
-  <!--        </select>-->
-  <!--      </clr-select-container>-->
-
-
-  <!--  <clr-wizard-page #pageThree [clrWizardPageNextDisabled]="!formPageThreeValid">-->
-  <!--    <ng-template clrPageTitle>Power</ng-template>-->
-  <!--    <ng-template clrPageNavTitle> Tytuł trzy</ng-template>-->
-
-  <!--    <clr-alert-->
-  <!--      [clrAlertClosable]="false"-->
-  <!--      clrAlertType="alert-error"-->
-  <!--      *ngIf="showPowerError"-->
-  <!--      [clrCloseButtonAriaLabel]="'Close Wiki alert'"-->
-  <!--    >-->
-  <!--      <clr-alert-item>-->
-  <!--        <span class="alert-text">-->
-  <!--          Your power and weakness cannot be from the same source.-->
-  <!--        </span>-->
-  <!--      </clr-alert-item>-->
-  <!--    </clr-alert>-->
-
-  <!--    <form #formPageTwo="ngForm">-->
-  <!--      <section class="form-block">-->
-  <!--        <label>Your pok&egrave;mon tekst tekst.</label>-->
-  <!--        &lt;!&ndash;        <div class="clr-row wizdemo-color-block-row">&ndash;&gt;-->
-  <!--        &lt;!&ndash;          <div *ngFor="let icon of powerSources" class="wizdemo-color-block-wrapper clr-col-3">&ndash;&gt;-->
-  <!--        &lt;!&ndash;            <div&ndash;&gt;-->
-  <!--        &lt;!&ndash;              class="wizdemo-color-block is-icon"&ndash;&gt;-->
-  <!--        &lt;!&ndash;              [class.active]="icon === model.power"&ndash;&gt;-->
-  <!--        &lt;!&ndash;              [class.disabled]="icon === model.weakness"&ndash;&gt;-->
-  <!--        &lt;!&ndash;              (click)="setPower(icon)"&ndash;&gt;-->
-  <!--        &lt;!&ndash;            >&ndash;&gt;-->
-  <!--        &lt;!&ndash;              <clr-icon [attr.shape]="icon"></clr-icon>&ndash;&gt;-->
-  <!--        &lt;!&ndash;            </div>&ndash;&gt;-->
-  <!--        &lt;!&ndash;          </div>&ndash;&gt;-->
-  <!--        &lt;!&ndash;        </div>&ndash;&gt;-->
-  <!--      </section>-->
-  <!--    </form>-->
-  <!--  </clr-wizard-page>-->
-
-  <!--  <clr-wizard-page #pageFour [clrWizardPageNextDisabled]="!formPageThreeValid">-->
-  <!--    <ng-template clrPageTitle>Weakness</ng-template>-->
-  <!--    <ng-template clrPageNavTitle>czwarty tytuł}</ng-template>-->
-
-  <!--    <clr-alert [clrAlertClosable]="false" clrAlertType="alert-error" *ngIf="showPowerError">-->
-  <!--      <clr-alert-item>-->
-  <!--        <span class="alert-text">-->
-  <!--          Your power and weakness cannot be from the same source.-->
-  <!--        </span>-->
-  <!--      </clr-alert-item>-->
-  <!--    </clr-alert>-->
-
-  <!--    <form #formPageTwo="ngForm">-->
-  <!--      <section class="form-block">-->
-  <!--        <label>Your pok&egrave;mon tytuł.</label>-->
-  <!--        &lt;!&ndash;        <div class="clr-row wizdemo-color-block-row">&ndash;&gt;-->
-  <!--        &lt;!&ndash;          <div *ngFor="let icon of powerSources" class="wizdemo-color-block-wrapper clr-col-3">&ndash;&gt;-->
-  <!--        &lt;!&ndash;            <div&ndash;&gt;-->
-  <!--        &lt;!&ndash;              class="wizdemo-color-block is-icon"&ndash;&gt;-->
-  <!--        &lt;!&ndash;              [class.active]="icon === model.weakness"&ndash;&gt;-->
-  <!--        &lt;!&ndash;              [class.disabled]="icon === model.power"&ndash;&gt;-->
-  <!--        &lt;!&ndash;              (click)="setWeakness(icon)"&ndash;&gt;-->
-  <!--        &lt;!&ndash;            >&ndash;&gt;-->
-  <!--        &lt;!&ndash;              <clr-icon [attr.shape]="icon"></clr-icon>&ndash;&gt;-->
-  <!--        &lt;!&ndash;            </div>&ndash;&gt;-->
-  <!--        &lt;!&ndash;          </div>&ndash;&gt;-->
-  <!--        &lt;!&ndash;        </div>&ndash;&gt;-->
-  <!--      </section>-->
-  <!--    </form>-->
-  <!--  </clr-wizard-page>-->
-
-  <!--  <clr-wizard-page #pageFive (clrWizardPageOnLoad)="createRanking()">-->
-  <!--    <ng-template clrPageTitle>Summary</ng-template>-->
-
-  <!--    &lt;!&ndash;    <p>&ndash;&gt;-->
-  <!--    &lt;!&ndash;      Your pok&egrave;mon's name is {{ model.name }}. {{ model.gender === "Male" ? "He" : "She" }} {{&ndash;&gt;-->
-  <!--    &lt;!&ndash;      textsplanationOfPower }} but {{ textsplanationOfWeakness }}.&ndash;&gt;-->
-  <!--    &lt;!&ndash;    </p>&ndash;&gt;-->
-  <!--    &lt;!&ndash;&ndash;&gt;-->
-  <!--    &lt;!&ndash;    <p>&ndash;&gt;-->
-  <!--    &lt;!&ndash;      Your pok&egrave;mon's power ranking is: {{ model.ranking }}{{ powerRankingPunctuation }}&ndash;&gt;-->
-  <!--    &lt;!&ndash;    </p>&ndash;&gt;-->
-  <!--    &lt;!&ndash;&ndash;&gt;-->
-  <!--    &lt;!&ndash;    <p>&ndash;&gt;-->
-  <!--    &lt;!&ndash;      {{ textsplanationOfRanking }}&ndash;&gt;-->
-  <!--    &lt;!&ndash;    </p>&ndash;&gt;-->
-  <!--  </clr-wizard-page>-->
 </clr-wizard>
