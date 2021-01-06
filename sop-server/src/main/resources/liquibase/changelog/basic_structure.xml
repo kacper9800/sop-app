@@ -947,33 +947,56 @@
       <column name="request_type_id" type="bigint"></column>
     </addColumn>
   </changeSet>
-<!--  <changeSet id="32" author="krzymkiewicz">-->
-<!--    <insert tableName="dictionaries">-->
-<!--      <column  name="active"  value="true"/>-->
-<!--      <column  name="deleted"  value="false"/>-->
-<!--      <column  name="name"  value="Doctortak"/>-->
-<!--      <column  name="value"  value="Phd"/>-->
-<!--      <column name="DICTIONARY_TYPE" value="ACADEMIC_DEGREE"/>-->
-<!--    </insert>-->
-<!--    <insert tableName="dictionaries">-->
-<!--      <column  name="active"  value="true"/>-->
-<!--      <column  name="deleted"  value="false"/>-->
-<!--      <column  name="value"  value="OTHER"/>-->
-<!--      <column name="DICTIONARY_TYPE" value="ACADEMIC_DEGREE"/>-->
-<!--    </insert>-->
-<!--    <insert tableName="dictionaries">-->
-<!--      <column  name="active"  value="true"/>-->
-<!--      <column  name="deleted"  value="false"/>-->
-<!--      <column  name="value"  value="OTHER"/>-->
-<!--      <column name="DICTIONARY_TYPE" value="ACADEMIC_DEGREE"/>-->
-<!--    </insert>-->
-<!--    <insert tableName="dictionaries">-->
-<!--      <column  name="active"  value="true"/>-->
-<!--      <column  name="deleted"  value="false"/>-->
-<!--      <column  name="value"  value="OTHER"/>-->
-<!--      <column name="DICTIONARY_TYPE" value="ACADEMIC_DEGREE"/>-->
-<!--    </insert>-->
-<!--  </changeSet>-->
+  <changeSet id="43" author="krzymkieiwcz">
+    <dropColumn tableName="requests" columnName="intern_to_moderator_status"/>
+    <dropColumn tableName="requests" columnName="intern_to_moderator_action_date"/>
+    <dropColumn tableName="requests" columnName="moderator_to_admin_status"/>
+    <dropColumn tableName="requests" columnName="moderator_to_admin_action_date"/>
+    <dropColumn tableName="requests" columnName="admin_to_moderator_status"/>
+    <dropColumn tableName="requests" columnName="admin_to_moderator_action_date"/>
+    <dropColumn tableName="requests" columnName="admin_to_intern_status"/>
+    <dropColumn tableName="requests" columnName="admin_to_intern_action_date"/>
+    <dropColumn tableName="requests" columnName="moderator_to_intern_status"/>
+    <dropColumn tableName="requests" columnName="moderator_to_intern_action_date"/>
+  </changeSet>
+  <changeSet id="44" author="krzymkiewicz">
+    <addColumn tableName="requests">
+      <column name="position" type="varchar(255)"></column>
+      <column name="positionDescription" type="varchar(2050)"></column>
+      <column name="amountOfHours" type="integer"></column>
+      <column name="responsibilities" type="varchar(2050)"></column>
+      <column name="company_id" type="bigint"></column>
+      <column name="practice_superviser_name" type="varchar(255)"></column>
+      <column name="practice_superviser_last_name" type="varchar(255)"></column>
+      <column name="practice_superviser_phone" type="varchar(30)"></column>
+      <column name="practice_superviser_email" type="varchar(255)"></column>
+      <column name="info_agreement" type="boolean"></column>
+      <column name="processing_agreement" type="boolean"></column>
+
+      <column name="send_request_date" type="timestamp without time zone"></column>
+      <column name="send_request_status" type="varchar(255)"></column>
+
+      <column name="moderator_decision_date" type="timestamp without time zone"></column>
+      <column name="moderator_decision_status" type="varchar(255)"></column>
+      <column name="moderator_decision_feedback" type="varchar(255)"></column>
+
+      <column name="admin_decision_date" type="timestamp without time zone"></column>
+      <column name="admin_decision_status" type="varchar(255)"></column>
+      <column name="admin_decision_feedback" type="varchar(255)"></column>
+    </addColumn>
+    <addForeignKeyConstraint
+      baseColumnNames="company_id"
+      baseTableName="requests"
+      constraintName="fk_company_id"
+      referencedColumnNames="id"
+      referencedTableName="companies"/>
+  </changeSet>
+  <changeSet id="45" author="krzymkiewicz">
+    <addColumn tableName="users">
+      <column name="is_during_internship" type="boolean"></column>
+    </addColumn>
+  </changeSet>
+
 </databaseChangeLog>
 
 

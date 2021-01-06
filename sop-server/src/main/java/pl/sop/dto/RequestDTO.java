@@ -27,6 +27,7 @@ public class RequestDTO {
 
   // Company data
   private String nip;
+  private Long companyId;
   private String companyName;
   private String companyDescription;
   private String departmentName;
@@ -72,11 +73,12 @@ public class RequestDTO {
       String requestTypeName, Long collegeId, String collegeName, Long instituteId,
       String instituteName, Long internId, String internName, String position,
       String positionDescription, Integer amountOfHours, String responsibilities,
-      String nip, String companyName, String companyDescription, String departmentName,
-      String practiceSuperviserName, String practiceSuperviserLastName,
-      String practiceSuperviserPhone, String practiceSuperviserEmail, Boolean infoAgreement,
-      Boolean processingAgreement, Long moderatorId, String moderatorName, Long adminId,
-      String adminName, ERequestStatus actualRequestStatus, LocalDate sendRequestDate,
+      String nip, Long companyId, String companyName, String companyDescription,
+      String departmentName, String practiceSuperviserName,
+      String practiceSuperviserLastName, String practiceSuperviserPhone,
+      String practiceSuperviserEmail, Boolean infoAgreement, Boolean processingAgreement,
+      Long moderatorId, String moderatorName, Long adminId, String adminName,
+      ERequestStatus actualRequestStatus, LocalDate sendRequestDate,
       ERequestStatus sendRequestStatus, LocalDate moderatorDecisionDate,
       ERequestStatus moderatorDecisionStatus, String moderatorDecisionFeedback,
       LocalDate adminDecisionDate, ERequestStatus adminDecisionStatus,
@@ -97,6 +99,7 @@ public class RequestDTO {
     this.amountOfHours = amountOfHours;
     this.responsibilities = responsibilities;
     this.nip = nip;
+    this.companyId = companyId;
     this.companyName = companyName;
     this.companyDescription = companyDescription;
     this.departmentName = departmentName;
@@ -249,6 +252,14 @@ public class RequestDTO {
 
   public void setNip(String nip) {
     this.nip = nip;
+  }
+
+  public Long getCompanyId() {
+    return companyId;
+  }
+
+  public void setCompanyId(Long companyId) {
+    this.companyId = companyId;
   }
 
   public String getCompanyName() {

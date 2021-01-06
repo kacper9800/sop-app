@@ -97,6 +97,7 @@ import { LandingPageComponent } from './landing-page/landing-page.component';
 import { AddDialogRequestsComponent } from './sop/requests/add-dialog-requests/add-dialog-requests.component';
 import { ViewDialogRequestsComponent } from './sop/requests/view-dialog-requests/view-dialog-requests.component';
 import { AddEditDialogLogbooksComponent } from './sop/logbook/add-edit-dialog-logbooks/add-edit-dialog-logbooks.component';
+import { AnswerRequestDialogRequestsComponent } from './sop/requests/answer-request-dialog-requests/answer-request-dialog-requests.component';
 
 @NgModule({
   declarations: [
@@ -156,6 +157,7 @@ import { AddEditDialogLogbooksComponent } from './sop/logbook/add-edit-dialog-lo
     AddDialogRequestsComponent,
     ViewDialogRequestsComponent,
     AddEditDialogLogbooksComponent,
+    AnswerRequestDialogRequestsComponent,
   ],
   imports: [
     BrowserModule,

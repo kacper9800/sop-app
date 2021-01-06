@@ -10,6 +10,7 @@ import {ClrWizard} from '@clr/angular';
 import {RequestsService} from '../../../_services/requests.service';
 import {MessageService} from 'primeng/api';
 import {PrincipalService} from '../../../_services/auth/principal.service';
+import {UserService} from '../../../_services/user.service';
 
 @Component({
   selector: 'app-add-dialog-requests',
@@ -48,6 +49,7 @@ export class AddDialogRequestsComponent implements OnInit {
   public thirdPageFormValid: boolean;
 
   constructor(private translateService: TranslateService,
+              private userService: UserService,
               private dictionaryService: DictionariesService,
               private requestsService: RequestsService,
               private principalService: PrincipalService,
@@ -56,6 +58,7 @@ export class AddDialogRequestsComponent implements OnInit {
 
   ngOnInit(): void {
     this.loadRequestTypes();
+    this.loadModerators();
   }
 
   public showNewRequestDialog() {
@@ -74,7 +77,8 @@ export class AddDialogRequestsComponent implements OnInit {
       position: new FormControl(''),
       positionDescription: new FormControl(''),
       amountOfHours: new FormControl(''),
-      responsibilities: new FormControl('')
+      responsibilities: new FormControl(''),
+      moderatorId: new FormControl()
     });
 
     this.thirdPageForm = this.formBuilder.group({
@@ -140,6 +144,7 @@ export class AddDialogRequestsComponent implements OnInit {
   }
 
   public onSuccessCreateRequest(res: any) {
+    this.closeDialogWithSaveEmitter.emit();
     // ToDo message
   }
 
@@ -151,12 +156,17 @@ export class AddDialogRequestsComponent implements OnInit {
     this.requestToSave = new Request();
     const requestTypeName = 'requests.requestTypes.' + this.requestType;
     const userName = this.principalService.getUser().firstName + ' ' + this.principalService.getUser().lastName;
-    this.requestToSave.name = this.translateService.instant(requestTypeName) + ' ' + userName;
-    this.requestToSave.requestType = this.firstPageForm.get('requestType').value;
+    this.requestToSave.name = this.translateService.instant(requestTypeName);
+    this.requestToSave.requestTypeName = this.firstPageForm.get('requestType').value;
     this.requestToSave.position = this.secondPageForm.get('position').value;
     this.requestToSave.positionDescription = this.secondPageForm.get('positionDescription').value;
     this.requestToSave.amountOfHours = this.secondPageForm.get('amountOfHours').value;
     this.requestToSave.responsibilities = this.secondPageForm.get('responsibilities').value;
+    this.requestToSave.moderatorId = this.secondPageForm.get('moderatorId').value;
+    console.log(this.requestToSave);
+    console.log(this.moderators);
+
+    this.requestToSave.instituteId = this.moderators.find(moderator => moderator.id === Number(this.requestToSave.moderatorId)).instituteId;
 
     this.requestToSave.companyName = this.thirdPageForm.get('companyName').value;
     this.requestToSave.nip = this.thirdPageForm.get('companyNip').value;
@@ -167,7 +177,6 @@ export class AddDialogRequestsComponent implements OnInit {
     this.requestToSave.practiceSuperviserEmail = this.thirdPageForm.get('practiceSuperviserEmail').value;
     this.requestToSave.infoAgreement = this.fourthPageForm.get('infoAgreement').value;
     this.requestToSave.processingAgreement = this.fourthPageForm.get('processingAgreement').value;
-    console.log(this.requestToSave);
   }
 
   public sendRequest() {
@@ -176,5 +185,36 @@ export class AddDialogRequestsComponent implements OnInit {
       (res) => this.onSuccessCreateRequest(res),
       (err) => this.onErrorCreateRequest()
     );
+  }
+
+  private loadModerators() {
+    this.userService.getModeratorsForInstitute().subscribe(
+      (res: any) => this.onSuccessLoadModerators(res),
+      (err) => this.onErrorLoadModerators(err)
+    );
+  }
+
+  private onSuccessLoadModerators(res: any) {
+    this.moderators = [];
+    this.moderators.push({
+      name: this.translateService.instant('requests.wizard.chooseModerator'),
+      id: null
+    });
+    res.forEach(moderator => this.moderators.push({
+      name: moderator.firstName + ' ' + moderator.lastName + '->' + moderator.instituteName,
+      id: moderator.id,
+      instituteId: moderator.instituteId,
+      instituteName: moderator.instituteName
+    }));
+
+  }
+
+  private onErrorLoadModerators(err: any) {
+    console.log('error');
+  }
+
+  public onModeratorChange(instituteId: number) {
+    console.log('change');
+    this.requestToSave.instituteId = instituteId;
   }
 }

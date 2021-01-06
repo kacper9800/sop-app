@@ -1,5 +1,6 @@
 package pl.sop.entities.organizationStructure;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -50,5 +51,19 @@ public class InstituteService {
   public Institute getById(Long instituteId) {
     Institute institute = instituteRepository.findActiveInstituteById(instituteId);
     return institute;
+  }
+
+  public List<Institute> getAllInstitutesForUserId(Long userId) {
+    List<Institute> institutes = instituteRepository.findAllInstitutesForUserId(userId);
+    return institutes;
+  }
+
+  public List<Long> getAllInstitutesIdForUser(Long userId) {
+    List<Institute> institutes = instituteRepository.findAllInstitutesForUserId(userId);
+    List<Long> institutesId = new ArrayList<>();
+    for (Institute institute: institutes) {
+      institutesId.add(institute.getId());
+    }
+    return institutesId;
   }
 }

@@ -3,6 +3,7 @@
   <h3 class="modal-title" style="text-align: center;">{{dialogTitle}}</h3>
   <div class="modal-body" style="margin-left: 20px">
     <ul class="clr-timeline">
+
       <li class="clr-timeline-step">
         <div class="clr-timeline-step-header">{{request.sendRequestDate | date}}</div>
         <clr-icon shape="success-standard" aria-label="Completed"></clr-icon>
@@ -18,15 +19,19 @@
       <li class="clr-timeline-step">
         <div class="clr-timeline-step-header"
              *ngIf="request.moderatorDecisionDate">{{request.moderatorDecisionDate | date}}</div>
-        <div class="clr-timeline-step-header" *ngIf="!request.moderatorDecisionDate">
-          Brak decyzji
+        <div class="clr-timeline-step-header" *ngIf="!request.moderatorDecisionDate"> Brak decyzji
         </div>
-        <clr-icon shape="dot-circle" aria-current="true" aria-label="Current" *ngIf="true"></clr-icon>
-        <clr-icon shape="success-standard" aria-label="Completed" *ngIf="request.moderatorDecisionStatus.toString() === 'ACCEPTED'"></clr-icon>
-        <clr-icon shape="success-standard" aria-label="Completed" *ngIf="request.moderatorDecisionStatus.toString() === 'ACCEPTED'"></clr-icon>
+
+        <clr-icon shape="dot-circle" aria-current="true" aria-label="Current"
+                  *ngIf="request.moderatorDecisionStatus && request.moderatorDecisionStatus.toString() === 'AWAITING'"></clr-icon>
+        <clr-icon shape="success-standard" aria-label="Completed"
+                  *ngIf="request.moderatorDecisionStatus && request.moderatorDecisionStatus.toString() === 'ACCEPTED'"></clr-icon>
+        <clr-icon shape="error-standard" aria-label="Error"
+                  *ngIf="request.moderatorDecisionStatus && request.moderatorDecisionStatus.toString() === 'REJECTED'"></clr-icon>
+
         <div class="clr-timeline-step-body">
           <span class="clr-timeline-step-title"
-                *ngIf="request.moderatorDecisionFeedback">{{request.moderatorDecisionFeedback}}</span>
+                *ngIf="request.moderatorDecisionFeedback ">{{request.moderatorDecisionFeedback}}</span>
           <span class="clr-timeline-step-description"
                 *ngIf="request.moderatorDecisionFeedback">{{request.moderatorDecisionFeedback}}</span>
         </div>
@@ -34,14 +39,24 @@
 
       <!--Admin-->
       <li class="clr-timeline-step">
-        <div class="clr-timeline-step-header" *ngIf="request.adminDecisionDate">{{request.adminDecisionDate | date}}</div>
-        <div class="clr-timeline-step-header" *ngIf="!request.adminDecisionDate">Brak decyzji</div>
-        <clr-icon shape="error-standard" aria-label="Error"></clr-icon>
-        <!--        <clr-spinner clrMedium aria-label="In progress">Fetching data</clr-spinner>-->
+        <div class="clr-timeline-step-header"
+             *ngIf="request.moderatorDecisionDate">{{request.moderatorDecisionDate | date}}</div>
+        <div class="clr-timeline-step-header" *ngIf="!request.moderatorDecisionDate">
+          Brak decyzji
+        </div>
+        <clr-icon shape="circle" aria-label="Not started" *ngIf="!request.adminDecisionStatus"></clr-icon>
+        <clr-icon shape="dot-circle" aria-current="true" aria-label="Current"
+                  *ngIf="request.adminDecisionStatus && request.adminDecisionStatus.toString() === 'AWAITING'"></clr-icon>
+        <clr-icon shape="success-standard" aria-label="Completed"
+                  *ngIf="request.adminDecisionStatus && request.adminDecisionStatus.toString() === 'ACCEPTED'"></clr-icon>
+        <clr-icon shape="error-standard" aria-label="Error"
+                  *ngIf="request.adminDecisionStatus && request.adminDecisionStatus.toString() === 'REJECTED'"></clr-icon>
 
         <div class="clr-timeline-step-body">
-          <span class="clr-timeline-step-title">{{request.adminDecisionFeedback}}</span>
-          <span class="clr-timeline-step-description">{{request.adminDecisionFeedback}}</span>
+          <span class="clr-timeline-step-title"
+                *ngIf="request.moderatorDecisionFeedback">{{request.adminDecisionFeedback}}</span>
+          <span class="clr-timeline-step-description"
+                *ngIf="request.moderatorDecisionFeedback">{{request.adminDecisionFeedback}}</span>
         </div>
       </li>
       <!--     -->

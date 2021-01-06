@@ -124,6 +124,57 @@
           Statystyki
         </a>
 
+        <!--Dyrektor instytutu-->
+        <a routerLink="/app/requests" class="nav-link" *ngIf="isDirector">
+          <clr-icon shape="arrow"></clr-icon>
+          <b>Wnioski o praktyki</b>
+        </a>
+        <a routerLink="/app/directions" class="nav-link" *ngIf="isDirector">
+          <clr-icon shape="two-way-arrows" class="is-solid"></clr-icon>
+          Kierunki studiów
+        </a>
+        <a routerLink="/app/activation-keys" class="nav-link" *ngIf="isDirector">
+          <clr-icon shape="key" class="is-solid"></clr-icon>
+          {{'navBar.activationKeys'| translate}}
+        </a>
+        <a routerLink="/app/college-structure" class="nav-link" *ngIf="isDirector">
+          <clr-icon shape="building"></clr-icon>
+          Struktura uczelni
+        </a>
+        <section class="nav-group collapsible" *ngIf="isDirector">
+          <input id="dropdown5" type="checkbox">
+          <label for="dropdown5">
+            <clr-icon shape="users" class="is-solid"></clr-icon>{{'navBar.users' | translate}}
+          </label>
+          <ul class="nav-list">
+            <li>
+              <a routerLink="/app/users" class="nav-link" *ngIf="isDirector">
+                {{'navBar.allUsers' | translate}}</a>
+            </li>
+            <li>
+              <a routerLink="/app/interns" class="nav-link" *ngIf="isDirector">
+                Lista praktykantów</a>
+            </li>
+          </ul>
+        </section>
+        <a routerLink="/app/companies" class="nav-link" *ngIf="isDirector">
+          <clr-icon shape="store" class="is-solid"></clr-icon>
+          Lista firm
+        </a>
+        <a routerLink="/app/documents" class="nav-link" *ngIf="isDirector">
+          <clr-icon shape="clipboard"></clr-icon>
+          Dokumenty
+        </a>
+        <a routerLink="/app/forms" class="nav-link" *ngIf="isDirector">
+          <clr-icon shape="form"></clr-icon>
+          {{'navBar.surveys' | translate}}
+        </a>
+        <a routerLink="/app/statistics" class="nav-link" *ngIf="isDirector">
+          <clr-icon shape="line-chart"></clr-icon>
+          Statystyki
+        </a>
+
+
         <!--Kierownik praktyk-->
         <a routerLink="/app/home" class="nav-link" *ngIf="isModerator" style="color: red">
           Kierownik praktyk

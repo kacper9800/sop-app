@@ -20,18 +20,6 @@
       <div class="clr-row">
         <div class="clr-col-2"></div>
         <div class="clr-col-8">
-          <clr-input-container>
-            <label><clr-icon shape="accessibility-2"></clr-icon></label>
-            <input type="text" clrInput formControlName="numberOfUses" [placeholder]="'common.amountOfUses' | translate"/>
-            <clr-control-error>{{'common.required' | translate}}</clr-control-error>
-          </clr-input-container>
-        </div>
-        <div class="clr-col-2"></div>
-      </div>
-
-      <div class="clr-row">
-        <div class="clr-col-2"></div>
-        <div class="clr-col-8">
           <clr-date-container>
             <label>
               <clr-icon shape="calendar"></clr-icon>
@@ -215,6 +203,20 @@
           <div class="clr-col-2"></div>
         </div>
       </ng-container>
+      <div class="clr-row">
+        <div class="clr-col-2"></div>
+        <div class="clr-col-8">
+          <clr-input-container>
+            <label>
+              <clr-icon shape="accessibility-2"></clr-icon>
+            </label>
+            <input type="text" clrInput formControlName="numberOfUses"
+                   [placeholder]="'common.amountOfUses' | translate"/>
+            <clr-control-error>{{'common.required' | translate}}</clr-control-error>
+          </clr-input-container>
+        </div>
+        <div class="clr-col-2"></div>
+      </div>
     </form>
   </div>
   <div class="modal-footer">

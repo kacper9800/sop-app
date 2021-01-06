@@ -99,6 +99,23 @@
         </div>
         <div class="clr-col-2"></div>
       </div>
+
+      <div class="clr-row">
+        <div class="clr-col-2"></div>
+        <div class="clr-col-8">
+          <clr-select-container>
+            <label>
+              Kierownik praktyk
+            </label>
+            <select clrSelect id="select-role" class="clr-select" formControlName="moderatorId" required>
+              <option *ngFor="let moderator of moderators" [value]="moderator.id">
+                {{moderator.name}}</option>
+            </select>
+            <clr-control-error>{{'common.required' | translate}}</clr-control-error>
+          </clr-select-container>
+        </div>
+        <div class="clr-col-2"></div>
+      </div>
     </form>
   </clr-wizard-page>
 
@@ -127,7 +144,7 @@
         <div class="clr-col-8">
           <clr-input-container>
             <label>{{'requests.wizard.companyNip' |translate}}</label>
-            <input [size]="35" required clrInput type="text" formControlName="companyNip"
+            <input [size]="35" maxlength="10" required clrInput type="text" formControlName="companyNip"
                    placeholder="{{'requests.wizard.companyNip' | translate}}"/>
             <clr-control-error>{{'common.required' | translate}}</clr-control-error>
           </clr-input-container>

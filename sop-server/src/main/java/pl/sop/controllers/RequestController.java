@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import pl.sop.dto.RequestDTO;
 import pl.sop.security.services.UserDetailsImpl;
 import pl.sop.services.RequestService;
@@ -32,24 +31,58 @@ public class RequestController {
   //  > /api/requests/{id} - deleteRequest DELETE
 
   @CrossOrigin
-  @PreAuthorize("hasRole('ROLE_SUPERADMIN') or hasRole('ROLE_ADMIN') or hasRole('ROLE_MODERATOR') or hasRole('ROLE_STUDENT')")
-  @RequestMapping(value = "/api/requests", method = RequestMethod.GET)
-  public ResponseEntity<List<RequestDTO>> getAllRequests(Authentication authentication) {
+  @PreAuthorize("hasRole('ROLE_STUDENT')")
+  @RequestMapping(value = "/api/requests/student", method = RequestMethod.GET)
+  public ResponseEntity<List<RequestDTO>> getAllRequestsForStudent(Authentication authentication) {
     UserDetailsImpl loggedUser = (UserDetailsImpl) authentication.getPrincipal();
     Long collegeId = loggedUser.getSelectedCollegeId();
     if (collegeId == null) {
       return new ResponseEntity<>(HttpStatus.NOT_ACCEPTABLE);
     }
-    return this.requestService
-        .getAllRequests(loggedUser.getId(), loggedUser.getSelectedCollegeId());
+    return this.requestService.getAllRequestsForStudent(loggedUser.getId());
+  }
+
+  @CrossOrigin
+  @PreAuthorize("hasRole('ROLE_SUPERADMIN') or hasRole('ROLE_ADMIN') or hasRole('ROLE_DIRECTOR') or hasRole('ROLE_MODERATOR')")
+  @RequestMapping(value = "/api/requests/institute", method = RequestMethod.GET)
+  public ResponseEntity<List<RequestDTO>> getAllRequestsForInstitute(Authentication authentication) {
+    UserDetailsImpl loggedUser = (UserDetailsImpl) authentication.getPrincipal();
+    Long collegeId = loggedUser.getSelectedCollegeId();
+    if (collegeId == null) {
+      return new ResponseEntity<>(HttpStatus.NOT_ACCEPTABLE);
+    }
+    return this.requestService.getAllRequestsForInstitute(loggedUser.getId());
+  }
+
+  @CrossOrigin
+  @PreAuthorize("hasRole('ROLE_DIRECTOR')")
+  @RequestMapping(value = "/api/requests/director", method = RequestMethod.GET)
+  public ResponseEntity<List<RequestDTO>> getAllRequestsForDirector(Authentication authentication) {
+    UserDetailsImpl loggedUser = (UserDetailsImpl) authentication.getPrincipal();
+    Long collegeId = loggedUser.getSelectedCollegeId();
+    if (collegeId == null) {
+      return new ResponseEntity<>(HttpStatus.NOT_ACCEPTABLE);
+    }
+    return this.requestService.getAllRequestsForDirectorId(loggedUser.getId());
   }
 
   @CrossOrigin
   @PreAuthorize("hasRole('ROLE_SUPERADMIN') or hasRole('ROLE_ADMIN') or hasRole('ROLE_MODERATOR') or hasRole('ROLE_STUDENT')")
+  @RequestMapping(value = "/api/requests/college", method = RequestMethod.GET)
+  public ResponseEntity<List<RequestDTO>> getAllRequestsForCollege(Authentication authentication) {
+    UserDetailsImpl loggedUser = (UserDetailsImpl) authentication.getPrincipal();
+    Long collegeId = loggedUser.getSelectedCollegeId();
+    if (collegeId == null) {
+      return new ResponseEntity<>(HttpStatus.NOT_ACCEPTABLE);
+    }
+    return this.requestService.getAllRequestsForCollege(loggedUser.getSelectedCollegeId());
+  }
+
+  @CrossOrigin
+  @PreAuthorize("hasRole('ROLE_SUPERADMIN') or hasRole('ROLE_ADMIN') or hasRole('ROLE_MODERATOR') or hasRole('ROLE_DIRECTOR') or hasRole('ROLE_STUDENT')")
   @RequestMapping(value = "/api/requests/{id}", method = RequestMethod.GET)
   public ResponseEntity<RequestDTO> getRequestById(Authentication authentication,
-      @RequestParam("id") Long id) {
-    UserDetailsImpl loggedUser = (UserDetailsImpl) authentication.getPrincipal();
+      @PathVariable("id") Long id) {
     if (id == null) {
       return new ResponseEntity<>(HttpStatus.NOT_ACCEPTABLE);
     }
@@ -84,8 +117,8 @@ public class RequestController {
   }
 
   @CrossOrigin
-  @PreAuthorize("hasRole('ROLE_ADMIN')")
-  @RequestMapping(value = "/api/requests/adminResponse", method = RequestMethod.PUT)
+  @PreAuthorize("hasRole('ROLE_DIRECTOR')")
+  @RequestMapping(value = "/api/requests/directorResponse", method = RequestMethod.PUT)
   public ResponseEntity responseRequestAsAdmin(Authentication authentication,
       @RequestBody RequestDTO requestDTO) {
     UserDetailsImpl loggedUser = (UserDetailsImpl) authentication.getPrincipal();

@@ -4,10 +4,11 @@ export interface IRequest {
   id: number;
   name: string;
   description: string;
-  requestType: string;
+  requestTypeName: string;
   collegeId: number;
   instituteId: number;
   internId: number;
+  internName: string;
 
   // Intern data
   position: string;
@@ -38,7 +39,7 @@ export interface IRequest {
   practiceSuperviserEmail: string;
 
   // Status
-  actualRequestStatusName: RequestStatus;
+  actualRequestStatus: RequestStatus;
   sendRequestDate: Date;
   sendRequestStatus: RequestStatus;
 
@@ -57,10 +58,11 @@ export class Request implements IRequest {
   id: number;
   name: string;
   description: string;
-  requestType: string;
+  requestTypeName: string;
   collegeId: number;
   instituteId: number;
   internId: number;
+  internName: string;
 
   // Intern data
   position: string;
@@ -92,7 +94,7 @@ export class Request implements IRequest {
 
 
   // Status
-  actualRequestStatusName: RequestStatus;
+  actualRequestStatus: RequestStatus;
   sendRequestDate: Date;
   sendRequestStatus: RequestStatus;
 

@@ -10,6 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import pl.sop.dto.UserDTO;
+import pl.sop.dto.UserModeratorDTO;
 import pl.sop.repositories.UserRepository;
 import pl.sop.security.services.UserDetailsImpl;
 import pl.sop.services.UserService;
@@ -53,8 +54,8 @@ public class UserController {
   }
 
   // Returns for logged user
-  @GetMapping(value = "/api/institute/moderators")
-  public ResponseEntity<List<UserDTO>> getModeratorsForInstitute(Authentication authentication) {
+  @GetMapping(value = "/api/users/institute/moderators")
+  public ResponseEntity<List<UserModeratorDTO>> getModeratorsForUserInstitutes(Authentication authentication) {
     UserDetailsImpl user = (UserDetailsImpl) authentication.getPrincipal();
     Long userId = user.getId();
     if (userId == null) {
@@ -64,14 +65,14 @@ public class UserController {
   }
 
   // Returns for logged user
-  @GetMapping(value = "/api/institute/admins")
-  public ResponseEntity<List<UserDTO>> getAdminsForInstitute(Authentication authentication) {
+  @GetMapping(value = "/api/users/institute/admins")
+  public ResponseEntity<List<UserModeratorDTO>> getDirectorsForInstitute(Authentication authentication) {
     UserDetailsImpl user = (UserDetailsImpl) authentication.getPrincipal();
     Long userId = user.getId();
     if (userId == null) {
       return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
-    return userService.getAllAdminsForInstitute(userId);
+    return userService.getAllDirectorsForInstitute(userId);
   }
 
 }

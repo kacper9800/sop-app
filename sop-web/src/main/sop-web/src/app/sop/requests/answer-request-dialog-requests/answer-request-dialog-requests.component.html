@@ -1,0 +1,237 @@
+<clr-modal [(clrModalOpen)]="displayDialog" [clrModalStaticBackdrop]="false" [clrModalSize]="'lg'"
+           [clrModalClosable]="false" style="height: 70%;">
+  <h3 class="modal-title" style="text-align: center;">{{dialogTitle}}</h3>
+  <div class="modal-body" style="margin-left: 20px">
+    <div class="clr-row">
+      <div class="clr-col-1"></div>
+      <div class="clr-col-4">
+        <b>{{'requests.wizard.name' | translate}}</b>
+      </div>
+      <div class="clr-col-6">
+        {{request.name}}
+      </div>
+      <div class="clr-col-1"></div>
+    </div>
+
+    <div class="clr-row">
+      <div class="clr-col-1"></div>
+      <div class="clr-col-4">
+        <b>{{'interns.internName' | translate}}</b>
+      </div>
+      <div class="clr-col-6">
+        {{request.internName}}
+      </div>
+      <div class="clr-col-1"></div>
+    </div>
+    <br>
+    <div class="clr-row">
+      <div class="clr-col-1"></div>
+      <div class="clr-col-4">
+        <b>{{'requests.wizard.companyName' | translate}}</b>
+      </div>
+      <div class="clr-col-6">
+        {{request.companyName}}
+      </div>
+      <div class="clr-col-1"></div>
+    </div>
+
+    <div class="clr-row">
+      <div class="clr-col-1"></div>
+      <div class="clr-col-4">
+        <b>{{'requests.wizard.position' | translate}}</b>
+      </div>
+      <div class="clr-col-6">
+        {{request.position}}
+      </div>
+      <div class="clr-col-1"></div>
+    </div>
+
+    <div class="clr-row">
+      <div class="clr-col-1"></div>
+      <div class="clr-col-4">
+        <b>{{'requests.wizard.positionDescription' | translate}}</b>
+      </div>
+      <div class="clr-col-6">
+        {{request.positionDescription}}
+      </div>
+      <div class="clr-col-1"></div>
+    </div>
+
+    <div class="clr-row">
+      <div class="clr-col-1"></div>
+      <div class="clr-col-4">
+        <b>{{'requests.wizard.amountOfHours' | translate}}</b>
+      </div>
+      <div class="clr-col-6">
+        {{request.amountOfHours}}
+      </div>
+      <div class="clr-col-1"></div>
+    </div>
+
+    <div class="clr-row">
+      <div class="clr-col-1"></div>
+      <div class="clr-col-4">
+        <b>{{'requests.wizard.responsibilities' | translate}}</b>
+      </div>
+      <div class="clr-col-6">
+        {{request.responsibilities}}
+      </div>
+      <div class="clr-col-1"></div>
+    </div>
+
+    <br>
+    <div class="clr-row">
+      <div class="clr-col-1"></div>
+      <div class="clr-col-4">
+        <b>{{'requests.wizard.practiceSuperviserName' | translate}}</b>
+      </div>
+      <div class="clr-col-6">
+        {{request.practiceSuperviserName}}
+      </div>
+      <div class="clr-col-1"></div>
+    </div>
+
+    <div class="clr-row">
+      <div class="clr-col-1"></div>
+      <div class="clr-col-4">
+        <b>{{'requests.wizard.practiceSuperviserLastName' | translate}}</b>
+      </div>
+      <div class="clr-col-6">
+        {{request.practiceSuperviserLastName}}
+      </div>
+      <div class="clr-col-1"></div>
+    </div>
+
+    <div class="clr-row">
+      <div class="clr-col-1"></div>
+      <div class="clr-col-4">
+        <b>{{'requests.wizard.practiceSuperviserPhone' | translate}}</b>
+      </div>
+      <div class="clr-col-6">
+        {{request.practiceSuperviserPhone}}
+      </div>
+      <div class="clr-col-1"></div>
+    </div>
+
+    <div class="clr-row">
+      <div class="clr-col-1"></div>
+      <div class="clr-col-4">
+        <b>{{'requests.wizard.practiceSuperviserEmail' | translate}}</b>
+      </div>
+      <div class="clr-col-6">
+        {{request.practiceSuperviserEmail}}
+      </div>
+      <div class="clr-col-1"></div>
+    </div>
+    <hr>
+
+    <form [formGroup]="moderatorDecisionForm"
+          *ngIf="principalService.isModerator() && !request.moderatorDecisionDate">
+      <div class="clr-row">
+        <div class="clr-col-1"></div>
+        <div class="clr-col-4">
+          <b>Decyzja</b>
+        </div>
+        <div class="clr-col-6">
+          <clr-select-container>
+            <select clrSelect id="moderator-decision" class="clr-select"
+                    (change)="onDecisionChange()"
+                    formControlName="moderatorDecisionStatus" required>
+              <option *ngFor="let decisionStatus of decisionStatuses"
+                      [value]="decisionStatus.value">
+                {{decisionStatus.name}}</option>
+            </select>
+            <clr-control-error>{{'common.required' | translate}}</clr-control-error>
+          </clr-select-container>
+        </div>
+        <div class="clr-col-1"></div>
+      </div>
+
+
+      <div class="clr-row">
+        <div class="clr-col-1"></div>
+        <div class="clr-col-4">
+          <b>Komentarz do decyzji</b>
+        </div>
+        <div class="clr-col-6">
+          <textarea clrTextarea formControlName="moderatorDecisionFeedback" name="description"
+                    required></textarea>
+        </div>
+        <div class="clr-col-1"></div>
+      </div>
+
+      <div class="clr-row" *ngIf="isDecisionPositive">
+        <div class="clr-col-1"></div>
+        <div class="clr-col-4">
+          <b>Dyrektor instytutu</b>
+        </div>
+        <div class="clr-col-6">
+          <clr-select-container>
+            <select clrSelect id="select-role" class="clr-select" formControlName="adminId"
+                    required>
+              <option *ngFor="let admin of admins" [value]="admin.id">
+                {{admin.name}}</option>
+            </select>
+            <clr-control-error>{{'common.required' | translate}}</clr-control-error>
+          </clr-select-container>
+          <br><br>
+        </div>
+        <div class="clr-col-1"></div>
+      </div>
+      <div *ngIf="!isDecisionPositive">
+        <br><br>
+      </div>
+    </form>
+
+    <form [formGroup]="directorDecisionForm"
+          *ngIf="principalService.isDirector() && !request.adminDecisionDate">
+      <div class="clr-row">
+        <div class="clr-col-1"></div>
+        <div class="clr-col-4">
+          <b>Decyzja</b>
+        </div>
+        <div class="clr-col-6">
+          <clr-select-container>
+            <select clrSelect id="admin-decision" class="clr-select"
+                    formControlName="adminDecisionStatus" required>
+              <option *ngFor="let decisionStatus of decisionStatuses"
+                      [value]="decisionStatus.value">
+                {{decisionStatus.name}}</option>
+            </select>
+            <clr-control-error>{{'common.required' | translate}}</clr-control-error>
+          </clr-select-container>
+        </div>
+        <div class="clr-col-1"></div>
+      </div>
+
+
+      <div class="clr-row">
+        <div class="clr-col-1"></div>
+        <div class="clr-col-4">
+          <b>Komentarz do decyzji</b>
+        </div>
+        <div class="clr-col-6">
+          <textarea clrTextarea formControlName="adminDecisionFeedback" name="description"
+                    required></textarea>
+        </div>
+        <div class="clr-col-1"></div>
+      </div>
+    </form>
+  </div>
+  <div class="modal-footer">
+    <div class="btn-group">
+      <button [clrLoading]="validateBtnState" type="submit"
+              *ngIf="principalService.isModerator() && !this.request.moderatorDecisionDate"
+              class="btn btn-primary" [disabled]="isSaveButtonDisabled()"
+              (click)="onSubmit()">
+        {{'add-edit-dialog.save' | translate}}</button>
+      <button [clrLoading]="validateBtnState" type="submit"
+              *ngIf="principalService.isDirector() && !this.request.adminDecisionDate"
+              class="btn btn-primary" [disabled]="isSaveButtonDisabled()"
+              (click)="onSubmit()">
+        {{'add-edit-dialog.save' | translate}}</button>
+      <button class="btn btn-secondary-outline"
+              (click)="displayDialog = false">{{'add-edit-dialog.close' | translate}} </button>
+    </div>
+  </div>
+</clr-modal>

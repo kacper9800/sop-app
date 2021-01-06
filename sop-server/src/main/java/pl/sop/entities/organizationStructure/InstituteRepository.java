@@ -36,4 +36,7 @@ public interface InstituteRepository extends JpaRepository<Institute, Long> {
       + " where college.id = :collegeId"
       + " and institute.deleted = false")
   List<Institute> findAllForCollegeId(Long collegeId);
+
+  @Query(value = "SELECT u.institutes FROM User u left join u.institutes i where u.id = :userId ")
+  List<Institute> findAllInstitutesForUserId(@Param("userId") Long userId);
 }

@@ -28,6 +28,7 @@ export class NavBarComponent implements OnInit {
 
   isSuperAdmin: boolean;
   isAdmin: boolean;
+  isDirector: boolean;
   isModerator: boolean;
   isSuperviser: boolean;
   isStudent: boolean;
@@ -51,6 +52,7 @@ export class NavBarComponent implements OnInit {
     if (this.tokenStorageService.getToken()) {
       this.isSuperAdmin = this.principalService.isSuperAdmin();
       this.isAdmin = this.principalService.isAdmin();
+      this.isDirector = this.principalService.isDirector();
       this.isModerator = this.principalService.isModerator();
       this.isSuperviser = this.principalService.isSuperviser();
       this.isStudent = this.principalService.isStudent();

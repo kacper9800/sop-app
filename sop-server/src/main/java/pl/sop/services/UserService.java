@@ -12,18 +12,20 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import pl.sop.configuration.mail.EmailServiceImpl;
+import pl.sop.converters.ToDTO.UserToUserModeratorDTO;
 import pl.sop.converters.ToDTO.UserViewToDTOConverter;
 import pl.sop.dto.UserDTO;
+import pl.sop.dto.UserModeratorDTO;
 import pl.sop.entities.ActivationKey;
 import pl.sop.entities.Role;
 import pl.sop.entities.User;
-import pl.sop.enums.ERole;
 import pl.sop.entities.organizationStructure.College;
 import pl.sop.entities.organizationStructure.CollegeRepository;
 import pl.sop.entities.organizationStructure.DepartmentService;
 import pl.sop.entities.organizationStructure.FacultyService;
 import pl.sop.entities.organizationStructure.Institute;
 import pl.sop.entities.organizationStructure.InstituteService;
+import pl.sop.enums.ERole;
 import pl.sop.payload.request.SignUpRequest;
 import pl.sop.payload.response.MessageResponse;
 import pl.sop.repositories.RoleRepository;
@@ -61,6 +63,7 @@ public class UserService {
   private EmailServiceImpl emailService;
 
   private final UserViewToDTOConverter userViewToDTOConverter = new UserViewToDTOConverter();
+  private final UserToUserModeratorDTO userToUserModeratorDTO = new UserToUserModeratorDTO();
 
   public User findUser(Long id) {
     User user = userRepository.findUserById(id);
@@ -89,7 +92,6 @@ public class UserService {
         Collectors.toList());
     return userDTOS;
   }
-
 
   public ResponseEntity<?> registerUser(SignUpRequest signUpRequest, Boolean isAdminUser) {
     if (!isAdminUser) {
@@ -154,7 +156,8 @@ public class UserService {
 
     List<String> sameUserNames = new ArrayList<>();
     List<Long> numbers = new ArrayList<>();
-    if (userRepository.existsByUsername(propsalUsername)) { // jeśli istnieją inne osoby, które mają takie same username
+    if (userRepository.existsByUsername(
+        propsalUsername)) { // jeśli istnieją inne osoby, które mają takie same username
       sameUserNames = userRepository.findSameUserNames(username); // to znajdźmy je!
       for (String sameUserName : sameUserNames) {
         char[] chars = sameUserName.toCharArray();
@@ -181,7 +184,7 @@ public class UserService {
           != null) { // Jeśli jest zapisany w tokenie institute id to dodaje go
         user.addInstitute(instituteService.findById(activationKey.getInstitute().getId()));
         if (activationKey.getDepartment()
-            != null) { // Jeśli jest zapisany w tokenie departmen id to dodaje go
+            != null) { // Jeśli jest zapisany w tokenie department id to dodaje go
           user.addDepartment(departmentService.findById(activationKey.getDepartment().getId()));
         }
       }
@@ -208,21 +211,52 @@ public class UserService {
     return ResponseEntity.ok(userRepository.save(user));
   }
 
-  public ResponseEntity<List<UserDTO>> getAllModeratorsForInstitute(Long userId) {
+  public ResponseEntity<List<UserModeratorDTO>> getAllModeratorsForInstitute(Long userId) {
+    // Getting user data
     User user = userRepository.findUserById(userId);
+    // Collecting user institutes
     Set<Institute> institutes = user.getInstitutes();
-    List<User> users = new ArrayList<>();
-    if (institutes != null) {
-      for (Institute institute : institutes) {
-        userRepository.findModeratorByInstituteId(institute.getId());
+    List<UserModeratorDTO> moderators = new ArrayList<>();
+    if (institutes != null) { // If institutes = 0  || null
+      for (Institute institute : institutes) { // For all institutes get all users with Moderator Role
+        List<User> instituteModerators = userRepository
+            .findModeratorByInstituteId(institute.getId());
+        for (User instituteModerator : instituteModerators) {
+          UserModeratorDTO userModeratorDTO = new UserModeratorDTO();
+          userModeratorDTO.setId(instituteModerator.getId());
+          userModeratorDTO.setFirstName(instituteModerator.getFirstName());
+          userModeratorDTO.setLastName(instituteModerator.getLastName());
+          userModeratorDTO.setAcademicTitle(instituteModerator.getAcademicTitle());
+          userModeratorDTO.setInstituteId(institute.getId());
+          userModeratorDTO.setInstituteName(institute.getName());
+          moderators.add(userModeratorDTO);
+        }
       }
     }
-    return null;
+    return ResponseEntity.ok(moderators);
   }
 
-  public ResponseEntity<List<UserDTO>> getAllAdminsForInstitute(Long userId) {
+  public ResponseEntity<List<UserModeratorDTO>> getAllDirectorsForInstitute(Long userId) {
     User user = userRepository.findUserById(userId);
+    // Collecting user institutes
     Set<Institute> institutes = user.getInstitutes();
-    return null;
+    List<UserModeratorDTO> admins = new ArrayList<>();
+    if (institutes != null) { // If institutes = 0  || null
+      for (Institute institute : institutes) { // For all institutes get all users with Director Role
+        List<User> instituteModerators = userRepository
+            .findDirectorsByInstituteId(institute.getId());
+        for (User instituteModerator : instituteModerators) {
+          UserModeratorDTO userAdminDTO = new UserModeratorDTO();
+          userAdminDTO.setId(instituteModerator.getId());
+          userAdminDTO.setFirstName(instituteModerator.getFirstName());
+          userAdminDTO.setLastName(instituteModerator.getLastName());
+          userAdminDTO.setAcademicTitle(instituteModerator.getAcademicTitle());
+          userAdminDTO.setInstituteId(institute.getId());
+          userAdminDTO.setInstituteName(institute.getName());
+          admins.add(userAdminDTO);
+        }
+      }
+    }
+    return ResponseEntity.ok(admins);
   }
 }

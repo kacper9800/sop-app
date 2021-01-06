@@ -108,6 +108,9 @@ public class User extends BasicEntity implements Serializable {
   @Column(name = "selected_college_id")
   private Long selectedCollegeId;
 
+  @Column(name ="is_during_internship")
+  private Boolean isDuringInternship;
+
   public User(@NotBlank @Size(max = 20) String username,
       @NotBlank @Size(max = 50) @Email String email,
       @NotBlank @Size(max = 120) String password,
@@ -278,5 +281,13 @@ public class User extends BasicEntity implements Serializable {
 
   public void setSelectedCollegeId(Long selectedCollegeId) {
     this.selectedCollegeId = selectedCollegeId;
+  }
+
+  public Boolean getDuringInternship() {
+    return isDuringInternship;
+  }
+
+  public void setDuringInternship(Boolean duringInternship) {
+    isDuringInternship = duringInternship;
   }
 }

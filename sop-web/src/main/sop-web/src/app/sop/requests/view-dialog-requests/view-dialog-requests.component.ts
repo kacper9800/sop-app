@@ -1,7 +1,8 @@
 import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {TranslateService} from '@ngx-translate/core';
-import {Request} from '../../../_model/request.model';
-import {RequestStatus} from "../../../_enums/request-status.enum";
+import {IRequest, Request} from '../../../_model/request.model';
+import {RequestStatus} from '../../../_enums/request-status.enum';
+import {RequestsService} from '../../../_services/requests.service';
 
 @Component({
   selector: 'app-view-dialog-requests',
@@ -16,28 +17,40 @@ export class ViewDialogRequestsComponent implements OnInit {
   public blockUI: boolean;
   public dialogTitle: string;
   public request: Request = new Request();
-  public isModeratorDecisionStatusAwaiting: any;
-  public isAdminDecisionStatusAwaiting: any;
 
-  constructor(private translateService: TranslateService) {
+  constructor(private translateService: TranslateService,
+              private requestsService: RequestsService) {
   }
 
   ngOnInit(): void {
+
   }
 
-  public showRequestDialog() {
+  public showRequestDialog(id: number) {
     this.blockUI = true;
     this.dialogTitle = this.translateService.instant('requests.dialog.titleView');
-    this.displayDialog = true;
-    this.request.sendRequestDate = new Date();
-    // this.request.adminDecisionDate = new Date();
-    this.request.moderatorDecisionDate = new Date();
-    this.request.moderatorDecisionStatus = RequestStatus.ACCEPTED;
-    this.request.adminDecisionFeedback = 'Poprawnie';
-    this.request.moderatorDecisionFeedback = 'Ok';
-    if (this.request.moderatorDecisionStatus === RequestStatus.ACCEPTED) {
-      this.isAdminDecisionStatusAwaiting = true;
-    }
+    this.requestsService.getRequestById(id).subscribe(
+      (res) => this.onSuccessLoadRequest(res),
+      (err) => this.onErrorLoadRequest(err)
+    );
   }
 
+  private onSuccessLoadRequest(res: IRequest) {
+    if (res != null) {
+      this.request.sendRequestDate = res.sendRequestDate;
+
+      this.request.moderatorDecisionStatus = res.moderatorDecisionStatus;
+      this.request.moderatorDecisionDate = res.moderatorDecisionDate;
+      this.request.moderatorDecisionFeedback = res.moderatorDecisionFeedback;
+
+      this.request.adminDecisionStatus = res.adminDecisionStatus;
+      this.request.adminDecisionDate = res.adminDecisionDate;
+      this.request.adminDecisionFeedback = res.adminDecisionFeedback;
+    }
+    this.displayDialog = true;
+  }
+
+  private onErrorLoadRequest(err: any) {
+
+  }
 }

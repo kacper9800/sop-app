@@ -1,13 +1,14 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {Observable} from 'rxjs';
 import {HttpClient, HttpResponse} from '@angular/common/http';
-import {Dictionary, IDictionary} from '../_model/dictionary.model';
+import {IDictionary} from '../_model/dictionary.model';
 import global from '../../global';
 
 const DICTIONARY_STUDY_MODES = '/dictionaries/study-modes';
 const DICTIONARY_ACADEMIC_DEGREES = '/dictionaries/academic-degrees';
 const DICTIONARY_SEX_TYPES = '/dictionaries/sex-types';
 const DICTIONARY_REQUEST_TYPES = '/dictionaries/request-types';
+const DICTIONARY_REQUEST_DECISION_STATUSES = '/dictionaries/request-decision-statuses';
 
 @Injectable({
   providedIn: 'root'
@@ -31,5 +32,9 @@ export class DictionariesService {
 
   public getRequestTypes(): Observable<HttpResponse<IDictionary[]>> {
     return this.httpClient.get<HttpResponse<IDictionary[]>>(global.API + DICTIONARY_REQUEST_TYPES);
+  }
+
+  public getRequestDecisionStatuses(): Observable<HttpResponse<IDictionary[]>> {
+    return this.httpClient.get<HttpResponse<IDictionary[]>>(global.API + DICTIONARY_REQUEST_DECISION_STATUSES);
   }
 }

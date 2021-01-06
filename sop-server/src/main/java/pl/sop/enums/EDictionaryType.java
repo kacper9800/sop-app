@@ -5,5 +5,7 @@ public enum EDictionaryType {
   ACADEMIC_DEGREE,  // Stopień akademicki
   STUDY_MODE,       // Tryb studiów
   STUDY_DIRECTION,   // Kierunek studiów
-  REQUEST_TYPE   // Kierunek studiów
+  REQUEST_TYPE,   // Kierunek studiów
+  REQUEST_DECISION_STATUS // Status
+  ;
 }

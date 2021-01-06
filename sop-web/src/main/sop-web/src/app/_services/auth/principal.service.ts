@@ -33,6 +33,10 @@ export class PrincipalService {
     return this.roles.includes('ROLE_ADMIN');
   }
 
+  public isDirector(): boolean {
+    return this.roles.includes('ROLE_DIRECTOR');
+  }
+
   public isModerator(): boolean {
     return this.roles.includes('ROLE_MODERATOR');
   }

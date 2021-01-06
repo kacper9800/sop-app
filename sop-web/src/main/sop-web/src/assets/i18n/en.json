@@ -249,7 +249,7 @@
     },
     "tableColumns": {
     },
-    "activate" : {
+    "activate": {
       "successActivate": "Successfully activated college",
       "successDeactivate": "Successfully deactivated college",
       "error": "Error during changing activity status"
@@ -299,7 +299,8 @@
     "basicData": "Basic data",
     "documents": "Documents",
     "logBook": "Logbook",
-    "tasks": "Tasks"
+    "tasks": "Tasks",
+    "internName": "Intern"
   },
   "directions": {
     "header": "Directions",
@@ -369,10 +370,13 @@
       "error": "Rejected"
     },
     "wizard": {
+      "name": "Request name",
       "position": "Position",
       "positionDescription": "Position description",
       "amountOfHours": "Amount of hours",
       "responsibilities": "Responsibilities",
+      "chooseModerator": "Choose moderator",
+      "chooseDecision": "Choose descision status",
       "companyName": "Company name",
       "companyNip": "Company NIP number",
       "departmentName": "Department name",
@@ -381,17 +385,27 @@
       "practiceSuperviserPhone": "Practice superviser phone",
       "practiceSuperviserEmail": "Practice superviser email"
     },
+    "statuses": {
+      "ACCEPTED": "Accepted",
+      "REJECTED": "Rejected",
+      "AWAITING": "Awaiting",
+      "SENT": "Sent"
+    },
+    "decisionStatuses": {
+      "ACCEPTED": "Accept",
+      "REJECTED": "Reject"
+    },
     "dialog": {
       "titleNew": "Adding new request",
       "titleView": "Show request",
       "titleEdit": "Editing request",
+      "titleAnswer": "Answer request",
       "buttons": {
         "cancel": "Cancel",
         "previous": "Previous",
         "next": "Next",
         "finish": "Finish"
       },
-
       "titles": {
         "chooseRequestTypeTitle": "Choose request type",
         "chooseRequestTypeNav": "Choose request",

@@ -8,6 +8,7 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import pl.sop.entities.User;
+import pl.sop.entities.organizationStructure.Institute;
 
 @Repository
 @CrossOrigin(origins = "*")
@@ -19,7 +20,13 @@ public interface UserRepository extends JpaRepository<User, Long> {
   @Query(value = "SELECT u FROM User u WHERE u.deleted = FALSE AND u.active = TRUE")
   List<User> findAllUsers();
 
-  @Query(value = "SELECT u FROM User  u WHERE u.id = :id")
+  @Query(value = "Select u from User u "
+      + " left join fetch u.colleges colleges "
+      + " left join fetch u.faculties faculties"
+      + " left join fetch u.institutes institutes"
+      + " left join fetch institutes.users users"
+      + " left join fetch u.departments departments"
+      + " WHERE u.id = :id")
   User findUserById(@Param("id") Long id);
 
   @Query(value = "select u from User u "
@@ -43,6 +50,15 @@ public interface UserRepository extends JpaRepository<User, Long> {
   @Query(value = "SELECT u.username from User u where u.username like :newUserName%")
   List<String> findSameUserNames(@Param("newUserName")String newUserName);
 
-  @Query(value = "SELECT u FROM User u ")
-  List<User> findModeratorByInstituteId(Long id);
+  @Query(value = "SELECT u FROM User u "
+      + " left join u.institutes i "
+      + " left join u.roles r"
+      + " where  i.id = :instituteId and r.name = 'ROLE_MODERATOR'")
+  List<User> findModeratorByInstituteId(@Param("instituteId") Long id);
+
+  @Query(value = "SELECT u FROM User u "
+      + " left join u.institutes i "
+      + " left join u.roles r"
+      + " where  i.id = :instituteId and r.name = 'ROLE_DIRECTOR'")
+  List<User> findDirectorsByInstituteId(@Param("instituteId") Long id);
 }

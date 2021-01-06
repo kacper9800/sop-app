@@ -38,9 +38,9 @@ public class DictionaryController {
   }
 
   @CrossOrigin
-  @RequestMapping(value = "/api/dictionaries/academic-degrees", method = RequestMethod.GET)
-  public ResponseEntity<List<DictionaryDTO>> getAllAcademicDegrees(Authentication authentication) {
-    return this.dictionaryService.getAllAcademicDegrees();
+  @RequestMapping(value = "/api/dictionaries/request-decision-statuses", method = RequestMethod.GET)
+  public ResponseEntity<List<DictionaryDTO>> getAllRequestDecisionStatuses(Authentication authentication) {
+    return this.dictionaryService.getAllRequestDecisionStatuses();
   }
 
   @CrossOrigin
@@ -49,5 +49,7 @@ public class DictionaryController {
   public ResponseEntity<List<DictionaryDTO>> getAllRequestTypes(Authentication authentication) {
     return this.dictionaryService.getAllRequestTypes();
   }
+
+
 
 }

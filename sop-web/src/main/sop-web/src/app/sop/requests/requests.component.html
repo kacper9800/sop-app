@@ -6,7 +6,7 @@
               [clrDgLoading]="blockUI" style="height: 75%;">
   <clr-dg-action-bar>
     <div class="btn-group">
-      <button type="button" class="btn btn-sm btn-primary"
+      <button type="button" class="btn btn-sm btn-primary" *ngIf="principal.isStudent()"
               (click)="showAddNewDialog()">
         <clr-icon shape="plus"></clr-icon>
         {{'requests.CRUD.addRequest' | translate}}
@@ -24,10 +24,9 @@
             {{'common.export.selected' | translate}}</button>
         </clr-dropdown-menu>
       </clr-dropdown>
-      <button type="button" class="btn btn-sm btn-primary"
-              (click)="showViewDialog()">
-        <clr-icon shape="plus"></clr-icon>
-          Eksperymentalny przycisk
+      <button class="stack-action btn btn-sm btn-link"
+              (click)="refreshRequests()"
+              type="button">Odśwież
       </button>
     </div>
   </clr-dg-action-bar>
@@ -37,39 +36,37 @@
 
   <clr-dg-row *ngFor="let request of requests" [clrDgItem]="request">
     <clr-dg-cell>{{request.name}}</clr-dg-cell>
-    <clr-dg-cell>
-      <div *ngIf="request.active">
-        <clr-icon shape="check"></clr-icon>
-      </div>
-      <div *ngIf="!request.active">
-        <clr-icon shape="times"></clr-icon>
-      </div>
-    </clr-dg-cell>
-    <clr-dg-cell>
-      <div *ngIf="request.removed">
-        <clr-icon shape="check"></clr-icon>
-      </div>
-      <div *ngIf="!request.removed">
-        <clr-icon shape="times"></clr-icon>
-      </div>
-    </clr-dg-cell>
+    <clr-dg-cell>{{'requests.statuses.' + request.actualRequestStatus | translate}}</clr-dg-cell>
     <clr-dg-cell>
       <div class="btn-group">
-<!--        <button *ngIf="request.active" type="button" class="btn btn-sm btn-danger-outline"-->
-<!--                (click)="activateAction(college)">-->
-<!--          <clr-icon shape="times"></clr-icon>-->
-<!--        </button>-->
-<!--        <button *ngIf="!college.active" type="button" class="btn btn-sm btn-success-outline"-->
-<!--                (click)="activateAction(college)">-->
-<!--          <clr-icon shape="check"></clr-icon>-->
-<!--        </button>-->
-        <button type="button" class="btn btn-sm btn-secondary"
-                (click)="showEditDialog(request.id)">
-          <clr-icon shape="pencil"></clr-icon>
+        <button *ngIf="principal.isModerator() || principal.isDirector()"
+                (click)="showAnswerRequestDialog(request.id)"
+                type="button" class="btn btn-sm btn-success-outline">
+          <clr-icon shape="angle-double"></clr-icon>
         </button>
-        <button type="button" class="btn btn-sm btn-danger" (click)="showConfirmDeleteDialog(request.id)">
+        <button (click)="showViewDialog(request.id)"
+                type="button" class="btn btn-sm btn-secondary">
+          <clr-icon shape="bubble-exclamation"></clr-icon>
+        </button>
+        <button type="button" class="btn btn-sm btn-danger" *ngIf="principal.isStudent()"
+                (click)="showConfirmDeleteDialog(request.id)">
           <clr-icon shape="trash"></clr-icon>
         </button>
+        <!--        <button type="button" class="btn btn-sm btn-secondary" *ngIf="principal.isStudent()"-->
+        <!--                (click)="showEditDialog(request.id)">-->
+        <!--          <clr-icon shape="pencil"></clr-icon>-->
+        <!--        </button>-->
+
+        <!--                (click)="activateAction(college)
+                <button *ngIf="request.active" type="button" class="btn btn-sm btn-danger-outline"
+                      (click)="activateAction(college)">
+                <clr-icon shape="times"></clr-icon>
+              </button>-->
+        <!--        <button *ngIf="!college.active" type="button" class="btn btn-sm btn-success-outline"-->
+        <!--                (click)="activateAction(college)">-->
+        <!--          <clr-icon shape="check"></clr-icon>-->
+        <!--        </button>-->
+
       </div>
     </clr-dg-cell>
   </clr-dg-row>
@@ -101,4 +98,5 @@
 <ng-template #viewDialog></ng-template>
 <ng-template #exportDialog></ng-template>
 <ng-template #confirmDeleteDialog></ng-template>
+<ng-template #answerRequestDialog></ng-template>
 

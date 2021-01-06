@@ -15,7 +15,8 @@ import {IRequest, Request} from '../../_model/request.model';
 import {RequestsService} from '../../_services/requests.service';
 import {AddEditDialogRequestsComponent} from './add-edit-dialog-requests/add-edit-dialog-requests.component';
 import {AddDialogRequestsComponent} from './add-dialog-requests/add-dialog-requests.component';
-import {ViewDialogRequestsComponent} from "./view-dialog-requests/view-dialog-requests.component";
+import {ViewDialogRequestsComponent} from './view-dialog-requests/view-dialog-requests.component';
+import {AnswerRequestDialogRequestsComponent} from './answer-request-dialog-requests/answer-request-dialog-requests.component';
 
 @Component({
   selector: 'app-requests',
@@ -40,10 +41,12 @@ export class RequestsComponent implements OnInit {
   public addDialog: ViewContainerRef;
   @ViewChild('viewDialog', {read: ViewContainerRef, static: true})
   public viewDialog: ViewContainerRef;
+  @ViewChild('answerRequestDialog', {read: ViewContainerRef, static: true})
+  public answerRequestDialog: ViewContainerRef;
   private componentRef: any;
 
   constructor(private resolver: ComponentFactoryResolver,
-              private principal: PrincipalService,
+              public principal: PrincipalService,
               private requestService: RequestsService,
               private messageService: MessageService,
               private translateService: TranslateService) {
@@ -56,9 +59,21 @@ export class RequestsComponent implements OnInit {
   }
 
   private loadRequests() {
-    this.requestService.getAllRequests().subscribe(
-      (res: HttpResponse<IRequest[]>) => this.onSuccessLoadRequests(res),
-      (err) => this.onErrorLoadRequests(err));
+    if (this.principal.isStudent()) {
+      this.requestService.getAllRequestsForStudent().subscribe(
+        (res: HttpResponse<IRequest[]>) => this.onSuccessLoadRequests(res),
+        (err) => this.onErrorLoadRequests(err));
+    } else if (this.principal.isModerator()) {
+      this.requestService.getAllRequestsForInstitute().subscribe(
+        (res: HttpResponse<IRequest[]>) => this.onSuccessLoadRequests(res),
+        (err) => this.onErrorLoadRequests(err));
+    } else if (this.principal.isDirector()) {
+      this.requestService.getAllRequestsForDirector().subscribe(
+        (res: HttpResponse<IRequest[]>) => this.onSuccessLoadRequests(res),
+        (err) => this.onErrorLoadRequests(err));
+
+    }
+
   }
 
 
@@ -81,14 +96,9 @@ export class RequestsComponent implements OnInit {
       {
         label: this.translateService.instant('common.collegeName'),
         fieldName: 'name'
-      },
-      {
-        label: this.translateService.instant('common.active'),
-        fieldName: 'active'
-      },
-      {
-        label: this.translateService.instant('common.deleted'),
-        fieldName: 'deleted'
+      }, {
+        label: this.translateService.instant('common.collegeName'),
+        fieldName: 'actualRequestStatusName'
       },
       {
         label: this.translateService.instant('common.actions'),
@@ -140,13 +150,27 @@ export class RequestsComponent implements OnInit {
     );
   }
 
-  public showViewDialog() {
+  public showViewDialog(id: number) {
     this.viewDialog.clear();
     const factory = this.resolver.resolveComponentFactory(ViewDialogRequestsComponent);
     this.componentRef = this.addEditDialog.createComponent(factory);
-    this.componentRef.instance.showRequestDialog();
+    this.componentRef.instance.showRequestDialog(id);
     this.componentRef.instance.closeDialogWithSaveEmitter.subscribe(() =>
       this.loadRequests()
     );
+  }
+
+  public showAnswerRequestDialog(id: number) {
+    this.viewDialog.clear();
+    const factory = this.resolver.resolveComponentFactory(AnswerRequestDialogRequestsComponent);
+    this.componentRef = this.addEditDialog.createComponent(factory);
+    this.componentRef.instance.showAnswerRequestDialog(id);
+    this.componentRef.instance.closeDialogWithSaveEmitter.subscribe(() =>
+      this.loadRequests()
+    );
+  }
+
+  public refreshRequests() {
+    this.loadRequests();
   }
 }

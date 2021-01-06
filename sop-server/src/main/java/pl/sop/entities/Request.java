@@ -12,11 +12,10 @@ import javax.persistence.Table;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
 import pl.sop.enums.ERequestStatus;
-import pl.sop.entities.organizationStructure.College;
 import pl.sop.entities.organizationStructure.Institute;
 
 @Entity
-@Table(name = "DIRECTIONS")
+@Table(name = "requests")
 public class Request extends BasicEntity {
 
   @Column(name = "name")
@@ -35,10 +34,6 @@ public class Request extends BasicEntity {
   private Dictionary requestType;
 
   @ManyToOne
-  @JoinColumn(name = "college_id", nullable = false)
-  private College college;
-
-  @ManyToOne
   @JoinColumn(name = "institute_id", nullable = false)
   private Institute institute;
 
@@ -55,7 +50,8 @@ public class Request extends BasicEntity {
   @Column(name = "responsibilities")
   private String responsibilities;
 
-  @Column(name = "company_id")
+  @ManyToOne
+  @JoinColumn(name = "company_id", nullable = false)
   private Company company;
 
   @Column(name = "practice_superviser_name")
@@ -119,7 +115,7 @@ public class Request extends BasicEntity {
   }
 
   public Request(String name, String description, User intern, Dictionary requestType,
-      College college, Institute institute, String position, String positionDescription,
+      Institute institute, String position, String positionDescription,
       Integer amountOfHours, String responsibilities, Company company,
       String practiceSuperviserName, String practiceSuperviserLastName,
       String practiceSuperviserPhone, String practiceSuperviseEmail, Boolean infoAgreement,
@@ -133,7 +129,6 @@ public class Request extends BasicEntity {
     this.description = description;
     this.intern = intern;
     this.requestType = requestType;
-    this.college = college;
     this.institute = institute;
     this.position = position;
     this.positionDescription = positionDescription;
@@ -189,14 +184,6 @@ public class Request extends BasicEntity {
 
   public void setRequestType(Dictionary requestType) {
     this.requestType = requestType;
-  }
-
-  public College getCollege() {
-    return college;
-  }
-
-  public void setCollege(College college) {
-    this.college = college;
   }
 
   public Institute getInstitute() {

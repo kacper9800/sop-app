@@ -301,7 +301,8 @@
     "basicData": "Dane podstawowe",
     "documents": "Dokumenty",
     "logBook": "Dziennik praktyk",
-    "tasks": "Zadania"
+    "tasks": "Zadania",
+    "internName": "Praktykant"
   },
   "directions": {
     "header": "Kierunki studiów",
@@ -323,7 +324,7 @@
   "roles": {
     "chooseRole": "Wybierz role",
     "ROLE_ADMIN": "Administrator uczelni",
-    "ROLE_DIRECTOR": "Dyrektor struktury5",
+    "ROLE_DIRECTOR": "Dyrektor struktury",
     "ROLE_MODERATOR": "Kierownik praktyk",
     "ROLE_SUPERVISER": "Opiekun praktyk",
     "ROLE_STUDENT": "Student"
@@ -372,10 +373,13 @@
       "error": "Odrzucono"
     },
     "wizard": {
+      "name": "Nazwa wniosku",
       "position": "Stanowisko",
       "positionDescription": "Opis stanowiska",
       "amountOfHours": "Liczba godzin",
       "responsibilities": "Zakres obowiązków",
+      "chooseModerator": "Wybierz kierownika praktyk",
+      "chooseDecision": "Dokonaj decyzji",
       "companyName": "Nazwa firmy",
       "companyNip": "Numer NIP firmy",
       "departmentName": "Nazwa działu",
@@ -384,10 +388,21 @@
       "practiceSuperviserPhone": "Telefon opiekuna praktyk",
       "practiceSuperviserEmail": "E-mail opiekuna praktyk"
     },
+    "statuses": {
+      "ACCEPTED": "Akceptowany",
+      "REJECTED": "Odrzucony",
+      "AWAITING": "Oczekujący",
+      "SENT": "Wysłano"
+    },
+    "decisionStatuses": {
+      "ACCEPTED": "Akceptuj",
+      "REJECTED": "Odrzuć"
+    },
     "dialog": {
       "titleNew": "Dodawanie nowego wniosku",
       "titleView": "Podgląd statusu wniosku",
       "titleEdit": "Edytowanie wniosku",
+      "titleAnswer": "Odpowiedź na wniosek",
       "buttons": {
         "cancel": "Anuluj",
         "previous": "Powrót",
