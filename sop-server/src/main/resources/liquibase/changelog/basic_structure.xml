@@ -996,6 +996,58 @@
       <column name="is_during_internship" type="boolean"></column>
     </addColumn>
   </changeSet>
+  <changeSet id="46" author="krzymkiewicz">
+    <renameTable oldTableName="logbook" newTableName="logbooks"/>
+    <addColumn tableName="logbooks">
+      <column name="name" type="varchar(255)"></column>
+      <column name="description" type="varchar(2050)"></column>
+      <column name="intern_id" type="bigint"></column>
+      <column name="institute_id" type="bigint"></column>
+      <column name="college_id" type="bigint"></column>
+    </addColumn>
+
+    <addForeignKeyConstraint
+      baseTableName="logbooks"
+      baseColumnNames="intern_id"
+      constraintName="fk_intern_id"
+      referencedTableName="users"
+      referencedColumnNames="id"/>
+
+    <addForeignKeyConstraint
+      baseTableName="logbooks"
+      baseColumnNames="institute_id"
+      constraintName="fk_institute_id"
+      referencedTableName="institutes"
+      referencedColumnNames="id"/>
+    <addForeignKeyConstraint
+      baseTableName="logbooks"
+      baseColumnNames="college_id"
+      constraintName="fk_college_id"
+      referencedTableName="colleges"
+      referencedColumnNames="id"/>
+
+    <createTable tableName="logbook_posts">
+      <column name="id" type="BIGINT" autoIncrement="true">
+        <constraints primaryKey="true" nullable="false"></constraints>
+      </column>
+      <column name="create_date" type="TIMESTAMP WITHOUT TIME ZONE"></column>
+      <column name="create_by" type="VARCHAR(255)"></column>
+      <column name="edit_date" type="TIMESTAMP WITHOUT TIME ZONE"></column>
+      <column name="edit_by" type="VARCHAR(255)"></column>
+      <column name="active" type="BOOLEAN"></column>
+      <column name="deleted" type="BOOLEAN"></column>
+      <column name="description" type="VARCHAR(2050)"></column>
+      <column name="date" type="TIMESTAMP WITHOUT TIME ZONE"></column>
+      <column name="hours" type="integer"></column>
+      <column name="logbook_id" type="bigint"></column>
+    </createTable>
+    <addForeignKeyConstraint
+      baseTableName="logbook_posts"
+      baseColumnNames="logbook_id"
+      constraintName="fk_logbook_id"
+      referencedTableName="logbooks"
+      referencedColumnNames="id"/>
+  </changeSet>
 
 </databaseChangeLog>
 
