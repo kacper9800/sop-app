@@ -3,6 +3,8 @@ export interface ILogbookPost {
   description: string;
   date: Date;
   amountOfHours: number;
+  isEditable: boolean;
+  logbookId: number;
 }
 
 export class LogbookPost implements ILogbookPost {
@@ -10,5 +12,7 @@ export class LogbookPost implements ILogbookPost {
   description: string;
   date: Date;
   amountOfHours: number;
+  isEditable: boolean;
+  logbookId: number;
 }
 

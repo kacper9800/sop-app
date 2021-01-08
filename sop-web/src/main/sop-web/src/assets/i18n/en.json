@@ -346,17 +346,29 @@
     "documents": "documents"
   },
   "logbooks": {
+    "name": "Logbook name",
     "header": "Internship logbooks",
     "notFound": "Not found any logbooks!",
     "logbooksPerPage": "Logbooks per page",
     "logbooks": "logbooks",
     "dialog": {
       "titleNew": "Adding new logbook",
-      "titleEdit": "Editing logbook"
+      "titleEdit": "Editing logbook",
+      "name": "Name",
+      "description": "Description"
     },
     "CRUD": {
       "addLogbook": "Add logbook"
     }
+  },
+  "logbookPosts": {
+    "description": "Description",
+    "date": "Date",
+    "amountOfHours": "Amount of hours",
+    "notFound": "Not found any logbook posts!",
+    "logbookPostsPerPage": "Logbook posts per page",
+    "logbookPosts": "Logbook posts",
+    "addLogbookPost": "Add logbook post"
   },
   "requests": {
     "header": "Requests",

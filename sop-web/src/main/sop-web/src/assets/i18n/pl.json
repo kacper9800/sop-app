@@ -349,17 +349,29 @@
     "notFound": "Nie znaleziono żadnych dokumentów"
   },
   "logbooks": {
+    "name": "Nazwa dziennika",
     "header": "Dzienniki praktyk",
     "notFound": "Nie znaleziono żadnych dzienników praktyk!",
     "logbooksPerPage": "Dzienników na stronie",
     "logbooks": "dokumentów",
     "dialog": {
       "titleNew": "Dodawanie nowego dziennika praktyk",
-      "titleEdit": "Edytowanie dziennika praktyk"
+      "titleEdit": "Edytowanie dziennika praktyk",
+      "name": "Nazwa",
+      "description": "Opis"
     },
     "CRUD": {
       "addLogbook": "Dodaj dziennik praktyk"
     }
+  },
+  "logbookPosts": {
+    "description": "Opis",
+    "date": "Data zadania",
+    "amountOfHours": "Liczba godzin",
+    "notFound": "Nie znaleziono żadnych wpisów!",
+    "logbookPostsPerPage": "Wpisów na stronie",
+    "logbookPosts": "wpisów",
+    "addLogbookPost": "Dodaj nowy wpis"
   },
   "requests": {
     "header": "Wnioski o praktyki",

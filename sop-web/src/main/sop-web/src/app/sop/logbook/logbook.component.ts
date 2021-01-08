@@ -14,6 +14,7 @@ import {AddEditDialogCollegesComponent} from '../colleges/add-edit-dialog-colleg
 import {ConfirmDeleteDialogComponent} from '../../common/confirm-delete-dialog/confirm-delete-dialog.component';
 import {ExportTableComponent} from '../export-table/export-table.component';
 import {LogbookService} from '../../_services/logbook.service';
+import {AddEditDialogLogbooksComponent} from './add-edit-dialog-logbooks/add-edit-dialog-logbooks.component';
 
 @Component({
   selector: 'app-logbook',
@@ -50,11 +51,10 @@ export class LogbookComponent implements OnInit {
   }
 
   private loadLogbooks() {
-    this.logbookService.getAllLogbooks().subscribe(
+    this.logbookService.getAllLogbooksForLoggedIntern().subscribe(
       (res: HttpResponse<ILogbook[]>) => this.onSuccessLoadLogbooks(res),
       (err) => this.onErrorLoadLogbooks(err));
   }
-
 
   private onSuccessLoadLogbooks(body) {
     this.logbooks = [];
@@ -68,51 +68,18 @@ export class LogbookComponent implements OnInit {
 
   private prepareColumns() {
     this.columns = [
-      // {
-      //   label: this.translateService.instant('common.id'),
-      //   fieldName: 'id'
-      // },
-      {
-        label: this.translateService.instant('common.collegeName'),
-        fieldName: 'name'
-      },
-      {
-        label: this.translateService.instant('common.directionName'),
-        fieldName: 'directionName'
-      },
-      {
-        label: this.translateService.instant('common.termNumber'),
-        fieldName: 'term'
-      },
-      {
-        label: this.translateService.instant('common.active'),
-        fieldName: 'active'
-      },
-      {
-        label: this.translateService.instant('common.deleted'),
-        fieldName: 'deleted'
-      },
-      {
-        label: this.translateService.instant('common.actions'),
-        fieldName: 'actions'
-      }];
+      { label: 'logbooks.name', fieldName: 'name'},
+      { label: 'common.instituteName', fieldName: 'instituteName'},
+      { label: 'common.collegeName', fieldName: 'collegeName'},
+      { label: 'common.active', fieldName: 'active'},
+      { label: 'common.actions', fieldName: 'actions'}];
   }
 
-  public showAddNewDialog(): void {
+  public showEditLogbookDialog(id: number): void {
     this.addEditDialog.clear();
-    const factory = this.resolver.resolveComponentFactory(AddEditDialogCollegesComponent);
+    const factory = this.resolver.resolveComponentFactory(AddEditDialogLogbooksComponent);
     this.componentRef = this.addEditDialog.createComponent(factory);
-    this.componentRef.instance.showNewCollegeDialog();
-    this.componentRef.instance.closeDialogWithSaveEmitter.subscribe(() =>
-      this.loadLogbooks()
-    );
-  }
-
-  public showEditDialog(id: number): void {
-    this.addEditDialog.clear();
-    const factory = this.resolver.resolveComponentFactory(AddEditDialogCollegesComponent);
-    this.componentRef = this.addEditDialog.createComponent(factory);
-    this.componentRef.instance.showEditCollegeDialog(id);
+    this.componentRef.instance.showEditLogbookPostsDialog(id);
     this.componentRef.instance.closeDialogWithSaveEmitter.subscribe(() =>
       this.loadLogbooks()
     );

@@ -23,22 +23,6 @@ public class LogbookController {
   // getAllLogbooks
   // getLogbookById
   // getLogbookForInternId
-  // get
-
-  // Logika tego miejsca:
-  // Głowna encja to Logbook
-  // pod nią podlegają LogbookPost w relacji jeden do wielu
-  // Logbook ma kolumny:
-  // > name
-  // > description
-  // > amountOfHours
-  // >
-  // >
-  // LogbookPost ma kolumny:
-  // > name
-  // > description
-  // > amountOfHours
-  // > Logbook (wiązanie po id)
   @Autowired
   private LogbookService logbookService;
 
@@ -71,8 +55,20 @@ public class LogbookController {
 
   @CrossOrigin
   @PreAuthorize("hasRole('ROLE_STUDENT')")
+  @RequestMapping(value = "/api/logbooks/intern/{id}", method = RequestMethod.GET)
+  public ResponseEntity<List<Logbook>> getAllLogbooksForInternId(Authentication authentication, @PathVariable("id") Long id) {
+    UserDetailsImpl loggedUser = (UserDetailsImpl) authentication.getPrincipal();
+    Long collegeId = loggedUser.getSelectedCollegeId();
+    if (id == null) {
+      return ResponseEntity.noContent().build();
+    }
+    return this.logbookService.getAllLogbooksForInternIdAndCollegeId(id, collegeId);
+  }
+
+  @CrossOrigin
+  @PreAuthorize("hasRole('ROLE_STUDENT')")
   @RequestMapping(value = "/api/logbooks/intern", method = RequestMethod.GET)
-  public ResponseEntity<List<Logbook>> getAllLogbooksForInternId(Authentication authentication) {
+  public ResponseEntity<List<Logbook>> getAllLogbooksForLoggedIntern(Authentication authentication) {
     UserDetailsImpl loggedUser = (UserDetailsImpl) authentication.getPrincipal();
     Long internId = loggedUser.getId();
     Long collegeId = loggedUser.getSelectedCollegeId();
@@ -83,7 +79,7 @@ public class LogbookController {
   }
 
   @CrossOrigin
-  @PreAuthorize("hasRole('ROLE_STUDNET')")
+  @PreAuthorize("hasRole('ROLE_STUDENT')")
   @RequestMapping(value = "/api/logbooks-posts/{id}", method = RequestMethod.GET)
   public ResponseEntity<List<LogbookPostDTO>> getLogbookPostsByLogbookId(
       @PathVariable("id") Long id, Authentication authentication) {
@@ -103,6 +99,7 @@ public class LogbookController {
     Long internId = loggedUser.getId();
     Long collegeId = loggedUser.getSelectedCollegeId();
     logbookDTO.setCollegeId(collegeId);
+    logbookDTO.setInternId(internId);
     if (internId == null) {
       return ResponseEntity.noContent().build();
     }
@@ -115,6 +112,9 @@ public class LogbookController {
   public ResponseEntity<?> createLogbookPost(Authentication authentication, @RequestBody LogbookPostDTO logbookPostDTO) {
     UserDetailsImpl loggedUser = (UserDetailsImpl) authentication.getPrincipal();
     Long internId = loggedUser.getId();
+    if (logbookPostDTO != null && logbookPostDTO.getLogbookId() == null) {
+      return ResponseEntity.badRequest().build();
+    }
     if (internId == null) {
       return ResponseEntity.noContent().build();
     }

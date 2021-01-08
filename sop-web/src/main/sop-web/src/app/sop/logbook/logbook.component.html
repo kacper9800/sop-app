@@ -7,11 +7,6 @@
               [clrDgLoading]="blockUI" style="height: 75%;">
   <clr-dg-action-bar>
     <div class="btn-group">
-      <button type="button" class="btn btn-sm btn-primary"
-              (click)="showAddNewDialog()">
-        <clr-icon shape="plus"></clr-icon>
-        {{'logbooks.CRUD.addLogbook' | translate}}
-      </button>
       <clr-dropdown>
         <button type="button" class="btn btn-sm btn-secondary" clrDropdownTrigger>
           {{'common.export.button' | translate}}
@@ -32,8 +27,9 @@
   </clr-dg-column>
 
   <clr-dg-row *ngFor="let logbook of logbooks" [clrDgItem]="logbook">
-    <!--    <clr-dg-cell>{{college.id}}</clr-dg-cell>-->
     <clr-dg-cell>{{logbook.name}}</clr-dg-cell>
+    <clr-dg-cell>{{logbook.instituteName}}</clr-dg-cell>
+    <clr-dg-cell>{{logbook.collegeName}}</clr-dg-cell>
     <clr-dg-cell>
       <div *ngIf="logbook.active">
         <clr-icon shape="check"></clr-icon>
@@ -43,31 +39,11 @@
       </div>
     </clr-dg-cell>
     <clr-dg-cell>
-      <div *ngIf="logbook.removed">
-        <clr-icon shape="check"></clr-icon>
-      </div>
-      <div *ngIf="!logbook.removed">
-        <clr-icon shape="times"></clr-icon>
-      </div>
-    </clr-dg-cell>
-    <clr-dg-cell>
       <div class="btn-group">
-<!--        <button *ngIf="logbook.active" type="button" class="btn btn-sm btn-danger-outline"-->
-<!--                (click)="activateAction(college)">-->
-<!--          <clr-icon shape="times"></clr-icon>-->
-<!--        </button>-->
-<!--        <button *ngIf="!logbook.active" type="button" class="btn btn-sm btn-success-outline"-->
-<!--                (click)="activateAction(college)">-->
-<!--          <clr-icon shape="check"></clr-icon>-->
-<!--        </button>-->
         <button type="button" class="btn btn-sm btn-secondary"
-                (click)="showEditDialog(logbook.id)">
+                (click)="showEditLogbookDialog(logbook.id)">
           <clr-icon shape="pencil"></clr-icon>
         </button>
-        <button type="button" class="btn btn-sm btn-danger" (click)="showConfirmDeleteDialog(logbook.id)">
-          <clr-icon shape="trash"></clr-icon>
-        </button>
-
       </div>
     </clr-dg-cell>
   </clr-dg-row>
@@ -82,17 +58,6 @@
     </clr-dg-pagination>
   </clr-dg-footer>
 </clr-datagrid>
-
-<!--<div class="row">-->
-<!--  <div class="clr-col-2"></div>-->
-<!--  <div class="clr-col-4">-->
-<!--    <div class="btn-group btn-primary">-->
-<!--      <button class="btn btn-success" (click)="opened=true">Dodaj klucz</button>-->
-<!--      <button class="btn btn-danger" (click)="opened=true">Usuń klucz</button>-->
-<!--    </div>-->
-<!--  </div>-->
-<!--  <div class="clr-col-2"></div>-->
-<!--</div>-->
 
 <ng-template #addEditDialog></ng-template>
 <ng-template #exportDialog></ng-template>

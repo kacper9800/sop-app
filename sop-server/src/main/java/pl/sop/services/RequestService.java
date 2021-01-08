@@ -11,6 +11,8 @@ import pl.sop.converters.ToDTO.RequestToDTOConverter;
 import pl.sop.dto.RequestDTO;
 import pl.sop.entities.Company;
 import pl.sop.entities.Dictionary;
+import pl.sop.entities.Internship;
+import pl.sop.entities.Logbook;
 import pl.sop.entities.Request;
 import pl.sop.entities.User;
 import pl.sop.entities.organizationStructure.CollegeService;
@@ -18,6 +20,8 @@ import pl.sop.entities.organizationStructure.Institute;
 import pl.sop.entities.organizationStructure.InstituteService;
 import pl.sop.enums.ERequestStatus;
 import pl.sop.repositories.CompanyRepository;
+import pl.sop.repositories.InternshipRepository;
+import pl.sop.repositories.LogbookRepository;
 import pl.sop.repositories.RequestRepository;
 import pl.sop.repositories.UserRepository;
 
@@ -47,6 +51,12 @@ public class RequestService {
 
   @Autowired
   private UserRepository userRepository;
+
+  @Autowired
+  private InternshipRepository internshipRepository;
+
+  @Autowired
+  private LogbookRepository logbookRepository;
 
   private DTOToRequestConverter dtoToRequestConverter = new DTOToRequestConverter();
   private RequestToDTOConverter requestToDTOConverter = new RequestToDTOConverter();
@@ -163,12 +173,40 @@ public class RequestService {
     request.setAdminDecisionFeedback(requestDTO.getAdminDecisionFeedback());
     request.setActualRequestStatus(requestDTO.getAdminDecisionStatus());
     this.requestRepository.save(request);
-    if (request.getAdminDecisionStatus().equals(ERequestStatus.ACCEPTED)) {
+
+    if (request.getAdminDecisionStatus().equals(ERequestStatus.ACCEPTED) && request.getRequestType()
+        .getValue().equals("START_INTERNSHIP")) {
       User intern = request.getIntern();
       intern.setDuringInternship(Boolean.TRUE);
       this.userRepository.save(intern);
+
+      Internship internship = createInternshipForRequest(request);
+      this.internshipRepository.save(internship);
+
+      Logbook logbook = createLogbookForRequest(request, internship);
+      this.logbookRepository.save(logbook);
     }
     return ResponseEntity.status(HttpStatus.OK).build();
+  }
+
+  public Internship createInternshipForRequest(Request request) {
+    Internship internship = new Internship();
+    internship.setRequest(request);
+    internship.setActive(Boolean.TRUE);
+    return internship;
+  }
+
+  public Logbook createLogbookForRequest(Request request, Internship internship) {
+    Logbook logbook = new Logbook();
+    logbook.setName("Dziennik praktyk");
+    logbook.setDescription(
+        request.getIntern().getFirstName() + " " + request.getIntern().getLastName());
+    logbook.setInstitute(request.getInstitute());
+    logbook.setCollege(request.getInstitute().getFaculty().getCollege());
+    logbook.setInternship(internship);
+    logbook.setActive(Boolean.TRUE);
+    logbook.setIntern(request.getIntern());
+    return logbook;
   }
 
   public ResponseEntity deleteRequest(Long id) {

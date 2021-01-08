@@ -1,1 +1,76 @@
-<p>add-edit-dialog-logbooks works!</p>
+<clr-modal [(clrModalOpen)]="displayDialog" [clrModalStaticBackdrop]="false" [clrModalSize]="'lg'"
+           [clrModalClosable]="false">
+  <h3 class="modal-title" style="text-align: center!important;">{{dialogTitle}}</h3>
+  <div class="modal-body">
+    <clr-datagrid [(clrDgSelected)]="selectedLogbookPosts" [clrDgLoading]="blockUI"
+                  style="height: 75%;">
+      <clr-dg-action-bar>
+        <div class="btn-group">
+          <button type="button" class="btn btn-sm btn-primary" [disabled]="isEditingNow"
+                  (click)="addNewRow()">
+            <clr-icon shape="plus"></clr-icon>
+            {{'logbookPosts.addLogbookPost' | translate}}
+          </button>
+          <clr-dropdown>
+            <button type="button" class="btn btn-sm btn-secondary" clrDropdownTrigger>
+              {{'common.export.button' | translate}}
+            </button>
+            <clr-dropdown-menu clrPosition="bottom-left" *clrIfOpen>
+              <button type="button" (click)="showExportDialog(true)"
+                      [disabled]="logbookPosts.length === 0" clrDropdownItem>
+                {{'common.export.all' | translate}}</button>
+              <!--              <button type="button" (click)="showExportDialog(false)"-->
+              <!--                      [disabled]="selectedUsers.length === 0" clrDropdownItem>-->
+              <!--                {{'common.export.selected' | translate}}</button>-->
+            </clr-dropdown-menu>
+          </clr-dropdown>
+        </div>
+      </clr-dg-action-bar>
+      <clr-dg-column *ngFor="let col of columns">
+        {{col.label}}
+      </clr-dg-column>
+
+      <clr-dg-row *ngFor="let logbookPost of logbookPosts" [clrDgItem]="logbookPost">
+        <clr-dg-cell>
+          <input *ngIf="logbookPost.isEditable" clrInput placeholder="Opis" [(ngModel)]="logbookPostToSave.description"/>
+          <span *ngIf="!logbookPost.isEditable"> {{logbookPost.description}}</span>
+        </clr-dg-cell>
+
+        <clr-dg-cell>
+          <input *ngIf="logbookPost.isEditable" type="date" clrDate
+                 placeholder="{{'common.startDate' | translate}}" [(ngModel)]="logbookPostToSave.date"/>
+          <span *ngIf="!logbookPost.isEditable">{{logbookPost.date}}</span>
+        </clr-dg-cell>
+
+        <clr-dg-cell>
+          <clr-combobox *ngIf="logbookPost.isEditable" [(ngModel)]="logbookPostToSave.amountOfHours" name="two" required>
+            <clr-options>
+              <clr-option [clrValue]="i" *ngFor="let element of numberOfHours; let i=index">{{i}}</clr-option>
+            </clr-options>
+          </clr-combobox>
+          <span *ngIf="!logbookPost.isEditable">{{logbookPost.amountOfHours}}</span>
+        </clr-dg-cell>
+
+        <clr-dg-placeholder>{{'logbookPosts.notFound' | translate}}</clr-dg-placeholder>
+        <clr-dg-footer>
+          <clr-dg-pagination #pagination [clrDgPageSize]="10">
+            <clr-dg-page-size
+              [clrPageSizeOptions]="[10,20,50,100]">{{'logbookPosts.logbookPostsPerPage' | translate}}</clr-dg-page-size>
+            {{pagination.firstItem + 1}} - {{pagination.lastItem + 1}}
+            {{'common.of' | translate}} {{pagination.totalItems}} {{'logbooks.logbookPosts' | translate}}
+          </clr-dg-pagination>
+        </clr-dg-footer>
+      </clr-dg-row>
+    </clr-datagrid>
+  </div>
+  <div class="modal-footer">
+    <div class="btn-group">
+      <button type="submit"
+              class="btn btn-primary" [disabled]="!isDataValid()"
+              (click)="onSubmit()">
+        {{'add-edit-dialog.save' | translate}}</button>
+      <button class="btn btn-secondary-outline"
+              (click)="displayDialog = false">{{'common.close' | translate}} </button>
+    </div>
+  </div>
+</clr-modal>

@@ -12,6 +12,7 @@ import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import pl.sop.entities.organizationStructure.College;
 import pl.sop.entities.organizationStructure.Institute;
@@ -42,17 +43,11 @@ public class Logbook extends BasicEntity {
   @OneToMany(mappedBy = "logbook", orphanRemoval = true)
   private List<LogbookPost> logbookPosts;
 
-  public Logbook() {
-  }
+  @OneToOne
+  @JoinColumn(name = "internship_id")
+  private Internship internship;
 
-  public Logbook(String name, String description, User intern,
-      Institute institute, College college, List<LogbookPost> logbookPosts) {
-    this.name = name;
-    this.description = description;
-    this.intern = intern;
-    this.institute = institute;
-    this.college = college;
-    this.logbookPosts = logbookPosts;
+  public Logbook() {
   }
 
   public String getName() {
@@ -101,5 +96,13 @@ public class Logbook extends BasicEntity {
 
   public void setLogbookPosts(List<LogbookPost> logbookPosts) {
     this.logbookPosts = logbookPosts;
+  }
+
+  public Internship getInternship() {
+    return internship;
+  }
+
+  public void setInternship(Internship internship) {
+    this.internship = internship;
   }
 }

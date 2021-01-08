@@ -9,6 +9,7 @@ public class LogbookToDTOConverter implements Converter<Logbook, LogbookDTO> {
   @Override
   public LogbookDTO convert(Logbook input) {
     LogbookDTO logbookDTO = new LogbookDTO();
+    logbookDTO.setId(input.getId());
     logbookDTO.setName(input.getName());
     logbookDTO.setDescription(input.getDescription());
     logbookDTO.setInternId(input.getIntern().getId());

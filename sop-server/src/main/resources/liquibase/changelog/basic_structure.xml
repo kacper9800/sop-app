@@ -656,8 +656,10 @@
     </insert>
   </changeSet>
   <changeSet id="29" author="krzymkiewicz">
-    <modifyDataType tableName="dictionaries" columnName="start_expiration_date" newDataType="TIMESTAMP WITHOUT TIME ZONE"/>
-    <modifyDataType tableName="dictionaries" columnName="end_expiration_date" newDataType="TIMESTAMP WITHOUT TIME ZONE"/>
+    <modifyDataType tableName="dictionaries" columnName="start_expiration_date"
+      newDataType="TIMESTAMP WITHOUT TIME ZONE"/>
+    <modifyDataType tableName="dictionaries" columnName="end_expiration_date"
+      newDataType="TIMESTAMP WITHOUT TIME ZONE"/>
     <createTable tableName="directions">
       <column name="id" type="BIGINT" autoIncrement="true">
         <constraints primaryKey="true" nullable="false"></constraints>
@@ -1048,7 +1050,80 @@
       referencedTableName="logbooks"
       referencedColumnNames="id"/>
   </changeSet>
+  <changeSet id="47" author="krzymkiewicz">
+    <createTable tableName="internships">
+      <column name="id" type="BIGINT" autoIncrement="true">
+        <constraints primaryKey="true" nullable="false"></constraints>
+      </column>
+      <column name="create_date" type="TIMESTAMP WITHOUT TIME ZONE"></column>
+      <column name="create_by" type="VARCHAR(255)"></column>
+      <column name="edit_date" type="TIMESTAMP WITHOUT TIME ZONE"></column>
+      <column name="edit_by" type="VARCHAR(255)"></column>
+      <column name="active" type="BOOLEAN"></column>
+      <column name="deleted" type="BOOLEAN"></column>
+      <column name="request_id" type="bigint"></column>
+    </createTable>
+    <addColumn tableName="logbooks">
+      <column name="internship_id" type="bigint"></column>
+    </addColumn>
+    <addForeignKeyConstraint
+      baseTableName="internships"
+      baseColumnNames="request_id"
+      constraintName="fk_request_id"
+      referencedTableName="requests"
+      referencedColumnNames="id"/>
+    <addForeignKeyConstraint
+      baseTableName="logbooks"
+      baseColumnNames="internship_id"
+      constraintName="fk_internship_id"
+      referencedTableName="internships"
+      referencedColumnNames="id"/>
+  </changeSet>
+  <changeSet id="48" author="krzymkiewicz">
+    <dropTable tableName="logbooks" cascadeConstraints="true"/>
 
+    <createTable tableName="logbooks">
+      <column name="id" type="BIGINT" autoIncrement="true">
+        <constraints primaryKey="true" nullable="false"></constraints>
+      </column>
+      <column name="create_date" type="TIMESTAMP WITHOUT TIME ZONE"></column>
+      <column name="create_by" type="VARCHAR(255)"></column>
+      <column name="edit_date" type="TIMESTAMP WITHOUT TIME ZONE"></column>
+      <column name="edit_by" type="VARCHAR(255)"></column>
+      <column name="active" type="BOOLEAN"></column>
+      <column name="deleted" type="BOOLEAN"></column>
+      <column name="name" type="varchar(255)"></column>
+      <column name="description" type="varchar(2050)"></column>
+      <column name="intern_id" type="bigint"></column>
+      <column name="institute_id" type="bigint"></column>
+      <column name="college_id" type="bigint"></column>
+      <column name="internship_id" type="bigint"></column>
+    </createTable>
+
+    <addForeignKeyConstraint
+      baseTableName="logbooks"
+      baseColumnNames="intern_id"
+      constraintName="fk_intern_id"
+      referencedTableName="users"
+      referencedColumnNames="id"/>
+    <addForeignKeyConstraint
+      baseTableName="logbooks"
+      baseColumnNames="institute_id"
+      constraintName="fk_institute_id"
+      referencedTableName="institutes"
+      referencedColumnNames="id"/>
+    <addForeignKeyConstraint
+      baseTableName="logbooks"
+      baseColumnNames="college_id"
+      constraintName="fk_college_id"
+      referencedTableName="colleges" referencedColumnNames="id"/>
+    <addForeignKeyConstraint
+      baseTableName="logbooks"
+      baseColumnNames="internship_id"
+      constraintName="fk_internship_id"
+      referencedTableName="internships"
+      referencedColumnNames="id"/>
+  </changeSet>
 </databaseChangeLog>
 
 
