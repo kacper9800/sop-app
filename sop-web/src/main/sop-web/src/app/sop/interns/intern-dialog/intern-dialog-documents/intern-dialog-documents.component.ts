@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import { Document} from '../../../../_model/document.model';
 
 
@@ -8,6 +8,9 @@ import { Document} from '../../../../_model/document.model';
   styleUrls: ['./intern-dialog-documents.component.css']
 })
 export class InternDialogDocumentsComponent implements OnInit {
+
+  @Input()
+  public internId: number;
   public documents: Document[] = [];
   public selectedDocuments: Document[] = [];
   public blockUI: boolean;

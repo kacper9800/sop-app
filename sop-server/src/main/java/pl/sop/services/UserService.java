@@ -70,6 +70,12 @@ public class UserService {
     return user;
   }
 
+  public UserDTO getInternBasicData(Long id) {
+    User user = userRepository.findUserById(id);
+    UserDTO userDTO = userViewToDTOConverter.convert(user);
+    return userDTO;
+  }
+
   public UserDTO getUser(Long id) {
     User user = userRepository.findUserById(id);
     return userViewToDTOConverter.convert(user);

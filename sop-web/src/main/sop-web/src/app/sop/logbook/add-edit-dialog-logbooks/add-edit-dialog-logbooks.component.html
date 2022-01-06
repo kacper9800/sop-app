@@ -2,12 +2,12 @@
            [clrModalClosable]="false">
   <h3 class="modal-title" style="text-align: center!important;">{{dialogTitle}}</h3>
   <div class="modal-body">
-    <clr-datagrid [(clrDgSelected)]="selectedLogbookPosts" [clrDgLoading]="blockUI"
+    <clr-datagrid [clrDgLoading]="blockUI"
                   style="height: 75%;">
       <clr-dg-action-bar>
         <div class="btn-group">
           <button type="button" class="btn btn-sm btn-primary" [disabled]="isEditingNow"
-                  (click)="addNewRow()">
+                  (click)="addNewRow()" *ngIf="principalService.isStudent()">
             <clr-icon shape="plus"></clr-icon>
             {{'logbookPosts.addLogbookPost' | translate}}
           </button>
@@ -67,7 +67,7 @@
     <div class="btn-group">
       <button type="submit"
               class="btn btn-primary" [disabled]="!isDataValid()"
-              (click)="onSubmit()">
+              (click)="onSubmit()" *ngIf="principalService.isStudent()">
         {{'add-edit-dialog.save' | translate}}</button>
       <button class="btn btn-secondary-outline"
               (click)="displayDialog = false">{{'common.close' | translate}} </button>

@@ -24,8 +24,8 @@ export class LogbookService {
     return this.httpClient.get<HttpResponse<ILogbook[]>>(global.API + LOGBOOK_API);
   }
 
-  public getAllLogbooksForIntern(id: number): Observable<HttpResponse<ILogbook[]>> {
-    return this.httpClient.get<HttpResponse<ILogbook[]>>(global.API + LOGBOOK_API + '/intern/' + id);
+  public getAllLogbooksForIntern(id: number): Observable<ILogbook[]> {
+    return this.httpClient.get<ILogbook[]>(global.API + LOGBOOK_API + '/intern/' + id);
   }
 
   public getAllLogbooksForLoggedIntern(): Observable<HttpResponse<ILogbook[]>> {

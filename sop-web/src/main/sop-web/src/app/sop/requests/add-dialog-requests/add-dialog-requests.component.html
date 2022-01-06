@@ -219,7 +219,7 @@
     </form>
   </clr-wizard-page>
 
-  <clr-wizard-page #pageFourfth [clrWizardPageNextDisabled]="false">
+  <clr-wizard-page #pageFourfth [clrWizardPageNextDisabled]="fourthPageForm.invalid">
     <ng-template
       clrPageTitle>{{'requests.dialog.titles.agreementsTitle' | translate}}</ng-template>
     <ng-template
@@ -247,12 +247,60 @@
     <div class="clr-row">
       <div class="clr-col-2"></div>
       <div class="clr-col-8">
-        <label>{{'requests.wizard.companyName' | translate}}</label>
+        <b>{{'requests.wizard.companyName' | translate}}:</b>
         {{requestToSave.companyName}}
       </div>
       <div class="clr-col-2"></div>
     </div>
 
 
+    <div class="clr-row">
+      <div class="clr-col-2"></div>
+      <div class="clr-col-8">
+        <b>{{'requests.wizard.amountOfHours' | translate}}:</b>
+        {{requestToSave.amountOfHours}}
+      </div>
+      <div class="clr-col-2"></div>
+    </div>
+
+
+    <div class="clr-row">
+      <div class="clr-col-2"></div>
+      <div class="clr-col-8">
+        <b>{{'requests.wizard.position' | translate}}:</b>
+        {{requestToSave.position}}
+      </div>
+      <div class="clr-col-2"></div>
+    </div>
+
+
+    <div class="clr-row">
+      <div class="clr-col-2"></div>
+      <div class="clr-col-8">
+        <b>{{'requests.wizard.positionDescription' | translate}}:</b>
+        {{requestToSave.positionDescription}}
+      </div>
+      <div class="clr-col-2"></div>
+    </div>
+
+
+    <div class="clr-row">
+      <div class="clr-col-2"></div>
+      <div class="clr-col-8">
+        <b>{{'requests.wizard.responsibilities' | translate}}:</b>
+        {{requestToSave.responsibilities}}
+      </div>
+      <div class="clr-col-2"></div>
+    </div>
+
+
+    <div class="clr-row">
+      <div class="clr-col-2"></div>
+      <div class="clr-col-8">
+        <b>{{'requests.wizard.practiceSuperviserFullName' | translate}}:</b>
+        {{requestToSave.practiceSuperviserName}} {{requestToSave.practiceSuperviserLastName}}
+      </div>
+      <div class="clr-col-2"></div>
+    </div>
   </clr-wizard-page>
 </clr-wizard>

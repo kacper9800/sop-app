@@ -3,7 +3,7 @@
 <h1 style="text-align: center">{{'logbooks.header' | translate}}</h1>
 <!--<h4 style="text-align: center">{{'logbooks.secondHeader' | translate}}</h4>-->
 
-<clr-datagrid [(clrDgSelected)]="selectedLogbook" [clrDgRowSelection]="true"
+<clr-datagrid [(clrDgSelected)]="selectedLogbook"
               [clrDgLoading]="blockUI" style="height: 75%;">
   <clr-dg-action-bar>
     <div class="btn-group">
@@ -28,8 +28,10 @@
 
   <clr-dg-row *ngFor="let logbook of logbooks" [clrDgItem]="logbook">
     <clr-dg-cell>{{logbook.name}}</clr-dg-cell>
-    <clr-dg-cell>{{logbook.instituteName}}</clr-dg-cell>
-    <clr-dg-cell>{{logbook.collegeName}}</clr-dg-cell>
+    <clr-dg-cell>{{logbook.companyName}}</clr-dg-cell>
+    <clr-dg-cell>{{logbook.position}}</clr-dg-cell>
+    <clr-dg-cell>{{logbook.actualAmountOfHours}}</clr-dg-cell>
+    <clr-dg-cell>{{logbook.amountOfHours}}</clr-dg-cell>
     <clr-dg-cell>
       <div *ngIf="logbook.active">
         <clr-icon shape="check"></clr-icon>
@@ -42,7 +44,8 @@
       <div class="btn-group">
         <button type="button" class="btn btn-sm btn-secondary"
                 (click)="showEditLogbookDialog(logbook.id)">
-          <clr-icon shape="pencil"></clr-icon>
+          <clr-icon shape="angle-double"></clr-icon>
+          Podgląd
         </button>
       </div>
     </clr-dg-cell>

@@ -54,7 +54,7 @@ public class LogbookController {
   }
 
   @CrossOrigin
-  @PreAuthorize("hasRole('ROLE_STUDENT')")
+  @PreAuthorize("hasRole('ROLE_STUDENT') or hasRole('ROLE_DIRECTOR') or hasRole('ROLE_ADMIN') or hasRole('ROLE_MODERATOR')")
   @RequestMapping(value = "/api/logbooks/intern/{id}", method = RequestMethod.GET)
   public ResponseEntity<List<Logbook>> getAllLogbooksForInternId(Authentication authentication, @PathVariable("id") Long id) {
     UserDetailsImpl loggedUser = (UserDetailsImpl) authentication.getPrincipal();
@@ -79,7 +79,7 @@ public class LogbookController {
   }
 
   @CrossOrigin
-  @PreAuthorize("hasRole('ROLE_STUDENT')")
+  @PreAuthorize("hasRole('ROLE_STUDENT') or hasRole('ROLE_DIRECTOR') or hasRole('ROLE_ADMIN') or hasRole('ROLE_MODERATOR')")
   @RequestMapping(value = "/api/logbooks-posts/{id}", method = RequestMethod.GET)
   public ResponseEntity<List<LogbookPostDTO>> getLogbookPostsByLogbookId(
       @PathVariable("id") Long id, Authentication authentication) {

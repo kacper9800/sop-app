@@ -75,4 +75,15 @@ public class UserController {
     return userService.getAllDirectorsForInstitute(userId);
   }
 
+  @GetMapping(value = "/api/users/intern/{id}")
+  @PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_SUPERADMIN') or hasRole('ROLE_MODERATOR')")
+  public ResponseEntity<UserDTO> getInternBasicData(Authentication authentication, @PathVariable("id") Long id) {
+    UserDetailsImpl user = (UserDetailsImpl) authentication.getPrincipal();
+    Long userId = user.getId();
+    if (userId == null) {
+      return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+    }
+    return ResponseEntity.ok(userService.getInternBasicData(id));
+  }
+
 }

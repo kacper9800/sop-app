@@ -1,7 +1,9 @@
 #nav {
   text-align: center;
 }
-
+#navbar {
+  margin: 11px;
+}
 
 .modal-body p {
   text-align: center;

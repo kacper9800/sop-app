@@ -23,7 +23,7 @@ public class DirectionController {
   private DirectionService directionService;
 
   @CrossOrigin
-  @PreAuthorize("hasRole('ROLE_SUPERADMIN') or hasRole('ROLE_ADMIN') or hasRole('ROLE_MODERATOR')")
+  @PreAuthorize("hasRole('ROLE_SUPERADMIN') or hasRole('ROLE_ADMIN') or hasRole('ROLE_MODERATOR') or hasRole('ROLE_DIRECTOR')")
   @RequestMapping(value = "/api/directions/{id}", method = RequestMethod.GET)
   public ResponseEntity<DirectionDTO> getDirectionById(Authentication authentication,
       @PathVariable("id") Long id) {
@@ -34,7 +34,7 @@ public class DirectionController {
   }
 
   @CrossOrigin
-  @PreAuthorize("hasRole('ROLE_SUPERADMIN') or hasRole('ROLE_ADMIN') or hasRole('ROLE_MODERATOR')")
+  @PreAuthorize("hasRole('ROLE_SUPERADMIN') or hasRole('ROLE_ADMIN') or hasRole('ROLE_MODERATOR') or hasRole('ROLE_DIRECTOR')")
   @RequestMapping(value = "/api/college-directions", method = RequestMethod.GET)
   public ResponseEntity<List<DirectionDTO>> getAllDirections(Authentication authentication) {
     UserDetailsImpl loggedUser = (UserDetailsImpl) authentication.getPrincipal();

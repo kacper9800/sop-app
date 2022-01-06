@@ -1,4 +1,6 @@
-<clr-datagrid [clrDgLoading]="blockUI" >
+
+<clr-datagrid [(clrDgSelected)]="selectedLogbook"
+              [clrDgLoading]="blockUI">
   <clr-dg-action-bar>
     <div class="btn-group">
       <clr-dropdown>
@@ -7,8 +9,11 @@
         </button>
         <clr-dropdown-menu clrPosition="bottom-left" *clrIfOpen>
           <button type="button" (click)="showExportDialog(true)"
-                  [disabled]="logbookPosts.length === 0" clrDropdownItem>
+                  [disabled]="logbooks.length === 0" clrDropdownItem>
             {{'common.export.all' | translate}}</button>
+          <button type="button" (click)="showExportDialog(false)"
+                  [disabled]="selectedLogbook.length === 0" clrDropdownItem>
+            {{'common.export.selected' | translate}}</button>
         </clr-dropdown-menu>
       </clr-dropdown>
     </div>
@@ -17,18 +22,39 @@
     {{col.label | translate}}
   </clr-dg-column>
 
-  <clr-dg-row *ngFor="let logbookPost of logbookPosts" [clrDgItem]="logbookPost">
-    <clr-dg-cell>{{logbookPost.name}}</clr-dg-cell>
-    <clr-dg-cell>{{logbookPost.date | date}}</clr-dg-cell>
+  <clr-dg-row *ngFor="let logbook of logbooks" [clrDgItem]="logbook">
+    <clr-dg-cell>{{logbook.name}}</clr-dg-cell>
+    <clr-dg-cell>{{logbook.companyName}}</clr-dg-cell>
+    <clr-dg-cell>{{logbook.position}}</clr-dg-cell>
+    <clr-dg-cell>
+      <div *ngIf="logbook.active">
+        <clr-icon shape="check"></clr-icon>
+      </div>
+      <div *ngIf="!logbook.active">
+        <clr-icon shape="times"></clr-icon>
+      </div>
+    </clr-dg-cell>
+    <clr-dg-cell>
+      <div class="btn-group">
+        <button type="button" class="btn btn-sm btn-secondary"
+                (click)="showViewLogbookDialog(logbook.id)">
+          <clr-icon *ngIf="principal.isStudent()" shape="pencil"></clr-icon>
+          <clr-icon *ngIf="!principal.isStudent()" shape="angle-double"></clr-icon>
+        </button>
+      </div>
+    </clr-dg-cell>
   </clr-dg-row>
 
-  <clr-dg-placeholder>{{'interns.notFound' | translate}}</clr-dg-placeholder>
-<!--  <clr-dg-footer>-->
-<!--    <clr-dg-pagination #pagination [clrDgPageSize]="10">-->
-<!--      <clr-dg-page-size-->
-<!--        [clrPageSizeOptions]="[5,10,20,50]">{{'users.usersPerPage' | translate}}</clr-dg-page-size>-->
-<!--      {{pagination.firstItem + 1}} - {{pagination.lastItem-->
-<!--    + 1}} {{'common.of' | translate}} {{logbookPosts.length}} {{'users.users' | translate}}-->
-<!--    </clr-dg-pagination>-->
-<!--  </clr-dg-footer>-->
+  <clr-dg-placeholder>{{'logbooks.notFound' | translate}}</clr-dg-placeholder>
+  <clr-dg-footer>
+    <clr-dg-pagination #pagination [clrDgPageSize]="10">
+      <clr-dg-page-size
+        [clrPageSizeOptions]="[10,20,50,100]">{{'logbooks.logbooksPerPage' | translate}}</clr-dg-page-size>
+      {{pagination.firstItem + 1}} - {{pagination.lastItem
+    + 1}} {{'common.of' | translate}} {{pagination.totalItems}} {{'logbooks.logbooks' | translate}}
+    </clr-dg-pagination>
+  </clr-dg-footer>
 </clr-datagrid>
+
+<ng-template #addEditDialog></ng-template>
+<ng-template #exportDialog></ng-template>

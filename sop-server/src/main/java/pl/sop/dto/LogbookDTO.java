@@ -3,6 +3,7 @@ package pl.sop.dto;
 import java.util.List;
 
 public class LogbookDTO {
+
   private Long id;
   private String name;
   private String description;
@@ -12,14 +13,24 @@ public class LogbookDTO {
   private String instituteName;
   private Long collegeId;
   private String collegeName;
+  private Long companyId;
+  private String companyName;
+  private String position;
+
+  private Integer actualAmountOfHours;
+  private Integer amountOfHours;
+
   private List<LogbookPostDTO> posts;
+  private Boolean active;
 
   public LogbookDTO() {
   }
 
   public LogbookDTO(Long id, String name, String description, Long internId,
       String internName, Long instituteId, String instituteName, Long collegeId,
-      String collegeName, List<LogbookPostDTO> posts) {
+      String collegeName, Long companyId, String companyName, String position,
+      Integer actualAmountOfHours, Integer amountOfHours,
+      List<LogbookPostDTO> posts, Boolean active) {
     this.id = id;
     this.name = name;
     this.description = description;
@@ -29,7 +40,13 @@ public class LogbookDTO {
     this.instituteName = instituteName;
     this.collegeId = collegeId;
     this.collegeName = collegeName;
+    this.companyId = companyId;
+    this.companyName = companyName;
+    this.position = position;
+    this.actualAmountOfHours = actualAmountOfHours;
+    this.amountOfHours = amountOfHours;
     this.posts = posts;
+    this.active = active;
   }
 
   public Long getId() {
@@ -104,11 +121,59 @@ public class LogbookDTO {
     this.collegeName = collegeName;
   }
 
+  public Long getCompanyId() {
+    return companyId;
+  }
+
+  public void setCompanyId(Long companyId) {
+    this.companyId = companyId;
+  }
+
+  public String getCompanyName() {
+    return companyName;
+  }
+
+  public void setCompanyName(String companyName) {
+    this.companyName = companyName;
+  }
+
+  public String getPosition() {
+    return position;
+  }
+
+  public void setPosition(String position) {
+    this.position = position;
+  }
+
+  public Integer getActualAmountOfHours() {
+    return actualAmountOfHours;
+  }
+
+  public void setActualAmountOfHours(Integer actualAmountOfHours) {
+    this.actualAmountOfHours = actualAmountOfHours;
+  }
+
+  public Integer getAmountOfHours() {
+    return amountOfHours;
+  }
+
+  public void setAmountOfHours(Integer amountOfHours) {
+    this.amountOfHours = amountOfHours;
+  }
+
   public List<LogbookPostDTO> getPosts() {
     return posts;
   }
 
   public void setPosts(List<LogbookPostDTO> posts) {
     this.posts = posts;
+  }
+
+  public Boolean getActive() {
+    return active;
+  }
+
+  public void setActive(Boolean active) {
+    this.active = active;
   }
 }

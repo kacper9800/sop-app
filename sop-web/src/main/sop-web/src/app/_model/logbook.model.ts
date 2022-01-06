@@ -11,6 +11,11 @@ export interface ILogbook {
   instituteName: string;
   collegeId: number;
   collegeName: string;
+  companyId: number;
+  companyName: string;
+  position: string;
+  actualAmountOfHours: number;
+  amountOfHours: number;
   active: boolean;
   removed: boolean;
   posts: LogbookPost[];
@@ -27,6 +32,11 @@ export class Logbook implements ILogbook {
   instituteName: string;
   collegeId: number;
   collegeName: string;
+  companyId: number;
+  companyName: string;
+  position: string;
+  actualAmountOfHours: number;
+  amountOfHours: number;
   active: boolean;
   removed: boolean;
   posts: LogbookPost[];

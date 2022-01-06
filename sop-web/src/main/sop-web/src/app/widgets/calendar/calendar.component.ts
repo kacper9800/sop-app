@@ -35,10 +35,10 @@ export class CalendarComponent implements OnInit {
           center: 'title',
           right: 'today timeGridDay timeGridWeek',
       },
-      buttonIcons: {
-        prev: 'left-single-arrow',
-        next: 'right-single-arrow',
-      },
+      // buttonIcons: {
+      //   prev: 'left-single-arrow',
+      //   next: 'right-single-arrow',
+      // },
       locales: [plLocale],
       locale: 'pl',
       buttonText: {

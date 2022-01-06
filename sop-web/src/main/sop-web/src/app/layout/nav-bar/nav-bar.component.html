@@ -1,4 +1,4 @@
-<clr-main-container *ngIf="isLoggedIn">
+<clr-main-container *ngIf="isLoggedIn" id="navbar">
   <div class="content-container">
     <nav class="sidenav" *ngIf="!planner" [clr-nav-level]="1">
       <section class="sidenav-content">
@@ -76,7 +76,7 @@
         </a>
         <!--Administrator uczelni-->
         <a routerLink="/app/requests" class="nav-link" *ngIf="isAdmin">
-          <clr-icon shape="arrow"></clr-icon>
+          <clr-icon shape="file-group"></clr-icon>
           <b>Wnioski o praktyki</b>
         </a>
         <a routerLink="/app/directions" class="nav-link" *ngIf="isAdmin">
@@ -126,7 +126,7 @@
 
         <!--Dyrektor instytutu-->
         <a routerLink="/app/requests" class="nav-link" *ngIf="isDirector">
-          <clr-icon shape="arrow"></clr-icon>
+          <clr-icon shape="file-group"></clr-icon>
           <b>Wnioski o praktyki</b>
         </a>
         <a routerLink="/app/directions" class="nav-link" *ngIf="isDirector">
@@ -180,7 +180,7 @@
           Kierownik praktyk
         </a>
         <a routerLink="/app/requests" class="nav-link" *ngIf="isModerator">
-          <clr-icon shape="arrow"></clr-icon>
+          <clr-icon shape="file-group"></clr-icon>
           <b>Wnioski o praktyki</b>
         </a>
         <a routerLink="/app/interns" class="nav-link" *ngIf="isModerator">
@@ -217,15 +217,12 @@
         </a>
 
         <!--        Praktykant-->
-        <a routerLink="/app/home" class="nav-link" *ngIf="isStudent || isSuperAdmin" style="color: red">
-          Praktykant
-        </a>
         <a routerLink="/app/requests" class="nav-link" *ngIf="isStudent || isSuperAdmin">
-          <clr-icon shape="arrow"></clr-icon>
+          <clr-icon shape="file-group"></clr-icon>
           <b>Wnioski o praktyki</b>
         </a>
         <a routerLink="/app/logbook" class="nav-link" *ngIf="isStudent || isSuperAdmin">
-          <clr-icon shape="calendar"></clr-icon>
+          <clr-icon shape="book"></clr-icon>
           Dziennik praktyk
         </a>
         <a routerLink="/app/documents" class="nav-link" *ngIf="isStudent || isSuperAdmin">
@@ -245,7 +242,7 @@
           {{'navBar.colleges' | translate}}
         </a>
         <a routerLink="/app/logbook" class="nav-link" *ngIf="isSuperviser || isSuperAdmin">
-          <clr-icon shape="calendar"></clr-icon>
+          <clr-icon shape="book"></clr-icon>
           Dzienniki praktyk
         </a>
         <a routerLink="/app/interns" class="nav-link" *ngIf="isSuperviser || isSuperAdmin">

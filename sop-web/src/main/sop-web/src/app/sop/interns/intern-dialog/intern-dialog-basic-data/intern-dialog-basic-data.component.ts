@@ -1,5 +1,8 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
+import {UserService} from '../../../../_services/user.service';
+import {IUserView, UserView} from '../../../../_model/user-view.model';
+import {HttpResponse} from '@angular/common/http';
 
 @Component({
   selector: 'app-intern-dialog-basic-data',
@@ -7,13 +10,21 @@ import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
   styleUrls: ['./intern-dialog-basic-data.component.css']
 })
 export class InternDialogBasicDataComponent implements OnInit {
-  public basicDataForm: FormGroup;
+  @Input()
+  public internId: number;
 
-  constructor(private formBuilder: FormBuilder) {
+  @Output()
+  public closeDialogWithSaveEmitter: EventEmitter<any> = new EventEmitter<any>();
+  public basicDataForm: FormGroup;
+  public user: UserView;
+
+  constructor(private formBuilder: FormBuilder,
+              private userService: UserService) {
   }
 
   ngOnInit(): void {
     this.createForm();
+    this.getInternBasicData();
   }
 
   public createForm() {
@@ -30,4 +41,19 @@ export class InternDialogBasicDataComponent implements OnInit {
     });
   }
 
+  public getInternBasicData() {
+    this.userService.getInternBasicData(this.internId).subscribe(
+      (res) => this.onSuccessLoadInternBasicData(res),
+      (err) => this.onErrorLoadInternBasicData(err)
+    );
+  }
+
+  private onSuccessLoadInternBasicData(res: HttpResponse<IUserView>) {
+    this.user = new UserView();
+    this.user = res.body;
+  }
+
+  private onErrorLoadInternBasicData(err: any) {
+
+  }
 }

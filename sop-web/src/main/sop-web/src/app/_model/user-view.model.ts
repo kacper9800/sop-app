@@ -4,6 +4,7 @@ export interface IUserView {
   lastName?: string;
   description?: string;
   duration?: number;
+  birthDate?: Date;
 
   location?: string;
   locationId?: number;
@@ -36,6 +37,7 @@ export class UserView implements IUserView {
   lastName?: string;
   description?: string;
   duration?: number;
+  birthDate?: Date;
 
   location?: string;
   locationId?: number;

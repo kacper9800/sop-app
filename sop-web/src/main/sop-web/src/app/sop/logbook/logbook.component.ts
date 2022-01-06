@@ -69,8 +69,10 @@ export class LogbookComponent implements OnInit {
   private prepareColumns() {
     this.columns = [
       { label: 'logbooks.name', fieldName: 'name'},
-      { label: 'common.instituteName', fieldName: 'instituteName'},
-      { label: 'common.collegeName', fieldName: 'collegeName'},
+      { label: 'common.companyName', fieldName: 'companyName'},
+      { label: 'requests.wizard.position', fieldName: 'position'},
+      { label: 'logbooks.actualAmountOfHours', fieldName: 'actualAmountOfHours'},
+      { label: 'logbooks.amountOfHours', fieldName: 'amountOfHours'},
       { label: 'common.active', fieldName: 'active'},
       { label: 'common.actions', fieldName: 'actions'}];
   }

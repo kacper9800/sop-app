@@ -205,6 +205,7 @@ public class RequestService {
     logbook.setCollege(request.getInstitute().getFaculty().getCollege());
     logbook.setInternship(internship);
     logbook.setActive(Boolean.TRUE);
+    logbook.setDeleted(Boolean.FALSE);
     logbook.setIntern(request.getIntern());
     return logbook;
   }

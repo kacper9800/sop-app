@@ -10,8 +10,12 @@ import pl.sop.entities.Logbook;
 @Repository
 public interface LogbookRepository extends JpaRepository<Logbook, Long> {
 
-  @Query(value = "SELECT logbook from Logbook logbook "
+  @Query(value = "SELECT distinct logbook from Logbook logbook "
+      + " left join logbook.logbookPosts logbookPosts"
       + " left join logbook.intern intern "
+      + " left join logbook.internship internship"
+      + " left join internship.request request"
+      + " left join request.company company"
       + " left join logbook.college college "
       + " where college.id = :collegeId and intern.id = :internId")
   List<Logbook> findAllLogbooksForInternIdAndCollegeId(@Param("internId") Long internId,

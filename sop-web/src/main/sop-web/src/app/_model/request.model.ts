@@ -7,6 +7,7 @@ export interface IRequest {
   requestTypeName: string;
   collegeId: number;
   instituteId: number;
+  instituteName: string;
   internId: number;
   internName: string;
 
@@ -61,6 +62,7 @@ export class Request implements IRequest {
   requestTypeName: string;
   collegeId: number;
   instituteId: number;
+  instituteName: string;
   internId: number;
   internName: string;
 

@@ -99,6 +99,8 @@ public class LogbookService {
 
     College college = collegeRepository.findCollegeById(logbookDTO.getCollegeId());
     logbook.setCollege(college);
+    logbook.setActive(Boolean.TRUE);
+    logbook.setDeleted(Boolean.FALSE);
     return ResponseEntity.ok(this.logbookRepository.save(logbook));
   }
 

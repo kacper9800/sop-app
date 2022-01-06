@@ -78,10 +78,10 @@
   <clr-dg-placeholder>{{'activationKeys.notFound' | translate}}</clr-dg-placeholder>
 
   <clr-dg-footer>
-    <clr-dg-pagination #pagination [clrDgPageSize]="10">
-      <clr-dg-page-size [clrPageSizeOptions]="[10,20,50,100]">Users per page</clr-dg-page-size>
+    <clr-dg-pagination #pagination [clrDgPageSize]="5">
+      <clr-dg-page-size [clrPageSizeOptions]="[5,10,30,50]">{{'activationKeys.activationKeys' | translate}}</clr-dg-page-size>
       {{pagination.firstItem + 1}} - {{pagination.lastItem + 1}}
-      of {{pagination.totalItems}} users
+      {{'common.of' | translate}} {{pagination.totalItems}} {{'activationKeys.activationKey' | translate}}
     </clr-dg-pagination>
   </clr-dg-footer>
 </clr-datagrid>

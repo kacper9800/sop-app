@@ -94,10 +94,27 @@ export class RequestsComponent implements OnInit {
       //   fieldName: 'id'
       // },
       {
-        label: this.translateService.instant('common.collegeName'),
+        label: this.translateService.instant('common.name'),
         fieldName: 'name'
-      }, {
-        label: this.translateService.instant('common.collegeName'),
+      },
+      {
+        label: this.translateService.instant('common.internName'),
+        fieldName: 'internName'
+      },
+      {
+        label: this.translateService.instant('common.instituteName'),
+        fieldName: 'instituteName'
+      },
+      {
+        label: this.translateService.instant('common.moderatorName'),
+        fieldName: 'moderatorName'
+      },
+      {
+        label: this.translateService.instant('common.adminName'),
+        fieldName: 'adminName'
+      },
+      {
+        label: this.translateService.instant('requests.status'),
         fieldName: 'actualRequestStatusName'
       },
       {

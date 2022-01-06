@@ -2,8 +2,7 @@
 
 <h1 style="text-align: center">{{'requests.header' | translate}}</h1>
 
-<clr-datagrid [(clrDgSelected)]="selectedRequests" [clrDgRowSelection]="true"
-              [clrDgLoading]="blockUI" style="height: 75%;">
+<clr-datagrid [(clrDgSelected)]="selectedRequests" [clrDgLoading]="blockUI" style="height: 75%;">
   <clr-dg-action-bar>
     <div class="btn-group">
       <button type="button" class="btn btn-sm btn-primary" *ngIf="principal.isStudent()"
@@ -36,6 +35,10 @@
 
   <clr-dg-row *ngFor="let request of requests" [clrDgItem]="request">
     <clr-dg-cell>{{request.name}}</clr-dg-cell>
+    <clr-dg-cell>{{request.internName}}</clr-dg-cell>
+    <clr-dg-cell>{{request.instituteName}}</clr-dg-cell>
+    <clr-dg-cell>{{request.moderatorName}}</clr-dg-cell>
+    <clr-dg-cell>{{request.adminName}}</clr-dg-cell>
     <clr-dg-cell>{{'requests.statuses.' + request.actualRequestStatus | translate}}</clr-dg-cell>
     <clr-dg-cell>
       <div class="btn-group">
@@ -43,14 +46,17 @@
                 (click)="showAnswerRequestDialog(request.id)"
                 type="button" class="btn btn-sm btn-success-outline">
           <clr-icon shape="angle-double"></clr-icon>
+          Odpowiedz
         </button>
         <button (click)="showViewDialog(request.id)"
                 type="button" class="btn btn-sm btn-secondary">
           <clr-icon shape="bubble-exclamation"></clr-icon>
+          Status
         </button>
         <button type="button" class="btn btn-sm btn-danger" *ngIf="principal.isStudent()"
-                (click)="showConfirmDeleteDialog(request.id)">
+                (click)="showConfirmDeleteDialog(request.id)" [disabled]="request.actualRequestStatus.toString() == 'ACCEPTED'">
           <clr-icon shape="trash"></clr-icon>
+          Usuń
         </button>
         <!--        <button type="button" class="btn btn-sm btn-secondary" *ngIf="principal.isStudent()"-->
         <!--                (click)="showEditDialog(request.id)">-->

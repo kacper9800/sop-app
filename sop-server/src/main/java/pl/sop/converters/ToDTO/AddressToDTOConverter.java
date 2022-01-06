@@ -9,10 +9,12 @@ public class AddressToDTOConverter implements Converter<Address, AddressDTO> {
   @Override
   public AddressDTO convert(Address input) {
     AddressDTO addressDTO = new AddressDTO();
-    addressDTO.setCity(input.getCity());
-    addressDTO.setStreet(input.getStreet());
-    addressDTO.setNumber(input.getNumber());
-    addressDTO.setPostCode(input.getPostCode());
+    if (input != null) {
+        addressDTO.setCity(input.getCity());
+        addressDTO.setStreet(input.getStreet());
+        addressDTO.setNumber(input.getNumber());
+        addressDTO.setPostCode(input.getPostCode());
+    }
     return addressDTO;
   }
 }

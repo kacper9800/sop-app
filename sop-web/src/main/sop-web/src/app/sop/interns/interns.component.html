@@ -70,10 +70,10 @@
           <clr-icon shape="id-badge"></clr-icon>
           {{'interns.showIntern' | translate }}
         </button>
-        <button *ngIf="isSuperAdmin || isAdmin" type="button" class="btn btn-sm btn-secondary" (click)="showEditDialog(user.id)">
-          <clr-icon shape="pencil"></clr-icon>
-          {{'common.crud.edit' | translate }}
-        </button>
+<!--        <button *ngIf="isSuperAdmin || isAdmin" type="button" class="btn btn-sm btn-secondary" (click)="showEditDialog(user.id)">-->
+<!--          <clr-icon shape="pencil"></clr-icon>-->
+<!--          {{'common.crud.edit' | translate }}-->
+<!--        </button>-->
         <button *ngIf="isSuperAdmin || isAdmin" type="button" class="btn btn-sm btn-danger" (click)="showConfirmDeleteDialog()">
           <clr-icon shape="trash"></clr-icon>
           {{'common.crud.delete' | translate }}

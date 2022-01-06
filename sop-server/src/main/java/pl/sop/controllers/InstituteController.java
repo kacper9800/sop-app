@@ -20,7 +20,7 @@ public class InstituteController {
   private InstituteService instituteService;
 
   @CrossOrigin
-  @PreAuthorize("hasRole('ROLE_SUPERADMIN') or hasRole('ROLE_ADMIN') or hasRole('ROLE_MODERATOR')")
+  @PreAuthorize("hasRole('ROLE_SUPERADMIN') or hasRole('ROLE_ADMIN') or hasRole('ROLE_MODERATOR') or hasRole('ROLE_DIRECTOR')")
   @RequestMapping(value = "/api/college-institutes", method = RequestMethod.GET)
   public ResponseEntity<List<InstituteDTO>> getAllInstitutes(Authentication authentication) {
     UserDetailsImpl loggedUser = (UserDetailsImpl) authentication.getPrincipal();

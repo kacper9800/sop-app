@@ -13,6 +13,7 @@ import {HttpResponse} from '@angular/common/http';
 import {ILogbookPost, LogbookPost} from '../../../_model/logbook-post.model';
 import {ExportTableComponent} from '../../export-table/export-table.component';
 import {TranslateService} from '@ngx-translate/core';
+import {PrincipalService} from '../../../_services/auth/principal.service';
 
 @Component({
   selector: 'app-add-edit-dialog-logbooks',
@@ -40,12 +41,14 @@ export class AddEditDialogLogbooksComponent implements OnInit {
 
   @ViewChild('exportDialog', {read: ViewContainerRef, static: true})
   public exportDialog: ViewContainerRef;
+
   private componentRef: any;
   public columns: any;
 
   constructor(private resolver: ComponentFactoryResolver,
               private logbookService: LogbookService,
               private formBuilder: FormBuilder,
+              public principalService: PrincipalService,
               private translateService: TranslateService) {
 
   }

@@ -1,12 +1,11 @@
 .mainContainer {
   max-height: 7%;
   height: 5vh;
+  border-right: none;
 }
 #nav {
   text-align: center;
 }
-
-
 .modal-body p {
   text-align: center;
 }

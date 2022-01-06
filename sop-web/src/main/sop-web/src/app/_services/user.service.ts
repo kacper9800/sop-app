@@ -23,7 +23,11 @@ export class UserService {
               private token: TokenStorageService) {
   }
 
-  getAllUsers(): Observable<any> {
+  public getInternBasicData(internId: number): Observable<HttpResponse<IUserView>> {
+    return this.http.get<HttpResponse<IUserView>>(global.API + USERS_API + '/intern/' + internId);
+  }
+
+  public getAllUsers(): Observable<any> {
     return this.http.get<User[]>(global.API + USERS_API);
   }
 
@@ -38,4 +42,6 @@ export class UserService {
   public getAdminsForInstitute(): Observable<HttpResponse<IUserView[]>> {
     return this.http.get<HttpResponse<IUserView[]>>(global.API + USERS_API + '/institute/admins');
   }
+
+
 }

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {FormGroup} from "@angular/forms";
 
 @Component({
@@ -7,9 +7,12 @@ import {FormGroup} from "@angular/forms";
   styleUrls: ['./intern-dialog.component.css']
 })
 export class InternDialogComponent implements OnInit {
+  @Output()
+  public closeDialogWithSaveEmitter: EventEmitter<any> = new EventEmitter<any>();
   public displayDialog: any;
   public dialogTitle: any;
   public internForm: FormGroup;
+  public internId: number;
 
   constructor() { }
 
@@ -18,7 +21,7 @@ export class InternDialogComponent implements OnInit {
 
   public showInternDialog(id: number) {
     this.displayDialog = true;
-
+    this.internId = id;
   }
 
 }

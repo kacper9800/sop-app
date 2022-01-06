@@ -34,7 +34,7 @@ public class ActivationKeyController {
   }
 
   @CrossOrigin
-  @PreAuthorize("hasRole('ROLE_SUPERADMIN') or hasRole('ROLE_ADMIN') or hasRole('ROLE_MODERATOR')")
+  @PreAuthorize("hasRole('ROLE_SUPERADMIN') or hasRole('ROLE_ADMIN') or hasRole('ROLE_MODERATOR') or hasRole('ROLE_DIRECTOR')")
   @RequestMapping(value = "/api/activationKeys", method = RequestMethod.GET)
   public ResponseEntity<List<ActivationKeyDTO>> getAllActivationKeys(Authentication authentication) {
     UserDetailsImpl loggedUser = (UserDetailsImpl) authentication.getPrincipal();
@@ -71,7 +71,7 @@ public class ActivationKeyController {
   }
 
   @CrossOrigin
-  @PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_SUPERADMIN')")
+  @PreAuthorize("hasRole('ROLE_SUPERADMIN') or hasRole('ROLE_ADMIN') or hasRole('ROLE_MODERATOR') or hasRole('ROLE_DIRECTOR')")
   @RequestMapping(value = "/api/activationKeys", method = RequestMethod.POST)
   public ResponseEntity createActivationKey(@RequestBody ActivationKeyDTO activationKeyDTO) {
     if (activationKeyDTO == null) {
@@ -82,7 +82,7 @@ public class ActivationKeyController {
   }
 
   @CrossOrigin
-  @PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_SUPERADMIN')")
+  @PreAuthorize("hasRole('ROLE_SUPERADMIN') or hasRole('ROLE_ADMIN') or hasRole('ROLE_MODERATOR') or hasRole('ROLE_DIRECTOR')")
   @RequestMapping(value = "/api/activationKeys", method = RequestMethod.PUT)
   public ResponseEntity<ActivationKeyDTO> updateActivationKey(
       @RequestBody ActivationKeyDTO activationKeyDTO) {
@@ -90,7 +90,7 @@ public class ActivationKeyController {
   }
 
   @CrossOrigin
-  @PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_SUPERADMIN')")
+  @PreAuthorize("hasRole('ROLE_SUPERADMIN') or hasRole('ROLE_ADMIN') or hasRole('ROLE_MODERATOR') or hasRole('ROLE_DIRECTOR')")
   @RequestMapping(value = "/api/activationKeys/{id}", method = RequestMethod.DELETE)
   public ResponseEntity<Boolean> deleteActivationKey(@PathVariable(value = "id") Long id) {
     return activationKeyService.deleteActivationKey(id);

@@ -6,14 +6,14 @@ import {
   ViewContainerRef
 } from '@angular/core';
 import {UsersService} from '../../_services/users.service';
-import {IUser, User} from '../../security/user';
-import {HttpResponse} from '@angular/common/http';
 import {ExportTableComponent} from '../export-table/export-table.component';
 import {TranslateService} from '@ngx-translate/core';
 import {PrincipalService} from '../../_services/auth/principal.service';
 import {InternDialogComponent} from './intern-dialog/intern-dialog.component';
 import {Direction} from '../../_model/direction.model';
 import {DirectionsService} from '../../_services/directions.service';
+import {InternService} from '../../_services/intern.service';
+import {Intern} from '../../_model/intern.model';
 
 @Component({
   selector: 'app-interns',
@@ -21,8 +21,8 @@ import {DirectionsService} from '../../_services/directions.service';
   styleUrls: ['./interns.component.css']
 })
 export class InternsComponent implements OnInit {
-  public selectedUsers: User[] = [];
-  public users: User[] = [];
+  public selectedUsers: Intern[] = [];
+  public users: Intern[] = [];
   public columns: any;
   public blockUI: boolean;
 
@@ -37,12 +37,12 @@ export class InternsComponent implements OnInit {
   public isAdmin: boolean;
   public isSuperAdmin: boolean;
 
-  // ToDo
   public selectedDirections: Direction[] = [];
   public directions: Direction[] = [];
 
   constructor(private resolver: ComponentFactoryResolver,
               private usersService: UsersService,
+              private internService: InternService,
               private directionsService: DirectionsService,
               private principalService: PrincipalService,
               private translateService: TranslateService) {
@@ -50,27 +50,27 @@ export class InternsComponent implements OnInit {
 
   ngOnInit() {
     this.blockUI = true;
-    this.loadUsers();
+    this.loadInterns();
     this.loadDirections();
     this.prepareColumns();
     this.isAdmin = this.principalService.isAdmin();
     this.isSuperAdmin = this.principalService.isSuperAdmin();
   }
 
-  private loadUsers() {
-    this.usersService.getAllUsers().subscribe(
-      (res: HttpResponse<IUser[]>) => this.onSuccessLoadUsers(res.body),
-      (err) => this.onErrorLoadUsers(err)
+  private loadInterns() {
+    this.internService.getAllInternsForCollege().subscribe(
+      (res: Intern[]) => this.onSuccessLoadInterns(res),
+      (err) => this.onErrorLoadInterns(err)
     );
   }
 
-  private onSuccessLoadUsers(res: IUser[]) {
+  private onSuccessLoadInterns(res: Intern[]) {
     this.users = [];
     this.users = res;
     this.blockUI = false;
   }
 
-  private onErrorLoadUsers(err: any) {
+  private onErrorLoadInterns(err: any) {
     this.blockUI = false;
   }
 
@@ -147,7 +147,7 @@ export class InternsComponent implements OnInit {
       this.componentRef.instance.showExportTableDialog(this.selectedUsers);
     }
     this.componentRef.instance.closeDialogWithSaveEmitter.subscribe(() =>
-      this.loadUsers()
+      this.loadInterns()
     );
   }
 
@@ -170,9 +170,9 @@ export class InternsComponent implements OnInit {
     });
     if (selectedClassId.length > 0) {
       this.blockUI = true;
-      this.usersService.loadInternsForClasses(selectedClassId).subscribe(
-        (res: HttpResponse<User[]>) => this.onSuccessLoadUsers(res.body),
-        (error) => this.onErrorLoadUsers(error)
+      this.internService.loadInternsForDirections(selectedClassId).subscribe(
+        (res: Intern[]) => this.onSuccessLoadInterns(res),
+        (error) => this.onErrorLoadInterns(error)
       );
     }
   }
@@ -183,7 +183,7 @@ export class InternsComponent implements OnInit {
     this.componentRef = this.exportDialog.createComponent(factory);
     this.componentRef.instance.showInternDialog(id);
     this.componentRef.instance.closeDialogWithSaveEmitter.subscribe(() =>
-      this.loadUsers()
+      this.loadInterns()
     );
   }
 
