@@ -999,19 +999,28 @@
     </addColumn>
   </changeSet>
   <changeSet id="46" author="krzymkiewicz">
-    <renameTable oldTableName="logbook" newTableName="logbooks"/>
-    <addColumn tableName="logbooks">
+    <createTable tableName="logbooks">
+      <column name="id" type="BIGINT" autoIncrement="true">
+        <constraints primaryKey="true" nullable="false"></constraints>
+      </column>
+      <column name="create_date" type="TIMESTAMP WITHOUT TIME ZONE"></column>
+      <column name="create_by" type="VARCHAR(255)"></column>
+      <column name="edit_date" type="TIMESTAMP WITHOUT TIME ZONE"></column>
+      <column name="edit_by" type="VARCHAR(255)"></column>
+      <column name="active" type="BOOLEAN"></column>
+      <column name="deleted" type="BOOLEAN"></column>
       <column name="name" type="varchar(255)"></column>
       <column name="description" type="varchar(2050)"></column>
       <column name="intern_id" type="bigint"></column>
       <column name="institute_id" type="bigint"></column>
       <column name="college_id" type="bigint"></column>
-    </addColumn>
+      <column name="internship_id" type="bigint"></column>
+    </createTable>
 
     <addForeignKeyConstraint
       baseTableName="logbooks"
       baseColumnNames="intern_id"
-      constraintName="fk_intern_id"
+      constraintName="fk_intern_user_id"
       referencedTableName="users"
       referencedColumnNames="id"/>
 
@@ -1063,60 +1072,12 @@
       <column name="deleted" type="BOOLEAN"></column>
       <column name="request_id" type="bigint"></column>
     </createTable>
-    <addColumn tableName="logbooks">
-      <column name="internship_id" type="bigint"></column>
-    </addColumn>
     <addForeignKeyConstraint
       baseTableName="internships"
       baseColumnNames="request_id"
       constraintName="fk_request_id"
       referencedTableName="requests"
       referencedColumnNames="id"/>
-    <addForeignKeyConstraint
-      baseTableName="logbooks"
-      baseColumnNames="internship_id"
-      constraintName="fk_internship_id"
-      referencedTableName="internships"
-      referencedColumnNames="id"/>
-  </changeSet>
-  <changeSet id="48" author="krzymkiewicz">
-    <dropTable tableName="logbooks" cascadeConstraints="true"/>
-
-    <createTable tableName="logbooks">
-      <column name="id" type="BIGINT" autoIncrement="true">
-        <constraints primaryKey="true" nullable="false"></constraints>
-      </column>
-      <column name="create_date" type="TIMESTAMP WITHOUT TIME ZONE"></column>
-      <column name="create_by" type="VARCHAR(255)"></column>
-      <column name="edit_date" type="TIMESTAMP WITHOUT TIME ZONE"></column>
-      <column name="edit_by" type="VARCHAR(255)"></column>
-      <column name="active" type="BOOLEAN"></column>
-      <column name="deleted" type="BOOLEAN"></column>
-      <column name="name" type="varchar(255)"></column>
-      <column name="description" type="varchar(2050)"></column>
-      <column name="intern_id" type="bigint"></column>
-      <column name="institute_id" type="bigint"></column>
-      <column name="college_id" type="bigint"></column>
-      <column name="internship_id" type="bigint"></column>
-    </createTable>
-
-    <addForeignKeyConstraint
-      baseTableName="logbooks"
-      baseColumnNames="intern_id"
-      constraintName="fk_intern_id"
-      referencedTableName="users"
-      referencedColumnNames="id"/>
-    <addForeignKeyConstraint
-      baseTableName="logbooks"
-      baseColumnNames="institute_id"
-      constraintName="fk_institute_id"
-      referencedTableName="institutes"
-      referencedColumnNames="id"/>
-    <addForeignKeyConstraint
-      baseTableName="logbooks"
-      baseColumnNames="college_id"
-      constraintName="fk_college_id"
-      referencedTableName="colleges" referencedColumnNames="id"/>
     <addForeignKeyConstraint
       baseTableName="logbooks"
       baseColumnNames="internship_id"
