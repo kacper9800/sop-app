@@ -13,6 +13,7 @@ public class DTOToCompanyConverterTest {
 
     @Test
     public void testConvert() {
+
         AddressDTO addressDTO = new AddressDTO("Kraków", "Podchorążych", "2", "30-084");
         CompanyDTO dto = new CompanyDTO("UP", addressDTO);
         Company company = dtoToCompanyConverter.convert(dto);
