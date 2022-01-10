@@ -286,11 +286,6 @@
             </configuration>
           </execution>
         </executions>
-        <configuration>
-          <systemPropertyVariables>
-            <jacoco-agent.destfile>target/jacoco.exec</jacoco-agent.destfile>
-          </systemPropertyVariables>
-        </configuration>
       </plugin>
     </plugins>
     <testSourceDirectory>src/test/java</testSourceDirectory>
@@ -302,4 +297,19 @@
       <url>https://oss.jfrog.org/artifactory/oss-snapshot-local/</url>
     </repository>
   </repositories>
+  <reporting>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-pmd-plugin</artifactId>
+        <version>3.7</version>
+        <configuration>
+          <rulesets>
+            <ruleset>/rulesets/java/braces.xml</ruleset>
+            <ruleset>/rulesets/java/naming.xml</ruleset>
+          </rulesets>
+        </configuration>
+      </plugin>
+    </plugins>
+  </reporting>
 </project>
