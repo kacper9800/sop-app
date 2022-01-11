@@ -11,7 +11,7 @@
             <label>
               <clr-icon shape="highlighter"></clr-icon>
             </label>
-            <input [size]="35" clrInput type="text" formControlName="name"
+            <input id="name" [size]="35" clrInput type="text" formControlName="name"
                    placeholder="{{'directions.directionName' | translate}}"/>
             <clr-control-error>{{'common.required' | translate}}</clr-control-error>
           </clr-input-container>
@@ -26,7 +26,7 @@
             <label>
               <clr-icon shape="highlighter"></clr-icon>
             </label>
-            <input [size]="35" clrInput type="text" formControlName="description"
+            <input id="description" [size]="35" clrInput type="text" formControlName="description"
                    placeholder="{{'common.description' | translate}}"/>
           </clr-input-container>
         </div>
@@ -38,7 +38,7 @@
         <div class="clr-col-8">
           <clr-select-container>
             <label><clr-icon shape="building"></clr-icon></label>
-            <select clrSelect name="options" formControlName="studyMode" required>
+            <select id="studyMode" clrSelect name="options" formControlName="studyMode" required>
               <option *ngFor="let studyMode of studyModes" [value]="studyMode.value">
                 {{'directions.' + studyMode.label.toString() | translate}}
               </option>
@@ -55,7 +55,7 @@
         <div class="clr-col-8">
           <clr-select-container>
             <label><clr-icon shape="building"></clr-icon></label>
-            <select clrSelect name="options" formControlName="instituteId" required>
+            <select id="instituteId" clrSelect name="options" formControlName="instituteId" required>
               <option *ngFor="let institute of institutes" [value]="institute.id">
                 {{institute.name}}
               </option>
@@ -73,7 +73,7 @@
             <label>
               <clr-icon shape="calendar"></clr-icon>
             </label>
-            <input type="date" clrDate name="demo" formControlName="expirationDateStart">
+            <input id="expirationDateStart" type="date" clrDate name="demo" formControlName="expirationDateStart">
             <clr-control-error>{{'common.required' | translate}}</clr-control-error>
           </clr-date-container>
         </div>
@@ -87,7 +87,7 @@
             <label>
               <clr-icon shape="calendar"></clr-icon>
             </label>
-            <input type="date" clrDate name="demo" formControlName="expirationDateEnd">
+            <input id="expirationDateEnd" type="date" clrDate name="demo" formControlName="expirationDateEnd">
             <clr-control-error>{{'common.required' | translate}}</clr-control-error>
           </clr-date-container>
         </div>

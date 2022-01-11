@@ -24,7 +24,7 @@
             <label>
               <clr-icon shape="calendar"></clr-icon>
             </label>
-            <input type="date" clrDate name="demo" formControlName="expirationDateStart"
+            <input id="expirationDateStart" type="date" clrDate name="demo" formControlName="expirationDateStart"
                    [placeholder]="'activationKeys.tableColumns.expirationDateStart' | translate">
           </clr-date-container>
         </div>
@@ -38,7 +38,7 @@
             <label>
               <clr-icon shape="calendar"></clr-icon>
             </label>
-            <input type="date" clrDate name="demo" formControlName="expirationDateEnd"
+            <input id="expirationDateEnd" type="date" clrDate name="demo" formControlName="expirationDateEnd"
                    [placeholder]="'activationKeys.tableColumns.expirationDateEnd' | translate">
           </clr-date-container>
         </div>
@@ -137,7 +137,7 @@
               <label>
                 <clr-icon shape="building"></clr-icon>
               </label>
-              <select clrSelect name="options" formControlName="collegeId">
+              <select id="collegeId" clrSelect name="options" formControlName="collegeId">
                 <option *ngFor="let college of colleges" [value]="college.id">
                   {{college.name}}
                 </option>
@@ -155,7 +155,7 @@
               <label>
                 <clr-icon shape="cluster"></clr-icon>
               </label>
-              <select clrSelect name="options" formControlName="facultyId"
+              <select id="facultyId" clrSelect name="options" formControlName="facultyId"
                       (change)="onFacultyChange()">
                 <option *ngFor="let faculty of faculties" [value]="faculty.id">
                   {{faculty.name}}
@@ -174,7 +174,7 @@
               <label>
                 <clr-icon shape="building"></clr-icon>
               </label>
-              <select clrSelect name="options" formControlName="instituteId"
+              <select id="instituteId" clrSelect name="options" formControlName="instituteId"
                       (change)="onInstituteChange()">
                 <option *ngFor="let institute of institutes" [value]="institute.id">
                   {{institute.name}}
@@ -192,7 +192,7 @@
               <label>
                 <clr-icon shape="host"></clr-icon>
               </label>
-              <select clrSelect name="options" formControlName="departmentId">
+              <select id="departmentId" clrSelect name="options" formControlName="departmentId">
                 <option *ngFor="let department of departments" [value]="department.id">
                   {{department.name}}
                 </option>
@@ -210,7 +210,7 @@
             <label>
               <clr-icon shape="accessibility-2"></clr-icon>
             </label>
-            <input type="text" clrInput formControlName="numberOfUses"
+            <input id="numberOfUses" type="text" clrInput formControlName="numberOfUses"
                    [placeholder]="'common.amountOfUses' | translate"/>
             <clr-control-error>{{'common.required' | translate}}</clr-control-error>
           </clr-input-container>

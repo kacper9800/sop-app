@@ -15,7 +15,7 @@
             <label>
               <clr-icon shape="key"></clr-icon>
             </label>
-            <input clrInput formControlName="token" [size]="35"
+            <input id="token" clrInput formControlName="token" [size]="35"
                    placeholder="{{'registration.tokenLabel' | translate}}"/>
           </clr-input-container>
         </div>
@@ -29,7 +29,7 @@
             <label>
               <clr-icon shape="user"></clr-icon>
             </label>
-            <input type="text" name="firstName" clrInput
+            <input id="firstName" type="text" name="firstName" clrInput
                    placeholder="{{'registration.firstNameLabel' | translate}}"
                    formControlName="firstName"/>
           </clr-input-container>
@@ -44,7 +44,7 @@
             <label>
               <clr-icon shape="user"></clr-icon>
             </label>
-            <input type="text" name="lastName" clrInput
+            <input id="lastName" type="text" name="lastName" clrInput
                    placeholder="{{'registration.lastNameLabel' | translate}}"
                    formControlName="lastName"/>
           </clr-input-container>
@@ -59,7 +59,7 @@
             <label>
               <clr-icon shape="calendar"></clr-icon>
             </label>
-            <input type="date" clrDate name="demo"
+            <input id="birthDate" type="date" clrDate name="demo"
                    placeholder="{{'registration.birthDateLabel' | translate}}"
                    formControlName="birthDate"/>
           </clr-date-container>
@@ -74,7 +74,7 @@
             <label>
               <clr-icon shape="envelope"></clr-icon>
             </label>
-            <input clrInput formControlName="email"
+            <input id="email" clrInput formControlName="email"
                    placeholder="{{'registration.emailLabel' | translate}}"/>
           </clr-input-container>
         </div>
@@ -139,7 +139,7 @@
             <label>
               <clr-icon shape="key"></clr-icon>
             </label>
-            <input clrInput type="password" formControlName="password"
+            <input id="password" clrInput type="password" formControlName="password"
                    placeholder="{{'registration.passwordLabel' | translate}}"/>
           </clr-input-container>
         </div>
@@ -153,7 +153,7 @@
             <label>
               <clr-icon shape="refresh"></clr-icon>
             </label>
-            <input clrInput type="password" formControlName="repeatedPassword"
+            <input id="repeatedPassword" clrInput type="password" formControlName="repeatedPassword"
                    placeholder="{{'registration.passwordRepeatLabel' | translate}}"/>
           </clr-input-container>
         </div>

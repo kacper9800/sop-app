@@ -17,6 +17,7 @@
     <skip.integration.tests>false</skip.integration.tests>
     <docker.image.prefix>sop-server</docker.image.prefix>
   </properties>
+
   <dependencies>
     <!--        Spring Boot-->
     <dependency>
@@ -77,7 +78,6 @@
       <artifactId>spring-boot-starter-undertow</artifactId>
     </dependency>
 
-
     <!-- Security -->
     <dependency>
       <groupId>org.springframework.boot</groupId>
@@ -105,6 +105,7 @@
       <artifactId>postgresql</artifactId>
       <scope>runtime</scope>
     </dependency>
+
     <!--        Hibernate-->
     <dependency>
       <groupId>org.hibernate</groupId>
@@ -121,6 +122,7 @@
       <artifactId>hibernate-java8</artifactId>
       <version>5.4.10.Final</version>
     </dependency>
+
     <!--        Swagger-->
     <dependency>
       <groupId>io.springfox</groupId>
@@ -142,6 +144,7 @@
       <artifactId>springfox-data-rest</artifactId>
       <version>3.0.0</version>
     </dependency>
+
     <dependency>
       <groupId>mysql</groupId>
       <artifactId>mysql-connector-java</artifactId>
@@ -164,12 +167,15 @@
       <artifactId>spring-boot-starter-mail</artifactId>
       <version>2.2.5.RELEASE</version>
     </dependency>
+
     <dependency>
       <groupId>junit</groupId>
       <artifactId>junit</artifactId>
     </dependency>
   </dependencies>
+
   <build>
+    <testSourceDirectory>src/test/java</testSourceDirectory>
     <plugins>
       <plugin>
         <groupId>org.springframework.boot</groupId>
@@ -186,26 +192,6 @@
           </buildArgs>
         </configuration>
       </plugin>
-      <!--	Add integration-test/java directory to be visible by Maven	-->
-      <plugin>
-        <groupId>org.codehaus.mojo</groupId>
-        <artifactId>build-helper-maven-plugin</artifactId>
-        <version>3.0.0</version>
-        <executions>
-          <execution>
-            <id>add-integration-test-sources</id>
-            <phase>generate-test-sources</phase>
-            <goals>
-              <goal>add-test-source</goal>
-            </goals>
-            <configuration>
-              <sources>
-                <source>src/integration-test/java</source>
-              </sources>
-            </configuration>
-          </execution>
-        </executions>
-      </plugin>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-compiler-plugin</artifactId>
@@ -214,81 +200,31 @@
           <target>1.8</target>
         </configuration>
       </plugin>
-      <!--	Include integration-tests in integration-test Maven phase	-->
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-failsafe-plugin</artifactId>
-        <version>3.0.0-M3</version>
-        <executions>
-          <execution>
-            <id>failsafe-integration-tests</id>
-            <phase>integration-test</phase>
-            <goals>
-              <goal>integration-test</goal>
-              <goal>verify</goal>
-            </goals>
-            <configuration>
-              <skipTests>${skip.integration.tests}</skipTests>
-            </configuration>
-          </execution>
-        </executions>
-      </plugin>
       <plugin>
         <groupId>org.jacoco</groupId>
         <artifactId>jacoco-maven-plugin</artifactId>
-        <version>0.8.4</version>
+        <version>0.8.5</version>
         <executions>
           <execution>
-            <id>default-prepare-agent</id>
+            <id>jacoco-initialize</id>
             <goals>
               <goal>prepare-agent</goal>
             </goals>
           </execution>
           <execution>
-            <id>default-report</id>
-            <phase>prepare-package</phase>
-            <goals>
-              <goal>report</goal>
-            </goals>
-          </execution>
-        </executions>
-      </plugin>
-      <plugin>
-        <groupId>org.jacoco</groupId>
-        <artifactId>jacoco-maven-plugin</artifactId>
-        <version>0.8.3</version>
-        <executions>
-          <execution>
-            <id>prepare-agent</id>
-            <goals>
-              <goal>prepare-agent</goal>
-            </goals>
-          </execution>
-          <execution>
-            <id>report</id>
-            <phase>prepare-package</phase>
-            <goals>
-              <goal>report</goal>
-            </goals>
-          </execution>
-          <execution>
-            <id>post-unit-test</id>
+            <id>jacoco-site</id>
             <phase>test</phase>
             <goals>
               <goal>report</goal>
             </goals>
-            <configuration>
-              <!-- Sets the path to the file which contains the execution data. -->
-
-              <dataFile>target/jacoco.exec</dataFile>
-              <!-- Sets the output directory for the code coverage report. -->
-              <outputDirectory>target/my-reports</outputDirectory>
-            </configuration>
           </execution>
         </executions>
       </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-surefire-plugin</artifactId>
+      </plugin>
     </plugins>
-    <testSourceDirectory>src/test/java</testSourceDirectory>
   </build>
   <repositories>
     <repository>
@@ -297,6 +233,8 @@
       <url>https://oss.jfrog.org/artifactory/oss-snapshot-local/</url>
     </repository>
   </repositories>
+
+  <!--  PMD - code reports-->
   <reporting>
     <plugins>
       <plugin>
