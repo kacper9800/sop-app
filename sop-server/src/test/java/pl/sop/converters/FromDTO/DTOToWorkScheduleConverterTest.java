@@ -1,10 +1,10 @@
 package pl.sop.converters.FromDTO;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import pl.sop.dto.WorkScheduleDTO;
 import pl.sop.entities.WorkSchedule;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class DTOToWorkScheduleConverterTest {
 

@@ -101,15 +101,4 @@ public class DTOToEventConverter implements Converter<EventDTO, Event> {
         durationObject = durationObject.plusMinutes(Integer.parseInt(values[1]));
         return durationObject.toString();
     }
-
-    private Date convertStringDateToDate(String dateToConvert) throws ParseException {
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
-        Date date;
-        if (dateToConvert != null) {
-            date = simpleDateFormat.parse(dateToConvert);
-        } else {
-            date = null;
-        }
-        return date;
-    }
 }

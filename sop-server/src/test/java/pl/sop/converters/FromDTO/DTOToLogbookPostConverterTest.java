@@ -1,12 +1,12 @@
 package pl.sop.converters.FromDTO;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import pl.sop.dto.LogbookPostDTO;
 import pl.sop.entities.LogbookPost;
 
 import java.time.LocalDate;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class DTOToLogbookPostConverterTest {
 

@@ -1,11 +1,11 @@
 package pl.sop.converters.FromDTO;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import pl.sop.dto.AddressDTO;
 import pl.sop.dto.CompanyDTO;
 import pl.sop.entities.Company;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class DTOToCompanyConverterTest {
 

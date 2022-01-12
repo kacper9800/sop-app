@@ -7,7 +7,6 @@ import pl.sop.entities.Company;
 
 public class DTOToCompanyConverter implements Converter<CompanyDTO, Company> {
 
-  private final AddressToDTOConverter addressToDTOConverter = new AddressToDTOConverter();
   private final DTOToAddressConverter dtoToAddressConverter = new DTOToAddressConverter();
 
   @Override

@@ -1,10 +1,10 @@
 package pl.sop.converters.FromDTO;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import pl.sop.dto.AddressDTO;
 import pl.sop.entities.Address;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class DTOToAddressConverterTest {
 
