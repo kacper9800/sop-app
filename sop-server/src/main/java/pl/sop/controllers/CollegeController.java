@@ -29,7 +29,7 @@ import pl.sop.security.services.UserDetailsImpl;
 public class CollegeController {
 
   @Autowired
-  private CollegeService collegeService;
+  CollegeService collegeService;
 
   @GetMapping(value = "/api/colleges")
   @PreAuthorize("hasRole('ROLE_SUPERADMIN')")
