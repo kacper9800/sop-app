@@ -65,7 +65,7 @@ public class CompanyService {
       return new ResponseEntity("Bad request!", HttpStatus.NOT_ACCEPTABLE);
     }
     Company company = dtoToCompanyConverter.convert(companyDTO);
-    return ResponseEntity.ok(companyRepository.save(company));
+    return ResponseEntity.ok(null);
   }
 
   public ResponseEntity deleteCompany(Long id) {
